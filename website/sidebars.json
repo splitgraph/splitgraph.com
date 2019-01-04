@@ -1,0 +1,6 @@
+{
+  "docs": {
+    "Quickstart": ["quickstart/01_introduction"],
+    "Splitfiles": ["splitfile"]
+  }
+}
