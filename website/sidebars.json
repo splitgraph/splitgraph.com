@@ -1,6 +1,16 @@
 {
   "docs": {
-    "Quickstart": ["quickstart/01_introduction"],
-    "Splitfiles": ["splitfile"]
+    "Getting Started": [
+      "introduction",
+      "installation",
+      "repositories",
+      "splitfiles",
+      "advanced_splitfiles"],
+    "Splitfiles": [
+      "splitfile_intro",
+      "splitfile_import",
+      "splitfile_from",
+      "splitfile_sql",
+      "splitfile_custom"]
   }
 }

@@ -1,0 +1,22 @@
+---
+id: splitfile_from
+title: FROM 
+---
+
+**`FROM repository[:tag] [AS alias]`**
+
+Bases the output of the splitfile on a certain revision of the
+remote/local repository. If `AS alias` is specified, the repository
+is cloned into `alias` and the current contents of `alias`
+destroyed. Otherwise, the current output repository (passed to
+the executor) is used.
+
+`FROM` can also be used to perform Docker-like multistage builds.
+
+For example:
+
+    FROM internal_data:latest AS stage_1
+    CREATE TABLE visible_staff AS SELECT name, age FROM staff WHERE is_restricted = FALSE
+
+    FROM EMPTY AS stage_2
+    FROM stage_1 IMPORT {SELECT * FROM visible_staff} AS visible_staff

@@ -1,0 +1,17 @@
+---
+id: introduction
+title: Introduction
+---
+
+What if you could `git push` your database?
+
+Splitgraph is a data management tool and a data sharing platform inspired by Docker and Git.
+
+Splitgraph allows the user to manipulate data images (snapshots of SQL tables at a given point in time) as if they
+were code repositories: by creating, versioning, sharing and downloading them. This is all done seamlessly, so that
+any tool that interacts with a Splitgraph table has no idea it's not just an ordinary database table.
+
+Furthermore, Splitgraph also defines a Splitfile language that is used to derive datasets from other datasets whilst
+being able to keep track of their provenance and update the image when its dependencies are updated. You can even
+plug another database into Splitgraph and query data from it as if it were just another set of tables.
+

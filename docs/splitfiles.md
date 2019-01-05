@@ -1,6 +1,7 @@
-
-Using Splitfiles
-----------------
+---
+id: splitfiles
+title: Introduction to Splitfiles
+---
 
 Whilst you can create new images using `sgr commit`, there is a better
 way: Splitfiles. Splitfiles are a declarative way to define new datasets

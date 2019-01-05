@@ -24,7 +24,7 @@ const siteConfig = {
   title: 'Splitgraph', // Title for your website.
   tagline: 'Publish data where it lives',
   url: 'https://splitgraph.com', // Your website URL
-  baseUrl: '/', // Base URL for your project */
+  baseUrl: '/docusaurus/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
@@ -38,10 +38,9 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    {doc: 'quickstart', label: 'Quickstart'},
-    //{doc: 'doc4', label: 'API'},
+    {doc: 'introduction', label: 'Docs'},
     {page: 'help', label: 'Help'},
-    {blog: true, label: 'Blog'},
+    //{blog: true, label: 'Blog'},
   ],
 
   // If you have users set above, you add it here:

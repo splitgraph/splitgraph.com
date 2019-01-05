@@ -1,6 +1,7 @@
-
-Advanced Splitfile usage
-------------------------
+---
+id: advanced_splitfiles
+title: Advanced Splitfile usage
+---
 
 There's one other advantage to using Splitfiles instead of building
 images manually: provenance tracking. An image that is created by a
