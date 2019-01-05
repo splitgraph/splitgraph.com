@@ -39,7 +39,9 @@ const siteConfig = {
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
     {doc: 'introduction', label: 'Docs'},
-    {page: 'help', label: 'Help'},
+    // Relative link to sphinx-generated docs?
+    {href: '/docusaurus/sphinx/commands/commands.html', label: 'sgr client'},
+    {href: '/docusaurus/sphinx/api/splitgraph.html', label: 'API'}
     //{blog: true, label: 'Blog'},
   ],
 

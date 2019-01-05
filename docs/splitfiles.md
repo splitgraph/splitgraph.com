@@ -148,4 +148,4 @@ rerunning the same Splitfile won't actually perform any computation:
      ---> Using cache
      ---> 96833d33a433
 
-For more information on the available Splitfile commands, see splitfile.
+For more information on the available Splitfile commands, see [the reference](splitfile_intro).

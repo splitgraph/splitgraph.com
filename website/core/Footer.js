@@ -43,8 +43,11 @@ class Footer extends React.Component {
             <a href={this.docUrl('splitfile.html', this.props.language)}>
               Splitfiles
             </a>
-            <a href={this.docUrl('doc3.html', this.props.language)}>
-              API Reference
+            <a href={this.props.config.baseUrl + "sphinx/commands/commands.html"}>
+              sgr client
+            </a>
+            <a href={this.props.config.baseUrl + "sphinx/api/splitgraph.html"}>
+              API reference
             </a>
           </div>
           <div>
