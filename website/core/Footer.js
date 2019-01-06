@@ -37,14 +37,11 @@ class Footer extends React.Component {
           </a>
           <div>
             <h5>Docs</h5>
-            <a href={this.docUrl('quickstart.html', this.props.language)}>
+            <a href={this.docUrl('introduction', this.props.language)}>
               Getting Started
             </a>
-            <a href={this.docUrl('splitfile.html', this.props.language)}>
+            <a href={this.docUrl('splitfile_intro', this.props.language)}>
               Splitfiles
-            </a>
-            <a href={this.props.config.baseUrl + "sphinx/commands/commands.html"}>
-              sgr client
             </a>
             <a href={this.props.config.baseUrl + "sphinx/api/splitgraph.html"}>
               API reference
@@ -61,7 +58,6 @@ class Footer extends React.Component {
           </div>
           <div>
             <h5>More</h5>
-            <a href={`${this.props.config.baseUrl}blog`}>Blog</a>
             <a href="https://github.com/splitgraph">GitHub</a>
             <a
               className="github-button"

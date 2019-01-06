@@ -11,6 +11,12 @@
       "splitfile_import",
       "splitfile_from",
       "splitfile_sql",
-      "splitfile_custom"]
+      "splitfile_custom"],
+    "sgr command line client": [
+      "sgr/image_management_creation",
+      "sgr/image_information",
+      "sgr/miscellaneous",
+      "sgr/sharing_images",
+      "sgr/splitfile_execution"]
   }
 }
