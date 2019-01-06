@@ -37,11 +37,14 @@ class Footer extends React.Component {
           </a>
           <div>
             <h5>Docs</h5>
-            <a href={this.docUrl('introduction', this.props.language)}>
+            <a href={this.docUrl('introduction.html')}>
               Getting Started
             </a>
-            <a href={this.docUrl('splitfile_intro', this.props.language)}>
+            <a href={this.docUrl('splitfile_intro.html')}>
               Splitfiles
+            </a>
+            <a href={this.docUrl('sgr/image_management_creation.html')}>
+              sgr client
             </a>
             <a href={this.props.config.baseUrl + "sphinx/api/splitgraph.html"}>
               API reference

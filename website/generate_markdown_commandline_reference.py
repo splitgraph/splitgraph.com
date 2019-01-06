@@ -25,9 +25,35 @@ def _emit_header(header, level=1):
     return "#" * level + " " + header
 
 
+def _emit_argument(argument):
+    return argument.make_metavar()
+
+
+def _emit_command_invocation(command, prefix='sgr '):
+    # e.g. sgr import [OPTIONS] IMAGE_SPEC ...
+    result = "```" + prefix + command.name + " [OPTIONS] " + \
+             " ".join(_emit_argument(a) for a in command.params if isinstance(a, click.Argument)) + "```\n"
+    return result
+
+
+def _emit_command_options(command):
+    help_records = [p.get_help_record(None) for p in command.params if isinstance(p, click.Option)]
+
+    if help_records:
+        result = "\n\n" + _emit_header("Options", level=3) + "\n\n"
+        result += "\n".join("  * **`%s`**: %s" % (option, option_help) for option, option_help in help_records)
+        return result
+    else:
+        return ""
+
+
 def _emit_command(command_name):
     command = getattr(cmd, command_name + '_c')
-    result = _emit_header(command_name, level=2) + "\n" + command.help
+    result = _emit_header(command_name, level=2) + "\n"
+    result += "\n" + _emit_command_invocation(command)
+    # Future: move examples under options?
+    result += "\n" + command.help.replace("Examples:", "### Examples")
+    result += _emit_command_options(command)
     return result
 
 
