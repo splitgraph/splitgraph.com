@@ -5,7 +5,9 @@
       "installation",
       "repositories",
       "splitfiles",
-      "advanced_splitfiles"],
+      "advanced_splitfiles",
+      "data_ingestion"
+    ],
     "Splitfiles": [
       "splitfile_intro",
       "splitfile_import",
