@@ -7,7 +7,7 @@ title: Repositories
 
 A Splitgraph repository is a collection of images, which themselves are
 collections of tables. If you're familiar with Git, you can treat an
-image as a Git commit and a table -- as the version of a file in a
+image as a Git commit and a table as the version of a file in a
 certain commit. Much like Git, Splitgraph allows you to create database
 images, track changes to them and check them out.
 
@@ -29,7 +29,7 @@ schema with the same name. This means that any application that can
 access the engine via a normal database connection can interact with the
 checked-out repository.
 
-`sgr` provides a shorthand, `sgr sql` to run arbitrary SQL queries
+`sgr` provides a shorthand, `sgr sql`, to run arbitrary SQL queries
 against the engine:
 
     sgr sql --schema example/repo_1 "SELECT * FROM demo"
@@ -55,7 +55,7 @@ meaning that it's stored as a full table snapshot.
 ## Repository manipulation
 
 A checked out repository also has change tracking enabled, so any
-alterations to that schema by any application will be captured, allowing
+writes to that schema by any application will be captured, allowing
 Splitgraph to package them into new images. In particular, changes to
 preexisting tables will be stored as `DIFF` objects (delta compressed)
 so that keeping track of table history is space efficient.

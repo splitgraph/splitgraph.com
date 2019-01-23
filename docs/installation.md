@@ -20,7 +20,7 @@ the official Splitgraph engine) or have access to a PostgreSQL (&gt;
 9.6) database (in which case some functionality won't be available).
 
 
-sgr, the Splitgraph command line client and library can be installed
+`sgr`, the Splitgraph command line client, and library can be installed
 either from [GitHub](https://github.com/splitgraph/splitgraph/) or from
 pip:
 
