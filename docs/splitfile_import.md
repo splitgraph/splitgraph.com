@@ -25,10 +25,6 @@ of the current `OUTPUT` hash, the hash of the source repository and
 the hashes of the names (or source SQL queries) and aliases of all
 imported tables.
 
-This is crude, but means that the layer is invalidated if there's a
-change on the remote or we import a different table/name it
-differently/use a different query to create a table. We can improve on
-this by perhaps only considering the objects and table aliases that are
-actually imported (as opposed to the source image hash: maybe the tables
-we're importing haven't changed even if other parts of the repository
-have).
+This means that the layer is invalidated if there's a
+change to the remote repository, a different table is imported, named differently
+or a different query is used to create a table. 

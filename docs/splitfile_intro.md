@@ -7,9 +7,7 @@ Splitfiles are similar to Dockerfiles: each command produces a new
 commit with a deterministic hash that depends on the current hash and
 the particulars of a command that's being executed.
 
-The Splitfile is parsed using parsimonious, a Python parser library. The
-exact grammar is in `splitgraph.splitfile.SGFILE_GRAMMAR` and there is
-some quality-of-life preprocessing that gets done to the file before
+There is some quality-of-life preprocessing that gets done to the file before
 it's interpreted:
 
 -   Newlines can be escaped to make a command multiline (`"\\n"` gets
