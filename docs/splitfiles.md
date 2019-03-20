@@ -20,7 +20,7 @@ the second table.
 
 `sgr` comes with a generator for this example Splitfile:
 
-    sgr example splitfile example/repo_1 example/repo_2 | tee example.splitfile
+    $ sgr example splitfile example/repo_1 example/repo_2 | tee example.splitfile
 
     # Import the table from the latest image in the first repository
     FROM example/repo_1 IMPORT demo AS table_1
@@ -53,7 +53,8 @@ This file consists of three commands:
 Let's run this Splitfile using the original data in the `example/repo_2`
 repository:
 
-    sgr build example.splitfile -o example/output --args IMAGE_2 original_data
+    $ sgr build example.splitfile -o example/output --args IMAGE_2 original_data
+    
     Executing Splitfile example.splitfile with arguments {'IMAGE_2': 'original_data'}
 
     Step 1/3 : FROM example/repo_1 IMPORT demo AS table_1
@@ -75,28 +76,31 @@ If you have seen the output of a Dockerfile being executed, this will
 also look familiar to you. Let's inspect the repository that we've just
 created:
 
-    sgr log example/output
+    $ sgr log example/output
+    
     H-> 96833d33a4333d33fd2490ca2ec8ebab83be5481cb17372b9a66e1518253a111 2019-01-01 14:47:41.385851 CREATE TABLE result...
         9764d69bbc46429bc897bfe114fefbca9202d39a5d1a6183d65d098133c73096 2019-01-01 14:47:41.302369 Importing ('table_2',) from example/repo_2
         73c258b9a244130f4b5a80adfb9c8c19d0186ca93ba447f2e5a91b68662bb840 2019-01-01 14:47:41.241848 Importing ('table_1',) from example/repo_1
         0000000000000000000000000000000000000000000000000000000000000000 2019-01-01 14:47:41.113029
 
-    sgr show example/output:latest --verbose
+    $ sgr show example/output:latest --verbose
+    
     Image example/output:96833d33a4333d33fd2490ca2ec8ebab83be5481cb17372b9a66e1518253a111
     CREATE TABLE result AS SELECT ...
     Created at 2019-01-01T14:47:41.385851
     Parent: 9764d69bbc46429bc897bfe114fefbca9202d39a5d1a6183d65d098133c73096
 
     Tables:
-      table_1: o8781a2d30bc731a00650ff9833a5bcc65d22597059f5d619dfe3549a7325a9 (SNAP)
-      table_2: od5a45d033903aa9f8241e5d87e884360fcee56ca874ae12c7cc94942b84092 (SNAP)
-      result: o4be220f929a52b1c1eaa2c083a1fbcab0cbc4bdd3c9a634e6a331dbe92b990 (SNAP)
+      table_1: o8781a2d30bc731a00650ff9833a5bcc65d22597059f5d619dfe3549a7325a9
+      table_2: od5a45d033903aa9f8241e5d87e884360fcee56ca874ae12c7cc94942b84092
+      result: o4be220f929a52b1c1eaa2c083a1fbcab0cbc4bdd3c9a634e6a331dbe92b990
 
 Let's also look at the actual data we produced. Since we ran the
 Splitfile against the original version of the `example/repo_2`
 repository, all keys from 0 to 9 should be present in the join table:
 
-    sgr sql --schema example/output "SELECT * FROM result ORDER BY key"
+    $ sgr sql --schema example/output "SELECT * FROM result ORDER BY key"
+    
     [(0,
       'e3f8da4d6d906fc5b7d33a670b2b370bbe617c30a9b4b56cda901605b8cbc014',
       'da6b3aca32bbc1011aff3c57e453ab9e4e1be1f7373fc1f5a745d19e4f70d955'),
@@ -131,7 +135,8 @@ repository, all keys from 0 to 9 should be present in the join table:
 Finally, since each image at execution time has a deterministic hash,
 rerunning the same Splitfile won't actually perform any computation:
 
-    sgr build example.splitfile -o example/output --args IMAGE_2 original_data
+    $ sgr build example.splitfile -o example/output --args IMAGE_2 original_data
+    
     Executing Splitfile example.splitfile with arguments {'IMAGE_2': 'original_data'}
 
     Step 1/3 : FROM example/repo_1 IMPORT demo AS table_1

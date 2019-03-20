@@ -24,14 +24,14 @@ the official Splitgraph engine) or have access to a PostgreSQL (&gt;
 either from [GitHub](https://github.com/splitgraph/splitgraph/) or from
 pip:
 
-    pip install --index-url https://test.pypi.org/simple/ splitgraph
+    $ pip install --index-url https://test.pypi.org/simple/ splitgraph
 
 ### Official Splitgraph engine
 
 Use Docker to pull and start the
 [engine](https://hub.docker.com/r/splitgraph/driver/):
 
-    docker run -d \
+    $ docker run -d \
     -e POSTGRES_PASSWORD=supersecure \
     -p 5432:5432 \
     splitgraph/driver
@@ -41,7 +41,7 @@ By default, `sgr` is configured to speak to the engine running on
 `supersecure` against a database called `splitgraph`. To complete the
 installation, run:
 
-    sgr init
+    $ sgr init
 
 ### Local Postgres
 
@@ -55,7 +55,7 @@ this demo.
 After installing `sgr`, run the configurator to generate a base config
 file:
 
-    sgr config --config-format --no-shielding | tee .sgconfig
+    $ sgr config --config-format --no-shielding | tee .sgconfig
     [defaults]
     SG_NAMESPACE=sg-default-ns
     SG_ENGINE_HOST=localhost
@@ -81,7 +81,8 @@ Open `.sgconfig` and change `SG_ENGINE_HOST`, `SG_ENGINE_PORT`,
 `SG_ENGINE_DB_NAME`, `SG_ENGINE_USER` and `SG_ENGINE_PWD` appropriate to
 your Postgres installation. Finally, initialize the engine:
 
-    sgr init
+    $ sgr init
+    
     2019-01-01 15:21:43,794 INFO Creating database splitgraph
     2019-01-01 15:21:44,416 INFO Installing the audit trigger...
     2019-01-01 15:21:44,500 INFO Ensuring metadata schema splitgraph_meta exists...
