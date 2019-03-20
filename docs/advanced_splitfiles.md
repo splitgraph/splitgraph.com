@@ -11,7 +11,8 @@ in its metadata.
 This means that we can output a list of images and repositories that
 were used in an image's creation:
 
-    sgr provenance example/output:latest
+    $ sgr provenance example/output:latest
+    
     example/output:96833d33a4333d33fd2490ca2ec8ebab83be5481cb17372b9a66e1518253a111 depends on:
     example/repo_2:6881def87f34aa1d7501d2960719fd6b5df9c392053278eade089b3186ee8407
     example/repo_1:5fe74f282e33fb78dda67b3c96f9f915e949d06a643d0b50ce5f74f35ad1e3c7
@@ -26,7 +27,8 @@ However, that's not all. We can also reconstruct a Splitfile that can be
 used to rebuild the newly created image, without the original Splitfile
 present:
 
-    sgr provenance example/output:latest --full
+    $ sgr provenance example/output:latest --full
+    
     # Splitfile commands used to recreate example/output:96833d33a4333d33fd2490ca2ec8ebab83be5481cb17372b9a66e1518253a111
     FROM example/repo_1:5fe74f282e33fb78dda67b3c96f9f915e949d06a643d0b50ce5f74f35ad1e3c7 IMPORT demo AS table_1
     FROM example/repo_2:6881def87f34aa1d7501d2960719fd6b5df9c392053278eade089b3186ee8407 IMPORT demo AS table_2
@@ -40,7 +42,8 @@ information. In particular, this means that we can rebuild the
 dependencies by simply substituting a different image hash into this
 regenerated Splitfile:
 
-    sgr rebuild example/output:latest --against example/repo_2:new_data
+    $ sgr rebuild example/output:latest --against example/repo_2:new_data
+    
     Rerunning example/output:96833d33a4333d33fd2490ca2ec8ebab83be5481cb17372b9a66e1518253a111 against:
     example/repo_2:new_data
 
@@ -68,7 +71,8 @@ the derivation has to be rerun.
 
 Let's examine the new result:
 
-    sgr sql --schema example/output "SELECT * FROM result ORDER BY key"
+    $ sgr sql --schema example/output "SELECT * FROM result ORDER BY key"
+    
     [(2,
       '1d8cdaef663c05d4792c692bfe3344d77935bd6d04ccf23f508dec2ae4f156fb',
       'cd36823ad91bf9f972efd98bbfcc30369e1c76ff993cc8ce79c5585535ad6d75'),
@@ -101,7 +105,8 @@ The caching behaviour still holds here, so if we do a `rebuild` against
 the original version of `example/repo_1`, the first version of
 `example/output` will be checked out:
 
-    sgr rebuild example/output:latest --against example/repo_2:original_data
+    $ sgr rebuild example/output:latest --against example/repo_2:original_data
+    
     Rerunning example/output:a2c37225c2d162c0d78bc15195a740e3a231bb9c1b5f37c00d3bf04560c63216 against:
     example/repo_2:original_data
 
