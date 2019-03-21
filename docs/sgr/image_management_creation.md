@@ -46,7 +46,7 @@ store them as full table snapshots.
 
 ### Options
 
-  * **`-s, --include-snap`**: Include the full table snapshots. This consumes more space, but makes checkouts faster.
+  * **`-s, --snap`**: Store the table as a full table snapshot. This consumes more space, but makes checkouts faster.
   * **`-m, --message TEXT`**: Optional commit message
 
 ## tag

@@ -45,6 +45,17 @@ Return the differences from the first (earlier) image to the second image.
   * **`-v, --verbose`**: Include the actual differences rather than just the total number of updated rows.
   * **`-t, --table-name TEXT`**: Show the differences for a single table.
 
+## object
+
+```sgr object [OPTIONS] OBJECT_ID```
+
+Show information about a Splitgraph object.
+
+Objects, or fragments, are building blocks of Splitgraph tables: each table consists of multiple immutable fragments
+that can partially overwrite each other. Each fragment might have a parent that it depends on. In addition,
+the smallest and largest values for every column are stored in the fragment's metadata. This information is used
+to choose which objects to download in order to execute a query against a table.
+
 ## show
 
 ```sgr show [OPTIONS] IMAGE_SPEC```

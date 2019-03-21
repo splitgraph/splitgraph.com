@@ -7,14 +7,20 @@ import shutil
 
 import click
 import splitgraph.commandline as cmd
-
 # Map category to Click commands -- maybe eventually we'll read this dynamically...
+from splitgraph.ingestion import csv_export, csv_import
+
 STRUCTURE = {'Image management/creation': ['checkout', 'commit', 'tag', 'import'],
-             'Image information': ['log', 'diff', 'show', 'sql', 'status'],
-             'Miscellaneous': ['mount', 'rm', 'init', 'cleanup', 'prune', 'config'],
+             'Image information': ['log', 'diff', 'object', 'show', 'sql', 'status'],
+             'Data import/export': ['csv export', 'csv import', 'mount'],
+             'Miscellaneous': ['rm', 'init', 'cleanup', 'prune', 'config'],
              'Sharing images': ['clone', 'push', 'pull', 'publish', 'upstream'],
              'Splitfile execution': ['build', 'rebuild', 'provenance']
              }
+
+# Map command names to Click command instances where they don't have the expected (cmd_name + '_c') format
+STRUCTURE_CMD_OVERRIDE = {'csv export': csv_export,
+                          'csv import': csv_import}
 
 
 def _emit_document_header(doc_id, title):
@@ -48,7 +54,9 @@ def _emit_command_options(command):
 
 
 def _emit_command(command_name):
-    command = getattr(cmd, command_name + '_c')
+    command = STRUCTURE_CMD_OVERRIDE.get(command_name)
+    if not command:
+        command = getattr(cmd, command_name + '_c')
     result = _emit_header(command_name, level=2) + "\n"
     result += "\n" + _emit_command_invocation(command)
     # Future: move examples under options?

@@ -103,9 +103,8 @@ Let's commit the changes to the new repository to create a new image:
     Tables:
       demo: obd90d0188367a0d9c1b06dff92a729a97d360d50c9fc94438b1b70d71842a5
 
-You'll see that the `demo` table is stored as a new object in this
-image: only the 6 changed rows have been stored in it, as opposed to the
-whole table.
+The `demo` table is stored as a new object in this image and only the 6 changed rows
+have been stored in it, as opposed to the whole table.
 
 Tag the new image and check out the old one:
 
