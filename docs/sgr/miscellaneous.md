@@ -3,17 +3,6 @@ id: miscellaneous
 title: Miscellaneous
 ---
 
-## mount
-
-```sgr mount [OPTIONS] ```
-
-Mount foreign databases as Postgres schemas.
-
-Uses the Postgres FDW interface to create a local Postgres schema with foreign tables that map
-to tables in other databases.
-
-See a given mount handler's documentation for handler-specific parameters.
-
 ## rm
 
 ```sgr rm [OPTIONS] IMAGE_SPEC```

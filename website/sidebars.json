@@ -18,6 +18,7 @@
       "sgr/image_management_creation",
       "sgr/image_information",
       "sgr/miscellaneous",
+      "sgr/data_import_export",
       "sgr/sharing_images",
       "sgr/splitfile_execution"]
   }
