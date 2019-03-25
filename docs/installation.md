@@ -19,12 +19,14 @@ To run this demo, you will need to either be able to run Docker (to use
 the official Splitgraph engine) or have access to a PostgreSQL (&gt;
 9.6) database (in which case some functionality won't be available).
 
-
-`sgr`, the Splitgraph command line client, and library can be installed
+`sgr`, the Splitgraph command line client and library can be installed
 either from [GitHub](https://github.com/splitgraph/splitgraph/) or from
 pip:
 
     $ pip install --index-url https://test.pypi.org/simple/ splitgraph
+
+You will need to be running Python 3.6 or later. For Linux systems, a single
+self-contained binary is available on the [releases page](https://github.com/splitgraph/splitgraph/releases).
 
 ### Official Splitgraph engine
 
@@ -46,11 +48,12 @@ installation, run:
 ### Local Postgres
 
 If you don't want or can't use Docker, you can also run `sgr` against
-any other Postgres database. This will mean that you won't be able to
-push/pull images to other Splitgraph engines or mount other databases
-(since it requires the Postgres Foreign Data Wrapper extensions to be
-installed), but it won't prevent you from following the instructions in
-this demo.
+any other Postgres database. Most Splitgraph functionality will still be
+available and you will still be able to download and share images as well
+as follow the instructions in this demo. However, you won't be able to:
+
+  * Push/pull images directly to other Splitgraph engines (as opposed to the default behaviour of downloading them from S3-compatible storage) or mount other databases: this requires the Postgres Foreign Data Wrapper extensions to be installed). 
+  * Use layered querying which allows to run SQL queries against Splitgraph images without materializing them, by only querying and downloading a subset of every table.
 
 After installing `sgr`, run the configurator to generate a base config
 file:
