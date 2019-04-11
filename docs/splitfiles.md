@@ -91,9 +91,9 @@ created:
     Parent: 9764d69bbc46429bc897bfe114fefbca9202d39a5d1a6183d65d098133c73096
 
     Tables:
-      table_1: o8781a2d30bc731a00650ff9833a5bcc65d22597059f5d619dfe3549a7325a9
-      table_2: od5a45d033903aa9f8241e5d87e884360fcee56ca874ae12c7cc94942b84092
-      result: o4be220f929a52b1c1eaa2c083a1fbcab0cbc4bdd3c9a634e6a331dbe92b990
+      result: oc9ee54fcb5537f423fa3a4422a81c12a8b49e2d3704adde417eadbb05d737a
+      table_1: o26c6d8345cba276f807d7bcf906531568f309c2609a3420d98c01a6c99b166
+      table_2: oa0f257670aa3a39444b5d03364d9abfcaa8c7f3fce970fde3b5d63d6ed3fb6
 
 Let's also look at the actual data we produced. Since we ran the
 Splitfile against the original version of the `example/repo_2`
@@ -102,35 +102,36 @@ repository, all keys from 0 to 9 should be present in the join table:
     $ sgr sql --schema example/output "SELECT * FROM result ORDER BY key"
     
     [(0,
-      'e3f8da4d6d906fc5b7d33a670b2b370bbe617c30a9b4b56cda901605b8cbc014',
-      'da6b3aca32bbc1011aff3c57e453ab9e4e1be1f7373fc1f5a745d19e4f70d955'),
+      '5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9',
+      '5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9'),
      (1,
-      '649e8e3fd3c2afafafbdd1b822030f70e5068417bfb8575fce23419ea4eb2ff',
-      '980766c6ad7d50f0abd0b23c52b88641c2cef27c69d8ae91387d31eafc4f5ef4'),
+      '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',
+      '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b'),
      (2,
-      '1d8cdaef663c05d4792c692bfe3344d77935bd6d04ccf23f508dec2ae4f156fb',
-      '53193b48f075f61de3be0d8c344d1795f4d5e69760cadb9a255fd7afd638cc7f'),
+      'd4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35',
+      'd4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35'),
      (3,
-      'c720af85b57634711987d4cc21bdecb7c68f8e76f7a39f3d9c5ffb500528f3e6',
-      '9524f629b9fcf93db71a3f782761e3d197cb8ccf055cb47ed56547909c110938'),
+      '4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce',
+      '4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce'),
      (4,
-      'c7b40b97aff78b36ecaf694bb17f45d6779fb9ab35e7e8691028cc2b4a33d2c7',
-      '2101df664248a539a9cb66c1e598211e1d11e485089e32583fff2d9ad3487993'),
+      '4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a',
+      '4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a'),
      (5,
-      '9f945d56c6df763a54f463a36e5139592c5cd50b74cd817e0aff29ec13694a9',
-      '30ddd6e11c61e3242ebbfb9d4eee426da0cf2b1e6ea8dc135b5fce3d5757e02'),
+      'ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d',
+      'ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d'),
      (6,
-      '77c236d7da1a04c42a353a83b57225f54e48afead36610764c4021e06611f918',
-      'efbea91e4e8ca2fbe7c7923896c90ae30092b409b7a796993c4da918f1e522ab'),
+      'e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683',
+      'e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683'),
      (7,
-      'c9fa6479320a5bd1cc7900e68f07ae81b11c1e7d1f7f337096ef28b60026fd8c',
-      '1738b2c8c1b2a7a0e5bd09dfea8e232dec8b626224ceb62dd4e54d485b71957d'),
+      '7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451',
+      '7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451'),
      (8,
-      '2397a04861b9ee87057ed023a2a5f10ec4ed1c14184f22cbf53606783398e1fa',
-      '8edd06b686969ca768a6d7ee77bad780ceb0217c3a61ab18e65ab0f840d438b'),
+      '2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3',
+      '2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3'),
      (9,
-      '500fd35e1fb72c4d0b5d1060734964b0e338f273ee41567cae51158ce98cfde1',
-      'd6cb4f591a28d27d7a041be13cf00408d7e2f0d989e6a32f88d0d9259d1bab2a')]
+      '19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7',
+      '19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7')]
+
 
 Finally, since each image at execution time has a deterministic hash,
 rerunning the same Splitfile won't actually perform any computation:
