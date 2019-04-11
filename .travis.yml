@@ -2,6 +2,10 @@ language: python
 python:
   - "3.6"
 sudo: required
+addons:
+  apt:
+    packages:
+    - sshpass
 node_js:
   - '8'
 branches:
