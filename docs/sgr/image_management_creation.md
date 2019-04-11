@@ -11,7 +11,7 @@ Check out a Splitgraph image into a Postgres schema.
 
 This downloads the required physical objects and materializes all tables, unless ``-l`` or ``--layered`` is passed,
 in which case the objects are downloaded and a foreign data wrapper is set up on the engine to satisfy read-only
-queries by combining results from each table's DIFF objects.
+queries by combining results from each table's fragments.
 
 Tables checked out in this way are still presented as normal Postgres tables and can queried in the same way.
 Since the tables aren't materialized, layered querying is faster to set up, but since each query now results in a
@@ -44,9 +44,19 @@ This packages up all changes into a new image. Where a table hasn't been created
 this will delta compress the changes. For all other tables (or if ``-s`` has been passed), this will
 store them as full table snapshots.
 
+When a table is stored as a full snapshot, `--chunk-size` sets the maximum size, in rows, of the fragments
+that the table will be split into (default is no splitting).
+
+If `--split-changesets` is passed, delta-compressed changes will also be split up according to the original
+table chunk boundaries. For example, if there's a change to the first and the 20000th row of a table that was
+originally committed with `--chunk-size=10000`, this will create 2 fragments: one based on the first chunk
+and one on the second chunk of the table.
+
 ### Options
 
   * **`-s, --snap`**: Store the table as a full table snapshot. This consumes more space, but makes checkouts faster.
+  * **`-c, --chunk-size INTEGER`**: Split new tables into chunks of this many rows.
+  * **`-t, --split-changesets`**: Split changesets for existing tables across original chunk boundaries.
   * **`-m, --message TEXT`**: Optional commit message
 
 ## tag
@@ -71,7 +81,7 @@ List all tags assigned to the image ``noaa/climate:abcdef1234567890...``
 ``sgr tag noaa/climate:abcdef1234567890 my_new_tag``
 
 Tag the image ``noaa/climate:abcdef1234567890...`` with ``my_new_tag``. If the tag already exists, this will
-raise an error, unless ``-f`` is passed, which will overwrite the tag.
+overwrite the tag.
 
 ``sgr tag noaa/climate my_new_tag``
 
@@ -83,7 +93,6 @@ Remove the tag ``my_new_tag`` from ``noaa/climate``.
 
 ### Options
 
-  * **`-f, --force`**: Overwrite the tag if it already exists.
   * **`-r, --remove`**: Remove the tag instead.
 
 ## import
