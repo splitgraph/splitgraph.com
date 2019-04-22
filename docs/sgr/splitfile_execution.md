@@ -31,7 +31,7 @@ Executes ``my_other.splitfile`` with parameters ``PARAM1`` and ``PARAM2`` set to
 ### Options
 
   * **`-a, --args <TEXT TEXT>...`**: Parameters to be substituted into the Splitfile. All parameters mentioned in the file must be specified in order for the Splitfile to be executed.
-  * **`-o, --output-repository FROM_SCHEMA`**: Repository to store the result in.
+  * **`-o, --output-repository REPOSITORY`**: Repository to store the result in.
 
 ## rebuild
 
@@ -59,7 +59,7 @@ out.
 ### Options
 
   * **`-u, --update`**: Rederive the image against the latest version of all dependencies.
-  * **`-a, --against IMAGE_SPEC`**: Images to substitute into the reconstructed Splitfile, of the form [NAMESPACE/]REPOSITORY[:HASH_OR_TAG]. Default tag is 'latest'.
+  * **`-a, --against IMAGE`**: Images to substitute into the reconstructed Splitfile, of the form [NAMESPACE/]REPOSITORY[:HASH_OR_TAG]. Default tag is 'latest'.
 
 ## provenance
 

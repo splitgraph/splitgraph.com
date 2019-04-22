@@ -7,8 +7,9 @@ import shutil
 
 import click
 import splitgraph.commandline as cmd
+from splitgraph.commandline.ingestion import csv_export, csv_import
+
 # Map category to Click commands -- maybe eventually we'll read this dynamically...
-from splitgraph.ingestion import csv_export, csv_import
 
 STRUCTURE = {'Image management/creation': ['checkout', 'commit', 'tag', 'import'],
              'Image information': ['log', 'diff', 'object', 'show', 'sql', 'status'],

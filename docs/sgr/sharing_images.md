@@ -93,6 +93,6 @@ Shows the current upstream for ``my/repo``.
 
 ### Options
 
-  * **`-s, --set <TEXT FROM_SCHEMA>...`**: Set the upstream to a engine alias + repository
+  * **`-s, --set <TEXT REPOSITORY>...`**: Set the upstream to a engine alias + repository
   * **`-r, --reset`**: Delete the upstream
 
