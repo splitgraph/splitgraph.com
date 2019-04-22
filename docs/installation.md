@@ -31,12 +31,12 @@ self-contained binary is available on the [releases page](https://github.com/spl
 ### Official Splitgraph engine
 
 Use Docker to pull and start the
-[engine](https://hub.docker.com/r/splitgraph/driver/):
+[engine](https://hub.docker.com/r/splitgraph/engine/):
 
     $ docker run -d \
     -e POSTGRES_PASSWORD=supersecure \
     -p 5432:5432 \
-    splitgraph/driver
+    splitgraph/engine
 
 By default, `sgr` is configured to speak to the engine running on
 `localhost:5432` with a superuser account called `sgr` and a password

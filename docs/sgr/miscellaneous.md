@@ -52,14 +52,23 @@ Initialize a new repository/engine.
 
 ### Examples
 
-``sgr init``
+`sgr init`
 
 Initializes the current local Splitgraph engine by writing some bookkeeping information.
 This is required for the rest of sgr to work.
 
+`sgr init --skip-audit`
+
+Initializes a Splitgraph engine without installing audit triggers: this is useful for engines that aren't
+intended to be used for image checkouts.
+
 ``sgr init new/repo``
 
 Creates a single image with the hash ``00000...`` in ``new/repo``
+
+### Options
+
+  * **`--skip-audit`**: 
 
 ## cleanup
 
