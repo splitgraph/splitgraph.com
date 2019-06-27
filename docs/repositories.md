@@ -198,7 +198,8 @@ Finally, the column index now spans all the values of the `key` column that were
 a query against this table that is inside that range, both fragments will be fetched to check if they match
 that query.
 
-We can also inspect the actual object: every object in the Splitgraph cache is stored as a Postgres table.
+We can also inspect the actual object: every object in the Splitgraph cache is stored as a
+[CStore](https://github.com/citusdata/cstore_fdw) columnar storage file.
 
     $ sgr sql "SELECT * FROM splitgraph_meta.oa0f257670aa3a39444b5d03364d9abfcaa8c7f3fce970fde3b5d63d6ed3fb6"
     
@@ -217,5 +218,5 @@ The object is stored with the same schema as the original table, plus a Boolean 
 updated/inserted (upserted) or deleted. For deleted rows, only the primary key is recorded and the rest of the table
 is padded with `NULL`s.
 
-Splitgraph objects aren't always stored in the engine as tables: when an image is pushed to an external location,
-they are usually uploaded to an S3-compatible storage as compressed binary Postgres table dumps.
+Splitgraph objects aren't always stored in the engine: when an image is pushed to an external location,
+they are usually uploaded to an S3-compatible storage.
