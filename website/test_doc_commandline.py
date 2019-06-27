@@ -39,7 +39,12 @@ def main(before, dir, dry_run, file):
     print("Setting up the tests...")
     for cmd in before:
         print(cmd)
-        subprocess.run(cmd, shell=True, stderr=subprocess.DEVNULL, check=True)
+        try:
+            subprocess.run(cmd, shell=True, stderr=subprocess.DEVNULL, check=True)
+        except subprocess.CalledProcessError as e:
+            print(" ERROR setting up the tests")
+            print(e.output)
+            raise
     print("Running tests...")
     index = 1
     for fname in file:
