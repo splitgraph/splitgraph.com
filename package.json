@@ -1,0 +1,11 @@
+{
+  "name": "splitgraph.com",
+  "version": "0.0.1",
+  "description": "Monorepo for splitgraph.com JS projects (docs, website)",
+  "main": "index.js",
+  "repository": "git@github.com:splitgraph/splitgraph.com.git",
+  "author": "Splitgraph",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["design", "docs"]
+}
