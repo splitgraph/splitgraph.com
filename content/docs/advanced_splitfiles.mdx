@@ -1,7 +1,7 @@
----
-id: advanced_splitfiles
-title: Advanced Splitfile usage
----
+export const meta = {
+  id: "advanced_splitfiles",
+  title: "Advanced Splitfile usage"
+};
 
 There's one other advantage to using Splitfiles instead of building
 images manually: provenance tracking. An image that is created by a
@@ -12,7 +12,7 @@ This means that we can output a list of images and repositories that
 were used in an image's creation:
 
     $ sgr provenance example/output:latest
-    
+
     example/output:96833d33a4333d33fd2490ca2ec8ebab83be5481cb17372b9a66e1518253a111 depends on:
     example/repo_2:6881def87f34aa1d7501d2960719fd6b5df9c392053278eade089b3186ee8407
     example/repo_1:5fe74f282e33fb78dda67b3c96f9f915e949d06a643d0b50ce5f74f35ad1e3c7
@@ -28,7 +28,7 @@ used to rebuild the newly created image, without the original Splitfile
 present:
 
     $ sgr provenance example/output:latest --full
-    
+
     # Splitfile commands used to recreate example/output:96833d33a4333d33fd2490ca2ec8ebab83be5481cb17372b9a66e1518253a111
     FROM example/repo_1:5fe74f282e33fb78dda67b3c96f9f915e949d06a643d0b50ce5f74f35ad1e3c7 IMPORT demo AS table_1
     FROM example/repo_2:6881def87f34aa1d7501d2960719fd6b5df9c392053278eade089b3186ee8407 IMPORT demo AS table_2
@@ -43,7 +43,7 @@ dependencies by simply substituting a different image hash into this
 regenerated Splitfile:
 
     $ sgr rebuild example/output:latest --against example/repo_2:new_data
-    
+
     Rerunning example/output:96833d33a4333d33fd2490ca2ec8ebab83be5481cb17372b9a66e1518253a111 against:
     example/repo_2:new_data
 
@@ -72,7 +72,7 @@ the derivation has to be rerun.
 Let's examine the new result:
 
     $ sgr sql --schema example/output "SELECT * FROM result ORDER BY key"
-    
+
     [(2,
       'd4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35',
       'd4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35_UPDATED'),
@@ -106,7 +106,7 @@ the original version of `example/repo_1`, the first version of
 `example/output` will be checked out:
 
     $ sgr rebuild example/output:latest --against example/repo_2:original_data
-    
+
     Rerunning example/output:a2c37225c2d162c0d78bc15195a740e3a231bb9c1b5f37c00d3bf04560c63216 against:
     example/repo_2:original_data
 

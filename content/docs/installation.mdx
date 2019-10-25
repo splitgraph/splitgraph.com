@@ -1,7 +1,7 @@
----
-id: installation
-title: Installation
----
+export const meta = {
+  id: "installation",
+  title: "Installation"
+};
 
 A normal Splitgraph installation consists of two components: the
 Splitgraph engine and the Splitgraph client (`sgr`).
@@ -52,8 +52,8 @@ any other Postgres database. Most Splitgraph functionality will still be
 available and you will still be able to download and share images as well
 as follow the instructions in this demo. However, you won't be able to:
 
-  * Push/pull images directly to other Splitgraph engines (as opposed to the default behaviour of downloading them from S3-compatible storage) or mount other databases: this requires the Postgres Foreign Data Wrapper extensions to be installed). 
-  * Use layered querying which allows to run SQL queries against Splitgraph images without materializing them, by only querying and downloading a subset of every table.
+- Push/pull images directly to other Splitgraph engines (as opposed to the default behaviour of downloading them from S3-compatible storage) or mount other databases: this requires the Postgres Foreign Data Wrapper extensions to be installed).
+- Use layered querying which allows to run SQL queries against Splitgraph images without materializing them, by only querying and downloading a subset of every table.
 
 After installing `sgr`, run the configurator to generate a base config
 file:
@@ -85,7 +85,7 @@ Open `.sgconfig` and change `SG_ENGINE_HOST`, `SG_ENGINE_PORT`,
 your Postgres installation. Finally, initialize the engine:
 
     $ sgr init
-    
+
     2019-01-01 15:21:43,794 INFO Creating database splitgraph
     2019-01-01 15:21:44,416 INFO Installing the audit trigger...
     2019-01-01 15:21:44,500 INFO Ensuring metadata schema splitgraph_meta exists...

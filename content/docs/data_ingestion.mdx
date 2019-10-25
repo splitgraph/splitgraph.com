@@ -1,7 +1,7 @@
----
-id: data_ingestion
-title: Data ingestion
----
+export const meta = {
+  id: "data_ingestion",
+  title: "Data ingestion"
+};
 
 ## Introduction
 
@@ -24,7 +24,7 @@ will be converted to a MongoDB query behind the scenes and forwarded to the targ
 
 ```
 $ sgr sql -s example/mongo "SELECT * FROM example_table"
-``` 
+```
 
 To snapshot the table, making it part of an actual Splitgraph image, use the `sgr import` command:
 
@@ -37,20 +37,20 @@ example/mongo_repo:example_table has been imported from example/mongo:select col
 
 ## Writing a custom mount handler
 
-To mount a custom database into your Splitgraph engine, you have to do three things: 
+To mount a custom database into your Splitgraph engine, you have to do three things:
 
-  * Install the foreign data wrapper into the engine (either using PGXN or compiling the wrapper by yourself)
-  * Write a Python function that, when invoked, will create the required mountpoint on the engine and initialize
-    the remote foreign data wrapper. For an example, see `mount_postgres` in `splitgraph.hooks.mount_handlers`.
-  * Register the handler in your `.sgconfig` file:
-    ``` 
-    [mount_handlers]
-    handler_name=your.handler.module.handler_function
-    ```
- 
+- Install the foreign data wrapper into the engine (either using PGXN or compiling the wrapper by yourself)
+- Write a Python function that, when invoked, will create the required mountpoint on the engine and initialize
+  the remote foreign data wrapper. For an example, see `mount_postgres` in `splitgraph.hooks.mount_handlers`.
+- Register the handler in your `.sgconfig` file:
+  ```
+  [mount_handlers]
+  handler_name=your.handler.module.handler_function
+  ```
+
 Registering the handler in such a way will also parse its function signature and docstring, adding the handler automatically to the `sgr` client as a subcommand, as well as making it available to be used in Splitfiles.
 
-For example, the `mount_postgres` function: 
+For example, the `mount_postgres` function:
 
 ```
 def mount_postgres(mountpoint, server, port, username, password, dbname, remote_schema, tables=[]):
@@ -86,7 +86,7 @@ def mount_postgres(mountpoint, server, port, username, password, dbname, remote_
     query += "FROM SERVER {} INTO {}"
     engine.run_sql(SQL(query).format(Identifier(remote_schema), Identifier(server_id),
                                      Identifier(mountpoint)), tables)
-``` 
+```
 
 gets made available in the `sgr` client with this help message:
 
@@ -111,4 +111,4 @@ Options:
   --help                      Show this message and exit.
 ```
 
-The connection string gets parsed and passed to the mount handler as `server`, `port`, `username` and `password` parameters. The remaining options are converted from a JSON dictionary and passed to the handler as extra kwargs. 
+The connection string gets parsed and passed to the mount handler as `server`, `port`, `username` and `password` parameters. The remaining options are converted from a JSON dictionary and passed to the handler as extra kwargs.

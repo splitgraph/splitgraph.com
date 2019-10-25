@@ -1,11 +1,11 @@
----
-id: data_import_export
-title: Data import/export
----
+export const meta = {
+  id: "data_import_export",
+  title: "Data import/export"
+};
 
 ## csv export
 
-```sgr export [OPTIONS] IMAGE_SPEC QUERY```
+`sgr export [OPTIONS] IMAGE_SPEC QUERY`
 
 Export the result of a query as CSV.
 
@@ -26,12 +26,12 @@ having to check the image out).
 
 ### Options
 
-  * **`-f, --file FILENAME`**: File name to export to, default stdout.
-  * **`-l, --layered`**: Don't materialize the tables, use layered querying instead.
+- **`-f, --file FILENAME`**: File name to export to, default stdout.
+- **`-l, --layered`**: Don't materialize the tables, use layered querying instead.
 
 ## csv import
 
-```sgr import [OPTIONS] REPOSITORY TABLE```
+`sgr import [OPTIONS] REPOSITORY TABLE`
 
 Import a CSV file into a checked-out Splitgraph repository. This doesn't create a new image, use `sgr commit`
 after the import and any adjustments (e.g. adding primary keys or converting column types) to do so.
@@ -46,14 +46,14 @@ If `-r` is passed, the table will instead be deleted and recreated from the CSV 
 
 ### Options
 
-  * **`-f, --file FILENAME`**: File name to import data from, default stdin.
-  * **`-r, --replace`**: Replace the table if it already exists.
-  * **`-k, --primary-key TEXT`**: Use the specified column(s) as primary key(s)
-  * **`-d, --datetime TEXT`**: Try to parse the specified column(s) as timestamps.
+- **`-f, --file FILENAME`**: File name to import data from, default stdin.
+- **`-r, --replace`**: Replace the table if it already exists.
+- **`-k, --primary-key TEXT`**: Use the specified column(s) as primary key(s)
+- **`-d, --datetime TEXT`**: Try to parse the specified column(s) as timestamps.
 
 ## mount
 
-```sgr mount [OPTIONS] ```
+`sgr mount [OPTIONS]`
 
 Mount foreign databases as Postgres schemas.
 
@@ -61,4 +61,3 @@ Uses the Postgres FDW interface to create a local Postgres schema with foreign t
 to tables in other databases.
 
 See a given mount handler's documentation for handler-specific parameters.
-

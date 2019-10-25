@@ -1,10 +1,9 @@
----
-id: splitfile_import
-title: IMPORT 
----
+export const meta = {
+  id: "splitfile_import",
+  title: "IMPORT"
+};
 
-**`FROM (repository[:tag])/(MOUNT handler conn_string handler_options)
-    IMPORT table1/{query1} [AS table1_alias], [table2/{query2}...]`**
+**`FROM (repository[:tag])/(MOUNT handler conn_string handler_options) IMPORT table1/{query1} [AS table1_alias], [table2/{query2}...]`**
 
 Uses the `sgr import` command to import one or more tables from
 either a local repository, a remote one, or an FDW-mounted database.
@@ -27,4 +26,4 @@ imported tables.
 
 This means that the layer is invalidated if there's a
 change to the remote repository, a different table is imported, named differently
-or a different query is used to create a table. 
+or a different query is used to create a table.

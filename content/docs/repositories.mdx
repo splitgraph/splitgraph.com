@@ -1,7 +1,7 @@
----
-id: repositories
-title: Repositories
----
+export const meta = {
+  id: "repositories",
+  title: "Repositories"
+};
 
 ## Introduction
 
@@ -71,7 +71,7 @@ PostgreSQL database backing the Splitgraph engine, but `sgr` provides a
 shorthand to alter the generated image:
 
     $ sgr example alter example/repo_2
-    
+
     Deleting 2 rows...
     Updating 2 rows...
     Adding 2 rows...
@@ -86,8 +86,8 @@ rows have been altered and two more rows have been added.
 Let's compare the `demo` table to its previous version:
 
     $ sgr diff example/repo_2 -v
-    
-    Between 6881def87f34 and the current working copy: 
+
+    Between 6881def87f34 and the current working copy:
     demo: added 4 rows, removed 4 rows.
     - (0, '5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9')
     - (1, '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b')
@@ -102,7 +102,7 @@ Let's commit the changes to the new repository to create a new image:
 
     $ sgr commit example/repo_2 --message "My first image"
     $ sgr show --verbose example/repo_2:latest
-    
+
     Image example/repo_2:a0057ef93849ce853b3c2a7268814cabdb6ba733cfd1f3b23a19ea719e11a98d
     My first image
     Created at 2019-01-01T14:23:33.641988
@@ -126,7 +126,7 @@ Check out the new copy:
     $ sgr checkout example/repo_2:new_data
     $ sgr sql --schema example/repo_2 "SELECT * FROM demo ORDER BY key"
 
-Behind the scenes, this replays the changes packaged up in the patch 
+Behind the scenes, this replays the changes packaged up in the patch
 object against the original copy of the table.
 
 ## More on Splitgraph objects
@@ -134,9 +134,9 @@ object against the original copy of the table.
 Let's further inspect the object that the first example image, `example/repo_1`, used.
 
     $ sgr object o26c6d8345cba276f807d7bcf906531568f309c2609a3420d98c01a6c99b166
-    
+
     Object ID: o26c6d8345cba276f807d7bcf906531568f309c2609a3420d98c01a6c99b166
-    
+
     Parent: None
     Namespace: example
     Format: FRAG
@@ -146,7 +146,7 @@ Let's further inspect the object that the first example image, `example/repo_1`,
     Column index:
       key: [0, 9]
       value: ['19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7', 'ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d']
-    
+
     Location: created locally
 
 There are a few interesting things in this object's metadata. Firstly, it's stored in the `FRAG` format.
@@ -172,9 +172,9 @@ hash of the schema and the parent ID of a given object. This means that Splitgra
 Now, let's look at the second object that the new version of the `demo` table in `example/repo_2:new_data` is linked to.
 
     $ sgr object oa0f257670aa3a39444b5d03364d9abfcaa8c7f3fce970fde3b5d63d6ed3fb6
-    
+
     Object ID: oa0f257670aa3a39444b5d03364d9abfcaa8c7f3fce970fde3b5d63d6ed3fb6
-    
+
     Parent: o26c6d8345cba276f807d7bcf906531568f309c2609a3420d98c01a6c99b166
     Namespace: example
     Format: FRAG
@@ -184,7 +184,7 @@ Now, let's look at the second object that the new version of the `demo` table in
     Column index:
       key: [0, 11]
       value: ['4a44dc15364204a80fe80e9039455cc1608281820fe2b24f1e5233ade6af1dd5', 'd4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35_UPDATED']
-    
+
     Location: created locally
 
 As you can see, this new object is based on the object that was used by the very first version
@@ -202,7 +202,7 @@ We can also inspect the actual object: every object in the Splitgraph cache is s
 [CStore](https://github.com/citusdata/cstore_fdw) columnar storage file.
 
     $ sgr sql "SELECT * FROM splitgraph_meta.oa0f257670aa3a39444b5d03364d9abfcaa8c7f3fce970fde3b5d63d6ed3fb6"
-    
+
     [(True,
       2,
       'd4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35_UPDATED'),

@@ -1,11 +1,11 @@
----
-id: miscellaneous
-title: Miscellaneous
----
+export const meta = {
+  id: "miscellaneous",
+  title: "Miscellaneous"
+};
 
 ## rm
 
-```sgr rm [OPTIONS] IMAGE_SPEC```
+`sgr rm [OPTIONS] IMAGE_SPEC`
 
 Delete schemas, repositories or images.
 
@@ -15,38 +15,38 @@ If the target of this command is a Splitgraph repository, this deletes the repos
 
 If the target of this command is an image, this deletes the image and all of its children.
 
-In any case, this command will ask for confirmation of the deletion, unless ``-y`` is passed. If ``-r``
-(``--remote``), is passed, this will perform deletion on a remote Splitgraph engine (registered in the config)
+In any case, this command will ask for confirmation of the deletion, unless `-y` is passed. If `-r`
+(`--remote`), is passed, this will perform deletion on a remote Splitgraph engine (registered in the config)
 instead, assuming the user has write access to the remote repository.
 
 This does not delete any physical objects that the deleted repository/images depend on:
-use ``sgr cleanup`` to do that.
+use `sgr cleanup` to do that.
 
 ### Examples
 
-``sgr rm temporary_schema``
+`sgr rm temporary_schema`
 
-Deletes ``temporary_schema`` from the local engine.
+Deletes `temporary_schema` from the local engine.
 
-``sgr rm --remote splitgraph.com username/repo``
+`sgr rm --remote splitgraph.com username/repo`
 
-Deletes ``username/repo`` from the Splitgraph registry.
+Deletes `username/repo` from the Splitgraph registry.
 
-``sgr rm -y username/repo:old_branch``
+`sgr rm -y username/repo:old_branch`
 
-Deletes the image pointed to by ``old_branch`` as well as all of its children (images created by a commit based
+Deletes the image pointed to by `old_branch` as well as all of its children (images created by a commit based
 on this image), as well as all of the tags that point to now deleted images, without asking for confirmation.
 Note this will not delete images that import tables from the deleted images via Splitfiles or indeed the
 physical objects containing the actual tables.
 
 ### Options
 
-  * **`-r, --remote TEXT`**: Perform the deletion on a remote instead, specified by its alias
-  * **`-y, --yes`**: Agree to deletion without confirmation
+- **`-r, --remote TEXT`**: Perform the deletion on a remote instead, specified by its alias
+- **`-y, --yes`**: Agree to deletion without confirmation
 
 ## init
 
-```sgr init [OPTIONS] [REPOSITORY]```
+`sgr init [OPTIONS] [REPOSITORY]`
 
 Initialize a new repository/engine.
 
@@ -62,17 +62,17 @@ This is required for the rest of sgr to work.
 Initializes a Splitgraph engine without installing audit triggers: this is useful for engines that aren't
 intended to be used for image checkouts.
 
-``sgr init new/repo``
+`sgr init new/repo`
 
-Creates a single image with the hash ``00000...`` in ``new/repo``
+Creates a single image with the hash `00000...` in `new/repo`
 
 ### Options
 
-  * **`--skip-audit`**: 
+- **`--skip-audit`**:
 
 ## cleanup
 
-```sgr cleanup [OPTIONS] ```
+`sgr cleanup [OPTIONS]`
 
 Prune unneeded objects from the engine.
 
@@ -80,28 +80,28 @@ This deletes all objects from the cache that aren't required by any local reposi
 
 ## prune
 
-```sgr prune [OPTIONS] REPOSITORY```
+`sgr prune [OPTIONS] REPOSITORY`
 
 Cleanup dangling images from a repository.
 
 This includes images not pointed to by any tags (or checked out) and those that aren't required by any of
 such images.
 
-Will ask for confirmation of the deletion, unless ``-y ``is passed. If ``-r`` (``--remote``) is
+Will ask for confirmation of the deletion, unless `-y`is passed. If `-r` (`--remote`) is
 passed, this will perform deletion on a remote Splitgraph engine (registered in the config) instead, assuming
 the user has write access to the remote repository.
 
 This does not delete any physical objects that the deleted repository/images depend on:
-use ``sgr cleanup`` to do that.
+use `sgr cleanup` to do that.
 
 ### Options
 
-  * **`-r, --remote TEXT`**: Perform the deletion on a remote instead, specified by its alias
-  * **`-y, --yes`**: Agree to deletion without confirmation
+- **`-r, --remote TEXT`**: Perform the deletion on a remote instead, specified by its alias
+- **`-y, --yes`**: Agree to deletion without confirmation
 
 ## config
 
-```sgr config [OPTIONS] ```
+`sgr config [OPTIONS]`
 
 Print the current Splitgraph configuration.
 
@@ -118,6 +118,5 @@ This command can be used to dump the current Splitgraph configuration into a fil
 
 ### Options
 
-  * **`-s, --no-shielding`**: If set, doesnt replace sensitive values (like passwords) with asterisks
-  * **`-c, --config-format`**: Output configuration in the Splitgraph config file format
-
+- **`-s, --no-shielding`**: If set, doesnt replace sensitive values (like passwords) with asterisks
+- **`-c, --config-format`**: Output configuration in the Splitgraph config file format
