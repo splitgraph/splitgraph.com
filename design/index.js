@@ -15,6 +15,15 @@ export {
   WarningText
 } from "./Text";
 
-export { BaseLayout, Header, Footer, MainContent, Sidebar } from "./Layout";
+export {
+  BaseLayout,
+  Header,
+  Footer,
+  MainContent,
+  Sidebar,
+  HolyGrail
+} from "./Layout";
+
+export { LogoImage } from "./Logo";
 
 export { defaultTheme } from "./defaultTheme";
