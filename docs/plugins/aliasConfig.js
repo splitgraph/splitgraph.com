@@ -4,6 +4,8 @@
 // the es6 directory (which can also cause problems, so best to avoid
 // by enumerating here)
 
-const ES6DependencyAliases = {};
+const ES6DependencyAliases = {
+  rehype: require.resolve("mdx-prism")
+};
 
 module.exports = ES6DependencyAliases;

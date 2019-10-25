@@ -14,8 +14,10 @@ import {
   LogoImage
 } from "@splitgraph/design";
 import { BaseLayout } from "@splitgraph/design/Layout";
+const { meta } = require("./introduction.mdx");
+const MdxContent = require("./introduction.mdx").default;
 
-const IndexPage = () => (
+const IndexPage = ({ docs }) => (
   <BaseLayout>
     <HolyGrail.Layout>
       <Header gridArea={HolyGrail.GridArea.Header}>
@@ -27,8 +29,9 @@ const IndexPage = () => (
       </Sidebar>
 
       <MainContent gridArea={HolyGrail.GridArea.Content}>
-        <Heading>Lorem ipsum...</Heading>
-        <SubHeading>Dolor, sit amet...</SubHeading>
+        <Heading>{meta.title}</Heading>
+        <MdxContent />
+        <pre>{JSON.stringify(docs, null, 2)}</pre>
       </MainContent>
 
       <Sidebar gridArea={HolyGrail.GridArea.Side}>
@@ -57,5 +60,13 @@ const IndexPage = () => (
     </HolyGrail.Layout>
   </BaseLayout>
 );
+
+IndexPage.getInitialProps = async ctx => {
+  // const compileDocs = require("../compile/compileDocs");
+
+  const docs = require("../compile/compiledDocs");
+
+  return { docs };
+};
 
 export default IndexPage;
