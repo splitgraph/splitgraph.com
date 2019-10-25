@@ -7,5 +7,9 @@
   "author": "Splitgraph",
   "license": "MIT",
   "private": true,
-  "workspaces": ["design", "docs"]
+  "workspaces": [
+    "design",
+    "docs",
+    "content"
+  ]
 }
