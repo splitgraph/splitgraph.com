@@ -1,4 +1,5 @@
 import sidebar from "../compile/compiledSidebar";
+import { Flex, Box } from "@splitgraph/design";
 
 // const sidebar = require("../compile/sidebar");
 
@@ -32,10 +33,14 @@ const Sidebar = sidebar => {
 
 const TestPage = () => {
   return (
-    <>
-      <Sidebar {...sidebar} />
-      <pre>{JSON.stringify(sidebar, null, 2)}</pre>;
-    </>
+    <Flex>
+      <Box>
+        <Sidebar {...sidebar} />
+      </Box>
+      <Box>
+        <pre>{JSON.stringify(sidebar, null, 2)}</pre>
+      </Box>
+    </Flex>
   );
 };
 

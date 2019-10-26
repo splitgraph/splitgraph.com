@@ -51,7 +51,7 @@ class ContentTree {
   }
 
   enrich() {
-    this.walk((item, parent) => {
+    this.walk((item, parent, depth) => {
       let isMetaFile = item.name == "metadata.json";
       if (isMetaFile) {
         // let extlessName = item.name.replace("metadata.json", "");
@@ -79,6 +79,7 @@ class ContentTree {
         return;
       }
 
+      item.depth = depth;
       let isRoot = !parent;
 
       let fromContentRoot = isRoot ? "/" : item.path.replace(this.rootPath, "");
@@ -117,10 +118,15 @@ class ContentTree {
   }
 
   walk(callback) {
-    return ContentTree.walk(this.tree, callback, null);
+    return ContentTree.walk({ root: this.tree, callback });
   }
 
-  static walk(root, callback = (item, parent) => {}, parent) {
+  static walk({
+    root,
+    callback = (item, parent, depth) => {},
+    parent,
+    depth = 0
+  }) {
     if (!root) {
       return;
     }
@@ -130,17 +136,30 @@ class ContentTree {
       : undefined;
 
     if (root.children) {
-      root.children.forEach(node => ContentTree.walk(node, callback, root));
+      root.children.forEach(node =>
+        ContentTree.walk({
+          root: node,
+          callback: callback,
+          parent: root,
+          depth: depth + 1
+        })
+      );
     }
 
-    return callback(root, parent);
+    return callback(root, parent, depth);
   }
 
   map(callback) {
-    return ContentTree.map(this.tree, callback, null, {});
+    return ContentTree.map({ root: this.tree, callback });
   }
 
-  static map(root, callback = (item, parent) => {}, parent, twin = {}) {
+  static map({
+    root,
+    callback = (item, parent, depth) => {},
+    parent,
+    twin = {},
+    depth = 0
+  }) {
     if (!root) {
       return;
     }
@@ -154,12 +173,18 @@ class ContentTree {
       for (let i = 0; i < root.children.length; i++) {
         let node = root.children[i];
         twin.children.push(
-          ContentTree.map(node, callback, root, twin.children[i])
+          ContentTree.map({
+            root: node,
+            callback: callback,
+            parent: root,
+            twin: twin.children[i],
+            depth: depth + 1
+          })
         );
       }
     }
 
-    Object.assign(twin, callback(root, parent));
+    Object.assign(twin, callback(root, parent, depth));
 
     return twin;
   }
