@@ -2,17 +2,17 @@ const path = require("path");
 const url = require("url");
 const dirTree = require("directory-tree");
 
+const defaultOpts = {
+  urlPrefix: "/",
+  importMdxMetadata: true,
+  onWalk: (item, parent) => {},
+  onMap: (item, parent) => {}
+};
+
 class ContentTree {
-  constructor(
-    rootPath,
-    opts = {
-      urlPrefix: "/",
-      importMdxMetadata: true,
-      onWalk: (item, parent) => {}
-    }
-  ) {
+  constructor(rootPath, opts) {
     this.rootPath = rootPath;
-    this.opts = opts;
+    this.opts = Object.assign(defaultOpts, opts);
 
     this.tree = {};
 
@@ -28,6 +28,7 @@ class ContentTree {
   init() {
     this.build();
     this.enrich();
+
     return this;
   }
 
@@ -110,16 +111,38 @@ class ContentTree {
 
   static walk(root, callback = (item, parent) => {}, parent) {
     if (!root) {
-      return Promise.resolve();
+      return;
     }
 
     if (root.children) {
-      Promise.all(
-        root.children.map(node => ContentTree.walk(node, callback, root))
-      );
+      root.children.forEach(node => ContentTree.walk(node, callback, root));
     }
 
     return callback(root, parent);
+  }
+
+  map(callback) {
+    return ContentTree.map(this.tree, callback, null, {});
+  }
+
+  static map(root, callback = (item, parent) => {}, parent, twin = {}) {
+    if (!root) {
+      return;
+    }
+
+    if (root.children) {
+      twin.children = [];
+      for (let i = 0; i < root.children.length; i++) {
+        let node = root.children[i];
+        twin.children.push(
+          ContentTree.map(node, callback, root, twin.children[i])
+        );
+      }
+    }
+
+    Object.assign(twin, callback(root, parent));
+
+    return twin;
   }
 }
 

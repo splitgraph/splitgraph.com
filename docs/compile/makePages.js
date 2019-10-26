@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const rimraf = require("rimraf").sync;
 const ContentTree = require("./ContentTree");
 
 const CONTENT_DIR = path.dirname(require.resolve("@splitgraph/content"));
@@ -58,21 +59,27 @@ export default ${templater}({MdxPage, meta, Link});
 };
 
 const writeDocsPages = ({ pagesToMake }) => {
+  console.log("Bake content...");
+  rimraf(PAGES_OUT_DIR);
+
   for (let { page, source } of pagesToMake) {
     let dirToMake = path.dirname(page);
 
-    console.log("Make  dir:", dirToMake);
     fs.mkdirSync(dirToMake, { recursive: true });
-
-    console.log("Make file:", page);
     fs.writeFileSync(page, source);
   }
 };
 
 const writeExportMap = ({ exportMap }) => {
-  console.log("Write export map to:", exportMap);
+  console.log("Done baking content. Export map:", exportMap);
   fs.writeFileSync(EXPORT_PATH_MAP, JSON.stringify(exportMap, null, 2));
 };
+
+new ContentTree(DOCS_DIR, {
+  importMdxMetadata: false,
+  urlPrefix: "/docs",
+  templater: "withDocsLayout"
+}).init();
 
 module.exports = {
   prepPages: () => {
