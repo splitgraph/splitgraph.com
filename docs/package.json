@@ -4,9 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start"
+    "preexport": "yarn run --scripts-prepend-node-path build",
+    "export": "next export",
+    "prestart": "yarn run --scripts-prepend-node-path export",
+    "start": "serve out"
   },
   "dependencies": {
     "@babel/preset-env": "^7.6.3",
@@ -19,6 +22,7 @@
     "babel-plugin-preval": "^3.0.1",
     "babel-plugin-react-require": "^3.1.1",
     "directory-tree": "^2.2.4",
+    "express": "^4.17.1",
     "mdx": "^0.3.1",
     "mdx-prism": "^0.3.1",
     "next": "^9.1.1",
@@ -27,6 +31,7 @@
     "pirates": "^4.0.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "rehype": "^9.0.0"
+    "rehype": "^9.0.0",
+    "serve": "^11.2.0"
   }
 }
