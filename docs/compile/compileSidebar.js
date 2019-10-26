@@ -32,16 +32,62 @@ overrideRequire(transform, { exts: [".mdx"] });
 
 const ContentTree = require("./ContentTree");
 
+const navItemData = item => ({
+  url: item.navigable && item.url ? item.url.fromSiteRoot : undefined,
+  title: item.metadata && item.metadata.title ? item.metadata.title : item.slug
+});
+
+const itemData = (item, includeNav) =>
+  !!item
+    ? {
+        id: item.url ? item.url.fromSiteRoot : undefined,
+        url: item.navigable && item.url ? item.url.fromSiteRoot : undefined,
+        slug: item.slug,
+        metadata: item.metadata,
+        isSection: item.isDirectory,
+        nav: item.nav
+      }
+    : {};
+
+const navData = (item, parent) => {
+  const myIndex = !parent ? 0 : parent.children.findIndex(i => i === item);
+  const numSiblings = !parent ? 0 : parent.children.length - 1;
+
+  return !!item
+    ? {
+        up:
+          parent && (parent.url || parent.navigable)
+            ? navItemData(parent)
+            : undefined,
+        left:
+          myIndex > 0 && numSiblings > 0
+            ? navItemData(
+                parent.children.slice(0, myIndex).find(c => !!c && !c.isMeta),
+                false
+              )
+            : undefined,
+
+        right:
+          myIndex < numSiblings && numSiblings > 0
+            ? navItemData(
+                parent.children.slice(myIndex + 1).find(c => !!c && !c.isMeta),
+                false
+              )
+            : undefined
+      }
+    : {};
+};
+
 const compileSidebar = () => {
-  const contentTree = new ContentTree(DOCS_DIR).init();
+  const contentTree = new ContentTree(DOCS_DIR, {
+    importMdxMetadata: true,
+    urlPrefix: "/docs"
+  }).init();
 
   return contentTree.map((item, parent) => {
     return {
-      id: item.url ? item.url.fromSiteRoot : undefined,
-      slug: item.slug,
-      url: item.navigable && item.url ? item.url.fromSiteRoot : undefined,
-      metadata: item.metadata,
-      isSection: item.isDirectory
+      ...itemData(item),
+      ...navData(item, parent)
     };
   });
 };
