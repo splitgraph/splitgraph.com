@@ -7,36 +7,20 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
+const { prepPages } = require("./compile/makePages");
+
+const { exportMap } = prepPages();
+
 app.prepare().then(() => {
   const server = express();
 
-  // custom route for posts
-  server.get("/post/:id", (req, res) => {
-    const contentImportPath = path
-      .join(
-        path.dirname(require.resolve("@splitgraph/content")),
-        "docs/0000_getting-started/0200_installation.mdx"
-      )
-      .replace(
-        "/Users/green/_sg/splitgraph-cloud/src/js/splitgraph.com/content/",
-        "@splitgraph/content/"
-      );
-
-    console.log("source path:", contentImportPath);
-
-    return app.render(req, res, "/index", {
-      id: req.params.id,
-      contentImportPath:
-        req.params.id === "1"
-          ? "./docs/0200_sgr/0100_image_management_creation.mdx"
-          : req.params.id === "2"
-          ? "./docs/0200_sgr/0300_image_information.mdx"
-          : "./docs/0200_sgr/0400_data_import_export.mdx"
-    });
-  });
-
   server.get("*", (req, res) => {
-    return handle(req, res);
+    if (req.url in exportMap) {
+      let { page, ...rest } = exportMap[req.url];
+      return app.render(req, res, page, rest);
+    } else {
+      return handle(req, res);
+    }
   });
 
   server.listen(port, err => {

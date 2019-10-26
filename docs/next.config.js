@@ -6,6 +6,8 @@ const aliasConfig = require("./plugins/aliasConfig");
 const transpileModulesConfig = require("./plugins/transpileModulesConfig");
 const withIgnoreFs = require("./plugins/withIgnoreFs");
 
+const { makePages, EXPORT_PATH_MAP } = require("./compile/makePages");
+
 const DOCS_ENV = process.env.DOCS_ENV || "dev";
 
 const CONFIG_FILE = process.env.CONFIG_FILE || `./config/${DOCS_ENV}.config.js`;
@@ -23,6 +25,10 @@ const CONFIG = require(CONFIG_FILE);
 //   fs.readFileSync(path.resolve(__dirname, "./assets/antd-custom.less"), "utf8")
 // );
 
+const fs = require("fs").promises;
+
+makePages();
+
 const nextConfig = {
   env: {
     ...CONFIG
@@ -31,37 +37,8 @@ const nextConfig = {
     alias: aliasConfig
   },
   exportPathMap: async () => {
-    return Promise.resolve({
-      "/post/1": {
-        page: "/index",
-        query: {
-          id: "1",
-          contentImportPath:
-            "./docs/0200_sgr/0100_image_management_creation.mdx"
-        }
-      },
-      "/post/2": {
-        page: "/index",
-        query: {
-          id: "2",
-          contentImportPath: "./docs/0200_sgr/0300_image_information.mdx"
-        }
-      },
-      "/post/3": {
-        page: "/index",
-        query: {
-          id: "3",
-          contentImportPath: "./docs/0200_sgr/0400_data_import_export.mdx"
-        }
-      },
-      "/post/4": {
-        page: "/index",
-        query: {
-          id: "4",
-          contentImportPath: "./docs/0200_sgr/0500_sharing_images.mdx"
-        }
-      }
-    });
+    const jsonMap = await fs.readFile(EXPORT_PATH_MAP);
+    return JSON.parse(jsonMap);
   }
 };
 

@@ -10,6 +10,7 @@
   "workspaces": [
     "design",
     "docs",
-    "content"
+    "content",
+    "templaters"
   ]
 }

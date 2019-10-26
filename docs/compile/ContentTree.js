@@ -1,9 +1,18 @@
 const path = require("path");
+const url = require("url");
 const dirTree = require("directory-tree");
 
 class ContentTree {
-  constructor(rootPath) {
+  constructor(
+    rootPath,
+    opts = {
+      urlPrefix: "/",
+      importMdxMetadata: true,
+      onWalk: (item, parent) => {}
+    }
+  ) {
     this.rootPath = rootPath;
+    this.opts = opts;
 
     this.tree = {};
 
@@ -12,6 +21,8 @@ class ContentTree {
     this.directories = [];
 
     this.nodes = [];
+
+    this.pathTreeMap = {};
   }
 
   init() {
@@ -36,25 +47,58 @@ class ContentTree {
 
   enrich() {
     this.walk((item, parent) => {
+      let isMetaFile = item.name.endsWith(".meta.js");
+      if (isMetaFile) {
+        let extlessName = item.name.replace(".meta.js", "");
+        let isDirMetaFile = parent && extlessName === parent.name;
+
+        if (isDirMetaFile) {
+          parent.metadata = require(item.path);
+        }
+
+        return;
+      }
+
+      let isMdxFile = [".mdx", ".md"].includes(path.extname(item.path));
+      if (isMdxFile && this.opts.importMdxMetadata) {
+        // We can require the mdx file because we made babel transform it
+        item.metadata = require(item.path).meta;
+      } else if (!isMdxFile) {
+        return;
+      }
+
+      let isRoot = !parent;
+
+      let fromContentRoot = isRoot ? "/" : item.path.replace(this.rootPath, "");
       item.path = {
         system: item.path,
-        siteRoot: item.path.replace(this.rootPath, "")
+        fromContentRoot,
+        fromSiteRoot: path.join(this.opts.urlPrefix, fromContentRoot)
       };
 
-      let isMetaFile = item.name.endsWith(".meta.js");
-      let isDirMetaFile =
-        isMetaFile && item.name.replace(".meta.js", "") === parent.name;
+      // Remove the lexiographical sort 0100, 0200 and the .mdx extension
+      const LEXICAL_JUNK = /\/\d{1,5}\_|\.mdx?$/gm;
+      const delexify = s => s.replace(LEXICAL_JUNK, "/").replace(/\/$/, "");
 
-      if (isDirMetaFile) {
-        parent.metadata = require(item.path.system);
+      item.slug = delexify(item.path.fromContentRoot);
+
+      item.url = {
+        fromContentRoot: delexify(item.path.fromContentRoot),
+        fromSiteRoot: delexify(item.path.fromSiteRoot)
+      };
+
+      item.isDirectory = item.type === "directory";
+      item.navigable = !item.isDirectory;
+
+      this.nodes.push(item);
+
+      if (item.type === "directory") {
+        this.directories.push(item);
+      } else {
+        this.mdxFiles.push(item);
       }
 
-      let isMdxFile = [".mdx", ".md"].includes(path.extname(item.path.system));
-
-      if (isMdxFile) {
-        // We can require the mdx file because we made babel transform it
-        item.metadata = require(item.path.system).meta;
-      }
+      this.opts.onWalk(item, parent);
     });
 
     return this;
@@ -64,7 +108,7 @@ class ContentTree {
     return ContentTree.walk(this.tree, callback, null);
   }
 
-  static walk(root, callback = (item, parent) => ({ item, parent }), parent) {
+  static walk(root, callback = (item, parent) => {}, parent) {
     if (!root) {
       return Promise.resolve();
     }
