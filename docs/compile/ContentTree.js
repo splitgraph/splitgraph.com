@@ -12,7 +12,7 @@ const defaultOpts = {
 class ContentTree {
   constructor(rootPath, opts) {
     this.rootPath = rootPath;
-    this.opts = Object.assign(defaultOpts, opts);
+    this.opts = Object.assign({}, defaultOpts, opts);
 
     this.tree = {};
 
@@ -35,11 +35,15 @@ class ContentTree {
   // Not actually right now, but at some point if we have too many files
   // and builds are slow, we can change this without breaking the interface
   build() {
-    const contentTree = dirTree(this.rootPath, {}, item => {
-      if (path.basename(item.path).endsWith(".meta.js")) {
-        this.metaFiles.push(item.path);
+    const contentTree = dirTree(
+      this.rootPath,
+      { extensions: /\.(md|mdx|json)$/ },
+      item => {
+        if (path.basename(item.path).endsWith(".meta.json")) {
+          this.metaFiles.push(item.path);
+        }
       }
-    });
+    );
 
     this.tree = contentTree;
 
@@ -48,14 +52,17 @@ class ContentTree {
 
   enrich() {
     this.walk((item, parent) => {
-      let isMetaFile = item.name.endsWith(".meta.js");
+      let isMetaFile = item.name == "metadata.json";
       if (isMetaFile) {
-        let extlessName = item.name.replace(".meta.js", "");
-        let isDirMetaFile = parent && extlessName === parent.name;
+        // let extlessName = item.name.replace("metadata.json", "");
+        // let isDirMetaFile = parent && extlessName === parent.name;
 
-        if (isDirMetaFile) {
-          parent.metadata = require(item.path);
-        }
+        // if (isDirMetaFile) {
+        // parent.metadata = require(item.path);
+        // }
+
+        parent.metadata = require(item.path);
+        item.isMeta = true;
 
         return;
       }
@@ -64,7 +71,11 @@ class ContentTree {
       if (isMdxFile && this.opts.importMdxMetadata) {
         // We can require the mdx file because we made babel transform it
         item.metadata = require(item.path).meta;
-      } else if (!isMdxFile) {
+      }
+
+      if (!isMdxFile && !item.type === "directory") {
+        item.name = "blahblah";
+        item = undefined;
         return;
       }
 
@@ -81,7 +92,7 @@ class ContentTree {
       const LEXICAL_JUNK = /\/\d{1,5}\_|\.mdx?$/gm;
       const delexify = s => s.replace(LEXICAL_JUNK, "/").replace(/\/$/, "");
 
-      item.slug = delexify(item.path.fromContentRoot);
+      item.slug = delexify(`/${item.name}`).replace("/", "");
 
       item.url = {
         fromContentRoot: delexify(item.path.fromContentRoot),
@@ -114,6 +125,10 @@ class ContentTree {
       return;
     }
 
+    root.children = root.children
+      ? root.children.filter(c => !!c && Object.keys(c).length > 0 && !c.isMeta)
+      : undefined;
+
     if (root.children) {
       root.children.forEach(node => ContentTree.walk(node, callback, root));
     }
@@ -129,6 +144,10 @@ class ContentTree {
     if (!root) {
       return;
     }
+
+    root.children = root.children
+      ? root.children.filter(c => !!c && Object.keys(c).length > 0 && !c.isMeta)
+      : undefined;
 
     if (root.children) {
       twin.children = [];

@@ -32,12 +32,20 @@ overrideRequire(transform, { exts: [".mdx"] });
 
 const ContentTree = require("./ContentTree");
 
-const compileDocs = () => {
+const compileSidebar = () => {
   const contentTree = new ContentTree(DOCS_DIR).init();
 
-  return contentTree;
+  return contentTree.map((item, parent) => {
+    return {
+      id: item.url ? item.url.fromSiteRoot : undefined,
+      slug: item.slug,
+      url: item.navigable && item.url ? item.url.fromSiteRoot : undefined,
+      metadata: item.metadata,
+      isSection: item.isDirectory
+    };
+  });
 };
 
-const docs = compileDocs().tree;
+const sidebar = compileSidebar();
 
-module.exports = docs;
+module.exports = sidebar;
