@@ -57,6 +57,60 @@ const Sidebar = ({ sidebar, Link, minLabelDepth = 0 }) => {
   );
 };
 
+const BaseStyle = {
+  ListContainer: {
+    display: "inline-flex"
+  },
+  List: {
+    listStyleType: "none",
+    padding: 0
+  },
+  Item: {
+    whiteSpace: "nowrap"
+  },
+  Label: {}
+};
+
+const HorizontalStyle = {
+  ListContainer: {
+    flexWrap: "wrap",
+    marginTop: "1rem",
+    left: 0,
+    right: 0,
+    position: "absolute",
+    flexFlow: "initial",
+    flexBasis: "100%",
+    padding: 0,
+    backgroundColor: "green",
+    overflowX: "scroll",
+    paddingBottom: "1rem"
+  },
+  List: {
+    display: "inline-flex",
+    flexWrap: "nowrap"
+  },
+  Item: {
+    display: "flex",
+    whiteSpace: "nowrap"
+  },
+  Label: {
+    whiteSpace: "nowrap"
+  }
+};
+
+const VerticalStyle = {
+  ListContainer: {},
+  List: {},
+  Item: {
+    display: "flex",
+    flexDirection: "column"
+  },
+  Label: {
+    display: "block",
+    flexBasis: "100%"
+  }
+};
+
 export default ({
   children,
   gridArea = "nav",
@@ -75,44 +129,39 @@ export default ({
         marginTop: "-2rem"
       },
       ul: {
-        listStyleType: "none",
-        padding: 0,
+        ...BaseStyle.List,
+        "@media (min-width: 769px)": {
+          ...VerticalStyle.List
+        },
         "@media (max-width: 768px)": {
-          display: "inline-flex",
-          flexWrap: "nowrap"
+          ...HorizontalStyle.List
         }
       },
       ".ul-wrapper": {
-        display: "inline-flex",
+        ...BaseStyle.ListContainer,
+        "@media (min-width: 769px)": {
+          ...VerticalStyle.ListContainer
+        },
         "@media (max-width: 768px)": {
-          flexWrap: "wrap",
-          marginTop: "1rem",
-          left: 0,
-          right: 0,
-          position: "absolute",
-          flexFlow: "initial",
-          flexBasis: "100%",
-          padding: 0,
-          backgroundColor: "green",
-          overflowX: "scroll",
-          paddingBottom: "1rem"
+          ...HorizontalStyle.ListContainer
         }
       },
       li: {
+        ...BaseStyle.ListItem,
+        "@media (min-width: 769px)": {
+          ...VerticalStyle.ListItem
+        },
         "@media (max-width: 768px)": {
-          whiteSpace: "nowrap"
+          ...HorizontalStyle.ListItem
         }
       },
-      li: {
+      "span,a": {
+        ...BaseStyle.Label,
         "@media (min-width: 769px)": {
-          display: "flex",
-          flexDirection: "column"
-        }
-      },
-      span: {
-        "@media (min-width: 769px)": {
-          display: "block",
-          flexBasis: "100%"
+          ...VerticalStyle.Label
+        },
+        "@media (max-width: 768px)": {
+          ...HorizontalStyle.Label
         }
       }
     }}
