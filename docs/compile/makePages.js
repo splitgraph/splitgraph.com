@@ -5,16 +5,13 @@ const ContentTree = require("./ContentTree");
 
 const CONTENT_DIR = path.dirname(require.resolve("@splitgraph/content"));
 const DOCS_DIR = `${path.join(CONTENT_DIR, "docs")}`;
-
 const PAGES_DIR = path.resolve(
   path.join(path.dirname(require.resolve(__filename)), "../pages")
 );
-
 const ROOT_DIR = path.resolve(path.join(PAGES_DIR, ".."));
-
 const PAGES_OUT_DIR = path.join(PAGES_DIR, "_content");
-
 const EXPORT_PATH_MAP = path.join(ROOT_DIR, "exports.json");
+const CONTENT_TREE = path.join(ROOT_DIR, "compile/compiledSidebar");
 
 const prepDocsPages = () => {
   const templater = "withDocsLayout";
@@ -39,14 +36,23 @@ const prepDocsPages = () => {
         page: nextjsPagePath.replace(/\.js$/gm, "")
       };
 
+      const pathToSave = path.join(PAGES_DIR, nextjsPagePath);
+
+      const contentTreeLocation = path.relative(
+        path.dirname(pathToSave),
+        CONTENT_TREE
+      );
+
       pagesToMake.push({
         nextjsPagePath,
-        page: path.join(PAGES_DIR, nextjsPagePath),
+        page: pathToSave,
         source: `
 import Link from "next/link";
+import { withRouter } from "next/router";
 import ${templater} from "@splitgraph/templaters/${templater}";
 import MdxPage, { meta } from "@splitgraph/content${item.path.fromSiteRoot}";
-export default ${templater}({MdxPage, meta, Link});
+import contentTree from "${contentTreeLocation}";
+export default withRouter(${templater}({ MdxPage, meta, contentTree, Link }));
 `
       });
     }
@@ -74,12 +80,6 @@ const writeExportMap = ({ exportMap }) => {
   console.log("Done baking content. Export map:", exportMap);
   fs.writeFileSync(EXPORT_PATH_MAP, JSON.stringify(exportMap, null, 2));
 };
-
-new ContentTree(DOCS_DIR, {
-  importMdxMetadata: false,
-  urlPrefix: "/docs",
-  templater: "withDocsLayout"
-}).init();
 
 module.exports = {
   prepPages: () => {

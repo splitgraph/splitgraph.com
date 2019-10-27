@@ -1,4 +1,5 @@
 import { Box } from "@splitgraph/design";
+import { useState } from "react";
 
 const SidebarNode = ({
   Link,
@@ -58,6 +59,7 @@ const Sidebar = ({ sidebar, Link, minLabelDepth = 0 }) => {
 };
 
 const BaseStyle = {
+  Container: {},
   ListContainer: {
     display: "inline-flex"
   },
@@ -72,6 +74,7 @@ const BaseStyle = {
 };
 
 const HorizontalStyle = {
+  Container: {},
   ListContainer: {
     flexWrap: "wrap",
     marginTop: "1rem",
@@ -99,6 +102,7 @@ const HorizontalStyle = {
 };
 
 const VerticalStyle = {
+  Container: {},
   ListContainer: {},
   List: {},
   Item: {
@@ -111,63 +115,88 @@ const VerticalStyle = {
   }
 };
 
+const Style = {
+  Container: {
+    ...BaseStyle.Container,
+    "@media (min-width: 769px)": {
+      ...VerticalStyle.Container
+    },
+    "@media (max-width: 768px)": {
+      ...HorizontalStyle.Container
+    }
+  },
+  List: {
+    ...BaseStyle.List,
+    "@media (min-width: 769px)": {
+      ...VerticalStyle.List
+    },
+    "@media (max-width: 768px)": {
+      ...HorizontalStyle.List
+    }
+  },
+  ListContainer: {
+    ...BaseStyle.ListContainer,
+    "@media (min-width: 769px)": {
+      ...VerticalStyle.ListContainer
+    },
+    "@media (max-width: 768px)": {
+      ...HorizontalStyle.ListContainer
+    }
+  },
+  ListItem: {
+    ...BaseStyle.ListItem,
+    "@media (min-width: 769px)": {
+      ...VerticalStyle.ListItem
+    },
+    "@media (max-width: 768px)": {
+      ...HorizontalStyle.ListItem
+    }
+  },
+  Label: {
+    ...BaseStyle.Label,
+    "@media (min-width: 769px)": {
+      ...VerticalStyle.Label
+    },
+    "@media (max-width: 768px)": {
+      ...HorizontalStyle.Label
+    }
+  }
+};
+
 export default ({
   children,
   gridArea = "nav",
   sidebar = {},
   Link,
   minLabelDepth = 1,
-  maxVisibleDepth = 2
-}) => (
-  <Box
-    sx={{
-      gridArea,
-      position: "relative",
-      left: 0,
-      right: 0,
-      "@media (max-width: 768px)": {
-        marginTop: "-2rem"
-      },
-      ul: {
-        ...BaseStyle.List,
-        "@media (min-width: 769px)": {
-          ...VerticalStyle.List
-        },
+  maxVisibleDepth = 2,
+  activeId = null
+}) => {
+  return (
+    <Box
+      sx={{
+        gridArea,
+        ...Style.Container,
+        position: "relative",
+        left: 0,
+        right: 0,
         "@media (max-width: 768px)": {
-          ...HorizontalStyle.List
-        }
-      },
-      ".ul-wrapper": {
-        ...BaseStyle.ListContainer,
-        "@media (min-width: 769px)": {
-          ...VerticalStyle.ListContainer
+          marginTop: "-2rem"
         },
-        "@media (max-width: 768px)": {
-          ...HorizontalStyle.ListContainer
-        }
-      },
-      li: {
-        ...BaseStyle.ListItem,
-        "@media (min-width: 769px)": {
-          ...VerticalStyle.ListItem
-        },
-        "@media (max-width: 768px)": {
-          ...HorizontalStyle.ListItem
-        }
-      },
-      "span,a": {
-        ...BaseStyle.Label,
-        "@media (min-width: 769px)": {
-          ...VerticalStyle.Label
-        },
-        "@media (max-width: 768px)": {
-          ...HorizontalStyle.Label
-        }
-      }
-    }}
-    fontSize={2}
-  >
-    {children}
-    <Sidebar sidebar={sidebar} Link={Link} minLabelDepth={minLabelDepth} />
-  </Box>
-);
+        ul: Style.List,
+        ".ul-wrapper": Style.ListContainer,
+        li: Style.ListItem,
+        "span,a": Style.Label
+      }}
+      fontSize={2}
+    >
+      {children}
+      <Sidebar
+        sidebar={sidebar}
+        Link={Link}
+        minLabelDepth={minLabelDepth}
+        activeId={activeId}
+      />
+    </Box>
+  );
+};
