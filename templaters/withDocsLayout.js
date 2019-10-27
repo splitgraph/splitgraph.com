@@ -14,7 +14,7 @@ import {
 } from "@splitgraph/design";
 import { BaseLayout } from "@splitgraph/design/Layout";
 
-const withDocsLayout = ({ MdxPage, meta = {}, Link }) => {
+const withDocsLayout = ({ MdxPage, meta = {}, Link, contentTree }) => {
   class WithDocsLayout extends Component {
     render() {
       return (
@@ -24,9 +24,11 @@ const withDocsLayout = ({ MdxPage, meta = {}, Link }) => {
               <LogoImage logoURL="/static/splitgraph_logo.svg" />
             </Header>
 
-            <Sidebar gridArea={HolyGrail.GridArea.Nav}>
-              <SubHeading>L Sidebar</SubHeading>
-            </Sidebar>
+            <Sidebar
+              gridArea={HolyGrail.GridArea.Nav}
+              sidebar={contentTree}
+              Link={Link}
+            />
 
             <MainContent gridArea={HolyGrail.GridArea.Content}>
               <Heading>{meta.title}</Heading>
