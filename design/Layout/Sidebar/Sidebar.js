@@ -1,15 +1,37 @@
+// @jsx jsx
+import { jsx } from "theme-ui";
+
 import { Box } from "@splitgraph/design";
-import { useState } from "react";
+
+import useSidebar from "./useSidebar";
+
+import SidebarStyle from "./SidebarStyle";
+import useSidebarNode from "./useSidebarNode";
 
 const SidebarNode = ({
   Link,
   minLabelDepth,
-  sidebar: { depth, url, slug, metadata: { title } = {}, children }
+  maxInitialStackDepth,
+  node: { depth, nodeId, url, slug, metadata: { title } = {}, children },
+  activeNodeId,
+  lastClickedNodeId,
+  lastClickedPath,
+  activeNodePath,
+  onClickNode,
+  acquireMutex,
+  mutex
 }) => {
-  // const outerStyle = {
-  //   margin: 5 * depth
-  // };
-  const outerStyle = {};
+  const { onClick, childListContainerStyle } = useSidebarNode({
+    nodeId,
+    onClickNode,
+    acquireMutex,
+    mutex,
+    activeNodePath,
+    lastClickedPath,
+    activeNodeId,
+    maxInitialStackDepth,
+    depth
+  });
 
   const item = (
     <>
@@ -18,17 +40,25 @@ const SidebarNode = ({
           <a>{title}</a>
         </Link>
       ) : depth >= minLabelDepth ? (
-        <span>{title}</span>
+        <span onClick={onClick}>{title}</span>
       ) : null}
       {children && (
-        <div className="ul-wrapper" style={outerStyle}>
+        <div className="ul-wrapper" sx={childListContainerStyle}>
           <ul key={`${slug}`}>
             {children.map(child => (
               <SidebarNode
                 key={`${child.slug}`}
                 Link={Link}
-                sidebar={child}
+                node={child}
                 minLabelDepth={minLabelDepth}
+                maxInitialStackDepth={maxInitialStackDepth}
+                activeNodeId={activeNodeId}
+                lastClickedNodeId={lastClickedNodeId}
+                lastClickedPath={lastClickedPath}
+                activeNodePath={activeNodePath}
+                onClickNode={onClickNode}
+                acquireMutex={acquireMutex}
+                mutex={mutex}
               />
             ))}
           </ul>
@@ -40,163 +70,103 @@ const SidebarNode = ({
   return depth < minLabelDepth ? item : <li>{item}</li>;
 };
 
-const Sidebar = ({ sidebar, Link, minLabelDepth = 0 }) => {
+const Sidebar = ({
+  rootNode,
+  Link,
+  minLabelDepth = 0,
+  maxInitialStackDepth = 0,
+  activeNodeId,
+  lastClickedNodeId,
+  lastClickedPath,
+  activeNodePath,
+  onClickNode,
+  acquireMutex,
+  mutex
+}) => {
   return (
     <>
       {!minLabelDepth &&
-        sidebar &&
-        sidebar.metadata &&
-        sidebar.metadata.title && <h1>{sidebar.metadata.title}</h1>}
+        rootNode &&
+        rootNode.metadata &&
+        rootNode.metadata.title && <h1>{rootNode.metadata.title}</h1>}
       <ul>
         <SidebarNode
           Link={Link}
-          sidebar={sidebar}
+          node={rootNode}
           minLabelDepth={minLabelDepth}
+          activeNodeId={activeNodeId}
+          lastClickedNodeId={lastClickedNodeId}
+          lastClickedPath={lastClickedPath}
+          activeNodePath={activeNodePath}
+          onClickNode={onClickNode}
+          acquireMutex={acquireMutex}
+          mutex={mutex}
+          maxInitialStackDepth={maxInitialStackDepth}
         />
       </ul>
     </>
   );
 };
 
-const BaseStyle = {
-  Container: {},
-  ListContainer: {
-    display: "inline-flex"
-  },
-  List: {
-    listStyleType: "none",
-    padding: 0
-  },
-  Item: {
-    whiteSpace: "nowrap"
-  },
-  Label: {}
-};
-
-const HorizontalStyle = {
-  Container: {},
-  ListContainer: {
-    flexWrap: "wrap",
-    marginTop: "1rem",
-    left: 0,
-    right: 0,
-    position: "absolute",
-    flexFlow: "initial",
-    flexBasis: "100%",
-    padding: 0,
-    backgroundColor: "green",
-    overflowX: "scroll",
-    paddingBottom: "1rem"
-  },
-  List: {
-    display: "inline-flex",
-    flexWrap: "nowrap"
-  },
-  Item: {
-    display: "flex",
-    whiteSpace: "nowrap"
-  },
-  Label: {
-    whiteSpace: "nowrap"
-  }
-};
-
-const VerticalStyle = {
-  Container: {},
-  ListContainer: {},
-  List: {},
-  Item: {
-    display: "flex",
-    flexDirection: "column"
-  },
-  Label: {
-    display: "block",
-    flexBasis: "100%"
-  }
-};
-
-const Style = {
-  Container: {
-    ...BaseStyle.Container,
-    "@media (min-width: 769px)": {
-      ...VerticalStyle.Container
-    },
-    "@media (max-width: 768px)": {
-      ...HorizontalStyle.Container
-    }
-  },
-  List: {
-    ...BaseStyle.List,
-    "@media (min-width: 769px)": {
-      ...VerticalStyle.List
-    },
-    "@media (max-width: 768px)": {
-      ...HorizontalStyle.List
-    }
-  },
-  ListContainer: {
-    ...BaseStyle.ListContainer,
-    "@media (min-width: 769px)": {
-      ...VerticalStyle.ListContainer
-    },
-    "@media (max-width: 768px)": {
-      ...HorizontalStyle.ListContainer
-    }
-  },
-  ListItem: {
-    ...BaseStyle.ListItem,
-    "@media (min-width: 769px)": {
-      ...VerticalStyle.ListItem
-    },
-    "@media (max-width: 768px)": {
-      ...HorizontalStyle.ListItem
-    }
-  },
-  Label: {
-    ...BaseStyle.Label,
-    "@media (min-width: 769px)": {
-      ...VerticalStyle.Label
-    },
-    "@media (max-width: 768px)": {
-      ...HorizontalStyle.Label
-    }
-  }
-};
-
-export default ({
+const SidebarRoot = ({
   children,
   gridArea = "nav",
-  sidebar = {},
+  rootNode = {},
   Link,
   minLabelDepth = 1,
-  maxVisibleDepth = 2,
-  activeId = null
+  maxInitialStackDepth,
+  matchActiveNode,
+  activeNodeId,
+  idKey
 }) => {
+  const {
+    lastClickedNodeId,
+    lastClickedPath,
+    activeNodePath,
+    onClickNode,
+    acquireMutex,
+    mutex
+  } = useSidebar({
+    contentTree: rootNode,
+    activeNodeId,
+    matchActiveNode,
+    idKey
+  });
+
   return (
     <Box
       sx={{
         gridArea,
-        ...Style.Container,
+        ...SidebarStyle.Container,
         position: "relative",
         left: 0,
         right: 0,
         "@media (max-width: 768px)": {
           marginTop: "-2rem"
         },
-        ul: Style.List,
-        ".ul-wrapper": Style.ListContainer,
-        li: Style.ListItem,
-        "span,a": Style.Label
+        ul: SidebarStyle.List,
+        ".ul-wrapper": SidebarStyle.ListContainer,
+        li: SidebarStyle.ListItem,
+        "span,a": SidebarStyle.Label
       }}
       fontSize={2}
     >
       {children}
       <Sidebar
-        sidebar={sidebar}
+        rootNode={rootNode}
         Link={Link}
         minLabelDepth={minLabelDepth}
-        activeId={activeId}
+        maxInitialStackDepth={maxInitialStackDepth}
+        activeNodeId={activeNodeId}
+        lastClickedNodeId={lastClickedNodeId}
+        lastClickedPath={lastClickedPath}
+        activeNodePath={activeNodePath}
+        onClickNode={onClickNode}
+        acquireMutex={acquireMutex}
+        mutex={mutex}
       />
     </Box>
   );
 };
+
+export default SidebarRoot;

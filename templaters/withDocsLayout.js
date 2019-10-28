@@ -1,4 +1,4 @@
-import { useMemo, useRouter } from "react";
+import { useMemo } from "react";
 
 import {
   Header,
@@ -7,12 +7,12 @@ import {
   Sidebar,
   Heading,
   SubHeading,
-  Text,
-  Box,
   HolyGrail,
   LogoImage
 } from "@splitgraph/design";
 import { BaseLayout } from "@splitgraph/design/Layout";
+
+import { findNodeInTree } from "@splitgraph/lib/tree";
 
 // TODO: Move this back into the docs repository so no need to do this dumb
 // dependency injection. It was only put into its own so that autogenned scripts
@@ -37,6 +37,22 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
       [router]
     );
 
+    const activeNode = useMemo(
+      () =>
+        findNodeInTree({
+          root: contentTree,
+          match: node => node.url && node.url === currentURL
+        }),
+      [currentURL]
+    );
+
+    const activeNodeId = useMemo(() => activeNode.nodeId, [activeNode]);
+
+    const matchActiveNode = useMemo(
+      () => node => node.url && node.url === currentURL,
+      [currentURL]
+    );
+
     return (
       <BaseLayout>
         <HolyGrail.Layout>
@@ -46,10 +62,10 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
 
           <Sidebar
             gridArea={HolyGrail.GridArea.Nav}
-            sidebar={contentTree}
-            idKey={"url"}
-            activeId={currentURL}
+            rootNode={contentTree}
+            matchActiveNode={matchActiveNode}
             Link={ContentLink}
+            activeNodeId={activeNodeId}
           />
 
           <MainContent gridArea={HolyGrail.GridArea.Content}>

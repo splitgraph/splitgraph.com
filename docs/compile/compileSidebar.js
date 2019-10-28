@@ -40,7 +40,7 @@ const navItemData = item => ({
 const itemData = (item, includeNav) =>
   !!item
     ? {
-        id: item.url ? item.url.fromSiteRoot : undefined,
+        nodeId: item.nodeId,
         depth: item.depth,
         url: item.navigable && item.url ? item.url.fromSiteRoot : undefined,
         slug: item.slug,
