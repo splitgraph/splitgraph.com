@@ -19,6 +19,7 @@ app.prepare().then(() => {
       let { page, ...rest } = exportMap[req.url];
       return app.render(req, res, page, rest);
     } else {
+      console.log("Unhandled URL:", req.url);
       return handle(req, res);
     }
   });

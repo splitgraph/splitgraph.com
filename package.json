@@ -11,6 +11,7 @@
     "design",
     "docs",
     "content",
-    "templaters"
+    "templaters",
+    "lib"
   ]
 }

@@ -1,12 +1,27 @@
 const path = require("path");
-const url = require("url");
 const dirTree = require("directory-tree");
+
+const { walkTree, mapTree } = require("@splitgraph/lib/tree");
 
 const defaultOpts = {
   urlPrefix: "/",
   importMdxMetadata: true,
   onWalk: (item, parent) => {},
   onMap: (item, parent) => {}
+};
+
+// https://stackoverflow.com/a/7616484/3793499
+const simpleStringHash = inputStr => {
+  var hash = 0,
+    i,
+    chr;
+  if (inputStr.length === 0) return hash;
+  for (i = 0; i < inputStr.length; i++) {
+    chr = inputStr.charCodeAt(i);
+    hash = (hash << 5) - hash + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
 };
 
 class ContentTree {
@@ -52,6 +67,7 @@ class ContentTree {
 
   enrich() {
     this.walk((item, parent, depth) => {
+      item.nodeId = simpleStringHash(item.path);
       let isMetaFile = item.name == "metadata.json";
       if (isMetaFile) {
         // let extlessName = item.name.replace("metadata.json", "");
@@ -118,75 +134,11 @@ class ContentTree {
   }
 
   walk(callback) {
-    return ContentTree.walk({ root: this.tree, callback });
-  }
-
-  static walk({
-    root,
-    callback = (item, parent, depth) => {},
-    parent,
-    depth = 0
-  }) {
-    if (!root) {
-      return;
-    }
-
-    root.children = root.children
-      ? root.children.filter(c => !!c && Object.keys(c).length > 0 && !c.isMeta)
-      : undefined;
-
-    if (root.children) {
-      root.children.forEach(node =>
-        ContentTree.walk({
-          root: node,
-          callback: callback,
-          parent: root,
-          depth: depth + 1
-        })
-      );
-    }
-
-    return callback(root, parent, depth);
+    return walkTree({ root: this.tree, callback });
   }
 
   map(callback) {
-    return ContentTree.map({ root: this.tree, callback });
-  }
-
-  static map({
-    root,
-    callback = (item, parent, depth) => {},
-    parent,
-    twin = {},
-    depth = 0
-  }) {
-    if (!root) {
-      return;
-    }
-
-    root.children = root.children
-      ? root.children.filter(c => !!c && Object.keys(c).length > 0 && !c.isMeta)
-      : undefined;
-
-    if (root.children) {
-      twin.children = [];
-      for (let i = 0; i < root.children.length; i++) {
-        let node = root.children[i];
-        twin.children.push(
-          ContentTree.map({
-            root: node,
-            callback: callback,
-            parent: root,
-            twin: twin.children[i],
-            depth: depth + 1
-          })
-        );
-      }
-    }
-
-    Object.assign(twin, callback(root, parent, depth));
-
-    return twin;
+    return mapTree({ root: this.tree, callback });
   }
 }
 

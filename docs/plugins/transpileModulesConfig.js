@@ -2,7 +2,8 @@
 const ourModules = [
   "@splitgraph/design",
   "@splitgraph/content",
-  "@splitgraph/templaters"
+  "@splitgraph/templaters",
+  "@splitgraph/lib"
 ];
 
 // Enumerate every dependency with an "es" or "es6" module available
