@@ -201,16 +201,23 @@ const getClassNames = ({
 const useScrollToActiveNode = ({
   nodeId,
   isInActivePath,
-  scrollTarget,
+  isInLastClickedPath,
+  containerEl,
   anythingBeenClicked
 }) => {
-  useEffect(() => {
-    if (!isInActivePath || !scrollTarget || anythingBeenClicked) {
+  useLayoutEffect(() => {
+    const scrollTarget = containerEl.current;
+    const isActiveAndLastClicked = isInActivePath && isInLastClickedPath;
+    if (
+      !isInActivePath ||
+      !scrollTarget ||
+      (anythingBeenClicked && !isActiveAndLastClicked)
+    ) {
       return;
     }
 
     scrollTarget.scrollIntoView({ block: "nearest", inline: "nearest" });
-  }, [isInActivePath, scrollTarget]);
+  }, [nodeId, isInActivePath, containerEl]);
 };
 
 const SidebarLabel = ({
@@ -258,9 +265,10 @@ const SidebarLabel = ({
   useScrollToActiveNode({
     nodeId,
     isInActivePath,
+    isInLastClickedPath,
     containerEl,
-    anythingBeenClicked,
-    scrollTarget: containerEl ? containerEl.current : undefined
+    anythingBeenClicked
+    // scrollTarget: containerEl ? containerEl.current : null
   });
 
   return node && url ? (
