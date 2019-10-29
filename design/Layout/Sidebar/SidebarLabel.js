@@ -52,14 +52,26 @@ const Selectors = Object.keys(ClassNames).reduce(
   {}
 );
 
+const hideSidebars = {
+  "ul::-webkit-scrollbar": {
+    width: 0,
+    height: 0
+  },
+  "ul::-webkit-scrollbar-button": {
+    width: 0,
+    height: 0
+  }
+};
+
 const styles = {
   Base: {
+    scrollSnapAlign: "center",
+    ...hideSidebars,
     BaseLabel: {},
     RootLabel: {},
     ChildLabel: {}
   },
   Horizontal: {
-    // TODO: Figure more elegant way than selecting on a
     [`${Selectors.ActiveParentNodeAndNothingClicked}:after,
       ${Selectors.ClickedParentNode}:after`]: {
       content: '"\\25BC"',
@@ -72,7 +84,7 @@ const styles = {
     },
 
     [`${Selectors.Base}`]: {
-      lineHeight: "2rem",
+      lineHeight: "4rem",
       paddingBottom: ".5rem",
       paddingTop: ".5rem",
       borderRadius: "4px",
@@ -88,7 +100,9 @@ const styles = {
       borderBottom: "1px",
       // borderBottomStyle: "solid",
       borderBottomColor: "primary",
-      color: "primary"
+      color: "primary",
+
+      scrollSnapAlign: "center"
       // marginLeft: 2
     },
 
@@ -103,7 +117,8 @@ const styles = {
       borderLeftColor: "primary"
     },
     [`${Selectors.MutedNode}`]: {
-      opacity: 0.5
+      opacity: 0.5,
+      backgroundColor: "#cccccc"
     },
     [`${Selectors.ActiveNode},${Selectors.InActivePath}`]: {
       fontWeight: "bold"
@@ -198,6 +213,19 @@ const getClassNames = ({
   return classNames.join(" ");
 };
 
+const hideScrollbars = el => {
+  el.style["::-webkit-scrollbar"] =
+    "width: 0 !important; background: transparent;";
+  // el.style["overflow"] = "-moz-scrollbars-none";
+  el.style["-ms-overflow-style"] = "none";
+};
+
+const revealScrollbars = el => {
+  el.style["-webkit-scrollbar"] = "initial";
+  // el.style["overflow"] = "initial";
+  el.style["-ms-overflow-style"] = "initial";
+};
+
 const useScrollToActiveNode = ({
   nodeId,
   isInActivePath,
@@ -216,7 +244,12 @@ const useScrollToActiveNode = ({
       return;
     }
 
+    // Hide the scrollbars, temporarily, to avoid a flash of them when
+    // the page loads
+    const scrollContainer = containerEl.current.closest("ul");
+    hideScrollbars(scrollContainer);
     scrollTarget.scrollIntoView({ block: "nearest", inline: "nearest" });
+    revealScrollbars(scrollContainer);
   }, [nodeId, isInActivePath, containerEl]);
 };
 

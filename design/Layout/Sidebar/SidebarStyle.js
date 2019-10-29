@@ -26,11 +26,11 @@ const HorizontalStyle = {
     backgroundColor: "gray",
     // WebkitOverflowScrolling: "touch",
     padding: 0
-    // maxHeight: 75
+    // maxHeight: 75,
   },
   ListContainer: {
     flexWrap: "wrap",
-    marginTop: "3rem",
+    marginTop: "4rem",
     top: 0,
     left: 0,
     right: 0,
@@ -48,7 +48,7 @@ const HorizontalStyle = {
     borderTopWidth: "1px",
     borderTopStyle: "dotted",
     borderTopColor: "secondary",
-    height: "3rem",
+    height: "4rem",
     backgroundColor: "gray"
   },
   List: {
@@ -58,7 +58,14 @@ const HorizontalStyle = {
     scrollbarWidth: "0",
     MsOverflowStyle: "none",
     overflowY: "hidden",
-    alignItems: "center"
+    alignItems: "center",
+    paddingLeft: 2,
+    paddingRight: 4,
+    // scrollMarginInlineEnd: "200px",
+    scrollSnapType: "x mandatory",
+    scrollPaddingRight: "200px",
+    scrollPaddingLeft: "200px"
+
     // lineHeight:
     // paddingBottom: "2rem"
   },
