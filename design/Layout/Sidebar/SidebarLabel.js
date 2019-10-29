@@ -14,8 +14,33 @@ const ClassNames = {
     "sgr-sidebar-label--activePath--nothing-clicked",
   LastClicked: "sgr-sidebar-label--lastClicked",
   InLastClickedPath: "sgr-sidebar-label--lastClickedPath",
+
+  // A "root" node according to minLabelDepth
   RootNode: "sgr-sidebar-label--root",
+
+  // A node that has at least one child
+  ParentNode: "sgr-sidebar-label--parent",
+
+  // A parent node in the active path
+  ActiveParentNode: "sgr-sidebar-label--parent--active",
+
+  // A parent node in the active path when nothing has been clicked
+  ActiveParentNodeAndNothingClicked:
+    "sgr-sidebar-label--parent--active--nothing-clicked",
+
+  // A parent node in the active path
+  ClickedParentNode: "sgr-sidebar-label--parent--clicked",
+
+  // A node that has a parent
   ChildNode: "sgr-sidebar-label--child",
+
+  // (lol) A node with a parent that is in the active path
+  ChildOfActiveParent: "sgr-sidebar-label--child--of-active-parent",
+
+  // A node with a parent that is in the active clicked path
+  ChildOfClickedParent: "sgr-sidebar-label--child-of-clicked-parent",
+
+  // A node that is neither in the active path nor the clicked path
   MutedNode: "sgr-sidebar-label--muted"
 };
 
@@ -34,6 +59,20 @@ const styles = {
     ChildLabel: {}
   },
   Horizontal: {
+    // TODO: Figure more elegant way than selecting on a
+    [`${Selectors.ActiveParentNodeAndNothingClicked}:after,
+      ${Selectors.ClickedParentNode}:after,
+      ${Selectors.ChildOfActiveParent}:after,
+      ${Selectors.ChildOfClickedParent}:after`]: {
+      content: '"\\25BC"',
+      fontSize: ".7em",
+      paddingLeft: 2
+    },
+
+    [`a${Selectors.ChildNode}`]: {
+      boxShadow: "0 0 4px rgba(0, 0, 0, .125)"
+    },
+
     [`${Selectors.Base}`]: {
       lineHeight: "2rem",
       // lineHeight: "2rem"
@@ -49,8 +88,7 @@ const styles = {
       // borderBottomStyle: "solid",
       borderBottomColor: "primary",
       color: "primary",
-      marginLeft: 2,
-      boxShadow: "0 0 4px rgba(0, 0, 0, .125)"
+      marginLeft: 2
     },
 
     [`${Selectors.LastClicked}`]: {
@@ -89,7 +127,9 @@ const getClassNames = ({
   isLastClicked,
   isInActivePath,
   isInLastClickedPath,
-  anythingBeenClicked
+  anythingBeenClicked,
+  isParent,
+  isChild
 }) => {
   const classNames = [ClassNames.Base];
 
@@ -122,6 +162,25 @@ const getClassNames = ({
   if (isLabelRoot) {
     classNames.push(ClassNames.RootNode);
   } else {
+    classNames.push(ClassNames.ChildNode);
+  }
+
+  if (isParent) {
+    classNames.push(ClassNames.ParentNode);
+
+    if (isInActivePath) {
+      classNames.push(ClassNames.ActiveParentNode);
+      if (!anythingBeenClicked) {
+        classNames.push(ClassNames.ActiveParentNodeAndNothingClicked);
+      }
+    }
+
+    if (isInLastClickedPath) {
+      classNames.push(ClassNames.ClickedParentNode);
+    }
+  }
+
+  if (isChild) {
     classNames.push(ClassNames.ChildNode);
   }
 
@@ -158,7 +217,17 @@ const SidebarLabel = ({
   isInLastClickedPath,
   anythingBeenClicked
 }) => {
-  const { depth, nodeId, url, slug, metadata: { title } = {}, children } = node;
+  const {
+    depth,
+    nodeId,
+    url,
+    slug,
+    metadata: { title } = {},
+    children,
+    parentNodeId
+  } = node;
+  const isParent = children && children.length > 0;
+  const isChild = !!parentNodeId;
 
   const labelClassNames = getClassNames({
     isLabelRoot: minLabelDepth === depth,
@@ -166,7 +235,9 @@ const SidebarLabel = ({
     isLastClicked,
     isInActivePath,
     isInLastClickedPath,
-    anythingBeenClicked
+    anythingBeenClicked,
+    isParent,
+    isChild
   });
 
   const labelContainerId = `sgr-sidebar-label-container-${nodeId}`;

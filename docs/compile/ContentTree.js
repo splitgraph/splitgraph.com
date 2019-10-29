@@ -68,6 +68,7 @@ class ContentTree {
   enrich() {
     this.walk((item, parent, depth) => {
       item.nodeId = simpleStringHash(item.path);
+      item.parentNodeId = parent.nodeId;
       let isMetaFile = item.name == "metadata.json";
       if (isMetaFile) {
         // let extlessName = item.name.replace("metadata.json", "");
