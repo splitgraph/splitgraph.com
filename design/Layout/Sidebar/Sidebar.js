@@ -9,6 +9,33 @@ import SidebarStyle from "./SidebarStyle";
 import useSidebarNode from "./useSidebarNode";
 
 import SidebarLabel from "./SidebarLabel";
+import { useEffect, useCallback } from "react";
+
+const useScrollActiveTreeIntoView = ({ activeNodePath }) => {
+  useEffect(() => {
+    const scrollIntoViewOnLoad = e => {
+      activeNodePath
+        .map(n => n.nodeId)
+        .forEach(nodeId => {
+          let elt = document.getElementById(
+            `sgr-sidebar-label-container-${nodeId}`
+          );
+
+          if (!elt) {
+            return;
+          }
+
+          elt.scrollIntoView({ block: "nearest", inline: "nearest" });
+
+          window.removeEventListener("load", scrollIntoViewOnLoad);
+        });
+    };
+
+    window.addEventListener("load", scrollIntoViewOnLoad);
+
+    return () => window.removeEventListener("load", scrollIntoViewOnLoad);
+  }, [activeNodePath]);
+};
 
 const SidebarNode = ({
   Link,
@@ -23,7 +50,17 @@ const SidebarNode = ({
   acquireMutex,
   mutex
 }) => {
-  const { depth, nodeId, url, slug, metadata: { title } = {}, children } = node;
+  const {
+    depth,
+    nodeId,
+    parentNodeId,
+    url,
+    slug,
+    metadata: { title } = {},
+    children
+  } = node;
+
+  useScrollActiveTreeIntoView({ activeNodePath });
 
   const {
     onClick,
@@ -32,7 +69,9 @@ const SidebarNode = ({
     isLastClicked,
     isInActivePath,
     isInLastClickedPath,
-    anythingBeenClicked
+    anythingBeenClicked,
+    isChildOfClickedParent,
+    isChildOfActiveParent
   } = useSidebarNode({
     nodeId,
     onClickNode,
@@ -41,6 +80,7 @@ const SidebarNode = ({
     activeNodePath,
     lastClickedPath,
     activeNodeId,
+    parentNodeId,
     maxInitialStackDepth,
     depth
   });
@@ -52,6 +92,8 @@ const SidebarNode = ({
         minLabelDepth={minLabelDepth}
         onClick={onClick}
         isActiveNode={isActiveNode}
+        isChildOfActiveParent={isChildOfActiveParent}
+        isChildOfClickedParent={isChildOfClickedParent}
         isLastClicked={isLastClicked}
         isInActivePath={isInActivePath}
         isInLastClickedPath={isInLastClickedPath}

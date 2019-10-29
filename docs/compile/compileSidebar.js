@@ -37,10 +37,11 @@ const navItemData = item => ({
   title: item.metadata && item.metadata.title ? item.metadata.title : item.slug
 });
 
-const itemData = (item, includeNav) =>
+const itemData = (item, parent) =>
   !!item
     ? {
         nodeId: item.nodeId,
+        parentNodeId: parent ? parent.nodeId : undefined,
         depth: item.depth,
         url: item.navigable && item.url ? item.url.fromSiteRoot : undefined,
         slug: item.slug,
@@ -64,7 +65,7 @@ const navData = (item, parent) => {
           myIndex > 0 && numSiblings > 0
             ? navItemData(
                 parent.children.slice(0, myIndex).find(c => !!c && !c.isMeta),
-                false
+                { includeNav: false }
               )
             : undefined,
 
@@ -87,7 +88,7 @@ const compileSidebar = () => {
 
   return contentTree.map((item, parent) => {
     return {
-      ...itemData(item),
+      ...itemData(item, parent),
       ...navData(item, parent)
     };
   });

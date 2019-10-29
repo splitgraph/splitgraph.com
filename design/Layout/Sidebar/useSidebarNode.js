@@ -4,6 +4,7 @@ import { getListContainerStyle } from "./SidebarStyle";
 // hooks. However it will need them for local collapsed state in vertical mode.
 const useSidebarNode = ({
   nodeId,
+  parentNodeId,
   onClickNode,
   acquireMutex,
   mutex,
@@ -49,6 +50,15 @@ const useSidebarNode = ({
     depth
   });
 
+  // The "bottom leafs" (other than the active one)
+  const isChildOfActiveParent =
+    parentNodeId && activeNodePath.find(n => n.nodeId === parentNodeId)
+      ? true
+      : false;
+
+  const isChildOfClickedParent =
+    parentNodeId && mutex === parentNodeId ? true : false;
+
   const onClick = () => {
     acquireMutex({ nodeId });
     onClickNode({ nodeId });
@@ -61,7 +71,9 @@ const useSidebarNode = ({
     isInLastClickedPath,
     onClick,
     childListContainerStyle,
-    anythingBeenClicked
+    anythingBeenClicked,
+    isChildOfActiveParent,
+    isChildOfClickedParent
   };
 };
 

@@ -66,9 +66,16 @@ class ContentTree {
   }
 
   enrich() {
+    // Note: In some cases (like the sidebar), the tree is mapped later, so if
+    // you add any keys here that you need down at a lower level, make sure they
+    // are mapped by the lower level onto whatever final representation
     this.walk((item, parent, depth) => {
       item.nodeId = simpleStringHash(item.path);
-      item.parentNodeId = parent.nodeId;
+      // if (parent) {
+      //   console.log("set parentNodeId -> ", parent.nodeId);
+      //   item.parentNodeId = parent.nodeId;
+      // }
+
       let isMetaFile = item.name == "metadata.json";
       if (isMetaFile) {
         // let extlessName = item.name.replace("metadata.json", "");
@@ -135,7 +142,7 @@ class ContentTree {
   }
 
   walk(callback) {
-    return walkTree({ root: this.tree, callback });
+    return walkTree({ root: this.tree, callback: callback.bind(this) });
   }
 
   map(callback) {

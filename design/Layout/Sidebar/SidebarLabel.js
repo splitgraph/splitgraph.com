@@ -1,6 +1,6 @@
 // @jsx jsx
 import { jsx } from "theme-ui";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 import { styleBreaker } from "./SidebarStyle";
 import { useLayoutEffect } from "react";
@@ -61,9 +61,7 @@ const styles = {
   Horizontal: {
     // TODO: Figure more elegant way than selecting on a
     [`${Selectors.ActiveParentNodeAndNothingClicked}:after,
-      ${Selectors.ClickedParentNode}:after,
-      ${Selectors.ChildOfActiveParent}:after,
-      ${Selectors.ChildOfClickedParent}:after`]: {
+      ${Selectors.ClickedParentNode}:after`]: {
       content: '"\\25BC"',
       fontSize: ".7em",
       paddingLeft: 2
@@ -75,6 +73,9 @@ const styles = {
 
     [`${Selectors.Base}`]: {
       lineHeight: "2rem",
+      paddingBottom: ".5rem",
+      paddingTop: ".5rem",
+      borderRadius: "4px",
       // lineHeight: "2rem"
       // padding: "2rem"
       marginRight: "0.5rem",
@@ -82,13 +83,13 @@ const styles = {
       // ":hover": {
       //   textDecoration: "underline"
       // },
-      paddingLeft: 2,
-      paddingRight: 2,
+      paddingLeft: 3,
+      paddingRight: 3,
       borderBottom: "1px",
       // borderBottomStyle: "solid",
       borderBottomColor: "primary",
-      color: "primary",
-      marginLeft: 2
+      color: "primary"
+      // marginLeft: 2
     },
 
     [`${Selectors.LastClicked}`]: {
@@ -129,7 +130,9 @@ const getClassNames = ({
   isInLastClickedPath,
   anythingBeenClicked,
   isParent,
-  isChild
+  isChild,
+  isChildOfActiveParent,
+  isChildOfClickedParent
 }) => {
   const classNames = [ClassNames.Base];
 
@@ -155,7 +158,7 @@ const getClassNames = ({
 
   const notActive = !isActiveNode && !isInActivePath;
   const unclicked = !isLastClicked && !isInLastClickedPath;
-  if (notActive && unclicked) {
+  if (notActive && (unclicked && !isChildOfClickedParent)) {
     classNames.push(ClassNames.MutedNode);
   }
 
@@ -182,28 +185,32 @@ const getClassNames = ({
 
   if (isChild) {
     classNames.push(ClassNames.ChildNode);
+
+    if (isChildOfActiveParent) {
+      classNames.push(ClassNames.ChildOfActiveParent);
+    }
+
+    if (isChildOfClickedParent) {
+      classNames.push(ClassNames.ChildOfClickedParent);
+    }
   }
 
   return classNames.join(" ");
 };
 
 const useScrollToActiveNode = ({
+  nodeId,
   isInActivePath,
-  containerEl,
+  scrollTarget,
   anythingBeenClicked
 }) => {
-  useLayoutEffect(() => {
-    if (
-      !isInActivePath ||
-      !containerEl ||
-      !containerEl.current ||
-      anythingBeenClicked
-    ) {
+  useEffect(() => {
+    if (!isInActivePath || !scrollTarget || anythingBeenClicked) {
       return;
     }
 
-    containerEl.current.scrollIntoView({ block: "nearest", inline: "nearest" });
-  }, [isInActivePath, containerEl]);
+    scrollTarget.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }, [isInActivePath, scrollTarget]);
 };
 
 const SidebarLabel = ({
@@ -212,6 +219,8 @@ const SidebarLabel = ({
   onClick,
   Link,
   isActiveNode,
+  isChildOfActiveParent,
+  isChildOfClickedParent,
   isLastClicked,
   isInActivePath,
   isInLastClickedPath,
@@ -237,13 +246,22 @@ const SidebarLabel = ({
     isInLastClickedPath,
     anythingBeenClicked,
     isParent,
-    isChild
+    isChild,
+    isChildOfActiveParent,
+    isChildOfClickedParent
   });
 
   const labelContainerId = `sgr-sidebar-label-container-${nodeId}`;
 
   const containerEl = useRef(null);
-  useScrollToActiveNode({ isInActivePath, containerEl, anythingBeenClicked });
+
+  useScrollToActiveNode({
+    nodeId,
+    isInActivePath,
+    containerEl,
+    anythingBeenClicked,
+    scrollTarget: containerEl ? containerEl.current : undefined
+  });
 
   return node && url ? (
     <span sx={Style} onClick={onClick} id={labelContainerId} ref={containerEl}>
@@ -258,7 +276,7 @@ const SidebarLabel = ({
       </Link>
     </span>
   ) : depth >= minLabelDepth ? (
-    <span sx={Style} id={labelContainerId}>
+    <span sx={Style} id={labelContainerId} ref={containerEl}>
       <span title={title} onClick={onClick} className={labelClassNames}>
         {title}
       </span>
