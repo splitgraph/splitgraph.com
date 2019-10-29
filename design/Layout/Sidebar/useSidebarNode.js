@@ -15,9 +15,12 @@ const useSidebarNode = ({
 }) => {
   // const [isLocalCollapsed, setLocalCollapsed] = useState(depth > maxInitialStackDepth)
 
+  const isActiveNode = nodeId === activeNodeId;
+  const isLastClicked = mutex === nodeId;
+  const anythingBeenClicked = lastClickedPath.length > 0;
+
   const isInActivePath =
-    nodeId === activeNodeId ||
-    !!activeNodePath.find(node => node.nodeId === nodeId);
+    isActiveNode || !!activeNodePath.find(node => node.nodeId === nodeId);
 
   const isInLastClickedPath = !!lastClickedPath.find(
     node => node.nodeId === nodeId
@@ -29,16 +32,17 @@ const useSidebarNode = ({
   // have lastClickedInPath, lastClickedNodeId, and nodeId.
   const hiddenHorizontally =
     depth > maxInitialStackDepth &&
-    ((mutex !== nodeId &&
+    ((!isLastClicked &&
       !isInLastClickedPath &&
-      (!isInActivePath || lastClickedPath.length > 0)) ||
+      (!isInActivePath || anythingBeenClicked)) ||
       (!isInActivePath && !isInLastClickedPath));
 
   const hiddenVertically = false;
 
   const childListContainerStyle = getListContainerStyle({
     hiddenHorizontally,
-    hiddenVertically
+    hiddenVertically,
+    depth
   });
 
   const onClick = () => {
@@ -47,6 +51,10 @@ const useSidebarNode = ({
   };
 
   return {
+    isActiveNode,
+    isLastClicked,
+    isInActivePath,
+    isInLastClickedPath,
     onClick,
     childListContainerStyle
   };

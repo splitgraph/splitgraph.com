@@ -22,7 +22,8 @@ export const defaultTheme = {
     success: "#3B8D36",
     warning: "orange",
     darkgray: "#3c",
-    sgdarkblue: "#36678d"
+    sgdarkblue: "#36678d",
+    accent: "secondary"
   },
   backgrounds: {
     divided: {

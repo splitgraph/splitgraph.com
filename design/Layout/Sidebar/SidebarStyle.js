@@ -1,5 +1,9 @@
 const BaseStyle = {
-  Container: {},
+  Container: {
+    position: "relative",
+    left: 0,
+    right: 0
+  },
   ListContainer: {
     display: "inline-flex"
   },
@@ -8,26 +12,44 @@ const BaseStyle = {
     padding: 0
   },
   Item: {
-    whiteSpace: "nowrap"
+    // whiteSpace: "nowrap",
+    // padding: 100,
+    color: "blue"
   },
   Label: {}
 };
 
 const HorizontalStyle = {
-  Container: {},
+  Container: {
+    // marginTop: "-2rem",
+    // overflowY: "scroll",
+    backgroundColor: "gray",
+    // WebkitOverflowScrolling: "touch",
+    padding: 0
+    // maxHeight: 75
+  },
   ListContainer: {
     flexWrap: "wrap",
-    marginTop: "1rem",
+    marginTop: "3rem",
+    top: 0,
     left: 0,
     right: 0,
     position: "absolute",
+
     flexFlow: "initial",
     flexBasis: "100%",
     padding: 0,
+
     // backgroundColor: "green",
     // paddingBottom: "1rem",
     // overflowY: "hidden",
-    height: "1rem"
+    // height: "4rem",
+    // backgroundColor: "green",
+    borderTopWidth: "1px",
+    borderTopStyle: "dotted",
+    borderTopColor: "secondary",
+    height: "3rem",
+    backgroundColor: "gray"
   },
   List: {
     display: "inline-flex",
@@ -35,7 +57,9 @@ const HorizontalStyle = {
     overflowX: "scroll",
     scrollbarWidth: "0",
     MsOverflowStyle: "none",
-    overflowY: "hidden"
+    overflowY: "hidden",
+    alignItems: "center"
+    // lineHeight:
     // paddingBottom: "2rem"
   },
   Item: {
@@ -79,13 +103,14 @@ const Style = {
   Container: breakStyle("Container"),
   List: breakStyle("List"),
   ListContainer: breakStyle("ListContainer"),
-  ListItem: breakStyle("ListItem"),
+  Item: breakStyle("Item"),
   Label: breakStyle("Label")
 };
 
 export const getListContainerStyle = ({
   hiddenHorizontally = false,
-  hiddenVertically = false
+  hiddenVertically = false,
+  depth = 0
 }) => {
   return breakStyle("ListContainer", {
     BaseStyle,
@@ -95,7 +120,10 @@ export const getListContainerStyle = ({
         ...HorizontalStyle.ListContainer,
         ...(hiddenHorizontally
           ? { display: "none !important" }
-          : { display: HorizontalStyle.ListContainer.display })
+          : { display: HorizontalStyle.ListContainer.display }),
+        ...(depth < 1
+          ? { marginTop: "0 !important" }
+          : { marginTop: HorizontalStyle.ListContainer.marginTop })
       }
     },
     VerticalStyle: {

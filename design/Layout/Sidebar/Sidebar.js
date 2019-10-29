@@ -8,11 +8,13 @@ import useSidebar from "./useSidebar";
 import SidebarStyle from "./SidebarStyle";
 import useSidebarNode from "./useSidebarNode";
 
+import SidebarLabel from "./SidebarLabel";
+
 const SidebarNode = ({
   Link,
   minLabelDepth,
   maxInitialStackDepth,
-  node: { depth, nodeId, url, slug, metadata: { title } = {}, children },
+  node,
   activeNodeId,
   lastClickedNodeId,
   lastClickedPath,
@@ -21,7 +23,16 @@ const SidebarNode = ({
   acquireMutex,
   mutex
 }) => {
-  const { onClick, childListContainerStyle } = useSidebarNode({
+  const { depth, nodeId, url, slug, metadata: { title } = {}, children } = node;
+
+  const {
+    onClick,
+    childListContainerStyle,
+    isActiveNode,
+    isLastClicked,
+    isInActivePath,
+    isInLastClickedPath
+  } = useSidebarNode({
     nodeId,
     onClickNode,
     acquireMutex,
@@ -35,13 +46,16 @@ const SidebarNode = ({
 
   const item = (
     <>
-      {url ? (
-        <Link href={url}>
-          <a>{title}</a>
-        </Link>
-      ) : depth >= minLabelDepth ? (
-        <span onClick={onClick}>{title}</span>
-      ) : null}
+      <SidebarLabel
+        node={node}
+        minLabelDepth={minLabelDepth}
+        onClick={onClick}
+        isActiveNode={isActiveNode}
+        isLastClicked={isLastClicked}
+        isInActivePath={isInActivePath}
+        isInLastClickedPath={isInLastClickedPath}
+        Link={Link}
+      />
       {children && (
         <div className="ul-wrapper" sx={childListContainerStyle}>
           <ul key={`${slug}`}>
@@ -67,7 +81,7 @@ const SidebarNode = ({
     </>
   );
 
-  return depth < minLabelDepth ? item : <li>{item}</li>;
+  return depth < minLabelDepth ? item : <li className="li-selector">{item}</li>;
 };
 
 const Sidebar = ({
@@ -138,15 +152,9 @@ const SidebarRoot = ({
       sx={{
         gridArea,
         ...SidebarStyle.Container,
-        position: "relative",
-        left: 0,
-        right: 0,
-        "@media (max-width: 768px)": {
-          marginTop: "-2rem"
-        },
         ul: SidebarStyle.List,
         ".ul-wrapper": SidebarStyle.ListContainer,
-        li: SidebarStyle.ListItem,
+        ".li-selector": SidebarStyle.Item,
         "span,a": SidebarStyle.Label
       }}
       fontSize={2}
