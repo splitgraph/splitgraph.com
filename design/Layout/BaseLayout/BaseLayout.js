@@ -1,4 +1,5 @@
-// import "@csstools/normalize.css";
+import "@csstools/normalize.css";
+import "../../css/base.css";
 
 import defaultTheme from "../../defaultTheme";
 
