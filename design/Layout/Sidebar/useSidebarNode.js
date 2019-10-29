@@ -16,8 +16,11 @@ const useSidebarNode = ({
   // const [isLocalCollapsed, setLocalCollapsed] = useState(depth > maxInitialStackDepth)
 
   const isActiveNode = nodeId === activeNodeId;
-  const isLastClicked = mutex === nodeId;
   const anythingBeenClicked = lastClickedPath.length > 0;
+
+  // second clause is necessary to disambiguate from mutex === nodeId && nodeId === activeNodeId
+  // because the mutex is set to the activeNodeId on initial load
+  const isLastClicked = mutex === nodeId && anythingBeenClicked;
 
   const isInActivePath =
     isActiveNode || !!activeNodePath.find(node => node.nodeId === nodeId);
@@ -40,6 +43,7 @@ const useSidebarNode = ({
   const hiddenVertically = false;
 
   const childListContainerStyle = getListContainerStyle({
+    isLastClicked,
     hiddenHorizontally,
     hiddenVertically,
     depth
@@ -56,7 +60,8 @@ const useSidebarNode = ({
     isInActivePath,
     isInLastClickedPath,
     onClick,
-    childListContainerStyle
+    childListContainerStyle,
+    anythingBeenClicked
   };
 };
 

@@ -107,7 +107,23 @@ const Style = {
   Label: breakStyle("Label")
 };
 
+// TODO: Temporary hack
+// This is a hack because we don't yet store parentId on nodes, in which
+// case we could just check in the label itself ifs parent was the last clicked
+const unmuteChildren = {
+  ".sgr-sidebar-label--muted": {
+    opacity: 1.0
+  }
+};
+
+const muteChildren = {
+  ".sgr-sidebar-label--muted": {
+    opacity: 0.5
+  }
+};
+
 export const getListContainerStyle = ({
+  isLastClicked = false,
   hiddenHorizontally = false,
   hiddenVertically = false,
   depth = 0
@@ -118,6 +134,7 @@ export const getListContainerStyle = ({
       ...HorizontalStyle,
       ListContainer: {
         ...HorizontalStyle.ListContainer,
+        ...(isLastClicked ? unmuteChildren : muteChildren),
         ...(hiddenHorizontally
           ? { display: "none !important" }
           : { display: HorizontalStyle.ListContainer.display }),

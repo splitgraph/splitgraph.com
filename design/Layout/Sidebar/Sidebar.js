@@ -31,7 +31,8 @@ const SidebarNode = ({
     isActiveNode,
     isLastClicked,
     isInActivePath,
-    isInLastClickedPath
+    isInLastClickedPath,
+    anythingBeenClicked
   } = useSidebarNode({
     nodeId,
     onClickNode,
@@ -55,6 +56,7 @@ const SidebarNode = ({
         isInActivePath={isInActivePath}
         isInLastClickedPath={isInLastClickedPath}
         Link={Link}
+        anythingBeenClicked={anythingBeenClicked}
       />
       {children && (
         <div className="ul-wrapper" sx={childListContainerStyle}>

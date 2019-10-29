@@ -1,12 +1,17 @@
 // @jsx jsx
 import { jsx } from "theme-ui";
+import { useRef } from "react";
 
 import { styleBreaker } from "./SidebarStyle";
+import { useLayoutEffect } from "react";
 
 const ClassNames = {
   Base: "sgr-sidebar-label",
   ActiveNode: "sgr-sidebar-label--active",
   InActivePath: "sgr-sidebar-label--activePath",
+  ActiveNodeAndNothingClicked: "sgr-sidebar-label--active--nothing-clicked",
+  InActivePathAndNothingClicked:
+    "sgr-sidebar-label--activePath--nothing-clicked",
   LastClicked: "sgr-sidebar-label--lastClicked",
   InLastClickedPath: "sgr-sidebar-label--lastClickedPath",
   RootNode: "sgr-sidebar-label--root",
@@ -35,9 +40,9 @@ const styles = {
       // padding: "2rem"
       marginRight: "0.5rem",
       cursor: "pointer",
-      ":hover": {
-        textDecoration: "underline"
-      },
+      // ":hover": {
+      //   textDecoration: "underline"
+      // },
       paddingLeft: 2,
       paddingRight: 2,
       borderBottom: "1px",
@@ -48,8 +53,9 @@ const styles = {
       boxShadow: "0 0 4px rgba(0, 0, 0, .125)"
     },
 
-    [`${Selectors.LastClicked},${Selectors.InLastClickedPath}`]: {
+    [`${Selectors.LastClicked}`]: {
       // color: "red"
+      textDecoration: "underline"
     },
     [`${Selectors.ActiveNode}, ${Selectors.InActivePath}`]: {
       // color: "purple",
@@ -82,14 +88,23 @@ const getClassNames = ({
   isActiveNode,
   isLastClicked,
   isInActivePath,
-  isInLastClickedPath
+  isInLastClickedPath,
+  anythingBeenClicked
 }) => {
   const classNames = [ClassNames.Base];
 
   if (isActiveNode) {
     classNames.push(ClassNames.ActiveNode);
+
+    if (!anythingBeenClicked) {
+      classNames.push(ClassNames.ActiveNodeAndNothingClicked);
+    }
   } else if (isInActivePath) {
     classNames.push(ClassNames.InActivePath);
+
+    if (!anythingBeenClicked) {
+      classNames.push(ClassNames.InActivePathAndNothingClicked);
+    }
   }
 
   if (isLastClicked) {
@@ -113,6 +128,25 @@ const getClassNames = ({
   return classNames.join(" ");
 };
 
+const useScrollToActiveNode = ({
+  isInActivePath,
+  containerEl,
+  anythingBeenClicked
+}) => {
+  useLayoutEffect(() => {
+    if (
+      !isInActivePath ||
+      !containerEl ||
+      !containerEl.current ||
+      anythingBeenClicked
+    ) {
+      return;
+    }
+
+    containerEl.current.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }, [isInActivePath, containerEl]);
+};
+
 const SidebarLabel = ({
   node,
   minLabelDepth,
@@ -121,7 +155,8 @@ const SidebarLabel = ({
   isActiveNode,
   isLastClicked,
   isInActivePath,
-  isInLastClickedPath
+  isInLastClickedPath,
+  anythingBeenClicked
 }) => {
   const { depth, nodeId, url, slug, metadata: { title } = {}, children } = node;
 
@@ -130,19 +165,29 @@ const SidebarLabel = ({
     isActiveNode,
     isLastClicked,
     isInActivePath,
-    isInLastClickedPath
+    isInLastClickedPath,
+    anythingBeenClicked
   });
 
+  const labelContainerId = `sgr-sidebar-label-container-${nodeId}`;
+
+  const containerEl = useRef(null);
+  useScrollToActiveNode({ isInActivePath, containerEl, anythingBeenClicked });
+
   return node && url ? (
-    <span sx={Style} onClick={onClick}>
+    <span sx={Style} onClick={onClick} id={labelContainerId} ref={containerEl}>
       <Link href={url}>
-        <a className={labelClassNames} title={title}>
+        <a
+          className={labelClassNames}
+          title={title}
+          sx={{ textDecoration: "none" }}
+        >
           {title}
         </a>
       </Link>
     </span>
   ) : depth >= minLabelDepth ? (
-    <span sx={Style}>
+    <span sx={Style} id={labelContainerId}>
       <span title={title} onClick={onClick} className={labelClassNames}>
         {title}
       </span>
