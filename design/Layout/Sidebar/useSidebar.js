@@ -1,4 +1,4 @@
-import { useReducer, useMemo } from "react";
+import { useReducer, useMemo, useEffect } from "react";
 
 import { findNodeInTree, findParentsOfNodeInTree } from "@splitgraph/lib/tree";
 
@@ -26,13 +26,18 @@ const sidebarStateFromProps = ({
   return {
     activeNodeId,
     lastClickedNodeId: null,
-    mutex: activeNodeId
+    lastClickedDepth: null,
+    nextDepth: null,
+    mutex: activeNodeId,
+    loading: false
   };
 };
 
 const SidebarActions = {
   ClickedNode: "clicked_node",
-  AcquireMutex: "acquire_mutex"
+  AcquireMutex: "acquire_mutex",
+  Reset: "reset",
+  SetLoading: "set_loading"
 };
 
 const sidebarReducer = (state, action) => {
@@ -40,12 +45,39 @@ const sidebarReducer = (state, action) => {
     case SidebarActions.ClickedNode:
       return {
         ...state,
-        lastClickedNodeId: action.nodeId
+        lastClickedNodeId: action.nodeId,
+        lastClickedDepth: action.depth,
+        nextDepth: action.nextDepth,
+        ...(action.setActive
+          ? {
+              activeNodeId: action.nodeId,
+              loading: action.loading ? true : false
+            }
+          : {})
       };
     case SidebarActions.AcquireMutex:
       return {
         ...state,
         mutex: action.nodeId
+      };
+    case SidebarActions.Reset:
+      return {
+        ...state,
+        mutex: state.activeNodeId,
+        lastClickedNodeId: null,
+        lastClickedDepth: null,
+        nextDepth: null,
+        loading: false
+      };
+    case SidebarActions.SetLoading:
+      return {
+        ...state,
+        loading: true
+      };
+    case SidebarActions.CompleteLoading:
+      return {
+        ...state,
+        loading: false
       };
   }
 };
@@ -80,6 +112,14 @@ const useActivePath = ({ contentTree, activeNodeId, idKey }) => {
   );
 };
 
+const useSetLoadedWhenWindowLoads = ({ completeLoading }) => {
+  useEffect(() => {
+    window.addEventListener("load", completeLoading);
+
+    return () => window.removeEventListener("load", completeLoading);
+  }, [completeLoading]);
+};
+
 const useSidebar = ({
   contentTree,
   activeNodeId,
@@ -102,17 +142,33 @@ const useSidebar = ({
     activeNodeId: state.activeNodeId
   });
 
-  const onClickNode = ({ nodeId }) =>
-    dispatch({ type: SidebarActions.ClickedNode, nodeId });
+  // TODO: Pass dispatch down instead of redundant callbacks
+  const onClickNode = ({ nodeId, depth, loading, setActive, nextDepth }) =>
+    dispatch({
+      type: SidebarActions.ClickedNode,
+      nodeId,
+      depth,
+      loading,
+      setActive,
+      nextDepth
+    });
   const acquireMutex = ({ nodeId }) =>
     dispatch({ type: SidebarActions.AcquireMutex, nodeId });
+
+  const reset = () => dispatch({ type: SidebarActions.Reset });
+
+  const completeLoading = () =>
+    dispatch({ type: SidebarActions.CompleteLoading });
+
+  useSetLoadedWhenWindowLoads({ completeLoading });
 
   return {
     ...state,
     lastClickedPath,
     activeNodePath,
     onClickNode,
-    acquireMutex
+    acquireMutex,
+    reset
   };
 };
 

@@ -19,9 +19,9 @@ export default ({ children }) => (
           "${GridArea.Footer} ${GridArea.Footer}  ${GridArea.Footer}"
       `,
       gridTemplateColumns: "300px 1fr 200px",
-      gridTemplateRows: "auto 1fr auto",
+      gridTemplateRows: "auto 100vh 1fr auto auto",
       gridGap: 0,
-      height: "100vh",
+      maxHeight: "100vh",
       "@media (max-width: 768px)": {
         gridTemplateAreas: `
           "${GridArea.Header}"
@@ -34,7 +34,7 @@ export default ({ children }) => (
         gridTemplateRows: `
           minmax(3rem, auto)
           minmax(4rem, auto)
-          1fr
+          auto
           minmax(75px, auto)
           auto
         `

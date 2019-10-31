@@ -6,3 +6,42 @@ body {
 
   font-family: "Open Sans", sans-serif;
 }
+
+pre {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+ul::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+ul::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+ul::-webkit-scrollbar-thumb {
+  background: #36678d;
+  border: none;
+  border-radius: 0;
+}
+ul::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+ul::-webkit-scrollbar-thumb:active {
+  background: #000000;
+}
+ul::-webkit-scrollbar-track {
+  background: #dddddf;
+  /* border: 100px dashed #ffffff; */
+  /* border-radius: 0px; */
+}
+ul::-webkit-scrollbar-track:hover {
+  background: #dddddf;
+}
+ul::-webkit-scrollbar-track:active {
+  background: #dddddf;
+}
+ul::-webkit-scrollbar-corner {
+  background: transparent;
+}

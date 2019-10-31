@@ -1,8 +1,7 @@
 // @jsx jsx
 import { jsx } from "theme-ui";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 
-import { styleBreaker } from "./SidebarStyle";
 import { useLayoutEffect } from "react";
 
 const ClassNames = {
@@ -75,15 +74,7 @@ const getHardcodedDepthStyles = (maxHardCodedDepth = 10) => {
       paddingLeft: `${depth / 2}rem`,
       marginLeft: depth > 1 ? `${depth / 2}rem` : 0,
       paddingRight: `${depth * 2}rem`
-      // borderLeftWidth: 0
-      // borderLeftWidth: depth > 1 ? `${depth / 2}rem` : "initial"
     };
-
-    // depthStyles.Vertical[
-    //   `.${ClassNames.Depth(depth)}.${ClassNames.ActiveNode}`
-    // ] = {
-    //   // marginLeft: 0
-    // };
   }
 
   return depthStyles;
@@ -125,46 +116,38 @@ const styles = {
       paddingBottom: ".5rem",
       paddingTop: ".5rem",
       borderRadius: "4px",
-      // lineHeight: "2rem"
-      // padding: "2rem"
       marginRight: "0.5rem",
       cursor: "pointer",
-      // ":hover": {
-      //   textDecoration: "underline"
-      // },
       paddingLeft: 3,
       paddingRight: 3,
       borderBottom: "1px",
-      // borderBottomStyle: "solid",
       borderBottomColor: "primary",
       color: "primary",
-
       scrollSnapAlign: "center"
-      // marginLeft: 2
     },
 
     [`${Selectors.LastClicked}`]: {
-      // color: "red"
       textDecoration: "underline"
     },
+
     [`${Selectors.ActiveNode}, ${Selectors.InActivePath}`]: {
       // color: "purple",
       borderLeftWidth: "2px",
       borderLeftStyle: "solid",
       borderLeftColor: "primary"
     },
+
     [`${Selectors.MutedNode}`]: {
       opacity: 0.5,
       backgroundColor: "#cccccc"
     },
+
     [`${Selectors.ActiveNode},${Selectors.InActivePath}`]: {
       fontWeight: "bold"
     }
   },
   Vertical: {
     [`${Selectors.Base}`]: {
-      // borderTop: "1px solid #fff",
-      // borderBottom: "1px solid #fff",
       color: "primary",
       display: "flex",
       alignItems: "center",
@@ -175,7 +158,7 @@ const styles = {
       borderRightStyle: "solid"
     },
 
-    /* Note the order of these three selectors is very important!
+    /* Note the order of these selectors is very important!
 
     A Node can simultaneously be:
 
@@ -196,7 +179,6 @@ const styles = {
       paddingBottom: 1,
       borderLeftWidth: "4px",
       borderLeftStyle: "solid",
-      // borderLeftColor: "active",
       ":hover": {
         borderColor: "white",
         backgroundColor: "white"
@@ -204,18 +186,10 @@ const styles = {
     },
 
     [`${Selectors.ChildOfActiveParent}`]: {
-      // borderLeftColor: "#fff",
-      // backgroundColor: "#fff",
       borderLeftWidth: "4px",
       ":hover": {
         borderLeftColor: "primary"
       }
-    },
-
-    [`${Selectors.ChildOfClickedParent}:after`]: {
-      content: ".",
-      display: "block",
-      borderRight: "100px solid #000"
     },
 
     [`${Selectors.ActiveParentNode} ul`]: {
@@ -228,22 +202,15 @@ const styles = {
       borderLeftWidth: "4px",
       borderLeftStyle: "solid",
       borderLeftColor: "primary",
-      // borderBottom: "1px solid #fff",
-      // alignItems: "flex-end",
       alignItems: "center",
       fontWeight: "bold",
       fontVariant: "small-caps",
       fontSize: "0.8em",
       textTransform: "uppercase"
-      // justifyContent: "flex-end"
     },
 
     // 3. Root node, may also be parent node. Definitely not child node.
     [`${Selectors.RootNode}`]: {
-      // paddingLeft: 2,
-      // borderRightWidth: "4px",
-      // borderRightStyle: "solid",
-      // borderRightColor: "primary",
       paddingLeft: "8px",
       justifyContent: "flex-end",
       paddingRight: "8px",
@@ -252,9 +219,6 @@ const styles = {
       ":hover": {
         borderLeftWidth: "0px"
       }
-
-      // borderRightStyle: "none"
-      // height: "3rem",
     },
 
     [`${Selectors.InActivePath}`]: {
@@ -270,7 +234,6 @@ const styles = {
       backgroundColor: "#fff",
       borderRightStyle: "none",
       borderLeftStyle: "solid",
-      // borderLeftColor: "primary",
       borderLeftWidth: "0px",
       borderTopStyle: "solid",
       borderBottomStyle: "solid",
@@ -478,7 +441,6 @@ const SidebarLabel = ({
     isInLastClickedPath,
     containerEl,
     anythingBeenClicked
-    // scrollTarget: containerEl ? containerEl.current : null
   });
 
   return node && url ? (

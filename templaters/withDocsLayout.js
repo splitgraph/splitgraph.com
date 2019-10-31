@@ -49,6 +49,13 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
     );
 
     const activeNodeId = useMemo(() => activeNode.nodeId, [activeNode]);
+    const activeNodeDepth = useMemo(
+      () =>
+        activeNode.children && activeNode.children.length > 0
+          ? activeNode.depth + 1
+          : activeNode.depth,
+      [activeNode]
+    );
 
     const matchActiveNode = useMemo(
       () => node => node.url && node.url === currentURL,
@@ -68,12 +75,15 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
             matchActiveNode={matchActiveNode}
             Link={ContentLink}
             activeNodeId={activeNodeId}
+            // 1 for depth 2, because it's zero based
+            maxInitialStackDepth={1}
+            initialDepth={activeNodeDepth}
           />
 
           <MainContent gridArea={HolyGrail.GridArea.Content}>
             <ContentHeader depth={activeNode.depth}>
               <Heading>{meta.title}</Heading>
-              <pre>{JSON.stringify(meta, null, 2)}</pre>
+              {/* <pre>{JSON.stringify(meta, null, 2)}</pre> */}
             </ContentHeader>
             <ContentBody>
               <MdxPage />

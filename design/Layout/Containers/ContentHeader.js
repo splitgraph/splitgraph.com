@@ -1,5 +1,4 @@
 import { Box } from "../../index";
-import { useMemo } from "react";
 
 const getStyle = depth => ({
   paddingLeft: 4,
@@ -8,11 +7,15 @@ const getStyle = depth => ({
     backgroundColor: "white"
   },
   "@media (max-width: 768px)": {
-    backgroundColor: "gray",
-    paddingTop: `${4 * (depth - 1)}rem`
+    backgroundColor: "primary",
+    color: "white",
+    borderRadius: "40px",
+    paddingTop: `${4 * (depth - 1)}rem`,
+    display: "flex",
+    alignItems: "flex-end",
+    justifyContent: "center",
+    boxShadow: "0 0 4px rgba(0, 0, 0, .125)"
   }
-
-  // overflowX: "hidden"
 });
 
 export default ({ children, depth }) => {

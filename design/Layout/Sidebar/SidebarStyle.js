@@ -88,9 +88,17 @@ const VerticalStyle = {
     justifyContent: "left",
     flexDirection: "column",
     lineSpacing: "4rem",
-    direction: "rtl"
+
+    // Container ltr + rtl = scrollbar on right (from ltr), align content to right (from rtl)
+    direction: "ltr",
+    overflowY: "scroll",
+    paddingBottom: "8rem",
+    scrollSnapType: "y mandatory",
+    // scrollPaddingRight: "200px",
+    scrollPaddingBottom: "200px"
   },
   ListContainer: {
+    direction: "rtl",
     // borderLeftWidth: 10,
     // borderLeftStyle: "solid",
     // paddingLeft: 2,

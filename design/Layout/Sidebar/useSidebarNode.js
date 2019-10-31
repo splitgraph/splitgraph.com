@@ -13,7 +13,9 @@ const useSidebarNode = ({
   activeNodeId,
   maxInitialStackDepth = Infinity,
   minLabelDepth = 0,
-  depth
+  depth,
+  isParent,
+  isNavigable
 }) => {
   // const [isLocalCollapsed, setLocalCollapsed] = useState(depth > maxInitialStackDepth)
 
@@ -41,7 +43,8 @@ const useSidebarNode = ({
       (!isInActivePath || anythingBeenClicked)) ||
     (!isInActivePath && !isInLastClickedPath);
 
-  const hiddenHorizontally = depth > maxInitialStackDepth && notExplicitlyShown;
+  const hiddenHorizontally =
+    depth - minLabelDepth > maxInitialStackDepth - 2 && notExplicitlyShown;
 
   const hiddenVertically = depth - minLabelDepth > 0 && notExplicitlyShown;
 
@@ -68,7 +71,14 @@ const useSidebarNode = ({
 
   const onClick = () => {
     acquireMutex({ nodeId });
-    onClickNode({ nodeId });
+
+    onClickNode({
+      nodeId,
+      depth: depth,
+      setActive: isNavigable,
+      loading: isNavigable,
+      nextDepth: isParent ? depth + 1 : depth
+    });
   };
 
   return {
