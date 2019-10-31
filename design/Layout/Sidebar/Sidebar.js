@@ -36,6 +36,7 @@ const SidebarNode = ({
   const {
     onClick,
     childListContainerStyle,
+    childListStyle,
     isActiveNode,
     isLastClicked,
     isInActivePath,
@@ -53,6 +54,7 @@ const SidebarNode = ({
     activeNodeId,
     parentNodeId,
     maxInitialStackDepth,
+    minLabelDepth,
     depth
   });
 
@@ -73,7 +75,7 @@ const SidebarNode = ({
       />
       {children && (
         <div className="ul-wrapper" sx={childListContainerStyle}>
-          <ul key={`${slug}`}>
+          <ul key={`${slug}`} sx={childListStyle}>
             {children.map(child => (
               <SidebarNode
                 key={`${child.slug}`}

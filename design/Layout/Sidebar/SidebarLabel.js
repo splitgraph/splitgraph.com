@@ -41,16 +41,53 @@ const ClassNames = {
   ChildOfClickedParent: "sgr-sidebar-label--child-of-clicked-parent",
 
   // A node that is neither in the active path nor the clicked path
-  MutedNode: "sgr-sidebar-label--muted"
+  MutedNode: "sgr-sidebar-label--muted",
+
+  // This is dynamic, and we use it for padding, but realistically there is a
+  // max, so we can still use the selector system to assign
+  Depth: (depth, minLabelDepth = 0) =>
+    `sgr-sidebar-depth-${depth - minLabelDepth}`
 };
 
 const Selectors = Object.keys(ClassNames).reduce(
   (acc, classNameKey) => ({
     ...acc,
-    [classNameKey]: `.${ClassNames[classNameKey]}`
+    [classNameKey]: `.${
+      typeof ClassNames[classNameKey] === "string"
+        ? ClassNames[classNameKey]
+        : "doesnotexist"
+    }`
   }),
   {}
 );
+
+// We can tweak this if we need more depth. Tradeoff is extra code in bundle.
+const getHardcodedDepthStyles = (maxHardCodedDepth = 10) => {
+  const depthStyles = {
+    Base: {},
+    Vertical: {},
+    Horizontal: {}
+  };
+
+  // Don't count the root nodes, we want to set their style separately
+  for (let depth = 1; depth < maxHardCodedDepth; depth++) {
+    depthStyles.Vertical[`.${ClassNames.Depth(depth)}`] = {
+      paddingLeft: `${depth / 2}rem`,
+      marginLeft: depth > 1 ? `${depth / 2}rem` : 0,
+      paddingRight: `${depth * 2}rem`
+      // borderLeftWidth: 0
+      // borderLeftWidth: depth > 1 ? `${depth / 2}rem` : "initial"
+    };
+
+    // depthStyles.Vertical[
+    //   `.${ClassNames.Depth(depth)}.${ClassNames.ActiveNode}`
+    // ] = {
+    //   // marginLeft: 0
+    // };
+  }
+
+  return depthStyles;
+};
 
 const hideSidebars = {
   "ul::-webkit-scrollbar": {
@@ -124,16 +161,150 @@ const styles = {
       fontWeight: "bold"
     }
   },
-  Vertical: {}
+  Vertical: {
+    [`${Selectors.Base}`]: {
+      // borderTop: "1px solid #fff",
+      // borderBottom: "1px solid #fff",
+      color: "primary",
+      display: "flex",
+      alignItems: "center",
+      height: "2rem",
+      cursor: "pointer",
+      borderRightWidth: "1px",
+      borderRightColor: "primary",
+      borderRightStyle: "solid"
+    },
+
+    /* Note the order of these three selectors is very important!
+
+    A Node can simultaneously be:
+
+      - root + parent
+      - parent + child
+
+    And can NOT be
+
+      - root + child
+      - child + root
+
+    The last selectors will take precedence when an object is both.
+    */
+
+    // 1. Child node, may also be parent node. Definitely not root node.
+    [`${Selectors.ChildNode}`]: {
+      paddingTop: 1,
+      paddingBottom: 1,
+      borderLeftWidth: "4px",
+      borderLeftStyle: "solid",
+      // borderLeftColor: "active",
+      ":hover": {
+        borderColor: "white",
+        backgroundColor: "white"
+      }
+    },
+
+    [`${Selectors.ChildOfActiveParent}`]: {
+      // borderLeftColor: "#fff",
+      // backgroundColor: "#fff",
+      borderLeftWidth: "4px",
+      ":hover": {
+        borderLeftColor: "primary"
+      }
+    },
+
+    [`${Selectors.ChildOfClickedParent}:after`]: {
+      content: ".",
+      display: "block",
+      borderRight: "100px solid #000"
+    },
+
+    [`${Selectors.ActiveParentNode} ul`]: {
+      backgroundColor: "primary !important"
+    },
+
+    // 2. Parent Node, may also be child node or root node.
+    [`${Selectors.ParentNode}`]: {
+      backgroundColor: "initial",
+      borderLeftWidth: "4px",
+      borderLeftStyle: "solid",
+      borderLeftColor: "primary",
+      // borderBottom: "1px solid #fff",
+      // alignItems: "flex-end",
+      alignItems: "center",
+      fontWeight: "bold",
+      fontVariant: "small-caps",
+      fontSize: "0.8em",
+      textTransform: "uppercase"
+      // justifyContent: "flex-end"
+    },
+
+    // 3. Root node, may also be parent node. Definitely not child node.
+    [`${Selectors.RootNode}`]: {
+      // paddingLeft: 2,
+      // borderRightWidth: "4px",
+      // borderRightStyle: "solid",
+      // borderRightColor: "primary",
+      paddingLeft: "8px",
+      justifyContent: "flex-end",
+      paddingRight: "8px",
+      borderLeftStyle: "none",
+      backgroundColor: "initial",
+      ":hover": {
+        borderLeftWidth: "0px"
+      }
+
+      // borderRightStyle: "none"
+      // height: "3rem",
+    },
+
+    [`${Selectors.InActivePath}`]: {
+      backgroundColor: "#fff",
+      ":hover": {
+        borderLeftColor: "primary",
+        borderLeftStyle: "solid",
+        borderLeftWidth: "4px"
+      }
+    },
+
+    [`${Selectors.ActiveNode}`]: {
+      backgroundColor: "#fff",
+      borderRightStyle: "none",
+      borderLeftStyle: "solid",
+      // borderLeftColor: "primary",
+      borderLeftWidth: "0px",
+      borderTopStyle: "solid",
+      borderBottomStyle: "solid",
+      borderTopColor: "primary",
+      borderBottomColor: "primary",
+      borderTopWidth: "1px",
+      borderBottomWidth: "1px",
+      ":hover": {
+        // unfortunately need to set again or will use other :hover
+        borderLeftColor: "primary",
+        borderLeftStyle: "solid",
+        borderLeftWidth: "4px",
+        borderLeftWidth: "0px",
+        borderTopStyle: "solid",
+        borderBottomStyle: "solid",
+        borderTopColor: "primary",
+        borderBottomColor: "primary",
+        borderTopWidth: "1px",
+        borderBottomWidth: "1px"
+      }
+    }
+  }
 };
 
 const Style = {
   ...styles.Base,
+  ...getHardcodedDepthStyles().Base,
   "@media (min-width: 769px)": {
-    ...styles.Vertical
+    ...styles.Vertical,
+    ...getHardcodedDepthStyles().Vertical
   },
   "@media (max-width: 768px)": {
-    ...styles.Horizontal
+    ...styles.Horizontal,
+    ...getHardcodedDepthStyles().Horizontal
   }
 };
 
@@ -147,7 +318,9 @@ const getClassNames = ({
   isParent,
   isChild,
   isChildOfActiveParent,
-  isChildOfClickedParent
+  isChildOfClickedParent,
+  depth,
+  minLabelDepth
 }) => {
   const classNames = [ClassNames.Base];
 
@@ -209,6 +382,8 @@ const getClassNames = ({
       classNames.push(ClassNames.ChildOfClickedParent);
     }
   }
+
+  classNames.push(ClassNames.Depth(depth, minLabelDepth));
 
   return classNames.join(" ");
 };
@@ -288,7 +463,9 @@ const SidebarLabel = ({
     isParent,
     isChild,
     isChildOfActiveParent,
-    isChildOfClickedParent
+    isChildOfClickedParent,
+    depth,
+    minLabelDepth
   });
 
   const labelContainerId = `sgr-sidebar-label-container-${nodeId}`;
@@ -318,7 +495,12 @@ const SidebarLabel = ({
     </span>
   ) : depth >= minLabelDepth ? (
     <span sx={Style} id={labelContainerId} ref={containerEl}>
-      <span title={title} onClick={onClick} className={labelClassNames}>
+      <span
+        title={title}
+        onClick={onClick}
+        // onMouseOver={onClick}
+        className={labelClassNames}
+      >
         {title}
       </span>
     </span>

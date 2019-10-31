@@ -45,7 +45,7 @@ const HorizontalStyle = {
     // overflowY: "hidden",
     // height: "4rem",
     // backgroundColor: "green",
-    borderTopWidth: "1px",
+    borderTopWidth: "0px",
     borderTopStyle: "dotted",
     borderTopColor: "secondary",
     height: "4rem",
@@ -80,9 +80,31 @@ const HorizontalStyle = {
 };
 
 const VerticalStyle = {
-  Container: {},
-  ListContainer: {},
-  List: {},
+  Container: {
+    display: "flex",
+    width: "100%",
+    backgroundColor: "gray",
+    alignItems: "center",
+    justifyContent: "left",
+    flexDirection: "column",
+    lineSpacing: "4rem",
+    direction: "rtl"
+  },
+  ListContainer: {
+    // borderLeftWidth: 10,
+    // borderLeftStyle: "solid",
+    // paddingLeft: 2,
+    flexBasis: "100%"
+    // display: "flex",
+    // flexDirection: "column"
+  },
+  List: {
+    flexBasis: "100%",
+    minWidth: "100%",
+    display: "flex",
+    flexDirection: "column",
+    margin: 0
+  },
   Item: {
     display: "flex",
     flexDirection: "column"
@@ -114,10 +136,21 @@ const Style = {
   Label: breakStyle("Label")
 };
 
+export const getListStyle = ({ isInActivePath = false }) => {
+  return breakStyle("List", {
+    BaseStyle,
+    HorizontalStyle,
+    VerticalStyle: {
+      ...VerticalStyle
+    }
+  });
+};
+
 export const getListContainerStyle = ({
   hiddenHorizontally = false,
   hiddenVertically = false,
-  depth = 0
+  depth = 0,
+  minLabelDepth = 0
 }) => {
   return breakStyle("ListContainer", {
     BaseStyle,
@@ -139,7 +172,9 @@ export const getListContainerStyle = ({
         ...VerticalStyle.ListContainer,
         ...(hiddenVertically
           ? { display: "none !important" }
-          : { display: VerticalStyle.ListContainer.display })
+          : {
+              display: VerticalStyle.ListContainer.display
+            })
       }
     }
   });

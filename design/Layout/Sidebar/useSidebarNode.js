@@ -1,4 +1,4 @@
-import { getListContainerStyle } from "./SidebarStyle";
+import { getListContainerStyle, getListStyle } from "./SidebarStyle";
 
 // TODO: This was originally an actual hook, but atm it isn't actually using any
 // hooks. However it will need them for local collapsed state in vertical mode.
@@ -12,6 +12,7 @@ const useSidebarNode = ({
   lastClickedPath,
   activeNodeId,
   maxInitialStackDepth = Infinity,
+  minLabelDepth = 0,
   depth
 }) => {
   // const [isLocalCollapsed, setLocalCollapsed] = useState(depth > maxInitialStackDepth)
@@ -34,20 +35,26 @@ const useSidebarNode = ({
   // Yes, this is a monstrosity, I didn't even understand it five minutes
   // after writing it. At this point, mutex is actually redundant, since we
   // have lastClickedInPath, lastClickedNodeId, and nodeId.
-  const hiddenHorizontally =
-    depth > maxInitialStackDepth &&
-    ((!isLastClicked &&
+  const notExplicitlyShown =
+    (!isLastClicked &&
       !isInLastClickedPath &&
       (!isInActivePath || anythingBeenClicked)) ||
-      (!isInActivePath && !isInLastClickedPath));
+    (!isInActivePath && !isInLastClickedPath);
 
-  const hiddenVertically = false;
+  const hiddenHorizontally = depth > maxInitialStackDepth && notExplicitlyShown;
+
+  const hiddenVertically = depth - minLabelDepth > 0 && notExplicitlyShown;
 
   const childListContainerStyle = getListContainerStyle({
     isLastClicked,
     hiddenHorizontally,
     hiddenVertically,
-    depth
+    depth,
+    minLabelDepth
+  });
+
+  const childListStyle = getListStyle({
+    isInActivePath
   });
 
   // The "bottom leafs" (other than the active one)
@@ -71,6 +78,7 @@ const useSidebarNode = ({
     isInLastClickedPath,
     onClick,
     childListContainerStyle,
+    childListStyle,
     anythingBeenClicked,
     isChildOfActiveParent,
     isChildOfClickedParent
