@@ -20,6 +20,8 @@ export {
   Header,
   Footer,
   MainContent,
+  ContentBody,
+  ContentHeader,
   Sidebar,
   HolyGrail
 } from "./Layout";

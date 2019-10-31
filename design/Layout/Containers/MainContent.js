@@ -1,13 +1,9 @@
 import { Box } from "../../index";
 
 const Style = {
-  paddingLeft: "1rem",
-  paddingRight: "1rem"
-  // overflowX: "hidden"
+  backgroundColor: "#fff"
 };
 
 export default ({ children, gridArea = "content" }) => (
-  <Box sx={{ gridArea, ...Style }} backgroundColor="gray">
-    {children}
-  </Box>
+  <Box sx={{ gridArea, ...Style }}>{children}</Box>
 );

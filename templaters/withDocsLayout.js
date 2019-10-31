@@ -3,6 +3,8 @@ import { useMemo } from "react";
 import {
   Header,
   Footer,
+  ContentHeader,
+  ContentBody,
   MainContent,
   Sidebar,
   Heading,
@@ -69,11 +71,13 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
           />
 
           <MainContent gridArea={HolyGrail.GridArea.Content}>
-            <Heading>{meta.title}</Heading>
-            <pre>{JSON.stringify(meta, null, 2)}</pre>
-            <div sx={{ overflowX: "hidden", paddingLeft: 400 }}>
+            <ContentHeader depth={activeNode.depth}>
+              <Heading>{meta.title}</Heading>
+              <pre>{JSON.stringify(meta, null, 2)}</pre>
+            </ContentHeader>
+            <ContentBody>
               <MdxPage />
-            </div>
+            </ContentBody>
           </MainContent>
 
           <Sidebar gridArea={HolyGrail.GridArea.Side}>

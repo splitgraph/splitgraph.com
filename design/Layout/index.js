@@ -1,6 +1,6 @@
 export { Footer } from "./Footer";
 export { Header } from "./Header";
-export { MainContent } from "./Containers";
+export { MainContent, ContentBody, ContentHeader } from "./Containers";
 export { Sidebar } from "./Sidebar";
 export { BaseLayout } from "./BaseLayout";
 
