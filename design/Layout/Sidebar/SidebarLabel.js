@@ -445,14 +445,13 @@ const SidebarLabel = ({
 
   return node && url ? (
     <span sx={Style} onClick={onClick} id={labelContainerId} ref={containerEl}>
-      <Link href={url}>
-        <a
-          className={labelClassNames}
-          title={title}
-          sx={{ textDecoration: "none" }}
-        >
-          {title}
-        </a>
+      <Link
+        href={url}
+        className={labelClassNames}
+        title={title}
+        sx={{ textDecoration: "none" }}
+      >
+        {title}
       </Link>
     </span>
   ) : depth >= minLabelDepth ? (

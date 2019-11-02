@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 
 import {
   Header,
@@ -8,7 +8,6 @@ import {
   MainContent,
   Sidebar,
   Heading,
-  SubHeading,
   HolyGrail,
   LogoImage
 } from "@splitgraph/design";
@@ -16,7 +15,20 @@ import { BaseLayout } from "@splitgraph/design/Layout";
 
 import { findNodeInTree } from "@splitgraph/lib/tree";
 
-// TODO: Move this back into the docs repository so no need to do this dumb
+import { OnlyTOC } from "./contentWrappers";
+
+// TODO: Link handling is a mess all over the place, mostly out of avoidance
+// of making @spltigraph/design dependent on @next/link, resulting in multiple
+// implementations with varying degrees of ref/prop passing all over the place.
+const InnerLink = React.forwardRef(
+  ({ href, onClick, children, ...rest }, ref) => (
+    <a href={href} onClick={onClick} ref={ref} {...rest}>
+      {children}
+    </a>
+  )
+);
+
+// TODO: Move this back into the docs repository (?) so no need to do this dumb
 // dependency injection. It was only put into its own so that autogenned scripts
 // could reference it by name instead of relative path, but that's fixed now.
 const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
@@ -25,10 +37,16 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
   // client side routing does not work and we get "content flashes"
   const ContentLink = ({ href, children, ...rest }) => {
     return (
-      <Link href={`/_content${href}`} as={href} {...rest}>
-        {children}
+      <Link href={`/_content${href}`} as={href} passHref>
+        <InnerLink {...rest}>{children}</InnerLink>
       </Link>
     );
+  };
+
+  // Grab the TOC out of the tree from MdxPage so we can render it separately
+  // This is easier than writing a webpack loader. Tried portals, bad with SSR.
+  const TocMdx = () => {
+    return <MdxPage components={{ wrapper: OnlyTOC }} />;
   };
 
   const WithDocsLayout = ({ router }) => {
@@ -83,7 +101,6 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
           <MainContent gridArea={HolyGrail.GridArea.Content}>
             <ContentHeader depth={activeNode.depth}>
               <Heading>{meta.title}</Heading>
-              {/* <pre>{JSON.stringify(meta, null, 2)}</pre> */}
             </ContentHeader>
             <ContentBody>
               <MdxPage />
@@ -91,7 +108,7 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
           </MainContent>
 
           <Sidebar gridArea={HolyGrail.GridArea.Side}>
-            <SubHeading>R Sidebar</SubHeading>
+            <TocMdx />
           </Sidebar>
 
           <Footer gridArea={HolyGrail.GridArea.Footer}>

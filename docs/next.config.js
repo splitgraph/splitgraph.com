@@ -47,7 +47,11 @@ const _configs = {
   css: {},
   mdx: {
     options: {
-      hastPlugins: [require("mdx-prism")]
+      hastPlugins: [
+        require("mdx-prism"),
+        require("rehype-slug"),
+        require("rehype-toc")
+      ]
     }
   },
   bundleAnalyzer: {
