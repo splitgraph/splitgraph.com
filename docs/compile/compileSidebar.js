@@ -3,7 +3,8 @@ const { sync: mdxTransform } = require("@mdx-js/mdx");
 const { transform: babelTransform } = require("babel-core");
 
 const path = require("path");
-const dirTree = require("directory-tree");
+
+const { flattenTree } = require("@splitgraph/lib/tree");
 
 const CONTENT_DIR = path.dirname(require.resolve("@splitgraph/content"));
 const DOCS_DIR = `${path.join(CONTENT_DIR, "docs")}`;
@@ -33,7 +34,7 @@ overrideRequire(transform, { exts: [".mdx"] });
 const ContentTree = require("./ContentTree");
 
 const navItemData = item => ({
-  url: item.navigable && item.url ? item.url.fromSiteRoot : undefined,
+  url: !!item.url && typeof item.url === "string" ? item.url : undefined,
   title: item.metadata && item.metadata.title ? item.metadata.title : item.slug
 });
 
@@ -51,9 +52,25 @@ const itemData = (item, parent) =>
       }
     : {};
 
-const navData = (item, parent) => {
-  const myIndex = !parent ? 0 : parent.children.findIndex(i => i === item);
-  const numSiblings = !parent ? 0 : parent.children.length - 1;
+const navData = (item, parent, flatTree) => {
+  const flatItemIndex = flatTree.findIndex(node => node.nodeId === item.nodeId);
+
+  const nextIndex =
+    flatItemIndex >= 0 && flatItemIndex + 1 < flatTree.length
+      ? flatItemIndex + 1
+      : flatItemIndex >= 1
+      ? 0
+      : -1;
+  const prevIndex =
+    flatItemIndex >= 0 && flatItemIndex - 1 >= 0 && flatTree.length > 1
+      ? flatItemIndex - 1
+      : -1;
+
+  const hasNext = nextIndex > -1;
+  const hasPrev = prevIndex > -1;
+
+  const prevItem = hasPrev ? flatTree[prevIndex] : {};
+  const nextItem = hasNext ? flatTree[nextIndex] : {};
 
   return !!item
     ? {
@@ -61,35 +78,29 @@ const navData = (item, parent) => {
           parent && (parent.url || parent.navigable)
             ? navItemData(parent)
             : undefined,
-        left:
-          myIndex > 0 && numSiblings > 0
-            ? navItemData(
-                parent.children.slice(0, myIndex).find(c => !!c && !c.isMeta),
-                { includeNav: false }
-              )
-            : undefined,
+        left: hasPrev ? navItemData(prevItem) : undefined,
 
-        right:
-          myIndex < numSiblings && numSiblings > 0
-            ? navItemData(
-                parent.children.slice(myIndex + 1).find(c => !!c && !c.isMeta),
-                false
-              )
-            : undefined
+        right: hasNext ? navItemData(nextItem) : undefined
       }
     : {};
 };
 
+// This is not very efficient, but it only runs at build time
 const compileSidebar = () => {
   const contentTree = new ContentTree(DOCS_DIR, {
     importMdxMetadata: true,
     urlPrefix: "/docs"
   }).init();
 
+  const flatTree = flattenTree({
+    root: contentTree.map(itemData),
+    filter: node => !!node && !node.isSection
+  });
+
   return contentTree.map((item, parent) => {
     return {
       ...itemData(item, parent),
-      ...navData(item, parent)
+      ...navData(itemData(item, parent), parent, flatTree)
     };
   });
 };
