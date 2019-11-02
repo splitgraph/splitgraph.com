@@ -34,7 +34,7 @@ const getInlineFooterStyle = ({ depth, show, initialDepth, loading }) => ({
       left: 0,
       right: 0,
       height: "6rem",
-      backgroundColor: loading ? "gray" : "primary",
+      backgroundColor: loading ? "background" : "primary",
       color: "white",
       borderBottomLeftRadius: "40px",
       borderBottomRightRadius: "40px",
@@ -53,7 +53,7 @@ const DopeWaterLoadingAnimation = ({ loading }) => {
   const style = {
     width: "100%",
     height: "100%",
-    backgroundColor: "gray",
+    backgroundColor: "background",
     borderBottomLeftRadius: "40px",
     borderBottomRightRadius: "40px",
     overflow: "hidden",

@@ -14,6 +14,8 @@ export const defaultTheme = {
     secondary: "#363C8D",
     muted: "#f6f6f9",
     gray: "#dddddf",
+    // gray: "#ecebf5",
+    // gray: "#fff",
     lightgray: "#ccc",
     mutedlightgray: "rgba(204, 204, 204, .5)",
     highlight: "hsla(205, 100%, 40%, 0.125)",

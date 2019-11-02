@@ -23,7 +23,7 @@ const HorizontalStyle = {
   Container: {
     // marginTop: "-2rem",
     // overflowY: "scroll",
-    backgroundColor: "gray",
+    backgroundColor: "background",
     // WebkitOverflowScrolling: "touch",
     padding: 0
     // maxHeight: 75,
@@ -49,7 +49,7 @@ const HorizontalStyle = {
     borderTopStyle: "dotted",
     borderTopColor: "secondary",
     height: "4rem",
-    backgroundColor: "gray"
+    backgroundColor: "background"
   },
   List: {
     display: "inline-flex",
@@ -83,7 +83,7 @@ const VerticalStyle = {
   Container: {
     display: "flex",
     width: "100%",
-    backgroundColor: "gray",
+    backgroundColor: "background",
     alignItems: "center",
     justifyContent: "left",
     flexDirection: "column",

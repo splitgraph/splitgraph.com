@@ -4,6 +4,8 @@ import { useRef } from "react";
 
 import { useLayoutEffect } from "react";
 
+import useIsomorphicLayoutEffect from "../../hooks/useIsomorphicLayoutEffect";
+
 const ClassNames = {
   Base: "sgr-sidebar-label",
   ActiveNode: "sgr-sidebar-label--active",
@@ -139,7 +141,7 @@ const styles = {
 
     [`${Selectors.MutedNode}`]: {
       opacity: 0.5,
-      backgroundColor: "#cccccc"
+      backgroundColor: "gray"
     },
 
     [`${Selectors.ActiveNode},${Selectors.InActivePath}`]: {
@@ -152,10 +154,10 @@ const styles = {
       display: "flex",
       alignItems: "center",
       height: "2rem",
-      cursor: "pointer",
-      borderRightWidth: "1px",
-      borderRightColor: "primary",
-      borderRightStyle: "solid"
+      cursor: "pointer"
+      // borderRightWidth: "1px",
+      // borderRightColor: "primary",
+      // borderRightStyle: "solid"
     },
 
     /* Note the order of these selectors is very important!
@@ -223,6 +225,7 @@ const styles = {
 
     [`${Selectors.InActivePath}`]: {
       backgroundColor: "#fff",
+      boxShadow: "0 0 1rem rgba(0,0,0,.25)",
       ":hover": {
         borderLeftColor: "primary",
         borderLeftStyle: "solid",
@@ -235,24 +238,25 @@ const styles = {
       borderRightStyle: "none",
       borderLeftStyle: "solid",
       borderLeftWidth: "0px",
-      borderTopStyle: "solid",
-      borderBottomStyle: "solid",
-      borderTopColor: "primary",
-      borderBottomColor: "primary",
-      borderTopWidth: "1px",
-      borderBottomWidth: "1px",
+      boxShadow: "0 0 1rem rgba(0,0,0,.25)",
+      // borderTopStyle: "solid",
+      // borderBottomStyle: "solid",
+      // borderTopColor: "primary",
+      // borderBottomColor: "primary",
+      // borderTopWidth: "1px",
+      // borderBottomWidth: "1px",
       ":hover": {
         // unfortunately need to set again or will use other :hover
         borderLeftColor: "primary",
         borderLeftStyle: "solid",
         borderLeftWidth: "4px",
-        borderLeftWidth: "0px",
-        borderTopStyle: "solid",
-        borderBottomStyle: "solid",
-        borderTopColor: "primary",
-        borderBottomColor: "primary",
-        borderTopWidth: "1px",
-        borderBottomWidth: "1px"
+        borderLeftWidth: "0px"
+        // borderTopStyle: "solid",
+        // borderBottomStyle: "solid",
+        // borderTopColor: "primary",
+        // borderBottomColor: "primary",
+        // borderTopWidth: "1px",
+        // borderBottomWidth: "1px"
       }
     }
   }
@@ -371,7 +375,11 @@ const useScrollToActiveNode = ({
   containerEl,
   anythingBeenClicked
 }) => {
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
     const scrollTarget = containerEl.current;
     const isActiveAndLastClicked = isInActivePath && isInLastClickedPath;
     if (
