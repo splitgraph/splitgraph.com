@@ -4,29 +4,20 @@ import {
   Header,
   Footer,
   ContentHeader,
+  ContentFooter,
   ContentBody,
   MainContent,
   Sidebar,
   Heading,
   HolyGrail,
-  LogoImage
+  LogoImage,
+  InterPageNav
 } from "@splitgraph/design";
 import { BaseLayout } from "@splitgraph/design/Layout";
 
 import { findNodeInTree } from "@splitgraph/lib/tree";
 
 import { OnlyTOC } from "./contentWrappers";
-
-// TODO: Link handling is a mess all over the place, mostly out of avoidance
-// of making @spltigraph/design dependent on @next/link, resulting in multiple
-// implementations with varying degrees of ref/prop passing all over the place.
-const InnerLink = React.forwardRef(
-  ({ href, onClick, children, ...rest }, ref) => (
-    <a href={href} onClick={onClick} ref={ref} {...rest}>
-      {children}
-    </a>
-  )
-);
 
 // TODO: Move this back into the docs repository (?) so no need to do this dumb
 // dependency injection. It was only put into its own so that autogenned scripts
@@ -38,7 +29,7 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
   const ContentLink = ({ href, children, ...rest }) => {
     return (
       <Link href={`/_content${href}`} as={href} passHref>
-        <InnerLink {...rest}>{children}</InnerLink>
+        <a {...rest}>{children}</a>
       </Link>
     );
   };
@@ -105,6 +96,14 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
             <ContentBody>
               <MdxPage />
             </ContentBody>
+            <ContentFooter>
+              <InterPageNav
+                Link={ContentLink}
+                up={activeNode.up}
+                left={activeNode.left}
+                right={activeNode.right}
+              />
+            </ContentFooter>
           </MainContent>
 
           <Sidebar gridArea={HolyGrail.GridArea.Side}>

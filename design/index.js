@@ -21,11 +21,14 @@ export {
   Footer,
   MainContent,
   ContentBody,
+  ContentFooter,
   ContentHeader,
   Sidebar,
   HolyGrail
 } from "./Layout";
 
 export { LogoImage } from "./Logo";
+
+export { InterPageNav } from "./Nav";
 
 export { defaultTheme } from "./defaultTheme";
