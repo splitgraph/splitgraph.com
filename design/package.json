@@ -12,6 +12,7 @@
     "@mdx-js/react": "^1.4.5",
     "@rebass/forms": "^4.0.5",
     "@rebass/preset": "^4.0.5",
+    "@theme-ui/prism": "^0.2.46",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "rebass": "^4.0.5",

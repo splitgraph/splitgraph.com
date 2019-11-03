@@ -1,6 +1,9 @@
+// @jsx jsx
+import { jsx } from "theme-ui";
 import React, { useMemo } from "react";
 
 import {
+  Box,
   Header,
   Footer,
   ContentHeader,
@@ -18,6 +21,29 @@ import { BaseLayout } from "@splitgraph/design/Layout";
 import { findNodeInTree } from "@splitgraph/lib/tree";
 
 import { OnlyTOC } from "./contentWrappers";
+
+import { defaultTheme } from "@splitgraph/design";
+
+const mdxComponents = {
+  pre: ({ children, ...rest }) => (
+    <pre sx={defaultTheme.styles.pre} {...rest}>
+      {children}
+    </pre>
+  ),
+  code: ({ children, ...rest }) => (
+    <code sx={defaultTheme.styles.code} {...rest}>
+      {children}
+    </code>
+  ),
+  inlineCode: ({ children, ...rest }) => (
+    <code
+      sx={{ ...defaultTheme.styles.pre, ...defaultTheme.styles.inlineCode }}
+      {...rest}
+    >
+      {children}
+    </code>
+  )
+};
 
 // TODO: Move this back into the docs repository (?) so no need to do this dumb
 // dependency injection. It was only put into its own so that autogenned scripts
@@ -94,7 +120,7 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
               <Heading>{meta.title}</Heading>
             </ContentHeader>
             <ContentBody>
-              <MdxPage />
+              <MdxPage components={mdxComponents} />
             </ContentBody>
             <ContentFooter>
               <InterPageNav

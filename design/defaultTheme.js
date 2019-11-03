@@ -5,7 +5,10 @@
     https://github.com/rebassjs/rebass/blob/master/packages/preset/src/index.js
 */
 
+import prismTheme from "@theme-ui/prism/presets/shades-of-purple.json";
+
 export const defaultTheme = {
+  useCustomProperties: true,
   colors: {
     text: "#000",
     background: "#fff",
@@ -166,6 +169,67 @@ export const defaultTheme = {
       fontFamily: "body",
       fontWeight: "body",
       lineHeight: "body"
+    },
+    pre: {
+      ...prismTheme,
+      "@media (max-width: 768px)": {
+        marginLeft: -4,
+        marginRight: -4,
+        paddingLeft: "1ch",
+        paddingRight: "1ch",
+        paddingTop: "1rem",
+        paddingBottom: "1rem",
+        borderTop: "4px solid #efefef",
+        borderBottom: "4px solid #efefef"
+      },
+      "@media (min-width: 769px)": {
+        maxWidth: "80ch"
+      },
+      fontSize: "0.8rem",
+      padding: 10,
+      overflowX: "auto",
+      backgroundColor: "primary",
+      ".mdx-marker": {
+        // backgroundColor: "rgba(255,255,255,0.1)",
+        display: "block",
+        marginLeft: "-1em",
+        marginRight: "-1em",
+        paddingRight: "1em",
+        paddingLeft: "1em",
+        borderLeft: `.25em solid ${prismTheme[".punctuation"].color}`
+      }
+    },
+    inlineCode: {
+      padding: undefined,
+      paddingLeft: "0.5ch",
+      paddingRight: "0.5ch",
+      paddingTop: 0,
+      paddingBottom: 0,
+      minHeight: "1rem",
+      display: "inline-flex",
+      alignContent: "center",
+      fontSize: undefined
+    },
+    code: {
+      backgroundColor: "primary",
+      fontFamily: "monospace",
+      fontSize: "inherit",
+      span: {
+        color: "red"
+      }
+    },
+    p: {
+      color: "text",
+      fontFamily: "body",
+      fontWeight: "body",
+      lineHeight: "body",
+      color: "red",
+      code: {
+        backgroundColor: "primary",
+        bg: prismTheme.backgroundColor,
+        color: prismTheme.color,
+        padding: 1
+      }
     }
   }
 };
