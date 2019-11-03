@@ -36,10 +36,7 @@ const mdxComponents = {
     </code>
   ),
   inlineCode: ({ children, ...rest }) => (
-    <code
-      sx={{ ...defaultTheme.styles.pre, ...defaultTheme.styles.inlineCode }}
-      {...rest}
-    >
+    <code sx={defaultTheme.styles.inlineCode} {...rest}>
       {children}
     </code>
   )

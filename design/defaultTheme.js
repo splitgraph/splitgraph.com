@@ -168,7 +168,10 @@ export const defaultTheme = {
     root: {
       fontFamily: "body",
       fontWeight: "body",
-      lineHeight: "body"
+      lineHeight: "body",
+      "@media (min-width: 769px)": {
+        maxWidth: "80ch"
+      }
     },
     pre: {
       ...prismTheme,
@@ -183,7 +186,7 @@ export const defaultTheme = {
         borderBottom: "4px solid #efefef"
       },
       "@media (min-width: 769px)": {
-        maxWidth: "80ch"
+        minWidth: "80ch"
       },
       fontSize: "0.8rem",
       padding: 10,
@@ -200,7 +203,10 @@ export const defaultTheme = {
       }
     },
     inlineCode: {
-      padding: undefined,
+      ...prismTheme,
+      "@media (min-width: 749px)": {
+        minWidth: "initial"
+      },
       paddingLeft: "0.5ch",
       paddingRight: "0.5ch",
       paddingTop: 0,
@@ -208,7 +214,8 @@ export const defaultTheme = {
       minHeight: "1rem",
       display: "inline-flex",
       alignContent: "center",
-      fontSize: undefined
+      overflowX: "auto",
+      backgroundColor: "primary"
     },
     code: {
       backgroundColor: "primary",
