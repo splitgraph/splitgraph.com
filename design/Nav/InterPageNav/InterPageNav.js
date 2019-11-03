@@ -30,7 +30,15 @@ const InterPageNav = ({ Link, up, right, left }) => {
   const style = {
     flexDirection: "row",
     alignItems: "space-between",
-    justifyContent: "center"
+    justifyContent: "space-between",
+    paddingTop: "8rem",
+    marginTop: "8rem",
+    borderTopColor: "#efefef",
+    borderTopStyle: "solid",
+    borderTopWidth: "1px",
+    a: {
+      color: "primary"
+    }
   };
 
   return (

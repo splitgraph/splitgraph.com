@@ -24,6 +24,12 @@ import { OnlyTOC } from "./contentWrappers";
 
 import { defaultTheme } from "@splitgraph/design";
 
+const tocStyle = {
+  a: {
+    color: "primary"
+  }
+};
+
 const mdxComponents = {
   pre: ({ children, ...rest }) => (
     <pre sx={defaultTheme.styles.pre} {...rest}>
@@ -129,9 +135,9 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
             </ContentFooter>
           </MainContent>
 
-          <Sidebar gridArea={HolyGrail.GridArea.Side}>
+          <Box gridArea={HolyGrail.GridArea.Side} sx={tocStyle}>
             <TocMdx />
-          </Sidebar>
+          </Box>
 
           <Footer gridArea={HolyGrail.GridArea.Footer}>
             <ul>
