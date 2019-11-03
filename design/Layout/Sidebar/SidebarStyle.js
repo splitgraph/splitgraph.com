@@ -95,16 +95,19 @@ const VerticalStyle = {
     paddingBottom: "8rem",
     scrollSnapType: "y mandatory",
     // scrollPaddingRight: "200px",
-    scrollPaddingBottom: "200px"
+    scrollPaddingBottom: "200px",
+
+    backgroundColor: "#efefef"
   },
   ListContainer: {
     direction: "rtl",
     // borderLeftWidth: 10,
     // borderLeftStyle: "solid",
     // paddingLeft: 2,
-    flexBasis: "100%"
+    flexBasis: "100%",
     // display: "flex",
-    // flexDirection: "column"
+    // flexDirection: "column",
+    backgroundColor: "background"
   },
   List: {
     flexBasis: "100%",

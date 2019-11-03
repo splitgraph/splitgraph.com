@@ -4,8 +4,6 @@ import { useRef } from "react";
 
 import { useLayoutEffect } from "react";
 
-import useIsomorphicLayoutEffect from "../../hooks/useIsomorphicLayoutEffect";
-
 const ClassNames = {
   Base: "sgr-sidebar-label",
   ActiveNode: "sgr-sidebar-label--active",
@@ -72,10 +70,39 @@ const getHardcodedDepthStyles = (maxHardCodedDepth = 10) => {
 
   // Don't count the root nodes, we want to set their style separately
   for (let depth = 1; depth < maxHardCodedDepth; depth++) {
+    let paddingLeft = depth / 2;
+    let marginLeft = depth > 1 ? depth / 2 : 0;
+
     depthStyles.Vertical[`.${ClassNames.Depth(depth)}`] = {
-      paddingLeft: `${depth / 2}rem`,
-      marginLeft: depth > 1 ? `${depth / 2}rem` : 0,
-      paddingRight: `${depth * 2}rem`
+      paddingLeft: `${paddingLeft}rem`,
+      marginLeft: `${marginLeft}rem`,
+      paddingRight: depth >= 1 ? "2rem" : `${depth * 2}rem`,
+
+      paddingLeft:
+        depth >= 1 ? `${marginLeft + paddingLeft}rem !important` : "initial",
+      marginRight: depth >= 1 ? `${marginLeft}rem` : "initial"
+    };
+
+    depthStyles.Vertical[
+      `.${ClassNames.Depth(depth)}${
+        Selectors.InActivePath
+      }, .${ClassNames.Depth(depth)}${Selectors.InLastClickedPath}`
+    ] = {
+      borderBottomStyle: "solid",
+      borderBottomWidth: "2px",
+      borderBottomColor: "lightgray"
+    };
+
+    depthStyles.Vertical[
+      `.${ClassNames.Depth(depth)}${Selectors.ActiveNode}, .${ClassNames.Depth(
+        depth
+      )}${Selectors.LastClicked}`
+    ] = {
+      borderBottomStyle: "solid",
+      borderBottomWidth: "2px",
+      borderBottomColor: "lightgray",
+      borderLeftColor: "primary",
+      borderRightStyle: "solid"
     };
   }
 
@@ -154,10 +181,16 @@ const styles = {
       display: "flex",
       alignItems: "center",
       height: "2rem",
-      cursor: "pointer"
-      // borderRightWidth: "1px",
-      // borderRightColor: "primary",
-      // borderRightStyle: "solid"
+      cursor: "pointer",
+      borderRightWidth: "1px",
+      borderRightColor: "lightgray",
+      borderRightStyle: "solid",
+      backgroundColor: "#efefef"
+    },
+
+    [`${Selectors.MutedNode}`]: {
+      // opacity: 0.5
+      // backgroundColor: "#efefef"
     },
 
     /* Note the order of these selectors is very important!
@@ -183,7 +216,8 @@ const styles = {
       borderLeftStyle: "solid",
       ":hover": {
         borderColor: "white",
-        backgroundColor: "white"
+        // backgroundColor: "white"
+        textDecoration: "underline"
       }
     },
 
@@ -200,7 +234,7 @@ const styles = {
 
     // 2. Parent Node, may also be child node or root node.
     [`${Selectors.ParentNode}`]: {
-      backgroundColor: "initial",
+      // backgroundColor: "initial",
       borderLeftWidth: "4px",
       borderLeftStyle: "solid",
       borderLeftColor: "primary",
@@ -211,21 +245,10 @@ const styles = {
       textTransform: "uppercase"
     },
 
-    // 3. Root node, may also be parent node. Definitely not child node.
-    [`${Selectors.RootNode}`]: {
-      paddingLeft: "8px",
-      justifyContent: "flex-end",
-      paddingRight: "8px",
-      borderLeftStyle: "none",
-      backgroundColor: "initial",
-      ":hover": {
-        borderLeftWidth: "0px"
-      }
-    },
-
     [`${Selectors.InActivePath}`]: {
       backgroundColor: "#fff",
-      boxShadow: "0 0 1rem rgba(0,0,0,.25)",
+      // Root doesn't have its box shadow dynamically set
+      boxShadow: `0 0.2rem 4px rgba(0, 0, 0, .25)`,
       ":hover": {
         borderLeftColor: "primary",
         borderLeftStyle: "solid",
@@ -233,30 +256,60 @@ const styles = {
       }
     },
 
+    // 3. Root node, may also be parent node. Definitely not child node.
+    [`${Selectors.RootNode}`]: {
+      paddingTop: "1rem",
+      paddingLeft: "8px",
+      justifyContent: "flex-end",
+      paddingRight: "8px",
+      borderLeftStyle: "none",
+      backgroundColor: "#efefef",
+      paddingTop: "8px",
+      borderTopStyle: "none",
+      borderTopColor: "primary",
+      borderTopWidth: "4px",
+      ":hover": {
+        borderLeftWidth: "0px",
+        borderLeftStyle: "none"
+      }
+    },
+
+    [`${Selectors.RootNode}${Selectors.InActivePath}`]: {
+      backgroundColor: "#fff"
+    },
+
+    [`${Selectors.ParentNode}${Selectors.InActivePath}, ${Selectors.ParentNode}${Selectors.InLastClickedPath}`]: {
+      backgroundColor: "#fff"
+    },
+
+    [`${Selectors.ParentNode}${Selectors.LastClicked}`]: {
+      backgroundColor: "#fff"
+    },
+
     [`${Selectors.ActiveNode}`]: {
       backgroundColor: "#fff",
       borderRightStyle: "none",
       borderLeftStyle: "solid",
-      borderLeftWidth: "0px",
-      boxShadow: "0 0 1rem rgba(0,0,0,.25)",
-      // borderTopStyle: "solid",
-      // borderBottomStyle: "solid",
-      // borderTopColor: "primary",
-      // borderBottomColor: "primary",
-      // borderTopWidth: "1px",
-      // borderBottomWidth: "1px",
+      borderLeftColor: "primary",
+      borderLeftWidth: "4px",
+      borderTopStyle: "solid",
+      borderBottomStyle: "solid",
+      borderTopColor: "lightgray",
+      borderBottomColor: "lightgray",
+      borderTopWidth: "1px",
+      borderBottomWidth: "1px",
       ":hover": {
         // unfortunately need to set again or will use other :hover
         borderLeftColor: "primary",
         borderLeftStyle: "solid",
         borderLeftWidth: "4px",
-        borderLeftWidth: "0px"
-        // borderTopStyle: "solid",
-        // borderBottomStyle: "solid",
-        // borderTopColor: "primary",
-        // borderBottomColor: "primary",
-        // borderTopWidth: "1px",
-        // borderBottomWidth: "1px"
+        borderLeftWidth: "4px",
+        borderTopStyle: "solid",
+        borderBottomStyle: "solid",
+        borderTopColor: "lightgray",
+        borderBottomColor: "lightgray",
+        borderTopWidth: "1px",
+        borderBottomWidth: "1px"
       }
     }
   }
@@ -375,11 +428,7 @@ const useScrollToActiveNode = ({
   containerEl,
   anythingBeenClicked
 }) => {
-  useIsomorphicLayoutEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
-
+  useLayoutEffect(() => {
     const scrollTarget = containerEl.current;
     const isActiveAndLastClicked = isInActivePath && isInLastClickedPath;
     if (
@@ -398,6 +447,9 @@ const useScrollToActiveNode = ({
     revealScrollbars(scrollContainer);
   }, [nodeId, isInActivePath, containerEl]);
 };
+
+const useScrollToActiveNodeOnClient =
+  typeof window === "undefined" ? () => {} : useScrollToActiveNode;
 
 const SidebarLabel = ({
   node,
@@ -443,7 +495,7 @@ const SidebarLabel = ({
 
   const containerEl = useRef(null);
 
-  useScrollToActiveNode({
+  useScrollToActiveNodeOnClient({
     nodeId,
     isInActivePath,
     isInLastClickedPath,
