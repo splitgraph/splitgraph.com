@@ -15,20 +15,38 @@ Most functionality is implemented in the client and to any other
 application, the engine is just another PostgreSQL database: it can
 interact with it by querying tables and writing to them as usual.
 
-To run this demo, you will need to either be able to run Docker (to use
-the official Splitgraph engine) or have access to a PostgreSQL (&gt;
-9.6) database (in which case some functionality won't be available).
+To run the Splitgraph engin, you will need to be able to run Docker.
 
 `sgr`, the Splitgraph command line client and library can be installed
 either from [GitHub](https://github.com/splitgraph/splitgraph/) or from
 pip:
 
-    $ pip install --index-url https://test.pypi.org/simple/ splitgraph
+    $ pip install splitgraph
 
 You will need to be running Python 3.6 or later. For Linux systems, a single
 self-contained binary is available on the [releases page](https://github.com/splitgraph/splitgraph/releases).
 
-### Official Splitgraph engine
+### Using `sgr engine add` to get started
+
+This is the easiest way that automates most of the steps described in the next section. Do:
+
+    sgr engine add
+    
+This will:
+
+  * Prompt you for a password: this is just the password used to protect your
+    local engine and will be stored in the generated configuration file.
+  * Pull and start the latest Splitgraph [engine](https://hub.docker.com/r/splitgraph/engine/) image
+  * By default, the engine container will be named `splitgraph_engine_default` and two Docker volumes
+    will be created:
+    * `splitgraph_engine_default_data` to store the physical data
+    * `splitgraph_engine_default_metadata` to store the metadata about composition of Splitgraph images.
+  * Initialize the engine
+  * Generate a minimal `.sgconfig` file for you in the current working directory.
+
+There are extra options in `sgr engine` for advanced users. To see them, run `sgr engine --help`.
+
+### Using Docker directly
 
 Use Docker to pull and start the
 [engine](https://hub.docker.com/r/splitgraph/engine/):
@@ -90,8 +108,10 @@ your Postgres installation. Finally, initialize the engine:
     2019-01-01 15:21:44,416 INFO Installing the audit trigger...
     2019-01-01 15:21:44,500 INFO Ensuring metadata schema splitgraph_meta exists...
 
+### Configuration file
+
 Splitgraph reads its configuration from the overridden environment
-variables first, then the `.sgconfig` file in the local working
+variables first, then the `.sgconfig` file in the current working
 directory (unless overridden by the `SG_CONFIG_FILE` environment
 variable, then uses the default values. For more information, see the
 documentation for splitgraph.config.
