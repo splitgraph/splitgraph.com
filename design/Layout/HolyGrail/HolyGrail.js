@@ -18,7 +18,7 @@ export default ({ children }) => (
           "${GridArea.Nav}    ${GridArea.Content} ${GridArea.Side}"
           "${GridArea.Footer} ${GridArea.Footer}  ${GridArea.Footer}"
       `,
-      gridTemplateColumns: "300px 1fr 200px",
+      gridTemplateColumns: "300px 1fr 300px",
       gridTemplateRows: "auto 100vh 1fr auto auto",
       gridGap: 0,
       maxHeight: "100vh",

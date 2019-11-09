@@ -65,7 +65,6 @@ const HorizontalStyle = {
     scrollSnapType: "x mandatory",
     scrollPaddingRight: "200px",
     scrollPaddingLeft: "200px"
-
     // lineHeight:
     // paddingBottom: "2rem"
   },
@@ -91,7 +90,9 @@ const VerticalStyle = {
 
     // Container ltr + rtl = scrollbar on right (from ltr), align content to right (from rtl)
     direction: "ltr",
-    overflowY: "scroll",
+    overflowY: "auto",
+    MsOverflowStyle: "-ms-autohiding-scrollbar",
+    scrollbarWidth: "thin",
     paddingBottom: "8rem",
     scrollSnapType: "y mandatory",
     // scrollPaddingRight: "200px",
@@ -107,14 +108,15 @@ const VerticalStyle = {
     flexBasis: "100%",
     // display: "flex",
     // flexDirection: "column",
-    backgroundColor: "background"
+    backgroundColor: "#efefef"
   },
   List: {
-    flexBasis: "100%",
+    // flexBasis: "100%",
     minWidth: "100%",
     display: "flex",
     flexDirection: "column",
-    margin: 0
+    margin: 0,
+    backgroundColor: "background"
   },
   Item: {
     display: "flex",

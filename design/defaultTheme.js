@@ -15,6 +15,7 @@ export const defaultTheme = {
     // primary: "#07c",
     primary: "#36678d",
     secondary: "#363C8D",
+    heavy: "#0d1821",
     muted: "#f6f6f9",
     gray: "#dddddf",
     // gray: "#ecebf5",
@@ -145,10 +146,11 @@ export const defaultTheme = {
       backgroundColor: "transparent",
       outline: "none",
       cursor: "pointer",
-      "&:active, &:hover": {
-        outline: 0,
-        textDecoration: "underline",
-        color: "secondary"
+      outline: 0,
+      color: "primary",
+      textDecoration: "none",
+      "&:hover": {
+        textDecoration: "underline"
       },
       "&[disabled]": {
         cursor: "not-allowed",

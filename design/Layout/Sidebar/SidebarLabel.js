@@ -411,7 +411,7 @@ const getClassNames = ({
 const hideScrollbars = el => {
   el.style["::-webkit-scrollbar"] =
     "width: 0 !important; background: transparent;";
-  // el.style["overflow"] = "-moz-scrollbars-none";
+  el.style["overflow"] = "-moz-scrollbars-none";
   el.style["-ms-overflow-style"] = "none";
 };
 

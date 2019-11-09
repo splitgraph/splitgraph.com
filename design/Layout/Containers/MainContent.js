@@ -3,7 +3,8 @@ import { Box } from "../../index";
 const Style = {
   backgroundColor: "#fff",
   "@media (min-width: 769px)": {
-    overflowY: "scroll",
+    overflowY: "auto",
+    MsOverflowStyle: "-ms-autohiding-scrollbar",
     paddingBottom: "8rem"
   },
   // 3rem for header size

@@ -5,8 +5,10 @@ body {
   border: 0;
 
   font-family: "Open Sans", sans-serif;
+  overflow-y: auto;
+  /* overflow:auto; */
 }
-
+/*
 ul::-webkit-scrollbar {
   width: 0;
   height: 0;
@@ -28,8 +30,6 @@ ul::-webkit-scrollbar-thumb:active {
 }
 ul::-webkit-scrollbar-track {
   background: #dddddf;
-  /* border: 100px dashed #ffffff; */
-  /* border-radius: 0px; */
 }
 ul::-webkit-scrollbar-track:hover {
   background: #dddddf;
@@ -39,4 +39,4 @@ ul::-webkit-scrollbar-track:active {
 }
 ul::-webkit-scrollbar-corner {
   background: transparent;
-}
+} */

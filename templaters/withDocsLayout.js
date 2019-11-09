@@ -24,12 +24,6 @@ import { OnlyTOC } from "./contentWrappers";
 
 import { defaultTheme } from "@splitgraph/design";
 
-const tocStyle = {
-  a: {
-    color: "primary"
-  }
-};
-
 const mdxComponents = {
   pre: ({ children, ...rest }) => (
     <pre sx={defaultTheme.styles.pre} {...rest}>
@@ -58,15 +52,25 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
   const ContentLink = ({ href, children, ...rest }) => {
     return (
       <Link href={`/_content${href}`} as={href} passHref>
-        <a {...rest}>{children}</a>
+        <a
+          {...rest}
+          sx={defaultTheme.links.primary}
+          onClick={e => {
+            console.log("clicked");
+          }}
+        >
+          {children}
+        </a>
       </Link>
     );
   };
 
+  mdxComponents.a = ContentLink;
+
   // Grab the TOC out of the tree from MdxPage so we can render it separately
   // This is easier than writing a webpack loader. Tried portals, bad with SSR.
   const TocMdx = () => {
-    return <MdxPage components={{ wrapper: OnlyTOC }} />;
+    return <MdxPage components={{ wrapper: OnlyTOC, a: ContentLink }} />;
   };
 
   const WithDocsLayout = ({ router }) => {
@@ -135,26 +139,23 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
             </ContentFooter>
           </MainContent>
 
-          <Box gridArea={HolyGrail.GridArea.Side} sx={tocStyle}>
+          <Box
+            gridArea={HolyGrail.GridArea.Side}
+            sx={{ a: defaultTheme.links.primary }}
+          >
             <TocMdx />
           </Box>
 
           <Footer gridArea={HolyGrail.GridArea.Footer}>
             <ul>
               <li>
-                <Link href="/post/2" prefetch={false}>
-                  <a>Login</a>
-                </Link>
+                <ContentLink href="/">Index</ContentLink>
               </li>
               <li>
-                <Link href="/post/3" prefetch={false}>
-                  <a>IndexPage (this)</a>
-                </Link>
+                <ContentLink href="/">Somewhere</ContentLink>
               </li>
               <li>
-                <Link href="/post/4" prefetch={false}>
-                  <a>Index</a>
-                </Link>
+                <ContentLink href="/">Else</ContentLink>
               </li>
             </ul>
           </Footer>
