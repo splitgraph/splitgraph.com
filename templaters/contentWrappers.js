@@ -1,16 +1,27 @@
 import React from "react";
 import { Box } from "@splitgraph/design";
 
-const TocWrapperStyle = {
+export const TocStyle = {
   "ol.toc-level": {
     fontSize: 1,
     color: "primary",
     listStyleType: "none",
-    padding: "1em"
+    padding: "1em",
+    padding: "0.5em !important",
+    whiteSpace: "nowrap",
+    overflowX: "hidden"
   },
 
   ".toc-item": {
     color: "green"
+  },
+
+  ".toc-item a": {
+    textDecoration: "none"
+  },
+
+  ".toc-item a:hover": {
+    textDecoration: "underline"
   },
 
   ".toc-level": {},
@@ -18,8 +29,44 @@ const TocWrapperStyle = {
   ".toc-link": {}
 };
 
-export const OnlyTOC = ({ children, ...rest }) => {
-  // TODO: Not guaranteed to always be the first child. need to filter on type
+const findMatchingElement = (children = [], matchFunc) => {
+  if (!children) {
+    return null;
+  }
 
-  return <Box sx={TocWrapperStyle}>{React.cloneElement(children[0])}</Box>;
+  const match = children.find(matchFunc);
+
+  if (match) {
+    return match;
+  }
+
+  for (let child of children) {
+    let maybeMatch =
+      !!child.props && child.props.children
+        ? findMatchingElement(
+            React.Children.toArray(child.props.children),
+            matchFunc
+          )
+        : null;
+
+    if (maybeMatch) {
+      return maybeMatch;
+    }
+  }
+
+  return null;
+};
+
+export const OnlyTOC = ({ children, ...rest }) => {
+  const originalToc = findMatchingElement(
+    React.Children.toArray(children),
+    el =>
+      el.props &&
+      (el.props.name === "nav" ||
+        (el.type === "nav" && el.props.className === "toc"))
+  );
+
+  const extractedToc = originalToc ? React.cloneElement(originalToc) : null;
+
+  return <Box sx={TocStyle}>{extractedToc}</Box>;
 };

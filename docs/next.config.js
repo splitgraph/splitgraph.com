@@ -14,6 +14,8 @@ const CONFIG_FILE = process.env.CONFIG_FILE || `./config/${DOCS_ENV}.config.js`;
 
 const VALID_ENVS = ["dev", "build", "staging"];
 
+const customizeTOC = require("./plugins/rehype-plugins/customizeTOC");
+
 if (!VALID_ENVS.includes(DOCS_ENV)) {
   console.error("Fatal: Bad DOCS_ENV");
   process.exit(1);
@@ -47,10 +49,18 @@ const _configs = {
   css: {},
   mdx: {
     options: {
+      mdPlugins: [
+        [require("remark-disable-tokenizers"), { block: ["indentedCode"] }]
+      ],
       hastPlugins: [
         require("mdx-prism"),
         require("rehype-slug"),
-        require("rehype-toc")
+        [
+          require("rehype-toc"),
+          {
+            customizeTOC
+          }
+        ]
       ]
     }
   },
