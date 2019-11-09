@@ -8,6 +8,8 @@ const withIgnoreFs = require("./plugins/withIgnoreFs");
 
 const { makePages, EXPORT_PATH_MAP } = require("./compile/makePages");
 
+const { makeCasts, getCastManifest } = require("./compile/makeCasts");
+
 const DOCS_ENV = process.env.DOCS_ENV || "dev";
 
 const CONFIG_FILE = process.env.CONFIG_FILE || `./config/${DOCS_ENV}.config.js`;
@@ -15,6 +17,8 @@ const CONFIG_FILE = process.env.CONFIG_FILE || `./config/${DOCS_ENV}.config.js`;
 const VALID_ENVS = ["dev", "build", "staging"];
 
 const customizeTOC = require("./plugins/rehype-plugins/customizeTOC");
+
+const injectAsciicasts = require("./plugins/rehype-plugins/injectAsciicasts");
 
 if (!VALID_ENVS.includes(DOCS_ENV)) {
   console.error("Fatal: Bad DOCS_ENV");
@@ -30,6 +34,14 @@ const CONFIG = require(CONFIG_FILE);
 const fs = require("fs").promises;
 
 makePages();
+
+const { castManifest } = makeCasts();
+
+console.log("Casts:");
+
+for (let castKey of Object.keys(castManifest)) {
+  console.log("    ", castKey);
+}
 
 const nextConfig = {
   env: {
@@ -54,6 +66,7 @@ const _configs = {
       ],
       hastPlugins: [
         require("mdx-prism"),
+        [injectAsciicasts, { castManifest }],
         require("rehype-slug"),
         [
           require("rehype-toc"),
