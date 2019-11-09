@@ -1,0 +1,139 @@
+
+import "@splitgraph/design/css/sphinxtheme.css";
+
+export const meta = {
+  title: "splitgraph.core.indexing package",
+  id: "splitgraph.core.indexing package"
+};
+
+<div className=" rst-content"><nav className="toc"><ol className="toc-level toc-level-1"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#module-contents">Module contents</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#submodules">Submodules</a><ol className="toc-level toc-level-2"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphcoreindexingbloom-module">splitgraph.core.indexing.bloom module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphcoreindexingrange-module">splitgraph.core.indexing.range module</a></li></ol></li></ol></nav><div className="section" id="module-splitgraph.core.indexing">
+<span id="module-contents"></span><h2 id="module-contents">Module contents<a className="headerlink" href="#module-splitgraph.core.indexing" title="Permalink to this headline">¶</a></h2>
+</div><div className="section" id="splitgraph-core-indexing-package">
+
+<div className="section" id="submodules">
+<h2 id="submodules">Submodules<a className="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div className="section" id="module-splitgraph.core.indexing.bloom">
+<span id="splitgraph-core-indexing-bloom-module"></span><h2 id="splitgraphcoreindexingbloom-module">splitgraph.core.indexing.bloom module<a className="headerlink" href="#module-splitgraph.core.indexing.bloom" title="Permalink to this headline">¶</a></h2>
+<p>Bloom filtering on fragments for equality queries.</p>
+<dl className="function">
+<dt id="splitgraph.core.indexing.bloom.describe">
+<code className="sig-prename descclassname">splitgraph.core.indexing.bloom.</code><code className="sig-name descname">describe</code><span className="sig-paren">(</span><em className="sig-param">index_tuple: Tuple[int, str]</em><span className="sig-paren">)</span> → str<a className="headerlink" href="#splitgraph.core.indexing.bloom.describe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a pretty-printed summary of the bloom filter</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><p><strong>index_tuple</strong> – Tuple of (k, base64-encoded fingerprint)
+returned by generate_bloom_index</p>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>String</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="function">
+<dt id="splitgraph.core.indexing.bloom.filter_bloom_index">
+<code className="sig-prename descclassname">splitgraph.core.indexing.bloom.</code><code className="sig-name descname">filter_bloom_index</code><span className="sig-paren">(</span><em className="sig-param">engine: splitgraph.engine.postgres.engine.PostgresEngine, object_ids: List[str], quals: Any</em><span className="sig-paren">)</span> → List[str]<a className="headerlink" href="#splitgraph.core.indexing.bloom.filter_bloom_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs a bloom filter on given qualifiers using the given objects’ previously-generated
+fingerprints.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>engine</strong> – Object engine</p></li>
+<li><p><strong>object_ids</strong> – Object IDs</p></li>
+<li><p><strong>quals</strong> – List of qualifiers</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>List of object IDs that might match the qualifiers in <cite>quals</cite> (including
+IDs that don’t have a bloom index).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="function">
+<dt id="splitgraph.core.indexing.bloom.generate_bloom_index">
+<code className="sig-prename descclassname">splitgraph.core.indexing.bloom.</code><code className="sig-name descname">generate_bloom_index</code><span className="sig-paren">(</span><em className="sig-param">engine: splitgraph.engine.postgres.engine.PostgresEngine, object_id: str, changeset: Optional[Dict[Tuple[str, ...], Tuple[bool, Dict[str, Any]]]], column: str, probability: Optional[float] = None, size: Optional[int] = None</em><span className="sig-paren">)</span> → Tuple[int, str]<a className="headerlink" href="#splitgraph.core.indexing.bloom.generate_bloom_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a bloom filter signature for a given column and a given fragment. Bloom filters
+can answer queries asking whether an item is definitely not in a given set or possibly can be.</p>
+<p>The tradeoff is between the probability of a false positive (item said to be in the set when
+it actually isn’t) and the size of the filter.</p>
+<p>Bloom filters also have an extra parameter, k, or the number of bits in the signature that
+a certain item flips. This parameter has an optimal value for a given number of distinct items
+or a probability and so isn’t explicitly passed by the user.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>engine</strong> – Object engine the fragment is cached in.</p></li>
+<li><p><strong>object_id</strong> – Fragment ID</p></li>
+<li><p><strong>changeset</strong> – Optional, if specified, the old column values are included in the index.</p></li>
+<li><p><strong>column</strong> – Column name to generate the index on.</p></li>
+<li><p><strong>probability</strong> – Probability of a false positive. Either this or the size of the filter must
+be specified, but not both.</p></li>
+<li><p><strong>size</strong> – Size of the filter, in bytes.</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>Dictionary to be inserted into the index.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div className="section" id="module-splitgraph.core.indexing.range">
+<span id="splitgraph-core-indexing-range-module"></span><h2 id="splitgraphcoreindexingrange-module">splitgraph.core.indexing.range module<a className="headerlink" href="#module-splitgraph.core.indexing.range" title="Permalink to this headline">¶</a></h2>
+<dl className="function">
+<dt id="splitgraph.core.indexing.range.extract_min_max_pks">
+<code className="sig-prename descclassname">splitgraph.core.indexing.range.</code><code className="sig-name descname">extract_min_max_pks</code><span className="sig-paren">(</span><em className="sig-param">engine: splitgraph.engine.postgres.engine.PostgresEngine, fragments: List[str], table_pks: List[str]</em><span className="sig-paren">)</span> → Any<a className="headerlink" href="#splitgraph.core.indexing.range.extract_min_max_pks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract minimum/maximum PK values for given fragments.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>engine</strong> – Engine the objects live on</p></li>
+<li><p><strong>fragments</strong> – IDs of objects</p></li>
+<li><p><strong>table_pks</strong> – List of columns forming the table primary key</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>List of min/max primary key for every object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="function">
+<dt id="splitgraph.core.indexing.range.filter_range_index">
+<code className="sig-prename descclassname">splitgraph.core.indexing.range.</code><code className="sig-name descname">filter_range_index</code><span className="sig-paren">(</span><em className="sig-param">metadata_engine: splitgraph.engine.postgres.engine.PostgresEngine, object_ids: List[str], quals: Any, column_types: Dict[str, str]</em><span className="sig-paren">)</span> → List[str]<a className="headerlink" href="#splitgraph.core.indexing.range.filter_range_index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="function">
+<dt id="splitgraph.core.indexing.range.generate_range_index">
+<code className="sig-prename descclassname">splitgraph.core.indexing.range.</code><code className="sig-name descname">generate_range_index</code><span className="sig-paren">(</span><em className="sig-param">object_engine: splitgraph.engine.postgres.engine.PostgresEngine, object_id: str, table_schema: List[splitgraph.core.types.TableColumn], changeset: Optional[Dict[Tuple[str, ...], Tuple[bool, Dict[str, Any]]]]</em><span className="sig-paren">)</span> → Dict[str, Tuple[T, T]]<a className="headerlink" href="#splitgraph.core.indexing.range.generate_range_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the minimum/maximum values of every column in the object (including deleted values).</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>object_engine</strong> – Engine the object is located on</p></li>
+<li><p><strong>object_id</strong> – ID of the object.</p></li>
+<li><p><strong>table_schema</strong> – Schema of the table</p></li>
+<li><p><strong>changeset</strong> – Changeset (old values will be included in the index)</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>Dictionary of &#38;lbrace;column: [min, max]&#38;rbrace;</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="function">
+<dt id="splitgraph.core.indexing.range.quals_to_sql">
+<code className="sig-prename descclassname">splitgraph.core.indexing.range.</code><code className="sig-name descname">quals_to_sql</code><span className="sig-paren">(</span><em className="sig-param">quals: Optional[Sequence[Sequence[Tuple[str, str, Any]]]], column_types: Dict[str, str]</em><span className="sig-paren">)</span> → Tuple[psycopg2.sql.Composable, Tuple]<a className="headerlink" href="#splitgraph.core.indexing.range.quals_to_sql" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a list of qualifiers in CNF to a fragment of a Postgres query
+:param quals: Qualifiers in CNF
+:param column_types: Dictionary of column names and their types
+:return: SQL Composable object and a tuple of arguments to be mogrified into it.</p>
+</dd></dl>
+
+</div>
+
+</div>
+</div>

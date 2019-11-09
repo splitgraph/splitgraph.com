@@ -1,0 +1,120 @@
+
+import "@splitgraph/design/css/sphinxtheme.css";
+
+export const meta = {
+  title: "splitgraph.cloud package",
+  id: "splitgraph.cloud package"
+};
+
+<div className=" rst-content"><nav className="toc"><ol className="toc-level toc-level-1"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#module-contents">Module contents</a></li></ol></nav><div className="section" id="module-splitgraph.cloud">
+<span id="module-contents"></span><h2 id="module-contents">Module contents<a className="headerlink" href="#module-splitgraph.cloud" title="Permalink to this headline">¶</a></h2>
+<p>Public API for interacting with the Splitgraph registry</p>
+<dl className="class">
+<dt id="splitgraph.cloud.AuthAPIClient">
+<em className="property">class </em><code className="sig-prename descclassname">splitgraph.cloud.</code><code className="sig-name descname">AuthAPIClient</code><span className="sig-paren">(</span><em className="sig-param">remote: str</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.AuthAPIClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">object</span></code></p>
+<p>Client for the Splitgraph registry auth API that generates tokens to access
+other Splitgraph services.</p>
+<p>Currently incomplete with just enough methods to allow to register and access
+the Splitgraph registry via the command line.</p>
+<dl className="method">
+<dt id="splitgraph.cloud.AuthAPIClient.access_token">
+<em className="property">property </em><code className="sig-name descname">access_token</code><a className="headerlink" href="#splitgraph.cloud.AuthAPIClient.access_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will return an up-to-date access token by either getting it from
+the configuration file or contacting the auth service for a new one.
+Will write the new access token into the configuration file.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Returns</dt>
+<dd className="field-odd"><p>Access token.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="method">
+<dt id="splitgraph.cloud.AuthAPIClient.create_machine_credentials">
+<code className="sig-name descname">create_machine_credentials</code><span className="sig-paren">(</span><em className="sig-param">access_token: str</em>, <em className="sig-param">password: str</em><span className="sig-paren">)</span> → requests.models.Response<a className="headerlink" href="#splitgraph.cloud.AuthAPIClient.create_machine_credentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a key and secret that can be used to log into the Splitgraph registry
+via a normal Postgres connection. The secret must be stored in the user’s local
+configuration file (it’s not stored on Splitgraph servers).</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>access_token</strong> – Access token</p></li>
+<li><p><strong>password</strong> – Password</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>Tuple of (key, secret).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="method">
+<dt id="splitgraph.cloud.AuthAPIClient.get_access_token">
+<code className="sig-name descname">get_access_token</code><span className="sig-paren">(</span><em className="sig-param">refresh_token: str</em><span className="sig-paren">)</span> → requests.models.Response<a className="headerlink" href="#splitgraph.cloud.AuthAPIClient.get_access_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a new access token from a refresh token.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><p><strong>refresh_token</strong> – Refresh token</p>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>New access token.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="method">
+<dt id="splitgraph.cloud.AuthAPIClient.get_refresh_token">
+<code className="sig-name descname">get_refresh_token</code><span className="sig-paren">(</span><em className="sig-param">username: str</em>, <em className="sig-param">password: str</em><span className="sig-paren">)</span> → requests.models.Response<a className="headerlink" href="#splitgraph.cloud.AuthAPIClient.get_refresh_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a long-lived refresh token and a short-lived access token from the API.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>username</strong> – Username</p></li>
+<li><p><strong>password</strong> – Password</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>Tuple of (access_token, refresh_token).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="method">
+<dt id="splitgraph.cloud.AuthAPIClient.register">
+<code className="sig-name descname">register</code><span className="sig-paren">(</span><em className="sig-param">username: str</em>, <em className="sig-param">password: str</em>, <em className="sig-param">email: str</em><span className="sig-paren">)</span> → requests.models.Response<a className="headerlink" href="#splitgraph.cloud.AuthAPIClient.register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register a new Splitgraph user.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>username</strong> – Username</p></li>
+<li><p><strong>password</strong> – Password</p></li>
+<li><p><strong>email</strong> – Email</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl className="function">
+<dt id="splitgraph.cloud.expect_result">
+<code className="sig-prename descclassname">splitgraph.cloud.</code><code className="sig-name descname">expect_result</code><span className="sig-paren">(</span><em className="sig-param">result: List[str]</em><span className="sig-paren">)</span> → Callable[Callable[..., requests.models.Response], Callable[..., Union[str, Tuple[str]]]]<a className="headerlink" href="#splitgraph.cloud.expect_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>A decorator that can be wrapped around a function returning a requests.Response with a JSON body.
+If the request has failed, it will extract the “error” from the JSON response and raise an AuthAPIError.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><p><strong>result</strong> – Items to extract. Will raise an AuthAPIError if not all items were fetched.</p>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>Tuple of items enumerated in the <cite>result</cite> list. If there’s only one item, it will
+return just that item.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div><div className="section" id="splitgraph-cloud-package">
+
+
+</div>
+</div>
