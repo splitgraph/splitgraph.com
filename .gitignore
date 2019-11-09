@@ -14,3 +14,6 @@ website/i18n/*
 .next
 .cache
 yarn-error.log
+
+# Temporary experiment, don't check in
+libmdx
