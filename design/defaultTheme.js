@@ -7,6 +7,29 @@
 
 import prismTheme from "@theme-ui/prism/presets/shades-of-purple.json";
 
+export const tocStyles = {
+  "ol.toc-level": {
+    color: "primary",
+    listStyleType: "circle"
+  },
+
+  ".toc-item": {
+    color: "primary"
+  },
+
+  ".toc-item a": {
+    textDecoration: "none"
+  },
+
+  ".toc-item a:hover": {
+    textDecoration: "underline"
+  },
+
+  ".toc-level": {},
+
+  ".toc-link": {}
+};
+
 export const defaultTheme = {
   useCustomProperties: true,
   colors: {
@@ -173,7 +196,8 @@ export const defaultTheme = {
       lineHeight: "body",
       "@media (min-width: 769px)": {
         maxWidth: "80ch"
-      }
+      },
+      ...tocStyles
     },
     pre: {
       ...prismTheme,

@@ -1,32 +1,17 @@
 import React from "react";
 import { Box } from "@splitgraph/design";
+import { tocStyles } from "@splitgraph/design";
 
-export const TocStyle = {
+const TocStyle = {
+  ...tocStyles,
   "ol.toc-level": {
+    ...tocStyles["ol.toc-level"],
     fontSize: 1,
-    color: "primary",
-    listStyleType: "none",
-    padding: "1em",
     padding: "0.5em !important",
     whiteSpace: "nowrap",
-    overflowX: "hidden"
-  },
-
-  ".toc-item": {
-    color: "green"
-  },
-
-  ".toc-item a": {
-    textDecoration: "none"
-  },
-
-  ".toc-item a:hover": {
-    textDecoration: "underline"
-  },
-
-  ".toc-level": {},
-
-  ".toc-link": {}
+    overflowX: "hidden",
+    listStyleType: "none"
+  }
 };
 
 const findMatchingElement = (children = [], matchFunc) => {

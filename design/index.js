@@ -31,4 +31,4 @@ export { LogoImage } from "./Logo";
 
 export { InterPageNav } from "./Nav";
 
-export { defaultTheme } from "./defaultTheme";
+export { defaultTheme, tocStyles } from "./defaultTheme";
