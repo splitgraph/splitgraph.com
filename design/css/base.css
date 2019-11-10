@@ -8,6 +8,13 @@ body {
   overflow-y: auto;
   /* overflow:auto; */
 }
+
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
 /*
 ul::-webkit-scrollbar {
   width: 0;

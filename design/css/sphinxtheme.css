@@ -1,5 +1,6 @@
 /* sphinx_rtd_theme version 0.4.3 | MIT license */
 /* Built 20190212 16:02 */
+
 ins {
   background: #ff9;
   color: #000;
@@ -11,6 +12,13 @@ mark {
   font-style: italic;
   font-weight: bold;
 }
+
+.rst-content {
+  /* width: 10px; */
+  max-width: 100% !important;
+  overflow-x: hidden;
+}
+
 .rst-content pre,
 .rst-content code,
 .rst-content tt,
@@ -192,14 +200,22 @@ mark {
   /* font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", Courier, monospace; */
   display: block;
-  overflow: auto;
 }
+
+@media (max-width: 768px) {
+  .rst-content dl dt {
+    overflow-x: "scroll !important";
+    word-break: break-all;
+  }
+}
+
 .rst-content pre.literal-block,
 .rst-content div[class^="highlight"] {
   border: 1px solid #e1e4e5;
   overflow-x: auto;
   margin: 1px 0 24px 0;
 }
+
 .rst-content pre.literal-block div[class^="highlight"],
 .rst-content div[class^="highlight"] div[class^="highlight"] {
   padding: 0px;
