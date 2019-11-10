@@ -30,14 +30,22 @@ const makeCastNode = ({ castManifest, inputNode }) => {
     metadata.height = 20;
   }
 
-  const iframeRemHeight = parseInt(metadata.height, 10) + 10;
+  const intHeight = parseInt(metadata.height, 10) + 1;
+  const fontSize = 16;
+  const toolbarSize = fontSize * 2;
+  const iframePxHeight = fontSize * intHeight + toolbarSize;
+
+  // Render a background ahead of time, so there is less of a white flash
+  // Use linear-gradient trick to render background to expected height exactly
+  const background = `linear-gradient(to bottom, #36678d ${iframePxHeight}px, transparent 0)`;
 
   const newNode = {
     type: "element",
     tagName: "iframe",
     properties: {
       src: embedHttpPath,
-      style: `min-width:100%;min-height:${iframeRemHeight}rem;border:none;`
+      className: "asciinema-embed",
+      style: `min-width:100%;min-height:${iframePxHeight}px;border:none;background:${background};`
     }
   };
 

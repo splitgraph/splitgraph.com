@@ -7,6 +7,12 @@
 
 import prismTheme from "@theme-ui/prism/presets/shades-of-purple.json";
 
+export const asciinemaEmbedStyles = {
+  "iframe.asciinema-embed": {
+    // border: "none"
+  }
+};
+
 export const tocStyles = {
   "ol.toc-level": {
     color: "primary",
@@ -197,7 +203,8 @@ export const defaultTheme = {
       "@media (min-width: 769px)": {
         maxWidth: "80ch"
       },
-      ...tocStyles
+      ...tocStyles,
+      ...asciinemaEmbedStyles
     },
     pre: {
       ...prismTheme,

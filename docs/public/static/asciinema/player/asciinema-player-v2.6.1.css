@@ -5,6 +5,12 @@
    red -> ANSI 8 -> fg/bg-8 styles).
  */
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .asciinema-player-wrapper {
   position: relative;
   text-align: center;
