@@ -256,6 +256,9 @@ export const defaultTheme = {
       fontSize: "inherit",
       span: {
         color: "red"
+      },
+      ".comment": {
+        color: "#f4c1c0"
       }
     },
     p: {
