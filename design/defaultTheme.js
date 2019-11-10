@@ -9,6 +9,11 @@ import prismTheme from "@theme-ui/prism/presets/shades-of-purple.json";
 
 export const asciinemaEmbedStyles = {
   "iframe.asciinema-embed": {
+    "@media (max-width: 768px)": {
+      marginLeft: -4,
+      marginRight: -4,
+      minWidth: "100vw !important"
+    }
     // border: "none"
   }
 };
