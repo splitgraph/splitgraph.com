@@ -20,7 +20,7 @@ const ASCIINEMA_PLAYER_VERSION = "v2.6.1";
 
 const dirTree = require("directory-tree");
 
-const { insecureRandomString } = require("@splitgraph/lib/util");
+const { md5sumSync } = require("@splitgraph/lib/util");
 
 const getCastMetadata = castSysPath => {
   const headerLine = fs
@@ -68,8 +68,8 @@ const getCastManifest = () => {
   const castManifest = {};
 
   dirTree(CONTENT_DIR, { extensions: /\.cast$/ }, item => {
-    // TODO: This should probably be a hash of the cast contents and cast embed HTML
-    let versionHash = insecureRandomString();
+    // This needs to be deterministic in order to work with nextjs export
+    let versionHash = md5sumSync(item.path);
 
     let originSystemPath = item.path;
     let contentPath = item.path.replace(CONTENT_DIR, "") || "/";
