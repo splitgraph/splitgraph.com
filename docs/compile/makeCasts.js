@@ -43,7 +43,9 @@ const getCastMetadata = castSysPath => {
 
 const getCastEmbedHtml = ({ castHttpPath, metadata }) => {
   const playerName = `asciinema-player-${ASCIINEMA_PLAYER_VERSION}`;
+  const extensionName = `asciinema-plus-plus-${ASCIINEMA_PLAYER_VERSION}`;
   const asciinemaPlayerJs = path.join(PLAYER_HTTP_DIR, `${playerName}.js`);
+  const asciinemaPlusPlus = path.join(PLAYER_HTTP_DIR, `${extensionName}.js`);
   const asciinemaPlayerCss = path.join(PLAYER_HTTP_DIR, `${playerName}.css`);
 
   // TODO: Can we pick a start time when we are making the cast files?
@@ -54,12 +56,16 @@ const getCastEmbedHtml = ({ castHttpPath, metadata }) => {
   <head>
   <link rel="stylesheet" type="text/css" href="${asciinemaPlayerCss}" />
   </head>
+  <body>
   <asciinema-player class="asciinema-theme-splitgraph"
                     cols="${metadata.width}"
                     rows="${metadata.height}"
+                    style="max-height: 100% !important;"
                     poster="${defaultStartTime}"
                     src="${castHttpPath}"></asciinema-player>
+  </body>
   <script src="${asciinemaPlayerJs}"></script>
+  <script src="${asciinemaPlusPlus}"></script>
   </html>
   `;
 };

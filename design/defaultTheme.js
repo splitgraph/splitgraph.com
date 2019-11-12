@@ -8,11 +8,22 @@
 import prismTheme from "@theme-ui/prism/presets/shades-of-purple.json";
 
 export const asciinemaEmbedStyles = {
+  "div.asciinema-embed-container": {
+    backgroundColor: "red",
+    marginLeft: -4,
+    marginRight: -4
+    // paddingTop: "80vh !important"
+    // height: "400px !important"
+    // paddingTop: "200px !important",
+    // height:
+  },
   "iframe.asciinema-embed": {
     "@media (max-width: 768px)": {
-      marginLeft: -4,
-      marginRight: -4,
-      minWidth: "100vw !important"
+      minHeight: "100% !important",
+      maxHeight: "100% !important",
+      minWidth: "100%"
+      // minWidth: "initial !important"
+      // minWidth: "100vw !important"
     }
     // border: "none"
   }

@@ -174,20 +174,28 @@ body {
   font-family: Consolas, Menlo, "Bitstream Vera Sans Mono", monospace,
     "Powerline Symbols";
   line-height: 1.3333333333em;
+
+  /* 47px = height of control bar (32px + 15px padding) */
+  height: calc(100% - 47px) !important;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: calc(100vh - 100px);
+}
+
+span.cursor {
+  scroll-snap-align: start;
 }
 
 @media (max-width: 768px) {
   .asciinema-terminal {
     overflow-x: "scroll";
-    overflow-y: "visible";
     /* overflow-y: "hidden"; */
   }
 }
 
 @media (min-width: 769px) {
   .asciinema-terminal {
-    overflow-x: "hidden";
-    overflow-y: "hidden";
+    overflow-x: hidden;
   }
 }
 
@@ -215,8 +223,18 @@ body {
   font-style: italic;
 }
 .asciinema-terminal.font-small {
-  font-size: 12px;
+  /* Note this implies hardcoded cols = 100 */
+  font-size: 1.5vw;
+  font-family: monospace;
+  /* font-size: 12px; */
 }
+
+@media (max-width: 768px) {
+  .asciinema-terminal.font-small {
+    width: 100vw !important;
+  }
+}
+
 .asciinema-terminal.font-medium {
   font-size: 18px;
 }

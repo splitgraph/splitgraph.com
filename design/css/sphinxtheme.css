@@ -16,7 +16,7 @@ mark {
 .rst-content {
   /* width: 10px; */
   max-width: 100% !important;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 .rst-content pre,
@@ -204,8 +204,19 @@ mark {
 
 @media (max-width: 768px) {
   .rst-content dl dt {
-    overflow-x: "scroll !important";
     word-break: break-all;
+    padding-right: 1em !important;
+    margin-right: 1em !important;
+    max-width: 100% !important;
+  }
+
+  .rst-content dl code,
+  .rst-content dt code,
+  .rst-content dl em,
+  .rst-content dt em,
+  .rst-content dt span,
+  .rst-content dl span {
+    word-break: break-all !important;
   }
 }
 
