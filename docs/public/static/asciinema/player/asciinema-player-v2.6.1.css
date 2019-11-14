@@ -9,6 +9,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  scrollbar-width: none;
 }
 
 .asciinema-player-wrapper {
@@ -135,8 +136,9 @@ body {
   box-sizing: content-box;
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
-  /* overflow-y: hidden;
-  overflow-x: hidden; */
+  overflow-y: hidden;
+  overflow-x: hidden;
+  scrollbar-width: none;
   max-width: 100%;
 }
 
@@ -176,10 +178,12 @@ body {
   line-height: 1.3333333333em;
 
   /* 47px = height of control bar (32px + 15px padding) */
-  height: calc(100% - 47px) !important;
+  /* use vh instead of % or it won't work in FF */
+  height: calc(100vh - 47px) !important;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-padding-top: calc(100vh - 100px);
+  scrollbar-width: none;
 }
 
 span.cursor {
@@ -224,7 +228,9 @@ span.cursor {
 }
 .asciinema-terminal.font-small {
   /* Note this implies hardcoded cols = 100 */
-  font-size: 1.5vw;
+  /* font-size: 1.5vw; */
+
+  /* font-size: calc(100vw / 100 * 1.6); */
   font-family: monospace;
   /* font-size: 12px; */
 }

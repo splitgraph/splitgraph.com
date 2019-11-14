@@ -3,6 +3,7 @@ import { Box } from "../../index";
 const getStyle = depth => ({
   paddingLeft: 4,
   paddingRight: 4,
+  paddingBottom: 4,
   "@media (min-width: 769px)": {
     backgroundColor: "white"
   },

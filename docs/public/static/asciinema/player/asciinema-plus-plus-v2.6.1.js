@@ -8,14 +8,16 @@ const watchTerminal = (terminal, found = false) => {
       var cursor = terminal.querySelector(".cursor");
 
       if (found && !cursor) {
-        console.warn("Cursor gone");
         found = false;
       }
 
       if (cursor) {
-        console.warn("Scroll cursor");
         found = true;
-        cursor.scrollIntoView();
+
+        // cursor.scrollIntoView() is bad because it scrolls parent frame too
+        // So, set the scroll manually (terminal is the scroll container)
+        // The 20(px) is a fudge factor, should be equal to 1 line height
+        terminal.scrollTop = cursor.offsetTop - terminal.clientHeight + 20;
       }
     });
   });
@@ -67,6 +69,43 @@ const waitForTerminalWrapper = () => {
   });
 };
 
+const keepCursorInView = terminalWrapperNode => {
+  const terminalNode = terminalWrapperNode.querySelector(".asciinema-terminal");
+
+  watchTerminal(terminalNode);
+};
+
+/*
+  For devices without fullscreen enabled (basically only iPhone safari),
+  "polyfill" it by making the fullscreen button a link that opens the page
+  in its own tab (we assume we're inside of an iframe).
+
+  Fullscreen is supported on all desktop browsers, all mobile android browsers,
+  and safari on iPad. It is not supported in safari on iPhone.
+*/
+const polyfillFullscreenish = terminalWrapperNode => {
+  if (document.fullscreenEnabled) {
+    return;
+  }
+
+  const fullscreenBtn = terminalWrapperNode.querySelector(".fullscreen-button");
+
+  if (!fullscreenBtn) {
+    return;
+  }
+
+  fullscreenBtn.addEventListener("click", e => {
+    e.preventDefault();
+
+    const link = document.createElement("a");
+    link.href = window.location.href;
+    link.target = "_blank";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  });
+};
+
 /*
   The main block of code
 
@@ -75,10 +114,7 @@ const waitForTerminalWrapper = () => {
 */
 (() => {
   waitForTerminalWrapper().then(terminalWrapperNode => {
-    const terminalNode = terminalWrapperNode.querySelector(
-      ".asciinema-terminal"
-    );
-
-    watchTerminal(terminalNode);
+    keepCursorInView(terminalWrapperNode);
+    polyfillFullscreenish(terminalWrapperNode);
   });
 })();

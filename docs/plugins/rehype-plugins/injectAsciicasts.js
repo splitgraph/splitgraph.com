@@ -27,22 +27,16 @@ const makeCastNode = ({ castManifest, inputNode }) => {
   if (!metadata.height) {
     console.warn("Warning: No height in metadata for cast:", embedHttpPath);
     console.warn("         -> Set to default height of 20");
-    metadata.height = 20;
+    metadata.height = 40;
   }
 
   const intHeight = parseInt(metadata.height, 10) + 1;
-  const intWidth = parseInt(metadata.width, 10) + 1;
   const fontSize = 12;
   const lineHeight = 1.3;
   const toolbarHeightPx = 47; // 32 height, 15 padding
   const iframePxHeight = fontSize * lineHeight * intHeight + toolbarHeightPx;
-  const aspectRatioPercent = parseInt((intHeight / intWidth) * 100).toPrecision(
-    4
-  );
-  const cropPaddingTopPercent = aspectRatioPercent;
-  const cropPaddingBottomCalc = `calc(${parseInt(
-    (1 / cropPaddingTopPercent) * 100 * 100
-  ).toPrecision(4)}% + ${toolbarHeightPx * (intHeight / intWidth)}px)`;
+
+  const containerPaddingTop = `height: ${400}`;
 
   // Render a background ahead of time, so there is less of a white flash
   // Use linear-gradient trick to render background to expected height exactly
@@ -53,7 +47,7 @@ const makeCastNode = ({ castManifest, inputNode }) => {
     tagName: "div",
     properties: {
       className: "asciinema-embed-container",
-      style: `overflow:hidden; padding-top:${cropPaddingTopPercent}%;position:relative;`
+      style: `overflow:hidden; ${containerPaddingTop}; position:relative;`
     }
   };
 
@@ -64,7 +58,7 @@ const makeCastNode = ({ castManifest, inputNode }) => {
       src: embedHttpPath,
       className: "asciinema-embed",
       style: `position:absolute;left:0;top:0;min-width:100%;width:100%;height:100%;border:none;background:${background};`,
-      allowfullscreen: true
+      allowFullScreen: true
     }
   };
 

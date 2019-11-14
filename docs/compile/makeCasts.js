@@ -41,12 +41,42 @@ const getCastMetadata = castSysPath => {
   }
 };
 
+const getCastStyle = ({ metadata }) => {
+  const intWidth = parseInt(metadata.width, 10);
+  const intHeight = parseInt(metadata.height, 10);
+
+  const minComfortableFontSize = 12;
+
+  const responsiveFontSize = `calc(100vw / ${intWidth} * 1.6)`;
+  const heightResponsiveFontSize = `calc(100vh / ${intHeight * 1.1}})`;
+  const minComfortableWidth = minComfortableFontSize * intWidth * 1.1;
+
+  const style = `
+<style type="text/css">
+@media (max-width: ${minComfortableWidth - 1}px) {
+  .asciinema-terminal.font-small {
+    font-size: ${responsiveFontSize};
+  }
+}
+
+@media (min-width: ${minComfortableWidth}px) {
+  .asciinema-terminal.font-small {
+    font-size: ${heightResponsiveFontSize};
+  }
+}
+</style>
+`;
+
+  return style;
+};
+
 const getCastEmbedHtml = ({ castHttpPath, metadata }) => {
   const playerName = `asciinema-player-${ASCIINEMA_PLAYER_VERSION}`;
   const extensionName = `asciinema-plus-plus-${ASCIINEMA_PLAYER_VERSION}`;
   const asciinemaPlayerJs = path.join(PLAYER_HTTP_DIR, `${playerName}.js`);
   const asciinemaPlusPlus = path.join(PLAYER_HTTP_DIR, `${extensionName}.js`);
   const asciinemaPlayerCss = path.join(PLAYER_HTTP_DIR, `${playerName}.css`);
+  const style = getCastStyle({ metadata });
 
   // TODO: Can we pick a start time when we are making the cast files?
   const defaultStartTime = "npt:0:01";
@@ -55,6 +85,7 @@ const getCastEmbedHtml = ({ castHttpPath, metadata }) => {
   <html>
   <head>
   <link rel="stylesheet" type="text/css" href="${asciinemaPlayerCss}" />
+  ${style}
   </head>
   <body>
   <asciinema-player class="asciinema-theme-splitgraph"
