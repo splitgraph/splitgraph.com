@@ -11,11 +11,147 @@ in its metadata.
 This means that we can output a list of images and repositories that
 were used in an image's creation:
 
-    $ sgr provenance example/output:latest
+<code>console.log("hello world")</code>
 
-    example/output:96833d33a4333d33fd2490ca2ec8ebab83be5481cb17372b9a66e1518253a111 depends on:
-    example/repo_2:6881def87f34aa1d7501d2960719fd6b5df9c392053278eade089b3186ee8407
-    example/repo_1:5fe74f282e33fb78dda67b3c96f9f915e949d06a643d0b50ce5f74f35ad1e3c7
+```dockerfile
+# syntax = docker/dockerfile:experimental
+FROM postgres:11.5
+
+RUN rm -f /etc/apt/apt.conf.d/docker-clean; \
+    echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' \
+    > /etc/apt/apt.conf.d/keep-cache
+
+RUN --mount=type=cache,target=/var/cache/apt --mount=type=cache,target=/var/lib/apt apt-get update -qq \
+    && apt-get install -yy \
+    sudo \
+    wget \
+    build-essential \
+    postgresql-server-dev-11 \
+    luajit \
+    libluajit-5.1-dev \
+    curl \
+    git \
+    zlib1g-dev \
+    libbz2-dev \
+    libssl-dev \
+    luarocks \
+    lua-luaossl \
+    libssl-dev \
+    libkrb5-dev
+
+# TODO: Some of these setup scripts download files and could also be used
+# with a cache mount, maybe
+RUN mkdir -p /splitgraph/setup
+WORKDIR /splitgraph/setup
+
+ADD setup/install_pllua.sh /splitgraph/setup/install_pllua.sh
+RUN /splitgraph/setup/install_pllua.sh
+
+ADD setup/install_python.sh /splitgraph/setup/install_python.sh
+RUN /splitgraph/setup/install_python.sh
+
+ADD setup/install_plpython.sh /splitgraph/setup/install_plpython.sh
+RUN /splitgraph/setup/install_plpython.sh
+
+ADD setup/setup_lua_installation.sh /splitgraph/setup/setup_lua_installation.sh
+RUN /splitgraph/setup/setup_lua_installation.sh
+
+ADD setup/install_python_base_deps.sh /splitgraph/setup/install_python_base_deps.sh
+RUN /splitgraph/setup/install_python_base_deps.sh
+
+# pgexts must come from a custom build context
+ADD pgexts /home/postgres/pgexts
+ADD setup/install_sgr_crypto.sh /splitgraph/setup/install_sgr_crypto.sh
+RUN /splitgraph/setup/install_sgr_crypto.sh
+
+VOLUME /var/lib/postgresql/data/pgdata
+VOLUME /etc/postgresql
+
+VOLUME /home/postgres/luamods
+VOLUME /home/postgres/pymods
+
+# Any image inheriting from this can ADD scripts to this folder, and they
+# will be executed in lexiographic order by the entrypoint
+RUN mkdir -p /splitgraph/entrypoint-scripts
+
+RUN mkdir -p /var/lib/postgresql/data/pgdata/ \
+    && chown -R postgres:postgres /var/lib/postgresql/data/pgdata/ \
+    && chmod 0700 /var/lib/postgresql/data/pgdata/ \
+    && chown -R postgres:postgres /usr/share/postgresql/11/extension/ \
+    && chown -R postgres:postgres /home/postgres/ \
+    && chown -R postgres:postgres /splitgraph/entrypoint-scripts
+
+# Add postgres to sudo group to allow sudo in the entrypoint
+# (TODO: This is dangerous. It's here because the entrypoint needs sudo to
+# set permissions, which is kind of a hack and should ideally be unnecessary.)
+RUN usermod -aG sudo postgres \
+    && ( echo "postgres ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers ; )
+
+ADD pgbase_entrypoint.sh /home/postgres/pgbase_entrypoint.sh
+
+USER postgres
+
+EXPOSE 5432
+
+ENTRYPOINT ["/home/postgres/pgbase_entrypoint.sh"]
+
+CMD ["postgres", "-D", "/etc/postgresql", "-c", "data_directory=/var/lib/postgresql/data/pgdata"]
+```
+
+```javascript
+console.log("hello world");
+
+function() {
+    for (let i = 0; i < 10; i++) {
+        console.log("Hello", i)
+    }
+}
+
+# 10 Characters:
+# aaaaaaaa
+
+# 20 Characters:
+# aaaaaaaabbbbbbbbbb
+
+# 20 Characters:
+# aaaaaaaabbbbbbbbbb
+
+# 30 Characters:
+# aaaaaaaabbbbbbbbbbbbbbbbbbbb
+
+# 45 Characters:
+# aaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+# 50 Characters:
+# aaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+# 55 Characters
+# aaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+# 60 Characters
+# aaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+# 65 Characters
+# aaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+# 70 Characters
+# aaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+# 80 Characters
+# aaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+# 90 Characters
+# aaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+```
+
+```
+$ sgr provenance example/output:latest
+
+example/output:96833d33a4333d33fd2490ca2ec8ebab83be5481cb17372b9a66e1518253a111 depends on:
+example/repo_2:6881def87f34aa1d7501d2960719fd6b5df9c392053278eade089b3186ee8407
+example/repo_1:5fe74f282e33fb78dda67b3c96f9f915e949d06a643d0b50ce5f74f35ad1e3c7
+```
 
 Since the Splitfile in the previous section imported tables from the two
 generated repositories, these repositories are considered to be
