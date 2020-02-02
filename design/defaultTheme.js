@@ -5,7 +5,28 @@
     https://github.com/rebassjs/rebass/blob/master/packages/preset/src/index.js
 */
 
-import prismTheme from "@theme-ui/prism/presets/shades-of-purple.json";
+// import prismTheme from "@theme-ui/prism/presets/shades-of-purple.json";
+
+const prismTheme = {
+  color: "#9EFEFF",
+  backgroundColor: "#2D2A55",
+  ".changed": { color: "rgb(255, 238, 128)" },
+  ".deleted": { color: "rgba(239, 83, 80, 0.56)" },
+  ".inserted": { color: "rgb(173, 219, 103)" },
+  ".comment": { color: "rgb(179, 98, 255)", fontStyle: "italic" },
+  ".punctuation": { color: "rgb(255, 255, 255)" },
+  ".constant": { color: "rgb(255, 98, 140)" },
+  ".string,.url": { color: "rgb(165, 255, 144)" },
+  ".variable": { color: "rgb(255, 238, 128)" },
+  ".number,.boolean": { color: "rgb(255, 98, 140)" },
+  ".attr-name": { color: "rgb(255, 180, 84)" },
+  ".keyword,.operator,.property,.namespace,.tag,.selector,.doctype": {
+    color: "rgb(255, 157, 0)"
+  },
+  ".builtin,.char,.constant,.function,.class-name": {
+    color: "rgb(250, 208, 0)"
+  }
+};
 
 export const asciinemaEmbedStyles = {
   "div.asciinema-embed-container": {
@@ -59,6 +80,7 @@ export const defaultTheme = {
     background: "#fff",
     // primary: "#07c",
     primary: "#36678d",
+    // primary: "#000",
     secondary: "#363C8D",
     heavy: "#0d1821",
     muted: "#f6f6f9",
@@ -69,6 +91,7 @@ export const defaultTheme = {
     mutedlightgray: "rgba(204, 204, 204, .5)",
     highlight: "hsla(205, 100%, 40%, 0.125)",
     errorBackground: "rgba(193, 18, 18, 0.5)",
+    successBackground: "rgba(59, 141, 54, 0.5)", // same as success, +0.5 opacity
     danger: "#8D363C",
     success: "#3B8D36",
     warning: "orange",
