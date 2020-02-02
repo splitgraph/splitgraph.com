@@ -1,6 +1,6 @@
-export { Box, Flex, Image, Button } from "rebass";
+export { Box, Flex, Image, Button, Text } from "rebass";
 
-export { ErrorAlert } from "./Alert";
+export { ErrorAlert, SuccessAlert } from "./Alert";
 export { SubmitButton } from "./Button";
 export { DividerWithMiddleText, HorizontalDivider } from "./Divider";
 export { Input, Label } from "./Form";

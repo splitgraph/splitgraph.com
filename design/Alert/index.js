@@ -1,2 +1,3 @@
 import ErrorAlert from "./ErrorAlert";
-export { ErrorAlert };
+import SuccessAlert from "./SuccessAlert";
+export { ErrorAlert, SuccessAlert };
