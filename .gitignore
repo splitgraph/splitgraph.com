@@ -17,3 +17,10 @@ yarn-error.log
 
 # Temporary experiment, don't check in
 libmdx
+
+# TODO: This is a bit crude, but suits our purposes for now while everything
+# is in docker upstream of this repository
+*/**/build-state.yml
+*/**/yarn-rc.js
+.yarnrc.yml
+.yarn
