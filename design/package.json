@@ -13,9 +13,11 @@
     "@rebass/forms": "^4.0.5",
     "@rebass/preset": "^4.0.5",
     "@theme-ui/prism": "^0.2.46",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
     "rebass": "^4.0.5",
     "theme-ui": "^0.2.43"
+  },
+  "peerDependencies": {
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
   }
 }
