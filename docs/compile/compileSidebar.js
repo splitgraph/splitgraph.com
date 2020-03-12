@@ -1,6 +1,7 @@
 const { addHook: overrideRequire } = require("pirates");
 const { sync: mdxTransform } = require("@mdx-js/mdx");
-const { transform: babelTransform } = require("babel-core");
+
+const { transform: babelTransform } = require("@babel/core");
 
 const path = require("path");
 
@@ -50,6 +51,7 @@ const transform = code => {
   }
 
   let result = babelTransform(metaExport, {
+    filename: "something.js",
     plugins: ["babel-plugin-react-require"],
     presets: ["@babel/react", "@babel/preset-env"]
   });

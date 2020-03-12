@@ -27,10 +27,6 @@ if (!VALID_ENVS.includes(DOCS_ENV)) {
 
 const CONFIG = require(CONFIG_FILE);
 
-// const themeVariables = lessToJS(
-//   fs.readFileSync(path.resolve(__dirname, "./assets/antd-custom.less"), "utf8")
-// );
-
 const fs = require("fs").promises;
 
 makePages();
