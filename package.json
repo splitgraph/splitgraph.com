@@ -16,7 +16,13 @@
     "lib",
     "tlib"
   ],
+  "scripts": {
+    "watchlibs": "yarn run run-p -l watch:*",
+    "watch:@splitgraph/tdesign": "yarn workspace @splitgraph/tdesign run start --verbose",
+    "watch:@splitgraph/tlib": "yarn workspace @splitgraph/tdesign run start --verbose"
+  },
   "devDependencies": {
+    "npm-run-all": "^4.1.5",
     "tsdx": "^0.12.3"
   }
 }

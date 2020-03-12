@@ -29,7 +29,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "tdesign",
+  "name": "@splitgraph/tdesign",
   "author": "Splitgraph Limited",
   "module": "dist/tdesign.esm.js",
   "devDependencies": {

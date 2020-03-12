@@ -2098,6 +2098,31 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@splitgraph/tdesign@workspace:tdesign":
+  version: 0.0.0-use.local
+  resolution: "@splitgraph/tdesign@workspace:tdesign"
+  dependencies:
+    "@babel/core": ^7.8.7
+    "@storybook/addon-actions": ^5.3.14
+    "@storybook/addon-links": ^5.3.14
+    "@storybook/addons": ^5.3.14
+    "@storybook/react": ^5.3.14
+    "@types/jest": ^25.1.4
+    "@types/react": ^16.9.23
+    "@types/react-dom": ^16.9.5
+    babel-loader: ^8.0.6
+    husky: ^4.2.3
+    react: ^16.13.0
+    react-dom: ^16.13.0
+    ts-loader: ^6.2.1
+    tsdx: ^0.12.3
+    tslib: ^1.11.1
+    typescript: ^3.8.3
+  peerDependencies:
+    react: ">=16"
+  languageName: unknown
+  linkType: soft
+
 "@splitgraph/templaters@workspace:templaters":
   version: 0.0.0-use.local
   resolution: "@splitgraph/templaters@workspace:templaters"
@@ -11761,6 +11786,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"memorystream@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "memorystream@npm:0.3.1"
+  checksum: 2/825bcc7d3eb8bd021a1b0f8c81e4d7a8dc2eced1f8bb79d41ec978547cf118146d6863f5e6134f02bb55ee5d963a8689793e6e82ce8eb989bac339ae782728bb
+  languageName: node
+  linkType: hard
+
 "meow@npm:3.6.0":
   version: 3.6.0
   resolution: "meow@npm:3.6.0"
@@ -12643,6 +12675,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"npm-run-all@npm:^4.1.5":
+  version: 4.1.5
+  resolution: "npm-run-all@npm:4.1.5"
+  dependencies:
+    ansi-styles: ^3.2.1
+    chalk: ^2.4.1
+    cross-spawn: ^6.0.5
+    memorystream: ^0.3.1
+    minimatch: ^3.0.4
+    pidtree: ^0.3.0
+    read-pkg: ^3.0.0
+    shell-quote: ^1.6.1
+    string.prototype.padend: ^3.0.0
+  bin:
+    npm-run-all: bin/npm-run-all/index.js
+    run-p: bin/run-p/index.js
+    run-s: bin/run-s/index.js
+  checksum: 2/ef1b5b5a5fe7864d2b45c13de6dbffacde956bfc265117e0d1c8b05ee34264d494e5e65474d46592228e3a00857eae58359782fe7889d73de0a8714e6f9c0e83
+  languageName: node
+  linkType: hard
+
 "npm-run-path@npm:^2.0.0":
   version: 2.0.2
   resolution: "npm-run-path@npm:2.0.2"
@@ -13414,6 +13467,15 @@ __metadata:
   version: 2.2.1
   resolution: "picomatch@npm:2.2.1"
   checksum: 2/c926fe6cb118643bbd4eb44125afbfa02fcd3f6ff3ba85db201874678a46ab2dad589c8db654474cc131df356af36a6afd4fb3c8878ca26bae5190c232b838a5
+  languageName: node
+  linkType: hard
+
+"pidtree@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "pidtree@npm:0.3.0"
+  bin:
+    pidtree: ./bin/pidtree.js
+  checksum: 2/31ea086786717ba334c950fb055cb0d1ad0234bd861c7775540161582184df5f7338d66268cdfc0aaa3bf1c77887bc975b0161a7add67ce97dd2740e9057e17a
   languageName: node
   linkType: hard
 
@@ -16413,6 +16475,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "splitgraph.com@workspace:."
   dependencies:
+    npm-run-all: ^4.1.5
     tsdx: ^0.12.3
   languageName: unknown
   linkType: soft
@@ -17030,31 +17093,6 @@ __metadata:
   checksum: 2/d325c316ac329ecb18f2b8cd3f85a80ab4a4105ada601b9253aaafae3fc14268e3cd874ccc265b6a08e60ebd17fbc31bd3dbc0d1018f874b536eb2a6e8ef6d9c
   languageName: node
   linkType: hard
-
-"tdesign@workspace:tdesign":
-  version: 0.0.0-use.local
-  resolution: "tdesign@workspace:tdesign"
-  dependencies:
-    "@babel/core": ^7.8.7
-    "@storybook/addon-actions": ^5.3.14
-    "@storybook/addon-links": ^5.3.14
-    "@storybook/addons": ^5.3.14
-    "@storybook/react": ^5.3.14
-    "@types/jest": ^25.1.4
-    "@types/react": ^16.9.23
-    "@types/react-dom": ^16.9.5
-    babel-loader: ^8.0.6
-    husky: ^4.2.3
-    react: ^16.13.0
-    react-dom: ^16.13.0
-    ts-loader: ^6.2.1
-    tsdx: ^0.12.3
-    tslib: ^1.11.1
-    typescript: ^3.8.3
-  peerDependencies:
-    react: ">=16"
-  languageName: unknown
-  linkType: soft
 
 "telejson@npm:^3.2.0":
   version: 3.3.0
