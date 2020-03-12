@@ -25,7 +25,7 @@
     "express": "^4.17.1",
     "mdx": "^0.3.1",
     "mdx-prism": "^0.3.1",
-    "next": "^9.1.1",
+    "next": "^9.3.0",
     "next-compose-plugins": "^2.2.0",
     "next-transpile-modules": "^2.3.1",
     "pirates": "^4.0.1",
