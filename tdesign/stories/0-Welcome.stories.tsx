@@ -1,12 +1,23 @@
 import React from 'react';
-import { Thing } from '@';
+
+import { SubmitButton } from '@';
 
 export default {
-  title: 'Welcome',
+  title: 'Basic Storybook Setup',
 };
 
-export const toStorybook = () => <Thing />;
+export const buttonStory = () => (
+  <SubmitButton sx={{ backgroundColor: 'green' }}>Green Button</SubmitButton>
+);
 
-toStorybook.story = {
-  name: 'to Storybook',
+export const anotherButtonStory = () => (
+  <SubmitButton sx={{ backgroundColor: 'red' }}>Red Button</SubmitButton>
+);
+
+buttonStory.story = {
+  name: 'green button',
+};
+
+anotherButtonStory.story = {
+  name: 'red button',
 };
