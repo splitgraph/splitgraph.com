@@ -7,13 +7,14 @@
     "dist"
   ],
   "scripts": {
-    "start": "tsdx watch",
+    "start": "yarn clean && tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "clean": "./clean.sh"
   },
   "peerDependencies": {
     "react": ">=16"

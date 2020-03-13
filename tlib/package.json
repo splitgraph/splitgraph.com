@@ -7,11 +7,12 @@
     "dist"
   ],
   "scripts": {
-    "start": "tsdx watch",
+    "start": "yarn clean && tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
     "lint": "tsdx lint",
-    "prepare": "tsdx build"
+    "prepare": "tsdx build",
+    "clean": "./clean.sh"
   },
   "husky": {
     "hooks": {
