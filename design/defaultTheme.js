@@ -239,9 +239,9 @@ export const defaultTheme = {
       fontFamily: "body",
       fontWeight: "body",
       lineHeight: "body",
-      "@media (min-width: 769px)": {
-        maxWidth: "80ch"
-      },
+      // "@media (min-width: 769px)": {
+      //   maxWidth: "80ch"
+      // },
       ...tocStyles,
       ...asciinemaEmbedStyles
     },
