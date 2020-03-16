@@ -11,7 +11,7 @@ export {
   Header,
 } from './Layout/index';
 
-export { Menu, MenuItem } from './Menu';
+export { Menu, MenuItem, MenuItemHeading } from './Menu';
 
 export { makeDefaultTheme } from './themes/index';
 

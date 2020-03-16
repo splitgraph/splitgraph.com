@@ -83,6 +83,7 @@ export const makeDefaultTheme = () => ({
     // primary: "#000",
     secondary: '#363C8D',
     heavy: '#0d1821',
+    lessHeavy: '#2a2a2a',
     light: '#ebebeb',
     muted: '#f6f6f9',
     gray: '#dddddf',

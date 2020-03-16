@@ -4,3 +4,5 @@ export { Menu };
 import MenuItem from './MenuItem';
 export { MenuItem };
 
+import MenuItemHeading from './MenuItemHeading';
+export { MenuItemHeading };

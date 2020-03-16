@@ -46,8 +46,8 @@ export default ({ children }: MenuProps) => {
         'initial',
       ],
       backgroundColor: [
-        expanded ? 'initial' : 'secondary',
-        expanded ? 'initial' : 'secondary',
+        expanded ? 'initial' : 'lessHeavy',
+        expanded ? 'initial' : 'lessHeavy',
         'initial',
       ],
       padding: '1em',
@@ -57,10 +57,33 @@ export default ({ children }: MenuProps) => {
         'initial',
       ],
     },
+    '.menu-item--heading': {
+      backgroundColor: 'initial',
+    },
+    // '.menu-item-label--heading': {
+    //   textTransform: 'uppercase',
+    //   fontSize: 'small',
+    // },
+    // '.menu-item-label--heading': {
+    //   // color: 'muted',
+    //   // textTransform: 'uppercase',
+    // },
+    '.menu-item--active': {
+      borderLeftWidth: '5px',
+      borderLeftColor: 'primary',
+      'border-left-style': 'solid',
+    },
+    '.menu-item--inactive': {
+      filter: [
+        expanded ? 'initial' : 'opacity(0.5)',
+        expanded ? 'initial' : 'opacity(0.5)',
+        'initial',
+      ],
+    },
     '.menu-item-inner-container': {
       marginLeft: [
-        expanded ? '1rem' : '1em',
-        expanded ? '1rem' : '1em',
+        expanded ? '1rem' : 'initial',
+        expanded ? '1rem' : 'initial',
         '1rem',
       ],
       marginRight: [
@@ -84,6 +107,11 @@ export default ({ children }: MenuProps) => {
     },
     '.menu-item-label': {
       display: ['initial', 'initial', expanded ? 'none' : 'initial'],
+      whiteSpace: [
+        expanded ? 'initial' : 'nowrap',
+        expanded ? 'initial' : 'nowrap',
+        'initial',
+      ],
     },
   };
 
