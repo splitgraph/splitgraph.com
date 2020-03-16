@@ -33,6 +33,6 @@ export default ({
     disabled={hasErrors || disabled}
     {...rest}
   >
-    {children}
+    Does it still work uhhh
   </Button>
 );
