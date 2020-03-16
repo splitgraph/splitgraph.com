@@ -1,6 +1,9 @@
-import TwoColumnLayout from './TwoColumnLayout';
+import TwoColumnLayout, {
+  ILayoutContext,
+  LayoutContext,
+} from './TwoColumnLayout';
 
-export { TwoColumnLayout };
+export { TwoColumnLayout, ILayoutContext, LayoutContext };
 
 import TwoColumnLayoutLeft from './TwoColumnLayoutLeft';
 export { TwoColumnLayoutLeft };

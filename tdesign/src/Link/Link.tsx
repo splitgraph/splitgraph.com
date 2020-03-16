@@ -1,4 +1,5 @@
 // @jsx jsx
+import { Styled } from 'theme-ui';
 import * as React from 'react';
 
 export interface LinkProps
@@ -23,7 +24,7 @@ export default ({
   children,
   ...rest
 }: LinkProps) => (
-  <a style={{ variant, ...sx }} href={href} {...rest}>
+  <Styled.a sx={{ variant, ...sx }} href={href} {...rest}>
     {children}
-  </a>
+  </Styled.a>
 );

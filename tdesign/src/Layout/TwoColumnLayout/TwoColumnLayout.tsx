@@ -46,6 +46,10 @@ const useResponsiveStyle = (): ILayoutContext => {
       gridArea: leftArea,
       backgroundColor: 'heavy',
       color: 'light',
+      a: {
+        color: 'light',
+        fontWeight: 'bold',
+      },
       borderRightColor: [null, null, 'sgdarkblue'],
       borderRightStyle: [null, null, 'solid'],
       borderRightSize: [null, null, '10px'],

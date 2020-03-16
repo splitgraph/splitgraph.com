@@ -6,21 +6,15 @@ import { useContext } from 'react';
 import { ILayoutContext, LayoutContext } from './TwoColumnLayout';
 
 import {
-  chevronsLeftURI,
-  chevronsRightURI,
-  chevronsDownURI,
-  chevronsUpURI,
+  chevronsLeftIconURI,
+  chevronsRightIconURI,
+  chevronsDownIconURI,
+  chevronsUpIconURI,
 } from '../../Icon';
 
 export interface TwoColumnLayoutLeftProps {
   children?: React.ReactNode;
 }
-
-// declare module 'react' {
-//   interface Attributes extends SxProps {}
-// }
-
-// onClick={_e: React.MouseEvent<HTMLButtonElement> => (setExpanded ? setExpanded(!expanded) : true)}
 
 const ExpandColumnPushDown = ({ expanded, setExpanded }: ILayoutContext) => {
   const pushdownStyle = {
@@ -31,11 +25,17 @@ const ExpandColumnPushDown = ({ expanded, setExpanded }: ILayoutContext) => {
     borderTopStyle: 'solid',
     borderTopColor: 'heavy',
     backgroundImage: [
-      expanded ? `url("${chevronsUpURI}")` : `url("${chevronsDownURI}")`,
-      expanded ? `url("${chevronsUpURI}")` : `url("${chevronsDownURI}")`,
-      expanded ? `url("${chevronsRightURI}")` : `url("${chevronsLeftURI}")`,
+      expanded
+        ? `url("${chevronsUpIconURI}")`
+        : `url("${chevronsDownIconURI}")`,
+      expanded
+        ? `url("${chevronsUpIconURI}")`
+        : `url("${chevronsDownIconURI}")`,
+      expanded
+        ? `url("${chevronsRightIconURI}")`
+        : `url("${chevronsLeftIconURI}")`,
     ],
-    backgroundPosition: ['center', 'center', 'right'],
+    backgroundPosition: ['center', 'center', expanded ? 'center' : 'right'],
     ':hover': {
       cursor: 'pointer',
     },
@@ -47,9 +47,8 @@ const ExpandColumnPushDown = ({ expanded, setExpanded }: ILayoutContext) => {
       sx={pushdownStyle}
       onClick={() => (setExpanded ? setExpanded(!expanded) : true)}
     >
-      Expanded?{' '}
-      <Box sx={{ display: ['flex', 'flex', 'none'] }}>{`${expanded}`}</Box>
-      <Box sx={{ display: ['none', 'none', 'flex'] }}>{`${!expanded}`}</Box>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
     </Box>
   );
 };
