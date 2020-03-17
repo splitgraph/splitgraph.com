@@ -59,16 +59,32 @@ const main = async () => {
   const manifest = await getCurrentManifest({ config });
   const releases = await fetchReleases({ client, config });
 
-  const { latest, created, deleted, modified } = await compareReleases({
+  const {
+    latest,
+    unchanged,
+    created,
+    deleted,
+    modified
+  } = await compareReleases({
     manifest,
     releases,
     client,
     config
   });
 
-  console.log(JSON.stringify({ latest, created, deleted, modified }, null, 2));
+  console.log(
+    JSON.stringify({ latest, unchanged, created, deleted, modified }, null, 2)
+  );
 
-  await applyManifest({ config, manifest, latest, created, deleted, modified });
+  await applyManifest({
+    config,
+    manifest,
+    latest,
+    unchanged,
+    created,
+    deleted,
+    modified
+  });
 
   process.exit(0);
 
@@ -186,10 +202,8 @@ const fetchReleases = async ({ client, config }) => {
 
 /*
   returns {
-    latest: {
-      localhost: { ...release }
-      github: { ...release  }
-    },
+    latest: { ...release },
+    unchanged: [],
     created: [],
     deleted: [],
     modified: []
@@ -198,12 +212,25 @@ const fetchReleases = async ({ client, config }) => {
 const compareReleases = async ({ releases, manifest, client, config }) => {
   const manifestReleases = manifest.releases;
 
+  const unchanged = findUnchanged({
+    manifestReleases,
+    remoteReleases: releases
+  });
   const created = findCreated({ manifestReleases, remoteReleases: releases });
   const modified = findModified({ manifestReleases, remoteReleases: releases });
   const deleted = findDeleted({ manifestReleases, remoteReleases: releases });
   const latest = await findLatest({ client, remoteReleases: releases, config });
+  const latestChanged = !releasesAreEqual(manifest.latest, latest);
+  const anyChanged =
+    created.length > 0 ||
+    modified.length > 0 ||
+    deleted.length > 0 ||
+    latestChanged;
 
   return {
+    latestChanged,
+    anyChanged,
+    unchanged,
     latest,
     created,
     modified,
@@ -241,7 +268,11 @@ const findConflictingTag = (list, release) =>
 const findMatchingRelease = (list, release) =>
   list.find(x => releasesAreEqual(x, release));
 
-const findUnchanged = ({ manifestReleases, remoteReleases }) => {};
+const findUnchanged = ({ manifestReleases, remoteReleases }) => {
+  return manifestReleases.filter(
+    release => !!findMatchingRelease(remoteReleases, release)
+  );
+};
 
 // release exists on remote but not manifest
 // but, we don't want to double count modified
@@ -317,11 +348,12 @@ const applyManifest = async ({
   config,
   manifest,
   latest,
+  unchanged,
   created,
   deleted,
   modified
 }) => {
-  const nextReleases = [...manifest.releases, ...created]
+  const nextReleases = [...unchanged, ...created]
     .filter(release => !findMatchingRelease(deleted, release))
     .map(release =>
       findConflictingTag(modified, release)
