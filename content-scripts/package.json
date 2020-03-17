@@ -7,7 +7,12 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@octokit/core": "^2.4.2",
+    "@octokit/plugin-paginate-rest": "^2.0.2",
+    "@octokit/rest": "^17.1.0",
+    "fs-extra": "^8.1.0",
     "globby": "^10.0.1",
+    "object-hash": "^2.0.3",
     "rehype-parse": "^6.0.1",
     "rehype-slug": "^2.0.3",
     "rehype-stringify": "^6.0.0",

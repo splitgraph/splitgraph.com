@@ -54,7 +54,10 @@ class ContentTree {
       this.rootPath,
       { extensions: /\.(md|mdx|json)$/ },
       item => {
-        if (path.basename(item.path).endsWith(".meta.json")) {
+        if (
+          path.basename(item.path).endsWith(".meta.json") ||
+          item.path.endsWith("metadata.json")
+        ) {
           this.metaFiles.push(item.path);
         }
       }

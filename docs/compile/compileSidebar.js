@@ -36,7 +36,7 @@ const transform = code => {
   // exports, and is already failing on at least two files. However, it's a
   // decent hack so long as errors are made obvious (which they currently are,
   // by setting metadata title to "Error") and the regex can be finetuned.
-  const exportRegex = /export const meta = \{\s+[A-za-z0-9:"\s\.-_\,]+}\;/gm;
+  const exportRegex = /export const meta = \{\s?[A-za-z0-9:"\s\.-_\,]+}\;?/gm;
 
   let exportMatch = exportRegex.exec(code);
 

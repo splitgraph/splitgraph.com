@@ -12,6 +12,7 @@
     "tdesign",
     "docs",
     "content",
+    "content-scripts",
     "templaters",
     "lib",
     "tlib"
