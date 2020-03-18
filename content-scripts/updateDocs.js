@@ -15,12 +15,6 @@ if (!shell.which("git")) {
   shell.exit(1);
 }
 
-const insecureRandomString = len =>
-  Math.random()
-    .toString(36)
-    .replace(/[^a-z0-9]+/g, "")
-    .substr(0, len);
-
 const secrets = {
   githubAccessToken: process.env.GITHUB_ACCESS_TOKEN
 };
@@ -45,13 +39,13 @@ const getConfig = ({ tmpDir }) => ({
     repo: "splitgraph.com",
     gitUrl: `https://splitbot:${secrets.githubAccessToken}@github.com/splitgraph/splitgraph.com`,
 
-    // Push updates to this new branch
-    // TODO: Think about if it should have this random suffix, or be constant
-    //       and force push over it with changes. Downside of a constant string
-    //       is that huma edits to a PR in progress might get force pushed over
-    //       by a subsequent run. Downside of suffix is "branch spam" where it
-    //       might open duplicate branches when only the latest should be applied.
-    newBranch: `splitbot/update-docs-${insecureRandomString(8)}`,
+    // Maintain a constant branch name and push updates to it
+    // This means there will only ever be one PR open at a time, which is ideal,
+    // but it does have the small downside that human edits may be force pushed
+    // over. This could be mitigated, by checking in the beginning if a PR is
+    // already open. If it is, the program could base on the head of the
+    // existing PR instead of the base of the existing PR.
+    newBranch: `splitbot/update-docs`,
 
     // Submit a pull request against this branch
     targetBranch: "next",
@@ -127,14 +121,6 @@ const main = async () => {
 
   const { anyChanged, latest, unchanged, created, deleted, modified } = diff;
 
-  console.log(
-    JSON.stringify(
-      { anyChanged, latest, unchanged, created, deleted, modified },
-      null,
-      2
-    )
-  );
-
   if (!anyChanged) {
     console.error("No changes");
     return;
@@ -149,8 +135,6 @@ const main = async () => {
     deleted,
     modified
   });
-
-  const repoPath = config.cloneTo;
 
   // A creation is a release that exists in the upstream list of releases but not in the manifest
   // Apply it by extracting the upstream release to the appropriate local directory
@@ -175,6 +159,8 @@ const main = async () => {
   await makeCommit({ config, commitMessage });
 
   await pushToRemote({ config });
+
+  await makePullRequestIfNecessary({ config, client, commitMessage });
 };
 
 const deleteLatestDocs = async ({ latestDir, archiveDir }) => {
@@ -219,14 +205,12 @@ const deleteVersionOfDocs = async ({ archiveDir, tag_name }) => {
 
   const versionDir = path.join(archiveDir, tag_name);
 
-  console.error("Deleting version:", versionDir);
-
   const deleteVersionCmd = `rm -rf ${versionDir}`;
   const deleteVersionResult = shell.exec(deleteVersionCmd);
 
   // This could be ok (maybe it exists in manifest but no dir exists)
   if (deleteVersionResult.code !== 0) {
-    console.warn("Warning: Failed to rm version dir:", versionDir);
+    console.error("Warning: Failed to rm version dir:", versionDir);
   }
 };
 
@@ -320,7 +304,10 @@ const fetchReleases = async ({ client, config }) => {
 };
 
 /*
-  returns {
+  returns e.g.
+
+  {
+    anyChanged: true,
     latest: { ...release },
     unchanged: [],
     created: [],
@@ -456,7 +443,7 @@ const getCurrentManifest = async ({ config }) => {
   try {
     return require(config.docs.paths(config).manifest);
   } catch {
-    console.warn("Warning: using empty manifest");
+    console.error("Warning: using empty manifest");
     return getEmptyManifest();
   }
 };
@@ -593,7 +580,6 @@ const getOrMakeOutputDirForRelease = async ({
   const outputDirExists = await fs.pathExists(outputDir);
 
   if (outputDirExists && overwrite) {
-    console.error("Overwrite existing dir:", outputDir);
     await fs.remove(outputDir);
   }
 
@@ -608,9 +594,6 @@ const genericCopyAssetResource = async ({ archiveDir, release, inputDir }) => {
   await fs.copy(inputDir, outputDir);
 
   await addMetadata({ release, metadataDir: outputDir });
-
-  console.warn("genericCopyAssetResource");
-  console.warn("        archiveDir:", archiveDir);
 };
 
 // To process asciinema, simply copy the files from bundle to their destination
@@ -652,9 +635,6 @@ const processPythonApiDocs = async ({ config, release, inputDir }) => {
   });
 
   await addMetadata({ release, metadataDir: outputDir });
-
-  console.warn("processPythonApiDocs");
-  console.warn("        ouputDir:", outputDir);
 };
 
 const processAsset = async ({ config, release, asset }) => {
@@ -681,9 +661,7 @@ const processAsset = async ({ config, release, asset }) => {
     );
   }
 
-  console.error("Extract tarball to");
-  console.error(downloadLocation);
-  console.error(extractedDir);
+  console.error("Extract tarball to:", extractedDir);
 
   const assetResources = shell.ls(extractedDir).map(resource => ({
     resourceName: resource,
@@ -694,7 +672,7 @@ const processAsset = async ({ config, release, asset }) => {
     const processAssetResource = config.docs.processors[resourceName];
 
     console.error(
-      `processors[${resourceName}]`,
+      `apply processors[${resourceName}]`,
       config.docs.processors[resourceName]
     );
 
@@ -723,9 +701,6 @@ const applyModified = async ({ config, modified }) => {
   }
 };
 
-// const deleteLatestAsciinema = async ({config}) =>
-//   await d
-
 const deleteAsciinemaVersion = async ({ config, tag_name }) =>
   await deleteVersionOfDocs({
     archiveDir: config.docs.paths(config).asciinema,
@@ -749,7 +724,7 @@ const applyDeleted = async ({ config, deleted }) => {
 
   for (let deletedTag of deletedTags) {
     for (let deleter of config.docs.deleters) {
-      console.warn("apply deleter", deleter);
+      console.error("apply deleter", deleter);
       await deleter({
         config,
         tag_name: deletedTag
@@ -791,14 +766,12 @@ const overwriteLatest = async ({ config, newLatest }) => {
     let latestDir = pathMaps[resourceRoot].latest;
     let archiveDir = pathMaps[resourceRoot].archive;
 
-    console.log("overwrite latest for", resourceRoot, ":");
     await deleteLatestDocs({
       config,
       latestDir,
       archiveDir
     });
 
-    console.log("copy new latest for", resourceRoot, ":");
     await copyLatestDocsFromArchive({ latestDir, archiveDir, newLatest });
 
     // Note asciinema have no metadata
@@ -829,29 +802,29 @@ const makeCommitMessage = async ({
   var message = "";
   message += `Update docs (latest: ${latest.tag_name})`;
 
-  message += `\n    - Versions created: ${
+  message += `\n- Versions created: ${
     !created || created.length === 0 ? "None" : created.length
   }`;
   for (let { tag_name } of unchanged) {
-    message += `\n        - ${tag_name}`;
+    message += `\n    - ${tag_name}`;
   }
 
-  message += `\n    - Versions modified: ${
+  message += `\n- Versions modified: ${
     !modified || modified.length === 0 ? "None" : modified.length
   }`;
   for (let { tag_name } of modified) {
-    message += `\n        - ${tag_name}`;
+    message += `\n    - ${tag_name}`;
   }
 
-  message += `\n    - Versions deleted: ${
+  message += `\n- Versions deleted: ${
     !deleted || deleted.length === 0 ? "None" : deleted.length
   }`;
   for (let { tag_name } of deleted) {
-    message += `\n        - ${tag_name}`;
+    message += `\n    - ${tag_name}`;
   }
 
   // Don't list unchanged because it is presumably a growing list
-  message += `\n    - Versions unchanged: ${
+  message += `\n- Versions unchanged: ${
     !unchanged || unchanged.length === 0 ? "None" : unchanged.length
   }`;
 
@@ -921,7 +894,38 @@ const pushToRemote = async ({ config }) => {
   return;
 };
 
-const fetchRelevantAssets = async () => {};
+const makePullRequestIfNecessary = async ({
+  config,
+  client,
+  commitMessage
+}) => {
+  // Check if PR already exists for this branch and base
+  const { data } = await client.request("GET /repos/:owner/:repo/pulls", {
+    owner: config.docs.owner,
+    repo: config.docs.repo,
+    head: config.docs.newBranch,
+    base: config.docs.targetBranch,
+    state: "open"
+  });
+
+  const alreadyExists = data.length > 0;
+
+  if (alreadyExists) {
+    console.error("Pull request already open for branch, do not open again");
+    return;
+  }
+
+  await client.request("POST /repos/:owner/:repo/pulls", {
+    owner: config.docs.owner,
+    repo: config.docs.repo,
+    title: commitMessage.split("\n")[0],
+    head: config.docs.newBranch,
+    base: config.docs.targetBranch,
+    body: commitMessage
+  });
+
+  return;
+};
 
 const yargs = require("yargs").command(
   "$0",
