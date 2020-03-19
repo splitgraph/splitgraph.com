@@ -1,0 +1,39 @@
+export const meta = {id: "eval", title: "eval"};
+
+## eval
+
+```sgr eval [OPTIONS] COMMAND```
+
+Evaluate a Python snippet using the Splitgraph API.
+
+This is for advanced users only and should be only used
+if you know what you are doing.
+
+Normal Python statements are supported and the command is evaluated
+in a namespace where the following is already imported and available:
+
+  * Repository: class that instantiates a Splitgraph repository and makes
+    API functions like .commit(), .checkout() etc available.
+
+  * engine: Current local engine
+
+  * object_manager: an instance of ObjectManager that allows
+    to get information about objects and manage the object cache.
+
+
+Example:
+    sgr eval 'import json; print(json.dumps(Repository\
+        .from_schema(repo_name)\
+        .images["latest"]\
+        .get_table(table_name)\
+        .table_schema))' \
+    -a repo_name my_repo -a table_name my_table
+
+Will dump the schema of table my_table in the most recent image in my_repo in JSON format.
+
+For more information, see the Splitgraph API reference.
+
+### Options
+
+  * **`--i-know-what-im-doing`**: Pass this if you're sure that the code you're running is safe and don't want to be prompted.
+  * **`-a, --arg <TEXT TEXT>...`**: Make extra variables available in the command's namespace

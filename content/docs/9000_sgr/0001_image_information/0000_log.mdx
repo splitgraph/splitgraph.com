@@ -1,0 +1,17 @@
+export const meta = {id: "log", title: "log"};
+
+## sgr log
+
+```sgr log [OPTIONS] REPOSITORY```
+
+Show the history of a Splitgraph repository.
+
+By default, this shows the history of the current branch, starting from the HEAD pointer and following its
+parent chain.
+
+If ``-t`` or ``--tree`` is passed, this instead renders the full image tree. The repository doesn't need to have
+been checked out in this case.
+
+### Options
+
+  * **`-t, --tree`**: 

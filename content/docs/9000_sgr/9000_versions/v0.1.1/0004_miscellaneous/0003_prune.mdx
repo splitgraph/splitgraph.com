@@ -1,0 +1,22 @@
+export const meta = {id: "prune", title: "prune"};
+
+## sgr prune
+
+```sgr prune [OPTIONS] REPOSITORY```
+
+Cleanup dangling images from a repository.
+
+This includes images not pointed to by any tags (or checked out) and those that aren't required by any of
+such images.
+
+Will ask for confirmation of the deletion, unless ``-y ``is passed. If ``-r`` (``--remote``) is
+passed, this will perform deletion on a remote Splitgraph engine (registered in the config) instead, assuming
+the user has write access to the remote repository.
+
+This does not delete any physical objects that the deleted repository/images depend on:
+use ``sgr cleanup`` to do that.
+
+### Options
+
+  * **`-r, --remote TEXT`**: Perform the deletion on a remote instead, specified by its alias
+  * **`-y, --yes`**: Agree to deletion without confirmation

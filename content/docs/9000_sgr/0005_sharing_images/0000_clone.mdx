@@ -1,0 +1,15 @@
+export const meta = {id: "clone", title: "clone"};
+
+## sgr clone
+
+```sgr clone [OPTIONS] REMOTE_REPOSITORY_OR_IMAGE [LOCAL_REPOSITORY]```
+
+Clone a remote Splitgraph repository/image into a local one.
+
+The lookup path for the repository is governed by the ``SG_REPO_LOOKUP`` and ``SG_REPO_LOOKUP_OVERRIDE``
+config parameters and can be overriden by the command line ``--remote`` option.
+
+### Options
+
+  * **`-r, --remote TEXT`**: Alias or full connection string for the remote engine
+  * **`-d, --download-all`**: Download all objects immediately instead on checkout.

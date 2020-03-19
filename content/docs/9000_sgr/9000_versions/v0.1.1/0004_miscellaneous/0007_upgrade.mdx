@@ -1,0 +1,19 @@
+export const meta = {id: "upgrade", title: "upgrade"};
+
+## sgr upgrade
+
+```sgr upgrade [OPTIONS] [VERSION]```
+
+Upgrade sgr client and engine.
+
+This will try to download the most recent stable binary for the current platform
+into the location this binary is running from and then upgrade the default engine.
+
+This method is only supported for single-binary installs and engines managed
+by `sgr engine`.
+
+### Options
+
+  * **`--skip-engine-upgrade`**: Only upgrade the client
+  * **`--path TEXT`**: Override the path to download the new binary to.
+  * **`--force`**: Reinstall older/same versions.

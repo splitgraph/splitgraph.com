@@ -1,0 +1,31 @@
+export const meta = {id: "upstream", title: "upstream"};
+
+## sgr upstream
+
+```sgr upstream [OPTIONS] REPOSITORY```
+
+Get or set the upstream for a repository.
+
+This shows the default repository used for pushes and pulls as well as allows to change it to a different
+remote engine and repository.
+
+The remote engine alias must exist in the config file.
+
+### Examples
+
+``sgr upstream my/repo --set splitgraph.com username/repo``
+
+Sets the upstream for ``my/repo`` to ``username/repo`` existing on the ``splitgraph.com`` engine
+
+``sgr upstream my/repo --reset``
+
+Removes the upstream for ``my/repo``.
+
+``sgr upstream my/repo``
+
+Shows the current upstream for ``my/repo``.
+
+### Options
+
+  * **`-s, --set <TEXT REPOSITORY>...`**: Set the upstream to a engine alias + repository
+  * **`-r, --reset`**: Delete the upstream

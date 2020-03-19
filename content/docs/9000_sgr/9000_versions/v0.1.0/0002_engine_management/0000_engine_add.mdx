@@ -1,0 +1,28 @@
+export const meta = {id: "engine_add", title: "engine add"};
+
+## engine add
+
+```sgr add [OPTIONS] [NAME]```
+
+Create and start a Splitgraph engine.
+
+This will pull the Splitgraph engine image, start it, create a Postgres user and initialize
+the engine.
+
+This also creates Docker volumes required to persist data/metadata.
+
+The engine Docker container by default will be named `splitgraph_engine_default` and
+its data and metadata volumes will have names `splitgraph_engine_default_data` and
+`splitgraph_engine_default_metadata`.
+
+### Options
+
+  * **`-i, --image TEXT`**: Docker image with the Splitgraph engine
+  * **`-p, --port INTEGER`**: Port to start the engine on
+  * **`-u, --username TEXT`**: 
+  * **`--no-init`**: Don't run `sgr init` on the engine
+  * **`--no-sgconfig`**: Don't add the engine to .sgconfig
+  * **`--inject-source`**: Inject the current Splitgraph source code into the engine using Docker bind mounts
+  * **`--no-pull`**: Don't pull the Docker image
+  * **`--set-default`**: Set the engine as the default engine in the config regardless of its name
+  * **`--password TEXT`**: 
