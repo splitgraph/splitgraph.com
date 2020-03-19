@@ -44,7 +44,7 @@ uploaded to S3/S3-compatible host using the Minio API. It’s registered in the 
 and used to download the objects back into the Splitgraph cache when they are needed.</p>
 <dl className="method">
 <dt id="splitgraph.hooks.external_objects.ExternalObjectHandler.download_objects">
-<code className="sig-name descname">download_objects</code><span className="sig-paren">(</span><em className="sig-param">objects: List[Tuple[str, str]], remote_engine: PostgresEngine</em><span className="sig-paren">)</span> → Sequence[str]<a className="headerlink" href="#splitgraph.hooks.external_objects.ExternalObjectHandler.download_objects" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">download_objects</code><span className="sig-paren">(</span><em className="sig-param">objects: List[Tuple[str, str]], remote_engine: PsycopgEngine</em><span className="sig-paren">)</span> → Sequence[str]<a className="headerlink" href="#splitgraph.hooks.external_objects.ExternalObjectHandler.download_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Download objects from the external location into the Splitgraph cache.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -62,7 +62,7 @@ uploaded the objects to.</p></li>
 
 <dl className="method">
 <dt id="splitgraph.hooks.external_objects.ExternalObjectHandler.upload_objects">
-<code className="sig-name descname">upload_objects</code><span className="sig-paren">(</span><em className="sig-param">objects: List[str], remote_engine: PostgresEngine</em><span className="sig-paren">)</span> → Sequence[Tuple[str, str]]<a className="headerlink" href="#splitgraph.hooks.external_objects.ExternalObjectHandler.upload_objects" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">upload_objects</code><span className="sig-paren">(</span><em className="sig-param">objects: List[str], remote_engine: PsycopgEngine</em><span className="sig-paren">)</span> → Sequence[Tuple[str, str]]<a className="headerlink" href="#splitgraph.hooks.external_objects.ExternalObjectHandler.upload_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Upload objects from the Splitgraph cache to an external location</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -228,7 +228,7 @@ GET/PUT URLs.</p>
 used to upload the objects.</p>
 <dl className="method">
 <dt id="splitgraph.hooks.s3.S3ExternalObjectHandler.download_objects">
-<code className="sig-name descname">download_objects</code><span className="sig-paren">(</span><em className="sig-param">objects: List[Tuple[str, str]], remote_engine: splitgraph.engine.postgres.engine.PostgresEngine</em><span className="sig-paren">)</span> → List[str]<a className="headerlink" href="#splitgraph.hooks.s3.S3ExternalObjectHandler.download_objects" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">download_objects</code><span className="sig-paren">(</span><em className="sig-param">objects: List[Tuple[str, str]], remote_engine: PsycopgEngine</em><span className="sig-paren">)</span> → List[str]<a className="headerlink" href="#splitgraph.hooks.s3.S3ExternalObjectHandler.download_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Download objects from Minio.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -239,7 +239,7 @@ used to upload the objects.</p>
 
 <dl className="method">
 <dt id="splitgraph.hooks.s3.S3ExternalObjectHandler.upload_objects">
-<code className="sig-name descname">upload_objects</code><span className="sig-paren">(</span><em className="sig-param">objects: List[str], remote_engine: splitgraph.engine.postgres.engine.PostgresEngine</em><span className="sig-paren">)</span> → List[Tuple[str, str]]<a className="headerlink" href="#splitgraph.hooks.s3.S3ExternalObjectHandler.upload_objects" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">upload_objects</code><span className="sig-paren">(</span><em className="sig-param">objects: List[str], remote_engine: PsycopgEngine</em><span className="sig-paren">)</span> → List[Tuple[str, str]]<a className="headerlink" href="#splitgraph.hooks.s3.S3ExternalObjectHandler.upload_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Upload objects to Minio</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>

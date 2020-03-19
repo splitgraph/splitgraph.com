@@ -1,10 +1,12 @@
 export const meta = {id: "push", title: "push"};
 
-## push
+## sgr push
 
-```sgr push [OPTIONS] REPOSITORY [REMOTE_REPOSITORY]```
+```sgr push [OPTIONS] REPOSITORY_OR_IMAGE [REMOTE_REPOSITORY]```
 
-Push changes from a local repository to the Splitgraph registry or another engine.
+Push images from a local repository to the Splitgraph registry or another engine.
+
+If an image is not specified (e.g. `sgr push noaa/climate`, this will push all new images.
 
 By default, the repository will be pushed to a repository with the same name in the user's namespace
 (SG_NAMESPACE configuration value which defaults to the username).
@@ -17,7 +19,7 @@ it will be used instead.
 
 Finally, if `remote_repository` or `--remote` are passed, they will take precedence.
 
-The actual objects will be uploaded to S3 via Minio. When pushing to another engine,
+The actual objects will be uploaded to S3 using Minio. When pushing to another engine,
 you can choose to upload them directly by passing --handler DB.
 
 ### Options

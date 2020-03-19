@@ -1,6 +1,6 @@
 export const meta = {id: "csv_import", title: "csv import"};
 
-## csv import
+## sgr csv import
 
 ```sgr import [OPTIONS] REPOSITORY TABLE```
 
@@ -20,7 +20,7 @@ If `-r` is passed, the table will instead be deleted and recreated from the CSV 
   * **`-f, --file FILENAME`**: File name to import data from, default stdin.
   * **`-r, --replace`**: Replace the table if it already exists.
   * **`-k, --primary-key TEXT`**: Use the specified column(s) as primary key(s)
-  * **`-d, --datetime TEXT`**: Try to parse the specified column(s) as timestamps.
+  * **`-t, --override-type <TEXT TEXT>...`**: Explicitly set types of these columns to PG types
   * **`--encoding TEXT`**: Encoding to use for the CSV file
   * **`--separator TEXT`**: CSV separator to use
   * **`--no-header`**: Treats the first line of the CSV as data rather than a header.

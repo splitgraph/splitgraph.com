@@ -320,7 +320,7 @@ dependencies of this Splitfile (table imports and FROM commands).</p></li>
 objects as required in order to fulfill certain queries)</p>
 <dl className="method">
 <dt id="splitgraph.core.object_manager.ObjectManager.cleanup">
-<code className="sig-name descname">cleanup</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → Set[str]<a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.cleanup" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">cleanup</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → List[str]<a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.cleanup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Deletes all objects in the object_tree not required by any current repository, including their dependencies and
 their remote locations. Also deletes all objects not registered in the object_tree.</p>
 </dd></dl>
@@ -519,7 +519,7 @@ or change it (since they control the external location they’ve uploaded it to 
 <p>Splitgraph repository API</p>
 <dl className="method">
 <dt id="splitgraph.core.repository.Repository.commit">
-<code className="sig-name descname">commit</code><span className="sig-paren">(</span><em className="sig-param">image_hash: Optional[str] = None</em>, <em className="sig-param">comment: Optional[str] = None</em>, <em className="sig-param">snap_only: bool = False</em>, <em className="sig-param">chunk_size: Optional[int] = 10000</em>, <em className="sig-param">split_changeset: bool = False</em>, <em className="sig-param">extra_indexes: Optional[Dict[str</em>, <em className="sig-param">Dict[str</em>, <em className="sig-param">Dict[str</em>, <em className="sig-param">Any]]]] = None</em><span className="sig-paren">)</span> → splitgraph.core.image.Image<a className="headerlink" href="#splitgraph.core.repository.Repository.commit" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">commit</code><span className="sig-paren">(</span><em className="sig-param">image_hash: Optional[str] = None, comment: Optional[str] = None, snap_only: bool = False, chunk_size: Optional[int] = 10000, split_changeset: bool = False, extra_indexes: Optional[Dict[str, Dict[str, Union[List[str], Dict[str, Dict[str, Any]]]]]] = None, in_fragment_order: Optional[Dict[str, List[str]]] = None</em><span className="sig-paren">)</span> → splitgraph.core.image.Image<a className="headerlink" href="#splitgraph.core.repository.Repository.commit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Commits all pending changes to a given repository, creating a new image.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -539,12 +539,12 @@ will need to be scanned to satisfy a query.
 If False, the changeset will be stored as a single fragment inheriting from the last fragment in the
 table.</p></li>
 <li><p><strong>extra_indexes</strong> – Dictionary of &#38;lbrace;table: index_type: column: index_specific_kwargs&#38;rbrace;.</p></li>
+<li><p><strong>in_fragment_order</strong> – Dictionary of &#38;lbrace;table: list of columns&#38;rbrace;. If specified, will</p></li>
 </ul>
 </dd>
-<dt className="field-even">Returns</dt>
-<dd className="field-even"><p>The newly created Image object.</p>
-</dd>
 </dl>
+<p>sort the data inside each chunk by this/these key(s) for each table.
+:return: The newly created Image object.</p>
 </dd></dl>
 
 <dl className="method">
@@ -714,7 +714,7 @@ The table is deleted on exit from the context manager.</p>
 
 <dl className="method">
 <dt id="splitgraph.core.repository.Repository.pull">
-<code className="sig-name descname">pull</code><span className="sig-paren">(</span><em className="sig-param">download_all: Optional[bool] = False</em>, <em className="sig-param">overwrite: bool = False</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.repository.Repository.pull" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">pull</code><span className="sig-paren">(</span><em className="sig-param">download_all: Optional[bool] = False</em>, <em className="sig-param">overwrite: bool = False</em>, <em className="sig-param">single_image: Optional[str] = None</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.repository.Repository.pull" title="Permalink to this definition">¶</a></dt>
 <dd><p>Synchronizes the state of the local Splitgraph repository with its upstream, optionally downloading all new
 objects created on the remote.</p>
 <dl className="field-list simple">
@@ -723,6 +723,7 @@ objects created on the remote.</p>
 <li><p><strong>download_all</strong> – If True, downloads all objects and stores them locally. Otherwise, will only download
 required objects when a table is checked out.</p></li>
 <li><p><strong>overwrite</strong> – If True, will overwrite object metadata on the local repository for existing objects.</p></li>
+<li><p><strong>single_image</strong> – Limit the download to a single image hash/tag.</p></li>
 </ul>
 </dd>
 </dl>
@@ -730,7 +731,7 @@ required objects when a table is checked out.</p></li>
 
 <dl className="method">
 <dt id="splitgraph.core.repository.Repository.push">
-<code className="sig-name descname">push</code><span className="sig-paren">(</span><em className="sig-param">remote_repository: Optional[Repository] = None</em>, <em className="sig-param">overwrite: bool = False</em>, <em className="sig-param">handler: str = 'DB'</em>, <em className="sig-param">handler_options: Optional[Dict[str</em>, <em className="sig-param">Any]] = None</em><span className="sig-paren">)</span> → splitgraph.core.repository.Repository<a className="headerlink" href="#splitgraph.core.repository.Repository.push" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">push</code><span className="sig-paren">(</span><em className="sig-param">remote_repository: Optional[Repository] = None</em>, <em className="sig-param">overwrite: bool = False</em>, <em className="sig-param">handler: str = 'DB'</em>, <em className="sig-param">handler_options: Optional[Dict[str</em>, <em className="sig-param">Any]] = None</em>, <em className="sig-param">single_image: Optional[str] = None</em><span className="sig-paren">)</span> → splitgraph.core.repository.Repository<a className="headerlink" href="#splitgraph.core.repository.Repository.push" title="Permalink to this definition">¶</a></dt>
 <dd><p>Inverse of <code className="docutils literal notranslate"><span className="pre">pull</span></code>: Pushes all local changes to the remote and uploads new objects.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -742,6 +743,7 @@ to store them in an S3 bucket.</p></li>
 <li><p><strong>overwrite</strong> – If True, will overwrite object metadata on the remote repository for existing objects.</p></li>
 <li><p><strong>handler_options</strong> – Extra options to pass to the handler. For example, see
 <a className="reference internal" href="splitgraph.hooks/#splitgraph.hooks.s3.S3ExternalObjectHandler" title="splitgraph.hooks.s3.S3ExternalObjectHandler"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.hooks.s3.S3ExternalObjectHandler</span></code></a>.</p></li>
+<li><p><strong>single_image</strong> – Limit the upload to a single image hash/tag.</p></li>
 </ul>
 </dd>
 </dl>
@@ -797,7 +799,7 @@ to store them in an S3 bucket.</p></li>
 
 <dl className="function">
 <dt id="splitgraph.core.repository.clone">
-<code className="sig-prename descclassname">splitgraph.core.repository.</code><code className="sig-name descname">clone</code><span className="sig-paren">(</span><em className="sig-param">remote_repository: Union[Repository, str], local_repository: Optional[Repository] = None, overwrite: bool = False, download_all: Optional[bool] = False</em><span className="sig-paren">)</span> → splitgraph.core.repository.Repository<a className="headerlink" href="#splitgraph.core.repository.clone" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.core.repository.</code><code className="sig-name descname">clone</code><span className="sig-paren">(</span><em className="sig-param">remote_repository: Union[Repository, str], local_repository: Optional[Repository] = None, overwrite: bool = False, download_all: Optional[bool] = False, single_image: Optional[str] = None</em><span className="sig-paren">)</span> → splitgraph.core.repository.Repository<a className="headerlink" href="#splitgraph.core.repository.clone" title="Permalink to this definition">¶</a></dt>
 <dd><p>Clones a remote Splitgraph repository or synchronizes remote changes with the local ones.</p>
 <p>If the target repository has no set upstream engine, the source repository becomes its upstream.</p>
 <dl className="field-list simple">
@@ -810,6 +812,7 @@ belongs to.</p></li>
 <li><p><strong>download_all</strong> – If True, downloads all objects and stores them locally. Otherwise, will only download required
 objects when a table is checked out.</p></li>
 <li><p><strong>overwrite</strong> – If True, will overwrite object metadata on the local repository for existing objects.</p></li>
+<li><p><strong>single_image</strong> – If set, only get a single image with this hash/tag from the source.</p></li>
 </ul>
 </dd>
 <dt className="field-even">Returns</dt>
@@ -867,6 +870,19 @@ qualifiers.</p>
 <dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">object</span></code></p>
 <p>Represents a Splitgraph table in a given image. Shouldn’t be created directly, use Table-loading
 methods in the <a className="reference internal" href="#splitgraph.core.image.Image" title="splitgraph.core.image.Image"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.core.image.Image</span></code></a> class instead.</p>
+<dl className="method">
+<dt id="splitgraph.core.table.Table.get_length">
+<code className="sig-name descname">get_length</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → int<a className="headerlink" href="#splitgraph.core.table.Table.get_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of rows in this table.</p>
+<p>This might be smaller than the total number of rows in all objects belonging to this
+table as some objects might overwrite each other.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Returns</dt>
+<dd className="field-odd"><p>Number of rows in table</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl className="method">
 <dt id="splitgraph.core.table.Table.get_query_plan">
 <code className="sig-name descname">get_query_plan</code><span className="sig-paren">(</span><em className="sig-param">quals: Optional[Sequence[Sequence[Tuple[str, str, Any]]]], columns: Sequence[str], use_cache: bool = True</em><span className="sig-paren">)</span> → splitgraph.core.table.QueryPlan<a className="headerlink" href="#splitgraph.core.table.Table.get_query_plan" title="Permalink to this definition">¶</a></dt>
@@ -981,7 +997,7 @@ FragmentManager.filter_fragments for the actual format.</p></li>
 
 <dl className="method">
 <dt id="splitgraph.core.table.Table.reindex">
-<code className="sig-name descname">reindex</code><span className="sig-paren">(</span><em className="sig-param">extra_indexes: Dict[str, Dict[str, Dict[str, Any]]], raise_on_patch_objects=True</em><span className="sig-paren">)</span> → List[str]<a className="headerlink" href="#splitgraph.core.table.Table.reindex" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">reindex</code><span className="sig-paren">(</span><em className="sig-param">extra_indexes: Dict[str, Union[List[str], Dict[str, Dict[str, Any]]]], raise_on_patch_objects=True</em><span className="sig-paren">)</span> → List[str]<a className="headerlink" href="#splitgraph.core.table.Table.reindex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run extra indexes on all objects in this table and update their metadata.
 This only works on objects that don’t have any deletions or upserts (have a deletion hash of 000000…).</p>
 <dl className="field-list simple">
