@@ -1,6 +1,6 @@
 {
-  "title": "Python API",
-  "updated_at": "2020-03-19T01:00:48.006Z",
+  "title": "v0.1.1",
+  "updated_at": "2020-03-19T01:00:45.370Z",
   "release": {
     "id": 24577125,
     "tag_name": "v0.1.1",
@@ -19,5 +19,5 @@
       }
     ]
   },
-  "isLatest": true
+  "isLatest": false
 }

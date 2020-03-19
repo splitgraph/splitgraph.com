@@ -1,0 +1,32 @@
+export const meta = {id: "checkout", title: "checkout"};
+
+## sgr checkout
+
+```sgr checkout [OPTIONS] IMAGE_SPEC```
+
+Check out a Splitgraph image into a Postgres schema.
+
+This downloads the required physical objects and materializes all tables, unless ``-l`` or ``--layered`` is passed,
+in which case the objects are downloaded and a foreign data wrapper is set up on the engine to satisfy read-only
+queries by combining results from each table's fragments.
+
+Tables checked out in this way are still presented as normal Postgres tables and can queried in the same way.
+Since the tables aren't materialized, layered querying is faster to set up, but since each query now results in a
+subquery to each object comprising the table, actual query execution is slower than to materialized Postgres tables.
+
+Layered querying is only supported for reading from tables and only with the official Splitgraph engine.
+
+Image spec must be of the format ``[NAMESPACE/]REPOSITORY[:HASH_OR_TAG]``. Note that currently, the schema that the
+image is checked out into has to have the same name as the repository. If no image hash or tag is passed,
+"HEAD" is assumed.
+
+If ``-u`` or ``--uncheckout`` is passed, this instead deletes the checked out schema (assuming there are no pending
+changes) and removes the HEAD pointer.
+
+If ``--force`` isn't passed and the schema has pending changes, this will fail.
+
+### Options
+
+  * **`-f, --force`**: Discard all pending changes to the schema
+  * **`-u, --uncheckout`**: Delete the checked out copy instead
+  * **`-l, --layered`**: Don't materialize the tables, use layered querying instead.

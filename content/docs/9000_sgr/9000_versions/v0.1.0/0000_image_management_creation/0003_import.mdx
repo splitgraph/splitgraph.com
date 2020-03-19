@@ -1,0 +1,34 @@
+export const meta = {id: "import", title: "import"};
+
+## import
+
+```sgr import [OPTIONS] IMAGE_SPEC TABLE_OR_QUERY TARGET_REPOSITORY [TARGET_TABLE]```
+
+Import tables into a Splitgraph repository.
+
+Imports a table or a result of a query from a local Splitgraph repository or a Postgres schema into another
+Splitgraph repository.
+
+### Examples
+
+``sgr import noaa/climate:my_tag climate_data my/repository``
+
+Create a new image in ``my/repository`` with the ``climate_data`` table included. This links the new image to
+the physical object, meaning that the history of the ``climate_data`` table is preserved.
+
+If no tag is specified, the 'latest' (not the HEAD image or current state of the checked out image)
+image is used.
+
+``sgr import noaa/climate:my_tag "SELECT * FROM climate_data" my/repository climate_data``
+
+Create a new image in ``my/repository`` with the result of the query stored in the ``climate_data`` table. This
+creates a new physical object without any linkage to the original data, so the history of the ``climate_data``
+table isn't preserved. The SQL query can interact with multiple tables in the source image.
+
+``sgr import other_schema other_table my/repository``
+
+Since other_schema isn't a Splitgraph repository, this will copy ``other_schema.other_table``
+into a new Splitgraph object and add the ``other_table`` table to a new image in ``my/repository``.
+
+Note that importing doesn't discard or commit pending changes in the target Splitgraph repository: a new image
+is created with the new table added, the new table is materialized in the repository and the HEAD pointer is moved.

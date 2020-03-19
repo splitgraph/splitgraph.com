@@ -1,0 +1,15 @@
+export const meta = {id: "engine_list", title: "engine list"};
+
+## engine list
+
+```sgr list [OPTIONS] ```
+
+List Splitgraph engines.
+
+This only lists Docker containers that were created by sgr engine
+(whose names start with "splitgraph_engine_". To operate other engines,
+use Docker CLI directly.
+
+### Options
+
+  * **`-a, --include-all`**: Include stopped engine containers.

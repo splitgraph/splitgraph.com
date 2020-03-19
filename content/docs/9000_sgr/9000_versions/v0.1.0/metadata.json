@@ -1,0 +1,23 @@
+{
+  "title": "v0.1.0",
+  "updated_at": "2020-03-19T01:00:47.593Z",
+  "release": {
+    "id": 23967035,
+    "tag_name": "v0.1.0",
+    "target_commitish": "10ac909ca329ceb30e21f935a0400ebe5a982acc",
+    "created_at": "2020-03-16T22:17:28Z",
+    "published_at": "2020-03-17T00:40:26Z",
+    "assets": [
+      {
+        "id": 18532858,
+        "url": "https://api.github.com/repos/splitgraph/splitgraph/releases/assets/18532858",
+        "name": "sgr-docs-bin.tar.gz",
+        "label": "",
+        "created_at": "2020-03-06T21:38:36Z",
+        "updated_at": "2020-03-06T21:38:36Z",
+        "browser_download_url": "https://github.com/splitgraph/splitgraph/releases/download/v0.1.0/sgr-docs-bin.tar.gz"
+      }
+    ]
+  },
+  "isLatest": false
+}

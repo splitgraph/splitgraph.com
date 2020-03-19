@@ -1,0 +1,21 @@
+export const meta = {id: "reindex", title: "reindex"};
+
+## sgr reindex
+
+```sgr reindex [OPTIONS] IMAGE_SPEC TABLE_NAME```
+
+Run extra indexes on a table. This will merge the indexing results for all objects
+that a table is formed from with the current object indexes. For explanation of
+what indexes do, see the documentation for `sgr commit`.
+
+If the objects haven't been downloaded yet, this will download them.
+
+Currently reindexing objects that change other objects is unsupported and will raise
+an error. Pass `-o` to ignore these objects and only reindex supported objects.
+
+Image spec must be of the format ``[NAMESPACE/]REPOSITORY[:HASH_OR_TAG]``. If no tag is specified, ``HEAD`` is used.
+
+### Options
+
+  * **`-i, --index-options LOADS`**: JSON dictionary of extra indexes to calculate, e.g. '{"bloom": {"column_1": {"probability": 0.01}}}'  [required]
+  * **`-o, --ignore-patch-objects`**: Ignore objects that change other objects' rows instead of raising an error

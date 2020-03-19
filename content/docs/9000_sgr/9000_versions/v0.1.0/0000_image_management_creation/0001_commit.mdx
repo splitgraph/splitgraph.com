@@ -1,0 +1,51 @@
+export const meta = {id: "commit", title: "commit"};
+
+## commit
+
+```sgr commit [OPTIONS] REPOSITORY```
+
+Commit changes to a checked-out Splitgraph repository.
+
+This packages up all changes into a new image. Where a table hasn't been created or had its schema changed,
+this will delta compress the changes. For all other tables (or if ``-s`` has been passed), this will
+store them as full table snapshots.
+
+When a table is stored as a full snapshot, `--chunk-size` sets the maximum size, in rows, of the fragments
+that the table will be split into (default is no splitting).
+
+If `--split-changesets` is passed, delta-compressed changes will also be split up according to the original
+table chunk boundaries. For example, if there's a change to the first and the 20000th row of a table that was
+originally committed with `--chunk-size=10000`, this will create 2 fragments: one based on the first chunk
+and one on the second chunk of the table.
+
+`--index-options` expects a JSON-serialized dictionary of `{table: index_type: column: index_specific_kwargs}`.
+Indexes are used to narrow down the amount of chunks to scan through when running a query. By default, each column
+has a range index (minimum and maximum values) and it's possible to add bloom filtering to speed up queries that
+involve equalities.
+
+Bloom filtering allows to trade off between the space overhead of the index and the probability of a false
+positive (claiming that an object contains a record when it actually doesn't, leading to extra scans).
+
+An example bloom filter `index-options` dictionary:
+
+
+```
+{
+    "table": {
+        "bloom": {
+            "column_1": {
+                "probability": 0.01,   # Only one of probability
+                "size": 10000          # or size can be specified.
+            }
+        }
+    }
+}
+```
+
+### Options
+
+  * **`-s, --snap`**: Do not delta compress the changes and instead store the whole table again. This consumes more space, but makes checkouts faster.
+  * **`-c, --chunk-size INTEGER`**: Split new tables into chunks of this many rows.
+  * **`-t, --split-changesets`**: Split changesets for existing tables across original chunk boundaries.
+  * **`-i, --index-options LOADS`**: JSON dictionary of extra indexes to calculate on the new objects.
+  * **`-m, --message TEXT`**: Optional commit message
