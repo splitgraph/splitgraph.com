@@ -407,7 +407,8 @@ const findDeleted = ({ manifestReleases, remoteReleases }) => {
 };
 
 const fingerprintAsset = asset => hash(asset);
-const fingerprintAssets = assets => hash(new Set(assets.map(fingerprintAsset)));
+const fingerprintAssets = assets =>
+  hash(new Set((assets || []).map(fingerprintAsset)));
 
 const fingerprintRelease = release => {
   const { id, tag_name, target_commitish, created_at, published_at } = release;
