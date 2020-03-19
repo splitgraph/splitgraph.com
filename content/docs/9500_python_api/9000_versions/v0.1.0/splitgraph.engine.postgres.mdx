@@ -220,16 +220,16 @@ If not specified, uses the schema of target_table.</p></li>
 
 <dl className="method">
 <dt id="splitgraph.engine.postgres.engine.PostgresEngine.store_object">
-<code className="sig-name descname">store_object</code><span className="sig-paren">(</span><em className="sig-param">object_id: str</em>, <em className="sig-param">source_schema: str</em>, <em className="sig-param">source_table: str</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.store_object" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stores a Splitgraph object located in a staging table in the actual format
+<code className="sig-name descname">store_object</code><span className="sig-paren">(</span><em className="sig-param">object_id: str, source_query: Union[bytes, psycopg2.sql.Composed, str, psycopg2.sql.SQL], schema_spec: List[splitgraph.core.types.TableColumn], source_query_args=None</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.store_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores a Splitgraph object using a source query in the actual format
 implemented by this engine.</p>
-<p>At the end of this operation, the staging table must be deleted.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
 <dd className="field-odd"><ul className="simple">
-<li><p><strong>source_schema</strong> – Schema the staging table is located in.</p></li>
-<li><p><strong>source_table</strong> – Name of the staging table</p></li>
 <li><p><strong>object_id</strong> – Name of the object</p></li>
+<li><p><strong>source_query</strong> – SELECT query that produces data required by the object</p></li>
+<li><p><strong>schema_spec</strong> – Schema of the source table</p></li>
+<li><p><strong>source_query_args</strong> – Arguments to mogrify into the source query.</p></li>
 </ul>
 </dd>
 </dl>
@@ -273,6 +273,12 @@ splitgraph_meta (unmounting non-existing objects and mounting existing ones).</p
 <dt id="splitgraph.engine.postgres.engine.PsycopgEngine.close">
 <code className="sig-name descname">close</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>Commit and close the engine’s backing connection</p>
+</dd></dl>
+
+<dl className="method">
+<dt id="splitgraph.engine.postgres.engine.PsycopgEngine.close_others">
+<code className="sig-name descname">close_others</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.close_others" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close and release all other connections to the connection pool.</p>
 </dd></dl>
 
 <dl className="method">
@@ -385,6 +391,11 @@ and by association the version of the engine itself.</p>
 </dd></dl>
 
 </dd></dl>
+
+<dl className="function">
+<dt id="splitgraph.engine.postgres.engine.add_ud_flag_column">
+<code className="sig-prename descclassname">splitgraph.engine.postgres.engine.</code><code className="sig-name descname">add_ud_flag_column</code><span className="sig-paren">(</span><em className="sig-param">table_schema: List[splitgraph.core.types.TableColumn]</em><span className="sig-paren">)</span> → List[splitgraph.core.types.TableColumn]<a className="headerlink" href="#splitgraph.engine.postgres.engine.add_ud_flag_column" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl className="function">
 <dt id="splitgraph.engine.postgres.engine.chunk">

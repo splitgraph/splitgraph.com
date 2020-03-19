@@ -1,6 +1,6 @@
 export const meta = {id: "commit", title: "commit"};
 
-## commit
+## sgr commit
 
 ```sgr commit [OPTIONS] REPOSITORY```
 
@@ -11,12 +11,16 @@ this will delta compress the changes. For all other tables (or if ``-s`` has bee
 store them as full table snapshots.
 
 When a table is stored as a full snapshot, `--chunk-size` sets the maximum size, in rows, of the fragments
-that the table will be split into (default is no splitting).
+that the table will be split into (default is no splitting). The splitting is done by the
+table's primary key.
 
 If `--split-changesets` is passed, delta-compressed changes will also be split up according to the original
 table chunk boundaries. For example, if there's a change to the first and the 20000th row of a table that was
 originally committed with `--chunk-size=10000`, this will create 2 fragments: one based on the first chunk
 and one on the second chunk of the table.
+
+If `--chunk-sort-keys` is passed, data inside the chunk is sorted by this key (or multiple keys).
+This helps speed up queries on those keys for storage layers than can leverage that (e.g. CStore). The expected format is JSON, e.g. `{table_1: [col_1, col_2]}`
 
 `--index-options` expects a JSON-serialized dictionary of `{table: index_type: column: index_specific_kwargs}`.
 Indexes are used to narrow down the amount of chunks to scan through when running a query. By default, each column
@@ -26,7 +30,7 @@ involve equalities.
 Bloom filtering allows to trade off between the space overhead of the index and the probability of a false
 positive (claiming that an object contains a record when it actually doesn't, leading to extra scans).
 
-An example bloom filter `index-options` dictionary:
+An example `index-options` dictionary:
 
 
 ```
@@ -37,7 +41,11 @@ An example bloom filter `index-options` dictionary:
                 "probability": 0.01,   # Only one of probability
                 "size": 10000          # or size can be specified.
             }
-        }
+        },
+        # Only compute the range index on these columns. By default,
+        # it's computed on all columns and is always computed on the
+        # primary key no matter what.
+        "range": ["column_2", "column_3"]
     }
 }
 ```
@@ -45,7 +53,8 @@ An example bloom filter `index-options` dictionary:
 ### Options
 
   * **`-s, --snap`**: Do not delta compress the changes and instead store the whole table again. This consumes more space, but makes checkouts faster.
-  * **`-c, --chunk-size INTEGER`**: Split new tables into chunks of this many rows.
+  * **`-c, --chunk-size INTEGER`**: Split new tables into chunks of this many rows (by primary key).
+  * **`-k, --chunk-sort-keys JSON`**: Sort the data inside each chunk by this/these key(s)
   * **`-t, --split-changesets`**: Split changesets for existing tables across original chunk boundaries.
-  * **`-i, --index-options LOADS`**: JSON dictionary of extra indexes to calculate on the new objects.
+  * **`-i, --index-options JSON`**: JSON dictionary of extra indexes to calculate on the new objects.
   * **`-m, --message TEXT`**: Optional commit message

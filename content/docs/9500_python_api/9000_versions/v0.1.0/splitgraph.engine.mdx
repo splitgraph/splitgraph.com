@@ -211,16 +211,16 @@ If not specified, uses the schema of target_table.</p></li>
 
 <dl className="method">
 <dt id="splitgraph.engine.ObjectEngine.store_object">
-<code className="sig-name descname">store_object</code><span className="sig-paren">(</span><em className="sig-param">object_id</em>, <em className="sig-param">source_schema</em>, <em className="sig-param">source_table</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.store_object" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stores a Splitgraph object located in a staging table in the actual format
+<code className="sig-name descname">store_object</code><span className="sig-paren">(</span><em className="sig-param">object_id: str, source_query: Union[bytes, psycopg2.sql.Composed, str, psycopg2.sql.SQL], schema_spec: List[splitgraph.core.types.TableColumn], source_query_args: Optional[Sequence[Any]]</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.store_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores a Splitgraph object using a source query in the actual format
 implemented by this engine.</p>
-<p>At the end of this operation, the staging table must be deleted.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
 <dd className="field-odd"><ul className="simple">
-<li><p><strong>source_schema</strong> – Schema the staging table is located in.</p></li>
-<li><p><strong>source_table</strong> – Name of the staging table</p></li>
 <li><p><strong>object_id</strong> – Name of the object</p></li>
+<li><p><strong>source_query</strong> – SELECT query that produces data required by the object</p></li>
+<li><p><strong>schema_spec</strong> – Schema of the source table</p></li>
+<li><p><strong>source_query_args</strong> – Arguments to mogrify into the source query.</p></li>
 </ul>
 </dd>
 </dl>
@@ -296,7 +296,7 @@ and loading tables.</p>
 
 <dl className="method">
 <dt id="splitgraph.engine.SQLEngine.copy_table">
-<code className="sig-name descname">copy_table</code><span className="sig-paren">(</span><em className="sig-param">source_schema: str, source_table: str, target_schema: str, target_table: str, with_pk_constraints: bool = True, limit: Optional[int] = None, after_pk: Union[Tuple[datetime.datetime, int], Tuple[int], None] = None</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.engine.SQLEngine.copy_table" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">copy_table</code><span className="sig-paren">(</span><em className="sig-param">source_schema: str</em>, <em className="sig-param">source_table: str</em>, <em className="sig-param">target_schema: str</em>, <em className="sig-param">target_table: str</em>, <em className="sig-param">with_pk_constraints: bool = True</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.engine.SQLEngine.copy_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy a table in the same engine, optionally applying primary key constraints as well.</p>
 </dd></dl>
 

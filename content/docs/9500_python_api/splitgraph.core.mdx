@@ -871,6 +871,19 @@ qualifiers.</p>
 <p>Represents a Splitgraph table in a given image. Shouldn’t be created directly, use Table-loading
 methods in the <a className="reference internal" href="#splitgraph.core.image.Image" title="splitgraph.core.image.Image"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.core.image.Image</span></code></a> class instead.</p>
 <dl className="method">
+<dt id="splitgraph.core.table.Table.get_length">
+<code className="sig-name descname">get_length</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → int<a className="headerlink" href="#splitgraph.core.table.Table.get_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of rows in this table.</p>
+<p>This might be smaller than the total number of rows in all objects belonging to this
+table as some objects might overwrite each other.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Returns</dt>
+<dd className="field-odd"><p>Number of rows in table</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="method">
 <dt id="splitgraph.core.table.Table.get_query_plan">
 <code className="sig-name descname">get_query_plan</code><span className="sig-paren">(</span><em className="sig-param">quals: Optional[Sequence[Sequence[Tuple[str, str, Any]]]], columns: Sequence[str], use_cache: bool = True</em><span className="sig-paren">)</span> → splitgraph.core.table.QueryPlan<a className="headerlink" href="#splitgraph.core.table.Table.get_query_plan" title="Permalink to this definition">¶</a></dt>
 <dd><p>Start planning a query (preliminary steps before object downloading,
