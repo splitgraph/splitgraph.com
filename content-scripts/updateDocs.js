@@ -121,6 +121,14 @@ const main = async () => {
 
   const { anyChanged, latest, unchanged, created, deleted, modified } = diff;
 
+  console.log(
+    JSON.stringify(
+      { anyChanged, latest, unchanged, created, deleted, modified },
+      null,
+      2
+    )
+  );
+
   if (!anyChanged) {
     console.error("No changes");
     return;

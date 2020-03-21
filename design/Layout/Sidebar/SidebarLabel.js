@@ -366,7 +366,7 @@ const getClassNames = ({
 
   const notActive = !isActiveNode && !isInActivePath;
   const unclicked = !isLastClicked && !isInLastClickedPath;
-  if (notActive && (unclicked && !isChildOfClickedParent)) {
+  if (notActive && unclicked && !isChildOfClickedParent) {
     classNames.push(ClassNames.MutedNode);
   }
 
@@ -469,7 +469,7 @@ const SidebarLabel = ({
     nodeId,
     url,
     slug,
-    metadata: { title } = {},
+    metadata: { title, sidebarTitle = null } = {},
     children,
     parentNodeId
   } = node;
@@ -503,26 +503,28 @@ const SidebarLabel = ({
     anythingBeenClicked
   });
 
+  const _title = sidebarTitle || title;
+
   return node && url ? (
     <span sx={Style} onClick={onClick} id={labelContainerId} ref={containerEl}>
       <Link
         href={url}
         className={labelClassNames}
-        title={title}
+        title={_title}
         sx={{ textDecoration: "none" }}
       >
-        {title}
+        {_title}
       </Link>
     </span>
   ) : depth >= minLabelDepth ? (
     <span sx={Style} id={labelContainerId} ref={containerEl}>
       <span
-        title={title}
+        title={_title}
         onClick={onClick}
         // onMouseOver={onClick}
         className={labelClassNames}
       >
-        {title}
+        {_title}
       </span>
     </span>
   ) : null;
