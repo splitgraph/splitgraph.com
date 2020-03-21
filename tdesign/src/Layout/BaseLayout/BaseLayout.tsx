@@ -2,7 +2,11 @@
 import * as React from 'react';
 
 import { Box } from 'rebass';
-import { Header } from '../Header';
+import { Header, HeaderLeft, HeaderCenter, HeaderRight } from '../Header';
+import { LogoImage } from '../LogoImage';
+import { LogoText } from '../LogoText';
+import { Link } from '../../Link';
+import { Avatar } from '../../Avatar';
 
 // import "@csstools/normalize.css";
 // import "../../css/base.css";
@@ -18,7 +22,17 @@ export interface BaseLayoutProps {
 export default ({ children }: BaseLayoutProps) => {
   return (
     <Box>
-      <Header>Header</Header>
+      <Header>
+        <HeaderLeft>
+          <LogoImage />
+          <LogoText />
+        </HeaderLeft>
+        <HeaderCenter>Center</HeaderCenter>
+        <HeaderRight>
+          <Link href="#">Docs</Link>
+          <Avatar initials={'MR'} />
+        </HeaderRight>
+      </Header>
       {children}
     </Box>
   );

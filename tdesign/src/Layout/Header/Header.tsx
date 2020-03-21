@@ -5,16 +5,56 @@ import { Box } from 'rebass';
 
 export interface HeaderProps {
   children?: React.ReactNode;
-  gridArea?: string;
+  style?: any;
 }
 
 const headerSx: any = {
   backgroundColor: 'primary',
-  display: 'flex',
-  minHeight: 100,
-  maxHeight: 100,
+  display: 'grid',
+  gridTemplateColumns: '1fr 2fr 1fr',
+  gridTemplateRows: '1fr',
+  gridColumnGap: '0px',
+  gridRowGap: '0px',
+  minHeight: '5vh',
+  '.header--left': {
+    gridArea: '1 / 1 / 2 / 2',
+    backgroundColor: 'heavy',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  '.header--center': {
+    gridArea: '1 / 2 / 2 / 3',
+    // backgroundColor: 'red',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  '.header--right': {
+    gridArea: '1 / 3 / 2 / 4',
+    // backgroundColor: 'purple',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+  '.logo-text': {
+    color: 'sglightblue',
+    // fontSize: '1.5rem',
+    paddingLeft: '1ch',
+  },
+  a: {
+    color: 'light',
+    fontWeight: 'bold',
+    textDecoration: 'underline',
+    marginRight: '1ch',
+  },
+  'a:hover': {
+    borderBottomStyle: 'solid',
+    borderBottomWidth: '1px',
+    borderBottomColor: 'light',
+  },
 };
 
-export default ({ children, gridArea = 'header' }: HeaderProps) => (
-  <Box sx={{ gridArea, ...headerSx }}>{children}</Box>
+export default ({ children }: HeaderProps) => (
+  <Box sx={headerSx}>{children}</Box>
 );

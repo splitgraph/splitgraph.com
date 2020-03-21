@@ -37,7 +37,7 @@ const useResponsiveStyle = (): ILayoutContext => {
 
   const style = {
     display: 'grid',
-    minHeight: '100vh',
+    // minHeight: '95vh',
     gridTemplateColumns,
     gridTemplateRows,
     gridColumnGap: 0,
@@ -60,7 +60,7 @@ const useResponsiveStyle = (): ILayoutContext => {
     },
     '.two-col-main': {
       gridArea: rightArea,
-      //   backgroundColor: 'blue',
+      backgroundColor: 'light',
     },
   };
 

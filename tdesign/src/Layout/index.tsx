@@ -1,5 +1,5 @@
 // export { Footer } from "./Footer";
-export { Header } from './Header';
+export { Header, HeaderLeft, HeaderRight, HeaderCenter } from './Header';
 // export {
 //   MainContent,
 //   ContentBody,
@@ -16,3 +16,8 @@ export {
   TwoColumnLayoutLeft,
   TwoColumnLayoutMain,
 } from './TwoColumnLayout';
+export { MainContent } from './MainContent';
+
+export { LogoImage } from './LogoImage';
+export { LogoText } from './LogoText';
+

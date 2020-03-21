@@ -77,7 +77,7 @@ export const makeDefaultTheme = () => ({
   useCustomProperties: true,
   colors: {
     text: '#000',
-    background: '#fff',
+    white: '#fff',
     // primary: "#07c",
     primary: '#36678d',
     // primary: "#000",
@@ -99,6 +99,7 @@ export const makeDefaultTheme = () => ({
     warning: 'orange',
     darkgray: '#3c',
     sgdarkblue: '#36678d',
+    sglightblue: '#d5f6fe',
     accent: 'secondary',
   },
   backgrounds: {
