@@ -1,12 +1,13 @@
 // @jsx jsx
 import { Styled } from 'theme-ui';
 import * as React from 'react';
+import Link from 'next/link';
 
 export interface LinkProps
   extends React.HTMLAttributes<
     HTMLAnchorElement | HTMLButtonElement | HTMLElement
   > {
-  href?: string;
+  href: string;
   as?: string;
   replace?: boolean;
   variant?: string;
@@ -14,17 +15,23 @@ export interface LinkProps
   children: React.ReactNode;
 }
 
-// TODO: Figure out best way to inject next/link
-export default ({
-  href,
-  as,
-  replace,
-  variant = 'links.primary',
-  sx = {},
-  children,
-  ...rest
-}: LinkProps) => (
-  <Styled.a sx={{ variant, ...sx }} href={href} {...rest}>
-    {children}
-  </Styled.a>
+export default React.forwardRef(
+  (
+    {
+      href,
+      as,
+      replace,
+      variant = 'links.primary',
+      sx = {},
+      children,
+      ...rest
+    }: LinkProps,
+    ref: any
+  ) => (
+    <Link href={href}>
+      <Styled.a sx={{ variant, ...sx }} href={href} ref={ref} {...rest}>
+        {children}
+      </Styled.a>
+    </Link>
+  )
 );

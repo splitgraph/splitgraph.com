@@ -17,6 +17,7 @@
     "clean": "./clean.sh"
   },
   "peerDependencies": {
+    "next": "*",
     "react": ">=16"
   },
   "husky": {
