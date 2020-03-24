@@ -26,3 +26,5 @@ export { ThemeProvider } from 'theme-ui';
 export * from './Link';
 
 export * from './Icon';
+
+export { Card } from './Card';

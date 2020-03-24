@@ -136,6 +136,7 @@ export const makeDefaultTheme = () => ({
   },
   shadows: {
     card: '0 0 4px rgba(0, 0, 0, .125)',
+    leftHighlightPrimary: '-5px 0 #36678d',
   },
   // rebass variants
   text: {

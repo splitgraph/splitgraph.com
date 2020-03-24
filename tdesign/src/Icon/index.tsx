@@ -54,3 +54,19 @@ export { IconShield };
 import IconLock from './IconLock';
 export { IconLock };
 
+
+import IconChevronDown from './IconChevronDown';
+export { IconChevronDown };
+
+
+import IconChevronLeft from './IconChevronLeft';
+export { IconChevronLeft };
+
+
+import IconChevronRight from './IconChevronRight';
+export { IconChevronRight };
+
+
+import IconChevronup from './IconChevronup';
+export { IconChevronup };
+
