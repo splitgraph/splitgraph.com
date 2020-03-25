@@ -26,7 +26,7 @@ interface ErrorResetLinkProps {
 }
 
 const ErrorResetLink = ({ text }: ErrorResetLinkProps) => (
-  <MutedLink>{text}</MutedLink>
+  <MutedLink href={'#'}>{text}</MutedLink>
 );
 
 export interface ErrorAlertProps {

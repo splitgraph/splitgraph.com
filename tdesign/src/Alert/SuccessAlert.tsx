@@ -26,7 +26,7 @@ interface SuccessResetLinkProps {
 }
 
 const SuccessResetLink = ({ text, href }: SuccessResetLinkProps) => (
-  <MutedLink sx={{ color: '#fff' }} href={href}>
+  <MutedLink sx={{ color: '#fff' }} href={href || '#'}>
     {text}
   </MutedLink>
 );
