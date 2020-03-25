@@ -9,7 +9,10 @@ export interface HeaderProps {
 }
 
 const headerSx: any = {
-  backgroundColor: 'primary',
+  backgroundColor: 'heavy',
+  borderBottomColor: 'primary',
+  borderBottomStyle: 'solid',
+  borderBottomWidth: '1px',
   display: 'grid',
   gridTemplateColumns: '1fr 2fr 1fr',
   gridTemplateRows: '1fr',
@@ -29,6 +32,7 @@ const headerSx: any = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    color: 'light',
   },
   '.header--right': {
     gridArea: '1 / 3 / 2 / 4',
