@@ -2,7 +2,7 @@
 // @ts-ignore
 import { jsx, Box, Text } from 'theme-ui';
 import * as React from 'react';
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useLayoutEffect, useRef } from 'react';
 
 import { IIconProps } from '../Icon/BaseIcon';
 import { Link } from '../Link';
@@ -41,7 +41,7 @@ export default ({
       inline: 'start',
     });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (typeof window === 'undefined') {
       return;
     }

@@ -41,6 +41,12 @@ const useResponsiveStyle = (): ILayoutContext => {
     gridTemplateColumns,
     gridTemplateRows,
     gridColumnGap: 0,
+    minHeight: '95vh',
+    maxHeight: [
+      expanded ? '100vh' : 'initial',
+      expanded ? '100vh' : 'initial',
+      'initial',
+    ],
     gridRowGap: 0,
     '.two-col-left': {
       gridArea: leftArea,

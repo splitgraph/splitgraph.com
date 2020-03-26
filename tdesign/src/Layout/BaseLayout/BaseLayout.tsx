@@ -21,7 +21,7 @@ export interface BaseLayoutProps {
 
 export default ({ children }: BaseLayoutProps) => {
   return (
-    <Box>
+    <Box style={{ minWidth: '-webkit-fit-content' }}>
       <Header>
         <HeaderLeft>
           <LogoImage />
@@ -29,7 +29,7 @@ export default ({ children }: BaseLayoutProps) => {
         </HeaderLeft>
         <HeaderCenter>Center</HeaderCenter>
         <HeaderRight>
-          <Link href="#">Docs</Link>
+          <Link href="/docs/getting-started/introduction">Docs</Link>
           <Avatar initials={'MR'} />
         </HeaderRight>
       </Header>
