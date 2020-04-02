@@ -2,7 +2,7 @@
 // @ts-ignore
 import { jsx, Box, Text } from 'theme-ui';
 import * as React from 'react';
-import { useContext, useLayoutEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 
 import { IIconProps } from '../Icon/BaseIcon';
 import { Link } from '../Link';
@@ -12,6 +12,7 @@ export interface MenuItemProps {
   // TODO: Figure out generics, should be something like React.FC<IIconProps>
   Icon?: any;
   href?: string;
+  as?: string;
   text?: string;
   iconProps?: IIconProps;
   iconSx?: any;
@@ -23,6 +24,7 @@ export interface MenuItemProps {
 export default ({
   Icon,
   href,
+  as,
   text,
   iconSx = {},
   isActive = false,
@@ -41,7 +43,7 @@ export default ({
       inline: 'start',
     });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (typeof window === 'undefined') {
       return;
     }
@@ -95,7 +97,7 @@ export default ({
       <Box sx={containerStyle} className={innerContainerClassName}>
         {Icon && <Icon sx={iconStyle} />}{' '}
         {href ? (
-          <Link sx={linkStyle} href={href} className={linkClassName}>
+          <Link sx={linkStyle} href={href} as={as} className={linkClassName}>
             {text}
           </Link>
         ) : (

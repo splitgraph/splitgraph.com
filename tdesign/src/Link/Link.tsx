@@ -28,8 +28,8 @@ export default React.forwardRef(
     }: LinkProps,
     ref: any
   ) => (
-    <Link href={href}>
-      <Styled.a sx={{ variant, ...sx }} href={href} ref={ref} {...rest}>
+    <Link href={href} as={as} passHref>
+      <Styled.a sx={{ variant, ...sx }} ref={ref} {...rest}>
         {children}
       </Styled.a>
     </Link>
