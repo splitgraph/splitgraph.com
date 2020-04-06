@@ -1,0 +1,253 @@
+export const meta = {
+  id: "splitgraph_cloud",
+  title: "Splitgraph Cloud"
+};
+
+### Introduction
+
+Whilst you can push and pull data to/from other Splitgraph engines, using Splitgraph Cloud offers
+multiple advantages over that.
+
+Splitgraph Cloud is the analog of the Docker registry for Docker: it's a repository of
+publicly available data images that you can experiment with.
+
+Every dataset pushed out to the Splitgraph registry gets multiple perks. One of them is an automatic read-only OpenAPI-compatible endpoint that can be used to query it, provided by [PostgREST](postgrest.org/). For example, https://data.splitgraph.com/splitgraph/domestic_us_flights/latest/-/rest/flights?and=(origin_airport.eq.JFK,destination_airport.eq.LAX).
+
+### Register on Splitgraph Cloud
+
+You can register and log into the registry directly from the `sgr` client:
+
+```
+$ sgr cloud register
+```
+
+This will prompt you for a username, password, e-mail, ask you to accept our Terms and Conditions
+and log you into the registry.
+
+Your API keys to communicate with the Splitgraph registry and the REST API are stored in your `.sgconfig` file. Your password is never stored in there.
+
+### Pull a data image
+
+The 2016 US Presidential Election precinct-level returns dataset ([source](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LYWX3D)) has 2 million rows, takes up 500MB as a CSV file and only 25MB in Splitgraph. It's a perfect example to showcase more powerful features of Splitgraph.
+
+Clone the image. Note this will only download the image's metadata. No actual data is transferred until it's required, unless you explicitly ask for it.
+
+```
+$ sgr clone splitgraph/2016_election:latest
+Gathering remote metadata...
+Fetched metadata for 1 image, 1 table, 20 objects and 1 tag.
+
+$ sgr show splitgraph/2016_election:latest
+Image splitgraph/2016_election:3835145ada3f07cad99087d1b1071122d58c48783cbfe4694c101d35651fba90
+
+Created at 2019-10-10T15:51:41.122370
+Size: 26.75 MiB
+No parent (root image)
+
+Tables:
+  precinct_results
+
+$ sgr table splitgraph/2016_election:latest precinct_results
+Table splitgraph/2016_election:3835145ada3f07cad99087d1b1071122d58c48783cbfe4694c101d35651fba90/precinct_results
+
+Size: 26.75 MiB
+Rows: 1989234
+Columns:
+  year (integer)
+  stage (character varying)
+  special (boolean)
+  state (character varying)
+  state_postal (character varying)
+  state_fips (bigint)
+  state_icpsr (bigint)
+  county_name (character varying)
+  county_fips (bigint)
+  county_ansi (bigint)
+  county_lat (numeric)
+  county_long (numeric)
+  jurisdiction (character varying)
+  precinct (character varying)
+  candidate (character varying)
+  candidate_normalized (character varying)
+  office (character varying)
+  district (character varying)
+  writein (boolean)
+  party (character varying)
+  mode (character varying)
+  votes (bigint)
+  candidate_opensecrets (character varying)
+  candidate_wikidata (character varying)
+  candidate_party (character varying)
+  candidate_last (character varying)
+  candidate_first (character varying)
+  candidate_middle (character varying)
+  candidate_full (character varying)
+  candidate_suffix (character varying)
+  candidate_nickname (character varying)
+  candidate_fec (character varying)
+  candidate_fec_name (character varying)
+  candidate_google (character varying)
+  candidate_govtrack (character varying)
+  candidate_icpsr (character varying)
+  candidate_maplight (character varying)
+  id (integer, PK)
+
+Objects:
+  o960395135f32c2da7b4b9371da06b0a9d00925472df2ec1ef687acf6f24894
+  o07f95f9944d673d8cc05a5b5174253adc513d377ccd811928ae0fe6923e451
+  o40e4e46594064e402ccdb914ffb8c9f59267a67b33420cf704073729a6671b
+  o1ccf32547f73be8047c3de06760b32c1077c3bd0b0d8309575ebe9ab8eb86c
+  oaf3cca3210e1903f06872d0041097dd284423958352d5cd7b5209eceec6cbf
+  odc1546c25cac950eca4b551642305d548172b554643f046a16cd9da236c895
+  oe60d81ef239980ceb5869fd787d159f227b59b66ab6ceef18aed45cd62ae8f
+  o9e77e782f8bda76be6a3f4d29b82661e32d614f7d63230619e8635b9b2b512
+  of06f6cfb7bd95047bb49bcd3ab6b98da63c2605aa9659c064cee3bd708b0e4
+  o0671aabeb9d4ce362515624616a5a202503db99d7a83007bfdf63fd71b91af
+...
+```
+
+### Query the image
+
+To interact this image, you could check it out, which would download all objects that it consists
+of and create a series of tables for you that any application that supports PostgreSQL
+can query.
+
+However, imagine if this dataset were a few hundred gigabytes large. Should you really need to
+download all of it to query a few rows?
+
+Splitgraph objects contain metadata that can help it to discard objects that are irrelevant to a
+query. The US election dataset is stored ordered by county FIPS code and so queries that filter
+on this column only need to download a couple of objects instead of the whole dataset.
+
+Let's check out the image into a so called "layered querying" schema. This sets up a Postgres
+foreign data wrapper for this image that acts as a shim and presents itself as normal Postgres
+table to clients.
+
+```
+$ sgr checkout --layered splitgraph/2016_election:latest
+Checked out splitgraph/2016_election:3835145ada3f.
+```
+
+We're interested in precinct-level election result for District of Columbia (FIPS code 11001).
+
+```
+$ sgr sql -s splitgraph/2016_election "EXPLAIN SELECT candidate_normalized, SUM(votes) FROM precinct_results WHERE county_fips=11001 GROUP BY candidate_normalized"
+GroupAggregate  (cost=71991481.18..71992900.45 rows=1 width=64)
+  Group Key: candidate_normalized
+  ->  Sort  (cost=71991481.18..71991954.27 rows=189234 width=380)
+        Sort Key: candidate_normalized
+        ->  Foreign Scan on precinct_results  (cost=20.00..71908920.00 rows=189234 width=380)
+              Filter: (county_fips = 11001)
+              Multicorn: Objects removed by filter: 18
+              Multicorn: Scan through 2 object(s) (2.55 MiB)
+JIT:
+  Functions: 7
+...
+```
+
+Here, we can see that this query will only download two objects. Let's actually run it: behind
+the scenes, this will lazily download required data.
+
+```
+sgr sql -s splitgraph/2016_election "SELECT candidate_normalized, SUM(votes) FROM precinct_results WHERE county_fips=11001 GROUP BY candidate_normalized"
+clinton 282830
+in      6551
+johnson 4906
+stein   4258
+trump   12723
+```
+
+Note that you don't need `sgr sql` to run this query: any Postgres client will work.
+
+
+It is also possible to add a bloom filter to some columns to speed up queries to datasets that
+consist of object that span overlapping value ranges. The [bloom filter example](https://github.com/splitgraph/splitgraph/tree/master/examples/bloom-filter) adds a bloom filter on the `county_name`
+column of this dataset, speeding up lookups on county name.
+
+### Create a derivative dataset
+
+Let's create a Splitfile that summarizes the vote counts for every candidate in every state.
+
+You don't need to worry about pulling this dataset or checking it out: Splitgraph will do it for you.
+
+```
+$ echo "FROM splitgraph/2016_election IMPORT { SELECT candidate_normalized, state_postal, SUM(votes) AS total_votes FROM precinct_results GROUP BY candidate_normalized, state_postal } AS votes_by_state" > votes_by_state.splitfile
+
+$ sgr build votes_by_state.splitfile -o votes_by_state
+
+Executing Splitfile votes_by_state.splitfile with arguments {}
+
+Step 1/1 : FROM splitgraph/2016_election IMPORT { SELECT candidate_n...
+Resolving repository splitgraph/2016_election
+Gathering remote metadata...
+No image/object metadata to pull.
+Importing 1 table from splitgraph/2016_election:3835145ada3f into votes_by_state
+Processing table sg_tmp_4c37a2fb468588cc4f0c1084e607d1b4
+Computing table partitions
+Indexing the partition key
+Storing and indexing the table
+100%|███████████████| 1/1 [00:00<00:00, 18.14objs/s]
+ ---> ee8dc4bb7c47
+
+$ sgr table votes_by_state:latest votes_by_state
+Table votes_by_state:ee8dc4bb7c4766cc30593b77e0b6b3dbb2863c06a4ed2274127d558901abeb2f/votes_by_state
+
+Size: 6.36 KiB
+Rows: 793
+Columns:
+  candidate_normalized (character varying)
+  state_postal (character varying)
+  total_votes (numeric)
+
+Objects:
+  o91e4939e520a19c02ca876c7c5248dcf96f9c3fa55552c6ed8359caea842e9
+```
+
+### Push it out
+
+Let's push the dataset out to Splitgraph Cloud. By default, the dataset gets pushed out a repository
+with the same name in your own namespace.
+
+```
+$ sgr push votes_by_state
+Pushing votes_by_state to YOUR_USERNAME/votes_by_state on remote data.splitgraph.com
+Gathering remote metadata...
+Uploading 1 object, total size 6.36 KiB
+Getting upload URLs from the registry...
+100%|█████████████████| 1/1 [00:01<00:00,  1.03s/objs, object=o91e4939e5...]
+Uploaded metadata for 2 images, 1 table, 1 object and 0 tags.
+Setting upstream for votes_by_state to YOUR_USERNAME/votes_by_state.
+```
+
+It's possible that the object that you have just created won't actually be uploaded. This is because
+Splitgraph objects are content-addressable and so objects that already exist upstream won't be
+recreated, avoiding redundant data transfers.
+
+### `sgr cloud curl`
+
+Every public dataset on the Splitgraph registry has a read-only OpenAPI-compatible endpoint that can be used to query it, provided by [PostgREST](postgrest.org/). It can be accessed by curl:
+
+```
+$ curl https://data.splitgraph.com/YOUR_USERNAME/votes_by_state/latest/-/rest/votes_by_state?state_postal=eq.DC
+
+[{"candidate_normalized":"clinton","state_postal":"DC","total_votes":282830},
+ {"candidate_normalized":"in","state_postal":"DC","total_votes":6551},
+ {"candidate_normalized":"johnson","state_postal":"DC","total_votes":4906},
+ {"candidate_normalized":"stein","state_postal":"DC","total_votes":4258},
+ {"candidate_normalized":"trump","state_postal":"DC","total_votes":12723}]
+```
+
+You can also use a shorthand, `sgr cloud curl`, that takes care of all the scaffolding around
+generating the URL and making sure you're logged into the registry:
+
+```
+$ sgr cloud curl YOUR_USERNAME/votes_by_state "votes_by_state?state_postal=eq.DC"
+
+[{"candidate_normalized":"clinton","state_postal":"DC","total_votes":282830},
+ {"candidate_normalized":"in","state_postal":"DC","total_votes":6551},
+ {"candidate_normalized":"johnson","state_postal":"DC","total_votes":4906},
+ {"candidate_normalized":"stein","state_postal":"DC","total_votes":4258},
+ {"candidate_normalized":"trump","state_postal":"DC","total_votes":12723}]
+```
+
+For more information on writing PostgREST queries, see the [PostgREST docs](http://postgrest.org/en/v6.0/api.html).

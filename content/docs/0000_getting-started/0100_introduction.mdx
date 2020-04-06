@@ -5,12 +5,15 @@ export const meta = {
 
 What if you could `git push` your database?
 
-Splitgraph is a data management tool and a data sharing platform inspired by Docker and Git.
+Splitgraph is a data management, building, sharing and versioning tool inspired by Docker and Git.
 
 Splitgraph allows the user to manipulate data images (snapshots of SQL tables at a given point in time) as if they
-were code repositories: by creating, versioning, sharing and downloading them. This is all done seamlessly, so that
-any tool that interacts with a Splitgraph table has no idea it's not just an ordinary database table.
+were code repositories: by creating, versioning, sharing and downloading them. It works on top of PostgreSQL and all versioning is done by SQL operations. Data is checked out into actual PostgreSQL tables, offering read/write performance and feature parity with PostgreSQL. The client application has no idea that it's talking to a Splitgraph table and you don't need to rewrite any of your tools to use Splitgraph.
 
-Furthermore, Splitgraph also defines a Splitfile language that is used to derive datasets from other datasets whilst
-being able to keep track of their provenance and update the image when its dependencies are updated. You can even
-plug another database into Splitgraph and query data from it as if it were just another set of tables.
+Furthermore, Splitgraph also defines the Splitfile language that has Dockerfile-like caching semantics and allows to build Splitgraph data images in a composable, maintainable and reproducible way. Images built this way have provenance tracking: just from looking at the image's metadata it's possible to find out which exact upstream images, tables and columns went into it or rebuild the image against a newer version of the source.
+
+Splitgraph images can also be queried without checking them out, which lets the client only downloads regions of the table that are actually relevant to the query, using bloom filters and other metadata. This is still completely transparent to the client application which gets presented with a PostgreSQL schema that it can talk to using the Postgres wire protocol.
+
+In addition, Splitgraph supports importing and querying data from other databases using Postgres foreign data wrappers. You can create Splitgraph images or query data in MongoDB, MySQL, CSV files or multiple other Postgres databases using the same interface.
+
+Finally, whilst you can share images with other Splitgraph installations, you can also try out Splitgraph Cloud. Datasets shared there get extra perks like an OpenAPI-compatible REST endpoint generated for them.
