@@ -7,6 +7,7 @@ export { Avatar } from './Avatar';
 export { SubmitButton } from './Button/index';
 export {
   BaseLayout,
+  ContentHeader,
   TwoColumnLayout,
   TwoColumnLayoutMain,
   TwoColumnLayoutLeft,

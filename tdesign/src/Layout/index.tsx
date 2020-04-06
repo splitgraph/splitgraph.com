@@ -21,3 +21,5 @@ export { MainContent } from './MainContent';
 export { LogoImage } from './LogoImage';
 export { LogoText } from './LogoText';
 
+export { ContentHeader } from './ContentHeader';
+
