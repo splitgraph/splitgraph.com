@@ -80,6 +80,7 @@ export const makeDefaultTheme = () => ({
     white: '#fff',
     // primary: "#07c",
     primary: '#36678d',
+    primaryHalfOpacity: 'rgba(54, 103, 141, .5)',
     // primary: "#000",
     secondary: '#363C8D',
     heavy: '#0d1821',
@@ -101,6 +102,7 @@ export const makeDefaultTheme = () => ({
     sgdarkblue: '#36678d',
     sglightblue: '#d5f6fe',
     accent: 'secondary',
+    background: '#0d1821',
   },
   backgrounds: {
     divided: {
@@ -183,9 +185,13 @@ export const makeDefaultTheme = () => ({
     primary: {
       fontSize: 2,
       fontWeight: 'bold',
-      color: 'background',
+      color: 'white',
       bg: 'primary',
       borderRadius: 'default',
+    },
+    primaryDisabled: {
+      variant: 'buttons.primary',
+      backgroundColor: 'primaryHalfOpacity',
     },
     outline: {
       variant: 'buttons.primary',
