@@ -7,7 +7,7 @@ export const meta = {
 
 Since a checked-out Splitgraph repository is just another PostgreSQL schema, you can write data to it using any Postgres client. However, this is not the only method of data ingestion: PostgreSQL also supports so-called Foreign Data Wrappers: plugins that allow a user to write a custom handler for any external data source, representing it as a set of foreign tables. Foreign tables act similarly to normal tables and can accept the same SQL queries, so using Splitgraph extends on this idea by building up some scaffolding around foreign data wrappers allowing the user to mount external databases into the engine from the `sgr` command line client or a Splitfile. These mounted tables can then be snapshotted and turned into Splitgraph images with just one command.
 
-The Splitgraph engine ships with several open-source foreign data wrappers: [`postgres_fdw`](https://www.postgresql.org/docs/10/postgres-fdw.html), [`mongo_fdw`](https://github.com/EnterpriseDB/mongo_fdw) and [`mysql_fdw`](https://github.com/EnterpriseDB/mysql_fdw).
+The Splitgraph engine ships with several open-source foreign data wrappers: [`postgres_fdw`](https://www.postgresql.org/docs/12/postgres-fdw.html), [`mongo_fdw`](https://github.com/EnterpriseDB/mongo_fdw) and [`mysql_fdw`](https://github.com/EnterpriseDB/mysql_fdw).
 
 ## Example usage
 

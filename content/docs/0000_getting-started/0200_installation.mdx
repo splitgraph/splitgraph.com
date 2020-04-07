@@ -3,11 +3,13 @@ export const meta = {
   title: "Installation"
 };
 
+### Introduction and requirements
+
 A normal Splitgraph installation consists of two components: the
 Splitgraph engine and the Splitgraph client (`sgr`).
 
 The engine is a Docker container with a customized version of PostgreSQL
-running on it. This is where cached images are stored.
+running on it. This is where cached data is stored.
 
 The client is a Python commandline tool that interacts with the engine.
 
@@ -15,23 +17,16 @@ Most functionality is implemented in the client and to any other
 application, the engine is just another PostgreSQL database: it can
 interact with it by querying tables and writing to them as usual.
 
-To run the Splitgraph engin, you will need to be able to run Docker.
+To run the Splitgraph engine, you will need to be able to run Docker.
 
-`sgr`, the Splitgraph command line client and library can be installed
-either from [GitHub](https://github.com/splitgraph/splitgraph/) or from
-pip:
+### 1 minute start
 
-    $ pip install splitgraph
+First, get the single binary for `sgr` from [the releases page](https://github.com/splitgraph/splitgraph/releases/latest), available for the three major platforms.
 
-You will need to be running Python 3.6 or later. For Linux systems, a single
-self-contained binary is available on the [releases page](https://github.com/splitgraph/splitgraph/releases).
+Then, create a new Splitgraph engine. Do:
 
-### Using `sgr engine add` to get started
+    $ sgr engine add
 
-This is the easiest way that automates most of the steps described in the next section. Do:
-
-    sgr engine add
-    
 This will:
 
   * Prompt you for a password: this is just the password used to protect your
@@ -42,18 +37,33 @@ This will:
     * `splitgraph_engine_default_data` to store the physical data
     * `splitgraph_engine_default_metadata` to store the metadata about composition of Splitgraph images.
   * Initialize the engine
-  * Generate a minimal `.sgconfig` file for you in the current working directory.
+  * Generate a minimal `.sgconfig` file for you in your home directory (`~/.splitgraph/.sgconfig`).
 
 There are extra options in `sgr engine` for advanced users. To see them, run `sgr engine --help`.
 
-### Using Docker directly
+### Advanced installation
 
-Use Docker to pull and start the
+#### `sgr`
+
+You can also install the Splitgraph library from pip. This is useful if you want to use the
+Splitgraph Python API to manipulate images from your code:
+
+    $ pip install splitgraph
+
+If you wish to contribute to Splitgraph itself or get the bleeding-edge version, you can follow
+the [development instructions](https://github.com/splitgraph/splitgraph/#setting-up-a-development-environment)
+on our GitHub.
+
+#### Engine
+
+You can also use Docker to pull and start the
 [engine](https://hub.docker.com/r/splitgraph/engine/):
 
     $ docker run -d \
     -e POSTGRES_PASSWORD=supersecure \
     -p 5432:5432 \
+    -v $PWD/splitgraph_data:/var/lib/splitgraph/objects \
+    -v $PWD/splitgraph_metadata:/var/lib/postgresql/data \
     splitgraph/engine
 
 By default, `sgr` is configured to speak to the engine running on
@@ -63,55 +73,21 @@ installation, run:
 
     $ sgr init
 
-### Local Postgres
-
-If you don't want or can't use Docker, you can also run `sgr` against
-any other Postgres database. Most Splitgraph functionality will still be
-available and you will still be able to download and share images as well
-as follow the instructions in this demo. However, you won't be able to:
-
-- Push/pull images directly to other Splitgraph engines (as opposed to the default behaviour of downloading them from S3-compatible storage) or mount other databases: this requires the Postgres Foreign Data Wrapper extensions to be installed).
-- Use layered querying which allows to run SQL queries against Splitgraph images without materializing them, by only querying and downloading a subset of every table.
-
-After installing `sgr`, run the configurator to generate a base config
-file:
-
-    $ sgr config --config-format --no-shielding | tee .sgconfig
-    [defaults]
-    SG_NAMESPACE=sg-default-ns
-    SG_ENGINE_HOST=localhost
-    SG_ENGINE_PORT=5432
-    SG_ENGINE_DB_NAME=splitgraph
-    SG_ENGINE_USER=sgr
-    SG_ENGINE_PWD=supersecure
-    SG_ENGINE_ADMIN_USER=sgr
-    SG_ENGINE_ADMIN_PWD=supersecure
-    SG_ENGINE_POSTGRES_DB_NAME=postgres
-    SG_CONFIG_FILE=.sgconfig
-    SG_META_SCHEMA=splitgraph_meta
-    SG_CONFIG_DIRS=
-    SG_CONFIG_DIR=
-    SG_REPO_LOOKUP=
-    SG_REPO_LOOKUP_OVERRIDE=
-    SG_S3_HOST=localhost
-    SG_S3_PORT=9000
-    SG_S3_KEY=
-    SG_S3_PWD=
-
-Open `.sgconfig` and change `SG_ENGINE_HOST`, `SG_ENGINE_PORT`,
-`SG_ENGINE_DB_NAME`, `SG_ENGINE_USER` and `SG_ENGINE_PWD` appropriate to
-your Postgres installation. Finally, initialize the engine:
-
-    $ sgr init
-
-    2019-01-01 15:21:43,794 INFO Creating database splitgraph
-    2019-01-01 15:21:44,416 INFO Installing the audit trigger...
-    2019-01-01 15:21:44,500 INFO Ensuring metadata schema splitgraph_meta exists...
-
 ### Configuration file
 
-Splitgraph reads its configuration from the overridden environment
-variables first, then the `.sgconfig` file in the current working
-directory (unless overridden by the `SG_CONFIG_FILE` environment
-variable, then uses the default values. For more information, see the
-documentation for splitgraph.config.
+The Splitgraph configuration file is usually stored in the user's home directory
+(`~/.splitgraph/.sgconfig`). If there's a configuration file in the current working
+directory or the environment variable `SG_CONFIG_FILE` is set, that file is used instead.
+
+It's possible to also override various other configuration flags using environment variables. You
+can inspect the current configuration in use by Splitgraph by running
+
+    $ sgr config
+
+For more information, see the documentation for splitgraph.config.
+
+### What now?
+
+You can keep following this guide to get introduced to basics of manipulating and
+building data images. You can also try out some self-contained example Splitgraph projects
+on [our GitHub](https://github.com/splitgraph/splitgraph/tree/master/examples).
