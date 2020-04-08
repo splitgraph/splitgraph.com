@@ -159,6 +159,10 @@ export const makeDefaultTheme = () => ({
     },
   },
   variants: {
+    paddedContentArea: {
+      paddingLeft: ['2rem', '2rem', '10%'],
+      paddingRight: ['2rem', '2rem', '10%'],
+    },
     avatar: {
       width: 'avatar',
       height: 'avatar',
