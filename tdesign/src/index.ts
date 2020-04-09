@@ -29,3 +29,5 @@ export * from './Link';
 export * from './Icon';
 
 export { Card } from './Card';
+
+export { PopoutBox } from './PopoutBox';
