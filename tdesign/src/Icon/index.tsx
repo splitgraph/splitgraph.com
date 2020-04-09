@@ -98,3 +98,11 @@ export { IconDatabase };
 import IconList from './IconList';
 export { IconList };
 
+
+import IconStarFilled from './IconStarFilled';
+export { IconStarFilled };
+
+
+import IconStarOutline from './IconStarOutline';
+export { IconStarOutline };
+
