@@ -138,6 +138,7 @@ export const makeDefaultTheme = () => ({
   },
   shadows: {
     card: '0 0 4px rgba(0, 0, 0, .125)',
+    cardHover: '0 0 4px rgba(0, 0, 0, .5)',
     leftHighlightPrimary: '-5px 0 #36678d',
   },
   // rebass variants
@@ -221,6 +222,7 @@ export const makeDefaultTheme = () => ({
     },
   },
   links: {
+    unstyled: {},
     primary: {
       // remove the gray background on active links in IE 10.
       backgroundColor: 'transparent',

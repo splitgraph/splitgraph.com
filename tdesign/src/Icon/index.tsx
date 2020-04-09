@@ -70,3 +70,31 @@ export { IconChevronRight };
 import IconChevronup from './IconChevronup';
 export { IconChevronup };
 
+
+import IconActivity from './IconActivity';
+export { IconActivity };
+
+
+import IconColumns from './IconColumns';
+export { IconColumns };
+
+
+import IconGitBranch from './IconGitBranch';
+export { IconGitBranch };
+
+
+import IconTerminal from './IconTerminal';
+export { IconTerminal };
+
+
+import IconGitMerge from './IconGitMerge';
+export { IconGitMerge };
+
+
+import IconDatabase from './IconDatabase';
+export { IconDatabase };
+
+
+import IconList from './IconList';
+export { IconList };
+
