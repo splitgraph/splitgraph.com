@@ -30,4 +30,4 @@ export * from './Icon';
 
 export { Card } from './Card';
 
-export { PopoutBox } from './PopoutBox';
+export { PopoutBox, IRenderPopoutButtonProps } from './PopoutBox';

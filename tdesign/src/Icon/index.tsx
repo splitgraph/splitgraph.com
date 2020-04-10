@@ -106,3 +106,11 @@ export { IconStarFilled };
 import IconStarOutline from './IconStarOutline';
 export { IconStarOutline };
 
+
+import IconCopy from './IconCopy';
+export { IconCopy };
+
+
+import IconClipboard from './IconClipboard';
+export { IconClipboard };
+

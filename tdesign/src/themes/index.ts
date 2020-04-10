@@ -193,6 +193,9 @@ export const makeDefaultTheme = () => ({
       color: 'white',
       bg: 'primary',
       borderRadius: 'default',
+      ':hover': {
+        cursor: 'pointer',
+      },
     },
     primaryDisabled: {
       variant: 'buttons.primary',
@@ -206,7 +209,7 @@ export const makeDefaultTheme = () => ({
     },
     secondary: {
       variant: 'buttons.primary',
-      color: 'background',
+      color: 'white',
       bg: 'secondary',
     },
     pill: {
