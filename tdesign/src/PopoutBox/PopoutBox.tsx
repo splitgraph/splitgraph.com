@@ -3,7 +3,7 @@
 import { jsx, Box, SystemStyleObject } from 'theme-ui';
 import * as React from 'react';
 
-export interface IRenderButtonProps {
+export interface IRenderPopoutButtonProps {
   onClick: () => void;
   isOpen: boolean;
 }
@@ -15,7 +15,7 @@ export type PopoutAnchorPosition =
   | 'bottomLeft';
 
 export interface IPopoutBoxProps {
-  renderButton: (opts: IRenderButtonProps) => React.ReactNode;
+  renderButton: (opts: IRenderPopoutButtonProps) => React.ReactNode;
   children?: React.ReactNode;
   popoutContainerStyle?: SystemStyleObject;
   anchorPosition?: PopoutAnchorPosition;
@@ -77,6 +77,21 @@ export default ({
     }
   };
 
+  const handleEscapeKey = (e: any) => {
+    if (!containerRef.current) {
+      return;
+    }
+
+    // ESC key
+    if (e.keyCode !== 27) {
+      return;
+    }
+
+    if (isOpen) {
+      setIsOpen(false);
+    }
+  };
+
   React.useEffect(() => {
     if (typeof window === 'undefined') {
       return;
@@ -87,8 +102,10 @@ export default ({
     }
 
     document.addEventListener('mousedown', handleDocumentClick);
+    document.addEventListener('keydown', handleEscapeKey);
 
     return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
       document.removeEventListener('mousedown', handleDocumentClick);
     };
   }, [isOpen, handleDocumentClick]);

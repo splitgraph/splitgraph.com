@@ -1,3 +1,2 @@
-import PopoutBox from './PopoutBox';
-export { PopoutBox };
-
+import PopoutBox, { IRenderPopoutButtonProps } from './PopoutBox';
+export { PopoutBox, IRenderPopoutButtonProps };
