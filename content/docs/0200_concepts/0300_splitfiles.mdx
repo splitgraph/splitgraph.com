@@ -1,0 +1,69 @@
+export const meta = {
+  id: "splitfiles",
+  title: "Splitfiles"
+};
+
+Splitfiles are inspired by Dockerfiles and are the simplest way to build Splitgraph images.
+
+Here's an example Splitfile:
+
+```
+FROM splitgraph/geonames:latest IMPORT {
+    SELECT
+        -- Note we need to escape the closing curly brace here for the
+        -- Splitfile executor.
+        substring(alternatenames FROM ',([A-Z]{3\}),') AS iata_code,
+        name,
+        latitude,
+        longitude,
+        geonameid
+    FROM all_countries
+    WHERE feature_code = 'AIRP'
+    AND country_code = 'US'
+    AND substring(alternatenames FROM ',([A-Z]{3\}),') IS NOT NULL
+} AS airports
+
+SQL {
+    CREATE TABLE us_flights_2009 AS
+    SELECT
+        origin_airport AS origin_iata,
+        ao.name AS origin_name,
+        ao.latitude AS origin_lat,
+        ao.longitude AS origin_lon,
+
+        destination_airport AS destination_iata,
+        ad.name AS destination_name,
+        ad.latitude AS destination_lat,
+        ad.longitude AS destination_lon,
+
+        SUM(passengers) AS total_passengers,
+        SUM(seats) AS total_seats,
+        SUM(flights) AS flights
+    FROM "splitgraph/domestic_us_flights:latest".flights f
+        JOIN airports ao ON f.origin_airport = ao.iata_code
+        JOIN airports ad ON f.destination_airport = ad.iata_code
+    WHERE
+        EXTRACT('year' FROM fly_month) = 2009
+        GROUP BY origin_airport, destination_airport,
+            ao.name, ao.latitude, ao.longitude,
+            ad.name, ad.latitude, ad.longitude
+}
+```
+
+They offer multiple advantages over using ad hoc queries or other tools:
+
+  * **Dockerfile-like caching**: every Splitfile line defines a layer. If data sources
+    and the actual command haven't changed, the image doesn't need to be rebuilt.
+  * **Referencing other datasets**: Splitfiles can import data from other Splitgraph images
+    (using the `FROM ... IMPORT ...` command) or perform joins on other datasets (by referencing
+    them in the `SQL` command as schemata).
+  * **Provenance tracking**: images built with Splitfiles have all their sources and commands
+    used to build them recorded in their metadata. This lets the user know exactly where
+    their dataset came from and quickly rebuild it if the upstream data has changed.
+  * **Full SQL support**: Splitgraph only does some minor rewriting and validation on SQL in Splitfiles
+    and defers to PostgreSQL for running actual queries, which means that all SQL constructs
+    are supported.
+  * **Efficient data imports**: The Splitfile executor uses [layered querying](../large_datasets/layered_querying) to import data.
+    This allows it to satisfy queries to huge remote datasets by only downloading a few fragments.
+
+For more information on Splitfiles, see [this page](working_with_data/using_splitfiles).

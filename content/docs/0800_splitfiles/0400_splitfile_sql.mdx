@@ -1,0 +1,30 @@
+export const meta = {
+  id: "splitfile_sql",
+  title: "SQL"
+};
+
+**`SQL command`**
+
+Runs a (potentially arbitrary) SQL statement. There is some preprocessing and validation done
+on this SQL statement:
+
+  * Only basic DDL (`CREATE/DROP/ALTER TABLE`) and DML (`UPDATE/INSERT/DELETE`) and function
+    calls are allowed
+  * The command is executed with the `OUTPUT` schema being the default `search_path`, so
+    non-schema-qualified tables will reference the current image.
+  * In schema-qualified tables, the schema is treated as a reference to a Splitgraph image,
+    for example, `"namespace/repository:latest".table_name`. This gets temporarily mounted
+    in the engine at execution time as a [layered checkout](../large_datasets/layered_querying)
+    with the effect that queries in `SQL` can perform joins or queries on other Splitgraph images.
+    This is recorded in image provenance as normal.
+  * There's a blacklist of table names that can't be used in Splitfiles
+
+The image hash produced by this command is a combination of the current
+`OUTPUT` hash and the hash of the SQL statement, with any image references rewritten to have
+image hashes, not tags.
+
+The SQL statement gets reformatted before hashing, meaning that minor formatting changes to the
+SQL will produce the same image hash.
+
+Note that non-deterministic SQL statements, for example `SELECT random()`, will produce the same
+hash given the same inputs.

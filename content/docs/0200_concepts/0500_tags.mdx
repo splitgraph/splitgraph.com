@@ -1,0 +1,12 @@
+export const meta = {
+  id: "tags",
+  title: "Tags"
+};
+
+Tags are labels added to specific Splitgraph images. Tags are unique per-repository.
+
+There are two reserved tags, `latest` and `HEAD`. `latest` always points to the most recent image
+in a given repository. If the repository is currently checked out, `HEAD` points to the checked-out
+image.
+
+Image tags can be managed with [`sgr tag`](../sgr/image_management_creation/tag).

@@ -1,0 +1,31 @@
+export const meta = {
+  id: "publish_rest_api",
+  title: "Publishing a REST API"
+};
+
+Every public dataset on the Splitgraph registry has a read-only OpenAPI-compatible endpoint that can be used to query it, provided by [PostgREST](http://postgrest.org/). It can be accessed by curl:
+
+```
+$ curl https://data.splitgraph.com/YOUR_USERNAME/votes_by_state/latest/-/rest/votes_by_state?state_postal=eq.DC
+
+[{"candidate_normalized":"clinton","state_postal":"DC","total_votes":282830},
+ {"candidate_normalized":"in","state_postal":"DC","total_votes":6551},
+ {"candidate_normalized":"johnson","state_postal":"DC","total_votes":4906},
+ {"candidate_normalized":"stein","state_postal":"DC","total_votes":4258},
+ {"candidate_normalized":"trump","state_postal":"DC","total_votes":12723}]
+```
+
+You can also use a shorthand, `sgr cloud curl`, that takes care of all the scaffolding around
+generating the URL and making sure you're logged into the registry:
+
+```
+$ sgr cloud curl YOUR_USERNAME/votes_by_state "votes_by_state?state_postal=eq.DC"
+
+[{"candidate_normalized":"clinton","state_postal":"DC","total_votes":282830},
+ {"candidate_normalized":"in","state_postal":"DC","total_votes":6551},
+ {"candidate_normalized":"johnson","state_postal":"DC","total_votes":4906},
+ {"candidate_normalized":"stein","state_postal":"DC","total_votes":4258},
+ {"candidate_normalized":"trump","state_postal":"DC","total_votes":12723}]
+```
+
+For more information on writing PostgREST queries, see the [PostgREST docs](http://postgrest.org/en/v6.0/api.html).

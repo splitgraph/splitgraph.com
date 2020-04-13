@@ -1,0 +1,47 @@
+export const meta = {
+  id: "load_mongo_collections",
+  title: "Loading MongoDB collections"
+};
+
+First, add this to your `.sgconfig`'s `mount_handlers` section to use [`mongo_fdw`](https://github.com/EnterpriseDB/mongo_fdw):
+
+```
+mongo_fdw=splitgraph.hooks.mount_handlers.mount_mongo
+```
+
+Then:
+
+```
+$ sgr mount mongo_fdw example/mongo \\
+    -c username:password@mongo_host:27017\\
+     -o '{"example_table": \\
+        {"db": "example_db", "coll": "example_collection", \\
+        "schema": {"column_1": "text", "column_2": "numeric"}}}'
+```
+
+This will create a schema called `example/mongo` on your engine, mounting the MongoDB database from `mongo_host:27017`. The schema will contain one foreign table, `example_table`, that will contain documents from the collection `example_collection` in the database `example_db`. The table will have 2 columns, `column_1` and `column_2`, populated from the documents in that collection.
+
+Note that this doesn't actually ingest any data from the remote database: if you query this foreign table, the query
+will be converted to a MongoDB query behind the scenes and forwarded to the target database:
+
+```
+$ sgr sql -s example/mongo "SELECT * FROM example_table"
+```
+
+To snapshot the table, making it part of an actual Splitgraph image, use the [`sgr import`](../../sgr/image_management_creation/import) command:
+
+```
+$ sgr import example/mongo \\
+    "SELECT column_1, column_2 FROM example_table" \\
+    example/mongo_repo example_table
+
+example/mongo_repo:example_table has been imported from example/mongo:select column_1, column_2 from example_table
+```
+
+`sgr import` can also be used to import tables between Splitgraph repositories without consuming extra space. For more information, see the [command line reference](../../sgr/image_management_creation/import).
+
+## Example
+
+[Link to source](https://github.com/splitgraph/splitgraph/tree/master/examples/import-from-mongo)
+
+<cast src="@splitgraph/content/casts/versioned/latest/import-from-mongo.cast" />

@@ -1,0 +1,12 @@
+export const meta = {
+  id: "introduction",
+  title: "Foreign Data Wrappers"
+};
+
+PostgreSQL has a feature called [Foreign Data Wrappers](https://wiki.postgresql.org/wiki/Foreign_data_wrappers): plugins that allow the user to write a custom handler for any external data source, representing it as a set of foreign tables.
+
+Foreign tables act similarly to normal tables and can accept the same SQL queries. Splitgraph extends on this idea by building some scaffolding around foreign data wrappers allowing the user to add external databases into the engine from the `sgr` command line client or a Splitfile.
+
+In Splitgraph terminology, this is called "mounting", kind of like mounting a filesystem to mount points in the directory tree. These mounted tables can then be snapshotted and turned into Splitgraph images with just one command, [`sgr import`](../sgr/image_management_creation/import).
+
+The Splitgraph engine ships with several open-source foreign data wrappers: [`postgres_fdw`](https://www.postgresql.org/docs/12/postgres-fdw.html), [`mongo_fdw`](https://github.com/EnterpriseDB/mongo_fdw) and [`mysql_fdw`](https://github.com/EnterpriseDB/mysql_fdw).

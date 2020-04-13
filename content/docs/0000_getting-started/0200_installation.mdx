@@ -3,29 +3,42 @@ export const meta = {
   title: "Installation"
 };
 
-### Introduction and requirements
+## Requirements
 
-A normal Splitgraph installation consists of two components: the
-Splitgraph engine and the Splitgraph client (`sgr`).
+A Splitgraph installation consists of two components: [the Splitgraph engine](../architecture/splitgraph_engine) and [the Splitgraph client (`sgr`)](../architecture/sgr_client).
 
-The engine is a Docker container with a customized version of PostgreSQL
-running on it. This is where cached data is stored.
+The client ships as a self-contained binary but can also be installed with `pip`.
 
-The client is a Python commandline tool that interacts with the engine.
+To run the Splitgraph engine, you will need to be able to run [Docker](https://www.docker.com/get-started).
 
-Most functionality is implemented in the client and to any other
-application, the engine is just another PostgreSQL database: it can
-interact with it by querying tables and writing to them as usual.
+## Installation
 
-To run the Splitgraph engine, you will need to be able to run Docker.
+### Single script
 
-### 1 minute start
+For Linux and OSX, there's a single script:
 
-First, get the single binary for `sgr` from [the releases page](https://github.com/splitgraph/splitgraph/releases/latest), available for the three major platforms.
+```
+$ bash -c "$(curl -sL https://github.com/splitgraph/splitgraph/releases/latest/download/install.sh)"
+```
+
+This script will:
+
+  * Download the `sgr` binary from [the releases page](https://github.com/splitgraph/splitgraph/releases/latest)
+  * Set up and initialize the Splitgraph Engine
+  * Register you on Splitgraph Cloud (data.splitgraph.com). This is completely optional:
+   Splitgraph can be used in a decentralized manner, like Git.
+
+If you're running Windows or would like to follow the steps manually, read on.
+
+### Manual
+
+First, get the binary for `sgr` from [the releases page](https://github.com/splitgraph/splitgraph/releases/latest), available for the three major platforms.
 
 Then, create a new Splitgraph engine. Do:
 
-    $ sgr engine add
+```
+$ sgr engine add
+```
 
 This will:
 
@@ -39,55 +52,106 @@ This will:
   * Initialize the engine
   * Generate a minimal `.sgconfig` file for you in your home directory (`~/.splitgraph/.sgconfig`).
 
-There are extra options in `sgr engine` for advanced users. To see them, run `sgr engine --help`.
+There are extra options in `sgr engine` for advanced users. To see them, run `sgr engine --help` or
+see [the CLI reference](../sgr/engine_management/engine_add).
 
-### Advanced installation
+## Advanced installation
 
-#### `sgr`
+### `sgr`
 
 You can also install the Splitgraph library from pip. This is useful if you want to use the
-Splitgraph Python API to manipulate images from your code:
+[Splitgraph Python API](../python_api/splitgraph) to manipulate images from your code:
 
-    $ pip install splitgraph
+```
+$ pip install splitgraph
+```
 
 If you wish to contribute to Splitgraph itself or get the bleeding-edge version, you can follow
 the [development instructions](https://github.com/splitgraph/splitgraph/#setting-up-a-development-environment)
 on our GitHub.
 
-#### Engine
+### Engine
 
-You can also use Docker to pull and start the
+You can also use Docker directly to pull and start the
 [engine](https://hub.docker.com/r/splitgraph/engine/):
 
-    $ docker run -d \
-    -e POSTGRES_PASSWORD=supersecure \
-    -p 5432:5432 \
-    -v $PWD/splitgraph_data:/var/lib/splitgraph/objects \
-    -v $PWD/splitgraph_metadata:/var/lib/postgresql/data \
+```
+$ docker run -d \\
+    -e POSTGRES_PASSWORD=supersecure \\
+    -p 5432:5432 \\
+    -v $PWD/splitgraph_data:/var/lib/splitgraph/objects \\
+    -v $PWD/splitgraph_metadata:/var/lib/postgresql/data \\
     splitgraph/engine
+```
 
 By default, `sgr` is configured to speak to the engine running on
 `localhost:5432` with a superuser account called `sgr` and a password
-`supersecure` against a database called `splitgraph`. To complete the
-installation, run:
+`supersecure` against a database called `splitgraph`. The credentials used by `sgr`
+can be changed by changing the [configuration file](#configuration-file).
 
-    $ sgr init
+To complete the installation, run:
 
-### Configuration file
+```
+$ sgr init
+```
+
+You can also use [docker-compose](https://docs.docker.com/compose/). A sample
+Compose configuration for the service is as follows:
+
+```
+version: '3'
+services:
+  engine:
+    image: splitgraph/engine:${DOCKER_TAG-stable}
+    ports:
+      - '0.0.0.0:5432:5432'
+    environment:
+      - POSTGRES_USER=sgr
+      - POSTGRES_PASSWORD=supersecure
+      - POSTGRES_DB=splitgraph
+      - SG_LOGLEVEL=INFO
+      - SG_CONFIG_FILE=/.sgconfig
+    expose:
+      - 5432
+    volumes:
+      - splitgraph_data:/var/lib/splitgraph/objects
+      - splitgraph_metadata:/var/lib/postgresql/data
+      - ${HOME}/.splitgraph/.sgconfig:/.sgconfig
+```
+
+## Upgrading
+
+Single-binary `sgr` can be upgraded by running [`sgr upgrade`](../sgr/miscellaneous/upgrade) which
+will download the new library and upgrade the engine, if the engine is managed by `sgr engine`.
+
+[`sgr engine upgrade`](../sgr/miscellaneous/engine/upgrade) upgrades an engine that's managed by `sgr engine`
+by deleting the current Docker container and starting a new one, keeping all data volumes intact.
+Whilst the versions of `sgr` and of the engine don't need to be the same, it is recommended to match them, as the engine and `sgr` are currently tested and released in lockstep.
+
+## Configuration file
 
 The Splitgraph configuration file is usually stored in the user's home directory
 (`~/.splitgraph/.sgconfig`). If there's a configuration file in the current working
 directory or the environment variable `SG_CONFIG_FILE` is set, that file is used instead.
 
+It's possible to generate a configuration file with defaults by doing:
+
+```
+$ sgr config -sc > ~/.splitgraph/.sgconfig
+```
+
+Note that the `.sgconfig` file gets edited automatically by `sgr` and any values there
+that are equal to their default values get deleted.
+
 It's possible to also override various other configuration flags using environment variables. You
 can inspect the current configuration in use by Splitgraph by running
 
-    $ sgr config
+```
+$ sgr config
+```
 
-For more information, see the documentation for splitgraph.config.
+## Next Steps
 
-### What now?
-
-You can keep following this guide to get introduced to basics of manipulating and
-building data images. You can also try out some self-contained example Splitgraph projects
+You can try out the [five minute demo](five_minute_demo) that will go through the basics of building
+and extending data images. You can also try out some self-contained example Splitgraph projects
 on [our GitHub](https://github.com/splitgraph/splitgraph/tree/master/examples).

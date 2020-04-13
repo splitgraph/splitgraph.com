@@ -1,0 +1,66 @@
+export const meta = {
+  id: "committing_changes",
+  title: "Committing changes"
+};
+
+To commit changes to a checked-out repository, use [`sgr commit`](../sgr/image_management_creation/commit).
+This will record the data in the audit triggers as a series of new Splitgraph objects and create
+a new image with those objects.
+
+## Example
+
+Let's commit the changes to the new repository to create a new image:
+
+```
+$ sgr commit example/repo_2 --message "My first image"
+$ sgr show example/repo_2:latest
+$ sgr table example/repo_2:latest demo
+
+Committing example/repo_2...
+Storing and indexing table demo
+100%|██████████████| 1/1 [00:00<00:00,  4.44objs/s]
+Committed example/repo_2 as 48407a3cef8a.
+
+Image example/repo_2:48407a3cef8a9ed3e54d88c6f3768385cc8d3e8e14c1034062decdc265f3d172
+My first image
+Created at 2020-04-06T10:18:11.218442
+Size: 1.48 KiB
+Parent: 97900a8279627ec22b355d1211dd824f78f5840b6a0e30e1d285f4e5c6120016
+
+Tables:
+  demo
+
+Table example/repo_2:48407a3cef8a9ed3e54d88c6f3768385cc8d3e8e14c1034062decdc265f3d172/demo
+
+Size: 1.48 KiB
+Rows: 10
+Columns:
+  key (integer, PK)
+  value (character varying)
+
+Objects:
+  o26c6d8345cba276f807d7bcf906531568f309c2609a3420d98c01a6c99b166
+  o4882c12cdc4cb5b4e89481ebdb71585998633f19a72652debbb80980ae0f0b
+```
+
+The `demo` table is stored as a new object in this image and only the 6 changed rows
+have been stored in it, as opposed to the whole table.
+
+Tag the new image and check out the old one:
+
+```
+$ sgr tag example/repo_2 new_data
+$ sgr checkout example/repo_2:original_data
+$ sgr sql --schema example/repo_2 "SELECT * FROM demo ORDER BY key"
+```
+
+You should see the original contents of the table before all changes.
+Check out the new copy:
+
+```
+$ sgr checkout example/repo_2:new_data
+$ sgr sql --schema example/repo_2 "SELECT * FROM demo ORDER BY key"
+```
+
+Behind the scenes, this replays the changes packaged up in the patch
+object against the original copy of the table.

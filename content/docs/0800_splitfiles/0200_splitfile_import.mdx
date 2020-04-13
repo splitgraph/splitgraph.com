@@ -18,6 +18,9 @@ Will create a new table that contains non-restricted staff names and
 ages in `internal_data.staff` without including any other entries in
 the table history.
 
+The SQL query can only contain one statement and has to be a SELECT query that doesn't reference
+any schema-qualified tables.
+
 In the case of imports from FDW, the commit hash produced by this
 command is random. Otherwise, the commit hash will be a combination
 of the current `OUTPUT` hash, the hash of the source repository and

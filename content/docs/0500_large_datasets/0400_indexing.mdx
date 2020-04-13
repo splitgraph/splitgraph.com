@@ -1,0 +1,158 @@
+export const meta = {
+  id: "indexing",
+  title: "Range and bloom indexes"
+};
+
+Every Splitgraph object has an index in its metadata. This is distinct from Postgres indexes,
+which can be created on checked out Splitgraph tables. Splitgraph indexes are higher-level and are
+used by [layered querying](large_datasets/layered_querying) to determine which objects need to
+be downloaded to satisfy a query.
+
+The main idea behind Splitgraph indexes is that they give false positives but don't give false negatives:
+they either say that an object _might_ be pertinent to a query (because it adds, deletes or modifies a row that
+is needed by that query) or that an object _definitely_ doesn't match a query, in which case
+it's not downloaded or used at all.
+
+Currently, Splitgraph supports range and bloom indexes.
+
+## Range indexes
+
+A range index records the minimum and maximum values of every column in the given object. This is
+most immediately useful for speeding up queries that do comparisons on the primary key or columns
+that are dependent on it and whose ranges don't overlap between objects and is not going to help
+queries on columns that have overlapping ranges between objects.
+
+## Bloom indexes
+
+Splitgraph allows the user to add an extra [bloom filter](https://en.wikipedia.org/wiki/Bloom_filter)
+index on columns that have unique values but still have their ranges overlap.
+
+Bloom filters can use a small amount of space to make a judgement on whether a set definitely
+doesn't or might have a certain value. [The example](#reindexing-example) shows adding a bloom filter index on the
+county name to a dataset of precinct-level results of the 2016 US Presidential Election, allowing Splitgraph
+to filter on county names with just 1KB of filter data and a 1% false positive rate.
+
+## Adding indexes
+
+Despite being stored in object metadata, indexes are added to tables, rather than objects. This is
+because the index for an object also includes old values that this object might have overwritten,
+so Splitgraph needs some context when creating an object index.
+
+Indexes can be added at commit time by passing `--index-options` to `sgr commit`:
+
+```
+$ sgr commit namespace/repository --index-options \\
+    '{\\
+        "table_name": {\\
+            "bloom": {\\
+                "column_1": {\\
+                    "probability": 0.01\\
+                }\\
+            },\\
+            "range": ["column_2", "column_3"] \\
+        }\\
+    }'
+```
+
+## Reindexing
+
+Existing objects can also be reindexed, adding new indexes to their metadata. Just like with index
+creation, this is done on tables, rather than on objects.
+
+Reindexing is currently only supported for objects that haven't been delta compressed (no overlapping objects). Images with overlapping objects should be [rechunked](large_datasets/chunking) first.
+
+To reindex objects that a table consists of, use [`sgr reindex`](../sgr/image_management_creation/reindex). For example:
+
+```
+$ sgr reindex -i '{"bloom": {"county_name": {"probability": 0.01}}}' \\
+               splitgraph/2016_election:latest precinct_results
+```
+
+This will add the new index to the object metadata, keeping existing ones.
+
+Note that if you wish to push new object metadata after reindexing, you'll need to add
+`--overwrite-object-meta` to your [`sgr push`](../sgr/sharing_images/push) command. Pushed objects are not overwritten by default.
+
+## Reindexing example
+
+<cast src="@splitgraph/content/casts/versioned/latest/bloom-filter.cast" />
+[Link to example](https://github.com/splitgraph/splitgraph/tree/master/examples/bloom-filter)
+
+## Sample indexes
+
+This is an object from the `splitgraph/geonames` dataset with a range index and some bloom indexes.
+
+```
+$ sgr object -r data.splitgraph.com ob729bf7d604891a1948140d082429638ae9e8a4041a6fc1c91bcae002c2fce
+Object ID: ob729bf7d604891a1948140d082429638ae9e8a4041a6fc1c91bcae002c2fce
+
+Namespace: splitgraph
+Format: FRAG
+Size: 5.09 MiB
+Created: 2019-12-11 12:21:18.084483
+Rows inserted: 100000
+Insertion hash: 4888af1fca2d422116873c2004c69d5ac39c3a457564ae9c439d8dbb5f33c16a
+Rows deleted: 0
+Deletion hash: 0000000000000000000000000000000000000000000000000000000000000000
+Column index:
+  cc2: ['AL', 'XK,MK']
+  dem: [-9999, 4667]
+  name: ['15th Er Eğitim Tugayı', '’Ržaničino']
+  latitude: ['39.08', '89']
+  timezone: ['Antarctica/Syowa', 'Europe/Zaporozhye']
+  asciiname: ["'Rzanicino", 'tahyna']
+  elevation: [-15, 4636]
+  geonameid: [712193, 813493]
+  longitude: ['10.44833', '55.11867']
+  population: [0, 38500000]
+  admin1_code: ['00', 'VO']
+  admin2_code: ['0', 'undefined = Kalininskiy Rayon']
+  admin3_code: ['0120', 'VTR31-17']
+  admin4_code: ['0149', '783524']
+  country_code: ['AL', 'XK']
+  feature_code: ['ADM1', 'WLL']
+  feature_class: ['A', 'V']
+  alternatenames: ["'Alipania,Al'banija,Albaani,Albaania,Albaaniya,Albaanje,Albainia,Albani,Albania,Albania - Shqiperia,Albania - Shqipëria,Albania nutome,Albanie,Albanien,Albanii,Albanija,Albanio,Albaniya,Albanië,Albanska,Albansko,Albanujo,Albanya,Albanìa,Albanía,Albanïi,Albenia,Albuanii,Albàinia,Albània,Albánia,Alb
+ánie,Albánsko,Albânia,Albānija,Alibani,Alibaniya,Alubani,Alubaniya,Alvania,An Albain,An Albáin,An-ba-ni,An-ba-ni (Albania),Arbainiya,Arnautluk,Arnavutluk,Arnavutluk Cumhuriyeti,Lalbanaen,Lalbanän,Orileede Alubaniani,Orílẹ́ède Àlùbàníánì,People's Socialist Republic of Albania,Peoples Republic of Albania,People’s Socialist Republic of Albania,Republic of Albania,Republika Popullore Socialiste e Shqiperise,Republika Popullore Socialiste e Shqipërisë,Republika Popullore e Shqiperise,Republika Popullore e Shqipërisë,Republika e Shqiperise,Republika e Shqipërisë,Sheypeni,Shkipeni,Shkiperiya,Shqipenia,Shqiperi,Shqiperia,Shqipni,Shqipnia,Shqipnie,Shqipnija,Shqipnië,Shqipri,Shqipria,Shqiprija,Shqipëri,Shqipëria,Shqypeni,Shqypni,Shqypëni,a er ba ni ya,alabani'a,alabeniya,alabyaniya,albaneti,albania,albaniya,albany,albanya,albanyh,albeniya,alpeniya,arubania,arubania gong he guo,aൽbeniya,i-Albania,ʻAlipania,Αλβανία,Албания,Албанија,Албанія,Альбанія,Ալբա
+նիա,אלבניה,آلبانی,آلبانیا,ألبانيا,ئالبانىيە,ئەڵبانیا,البانیا,البانیه,البانیہ,ܐܠܒܢܝܐ,अल्बानिया,अल्बेनिया,আলবেনিয়া,আলব্যানিয়া,আলব্যানিয়া,અલ્બેનિયા,ଆଲବାନିଆ,அல்பேனியா,అల్బేనియా,ಅಲ್ಬೇನಿಯಾ,അൽബേനിയ,ඇල්බේනියාව,ประเทศแอลเบเนีย,แอลเบเนีย,ແອລເບເນຍ,ཨལ་བཱ་ནི་ཡ།,ალბანეთი,አልባኒያ,ᎠᎵᏇᏂᏯ,អាល់បានី,アルバニア,アルバニア共和国,阿尔巴尼亚,알바니아", 'جنوویک کوسک
+یلنے']
+  modification_date: ['1993-11-01', '2019-12-11']
+Bloom index:
+  timezone: k=10, size 92.00 B, approx. 38 item(s), false positive probability 0.1%
+  asciiname: k=9, size 166.56 KiB, approx. 80129 item(s), false positive probability 0.2%
+  country_code: k=9, size 64.00 B, approx. 30 item(s), false positive probability 0.2%
+  feature_code: k=9, size 512.00 B, approx. 237 item(s), false positive probability 0.2%
+  feature_class: k=10, size 24.00 B, approx. 7 item(s), false positive probability 0.0%
+```
+
+By default, Splitgraph adds range indexes to all columns, but they're not very useful here, since most of them
+span A-Z. However, this dataset also has a bloom filter index on `asciiname` and `country_code`, amongst
+other columns, which lets us filter on those columns without downloading the whole dataset.
+
+```
+$ sgr clone splitgraph/geonames
+Gathering remote metadata...
+Fetched metadata for 2 images, 1 table, 120 objects and 0 tags.
+
+$ sgr checkout --layered splitgraph/geonames:latest
+Checked out splitgraph/geonames:0b77a102cbab.
+
+$ pgcli postgres://sgr:password@localhost:5432/splitgraph
+Server: PostgreSQL 12.2 (Debian 12.2-2.pgdg100+1)
+Version: 2.2.0
+Chat: https://gitter.im/dbcli/pgcli
+Home: http://pgcli.com
+
+sgr@localhost:splitgraph> EXPLAIN SELECT * FROM "splitgraph/geonames".all_countries WHERE asciiname = 'Cambridge' AND country_code = 'GB';
++---------------------------------------------------------------------------------------------+
+| QUERY PLAN                                                                                  |
+|---------------------------------------------------------------------------------------------|
+| Foreign Scan on all_countries  (cost=20.00..209000000.00 rows=1100000 width=190)            |
+|   Filter: (((asciiname)::text = 'Cambridge'::text) AND ((country_code)::text = 'GB'::text)) |
+|   Multicorn: Objects removed by filter: 109                                                 |
+|   Multicorn: Scan through 11 object(s) (50.98 MiB)                                          |
+| JIT:                                                                                        |
+|   Functions: 1                                                                              |
+|   Options: Inlining true, Optimization true, Expressions true, Deforming true               |
++---------------------------------------------------------------------------------------------+
+```

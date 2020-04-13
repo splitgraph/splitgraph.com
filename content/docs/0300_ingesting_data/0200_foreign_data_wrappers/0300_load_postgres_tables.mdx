@@ -1,0 +1,24 @@
+export const meta = {
+  id: "load_postgres_tables",
+  title: "Loading Postgres tables"
+};
+
+Add this to your `.sgconfig`'s `mount_handlers` section to use [`postgres_fdw`](https://www.postgresql.org/docs/12/postgres-fdw.html).
+
+```
+postgres_fdw=splitgraph.hooks.mount_handlers.mount_postgres
+```
+
+Then:
+
+```
+sgr mount postgres_fdw \\
+    -c username:password@server:port \\
+    -o '{"dbname": remote_db_name, "remote_schema": remote_schema_name, \\
+        "tables_to_mount": ["table_1", "table_2"]}' \\
+    local_schema
+```
+
+`"tables_to_mount"` can be omitted (in which case all tables in `remote_schema` will be mounted into `local_schema`).
+
+To snapshot the data, making it part of an actual Splitgraph image, use the [`sgr import`](../../sgr/image_management_creation/import) command.

@@ -1,0 +1,22 @@
+export const meta = {
+  id: "images",
+  title: "Images"
+};
+
+Splitgraph's main purpose is to build, extend, manipulate and share data images. Data images are
+essentially snapshots of a PostgreSQL schema at a given point in time, much like Docker images
+are snapshots of the filesystem.
+
+An image consists of tables. Several images can share the same table in a space-efficient
+way, with the actual table data stored only once.
+
+There are multiple ways to create Splitgraph images. The easiest one is by checking an image
+out into an actual PostgreSQL schema. This enables change tracking and allows any application that
+can interact with a PostgreSQL database to work with Splitgraph. At any point in time, the schema
+can be committed to create a new image.
+
+Splitgraph images can also be created using a domain-specific language called [Splitfiles](splitfiles) that offer
+a similar experience to Dockerfiles, including caching to not rebuild data where sources haven't changed.
+
+Under the hood, Splitgraph image metadata (including their parents and provenance) is stored in
+`splitgraph_meta.images` table and table metadata is stored in `splitgraph_meta.tables`.

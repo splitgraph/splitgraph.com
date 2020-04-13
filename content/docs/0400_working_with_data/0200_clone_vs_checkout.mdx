@@ -1,0 +1,52 @@
+export const meta = {
+  id: "clone_vs_checkout",
+  title: "Clone vs checkout"
+};
+
+A Splitgraph repository can be cloned using [`sgr clone`](../sgr/sharing_images/clone):
+
+```
+$ sgr clone some_namespace/some_repository
+```
+
+This will look for this repository in all currently registered remotes in `SG_REPO_LOOKUP` and
+clone the repository from the first remote that contains it.
+
+By default, cloning a Splitgraph repository is different than what happens with Git repositories.
+In this case, only the repository's metadata is cloned, which is lightweight compared to the
+actual data but still lets the user to get an overview of the repository.
+
+```
+# This only transfers a few KB of metadata.
+$ sgr clone splitgraph/2016_election
+Gathering remote metadata...
+Fetched metadata for 1 image, 1 table, 20 objects and 1 tag.
+
+# How big is the actual image?
+$ sgr show splitgraph/2016_election:latest
+Image splitgraph/2016_election:3835145ada3f07cad99087d1b1071122d58c48783cbfe4694c101d35651fba90
+
+Created at 2019-10-10T15:51:41.122370
+Size: 26.75 MiB
+No parent (root image)
+
+Tables:
+  precinct_results
+```
+
+Splitgraph tries to be as lazy as possible and only download the actual data when a query or a
+checkout requires it. This behaviour can be overridden by passing `--download-all` to `sgr clone`.
+
+## Checkout
+
+On checkout of an image, all objects that are required by that image are gathered, downloaded and
+assembled into tables in a process called "materialization".
+
+```
+$ sgr checkout splitgraph/2016_election:latest
+Need to download 20 objects (26.75 MiB), cache occupancy: 492.69 MiB/10.00 GiB
+Fetching 20 objects, total size 26.75 MiB
+Getting download URLs from registry PostgresEngine data.splitgraph.com (5a87...@data.splitgraph.com:5432/sgregistry)...
+100%|███████████| 20/20 [00:12<00:00,  1.66obj/s, object=o1ccf32547...]
+Checked out splitgraph/2016_election:3835145ada3f.
+```

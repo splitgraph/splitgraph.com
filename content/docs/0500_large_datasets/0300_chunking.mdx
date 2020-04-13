@@ -1,0 +1,41 @@
+export const meta = {
+  id: "chunking",
+  title: "Chunking data"
+};
+
+Large Splitgraph tables are usually split up into multiple objects. At commit time, new tables in
+an image are chunked up into fragments into 10000 rows by default. This can be changed by passing
+`--chunk-size` to `sgr commit`.
+
+Chunking is done by primary key. It is also possible to sort data inside a chunk by passing
+`--chunk-sort-keys` to `sgr commit`. This lets [`cstore_fdw`](https://github.com/citusdata/cstore_fdw),
+Splitgraph's storage backend, to use its own skip lists to not read parts of a chunk that aren't
+interesting to a query.
+
+When a change to a table is committed, that change is also represented as multiple objects that
+contain row-level additions/deletions and can partially "overlap" old objects. These new objects
+are appended to the end of the table's object list.
+
+This can be overridden with `--snap`, in which case all changed tables will be repackaged as
+brand new objects.
+
+If `--split-changesets` is passed to `sgr commit`, delta-compressed changes will also be split up
+according to the original table chunk boundaries. For example, if there's a change to the first
+and the 20000th row of a table that was originally committed with `--chunk-size=10000`, this will
+create 2 fragments: one based on the first chunk and one on the second chunk of the table.
+
+## Rechunking images
+
+An image that has had a lot of changes made to it still holds all of its history, since it
+contains all the intermediate objects. This method allows Splitgraph to perform quicker commits
+(since a change is appended to the end of a table's list of objects) at the expense of the image
+bloating up. This is sometimes not necessary. If you have multiple images in a repository that show
+a dataset's history, you might want to optimize the latest image in that repository to decrease
+its size and speed up querying.
+
+Rechunking an image is done by checking it out and recommitting it as a snapshot. For example:
+
+```
+$ sgr checkout my/big_image:latest
+$ sgr commit my/big_image --snap --chunk-size 100000
+```

@@ -15,8 +15,10 @@ the executor) is used.
 
 For example:
 
-    FROM internal_data:latest AS stage_1
-    CREATE TABLE visible_staff AS SELECT name, age FROM staff WHERE is_restricted = FALSE
+```
+FROM internal_data:latest AS stage_1
+CREATE TABLE visible_staff AS SELECT name, age FROM staff WHERE is_restricted = FALSE
 
-    FROM EMPTY AS stage_2
-    FROM stage_1 IMPORT {SELECT * FROM visible_staff} AS visible_staff
+FROM EMPTY AS stage_2
+FROM stage_1 IMPORT {SELECT * FROM visible_staff} AS visible_staff
+```
