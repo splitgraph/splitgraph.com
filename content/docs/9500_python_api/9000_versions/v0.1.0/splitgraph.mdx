@@ -74,130 +74,137 @@ export const meta = {
 <div className="section" id="module-splitgraph.exceptions">
 <span id="splitgraph-exceptions-module"></span><h2 id="splitgraphexceptions-module">splitgraph.exceptions module<a className="headerlink" href="#module-splitgraph.exceptions" title="Permalink to this headline">¶</a></h2>
 <p>Exceptions that can be raised by the Splitgraph library.</p>
-<dl className="exception">
+<dl className="py exception">
 <dt id="splitgraph.exceptions.APICompatibilityError">
 <em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">APICompatibilityError</code><a className="headerlink" href="#splitgraph.exceptions.APICompatibilityError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
 <p>Exceptions related to API incompatibilities</p>
 </dd></dl>
 
-<dl className="exception">
+<dl className="py exception">
 <dt id="splitgraph.exceptions.AuthAPIError">
 <em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">AuthAPIError</code><a className="headerlink" href="#splitgraph.exceptions.AuthAPIError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
 <p>Exceptions raised by the Auth API</p>
 </dd></dl>
 
-<dl className="exception">
+<dl className="py exception">
 <dt id="splitgraph.exceptions.CheckoutError">
 <em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">CheckoutError</code><a className="headerlink" href="#splitgraph.exceptions.CheckoutError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
 <p>Errors related to checking out/committing repositories</p>
 </dd></dl>
 
-<dl className="exception">
+<dl className="py exception">
 <dt id="splitgraph.exceptions.DockerUnavailableError">
 <em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">DockerUnavailableError</code><a className="headerlink" href="#splitgraph.exceptions.DockerUnavailableError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
 <p>Could not connect to the Docker daemon.</p>
 </dd></dl>
 
-<dl className="exception">
+<dl className="py exception">
 <dt id="splitgraph.exceptions.EngineInitializationError">
 <em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">EngineInitializationError</code><a className="headerlink" href="#splitgraph.exceptions.EngineInitializationError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
 <p>Raised when the engine isn’t initialized (no splitgraph_meta schema or audit triggers)</p>
 </dd></dl>
 
-<dl className="exception">
+<dl className="py exception">
 <dt id="splitgraph.exceptions.ExternalHandlerError">
 <em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">ExternalHandlerError</code><a className="headerlink" href="#splitgraph.exceptions.ExternalHandlerError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
 <p>Exceptions raised by external object handlers.</p>
 </dd></dl>
 
-<dl className="exception">
+<dl className="py exception">
 <dt id="splitgraph.exceptions.ImageNotFoundError">
 <em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">ImageNotFoundError</code><a className="headerlink" href="#splitgraph.exceptions.ImageNotFoundError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
 <p>A Splitgraph image doesn’t exist.</p>
 </dd></dl>
 
-<dl className="exception">
+<dl className="py exception">
 <dt id="splitgraph.exceptions.IncompleteObjectDownloadError">
-<em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">IncompleteObjectDownloadError</code><span className="sig-paren">(</span><em className="sig-param">reason: Optional[BaseException], successful_objects: List[str]</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.exceptions.IncompleteObjectDownloadError" title="Permalink to this definition">¶</a></dt>
+<em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">IncompleteObjectDownloadError</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">reason</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>BaseException<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">successful_objects</span><span className="p">:</span> <span className="n">List<span className="p">[</span>str<span className="p">]</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.exceptions.IncompleteObjectDownloadError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
 <p>Raised when an error is encountered during download of multiple objects.
 The handler is supposed to perform any necessary
 cleanup and reraise <cite>reason</cite> at the earliest opportunity.</p>
 </dd></dl>
 
-<dl className="exception">
+<dl className="py exception">
 <dt id="splitgraph.exceptions.IncompleteObjectUploadError">
-<em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">IncompleteObjectUploadError</code><span className="sig-paren">(</span><em className="sig-param">reason: Optional[BaseException], successful_objects: List[str], successful_object_urls: List[str]</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.exceptions.IncompleteObjectUploadError" title="Permalink to this definition">¶</a></dt>
+<em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">IncompleteObjectUploadError</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">reason</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>BaseException<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">successful_objects</span><span className="p">:</span> <span className="n">List<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">successful_object_urls</span><span className="p">:</span> <span className="n">List<span className="p">[</span>str<span className="p">]</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.exceptions.IncompleteObjectUploadError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
 <p>Raised when an error is encountered during upload of multiple objects.
 The handler is supposed to perform any necessary
 cleanup and reraise <cite>reason</cite> at the earliest opportunity.</p>
 </dd></dl>
 
-<dl className="exception">
+<dl className="py exception">
 <dt id="splitgraph.exceptions.MountHandlerError">
 <em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">MountHandlerError</code><a className="headerlink" href="#splitgraph.exceptions.MountHandlerError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
 <p>Exceptions raised by mount handlers.</p>
 </dd></dl>
 
-<dl className="exception">
+<dl className="py exception">
 <dt id="splitgraph.exceptions.ObjectCacheError">
 <em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">ObjectCacheError</code><a className="headerlink" href="#splitgraph.exceptions.ObjectCacheError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
 <p>Issues with the object cache (not enough space)</p>
 </dd></dl>
 
-<dl className="exception">
+<dl className="py exception">
 <dt id="splitgraph.exceptions.ObjectIndexingError">
 <em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">ObjectIndexingError</code><a className="headerlink" href="#splitgraph.exceptions.ObjectIndexingError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
 <p>Errors related to indexing objects</p>
 </dd></dl>
 
-<dl className="exception">
+<dl className="py exception">
+<dt id="splitgraph.exceptions.ObjectMountingError">
+<em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">ObjectMountingError</code><a className="headerlink" href="#splitgraph.exceptions.ObjectMountingError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
+<p>Errors related to incompatible objects.</p>
+</dd></dl>
+
+<dl className="py exception">
 <dt id="splitgraph.exceptions.ObjectNotFoundError">
 <em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">ObjectNotFoundError</code><a className="headerlink" href="#splitgraph.exceptions.ObjectNotFoundError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
 <p>Raised when a physical object doesn’t exist in the cache.</p>
 </dd></dl>
 
-<dl className="exception">
+<dl className="py exception">
 <dt id="splitgraph.exceptions.RepositoryNotFoundError">
 <em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">RepositoryNotFoundError</code><a className="headerlink" href="#splitgraph.exceptions.RepositoryNotFoundError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
 <p>A Splitgraph repository doesn’t exist.</p>
 </dd></dl>
 
-<dl className="exception">
+<dl className="py exception">
 <dt id="splitgraph.exceptions.SplitGraphError">
 <em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">SplitGraphError</code><a className="headerlink" href="#splitgraph.exceptions.SplitGraphError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">Exception</span></code></p>
 <p>A generic Splitgraph exception.</p>
 </dd></dl>
 
-<dl className="exception">
+<dl className="py exception">
 <dt id="splitgraph.exceptions.SplitfileError">
 <em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">SplitfileError</code><a className="headerlink" href="#splitgraph.exceptions.SplitfileError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
 <p>Generic error class for Splitfile interpretation/execution errors.</p>
 </dd></dl>
 
-<dl className="exception">
+<dl className="py exception">
 <dt id="splitgraph.exceptions.TableNotFoundError">
 <em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">TableNotFoundError</code><a className="headerlink" href="#splitgraph.exceptions.TableNotFoundError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
 <p>A table doesn’t exist in an image</p>
 </dd></dl>
 
-<dl className="exception">
+<dl className="py exception">
 <dt id="splitgraph.exceptions.UnsupportedSQLError">
 <em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">UnsupportedSQLError</code><a className="headerlink" href="#splitgraph.exceptions.UnsupportedSQLError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>

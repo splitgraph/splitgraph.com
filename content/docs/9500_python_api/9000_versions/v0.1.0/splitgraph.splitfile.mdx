@@ -19,9 +19,30 @@ language).</p>
 <div className="section" id="module-splitgraph.splitfile.execution">
 <span id="splitgraph-splitfile-execution-module"></span><h2 id="splitgraphsplitfileexecution-module">splitgraph.splitfile.execution module<a className="headerlink" href="#module-splitgraph.splitfile.execution" title="Permalink to this headline">¶</a></h2>
 <p>Functions for executing Splitfiles.</p>
-<dl className="function">
+<dl className="py class">
+<dt id="splitgraph.splitfile.execution.ImageMapper">
+<em className="property">class </em><code className="sig-prename descclassname">splitgraph.splitfile.execution.</code><code className="sig-name descname">ImageMapper</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">object_engine</span><span className="p">:</span> <span className="n"><a className="reference internal" href="splitgraph.engine.postgres/#splitgraph.engine.postgres.engine.PostgresEngine" title="splitgraph.engine.postgres.engine.PostgresEngine">splitgraph.engine.postgres.engine.PostgresEngine</a></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.splitfile.execution.ImageMapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">object</span></code></p>
+<dl className="py method">
+<dt id="splitgraph.splitfile.execution.ImageMapper.get_provenance_data">
+<code className="sig-name descname">get_provenance_data</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>List<span className="p">[</span>str<span className="p">]</span><span className="p">, </span>List<span className="p">[</span>bool<span className="p">]</span><span className="p">, </span>List<span className="p">[</span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.splitfile.execution.ImageMapper.get_provenance_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.splitfile.execution.ImageMapper.setup_lq_mounts">
+<code className="sig-name descname">setup_lq_mounts</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.splitfile.execution.ImageMapper.setup_lq_mounts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.splitfile.execution.ImageMapper.teardown_lq_mounts">
+<code className="sig-name descname">teardown_lq_mounts</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.splitfile.execution.ImageMapper.teardown_lq_mounts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py function">
 <dt id="splitgraph.splitfile.execution.execute_commands">
-<code className="sig-prename descclassname">splitgraph.splitfile.execution.</code><code className="sig-name descname">execute_commands</code><span className="sig-paren">(</span><em className="sig-param">commands: str</em>, <em className="sig-param">params: Optional[Dict[str</em>, <em className="sig-param">str]] = None</em>, <em className="sig-param">output: Optional[splitgraph.core.repository.Repository] = None</em>, <em className="sig-param">output_base: str = '00000000000000000000000000000000'</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.splitfile.execution.execute_commands" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.splitfile.execution.</code><code className="sig-name descname">execute_commands</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">commands</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">params</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">output</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span><a className="reference internal" href="splitgraph.core/#splitgraph.core.repository.Repository" title="splitgraph.core.repository.Repository">splitgraph.core.repository.Repository</a><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">output_base</span><span className="p">:</span> <span className="n">str</span> <span className="o">=</span> <span className="default_value">'00000000000000000000000000000000'</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.splitfile.execution.execute_commands" title="Permalink to this definition">¶</a></dt>
 <dd><p>Executes a series of Splitfile commands.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -37,14 +58,19 @@ on top of it.</p></li>
 </dl>
 </dd></dl>
 
-<dl className="function">
+<dl className="py function">
 <dt id="splitgraph.splitfile.execution.getrandbits">
-<code className="sig-prename descclassname">splitgraph.splitfile.execution.</code><code className="sig-name descname">getrandbits</code><span className="sig-paren">(</span><em className="sig-param">k</em><span className="sig-paren">)</span> → x.  Generates an int with k random bits.<a className="headerlink" href="#splitgraph.splitfile.execution.getrandbits" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.splitfile.execution.</code><code className="sig-name descname">getrandbits</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">k</span></em><span className="sig-paren">)</span> → x.  Generates an int with k random bits.<a className="headerlink" href="#splitgraph.splitfile.execution.getrandbits" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl className="function">
+<dl className="py function">
+<dt id="splitgraph.splitfile.execution.prevalidate_imports">
+<code className="sig-prename descclassname">splitgraph.splitfile.execution.</code><code className="sig-name descname">prevalidate_imports</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">table_names</span><span className="p">:</span> <span className="n">List<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">table_queries</span><span className="p">:</span> <span className="n">List<span className="p">[</span>bool<span className="p">]</span></span></em><span className="sig-paren">)</span> → List<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.splitfile.execution.prevalidate_imports" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
 <dt id="splitgraph.splitfile.execution.rebuild_image">
-<code className="sig-prename descclassname">splitgraph.splitfile.execution.</code><code className="sig-name descname">rebuild_image</code><span className="sig-paren">(</span><em className="sig-param">image: splitgraph.core.image.Image, source_replacement: Dict[splitgraph.core.repository.Repository, str]</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.splitfile.execution.rebuild_image" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.splitfile.execution.</code><code className="sig-name descname">rebuild_image</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">image</span><span className="p">:</span> <span className="n"><a className="reference internal" href="splitgraph.core/#splitgraph.core.image.Image" title="splitgraph.core.image.Image">splitgraph.core.image.Image</a></span></em>, <em className="sig-param"><span className="n">source_replacement</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span><a className="reference internal" href="splitgraph.core/#splitgraph.core.repository.Repository" title="splitgraph.core.repository.Repository">splitgraph.core.repository.Repository</a><span className="p">, </span>str<span className="p">]</span></span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.splitfile.execution.rebuild_image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recreates the Splitfile used to create a given image and reruns it, replacing its dependencies with a different
 set of versions.</p>
 <dl className="field-list simple">

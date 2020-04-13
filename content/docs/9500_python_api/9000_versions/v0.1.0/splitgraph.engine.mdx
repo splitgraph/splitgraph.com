@@ -12,27 +12,27 @@ export const meta = {
 tracking tables for changes and uploading/downloading tables to other remote engines.</p>
 <p>By default, Splitgraph is backed by Postgres: see <a className="reference internal" href="splitgraph.engine.postgres/#module-splitgraph.engine.postgres" title="splitgraph.engine.postgres"><code className="xref py py-mod docutils literal notranslate"><span className="pre">splitgraph.engine.postgres</span></code></a> for an example of how to
 implement a different engine.</p>
-<dl className="class">
+<dl className="py class">
 <dt id="splitgraph.engine.ChangeEngine">
 <em className="property">class </em><code className="sig-prename descclassname">splitgraph.engine.</code><code className="sig-name descname">ChangeEngine</code><a className="headerlink" href="#splitgraph.engine.ChangeEngine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.engine.SQLEngine" title="splitgraph.engine.SQLEngine"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.engine.SQLEngine</span></code></a>, <code className="xref py py-class docutils literal notranslate"><span className="pre">abc.ABC</span></code></p>
 <p>An SQL engine that can perform change tracking on a set of tables.</p>
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.ChangeEngine.discard_pending_changes">
-<code className="sig-name descname">discard_pending_changes</code><span className="sig-paren">(</span><em className="sig-param">schema</em>, <em className="sig-param">table=None</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ChangeEngine.discard_pending_changes" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">discard_pending_changes</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span></em>, <em className="sig-param"><span className="n">table</span><span className="o">=</span><span className="default_value">None</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ChangeEngine.discard_pending_changes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Discard recorded pending changes for a tracked table or the whole schema</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.ChangeEngine.get_change_key">
-<code className="sig-name descname">get_change_key</code><span className="sig-paren">(</span><em className="sig-param">schema: str</em>, <em className="sig-param">table: str</em><span className="sig-paren">)</span> → List[Tuple[str, str]]<a className="headerlink" href="#splitgraph.engine.ChangeEngine.get_change_key" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">get_change_key</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">table</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → List<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.engine.ChangeEngine.get_change_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the key used to identify a row in a change (list of column name, column type).
 If the tracked table has a PK, we use that; if it doesn’t, the whole row is used.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.ChangeEngine.get_changed_tables">
-<code className="sig-name descname">get_changed_tables</code><span className="sig-paren">(</span><em className="sig-param">schema</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ChangeEngine.get_changed_tables" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">get_changed_tables</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ChangeEngine.get_changed_tables" title="Permalink to this definition">¶</a></dt>
 <dd><p>List tracked tables that have pending changes</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -44,9 +44,9 @@ If the tracked table has a PK, we use that; if it doesn’t, the whole row is us
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.ChangeEngine.get_pending_changes">
-<code className="sig-name descname">get_pending_changes</code><span className="sig-paren">(</span><em className="sig-param">schema</em>, <em className="sig-param">table</em>, <em className="sig-param">aggregate=False</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ChangeEngine.get_pending_changes" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">get_pending_changes</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span></em>, <em className="sig-param"><span className="n">table</span></em>, <em className="sig-param"><span className="n">aggregate</span><span className="o">=</span><span className="default_value">False</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ChangeEngine.get_pending_changes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return pending changes for a given tracked table</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -66,7 +66,7 @@ have been inserted/updated otherwise.</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.ChangeEngine.get_tracked_tables">
 <code className="sig-name descname">get_tracked_tables</code><span className="sig-paren">(</span><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ChangeEngine.get_tracked_tables" title="Permalink to this definition">¶</a></dt>
 <dd><dl className="field-list simple">
@@ -76,15 +76,15 @@ have been inserted/updated otherwise.</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.ChangeEngine.has_pending_changes">
-<code className="sig-name descname">has_pending_changes</code><span className="sig-paren">(</span><em className="sig-param">schema</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ChangeEngine.has_pending_changes" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">has_pending_changes</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ChangeEngine.has_pending_changes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if the tracked schema has pending changes and False if it doesn’t.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.ChangeEngine.track_tables">
-<code className="sig-name descname">track_tables</code><span className="sig-paren">(</span><em className="sig-param">tables</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ChangeEngine.track_tables" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">track_tables</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">tables</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ChangeEngine.track_tables" title="Permalink to this definition">¶</a></dt>
 <dd><p>Start engine-specific change tracking on a list of tables.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -93,9 +93,9 @@ have been inserted/updated otherwise.</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.ChangeEngine.untrack_tables">
-<code className="sig-name descname">untrack_tables</code><span className="sig-paren">(</span><em className="sig-param">tables</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ChangeEngine.untrack_tables" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">untrack_tables</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">tables</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ChangeEngine.untrack_tables" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stop engine-specific change tracking on a list of tables and delete any pending changes.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -106,14 +106,14 @@ have been inserted/updated otherwise.</p>
 
 </dd></dl>
 
-<dl className="class">
+<dl className="py class">
 <dt id="splitgraph.engine.ObjectEngine">
 <em className="property">class </em><code className="sig-prename descclassname">splitgraph.engine.</code><code className="sig-name descname">ObjectEngine</code><a className="headerlink" href="#splitgraph.engine.ObjectEngine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">object</span></code></p>
 <p>Routines for storing/applying objects as well as sharing them with other engines.</p>
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.ObjectEngine.apply_fragments">
-<code className="sig-name descname">apply_fragments</code><span className="sig-paren">(</span><em className="sig-param">objects</em>, <em className="sig-param">target_schema</em>, <em className="sig-param">target_table</em>, <em className="sig-param">extra_quals=None</em>, <em className="sig-param">extra_qual_args=None</em>, <em className="sig-param">schema_spec=None</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.apply_fragments" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">apply_fragments</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">objects</span></em>, <em className="sig-param"><span className="n">target_schema</span></em>, <em className="sig-param"><span className="n">target_table</span></em>, <em className="sig-param"><span className="n">extra_quals</span><span className="o">=</span><span className="default_value">None</span></em>, <em className="sig-param"><span className="n">extra_qual_args</span><span className="o">=</span><span className="default_value">None</span></em>, <em className="sig-param"><span className="n">schema_spec</span><span className="o">=</span><span className="default_value">None</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.apply_fragments" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply multiple fragments to a target table as a single-query batch operation.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -131,9 +131,9 @@ If not specified, uses the schema of target_table.</p></li>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.ObjectEngine.delete_objects">
-<code className="sig-name descname">delete_objects</code><span className="sig-paren">(</span><em className="sig-param">object_ids</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.delete_objects" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">delete_objects</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">object_ids</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.delete_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete one or more objects from the engine.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -142,9 +142,9 @@ If not specified, uses the schema of target_table.</p></li>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.ObjectEngine.download_objects">
-<code className="sig-name descname">download_objects</code><span className="sig-paren">(</span><em className="sig-param">objects</em>, <em className="sig-param">remote_engine</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.download_objects" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">download_objects</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">objects</span></em>, <em className="sig-param"><span className="n">remote_engine</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.download_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Download objects from the remote engine to the local cache</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -157,9 +157,9 @@ If not specified, uses the schema of target_table.</p></li>
 <p>:return List of object IDs that were downloaded.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.ObjectEngine.dump_object">
-<code className="sig-name descname">dump_object</code><span className="sig-paren">(</span><em className="sig-param">object_id</em>, <em className="sig-param">stream</em>, <em className="sig-param">schema</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.dump_object" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">dump_object</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">object_id</span></em>, <em className="sig-param"><span className="n">stream</span></em>, <em className="sig-param"><span className="n">schema</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.dump_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dump an object into a series of SQL statements</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -172,9 +172,9 @@ If not specified, uses the schema of target_table.</p></li>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.ObjectEngine.get_object_schema">
-<code className="sig-name descname">get_object_schema</code><span className="sig-paren">(</span><em className="sig-param">object_id</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.get_object_schema" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">get_object_schema</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">object_id</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.get_object_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the schema of a given object, returned as a list of
 (ordinal, column_name, column_type, is_pk).</p>
 <dl className="field-list simple">
@@ -184,16 +184,16 @@ If not specified, uses the schema of target_table.</p></li>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.ObjectEngine.get_object_size">
-<code className="sig-name descname">get_object_size</code><span className="sig-paren">(</span><em className="sig-param">object_id</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.get_object_size" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">get_object_size</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">object_id</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.get_object_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the on-disk footprint of this object, in bytes
 :param object_id: ID of the object</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.ObjectEngine.store_fragment">
-<code className="sig-name descname">store_fragment</code><span className="sig-paren">(</span><em className="sig-param">inserted</em>, <em className="sig-param">deleted</em>, <em className="sig-param">schema</em>, <em className="sig-param">table</em>, <em className="sig-param">source_schema</em>, <em className="sig-param">source_table</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.store_fragment" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">store_fragment</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">inserted</span></em>, <em className="sig-param"><span className="n">deleted</span></em>, <em className="sig-param"><span className="n">schema</span></em>, <em className="sig-param"><span className="n">table</span></em>, <em className="sig-param"><span className="n">source_schema</span></em>, <em className="sig-param"><span className="n">source_table</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.store_fragment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Store a fragment of a changed table in another table</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -209,9 +209,9 @@ If not specified, uses the schema of target_table.</p></li>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.ObjectEngine.store_object">
-<code className="sig-name descname">store_object</code><span className="sig-paren">(</span><em className="sig-param">object_id: str, source_query: Union[bytes, psycopg2.sql.Composed, str, psycopg2.sql.SQL], schema_spec: List[splitgraph.core.types.TableColumn], source_query_args: Optional[Sequence[Any]]</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.store_object" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">store_object</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">object_id</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">source_query</span><span className="p">:</span> <span className="n">Union<span className="p">[</span>bytes<span className="p">, </span>psycopg2.sql.Composed<span className="p">, </span>str<span className="p">, </span>psycopg2.sql.SQL<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">schema_spec</span><span className="p">:</span> <span className="n">List<span className="p">[</span>splitgraph.core.types.TableColumn<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">source_query_args</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Sequence<span className="p">[</span>Any<span className="p">]</span><span className="p">]</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.store_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stores a Splitgraph object using a source query in the actual format
 implemented by this engine.</p>
 <dl className="field-list simple">
@@ -226,9 +226,9 @@ implemented by this engine.</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.ObjectEngine.upload_objects">
-<code className="sig-name descname">upload_objects</code><span className="sig-paren">(</span><em className="sig-param">objects</em>, <em className="sig-param">remote_engine</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.upload_objects" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">upload_objects</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">objects</span></em>, <em className="sig-param"><span className="n">remote_engine</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.ObjectEngine.upload_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Upload objects from the local cache to the remote engine</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -242,39 +242,39 @@ implemented by this engine.</p>
 
 </dd></dl>
 
-<dl className="class">
+<dl className="py class">
 <dt id="splitgraph.engine.ResultShape">
 <em className="property">class </em><code className="sig-prename descclassname">splitgraph.engine.</code><code className="sig-name descname">ResultShape</code><a className="headerlink" href="#splitgraph.engine.ResultShape" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">enum.Enum</span></code></p>
 <p>Shape that the result of a query will be coerced to</p>
-<dl className="attribute">
+<dl className="py attribute">
 <dt id="splitgraph.engine.ResultShape.MANY_MANY">
 <code className="sig-name descname">MANY_MANY</code><em className="property"> = 4</em><a className="headerlink" href="#splitgraph.engine.ResultShape.MANY_MANY" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl className="attribute">
+<dl className="py attribute">
 <dt id="splitgraph.engine.ResultShape.MANY_ONE">
 <code className="sig-name descname">MANY_ONE</code><em className="property"> = 3</em><a className="headerlink" href="#splitgraph.engine.ResultShape.MANY_ONE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl className="attribute">
+<dl className="py attribute">
 <dt id="splitgraph.engine.ResultShape.NONE">
 <code className="sig-name descname">NONE</code><em className="property"> = 0</em><a className="headerlink" href="#splitgraph.engine.ResultShape.NONE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl className="attribute">
+<dl className="py attribute">
 <dt id="splitgraph.engine.ResultShape.ONE_MANY">
 <code className="sig-name descname">ONE_MANY</code><em className="property"> = 2</em><a className="headerlink" href="#splitgraph.engine.ResultShape.ONE_MANY" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl className="attribute">
+<dl className="py attribute">
 <dt id="splitgraph.engine.ResultShape.ONE_ONE">
 <code className="sig-name descname">ONE_ONE</code><em className="property"> = 1</em><a className="headerlink" href="#splitgraph.engine.ResultShape.ONE_ONE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl className="class">
+<dl className="py class">
 <dt id="splitgraph.engine.SQLEngine">
 <em className="property">class </em><code className="sig-prename descclassname">splitgraph.engine.</code><code className="sig-name descname">SQLEngine</code><a className="headerlink" href="#splitgraph.engine.SQLEngine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">abc.ABC</span></code></p>
@@ -282,33 +282,33 @@ implemented by this engine.</p>
 a few other functions. Together with the <cite>information_schema</cite> (part of the SQL standard), this class uses those
 functions to implement some basic database management methods like listing, deleting, creating, dumping
 and loading tables.</p>
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.close">
 <code className="sig-name descname">close</code><span className="sig-paren">(</span><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>Commit and close the engine’s backing connection</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.commit">
 <code className="sig-name descname">commit</code><span className="sig-paren">(</span><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.commit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Commit the engine’s backing connection</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.copy_table">
-<code className="sig-name descname">copy_table</code><span className="sig-paren">(</span><em className="sig-param">source_schema: str</em>, <em className="sig-param">source_table: str</em>, <em className="sig-param">target_schema: str</em>, <em className="sig-param">target_table: str</em>, <em className="sig-param">with_pk_constraints: bool = True</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.engine.SQLEngine.copy_table" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">copy_table</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">source_schema</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">source_table</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">target_schema</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">target_table</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">with_pk_constraints</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">True</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.engine.SQLEngine.copy_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy a table in the same engine, optionally applying primary key constraints as well.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.create_schema">
-<code className="sig-name descname">create_schema</code><span className="sig-paren">(</span><em className="sig-param">schema: str</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.engine.SQLEngine.create_schema" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">create_schema</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.engine.SQLEngine.create_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a schema if it doesn’t exist</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.create_table">
-<code className="sig-name descname">create_table</code><span className="sig-paren">(</span><em className="sig-param">schema: Optional[str], table: str, schema_spec: List[splitgraph.core.types.TableColumn], unlogged: bool = False, temporary: bool = False, include_comments: bool = False</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.engine.SQLEngine.create_table" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">create_table</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">table</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">schema_spec</span><span className="p">:</span> <span className="n">List<span className="p">[</span>splitgraph.core.types.TableColumn<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">unlogged</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">temporary</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">include_comments</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.engine.SQLEngine.create_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a table using a previously-dumped table schema spec</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -324,21 +324,21 @@ and loading tables.</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.delete_schema">
-<code className="sig-name descname">delete_schema</code><span className="sig-paren">(</span><em className="sig-param">schema: str</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.engine.SQLEngine.delete_schema" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">delete_schema</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.engine.SQLEngine.delete_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a schema if it exists, including all the tables in it.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.delete_table">
-<code className="sig-name descname">delete_table</code><span className="sig-paren">(</span><em className="sig-param">schema: str</em>, <em className="sig-param">table: str</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.engine.SQLEngine.delete_table" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">delete_table</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">table</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.engine.SQLEngine.delete_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Drop a table from a schema if it exists</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.dump_table_creation">
-<em className="property">static </em><code className="sig-name descname">dump_table_creation</code><span className="sig-paren">(</span><em className="sig-param">schema: Optional[str], table: str, schema_spec: List[splitgraph.core.types.TableColumn], unlogged: bool = False, temporary: bool = False, include_comments: bool = False</em><span className="sig-paren">)</span> → Tuple[psycopg2.sql.Composed, Tuple]<a className="headerlink" href="#splitgraph.engine.SQLEngine.dump_table_creation" title="Permalink to this definition">¶</a></dt>
+<em className="property">static </em><code className="sig-name descname">dump_table_creation</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">table</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">schema_spec</span><span className="p">:</span> <span className="n">List<span className="p">[</span>splitgraph.core.types.TableColumn<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">unlogged</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">temporary</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">include_comments</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em><span className="sig-paren">)</span> → Tuple<span className="p">[</span>psycopg2.sql.Composed<span className="p">, </span>Tuple<span className="p">]</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.dump_table_creation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dumps the DDL for a table using a previously-dumped table schema spec</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -357,9 +357,9 @@ and loading tables.</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.dump_table_sql">
-<code className="sig-name descname">dump_table_sql</code><span className="sig-paren">(</span><em className="sig-param">schema</em>, <em className="sig-param">table_name</em>, <em className="sig-param">stream</em>, <em className="sig-param">columns='*'</em>, <em className="sig-param">where=''</em>, <em className="sig-param">where_args=None</em>, <em className="sig-param">target_schema=None</em>, <em className="sig-param">target_table=None</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.dump_table_sql" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">dump_table_sql</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span></em>, <em className="sig-param"><span className="n">table_name</span></em>, <em className="sig-param"><span className="n">stream</span></em>, <em className="sig-param"><span className="n">columns</span><span className="o">=</span><span className="default_value">'*'</span></em>, <em className="sig-param"><span className="n">where</span><span className="o">=</span><span className="default_value">''</span></em>, <em className="sig-param"><span className="n">where_args</span><span className="o">=</span><span className="default_value">None</span></em>, <em className="sig-param"><span className="n">target_schema</span><span className="o">=</span><span className="default_value">None</span></em>, <em className="sig-param"><span className="n">target_table</span><span className="o">=</span><span className="default_value">None</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.dump_table_sql" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dump the table contents in the SQL format
 :param schema: Schema the table is located in
 :param table_name: Name of the table
@@ -371,57 +371,57 @@ and loading tables.</p>
 :param target_table: Name of the table to insert data into (default same as <cite>table_name</cite>)</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.get_all_tables">
-<code className="sig-name descname">get_all_tables</code><span className="sig-paren">(</span><em className="sig-param">schema: str</em><span className="sig-paren">)</span> → List[str]<a className="headerlink" href="#splitgraph.engine.SQLEngine.get_all_tables" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">get_all_tables</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → List<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.get_all_tables" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all tables in a given schema.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.get_column_names_types">
-<code className="sig-name descname">get_column_names_types</code><span className="sig-paren">(</span><em className="sig-param">schema: str</em>, <em className="sig-param">table_name: str</em><span className="sig-paren">)</span> → List[Tuple[str, str]]<a className="headerlink" href="#splitgraph.engine.SQLEngine.get_column_names_types" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">get_column_names_types</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">table_name</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → List<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.get_column_names_types" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list of (column, type) in a given table.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.get_full_table_schema">
-<code className="sig-name descname">get_full_table_schema</code><span className="sig-paren">(</span><em className="sig-param">schema: str</em>, <em className="sig-param">table_name: str</em><span className="sig-paren">)</span> → List[splitgraph.core.types.TableColumn]<a className="headerlink" href="#splitgraph.engine.SQLEngine.get_full_table_schema" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">get_full_table_schema</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">table_name</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → List<span className="p">[</span>splitgraph.core.types.TableColumn<span className="p">]</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.get_full_table_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a list of (column ordinal, name, data type, is_pk, column comment),
 used to detect schema changes like columns being dropped/added/renamed or type changes.</p>
 <p>NB this doesn’t work for temporary tables (pg_temp) and returns an empty schema.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.get_primary_keys">
-<code className="sig-name descname">get_primary_keys</code><span className="sig-paren">(</span><em className="sig-param">schema</em>, <em className="sig-param">table</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.get_primary_keys" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">get_primary_keys</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span></em>, <em className="sig-param"><span className="n">table</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.get_primary_keys" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a list of (column_name, column_type) denoting the primary keys of a given table.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.get_table_type">
-<code className="sig-name descname">get_table_type</code><span className="sig-paren">(</span><em className="sig-param">schema: str</em>, <em className="sig-param">table: str</em><span className="sig-paren">)</span> → Optional[str]<a className="headerlink" href="#splitgraph.engine.SQLEngine.get_table_type" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">get_table_type</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">table</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → Optional<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.get_table_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the type of the table (BASE or FOREIGN)</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.initialize">
 <code className="sig-name descname">initialize</code><span className="sig-paren">(</span><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.initialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Does any required initialization of the engine</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.lock_table">
-<code className="sig-name descname">lock_table</code><span className="sig-paren">(</span><em className="sig-param">schema</em>, <em className="sig-param">table</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.lock_table" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">lock_table</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span></em>, <em className="sig-param"><span className="n">table</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.lock_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Acquire an exclusive lock on a given table, released when the transaction commits / rolls back.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.rollback">
 <code className="sig-name descname">rollback</code><span className="sig-paren">(</span><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.rollback" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rollback the engine’s backing connection</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.run_sql">
 <code className="sig-name descname">run_sql</code><span className="sig-paren">(</span><em className="sig-param">statement</em>, <em className="sig-param">arguments=None</em>, <em className="sig-param">return_shape=&lt;ResultShape.MANY_MANY: 4></em>, <em className="sig-param">named=False</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.run_sql" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run an arbitrary SQL statement with some arguments, return an iterator of results.
@@ -429,9 +429,9 @@ If the statement doesn’t return any results, return None. If named=True, retur
 tuples when possible.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.run_sql_batch">
-<code className="sig-name descname">run_sql_batch</code><span className="sig-paren">(</span><em className="sig-param">statement</em>, <em className="sig-param">arguments</em>, <em className="sig-param">schema=None</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.run_sql_batch" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">run_sql_batch</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">statement</span></em>, <em className="sig-param"><span className="n">arguments</span></em>, <em className="sig-param"><span className="n">schema</span><span className="o">=</span><span className="default_value">None</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.SQLEngine.run_sql_batch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run a parameterized SQL statement against multiple sets of arguments.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -444,7 +444,7 @@ tuples when possible.</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.run_sql_in">
 <code className="sig-name descname">run_sql_in</code><span className="sig-paren">(</span><em className="sig-param">schema: str, sql: Union[psycopg2.sql.Composed, str], arguments: None = None, return_shape: splitgraph.engine.ResultShape = &lt;ResultShape.MANY_MANY: 4></em><span className="sig-paren">)</span> → Any<a className="headerlink" href="#splitgraph.engine.SQLEngine.run_sql_in" title="Permalink to this definition">¶</a></dt>
 <dd><p>Executes a non-schema-qualified query against a specific schema.</p>
@@ -460,17 +460,17 @@ tuples when possible.</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.savepoint">
-<code className="sig-name descname">savepoint</code><span className="sig-paren">(</span><em className="sig-param">name: str</em><span className="sig-paren">)</span> → Iterator[None]<a className="headerlink" href="#splitgraph.engine.SQLEngine.savepoint" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">savepoint</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">name</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → Iterator[None]<a className="headerlink" href="#splitgraph.engine.SQLEngine.savepoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>At the beginning of this context manager, a savepoint is initialized and any database
 error that occurs in run_sql results in a rollback to this savepoint rather than the
 rollback of the whole transaction. At exit, the savepoint is released.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.schema_exists">
-<code className="sig-name descname">schema_exists</code><span className="sig-paren">(</span><em className="sig-param">schema: str</em><span className="sig-paren">)</span> → bool<a className="headerlink" href="#splitgraph.engine.SQLEngine.schema_exists" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">schema_exists</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → bool<a className="headerlink" href="#splitgraph.engine.SQLEngine.schema_exists" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if a schema exists on the engine.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -479,9 +479,9 @@ rollback of the whole transaction. At exit, the savepoint is released.</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.engine.SQLEngine.table_exists">
-<code className="sig-name descname">table_exists</code><span className="sig-paren">(</span><em className="sig-param">schema: str</em>, <em className="sig-param">table_name: str</em><span className="sig-paren">)</span> → bool<a className="headerlink" href="#splitgraph.engine.SQLEngine.table_exists" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">table_exists</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">table_name</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → bool<a className="headerlink" href="#splitgraph.engine.SQLEngine.table_exists" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if a table exists on the engine.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -495,9 +495,9 @@ rollback of the whole transaction. At exit, the savepoint is released.</p>
 
 </dd></dl>
 
-<dl className="function">
+<dl className="py function">
 <dt id="splitgraph.engine.get_engine">
-<code className="sig-prename descclassname">splitgraph.engine.</code><code className="sig-name descname">get_engine</code><span className="sig-paren">(</span><em className="sig-param">name: Optional[str] = None</em>, <em className="sig-param">use_socket: bool = False</em>, <em className="sig-param">use_fdw_params: Optional[bool] = None</em>, <em className="sig-param">autocommit: bool = False</em><span className="sig-paren">)</span> → PostgresEngine<a className="headerlink" href="#splitgraph.engine.get_engine" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.engine.</code><code className="sig-name descname">get_engine</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">name</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">use_socket</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">use_fdw_params</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>bool<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">autocommit</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em><span className="sig-paren">)</span> → PostgresEngine<a className="headerlink" href="#splitgraph.engine.get_engine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the current global engine or a named remote engine</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -513,9 +513,20 @@ will infer from the global splitgraph.config.IN_FDW flag.</p></li>
 </dl>
 </dd></dl>
 
-<dl className="function">
+<dl className="py function">
+<dt id="splitgraph.engine.set_engine">
+<code className="sig-prename descclassname">splitgraph.engine.</code><code className="sig-name descname">set_engine</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">engine</span><span className="p">:</span> <span className="n">PostgresEngine</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.engine.set_engine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Switch the global engine to a different one.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><p><strong>engine</strong> – Engine</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
 <dt id="splitgraph.engine.switch_engine">
-<code className="sig-prename descclassname">splitgraph.engine.</code><code className="sig-name descname">switch_engine</code><span className="sig-paren">(</span><em className="sig-param">engine: PostgresEngine</em><span className="sig-paren">)</span> → Iterator[None]<a className="headerlink" href="#splitgraph.engine.switch_engine" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.engine.</code><code className="sig-name descname">switch_engine</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">engine</span><span className="p">:</span> <span className="n">PostgresEngine</span></em><span className="sig-paren">)</span> → Iterator[None]<a className="headerlink" href="#splitgraph.engine.switch_engine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Switch the global engine to a different one. The engine will
 get switched back on exit from the context manager.</p>
 <dl className="field-list simple">

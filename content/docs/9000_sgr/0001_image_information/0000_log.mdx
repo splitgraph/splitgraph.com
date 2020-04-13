@@ -1,11 +1,13 @@
 export const meta = {id: "log", title: "sgr log", sidebarTitle: "log"};
 
-```sgr log [OPTIONS] REPOSITORY```
+```sgr log [OPTIONS] IMAGE_SPEC```
 
-Show the history of a Splitgraph repository.
+Show the history of a Splitgraph repository/image
 
 By default, this shows the history of the current branch, starting from the HEAD pointer and following its
 parent chain.
+
+Alternatively, it can follow the parent chain of any other image.
 
 If ``-t`` or ``--tree`` is passed, this instead renders the full image tree. The repository doesn't need to have
 been checked out in this case.
@@ -13,3 +15,4 @@ been checked out in this case.
 ### Options
 
   * **`-t, --tree`**: 
+  * **`-r, --remote [data.splitgraph.com]`**: Perform operation on a different remote engine
