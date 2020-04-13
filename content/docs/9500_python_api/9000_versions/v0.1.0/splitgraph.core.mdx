@@ -29,9 +29,9 @@ lookup path.</p></li>
 <div className="section" id="module-splitgraph.core.engine">
 <span id="splitgraph-core-engine-module"></span><h2 id="splitgraphcoreengine-module">splitgraph.core.engine module<a className="headerlink" href="#module-splitgraph.core.engine" title="Permalink to this headline">¶</a></h2>
 <p>Routines for managing Splitgraph engines, including looking up repositories and managing objects.</p>
-<dl className="function">
+<dl className="py function">
 <dt id="splitgraph.core.engine.get_current_repositories">
-<code className="sig-prename descclassname">splitgraph.core.engine.</code><code className="sig-name descname">get_current_repositories</code><span className="sig-paren">(</span><em className="sig-param">engine: PostgresEngine</em><span className="sig-paren">)</span> → List[Tuple[Repository, Optional[Image]]]<a className="headerlink" href="#splitgraph.core.engine.get_current_repositories" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.core.engine.</code><code className="sig-name descname">get_current_repositories</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">engine</span><span className="p">:</span> <span className="n">PostgresEngine</span></em><span className="sig-paren">)</span> → List<span className="p">[</span>Tuple<span className="p">[</span>Repository<span className="p">, </span>Optional<span className="p">[</span>Image<span className="p">]</span><span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.core.engine.get_current_repositories" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lists all repositories currently in the engine.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -43,9 +43,9 @@ lookup path.</p></li>
 </dl>
 </dd></dl>
 
-<dl className="function">
+<dl className="py function">
 <dt id="splitgraph.core.engine.init_engine">
-<code className="sig-prename descclassname">splitgraph.core.engine.</code><code className="sig-name descname">init_engine</code><span className="sig-paren">(</span><em className="sig-param">skip_object_handling: bool = False</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.engine.init_engine" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.core.engine.</code><code className="sig-name descname">init_engine</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">skip_object_handling</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.engine.init_engine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes the engine by:</p>
 <blockquote>
 <div><ul className="simple">
@@ -61,9 +61,9 @@ object handling and checkouts (like audit triggers and CStore management).</p>
 </dl>
 </dd></dl>
 
-<dl className="function">
+<dl className="py function">
 <dt id="splitgraph.core.engine.lookup_repository">
-<code className="sig-prename descclassname">splitgraph.core.engine.</code><code className="sig-name descname">lookup_repository</code><span className="sig-paren">(</span><em className="sig-param">name: str</em>, <em className="sig-param">include_local: bool = False</em><span className="sig-paren">)</span> → Repository<a className="headerlink" href="#splitgraph.core.engine.lookup_repository" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.core.engine.</code><code className="sig-name descname">lookup_repository</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">name</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">include_local</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em><span className="sig-paren">)</span> → Repository<a className="headerlink" href="#splitgraph.core.engine.lookup_repository" title="Permalink to this definition">¶</a></dt>
 <dd><p>Queries the SG engines on the lookup path to locate one hosting the given repository.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -78,9 +78,9 @@ object handling and checkouts (like audit triggers and CStore management).</p>
 </dl>
 </dd></dl>
 
-<dl className="function">
+<dl className="py function">
 <dt id="splitgraph.core.engine.repository_exists">
-<code className="sig-prename descclassname">splitgraph.core.engine.</code><code className="sig-name descname">repository_exists</code><span className="sig-paren">(</span><em className="sig-param">repository: Repository</em><span className="sig-paren">)</span> → bool<a className="headerlink" href="#splitgraph.core.engine.repository_exists" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.core.engine.</code><code className="sig-name descname">repository_exists</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">repository</span><span className="p">:</span> <span className="n">Repository</span></em><span className="sig-paren">)</span> → bool<a className="headerlink" href="#splitgraph.core.engine.repository_exists" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if a repository exists on the engine.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -93,15 +93,15 @@ object handling and checkouts (like audit triggers and CStore management).</p>
 <div className="section" id="module-splitgraph.core.image">
 <span id="splitgraph-core-image-module"></span><h2 id="splitgraphcoreimage-module">splitgraph.core.image module<a className="headerlink" href="#module-splitgraph.core.image" title="Permalink to this headline">¶</a></h2>
 <p>Image representation and provenance</p>
-<dl className="class">
+<dl className="py class">
 <dt id="splitgraph.core.image.Image">
 <em className="property">class </em><code className="sig-prename descclassname">splitgraph.core.image.</code><code className="sig-name descname">Image</code><a className="headerlink" href="#splitgraph.core.image.Image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">tuple</span></code></p>
 <p>Represents a Splitgraph image. Should’t be created directly, use Image-loading methods in the
 <a className="reference internal" href="#splitgraph.core.repository.Repository" title="splitgraph.core.repository.Repository"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.core.repository.Repository</span></code></a> class instead.</p>
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.checkout">
-<code className="sig-name descname">checkout</code><span className="sig-paren">(</span><em className="sig-param">force: bool = False</em>, <em className="sig-param">layered: bool = False</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.image.Image.checkout" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">checkout</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">force</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">layered</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.image.Image.checkout" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks the image out, changing the current HEAD pointer. Raises an error
 if there are pending changes to its checkout.</p>
 <dl className="field-list simple">
@@ -115,21 +115,21 @@ inside of it).</p></li>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.comment">
 <em className="property">property </em><code className="sig-name descname">comment</code><a className="headerlink" href="#splitgraph.core.image.Image.comment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 3</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.created">
 <em className="property">property </em><code className="sig-name descname">created</code><a className="headerlink" href="#splitgraph.core.image.Image.created" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 2</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.delete_tag">
-<code className="sig-name descname">delete_tag</code><span className="sig-paren">(</span><em className="sig-param">tag: str</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.image.Image.delete_tag" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">delete_tag</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">tag</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.image.Image.delete_tag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Deletes a tag from an image.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -138,24 +138,24 @@ inside of it).</p></li>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.engine">
 <em className="property">property </em><code className="sig-name descname">engine</code><a className="headerlink" href="#splitgraph.core.image.Image.engine" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.get_log">
-<code className="sig-name descname">get_log</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → List[splitgraph.core.image.Image]<a className="headerlink" href="#splitgraph.core.image.Image.get_log" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">get_log</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → List<span className="p">[</span><a className="reference internal" href="#splitgraph.core.image.Image" title="splitgraph.core.image.Image">splitgraph.core.image.Image</a><span className="p">]</span><a className="headerlink" href="#splitgraph.core.image.Image.get_log" title="Permalink to this definition">¶</a></dt>
 <dd><p>Repeatedly gets the parent of a given image until it reaches the bottom.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.get_parent_children">
-<code className="sig-name descname">get_parent_children</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → Tuple[str, List[Any]]<a className="headerlink" href="#splitgraph.core.image.Image.get_parent_children" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">get_parent_children</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → Tuple<span className="p">[</span>str<span className="p">, </span>List<span className="p">[</span>Any<span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.core.image.Image.get_parent_children" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the parent and a list of children of a given image.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.get_size">
 <code className="sig-name descname">get_size</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → int<a className="headerlink" href="#splitgraph.core.image.Image.get_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the physical size used by the image’s objects (including those that might be
@@ -169,9 +169,9 @@ objects have been downloaded.</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.get_table">
-<code className="sig-name descname">get_table</code><span className="sig-paren">(</span><em className="sig-param">table_name: str</em><span className="sig-paren">)</span> → splitgraph.core.table.Table<a className="headerlink" href="#splitgraph.core.image.Image.get_table" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">get_table</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">table_name</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → <a className="reference internal" href="#splitgraph.core.table.Table" title="splitgraph.core.table.Table">splitgraph.core.table.Table</a><a className="headerlink" href="#splitgraph.core.image.Image.get_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a Table object representing a version of a given table.
 Contains a list of objects that the table is linked to and the table’s schema.</p>
 <dl className="field-list simple">
@@ -184,40 +184,43 @@ Contains a list of objects that the table is linked to and the table’s schema.
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.get_tables">
-<code className="sig-name descname">get_tables</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → List[str]<a className="headerlink" href="#splitgraph.core.image.Image.get_tables" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">get_tables</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → List<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.core.image.Image.get_tables" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the names of all tables inside of an image.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.get_tags">
 <code className="sig-name descname">get_tags</code><span className="sig-paren">(</span><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.core.image.Image.get_tags" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lists all tags that this image has.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.image_hash">
 <em className="property">property </em><code className="sig-name descname">image_hash</code><a className="headerlink" href="#splitgraph.core.image.Image.image_hash" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 0</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.object_engine">
 <em className="property">property </em><code className="sig-name descname">object_engine</code><a className="headerlink" href="#splitgraph.core.image.Image.object_engine" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.parent_id">
 <em className="property">property </em><code className="sig-name descname">parent_id</code><a className="headerlink" href="#splitgraph.core.image.Image.parent_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 1</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.provenance">
-<code className="sig-name descname">provenance</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → List[Tuple[Repository, str]]<a className="headerlink" href="#splitgraph.core.image.Image.provenance" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">provenance</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">reverse</span><span className="o">=</span><span className="default_value">False</span></em>, <em className="sig-param"><span className="n">engine</span><span className="o">=</span><span className="default_value">None</span></em><span className="sig-paren">)</span> → List<span className="p">[</span>Tuple<span className="p">[</span>Repository<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.core.image.Image.provenance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Inspects the image’s parent chain to come up with a set of repositories and their hashes
 that it was created from.</p>
+<p>If <cite>reverse</cite> is True, returns a list of images that were created _from_ this image. If
+this image is on a remote repository, <cite>engine</cite> can be passed in to override the engine
+used for the lookup of dependents.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Returns</dt>
 <dd className="field-odd"><p>List of (repository, image_hash)</p>
@@ -225,21 +228,15 @@ that it was created from.</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.provenance_data">
 <em className="property">property </em><code className="sig-name descname">provenance_data</code><a className="headerlink" href="#splitgraph.core.image.Image.provenance_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Alias for field number 5</p>
-</dd></dl>
-
-<dl className="method">
-<dt id="splitgraph.core.image.Image.provenance_type">
-<em className="property">property </em><code className="sig-name descname">provenance_type</code><a className="headerlink" href="#splitgraph.core.image.Image.provenance_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 4</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.query_schema">
-<code className="sig-name descname">query_schema</code><span className="sig-paren">(</span><em className="sig-param">wrapper: Optional[str] = 'splitgraph.core.fdw_checkout.QueryingForeignDataWrapper'</em><span className="sig-paren">)</span> → Iterator[str]<a className="headerlink" href="#splitgraph.core.image.Image.query_schema" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">query_schema</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">wrapper</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">'splitgraph.core.fdw_checkout.QueryingForeignDataWrapper'</span></em><span className="sig-paren">)</span> → Iterator<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.core.image.Image.query_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a temporary schema with tables in this image mounted as foreign tables that can be accessed via
 read-only layered querying. On exit from the context manager, the schema is discarded.</p>
 <dl className="field-list simple">
@@ -249,30 +246,27 @@ read-only layered querying. On exit from the context manager, the schema is disc
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.repository">
 <em className="property">property </em><code className="sig-name descname">repository</code><a className="headerlink" href="#splitgraph.core.image.Image.repository" title="Permalink to this definition">¶</a></dt>
-<dd><p>Alias for field number 6</p>
+<dd><p>Alias for field number 5</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.set_provenance">
-<code className="sig-name descname">set_provenance</code><span className="sig-paren">(</span><em className="sig-param">provenance_type: str</em>, <em className="sig-param">**kwargs</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.image.Image.set_provenance" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">set_provenance</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">provenance_data</span><span className="p">:</span> <span className="n">List<span className="p">[</span>Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>List<span className="p">[</span>str<span className="p">]</span><span className="p">, </span>List<span className="p">[</span>bool<span className="p">]</span><span className="p">, </span>List<span className="p">[</span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.image.Image.set_provenance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the image’s provenance. Internal function called by the Splitfile interpreter, shouldn’t
 be called directly as it changes the image after it’s been created.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
-<dd className="field-odd"><ul className="simple">
-<li><p><strong>provenance_type</strong> – One of “SQL”, “MOUNT”, “IMPORT” or “FROM”</p></li>
-<li><p><strong>kwargs</strong> – Extra provenance-specific arguments</p></li>
-</ul>
+<dd className="field-odd"><p><strong>provenance_data</strong> – List of parsed Splitfile commands and their data.</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.tag">
-<code className="sig-name descname">tag</code><span className="sig-paren">(</span><em className="sig-param">tag: str</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.image.Image.tag" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">tag</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">tag</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.image.Image.tag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tags a given image. All tags are unique inside of a repository. If a tag already exists, it’s removed
 from the previous image and given to the new image.</p>
 <dl className="field-list simple">
@@ -282,15 +276,15 @@ from the previous image and given to the new image.</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.image.Image.to_splitfile">
-<code className="sig-name descname">to_splitfile</code><span className="sig-paren">(</span><em className="sig-param">err_on_end: bool = True</em>, <em className="sig-param">source_replacement: Optional[Dict[Repository</em>, <em className="sig-param">str]] = None</em><span className="sig-paren">)</span> → List[str]<a className="headerlink" href="#splitgraph.core.image.Image.to_splitfile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Crawls the image’s parent chain to recreates a Splitfile that can be used to reconstruct it.</p>
+<code className="sig-name descname">to_splitfile</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">ignore_irreproducible</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">source_replacement</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Dict<span className="p">[</span>Repository<span className="p">, </span>str<span className="p">]</span><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → List<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.core.image.Image.to_splitfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate the Splitfile that can be used to reconstruct this image.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
 <dd className="field-odd"><ul className="simple">
-<li><p><strong>err_on_end</strong> – If False, when an image with no provenance is reached and it still has a parent, then instead
-of raising an exception, it will base the Splitfile (using the FROM command) on that image.</p></li>
+<li><p><strong>ignore_irreproducible</strong> – If True, ignore commands from irreproducible Splitfile lines
+(like MOUNT or custom commands) and instead emit a comment (this results in an invalid Splitfile).</p></li>
 <li><p><strong>source_replacement</strong> – A dictionary of repositories and image hashes/tags specifying how to replace the
 dependencies of this Splitfile (table imports and FROM commands).</p></li>
 </ul>
@@ -303,31 +297,37 @@ dependencies of this Splitfile (table imports and FROM commands).</p></li>
 
 </dd></dl>
 
-<dl className="function">
+<dl className="py function">
 <dt id="splitgraph.core.image.getrandbits">
-<code className="sig-prename descclassname">splitgraph.core.image.</code><code className="sig-name descname">getrandbits</code><span className="sig-paren">(</span><em className="sig-param">k</em><span className="sig-paren">)</span> → x.  Generates an int with k random bits.<a className="headerlink" href="#splitgraph.core.image.getrandbits" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.core.image.</code><code className="sig-name descname">getrandbits</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">k</span></em><span className="sig-paren">)</span> → x.  Generates an int with k random bits.<a className="headerlink" href="#splitgraph.core.image.getrandbits" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.core.image.reconstruct_splitfile">
+<code className="sig-prename descclassname">splitgraph.core.image.</code><code className="sig-name descname">reconstruct_splitfile</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">provenance_data</span><span className="p">:</span> <span className="n">List<span className="p">[</span>Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>List<span className="p">[</span>str<span className="p">]</span><span className="p">, </span>List<span className="p">[</span>bool<span className="p">]</span><span className="p">, </span>List<span className="p">[</span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em>, <em className="sig-param"><span className="n">ignore_irreproducible</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">source_replacement</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Dict<span className="p">[</span>Repository<span className="p">, </span>str<span className="p">]</span><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → List<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.core.image.reconstruct_splitfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreate the Splitfile that can be used to reconstruct an image.</p>
+</dd></dl>
 
 </div>
 <div className="section" id="module-splitgraph.core.object_manager">
 <span id="splitgraph-core-object-manager-module"></span><h2 id="splitgraphcoreobject_manager-module">splitgraph.core.object_manager module<a className="headerlink" href="#module-splitgraph.core.object_manager" title="Permalink to this headline">¶</a></h2>
 <p>Functions related to creating, deleting and keeping track of physical Splitgraph objects.</p>
-<dl className="class">
+<dl className="py class">
 <dt id="splitgraph.core.object_manager.ObjectManager">
-<em className="property">class </em><code className="sig-prename descclassname">splitgraph.core.object_manager.</code><code className="sig-name descname">ObjectManager</code><span className="sig-paren">(</span><em className="sig-param">object_engine: PostgresEngine</em>, <em className="sig-param">metadata_engine: Optional[PostgresEngine] = None</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager" title="Permalink to this definition">¶</a></dt>
+<em className="property">class </em><code className="sig-prename descclassname">splitgraph.core.object_manager.</code><code className="sig-name descname">ObjectManager</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">object_engine</span><span className="p">:</span> <span className="n">PostgresEngine</span></em>, <em className="sig-param"><span className="n">metadata_engine</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>PostgresEngine<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.core.fragment_manager.FragmentManager</span></code></p>
 <p>Brings the multiple manager classes together and manages the object cache (downloading and uploading
 objects as required in order to fulfill certain queries)</p>
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.object_manager.ObjectManager.cleanup">
-<code className="sig-name descname">cleanup</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → List[str]<a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.cleanup" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">cleanup</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → List<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.cleanup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Deletes all objects in the object_tree not required by any current repository, including their dependencies and
 their remote locations. Also deletes all objects not registered in the object_tree.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.object_manager.ObjectManager.download_objects">
-<code className="sig-name descname">download_objects</code><span className="sig-paren">(</span><em className="sig-param">source: Optional[ObjectManager], objects_to_fetch: List[str], object_locations: List[Tuple[str, str, str]]</em><span className="sig-paren">)</span> → List[str]<a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.download_objects" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">download_objects</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">source</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>ObjectManager<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">objects_to_fetch</span><span className="p">:</span> <span className="n">List<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">object_locations</span><span className="p">:</span> <span className="n">List<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span></span></em><span className="sig-paren">)</span> → List<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.download_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetches the required objects from the remote and stores them locally.
 Does nothing for objects that already exist.</p>
 <dl className="field-list simple">
@@ -341,9 +341,9 @@ Does nothing for objects that already exist.</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.object_manager.ObjectManager.ensure_objects">
-<code className="sig-name descname">ensure_objects</code><span className="sig-paren">(</span><em className="sig-param">table: Optional[Table], objects: Optional[List[str]] = None, quals: Optional[Sequence[Sequence[Tuple[str, str, Any]]]] = None, defer_release: bool = False, tracer: Optional[splitgraph.core.common.Tracer] = None, upstream_manager: Optional[ObjectManager] = None</em><span className="sig-paren">)</span> → Iterator[Union[List[str], Tuple[List[str], splitgraph.core.common.CallbackList]]]<a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.ensure_objects" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">ensure_objects</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">table</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Table<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">objects</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>List<span className="p">[</span>str<span className="p">]</span><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">quals</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Sequence<span className="p">[</span>Sequence<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>str<span className="p">, </span>Any<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">defer_release</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">tracer</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>splitgraph.core.common.Tracer<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">upstream_manager</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>ObjectManager<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → Iterator<span className="p">[</span>Union<span className="p">[</span>List<span className="p">[</span>str<span className="p">]</span><span className="p">, </span>Tuple<span className="p">[</span>List<span className="p">[</span>str<span className="p">]</span><span className="p">, </span>splitgraph.core.common.CallbackList<span className="p">]</span><span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.ensure_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resolves the objects needed to materialize a given table and makes sure they are in the local
 splitgraph_meta schema.</p>
 <p>Whilst inside this manager, the objects are guaranteed to exist. On exit from it, the objects are marked as
@@ -365,7 +365,7 @@ when the objects are no longer needed. If defer_release is False: just the list 
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.object_manager.ObjectManager.get_cache_occupancy">
 <code className="sig-name descname">get_cache_occupancy</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → int<a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.get_cache_occupancy" title="Permalink to this definition">¶</a></dt>
 <dd><dl className="field-list simple">
@@ -375,9 +375,9 @@ when the objects are no longer needed. If defer_release is False: just the list 
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.object_manager.ObjectManager.get_downloaded_objects">
-<code className="sig-name descname">get_downloaded_objects</code><span className="sig-paren">(</span><em className="sig-param">limit_to: Optional[List[str]] = None</em><span className="sig-paren">)</span> → List[str]<a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.get_downloaded_objects" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">get_downloaded_objects</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">limit_to</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>List<span className="p">[</span>str<span className="p">]</span><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → List<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.get_downloaded_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets a list of objects currently in the Splitgraph cache (i.e. not only existing externally.)</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -389,7 +389,7 @@ when the objects are no longer needed. If defer_release is False: just the list 
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.object_manager.ObjectManager.get_total_object_size">
 <code className="sig-name descname">get_total_object_size</code><span className="sig-paren">(</span><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.get_total_object_size" title="Permalink to this definition">¶</a></dt>
 <dd><dl className="field-list simple">
@@ -399,9 +399,9 @@ when the objects are no longer needed. If defer_release is False: just the list 
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.object_manager.ObjectManager.make_objects_external">
-<code className="sig-name descname">make_objects_external</code><span className="sig-paren">(</span><em className="sig-param">objects: List[str], handler: str, handler_params: Dict[Any, Any]</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.make_objects_external" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">make_objects_external</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">objects</span><span className="p">:</span> <span className="n">List<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">handler</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">handler_params</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>Any<span className="p">, </span>Any<span className="p">]</span></span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.make_objects_external" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uploads local objects to an external location and marks them as being cached locally (thus making it possible
 to evict or swap them out).</p>
 <dl className="field-list simple">
@@ -415,9 +415,9 @@ to evict or swap them out).</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.object_manager.ObjectManager.run_eviction">
-<code className="sig-name descname">run_eviction</code><span className="sig-paren">(</span><em className="sig-param">keep_objects: List[str], required_space: Optional[int] = None</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.run_eviction" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">run_eviction</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">keep_objects</span><span className="p">:</span> <span className="n">List<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">required_space</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>int<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.run_eviction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete enough objects with zero reference count (only those, since we guarantee that whilst refcount is >0,
 the object stays alive) to free at least <cite>required_space</cite> in the cache.</p>
 <dl className="field-list simple">
@@ -431,9 +431,9 @@ it shall raise an exception. If None, removes all eligible objects.</p></li>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.object_manager.ObjectManager.upload_objects">
-<code className="sig-name descname">upload_objects</code><span className="sig-paren">(</span><em className="sig-param">target: splitgraph.core.object_manager.ObjectManager, objects_to_push: List[str], handler: str = 'DB', handler_params: Optional[Dict[Any, Any]] = None</em><span className="sig-paren">)</span> → Sequence[Tuple[str, Optional[str]]]<a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.upload_objects" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">upload_objects</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">target</span><span className="p">:</span> <span className="n"><a className="reference internal" href="#splitgraph.core.object_manager.ObjectManager" title="splitgraph.core.object_manager.ObjectManager">splitgraph.core.object_manager.ObjectManager</a></span></em>, <em className="sig-param"><span className="n">objects_to_push</span><span className="p">:</span> <span className="n">List<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">handler</span><span className="p">:</span> <span className="n">str</span> <span className="o">=</span> <span className="default_value">'DB'</span></em>, <em className="sig-param"><span className="n">handler_params</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Dict<span className="p">[</span>Any<span className="p">, </span>Any<span className="p">]</span><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → Sequence<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>Optional<span className="p">[</span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.core.object_manager.ObjectManager.upload_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uploads physical objects to the remote or some other external location.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -459,9 +459,9 @@ already exist on the remote).</p>
 <div className="section" id="module-splitgraph.core.registry">
 <span id="splitgraph-core-registry-module"></span><h2 id="splitgraphcoreregistry-module">splitgraph.core.registry module<a className="headerlink" href="#module-splitgraph.core.registry" title="Permalink to this headline">¶</a></h2>
 <p>Functions for communicating with the remote Splitgraph catalog</p>
-<dl className="function">
+<dl className="py function">
 <dt id="splitgraph.core.registry.get_info_key">
-<code className="sig-prename descclassname">splitgraph.core.registry.</code><code className="sig-name descname">get_info_key</code><span className="sig-paren">(</span><em className="sig-param">engine: PostgresEngine</em>, <em className="sig-param">key: str</em><span className="sig-paren">)</span> → Optional[str]<a className="headerlink" href="#splitgraph.core.registry.get_info_key" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.core.registry.</code><code className="sig-name descname">get_info_key</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">engine</span><span className="p">:</span> <span className="n">PostgresEngine</span></em>, <em className="sig-param"><span className="n">key</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → Optional<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.core.registry.get_info_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets a configuration key from the remote registry, used to notify the client of the registry’s capabilities.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -473,9 +473,9 @@ already exist on the remote).</p>
 </dl>
 </dd></dl>
 
-<dl className="function">
+<dl className="py function">
 <dt id="splitgraph.core.registry.set_info_key">
-<code className="sig-prename descclassname">splitgraph.core.registry.</code><code className="sig-name descname">set_info_key</code><span className="sig-paren">(</span><em className="sig-param">engine: PostgresEngine, key: str, value: Union[bool, str]</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.registry.set_info_key" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.core.registry.</code><code className="sig-name descname">set_info_key</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">engine</span><span className="p">:</span> <span className="n">PostgresEngine</span></em>, <em className="sig-param"><span className="n">key</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">value</span><span className="p">:</span> <span className="n">Union<span className="p">[</span>bool<span className="p">, </span>str<span className="p">]</span></span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.registry.set_info_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets a configuration value on the remote registry.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -488,9 +488,9 @@ already exist on the remote).</p>
 </dl>
 </dd></dl>
 
-<dl className="function">
+<dl className="py function">
 <dt id="splitgraph.core.registry.setup_registry_mode">
-<code className="sig-prename descclassname">splitgraph.core.registry.</code><code className="sig-name descname">setup_registry_mode</code><span className="sig-paren">(</span><em className="sig-param">engine: PostgresEngine</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.registry.setup_registry_mode" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.core.registry.</code><code className="sig-name descname">setup_registry_mode</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">engine</span><span className="p">:</span> <span className="n">PostgresEngine</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.registry.setup_registry_mode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set up access policies/RLS:</p>
 <ul className="simple">
 <li><p>Normal users aren’t allowed to create tables/schemata (can’t do checkouts inside of a registry or
@@ -512,14 +512,14 @@ or change it (since they control the external location they’ve uploaded it to 
 <div className="section" id="module-splitgraph.core.repository">
 <span id="splitgraph-core-repository-module"></span><h2 id="splitgraphcorerepository-module">splitgraph.core.repository module<a className="headerlink" href="#module-splitgraph.core.repository" title="Permalink to this headline">¶</a></h2>
 <p>Public API for managing images in a Splitgraph repository.</p>
-<dl className="class">
+<dl className="py class">
 <dt id="splitgraph.core.repository.Repository">
-<em className="property">class </em><code className="sig-prename descclassname">splitgraph.core.repository.</code><code className="sig-name descname">Repository</code><span className="sig-paren">(</span><em className="sig-param">namespace: str</em>, <em className="sig-param">repository: str</em>, <em className="sig-param">engine: Optional[splitgraph.engine.postgres.engine.PostgresEngine] = None</em>, <em className="sig-param">object_engine: Optional[splitgraph.engine.postgres.engine.PostgresEngine] = None</em>, <em className="sig-param">object_manager: Optional[splitgraph.core.object_manager.ObjectManager] = None</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.core.repository.Repository" title="Permalink to this definition">¶</a></dt>
+<em className="property">class </em><code className="sig-prename descclassname">splitgraph.core.repository.</code><code className="sig-name descname">Repository</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">namespace</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">repository</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">engine</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span><a className="reference internal" href="splitgraph.engine.postgres/#splitgraph.engine.postgres.engine.PostgresEngine" title="splitgraph.engine.postgres.engine.PostgresEngine">splitgraph.engine.postgres.engine.PostgresEngine</a><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">object_engine</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span><a className="reference internal" href="splitgraph.engine.postgres/#splitgraph.engine.postgres.engine.PostgresEngine" title="splitgraph.engine.postgres.engine.PostgresEngine">splitgraph.engine.postgres.engine.PostgresEngine</a><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">object_manager</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span><a className="reference internal" href="#splitgraph.core.object_manager.ObjectManager" title="splitgraph.core.object_manager.ObjectManager">splitgraph.core.object_manager.ObjectManager</a><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.core.repository.Repository" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">object</span></code></p>
 <p>Splitgraph repository API</p>
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.commit">
-<code className="sig-name descname">commit</code><span className="sig-paren">(</span><em className="sig-param">image_hash: Optional[str] = None, comment: Optional[str] = None, snap_only: bool = False, chunk_size: Optional[int] = 10000, split_changeset: bool = False, extra_indexes: Optional[Dict[str, Dict[str, Union[List[str], Dict[str, Dict[str, Any]]]]]] = None, in_fragment_order: Optional[Dict[str, List[str]]] = None</em><span className="sig-paren">)</span> → splitgraph.core.image.Image<a className="headerlink" href="#splitgraph.core.repository.Repository.commit" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">commit</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">image_hash</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">comment</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">snap_only</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">chunk_size</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>int<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">10000</span></em>, <em className="sig-param"><span className="n">split_changeset</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">extra_indexes</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>List<span className="p">[</span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Any<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">in_fragment_order</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Dict<span className="p">[</span>str<span className="p">, </span>List<span className="p">[</span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → <a className="reference internal" href="#splitgraph.core.image.Image" title="splitgraph.core.image.Image">splitgraph.core.image.Image</a><a className="headerlink" href="#splitgraph.core.repository.Repository.commit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Commits all pending changes to a given repository, creating a new image.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -551,15 +551,15 @@ table.</p></li>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.commit_engines">
 <code className="sig-name descname">commit_engines</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.repository.Repository.commit_engines" title="Permalink to this definition">¶</a></dt>
 <dd><p>Commit the underlying transactions on both engines that the repository uses.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.delete">
-<code className="sig-name descname">delete</code><span className="sig-paren">(</span><em className="sig-param">unregister: bool = True</em>, <em className="sig-param">uncheckout: bool = True</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.repository.Repository.delete" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">delete</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">unregister</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">True</span></em>, <em className="sig-param"><span className="n">uncheckout</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">True</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.repository.Repository.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Discards all changes to a given repository and optionally all of its history,
 as well as deleting the Postgres schema that it might be checked out into.
 Doesn’t delete any cached physical objects.</p>
@@ -576,9 +576,9 @@ if the repository is backed by a registry (rather than a local engine).</p></li>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.diff">
-<code className="sig-name descname">diff</code><span className="sig-paren">(</span><em className="sig-param">table_name: str, image_1: Union[splitgraph.core.image.Image, str], image_2: Union[splitgraph.core.image.Image, str, None], aggregate: bool = False</em><span className="sig-paren">)</span> → Union[bool, Tuple[int, int, int], List[Tuple[bool, Tuple]]]<a className="headerlink" href="#splitgraph.core.repository.Repository.diff" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">diff</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">table_name</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">image_1</span><span className="p">:</span> <span className="n">Union<span className="p">[</span><a className="reference internal" href="#splitgraph.core.image.Image" title="splitgraph.core.image.Image">splitgraph.core.image.Image</a><span className="p">, </span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">image_2</span><span className="p">:</span> <span className="n">Union[splitgraph.core.image.Image, str, None]</span></em>, <em className="sig-param"><span className="n">aggregate</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em><span className="sig-paren">)</span> → Union<span className="p">[</span>bool<span className="p">, </span>Tuple<span className="p">[</span>int<span className="p">, </span>int<span className="p">, </span>int<span className="p">]</span><span className="p">, </span>List<span className="p">[</span>Tuple<span className="p">[</span>bool<span className="p">, </span>Tuple<span className="p">]</span><span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.core.repository.Repository.diff" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compares the state of a table in different images by materializing both tables into a temporary space
 and comparing them row-to-row.</p>
 <dl className="field-list simple">
@@ -600,9 +600,9 @@ Otherwise, returns a list of changes where each change is a tuple of
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.dump">
-<code className="sig-name descname">dump</code><span className="sig-paren">(</span><em className="sig-param">stream: _io.TextIOWrapper</em>, <em className="sig-param">exclude_object_contents: bool = False</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.repository.Repository.dump" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">dump</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">stream</span><span className="p">:</span> <span className="n">_io.TextIOWrapper</span></em>, <em className="sig-param"><span className="n">exclude_object_contents</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.repository.Repository.dump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates an SQL dump with the metadata required for the repository and all of its objects.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -614,21 +614,21 @@ Otherwise, returns a list of changes where each change is a tuple of
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.from_schema">
-<em className="property">classmethod </em><code className="sig-name descname">from_schema</code><span className="sig-paren">(</span><em className="sig-param">schema: str</em><span className="sig-paren">)</span> → splitgraph.core.repository.Repository<a className="headerlink" href="#splitgraph.core.repository.Repository.from_schema" title="Permalink to this definition">¶</a></dt>
+<em className="property">classmethod </em><code className="sig-name descname">from_schema</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → <a className="reference internal" href="#splitgraph.core.repository.Repository" title="splitgraph.core.repository.Repository">splitgraph.core.repository.Repository</a><a className="headerlink" href="#splitgraph.core.repository.Repository.from_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Postgres schema name of the format <cite>namespace/repository</cite> to a Splitgraph repository object.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.from_template">
-<em className="property">classmethod </em><code className="sig-name descname">from_template</code><span className="sig-paren">(</span><em className="sig-param">template: splitgraph.core.repository.Repository</em>, <em className="sig-param">namespace: Optional[str] = None</em>, <em className="sig-param">repository: None = None</em>, <em className="sig-param">engine: Optional[splitgraph.engine.postgres.engine.PostgresEngine] = None</em>, <em className="sig-param">object_engine: Optional[splitgraph.engine.postgres.engine.PostgresEngine] = None</em><span className="sig-paren">)</span> → splitgraph.core.repository.Repository<a className="headerlink" href="#splitgraph.core.repository.Repository.from_template" title="Permalink to this definition">¶</a></dt>
+<em className="property">classmethod </em><code className="sig-name descname">from_template</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">template</span><span className="p">:</span> <span className="n"><a className="reference internal" href="#splitgraph.core.repository.Repository" title="splitgraph.core.repository.Repository">splitgraph.core.repository.Repository</a></span></em>, <em className="sig-param"><span className="n">namespace</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">repository</span><span className="p">:</span> <span className="n">None</span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">engine</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span><a className="reference internal" href="splitgraph.engine.postgres/#splitgraph.engine.postgres.engine.PostgresEngine" title="splitgraph.engine.postgres.engine.PostgresEngine">splitgraph.engine.postgres.engine.PostgresEngine</a><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">object_engine</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span><a className="reference internal" href="splitgraph.engine.postgres/#splitgraph.engine.postgres.engine.PostgresEngine" title="splitgraph.engine.postgres.engine.PostgresEngine">splitgraph.engine.postgres.engine.PostgresEngine</a><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → <a className="reference internal" href="#splitgraph.core.repository.Repository" title="splitgraph.core.repository.Repository">splitgraph.core.repository.Repository</a><a className="headerlink" href="#splitgraph.core.repository.Repository.from_template" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a Repository from an existing one replacing some of its attributes.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.get_all_hashes_tags">
-<code className="sig-name descname">get_all_hashes_tags</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → List[Tuple[Optional[str], str]]<a className="headerlink" href="#splitgraph.core.repository.Repository.get_all_hashes_tags" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">get_all_hashes_tags</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → List<span className="p">[</span>Tuple<span className="p">[</span>Optional<span className="p">[</span>str<span className="p">]</span><span className="p">, </span>str<span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.core.repository.Repository.get_all_hashes_tags" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets all tagged images and their hashes in a given repository.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Returns</dt>
@@ -637,28 +637,54 @@ Otherwise, returns a list of changes where each change is a tuple of
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
+<dt id="splitgraph.core.repository.Repository.get_local_size">
+<code className="sig-name descname">get_local_size</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → int<a className="headerlink" href="#splitgraph.core.repository.Repository.get_local_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the actual size used by this repository’s downloaded objects.</p>
+<p>This might still be double-counted if the repository shares objects
+with other repositores.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Returns</dt>
+<dd className="field-odd"><p>Size of the repository in bytes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.core.repository.Repository.get_size">
+<code className="sig-name descname">get_size</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → int<a className="headerlink" href="#splitgraph.core.repository.Repository.get_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the physical size used by the repository’s data, counting objects that are used
+by multiple images only once. This is calculated from the metadata, the on-disk
+footprint might be smaller if not all of repository’s objects have been downloaded.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Returns</dt>
+<dd className="field-odd"><p>Size of the repository in bytes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.has_pending_changes">
 <code className="sig-name descname">has_pending_changes</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → bool<a className="headerlink" href="#splitgraph.core.repository.Repository.has_pending_changes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Detects if the repository has any pending changes (schema changes, table additions/deletions, content changes).</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.head">
 <em className="property">property </em><code className="sig-name descname">head</code><a className="headerlink" href="#splitgraph.core.repository.Repository.head" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the HEAD image for the repository or None if the repository isn’t checked out.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.head_strict">
 <em className="property">property </em><code className="sig-name descname">head_strict</code><a className="headerlink" href="#splitgraph.core.repository.Repository.head_strict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the HEAD image for the repository. Raise an exception if the repository
 isn’t checked out.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.import_tables">
-<code className="sig-name descname">import_tables</code><span className="sig-paren">(</span><em className="sig-param">tables: Sequence[str], source_repository: Repository, source_tables: Sequence[str], image_hash: Optional[str] = None, foreign_tables: bool = False, do_checkout: bool = True, target_hash: Optional[str] = None, table_queries: Optional[Sequence[bool]] = None, parent_hash: Optional[str] = None, wrapper: Optional[str] = 'splitgraph.core.fdw_checkout.QueryingForeignDataWrapper'</em><span className="sig-paren">)</span> → str<a className="headerlink" href="#splitgraph.core.repository.Repository.import_tables" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">import_tables</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">tables</span><span className="p">:</span> <span className="n">Sequence<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">source_repository</span><span className="p">:</span> <span className="n"><a className="reference internal" href="#splitgraph.core.repository.Repository" title="splitgraph.core.repository.Repository">splitgraph.core.repository.Repository</a></span></em>, <em className="sig-param"><span className="n">source_tables</span><span className="p">:</span> <span className="n">Sequence<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">image_hash</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">foreign_tables</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">do_checkout</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">True</span></em>, <em className="sig-param"><span className="n">target_hash</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">table_queries</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Sequence<span className="p">[</span>bool<span className="p">]</span><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">parent_hash</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">wrapper</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">'splitgraph.core.fdw_checkout.QueryingForeignDataWrapper'</span></em>, <em className="sig-param"><span className="n">skip_validation</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em><span className="sig-paren">)</span> → str<a className="headerlink" href="#splitgraph.core.repository.Repository.import_tables" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new commit in target_repository with one or more tables linked to already-existing tables.
 After this operation, the HEAD of the target repository moves to the new commit and the new tables are
 materialized.</p>
@@ -684,6 +710,7 @@ query. This is committed as a new snapshot.</p></li>
 Existing tables from the parent image are preserved in the new image. If None, the current repository
 HEAD is used.</p></li>
 <li><p><strong>wrapper</strong> – Override the default class for the layered querying foreign data wrapper.</p></li>
+<li><p><strong>skip_validation</strong> – Don’t validate SQL used in import statements (used by the Splitfile executor that pre-formats the SQL).</p></li>
 </ul>
 </dd>
 <dt className="field-even">Returns</dt>
@@ -692,15 +719,15 @@ HEAD is used.</p></li>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.init">
 <code className="sig-name descname">init</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.repository.Repository.init" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes an empty repo with an initial commit (hash 0000…)</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.materialized_table">
-<code className="sig-name descname">materialized_table</code><span className="sig-paren">(</span><em className="sig-param">table_name: str, image_hash: Optional[str]</em><span className="sig-paren">)</span> → Iterator[Tuple[str, str]]<a className="headerlink" href="#splitgraph.core.repository.Repository.materialized_table" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">materialized_table</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">table_name</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">image_hash</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span></em><span className="sig-paren">)</span> → Iterator<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.core.repository.Repository.materialized_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>A context manager that returns a pointer to a read-only materialized table in a given image.
 The table is deleted on exit from the context manager.</p>
 <dl className="field-list simple">
@@ -716,9 +743,9 @@ The table is deleted on exit from the context manager.</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.pull">
-<code className="sig-name descname">pull</code><span className="sig-paren">(</span><em className="sig-param">download_all: Optional[bool] = False</em>, <em className="sig-param">overwrite: bool = False</em>, <em className="sig-param">single_image: Optional[str] = None</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.repository.Repository.pull" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">pull</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">download_all</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>bool<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">overwrite_objects</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">overwrite_tags</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">single_image</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.repository.Repository.pull" title="Permalink to this definition">¶</a></dt>
 <dd><p>Synchronizes the state of the local Splitgraph repository with its upstream, optionally downloading all new
 objects created on the remote.</p>
 <dl className="field-list simple">
@@ -726,16 +753,17 @@ objects created on the remote.</p>
 <dd className="field-odd"><ul className="simple">
 <li><p><strong>download_all</strong> – If True, downloads all objects and stores them locally. Otherwise, will only download
 required objects when a table is checked out.</p></li>
-<li><p><strong>overwrite</strong> – If True, will overwrite object metadata on the local repository for existing objects.</p></li>
+<li><p><strong>overwrite_objects</strong> – If True, will overwrite object metadata on the local repository for existing objects.</p></li>
+<li><p><strong>overwrite_tags</strong> – If True, will overwrite existing tags.</p></li>
 <li><p><strong>single_image</strong> – Limit the download to a single image hash/tag.</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.push">
-<code className="sig-name descname">push</code><span className="sig-paren">(</span><em className="sig-param">remote_repository: Optional[Repository] = None</em>, <em className="sig-param">overwrite: bool = False</em>, <em className="sig-param">handler: str = 'DB'</em>, <em className="sig-param">handler_options: Optional[Dict[str</em>, <em className="sig-param">Any]] = None</em>, <em className="sig-param">single_image: Optional[str] = None</em><span className="sig-paren">)</span> → splitgraph.core.repository.Repository<a className="headerlink" href="#splitgraph.core.repository.Repository.push" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">push</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">remote_repository</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Repository<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">overwrite_objects</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">overwrite_tags</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">handler</span><span className="p">:</span> <span className="n">str</span> <span className="o">=</span> <span className="default_value">'DB'</span></em>, <em className="sig-param"><span className="n">handler_options</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Dict<span className="p">[</span>str<span className="p">, </span>Any<span className="p">]</span><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">single_image</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → <a className="reference internal" href="#splitgraph.core.repository.Repository" title="splitgraph.core.repository.Repository">splitgraph.core.repository.Repository</a><a className="headerlink" href="#splitgraph.core.repository.Repository.push" title="Permalink to this definition">¶</a></dt>
 <dd><p>Inverse of <code className="docutils literal notranslate"><span className="pre">pull</span></code>: Pushes all local changes to the remote and uploads new objects.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -744,7 +772,8 @@ required objects when a table is checked out.</p></li>
 upstream is used.</p></li>
 <li><p><strong>handler</strong> – Name of the handler to use to upload objects. Use <cite>DB</cite> to push them to the remote or <cite>S3</cite>
 to store them in an S3 bucket.</p></li>
-<li><p><strong>overwrite</strong> – If True, will overwrite object metadata on the remote repository for existing objects.</p></li>
+<li><p><strong>overwrite_objects</strong> – If True, will overwrite object metadata on the remote repository for existing objects.</p></li>
+<li><p><strong>overwrite_tags</strong> – If True, will overwrite existing tags on the remote repository.</p></li>
 <li><p><strong>handler_options</strong> – Extra options to pass to the handler. For example, see
 <a className="reference internal" href="splitgraph.hooks/#splitgraph.hooks.s3.S3ExternalObjectHandler" title="splitgraph.hooks.s3.S3ExternalObjectHandler"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.hooks.s3.S3ExternalObjectHandler</span></code></a>.</p></li>
 <li><p><strong>single_image</strong> – Limit the upload to a single image hash/tag.</p></li>
@@ -753,21 +782,21 @@ to store them in an S3 bucket.</p></li>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.rollback_engines">
 <code className="sig-name descname">rollback_engines</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.repository.Repository.rollback_engines" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rollback the underlying transactions on both engines that the repository uses.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.run_sql">
 <code className="sig-name descname">run_sql</code><span className="sig-paren">(</span><em className="sig-param">sql: Union[psycopg2.sql.Composed, str], arguments: Optional[Any] = None, return_shape: splitgraph.engine.ResultShape = &lt;ResultShape.MANY_MANY: 4></em><span className="sig-paren">)</span> → Any<a className="headerlink" href="#splitgraph.core.repository.Repository.run_sql" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute an arbitrary SQL statement inside of this repository’s checked out schema.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.set_tags">
-<code className="sig-name descname">set_tags</code><span className="sig-paren">(</span><em className="sig-param">tags: Dict[str, Optional[str]]</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.repository.Repository.set_tags" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">set_tags</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">tags</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Optional<span className="p">[</span>str<span className="p">]</span><span className="p">]</span></span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.repository.Repository.set_tags" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets tags for multiple images.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -776,15 +805,15 @@ to store them in an S3 bucket.</p></li>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.to_schema">
 <code className="sig-name descname">to_schema</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → str<a className="headerlink" href="#splitgraph.core.repository.Repository.to_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the engine schema that this repository gets checked out into.</p>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.uncheckout">
-<code className="sig-name descname">uncheckout</code><span className="sig-paren">(</span><em className="sig-param">force: bool = False</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.repository.Repository.uncheckout" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">uncheckout</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">force</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.repository.Repository.uncheckout" title="Permalink to this definition">¶</a></dt>
 <dd><p>Deletes the schema that the repository is checked out into</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -793,7 +822,7 @@ to store them in an S3 bucket.</p></li>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.repository.Repository.upstream">
 <em className="property">property </em><code className="sig-name descname">upstream</code><a className="headerlink" href="#splitgraph.core.repository.Repository.upstream" title="Permalink to this definition">¶</a></dt>
 <dd><p>The remote upstream repository that this local repository tracks.</p>
@@ -801,9 +830,9 @@ to store them in an S3 bucket.</p></li>
 
 </dd></dl>
 
-<dl className="function">
+<dl className="py function">
 <dt id="splitgraph.core.repository.clone">
-<code className="sig-prename descclassname">splitgraph.core.repository.</code><code className="sig-name descname">clone</code><span className="sig-paren">(</span><em className="sig-param">remote_repository: Union[Repository, str], local_repository: Optional[Repository] = None, overwrite: bool = False, download_all: Optional[bool] = False, single_image: Optional[str] = None</em><span className="sig-paren">)</span> → splitgraph.core.repository.Repository<a className="headerlink" href="#splitgraph.core.repository.clone" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.core.repository.</code><code className="sig-name descname">clone</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">remote_repository</span><span className="p">:</span> <span className="n">Union<span className="p">[</span>Repository<span className="p">, </span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">local_repository</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Repository<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">overwrite_objects</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">overwrite_tags</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">download_all</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>bool<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">False</span></em>, <em className="sig-param"><span className="n">single_image</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → <a className="reference internal" href="#splitgraph.core.repository.Repository" title="splitgraph.core.repository.Repository">splitgraph.core.repository.Repository</a><a className="headerlink" href="#splitgraph.core.repository.clone" title="Permalink to this definition">¶</a></dt>
 <dd><p>Clones a remote Splitgraph repository or synchronizes remote changes with the local ones.</p>
 <p>If the target repository has no set upstream engine, the source repository becomes its upstream.</p>
 <dl className="field-list simple">
@@ -815,7 +844,8 @@ belongs to.</p></li>
 <li><p><strong>local_repository</strong> – Local repository to clone into. If None, uses the same name as the remote.</p></li>
 <li><p><strong>download_all</strong> – If True, downloads all objects and stores them locally. Otherwise, will only download required
 objects when a table is checked out.</p></li>
-<li><p><strong>overwrite</strong> – If True, will overwrite object metadata on the local repository for existing objects.</p></li>
+<li><p><strong>overwrite_objects</strong> – If True, will overwrite object metadata on the local repository for existing objects.</p></li>
+<li><p><strong>overwrite_tags</strong> – If True, will overwrite existing tags.</p></li>
 <li><p><strong>single_image</strong> – If set, only get a single image with this hash/tag from the source.</p></li>
 </ul>
 </dd>
@@ -825,14 +855,14 @@ objects when a table is checked out.</p></li>
 </dl>
 </dd></dl>
 
-<dl className="function">
+<dl className="py function">
 <dt id="splitgraph.core.repository.getrandbits">
-<code className="sig-prename descclassname">splitgraph.core.repository.</code><code className="sig-name descname">getrandbits</code><span className="sig-paren">(</span><em className="sig-param">k</em><span className="sig-paren">)</span> → x.  Generates an int with k random bits.<a className="headerlink" href="#splitgraph.core.repository.getrandbits" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.core.repository.</code><code className="sig-name descname">getrandbits</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">k</span></em><span className="sig-paren">)</span> → x.  Generates an int with k random bits.<a className="headerlink" href="#splitgraph.core.repository.getrandbits" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl className="function">
+<dl className="py function">
 <dt id="splitgraph.core.repository.import_table_from_remote">
-<code className="sig-prename descclassname">splitgraph.core.repository.</code><code className="sig-name descname">import_table_from_remote</code><span className="sig-paren">(</span><em className="sig-param">remote_repository: splitgraph.core.repository.Repository, remote_tables: List[str], remote_image_hash: str, target_repository: splitgraph.core.repository.Repository, target_tables: List[Any], target_hash: str = None</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.repository.import_table_from_remote" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.core.repository.</code><code className="sig-name descname">import_table_from_remote</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">remote_repository</span><span className="p">:</span> <span className="n"><a className="reference internal" href="#splitgraph.core.repository.Repository" title="splitgraph.core.repository.Repository">splitgraph.core.repository.Repository</a></span></em>, <em className="sig-param"><span className="n">remote_tables</span><span className="p">:</span> <span className="n">List<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">remote_image_hash</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">target_repository</span><span className="p">:</span> <span className="n"><a className="reference internal" href="#splitgraph.core.repository.Repository" title="splitgraph.core.repository.Repository">splitgraph.core.repository.Repository</a></span></em>, <em className="sig-param"><span className="n">target_tables</span><span className="p">:</span> <span className="n">List<span className="p">[</span>Any<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">target_hash</span><span className="p">:</span> <span className="n">str</span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.repository.import_table_from_remote" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shorthand for importing one or more tables from a yet-uncloned remote. Here, the remote image hash is required,
 as otherwise we aren’t necessarily able to determine what the remote head is.</p>
 <dl className="field-list simple">
@@ -849,9 +879,9 @@ as otherwise we aren’t necessarily able to determine what the remote head is.<
 </dl>
 </dd></dl>
 
-<dl className="function">
+<dl className="py function">
 <dt id="splitgraph.core.repository.table_exists_at">
-<code className="sig-prename descclassname">splitgraph.core.repository.</code><code className="sig-name descname">table_exists_at</code><span className="sig-paren">(</span><em className="sig-param">repository: splitgraph.core.repository.Repository</em>, <em className="sig-param">table_name: str</em>, <em className="sig-param">image: Optional[splitgraph.core.image.Image] = None</em><span className="sig-paren">)</span> → bool<a className="headerlink" href="#splitgraph.core.repository.table_exists_at" title="Permalink to this definition">¶</a></dt>
+<code className="sig-prename descclassname">splitgraph.core.repository.</code><code className="sig-name descname">table_exists_at</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">repository</span><span className="p">:</span> <span className="n"><a className="reference internal" href="#splitgraph.core.repository.Repository" title="splitgraph.core.repository.Repository">splitgraph.core.repository.Repository</a></span></em>, <em className="sig-param"><span className="n">table_name</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">image</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span><a className="reference internal" href="#splitgraph.core.image.Image" title="splitgraph.core.image.Image">splitgraph.core.image.Image</a><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → bool<a className="headerlink" href="#splitgraph.core.repository.table_exists_at" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determines whether a given table exists in a Splitgraph image without checking it out. If <cite>image_hash</cite> is None,
 determines whether the table exists in the current staging area.</p>
 </dd></dl>
@@ -860,21 +890,21 @@ determines whether the table exists in the current staging area.</p>
 <div className="section" id="module-splitgraph.core.table">
 <span id="splitgraph-core-table-module"></span><h2 id="splitgraphcoretable-module">splitgraph.core.table module<a className="headerlink" href="#module-splitgraph.core.table" title="Permalink to this headline">¶</a></h2>
 <p>Table metadata-related classes.</p>
-<dl className="class">
+<dl className="py class">
 <dt id="splitgraph.core.table.QueryPlan">
-<em className="property">class </em><code className="sig-prename descclassname">splitgraph.core.table.</code><code className="sig-name descname">QueryPlan</code><span className="sig-paren">(</span><em className="sig-param">table: splitgraph.core.table.Table, quals: Optional[Sequence[Sequence[Tuple[str, str, Any]]]], columns: Sequence[str]</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.core.table.QueryPlan" title="Permalink to this definition">¶</a></dt>
+<em className="property">class </em><code className="sig-prename descclassname">splitgraph.core.table.</code><code className="sig-name descname">QueryPlan</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">table</span><span className="p">:</span> <span className="n"><a className="reference internal" href="#splitgraph.core.table.Table" title="splitgraph.core.table.Table">splitgraph.core.table.Table</a></span></em>, <em className="sig-param"><span className="n">quals</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Sequence<span className="p">[</span>Sequence<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>str<span className="p">, </span>Any<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em>, <em className="sig-param"><span className="n">columns</span><span className="p">:</span> <span className="n">Sequence<span className="p">[</span>str<span className="p">]</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.core.table.QueryPlan" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">object</span></code></p>
 <p>Represents the initial query plan (fragments to query) for given columns and
 qualifiers.</p>
 </dd></dl>
 
-<dl className="class">
+<dl className="py class">
 <dt id="splitgraph.core.table.Table">
-<em className="property">class </em><code className="sig-prename descclassname">splitgraph.core.table.</code><code className="sig-name descname">Table</code><span className="sig-paren">(</span><em className="sig-param">repository: Repository, image: Image, table_name: str, table_schema: List[splitgraph.core.types.TableColumn], objects: List[str]</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.core.table.Table" title="Permalink to this definition">¶</a></dt>
+<em className="property">class </em><code className="sig-prename descclassname">splitgraph.core.table.</code><code className="sig-name descname">Table</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">repository</span><span className="p">:</span> <span className="n">Repository</span></em>, <em className="sig-param"><span className="n">image</span><span className="p">:</span> <span className="n">Image</span></em>, <em className="sig-param"><span className="n">table_name</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">table_schema</span><span className="p">:</span> <span className="n">List<span className="p">[</span>splitgraph.core.types.TableColumn<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">objects</span><span className="p">:</span> <span className="n">List<span className="p">[</span>str<span className="p">]</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.core.table.Table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">object</span></code></p>
 <p>Represents a Splitgraph table in a given image. Shouldn’t be created directly, use Table-loading
 methods in the <a className="reference internal" href="#splitgraph.core.image.Image" title="splitgraph.core.image.Image"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.core.image.Image</span></code></a> class instead.</p>
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.table.Table.get_length">
 <code className="sig-name descname">get_length</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → int<a className="headerlink" href="#splitgraph.core.table.Table.get_length" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the number of rows in this table.</p>
@@ -887,9 +917,9 @@ table as some objects might overwrite each other.</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.table.Table.get_query_plan">
-<code className="sig-name descname">get_query_plan</code><span className="sig-paren">(</span><em className="sig-param">quals: Optional[Sequence[Sequence[Tuple[str, str, Any]]]], columns: Sequence[str], use_cache: bool = True</em><span className="sig-paren">)</span> → splitgraph.core.table.QueryPlan<a className="headerlink" href="#splitgraph.core.table.Table.get_query_plan" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">get_query_plan</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">quals</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Sequence<span className="p">[</span>Sequence<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>str<span className="p">, </span>Any<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em>, <em className="sig-param"><span className="n">columns</span><span className="p">:</span> <span className="n">Sequence<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">use_cache</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">True</span></em><span className="sig-paren">)</span> → <a className="reference internal" href="#splitgraph.core.table.QueryPlan" title="splitgraph.core.table.QueryPlan">splitgraph.core.table.QueryPlan</a><a className="headerlink" href="#splitgraph.core.table.Table.get_query_plan" title="Permalink to this definition">¶</a></dt>
 <dd><p>Start planning a query (preliminary steps before object downloading,
 like qualifier filtering).</p>
 <dl className="field-list simple">
@@ -906,7 +936,7 @@ like qualifier filtering).</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.table.Table.get_size">
 <code className="sig-name descname">get_size</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → int<a className="headerlink" href="#splitgraph.core.table.Table.get_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the physical size used by the table’s objects (including those shared with other tables).</p>
@@ -919,9 +949,9 @@ objects have been downloaded.</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.table.Table.materialize">
-<code className="sig-name descname">materialize</code><span className="sig-paren">(</span><em className="sig-param">destination: str</em>, <em className="sig-param">destination_schema: Optional[str] = None</em>, <em className="sig-param">lq_server: Optional[str] = None</em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.table.Table.materialize" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">materialize</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">destination</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">destination_schema</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">lq_server</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.core.table.Table.materialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Materializes a Splitgraph table in the target schema as a normal Postgres table, potentially downloading all
 required objects and using them to reconstruct the table.</p>
 <dl className="field-list simple">
@@ -935,9 +965,9 @@ required objects and using them to reconstruct the table.</p>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.table.Table.query">
-<code className="sig-name descname">query</code><span className="sig-paren">(</span><em className="sig-param">columns: List[str], quals: Sequence[Sequence[Tuple[str, str, Any]]]</em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.core.table.Table.query" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">query</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">columns</span><span className="p">:</span> <span className="n">List<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">quals</span><span className="p">:</span> <span className="n">Sequence<span className="p">[</span>Sequence<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>str<span className="p">, </span>Any<span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.core.table.Table.query" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run a read-only query against this table without materializing it.</p>
 <p>This is a wrapper around query_lazy() that force evaluates the results which
 might mean more fragments being materialized that aren’t needed.</p>
@@ -955,9 +985,9 @@ FragmentManager.filter_fragments for the actual format.</p></li>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.table.Table.query_indirect">
-<code className="sig-name descname">query_indirect</code><span className="sig-paren">(</span><em className="sig-param">columns: List[str], quals: Optional[Sequence[Sequence[Tuple[str, str, Any]]]]</em><span className="sig-paren">)</span> → Tuple[Iterator[bytes], Callable, splitgraph.core.table.QueryPlan]<a className="headerlink" href="#splitgraph.core.table.Table.query_indirect" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">query_indirect</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">columns</span><span className="p">:</span> <span className="n">List<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">quals</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Sequence<span className="p">[</span>Sequence<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>str<span className="p">, </span>Any<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em><span className="sig-paren">)</span> → Tuple<span className="p">[</span>Iterator<span className="p">[</span>bytes<span className="p">]</span><span className="p">, </span>Callable<span className="p">, </span><a className="reference internal" href="#splitgraph.core.table.QueryPlan" title="splitgraph.core.table.QueryPlan">splitgraph.core.table.QueryPlan</a><span className="p">]</span><a className="headerlink" href="#splitgraph.core.table.Table.query_indirect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run a read-only query against this table without materializing it. Instead of
 actual results, this returns a generator of SQL queries that the caller can use
 to get the results as well as a callback that the caller has to run after they’re
@@ -981,9 +1011,9 @@ that are fully populated after the callback has been called to end the query).</
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.table.Table.query_lazy">
-<code className="sig-name descname">query_lazy</code><span className="sig-paren">(</span><em className="sig-param">columns: List[str], quals: Sequence[Sequence[Tuple[str, str, Any]]]</em><span className="sig-paren">)</span> → Iterator[Iterator[Dict[str, Any]]]<a className="headerlink" href="#splitgraph.core.table.Table.query_lazy" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">query_lazy</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">columns</span><span className="p">:</span> <span className="n">List<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">quals</span><span className="p">:</span> <span className="n">Sequence<span className="p">[</span>Sequence<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>str<span className="p">, </span>Any<span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em><span className="sig-paren">)</span> → Iterator<span className="p">[</span>Iterator<span className="p">[</span>Dict<span className="p">[</span>str<span className="p">, </span>Any<span className="p">]</span><span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.core.table.Table.query_lazy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run a read-only query against this table without materializing it.</p>
 <dl className="field-list simple">
 <dt className="field-odd">Parameters</dt>
@@ -999,9 +1029,9 @@ FragmentManager.filter_fragments for the actual format.</p></li>
 </dl>
 </dd></dl>
 
-<dl className="method">
+<dl className="py method">
 <dt id="splitgraph.core.table.Table.reindex">
-<code className="sig-name descname">reindex</code><span className="sig-paren">(</span><em className="sig-param">extra_indexes: Dict[str, Union[List[str], Dict[str, Dict[str, Any]]]], raise_on_patch_objects=True</em><span className="sig-paren">)</span> → List[str]<a className="headerlink" href="#splitgraph.core.table.Table.reindex" title="Permalink to this definition">¶</a></dt>
+<code className="sig-name descname">reindex</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">extra_indexes</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>List<span className="p">[</span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Any<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em>, <em className="sig-param"><span className="n">raise_on_patch_objects</span><span className="o">=</span><span className="default_value">True</span></em><span className="sig-paren">)</span> → List<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.core.table.Table.reindex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run extra indexes on all objects in this table and update their metadata.
 This only works on objects that don’t have any deletions or upserts (have a deletion hash of 000000…).</p>
 <dl className="field-list simple">
@@ -1017,6 +1047,11 @@ overwrite any other objects. If False, will log a warning but will reindex all n
 </dd></dl>
 
 </dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.core.table.merge_index_data">
+<code className="sig-prename descclassname">splitgraph.core.table.</code><code className="sig-name descname">merge_index_data</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">current_index</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Any<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">new_index</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Any<span className="p">]</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.core.table.merge_index_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 

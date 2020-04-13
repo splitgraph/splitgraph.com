@@ -8,3 +8,7 @@ Objects, or fragments, are building blocks of Splitgraph tables: each table cons
 that can partially overwrite each other. Each fragment might have a parent that it depends on. In addition,
 the smallest and largest values for every column are stored in the fragment's metadata. This information is used
 to choose which objects to download in order to execute a query against a table.
+
+### Options
+
+  * **`-r, --remote [data.splitgraph.com]`**: Perform operation on a different remote engine

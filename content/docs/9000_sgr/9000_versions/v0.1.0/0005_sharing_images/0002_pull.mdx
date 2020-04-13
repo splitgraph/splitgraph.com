@@ -2,8 +2,10 @@ export const meta = {id: "pull", title: "sgr pull", sidebarTitle: "pull"};
 
 ```sgr pull [OPTIONS] REPOSITORY_OR_IMAGE```
 
-Pull changes from an upstream repository or download a single image.
+Pull changes / download a single image.
 
 ### Options
 
   * **`-d, --download-all`**: Download all objects immediately instead of on checkout.
+  * **`-f, --overwrite-object-meta`**: Overwrite metadata for existing objects
+  * **`-t, --tags`**: Overwrite tags for pulled image/repo
