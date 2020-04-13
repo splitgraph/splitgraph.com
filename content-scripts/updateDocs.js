@@ -638,6 +638,10 @@ const processPythonApiDocs = async ({ config, release, inputDir }) => {
     archiveDir: archive
   });
 
+  console.warn("inputDir:", path.join(inputDir, "api"));
+  console.warn("outputDir:", outputDir);
+  // process.exit(0);
+
   makeMdxFilesFromSphinxJson({
     inputDir: path.join(inputDir, "api"),
     outputDir
@@ -712,19 +716,19 @@ const applyModified = async ({ config, modified }) => {
 
 const deleteAsciinemaVersion = async ({ config, tag_name }) =>
   await deleteVersionOfDocs({
-    archiveDir: config.docs.paths(config).asciinema,
+    archiveDir: config.docs.paths(config).asciinema.archive,
     tag_name
   });
 
 const deletePythonApiDocsVersion = async ({ config, tag_name }) =>
   await deleteVersionOfDocs({
-    archiveDir: config.docs.paths(config).pythonApiDocs,
+    archiveDir: config.docs.paths(config).pythonApiDocs.archive,
     tag_name
   });
 
 const deleteSgrCliDocsVersion = async ({ config, tag_name }) =>
   await deleteVersionOfDocs({
-    archiveDir: config.docs.paths(config).sgrCliDocs,
+    archiveDir: config.docs.paths(config).sgrCliDocs.archive,
     tag_name
   });
 
