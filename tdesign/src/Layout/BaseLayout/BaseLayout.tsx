@@ -5,21 +5,21 @@ import { Box } from 'rebass';
 import { Header, HeaderLeft, HeaderCenter, HeaderRight } from '../Header';
 import { LogoImage } from '../LogoImage';
 import { LogoText } from '../LogoText';
-import { Link } from '../../Link';
-import { Avatar } from '../../Avatar';
-
-// import "@csstools/normalize.css";
-// import "../../css/base.css";
-
-// import defaultTheme from "../../defaultTheme";
-
-// import { ThemeProvider } from "theme-ui";
 
 export interface BaseLayoutProps {
   children?: React.ReactNode;
+  renderHeaderRight?: () => React.ReactNode;
+  renderHeaderCenter?: () => React.ReactNode;
 }
 
-export default ({ children }: BaseLayoutProps) => {
+export default ({
+  children,
+  renderHeaderCenter,
+  renderHeaderRight,
+}: BaseLayoutProps) => {
+  const headerCenter = !!renderHeaderCenter ? renderHeaderCenter() : null;
+  const headerRight = !!renderHeaderRight ? renderHeaderRight() : null;
+
   return (
     <Box style={{ minWidth: '-webkit-fit-content' }}>
       <Header>
@@ -27,11 +27,8 @@ export default ({ children }: BaseLayoutProps) => {
           <LogoImage />
           <LogoText />
         </HeaderLeft>
-        <HeaderCenter>Center</HeaderCenter>
-        <HeaderRight>
-          <Link href="/docs/getting-started/introduction">Docs</Link>
-          <Avatar initials={'MR'} />
-        </HeaderRight>
+        <HeaderCenter>{headerCenter}</HeaderCenter>
+        <HeaderRight>{headerRight}</HeaderRight>
       </Header>
       {children}
     </Box>

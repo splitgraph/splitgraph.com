@@ -207,6 +207,10 @@ export const makeDefaultTheme = () => ({
       bg: 'transparent',
       boxShadow: 'inset 0 0 2px',
     },
+    link: {
+      variant: 'links.primary',
+      bg: 'transparent',
+    },
     secondary: {
       variant: 'buttons.primary',
       color: 'white',
