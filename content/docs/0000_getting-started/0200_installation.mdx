@@ -130,25 +130,9 @@ Whilst the versions of `sgr` and of the engine don't need to be the same, it is 
 
 ## Configuration file
 
-The Splitgraph configuration file is usually stored in the user's home directory
-(`~/.splitgraph/.sgconfig`). If there's a configuration file in the current working
-directory or the environment variable `SG_CONFIG_FILE` is set, that file is used instead.
+The Splitgraph configuration file is usually stored in the user's home directory (`~/.splitgraph/.sgconfig`).
 
-It's possible to generate a configuration file with defaults by doing:
-
-```
-$ sgr config -sc > ~/.splitgraph/.sgconfig
-```
-
-Note that the `.sgconfig` file gets edited automatically by `sgr` and any values there
-that are equal to their default values get deleted.
-
-It's possible to also override various other configuration flags using environment variables. You
-can inspect the current configuration in use by Splitgraph by running
-
-```
-$ sgr config
-```
+For more information on configuring Splitgraph, see [this page](../configuration/introduction).
 
 ## Next Steps
 
