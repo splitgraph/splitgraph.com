@@ -1,6 +1,6 @@
 // @jsx jsx
 // @ts-ignore
-import { jsx, Box } from 'theme-ui';
+import { jsx, Box, SystemStyleObject } from 'theme-ui';
 import * as React from 'react';
 
 export interface IAvatarProps {
@@ -20,12 +20,17 @@ const avatarContainerStyle = {
   borderWidth: '1px',
   borderStyle: 'solid',
   borderColor: 'sglightblue',
-};
+  '.avatar-initials': {
+    textTransform: 'uppercase',
+  },
+} as SystemStyleObject;
 
 export default ({ avatarURL, initials }: IAvatarProps) => {
   return (
     <Box sx={avatarContainerStyle}>
-      {!avatarURL && initials && <span>{initials}</span>}
+      {!avatarURL && initials && (
+        <span className="avatar-initials">{initials}</span>
+      )}
       {avatarURL && <img src={avatarURL} />}
     </Box>
   );

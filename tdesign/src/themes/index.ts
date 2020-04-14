@@ -229,7 +229,17 @@ export const makeDefaultTheme = () => ({
     },
   },
   links: {
-    unstyled: {},
+    unstyled: {
+      color: 'inherit',
+      textDecoration: 'inherit',
+      fontFamily: 'inherit',
+      fontWeight: 'inherit',
+      fontSize: 'inherit',
+      ':hover': {
+        textDecoration: 'none',
+        border: 'none',
+      },
+    },
     primary: {
       // remove the gray background on active links in IE 10.
       backgroundColor: 'transparent',

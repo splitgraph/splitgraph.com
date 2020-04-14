@@ -1,16 +1,25 @@
 // @jsx jsx
+// @ts-ignore
+import { jsx, Box, SystemStyleObject } from 'theme-ui';
 import * as React from 'react';
 
-import { Box } from 'rebass';
 import { Header, HeaderLeft, HeaderCenter, HeaderRight } from '../Header';
 import { LogoImage } from '../LogoImage';
 import { LogoText } from '../LogoText';
+import { Link } from '../../Link';
 
 export interface BaseLayoutProps {
   children?: React.ReactNode;
   renderHeaderRight?: () => React.ReactNode;
   renderHeaderCenter?: () => React.ReactNode;
 }
+
+const headerStyle = {
+  minWidth: '-webkit-fit-content',
+  '.logo-link': {
+    variant: 'links.unstyled',
+  },
+} as SystemStyleObject;
 
 export default ({
   children,
@@ -21,11 +30,13 @@ export default ({
   const headerRight = !!renderHeaderRight ? renderHeaderRight() : null;
 
   return (
-    <Box style={{ minWidth: '-webkit-fit-content' }}>
+    <Box sx={headerStyle}>
       <Header>
         <HeaderLeft>
-          <LogoImage />
-          <LogoText />
+          <Link className="logo-link" as={'/'} href={'/'}>
+            <LogoImage />
+            <LogoText />
+          </Link>
         </HeaderLeft>
         <HeaderCenter>{headerCenter}</HeaderCenter>
         <HeaderRight>{headerRight}</HeaderRight>

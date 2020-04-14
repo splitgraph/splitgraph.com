@@ -14,7 +14,7 @@ const headerSx: any = {
   borderBottomStyle: 'solid',
   borderBottomWidth: '1px',
   display: 'grid',
-  gridTemplateColumns: '1fr 2fr 1fr',
+  gridTemplateColumns: '1fr 1fr 2fr',
   gridTemplateRows: '1fr',
   gridColumnGap: '0px',
   gridRowGap: '0px',
