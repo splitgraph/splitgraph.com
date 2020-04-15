@@ -114,3 +114,7 @@ export { IconCopy };
 import IconClipboard from './IconClipboard';
 export { IconClipboard };
 
+
+import IconAlertTriangle from './IconAlertTriangle';
+export { IconAlertTriangle };
+

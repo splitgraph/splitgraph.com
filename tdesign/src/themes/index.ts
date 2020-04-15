@@ -174,6 +174,22 @@ export const makeDefaultTheme = () => ({
       bg: 'background',
       boxShadow: 'card',
     },
+    notice: {
+      display: 'flex',
+      alignItems: 'center',
+      '[class^="sg-icon-"]': {
+        display: 'inline-block',
+        marginRight: '1em',
+      },
+      borderWidth: '1px',
+      borderStyle: 'solid',
+      borderColor: 'primary',
+      backgroundColor: 'rgba(213, 246, 255, .5)',
+      padding: '.5em',
+      a: {
+        variant: 'links.primary',
+      },
+    },
     nav: {
       fontSize: 1,
       fontWeight: 'bold',
@@ -238,6 +254,17 @@ export const makeDefaultTheme = () => ({
       ':hover': {
         textDecoration: 'none',
         border: 'none',
+      },
+    },
+    button: {
+      variant: 'links.unstyled',
+      backgroundColor: 'primary',
+      color: 'muted',
+      padding: '0.5rem',
+      fontWeight: 'bold',
+      borderRadius: '0.5em',
+      ':hover': {
+        cursor: 'pointer',
       },
     },
     primary: {
