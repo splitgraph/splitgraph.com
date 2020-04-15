@@ -10,8 +10,8 @@ are snapshots of the filesystem.
 An image consists of tables. Several images can share the same table in a space-efficient
 way, with the actual table data stored only once.
 
-There are multiple ways to create Splitgraph images. The easiest one is by checking an image
-out into an actual PostgreSQL schema. This enables change tracking and allows any application that
+There are multiple ways to create Splitgraph images. Firstly, the image can be checked out
+into an actual PostgreSQL schema. This enables change tracking and allows any application that
 can interact with a PostgreSQL database to work with Splitgraph. At any point in time, the schema
 can be committed to create a new image.
 

@@ -1,0 +1,101 @@
+export const meta = {
+  id: "frequently_asked_questions",
+  title: "Frequently Asked Questions"
+};
+
+### What is Splitgraph?
+
+Splitgraph is a tool for building, versioning, querying and sharing datasets that works on top of [PostgreSQL](https://www.postgresql.org/) and integrates seamlessly with anything that uses PostgreSQL.
+
+### Is Splitgraph a PostgreSQL extension?
+
+Not quite. The [Splitgraph engine](../architecture/splitgraph_engine) ships as a Docker image and is a customized version of PostgreSQL that is fully compatible with existing clients. In the future, we might repackage Splitgraph as a PostgreSQL extension.
+
+### Can I add Splitgraph to my existing PostgreSQL deployment?
+
+Whilst it is possible to add Splitgraph to existing PostgreSQL deployments, there isn't currently
+a simple installation method. If you're interested in doing so, you can follow the instructions
+in the [Dockerfile](https://github.com/splitgraph/splitgraph/blob/master/engine/Dockerfile) used
+to build the engine or contact us.
+
+### Why PostgreSQL? Why not write your own database?
+
+PostgreSQL is a battle-tested RDBMS with a mature feature set (ACID transactions, authentication,
+indexing, crash safety), extensive list of users and a rich ecosystem of extensions and applications.
+We don't think that features added by Splitgraph warrant building a brand new database.
+
+Philosophically, we believe that great tools enhance existing abstractions without breaking them:
+
+  * Git adds versioning to the filesystem, enhancing it for any tools that use the filesystem. Compilers,
+    IDEs or editors don't need to be aware of Git to reap its benefits.
+  * Docker containerizes applications by letting one use the same commands they would use
+    for installing the application on a bare machine. The application itself has no idea it's running
+    inside of a container and doesn't need to be rewritten to run in Docker.
+
+We were guided by the same principles when building Splitgraph. Any application that works
+with PostgreSQL can work with a Splitgraph table without any changes. We have examples of using
+Splitgraph with [Jupyter notebooks](../integrating_splitgraph/jupyter_notebooks),
+[PostGIS](../integrating_splitgraph/postgis) or [PostgREST](../splitgraph_cloud/publish_rest_api).
+
+### What's the performance like? Do you have any benchmarks?
+
+We maintain a couple of Jupyter notebooks with benchmarks on [our GitHub](https://github.com/splitgraph/splitgraph/tree/v0.1.0/examples/benchmarking).
+
+It's difficult to specify what is considered a benchmark for Splitgraph, as for a lot of operations
+one would be benchmarking PostgreSQL itself. This is why we haven't run benchmarks like [TPC-DS](http://www.tpc.org/tpcds/) on Splitgraph
+(since for maximum performance, it's easy to check out a Splitgraph image into a PostgreSQL schema)
+but have tested the overhead of various Splitgraph workloads over PostgreSQL.
+
+In short:
+
+  * Committing and checking out Splitgraph images takes less time than writing the same data to PostgreSQL tables.
+  * Writing to PostgreSQL tables that are change-tracked by Splitgraph is almost 2x slower
+    than writing to untracked tables (Splitgraph uses audit triggers to record changes rather than
+    diffing the table at commit time).
+  * Splitgraph images take up much less (5x-10x) space than equivalent PostgreSQL tables.
+  * Querying Splitgraph images directly without checkout [(layered querying)](../large_datasets/layered_querying) can sometimes be faster and use less IO
+  than querying PostgreSQL tables.
+
+### Can Splitgraph be used for big datasets?
+
+Yes. Splitgraph has a few optimizations that make it suitable for working with large datasets:
+
+  * Datasets are partitioned into fragments stored in a [columnar format](../concepts/objects) which is
+    superior to row-format storage for OLAP workloads.
+  * Splitgraph images can be queried without checking them out [(layered querying)](../large_datasets/layered_querying) which lazily downloads a small fraction of the table needed for the query. This is still completely seamless to the client application.
+
+### Do I have to register anywhere to use Splitgraph?
+
+No. Splitgraph can be used in a decentralized way, sharing data between two engines like you would
+with Git. Here's an [example](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-other-engine) of getting two Splitgraph instances to synchronize with each other.
+
+You can register on [Splitgraph Cloud](../splitgraph_cloud/introduction) if you wish to
+get or share public data or have a [REST API](../splitgraph_cloud/publish_rest_api) generated for your dataset.
+
+### Why not just use...
+
+#### dbt, Pachyderm, ...
+
+There are plenty of great tools around for building datasets and managing ETL pipelines. Firstly,
+they can also work against Splitgraph, since a Splitgraph engine is also a PostgreSQL instance.
+After the dataset is built, one can snapshot the schema it was built in and package it up as a Splitgraph image.
+
+Secondly, Splitgraph offers its own method of building datasets: [Splitfiles](../concepts/splitfiles). Splitfiles offer Dockerfile-like caching, provenance tracking, fast dataset rebuilds, joins between datasets and full SQL support.
+
+#### dvc, DataLad, ...
+
+Some tools use [git-annex](https://git-annex.branchable.com/) to version code and data together.
+Splitgraph's versioning improves on that by delta compressing changes (which means that bringing
+a dataset up to date only requires downloading the changes, rather than the new version) and putting
+the data inside of an actual database, making querying it more efficient.
+
+#### FoundationDB, Noms, ...
+
+A lot of tools that do data versioning also require users to learn to use a brand new database
+and rewrite their existing applications to use it. We don't think the benefits from writing a new
+database system from scratch outweigh the costs of bringing it up to feature parity with existing
+databases and bootstrapping an ecosystem of extensions and applications.
+
+Splitgraph tries to provide an end-to-end framework for dealing with common data science problems.
+Rather than taking one tool and adapting it for data, we tried to get our inspiration from multiple
+best practices in software engineering.
