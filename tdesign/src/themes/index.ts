@@ -174,6 +174,13 @@ export const makeDefaultTheme = () => ({
       bg: 'background',
       boxShadow: 'card',
     },
+    basicWhite: {
+      borderWidth: '1px',
+      borderStyle: 'solid',
+      borderColor: 'primary',
+      backgroundColor: 'white',
+      padding: '1rem',
+    },
     notice: {
       display: 'flex',
       alignItems: 'center',
@@ -189,6 +196,14 @@ export const makeDefaultTheme = () => ({
       a: {
         variant: 'links.primary',
       },
+    },
+    errorNotice: {
+      variant: 'variants.notice',
+      backgroundColor: 'errorBackground',
+      borderColor: 'danger',
+    },
+    errorText: {
+      color: 'danger',
     },
     nav: {
       fontSize: 1,
