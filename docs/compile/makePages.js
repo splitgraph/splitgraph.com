@@ -16,7 +16,11 @@ const CONTENT_TREE = path.join(ROOT_DIR, "compile/compiledSidebar");
 const prepDocsPages = () => {
   const templater = "withDocsLayout";
 
-  const exportMap = {};
+  const exportMap = {
+    "/": {
+      page: "/",
+    },
+  };
   const pagesToMake = [];
 
   new ContentTree(DOCS_DIR, {
@@ -33,7 +37,7 @@ const prepDocsPages = () => {
         .replace(path.dirname(PAGES_OUT_DIR), "");
 
       exportMap[item.url.fromSiteRoot] = {
-        page: nextjsPagePath.replace(/\.js$/gm, "")
+        page: nextjsPagePath.replace(/\.js$/gm, ""),
       };
 
       const pathToSave = path.join(PAGES_DIR, nextjsPagePath);
@@ -53,14 +57,14 @@ import ${templater} from "@splitgraph/templaters/${templater}";
 import MdxPage, { meta } from "@splitgraph/content${item.path.fromSiteRoot}";
 import contentTree from "${contentTreeLocation}";
 export default withRouter(${templater}({ MdxPage, meta, contentTree, Link }));
-`
+`,
       });
-    }
+    },
   }).init();
 
   return {
     pagesToMake,
-    exportMap
+    exportMap,
   };
 };
 
@@ -93,5 +97,5 @@ module.exports = {
     writeDocsPages({ pagesToMake });
     writeExportMap({ exportMap });
   },
-  EXPORT_PATH_MAP
+  EXPORT_PATH_MAP,
 };
