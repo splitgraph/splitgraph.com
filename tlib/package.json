@@ -25,7 +25,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "tlib",
+  "name": "@splitgraph/tlib",
   "author": "Splitgraph Limited",
   "module": "dist/tlib.esm.js",
   "devDependencies": {

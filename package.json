@@ -18,6 +18,7 @@
     "tlib"
   ],
   "scripts": {
+    "build": "./build_js_static.sh",
     "watchlibs": "yarn run run-p -l watch:*",
     "watch:@splitgraph/tdesign": "yarn workspace @splitgraph/tdesign run watch",
     "watch:@splitgraph/tlib": "yarn workspace @splitgraph/tdesign run watch"

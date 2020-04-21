@@ -5,10 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "node server.js",
-    "build": "next build",
-    "preexport": "yarn run --scripts-prepend-node-path build",
-    "export": "next export",
-    "prestart": "yarn run --scripts-prepend-node-path export",
+    "build": "next build && next export",
     "start": "serve out"
   },
   "dependencies": {

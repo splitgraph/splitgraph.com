@@ -2392,6 +2392,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@splitgraph/tlib@workspace:tlib":
+  version: 0.0.0-use.local
+  resolution: "@splitgraph/tlib@workspace:tlib"
+  dependencies:
+    "@types/jest": ^25.1.4
+    husky: ^4.2.3
+    tsdx: ^0.12.3
+    tslib: ^1.11.1
+    typescript: ^3.8.3
+  languageName: unknown
+  linkType: soft
+
 "@storybook/addon-actions@npm:^5.3.14":
   version: 5.3.18
   resolution: "@storybook/addon-actions@npm:5.3.18"
@@ -17823,18 +17835,6 @@ __metadata:
   checksum: 2/3835904155dfbe4b1a114d25683a85d9f3690a9b19eee896e5c1e59181982f20e46b7b6c1f2f66262e95b886de34dacd5b3a3d0ec3fc5aeb5bd54ad3f6a8a05e
   languageName: node
   linkType: hard
-
-"tlib@workspace:tlib":
-  version: 0.0.0-use.local
-  resolution: "tlib@workspace:tlib"
-  dependencies:
-    "@types/jest": ^25.1.4
-    husky: ^4.2.3
-    tsdx: ^0.12.3
-    tslib: ^1.11.1
-    typescript: ^3.8.3
-  languageName: unknown
-  linkType: soft
 
 "tmp@npm:^0.0.33":
   version: 0.0.33
