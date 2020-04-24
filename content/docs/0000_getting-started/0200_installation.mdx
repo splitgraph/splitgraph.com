@@ -122,7 +122,7 @@ services:
 ## Upgrading
 
 Single-binary `sgr` can be upgraded by running [`sgr upgrade`](../sgr/miscellaneous/upgrade) which
-will download the new library and upgrade the engine, if the engine is managed by `sgr engine`.
+will download the new binary and upgrade the engine (if the engine is managed by `sgr engine`).
 
 [`sgr engine upgrade`](../sgr/miscellaneous/engine/upgrade) upgrades an engine that's managed by `sgr engine`
 by deleting the current Docker container and starting a new one, keeping all data volumes intact.
@@ -136,6 +136,6 @@ For more information on configuring Splitgraph, see [this page](../configuration
 
 ## Next Steps
 
-You can try out the [five minute demo](five_minute_demo) that will go through the basics of building
+You can take a look at the [five minute demo](five_minute_demo) that will go through the basics of building
 and extending data images. You can also try out some self-contained example Splitgraph projects
 on [our GitHub](https://github.com/splitgraph/splitgraph/tree/master/examples).

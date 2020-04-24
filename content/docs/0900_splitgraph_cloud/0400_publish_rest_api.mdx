@@ -3,7 +3,7 @@ export const meta = {
   title: "Publishing a REST API"
 };
 
-Every public dataset on the Splitgraph registry has a read-only OpenAPI-compatible endpoint that can be used to query it, provided by [PostgREST](http://postgrest.org/). It can be accessed by curl:
+Every public dataset on the Splitgraph registry has a read-only OpenAPI-compatible endpoint that can be used to query it, provided by [PostgREST](http://postgrest.org/en/latest/). It can be accessed by curl:
 
 ```
 $ curl https://data.splitgraph.com/YOUR_USERNAME/votes_by_state/latest/-/rest/votes_by_state?state_postal=eq.DC
@@ -28,4 +28,4 @@ $ sgr cloud curl YOUR_USERNAME/votes_by_state "votes_by_state?state_postal=eq.DC
  {"candidate_normalized":"trump","state_postal":"DC","total_votes":12723}]
 ```
 
-For more information on writing PostgREST queries, see the [PostgREST docs](http://postgrest.org/en/v6.0/api.html).
+For more information on writing PostgREST queries, see the [PostgREST docs](http://postgrest.org/en/latest/api.html).

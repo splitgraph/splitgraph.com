@@ -18,11 +18,14 @@ a simple installation method. If you're interested in doing so, you can follow t
 in the [Dockerfile](https://github.com/splitgraph/splitgraph/blob/master/engine/Dockerfile) used
 to build the engine or contact us.
 
+You can also add the Splitgraph engine as a PostgreSQL [logical replication client](https://github.com/splitgraph/splitgraph/tree/4e78856d3872ddaac8c37df52dc46654a7e0b118/examples/pg-replication),
+which will let you ingest data from existing databases without installing Splitgraph on them.
+
 ### Why PostgreSQL? Why not write your own database?
 
 PostgreSQL is a battle-tested RDBMS with a mature feature set (ACID transactions, authentication,
-indexing, crash safety), extensive list of users and a rich ecosystem of extensions and applications.
-We don't think that features added by Splitgraph warrant building a brand new database.
+indexing, crash safety), a long list of commercial and enthusiast users and a rich ecosystem
+of extensions and applications. We don't think that features added by Splitgraph warrant building a brand new database.
 
 Philosophically, we believe that great tools enhance existing abstractions without breaking them:
 
@@ -52,7 +55,8 @@ In short:
   * Writing to PostgreSQL tables that are change-tracked by Splitgraph is almost 2x slower
     than writing to untracked tables (Splitgraph uses audit triggers to record changes rather than
     diffing the table at commit time).
-  * Splitgraph images take up much less (5x-10x) space than equivalent PostgreSQL tables.
+  * Splitgraph images take up much less (5x-10x) space than equivalent PostgreSQL tables due to it
+    using [`cstore_fdw`](https://github.com/citusdata/cstore_fdw) for storage.
   * Querying Splitgraph images directly without checkout [(layered querying)](../large_datasets/layered_querying) can sometimes be faster and use less IO
   than querying PostgreSQL tables.
 
