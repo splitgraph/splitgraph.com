@@ -3,12 +3,12 @@ export const meta = {
   title: "Layered querying"
 };
 
-Splitgraph tries to not redo work that can be done more efficiently by the database, which is why
-after an image is checked out into native PostgreSQL tables, Splitgraph stops getting involved.
+Splitgraph tries to not redo work that can be done more efficiently by the database. A Splitgraph
+image can be checked out into native PostgreSQL tables, allowing for necessary indexes to be created to
+maximize performance for specific queries.
 
-However, this becomes an issue with large datasets where the overhead of checking out an image is
-too large. This is why Splitgraph supports querying images directly without materializing
-them into actual PostgreSQL tables.
+However, this workflow isn't suitable for exploratory queries on large datasets where checking out an image takes too long. This is why Splitgraph supports querying images directly without materializing
+them into PostgreSQL tables.
 
 This is done by so-called layered querying. Instead of PostgreSQL tables, an image is checked out
 into a schema consisting of foreign tables. They still present themselves as normal tables to
@@ -16,24 +16,21 @@ any application interacting with the engine, but behind the scenes queries to th
 by the engine-side Splitgraph library. In particular, this lets Splitgraph inspect object metadata
 and determine which objects need to be downloaded to satisfy the query and do so on the fly.
 
-This is similar to Docker, where an application running inside of a container thinks that it's interacting
+Layered querying takes its name from the way Docker works, where an application running inside of a container thinks that it's interacting
 with a root filesystem, but is actually interacting with an OverlayFS mount that directs reads to the relevant layer.
 
 Splitgraph uses [a fork](https://github.com/splitgraph/Multicorn)
 of [Multicorn](https://multicorn.org/), an extension that allows to write foreign data wrappers
-in Python. This fork has been customized so that no data actually passes through the Python runtime:
-Splitgraph simply downloads required objects and materializes required table regions
-and tells PostgreSQL where it can find the query result. This lets layered querying compete with and
-sometimes beat PostgreSQL on query performance.
+in Python. This fork has been customized so that no data actually passes through the Python runtime.
+Splitgraph downloads required objects and materializes required table regions. Scans are performed
+using native C code, which lets layered querying compete with and sometimes beat PostgreSQL on query performance.
 
-Layered querying is currently read-only.
-
-The Splitfile executor uses layered querying to satisfy `IMPORT` and `SQL` commands that read from
+Layered querying is currently read-only. The Splitfile executor uses layered querying to satisfy `IMPORT` and `SQL` commands that read from
 other Splitgraph images.
 
 ## Layered checkouts
 
-To use layered querying, check the dataset out with the `--layered` flag. For example:
+To use layered querying, check out a pulled dataset with the `--layered` flag. For example:
 
 ```
 $ sgr checkout --layered splitgraph/2016_election:latest
@@ -73,3 +70,6 @@ You should instead check an image out into a PostgreSQL schema (`sgr checkout`) 
   * You are intending to run multiple small queries against the dataset. Splitgraph's query planning
     has a considerable latency overhead over PostgreSQL's and so this kind of workload will be more
     expensive than with native PostgreSQL tables.
+
+You can find some Jupyter notebooks with benchmarks comparing layered querying and querying native
+PostgreSQL tables on [GitHub](https://github.com/splitgraph/splitgraph/tree/master/examples/benchmarking).

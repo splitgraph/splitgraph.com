@@ -10,7 +10,7 @@ an image are chunked up into fragments into 10000 rows by default. This can be c
 Chunking is done by primary key. It is also possible to sort data inside a chunk by passing
 `--chunk-sort-keys` to `sgr commit`. This lets [`cstore_fdw`](https://github.com/citusdata/cstore_fdw),
 Splitgraph's storage backend, to use its own skip lists to not read parts of a chunk that aren't
-interesting to a query.
+interesting to a query, decreasing the amount of disk access.
 
 When a change to a table is committed, that change is also represented as multiple objects that
 contain row-level additions/deletions and can partially "overlap" old objects. These new objects
@@ -24,18 +24,46 @@ according to the original table chunk boundaries. For example, if there's a chan
 and the 20000th row of a table that was originally committed with `--chunk-size=10000`, this will
 create 2 fragments: one based on the first chunk and one on the second chunk of the table.
 
+## Optimal object sizes
+
+There is a performance and space tradeoff regarding the amount of rows and the physical size
+of every object (chunk) and hence the amount of objects that a single table gets split up to.
+
+  * Every extra object in a table has multiple kinds of overhead:
+    * Fixed storage overhead in Splitgraph's metadata (`splitgraph_meta.objects` table),
+    including the hashes and the index for that object.
+    * Overhead when scanning through the object index at layered query plan time
+    * (small) overhead of initializing a scan through the object by PostgreSQL
+    * Fixed overhead when checking out the table (more deltas have to be applied to the staging area)
+    * Latency overhead for downloading lots of small objects (each of which is a file) over
+      few large ones
+  * Datasets with lots of small objects can take better advantage of the object index: in layered
+    querying, a smaller fraction of the table might need to get downloaded or scanned through to
+    satisfy the query, since the table is more granular.
+  * Tables that share a lot of data with other tables have a better chance of reusing the same
+    fragments when stored as smaller objects.
+
+In practice, we have found that targeting object sizes of a few megabytes delivers a good balance.
+It is not currently possible to get Splitgraph to automatically target a certain object size, but
+the required number of rows in each object can be approximated by knowing the total image size
+and the amount of rows in all of its tables.
+
 ## Rechunking images
 
 An image that has had a lot of changes made to it still holds all of its history, since it
-contains all the intermediate objects. This method allows Splitgraph to perform quicker commits
+contains all the intermediate objects together with deltas. This method allows Splitgraph to perform quicker commits
 (since a change is appended to the end of a table's list of objects) at the expense of the image
-bloating up. This is sometimes not necessary. If you have multiple images in a repository that show
+bloating up and having lots of dead rows. This is sometimes undesirable. If you have multiple images in a repository that show
 a dataset's history, you might want to optimize the latest image in that repository to decrease
-its size and speed up querying.
+its size and speed up querying. In addition, you might want to be able to delete sensitive data
+from an image and not have it in the history at all.
 
-Rechunking an image is done by checking it out and recommitting it as a snapshot. For example:
+To rechunk an image, splitting every table in it into disjoint objects again, check it out and recommit it as a snapshot, adding necessary indexes. For example:
 
 ```
 $ sgr checkout my/big_image:latest
 $ sgr commit my/big_image --snap --chunk-size 100000
 ```
+
+Loose objects that are not linked to any tables can be cleaned up from a Splitgraph engine by
+[`sgr cleanup`](../sgr/miscellaneous/cleanup).

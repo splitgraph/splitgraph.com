@@ -9,7 +9,7 @@ multiple advantages over that.
 Splitgraph Cloud is the analog of the Docker registry for Docker: it's a repository of
 publicly available data images that you can experiment with.
 
-Every dataset pushed out to the Splitgraph registry gets multiple perks. One of them is an automatic read-only OpenAPI-compatible endpoint that can be used to query it, provided by [PostgREST](postgrest.org/).
+Every dataset pushed out to the Splitgraph registry gets multiple perks. One of them is an automatic read-only OpenAPI-compatible endpoint that can be used to query it, provided by [PostgREST](http://postgrest.org/en/latest/).
 
 For example, [this](https://data.splitgraph.com/splitgraph/domestic_us_flights/latest/-/rest/flights?and=(origin_airport.eq.JFK,destination_airport.eq.LAX)) link runs the following PostgREST query against
 the `splitgraph/domestic_us_flights:latest` image:
