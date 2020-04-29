@@ -1,0 +1,16 @@
+export const meta = {
+  id: "postgres_replication",
+  title: "PostgreSQL replication client"
+};
+
+<cast src="@splitgraph/content/casts/versioned/latest/pg-replication.cast" />
+
+[Link to example](https://github.com/splitgraph/splitgraph/tree/master/examples/pg-replication)
+
+It is possible to add a Splitgraph engine as a replication client to a production PostgreSQL database, occasionally committing the changes as new Splitgraph images. This is done through PostgreSQL logical replication and has many uses:
+
+  * Recording the history of the upstream database for audit purposes
+  * Using anonymized production data snapshots for integration testing
+  * Building derivative datasets with Splitfiles as an alternative to data warehousing.
+
+For more information, see [the example](https://github.com/splitgraph/splitgraph/tree/master/examples/pg-replication).

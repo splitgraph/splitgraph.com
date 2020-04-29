@@ -18,7 +18,7 @@ a simple installation method. If you're interested in doing so, you can follow t
 in the [Dockerfile](https://github.com/splitgraph/splitgraph/blob/master/engine/Dockerfile) used
 to build the engine or contact us.
 
-You can also add the Splitgraph engine as a PostgreSQL [logical replication client](https://github.com/splitgraph/splitgraph/tree/4e78856d3872ddaac8c37df52dc46654a7e0b118/examples/pg-replication),
+You can also add the Splitgraph engine as a PostgreSQL [logical replication client](../ingesting_data/postgres_replication),
 which will let you ingest data from existing databases without installing Splitgraph on them.
 
 ### Why PostgreSQL? Why not write your own database?
@@ -38,7 +38,7 @@ Philosophically, we believe that great tools enhance existing abstractions witho
 We were guided by the same principles when building Splitgraph. Any application that works
 with PostgreSQL can work with a Splitgraph table without any changes. We have examples of using
 Splitgraph with [Jupyter notebooks](../integrating_splitgraph/jupyter_notebooks),
-[PostGIS](../integrating_splitgraph/postgis) or [PostgREST](../splitgraph_cloud/publish_rest_api).
+[PostGIS](../integrating_splitgraph/postgis) or [PostgREST](../integrating_splitgraph/postgrest).
 
 ### What's the performance like? Do you have any benchmarks?
 
@@ -51,7 +51,7 @@ but have tested the overhead of various Splitgraph workloads over PostgreSQL.
 
 In short:
 
-  * Committing and checking out Splitgraph images takes less time than writing the same data to PostgreSQL tables.
+  * Committing and checking out Splitgraph images takes slightly less time than writing the same data to PostgreSQL tables (data is moved directly between PostgreSQL tables without query parsing overhead)
   * Writing to PostgreSQL tables that are change-tracked by Splitgraph is almost 2x slower
     than writing to untracked tables (Splitgraph uses audit triggers to record changes rather than
     diffing the table at commit time).
@@ -68,12 +68,17 @@ Yes. Splitgraph has a few optimizations that make it suitable for working with l
     superior to row-format storage for OLAP workloads.
   * Splitgraph images can be queried without checking them out [(layered querying)](../large_datasets/layered_querying) which lazily downloads a small fraction of the table needed for the query. This is still completely seamless to the client application.
 
+Since Splitgraph is built on top of PostgreSQL, same methods that are used for horizontally scaling a
+PostgreSQL deployment can also be used on Splitgraph.
+
 ### Do I have to register anywhere to use Splitgraph?
 
-No. Splitgraph can be used in a decentralized way, sharing data between two engines like you would
+No. Splitgraph can be used in a decentralized way, sharing data between two engines like one would
 with Git. Here's an [example](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-other-engine) of getting two Splitgraph instances to synchronize with each other.
 
-You can register on [Splitgraph Cloud](../splitgraph_cloud/introduction) if you wish to
+It is also possible to push data to S3-compatible storage (like [Minio](https://github.com/splitgraph/splitgraph/tree/487c704eb6aba5025708215bfa80399723c530b1/examples/push-to-object-storage)).
+
+You can use [Splitgraph Cloud](../splitgraph_cloud/introduction) if you wish to
 get or share public data or have a [REST API](../splitgraph_cloud/publish_rest_api) generated for your dataset.
 
 ### Why not just use...
@@ -86,6 +91,9 @@ After the dataset is built, one can snapshot the schema it was built in and pack
 
 Secondly, Splitgraph offers its own method of building datasets: [Splitfiles](../concepts/splitfiles). Splitfiles offer Dockerfile-like caching, provenance tracking, fast dataset rebuilds, joins between datasets and full SQL support.
 
+We envision Splitfiles as a replacement for ETL pipelines: instead of a series of processes that transform data between tables in a data warehouse,
+transformations are treated as pure functions between isolated self-contained datasets, allowing one to replay any part of their pipeline at any point in time.
+
 #### dvc, DataLad, ...
 
 Some tools use [git-annex](https://git-annex.branchable.com/) to version code and data together.
@@ -97,7 +105,7 @@ the data inside of an actual database, making querying it more efficient.
 
 A lot of tools that do data versioning also require users to learn to use a brand new database
 and rewrite their existing applications to use it. We don't think the benefits from writing a new
-database system from scratch outweigh the costs of bringing it up to feature parity with existing
+database system from scratch outweigh the costs of bringing it up to feature and performance parity with existing
 databases and bootstrapping an ecosystem of extensions and applications.
 
 Splitgraph tries to provide an end-to-end framework for dealing with common data science problems.

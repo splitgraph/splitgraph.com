@@ -17,7 +17,9 @@ on this SQL statement:
     in the engine at execution time as a [layered checkout](../large_datasets/layered_querying)
     with the effect that queries in `SQL` can perform joins or queries on other Splitgraph images.
     This is recorded in image provenance as normal.
-  * There's a blacklist of table names that can't be used in Splitfiles
+  * There's a blacklist of table names that can't be used in Splitfiles. These names reference
+    Postgres system tables and are always accessible by any SQL statement, making it possible
+    for outside state to be leaked into the image.
 
 The image hash produced by this command is a combination of the current
 `OUTPUT` hash and the hash of the SQL statement, with any image references rewritten to have

@@ -1,0 +1,14 @@
+export const meta = {
+  id: "postgrest",
+  title: "PostgREST"
+};
+
+Since a Splitgraph engine is also a PostgreSQL database, tools that use PostgreSQL can work with Splitgraph tables without any changes.
+
+One such tool is [PostgREST](http://postgrest.org/en/latest/) that generates a REST API for a PostgreSQL schema. Splitgraph runs PostgREST in [Splitgraph Cloud](../splitgraph_cloud/publish_rest_api), allowing any Splitgraph dataset to be accessed via HTTP.
+
+You can reproduce a similar setup locally, getting PostgREST to work against a Splitgraph image.
+
+<cast src="@splitgraph/content/casts/versioned/latest/postgrest.cast" />
+
+[Link to example](https://github.com/splitgraph/splitgraph/tree/master/examples/postgrest)
