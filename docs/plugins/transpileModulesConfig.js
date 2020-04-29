@@ -1,10 +1,5 @@
 // Our modules are managed by yarn workspaces
-const ourModules = [
-  "@splitgraph/design",
-  "@splitgraph/content",
-  "@splitgraph/templaters",
-  "@splitgraph/lib"
-];
+const ourModules = ["@splitgraph"];
 
 // Enumerate every dependency with an "es" or "es6" module available
 // TODO: Make this programmatic (as in, with javascript, not shell)
@@ -21,7 +16,7 @@ const ourModules = [
 const es6modules = [];
 
 const transpileModulesConfig = {
-  transpileModules: [...es6modules, ...ourModules]
+  transpileModules: [...es6modules, ...ourModules],
 };
 
 module.exports = transpileModulesConfig;
