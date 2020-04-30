@@ -8,6 +8,7 @@ COMMIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 
 pushd "$SPLITGRAPH_DIR" \
     && yarn deploy \
+        $( test ! -z $NOW_TOKEN && echo "--token $NOW_TOKEN" ) \
         --force \
         -m COMMITISH="$COMMITISH" \
         -m COMMIT_BRANCH="$COMMIT_BRANCH" \
