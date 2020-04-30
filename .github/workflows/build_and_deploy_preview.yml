@@ -30,3 +30,8 @@ jobs:
         with:
           name: website
           path: ./docs/out
+      - run: ./.ci/get_preview_url.sh > preview_url.txt
+      - uses: actions/upload-artifact@v2
+        with:
+          name: preview_url
+          path: ./preview_url.txt
