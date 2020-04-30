@@ -16,7 +16,7 @@ $ sgr config -sc > ~/.splitgraph/.sgconfig
 Note that the `.sgconfig` file gets edited automatically by `sgr` and any values there
 that are equal to their default values get deleted.
 
-It's possible to also override various other configuration flags using environment variables. You
+It's also possible to override various other configuration flags using environment variables. You
 can inspect the current configuration in use by Splitgraph by running
 
 ```
@@ -58,7 +58,7 @@ or when Splitgraph is connecting to that engine for a push/pull, the configurati
 section take precedence.
 
 By default, Splitgraph has a remote `data.splitgraph.com` registered for it. To add another remote,
-add this to your `.sgconfig`:
+add this to the `.sgconfig` file:
 
 ```
 [remote: other_engine]
@@ -76,4 +76,4 @@ See [the engine-to-engine sync example](https://github.com/splitgraph/splitgraph
 
 ## Configuration flag reference
 
-The [next page](config_flag_reference) lists all flags supported by the configuration file.
+The [configuration flag reference](config_flag_reference) page lists all flags supported by the configuration file.

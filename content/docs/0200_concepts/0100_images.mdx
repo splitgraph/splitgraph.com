@@ -11,9 +11,9 @@ An image consists of tables. Several images can share the same table in a space-
 way, with the actual table data stored only once.
 
 There are multiple ways to create Splitgraph images. Firstly, the image can be checked out
-into an actual PostgreSQL schema. This enables change tracking and allows any application that
-can interact with a PostgreSQL database to work with Splitgraph. At any point in time, the schema
-can be committed to create a new image.
+into an actual PostgreSQL schema. This enables [change tracking](../working_with_data/tracking_changes)
+and allows any application that can interact with a PostgreSQL database to work with Splitgraph.
+At any point in time, the schema can be committed to create a new image.
 
 Splitgraph images can also be created using a domain-specific language called [Splitfiles](splitfiles) that offer
 a similar experience to Dockerfiles, including caching to not rebuild data where sources haven't changed.
