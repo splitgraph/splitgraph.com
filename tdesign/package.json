@@ -7,7 +7,7 @@
     "dist"
   ],
   "scripts": {
-    "watch": "tsdx watch --verbose --noClean",
+    "watch": "tsdx watch --verbose",
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",

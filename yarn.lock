@@ -2331,6 +2331,7 @@ __metadata:
     next: ^9.3.0
     next-compose-plugins: ^2.2.0
     next-transpile-modules: ^2.3.1
+    now: ^18.0.0
     pirates: ^4.0.1
     react: ^16.13.0
     react-dom: ^16.13.0
@@ -13406,6 +13407,15 @@ fsevents@~2.1.2:
   version: 3.3.0
   resolution: "normalize-url@npm:3.3.0"
   checksum: 2/5704115f74833cf157a5f104477d9c8e8b4e2c00275624159bcd3c65dbdac93db4f6f008f91364d0f20f93655bd2b643afa9e8875c67b4ab8673cd1dd0fb7a5c
+  languageName: node
+  linkType: hard
+
+"now@npm:^18.0.0":
+  version: 18.0.0
+  resolution: "now@npm:18.0.0"
+  bin:
+    now: ./dist/index.js
+  checksum: 2/87eb1690be7a5164315fcc2d61e6d4683fd0f1c8f9863527fde6496cc525b182983b916bf5a836061ffc7746cc3d6890f7b2ad3c25aaaa3f7d93cfd0dd33ff77
   languageName: node
   linkType: hard
 

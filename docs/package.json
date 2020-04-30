@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build && next export",
+    "deploy": "cp now.json out/ && yarn run now",
     "start": "serve out"
   },
   "dependencies": {
@@ -36,5 +37,8 @@
     "rimraf": "^3.0.0",
     "serve": "^11.2.0",
     "unist-util-find": "^1.0.1"
+  },
+  "devDependencies": {
+    "now": "^18.0.0"
   }
 }
