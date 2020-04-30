@@ -26,3 +26,7 @@ jobs:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
           NOW_PROJECT_ID: ${{ secrets.NOW_PROJECT_ID }}
           NOW_ORG_ID: ${{ secrets.NOW_ORG_ID }}
+      - uses: actions/upload-artifact@v2
+        with:
+          name: website
+          path: ./docs/out
