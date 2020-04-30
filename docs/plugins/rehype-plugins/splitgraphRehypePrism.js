@@ -7,17 +7,33 @@ const visit = require("unist-util-visit");
 const nodeToString = require("hast-util-to-string");
 
 const refractor = require("refractor/core");
+
+const bash = require("refractor/lang/bash");
+const diff = require("refractor/lang/diff");
+const docker = require("refractor/lang/docker");
+const ini = require("refractor/lang/ini");
 const javascript = require("refractor/lang/javascript");
-const sql = require("refractor/lang/sql");
-const python = require("refractor/lang/python");
 const json = require("refractor/lang/json");
+const plsql = require("refractor/lang/plsql");
+const python = require("refractor/lang/python");
+const sql = require("refractor/lang/sql");
+const yaml = require("refractor/lang/yaml");
 
 const splitfile = require("@splitgraph/lib/splitfileLang");
 
+refractor.register(bash);
+refractor.register(diff);
+refractor.register(docker);
+refractor.register(ini);
 refractor.register(javascript);
-refractor.register(sql);
-refractor.register(python);
 refractor.register(json);
+refractor.register(plsql);
+refractor.register(python);
+refractor.register(sql);
+refractor.register(yaml);
+
+// Note: splitfile language must be registered last, or there will be build errors
+// Please, pay no attention to the man behind the curtain...
 refractor.register(splitfile);
 
 const getLanguage = (node) => {
