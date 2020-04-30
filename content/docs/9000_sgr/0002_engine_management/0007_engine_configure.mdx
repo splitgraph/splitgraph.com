@@ -1,9 +1,10 @@
 export const meta = {id: "engine_configure", title: "sgr engine configure", sidebarTitle: "engine configure"};
 
-```sgr configure [OPTIONS] [NAME]```
+```sgr engine configure [OPTIONS] [NAME]```
 
-Inject configuration file into an engine. This copies
-the current .sgconfig file (pointed to by SG_CONFIG_FILE) into
+Inject a configuration file into an engine.
+
+This copies the current .sgconfig file (pointed to by SG_CONFIG_FILE) into
 the engine container, making it use that configuration for
 when it's queried through an application other than the sgr client
 (layered querying).

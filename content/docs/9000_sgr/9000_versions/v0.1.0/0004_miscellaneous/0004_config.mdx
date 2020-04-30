@@ -9,11 +9,15 @@ and all overrides specified via environment variables.
 
 This command can be used to dump the current Splitgraph configuration into a file:
 
-    sgr config --no-shielding --config-format > .sgconfig
+```
+sgr config --no-shielding --config-format > .sgconfig
+```
 
 ...or save a config file overriding an entry:
 
-    SG_REPO_LOOKUP=engine1,engine2 sgr config -sc > .sgconfig
+```
+SG_REPO_LOOKUP=engine1,engine2 sgr config -sc > .sgconfig
+```
 
 ### Options
 

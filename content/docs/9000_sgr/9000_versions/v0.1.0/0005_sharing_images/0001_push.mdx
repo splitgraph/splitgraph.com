@@ -18,12 +18,13 @@ it will be used instead.
 Finally, if `remote_repository` or `--remote` are passed, they will take precedence.
 
 The actual objects will be uploaded to S3 using Minio. When pushing to another engine,
-you can choose to upload them directly by passing --handler DB.
+you can choose to upload them directly by passing `--handler DB`.
 
 ### Options
 
-  * **`-r, --remote [data.splitgraph.com]`**: Alias or full connection string for the remote engine
+  * **`-r, --remote [data.splitgraph.com]`**: Name of the remote engine
   * **`-h, --upload-handler TEXT`**: Upload handler
   * **`-o, --upload-handler-options TEXT`**: Upload handler parameters
   * **`-f, --overwrite-object-meta`**: Overwrite metadata for existing remote objects
   * **`-t, --tags`**: Overwrite tags for pushed image/repo
+  * **`-r, --reupload-objects`**: Reupload objects that metadata is pushed out for
