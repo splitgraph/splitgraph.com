@@ -22,6 +22,7 @@
     "buildlibs": "./scripts/buildlibs.sh",
     "dev": "yarn run buildlibs && yarn run run-p -l watch:@splitgraph/tdesign watch:@splitgraph/tlib dev:@splitgraph/docs",
     "deploy": "yarn workspace @splitgraph/docs run deploy",
+    "update-docs": "node ./content-scripts/updateDocs.js",
     "dev:@splitgraph/docs": "yarn workspace @splitgraph/docs run dev",
     "watch:@splitgraph/tdesign": "yarn workspace @splitgraph/tdesign run watch",
     "watch:@splitgraph/tlib": "yarn workspace @splitgraph/tdesign run watch"
