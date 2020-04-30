@@ -1,12 +1,18 @@
 export const meta = {id: "cloud_login", title: "sgr cloud login", sidebarTitle: "cloud login"};
 
-```sgr login [OPTIONS] ```
+```sgr cloud login [OPTIONS] ```
 
-Log into a Splitgraph registry.
+Log into a Splitgraph registry with username/password.
 
 This will generate a new refresh token (to use the Splitgraph query API)
 and API keys to let sgr access the registry (if they don't already exist
 in the configuration file or if the actual username has changed).
+
+Note that if you already have generated an API key pair but it's not
+in the configuration file, this will generate a new pair instead of
+restoring the existing one, as the API secret is only stored in the configuration file.
+
+If you want to log in using an existing API key pair, use `sgr cloud login-api` instead.
 
 ### Options
 

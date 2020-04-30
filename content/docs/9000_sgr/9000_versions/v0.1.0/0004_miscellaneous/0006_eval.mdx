@@ -20,12 +20,14 @@ in a namespace where the following is already imported and available:
 
 
 Example:
-    sgr eval 'import json; print(json.dumps(Repository\
-        .from_schema(repo_name)\
-        .images["latest"]\
-        .get_table(table_name)\
-        .table_schema))' \
-    -a repo_name my_repo -a table_name my_table
+```
+sgr eval 'import json; print(json.dumps(Repository\
+    .from_schema(repo_name)\
+    .images["latest"]\
+    .get_table(table_name)\
+    .table_schema))' \
+-a repo_name my_repo -a table_name my_table
+```
 
 Will dump the schema of table my_table in the most recent image in my_repo in JSON format.
 
