@@ -20,6 +20,8 @@ const customizeTOC = require("./plugins/rehype-plugins/customizeTOC");
 
 const injectAsciicasts = require("./plugins/rehype-plugins/injectAsciicasts");
 
+const splitgraphRehypePrism = require("./plugins/rehype-plugins/splitgraphRehypePrism");
+
 if (!VALID_ENVS.includes(DOCS_ENV)) {
   console.error("Fatal: Bad DOCS_ENV");
   process.exit(1);
@@ -41,15 +43,15 @@ for (let castKey of Object.keys(castManifest)) {
 
 const nextConfig = {
   env: {
-    ...CONFIG
+    ...CONFIG,
   },
   resolve: {
-    alias: aliasConfig
+    alias: aliasConfig,
   },
   exportPathMap: async () => {
     const jsonMap = await fs.readFile(EXPORT_PATH_MAP);
     return JSON.parse(jsonMap);
-  }
+  },
 };
 
 const _configs = {
@@ -58,24 +60,24 @@ const _configs = {
   mdx: {
     options: {
       mdPlugins: [
-        [require("remark-disable-tokenizers"), { block: ["indentedCode"] }]
+        [require("remark-disable-tokenizers"), { block: ["indentedCode"] }],
       ],
       hastPlugins: [
-        require("mdx-prism"),
+        splitgraphRehypePrism,
         [injectAsciicasts, { castManifest }],
         require("rehype-slug"),
         [
           require("rehype-toc"),
           {
-            customizeTOC
-          }
-        ]
-      ]
-    }
+            customizeTOC,
+          },
+        ],
+      ],
+    },
   },
   bundleAnalyzer: {
-    enabled: process.env.ANALYZE === "true"
-  }
+    enabled: process.env.ANALYZE === "true",
+  },
 };
 
 const _plugins = {
@@ -83,7 +85,7 @@ const _plugins = {
   bundleAnalyzer: require("@next/bundle-analyzer"),
   withIgnoreFs,
   mdx: require("@zeit/next-mdx")(_configs.mdx), // note slightly different call format
-  transpileModules: require("next-transpile-modules")
+  transpileModules: require("next-transpile-modules"),
 };
 
 const plugins = [
@@ -91,7 +93,7 @@ const plugins = [
   [_plugins.mdx],
   [_plugins.withIgnoreFs, {}],
   [_plugins.css, _configs.css],
-  [_plugins.bundleAnalyzer(_configs.bundleAnalyzer)]
+  [_plugins.bundleAnalyzer(_configs.bundleAnalyzer)],
 ];
 
 module.exports = withPlugins(plugins, nextConfig);

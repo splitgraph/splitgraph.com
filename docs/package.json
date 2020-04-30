@@ -4,10 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "yarn run clean && node server.js",
     "build": "next build && next export",
     "deploy": "cp now.json out/ && yarn run now",
-    "start": "serve out"
+    "start": "serve out",
+    "clean": "./clean.sh"
   },
   "dependencies": {
     "@babel/preset-env": "^7.6.3",

@@ -18,21 +18,21 @@ const prismTheme = {
   ".constant": { color: "rgb(255, 98, 140)" },
   ".string,.url": { color: "rgb(165, 255, 144)" },
   ".variable": { color: "rgb(255, 238, 128)" },
-  ".number,.boolean": { color: "rgb(255, 98, 140)" },
+  ".number,.boolean,.operator": { color: "rgb(255, 98, 140)" },
   ".attr-name": { color: "rgb(255, 180, 84)" },
-  ".keyword,.operator,.property,.namespace,.tag,.selector,.doctype": {
-    color: "rgb(255, 157, 0)"
+  ".keyword,.property,.namespace,.tag,.selector,.doctype": {
+    color: "rgb(255, 157, 0)",
   },
   ".builtin,.char,.constant,.function,.class-name": {
-    color: "rgb(250, 208, 0)"
-  }
+    color: "rgb(250, 208, 0)",
+  },
 };
 
 export const asciinemaEmbedStyles = {
   "div.asciinema-embed-container": {
     backgroundColor: "red",
     marginLeft: -4,
-    marginRight: -4
+    marginRight: -4,
     // paddingTop: "80vh !important"
     // height: "400px !important"
     // paddingTop: "200px !important",
@@ -42,35 +42,35 @@ export const asciinemaEmbedStyles = {
     "@media (max-width: 768px)": {
       minHeight: "100% !important",
       maxHeight: "100% !important",
-      minWidth: "100%"
+      minWidth: "100%",
       // minWidth: "initial !important"
       // minWidth: "100vw !important"
-    }
+    },
     // border: "none"
-  }
+  },
 };
 
 export const tocStyles = {
   "ol.toc-level": {
     color: "primary",
-    listStyleType: "circle"
+    listStyleType: "circle",
   },
 
   ".toc-item": {
-    color: "primary"
+    color: "primary",
   },
 
   ".toc-item a": {
-    textDecoration: "none"
+    textDecoration: "none",
   },
 
   ".toc-item a:hover": {
-    textDecoration: "underline"
+    textDecoration: "underline",
   },
 
   ".toc-level": {},
 
-  ".toc-link": {}
+  ".toc-link": {},
 };
 
 export const defaultTheme = {
@@ -97,71 +97,71 @@ export const defaultTheme = {
     warning: "orange",
     darkgray: "#3c",
     sgdarkblue: "#36678d",
-    accent: "secondary"
+    accent: "secondary",
   },
   backgrounds: {
     divided: {
       background: [
         "linear-gradient(180deg, #f6f6f9 40%, #36678d 40%)",
         "linear-gradient(180deg, #f6f6f9 45%, #36678d 45%)",
-        "linear-gradient(180deg, #f6f6f9 55%, #36678d 55%)"
-      ]
-    }
+        "linear-gradient(180deg, #f6f6f9 55%, #36678d 55%)",
+      ],
+    },
   },
   fonts: {
     body: "system-ui, sans-serif",
     heading: "inherit",
-    monospace: "Menlo, monospace"
+    monospace: "Menlo, monospace",
   },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 96],
   fontWeights: {
     body: 400,
     heading: 700,
-    bold: 700
+    bold: 700,
   },
   lineHeights: {
     body: 1.5,
-    heading: 1.25
+    heading: 1.25,
   },
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   sizes: {
-    avatar: 48
+    avatar: 48,
   },
   radii: {
     default: 4,
-    circle: 99999
+    circle: 99999,
   },
   shadows: {
-    card: "0 0 4px rgba(0, 0, 0, .125)"
+    card: "0 0 4px rgba(0, 0, 0, .125)",
   },
   // rebass variants
   text: {
     heading: {
       fontFamily: "heading",
       lineHeight: "heading",
-      fontWeight: "heading"
+      fontWeight: "heading",
     },
     display: {
       fontFamily: "heading",
       fontWeight: "heading",
       lineHeight: "heading",
-      fontSize: [5, 6, 7]
+      fontSize: [5, 6, 7],
     },
     caps: {
       textTransform: "uppercase",
-      letterSpacing: "0.1em"
-    }
+      letterSpacing: "0.1em",
+    },
   },
   variants: {
     avatar: {
       width: "avatar",
       height: "avatar",
-      borderRadius: "circle"
+      borderRadius: "circle",
     },
     card: {
       p: 2,
       bg: "background",
-      boxShadow: "card"
+      boxShadow: "card",
     },
     nav: {
       fontSize: 1,
@@ -171,9 +171,9 @@ export const defaultTheme = {
       color: "inherit",
       textDecoration: "none",
       ":hover,:focus,.active": {
-        color: "primary"
-      }
-    }
+        color: "primary",
+      },
+    },
   },
   buttons: {
     primary: {
@@ -181,18 +181,18 @@ export const defaultTheme = {
       fontWeight: "bold",
       color: "background",
       bg: "primary",
-      borderRadius: "default"
+      borderRadius: "default",
     },
     outline: {
       variant: "buttons.primary",
       color: "primary",
       bg: "transparent",
-      boxShadow: "inset 0 0 2px"
+      boxShadow: "inset 0 0 2px",
     },
     secondary: {
       variant: "buttons.primary",
       color: "background",
-      bg: "secondary"
+      bg: "secondary",
     },
     pill: {
       // variant: "buttons.pill",
@@ -204,8 +204,8 @@ export const defaultTheme = {
       borderWidth: 3,
       borderStyle: "solid",
       borderRadius: 40,
-      boxShadow: "card"
-    }
+      boxShadow: "card",
+    },
   },
   links: {
     primary: {
@@ -218,21 +218,21 @@ export const defaultTheme = {
       color: "primary",
       textDecoration: "none",
       "&:hover": {
-        textDecoration: "underline"
+        textDecoration: "underline",
       },
       "&[disabled]": {
         cursor: "not-allowed",
-        pointerEvents: "none"
-      }
+        pointerEvents: "none",
+      },
     },
     muted: {
       variant: "links.primary",
       color: "muted",
       "&:active, &:hover": {
         color: "muted",
-        textDecoration: "underline"
-      }
-    }
+        textDecoration: "underline",
+      },
+    },
   },
   styles: {
     root: {
@@ -243,7 +243,7 @@ export const defaultTheme = {
       //   maxWidth: "80ch"
       // },
       ...tocStyles,
-      ...asciinemaEmbedStyles
+      ...asciinemaEmbedStyles,
     },
     pre: {
       ...prismTheme,
@@ -255,10 +255,10 @@ export const defaultTheme = {
         paddingTop: "1rem",
         paddingBottom: "1rem",
         borderTop: "4px solid #efefef",
-        borderBottom: "4px solid #efefef"
+        borderBottom: "4px solid #efefef",
       },
       "@media (min-width: 769px)": {
-        minWidth: "80ch"
+        minWidth: "80ch",
       },
       fontSize: "0.8rem",
       padding: 10,
@@ -271,13 +271,13 @@ export const defaultTheme = {
         marginRight: "-1em",
         paddingRight: "1em",
         paddingLeft: "1em",
-        borderLeft: `.25em solid ${prismTheme[".punctuation"].color}`
-      }
+        borderLeft: `.25em solid ${prismTheme[".punctuation"].color}`,
+      },
     },
     inlineCode: {
       ...prismTheme,
       "@media (min-width: 749px)": {
-        minWidth: "initial"
+        minWidth: "initial",
       },
       paddingLeft: "0.5ch",
       paddingRight: "0.5ch",
@@ -287,18 +287,18 @@ export const defaultTheme = {
       display: "inline-flex",
       alignContent: "center",
       overflowX: "auto",
-      backgroundColor: "primary"
+      backgroundColor: "primary",
     },
     code: {
       backgroundColor: "primary",
       fontFamily: "monospace",
       fontSize: "inherit",
       span: {
-        color: "red"
+        color: "red",
       },
       ".comment": {
-        color: "#f4c1c0"
-      }
+        color: "#f4c1c0",
+      },
     },
     p: {
       color: "text",
@@ -310,10 +310,10 @@ export const defaultTheme = {
         backgroundColor: "primary",
         bg: prismTheme.backgroundColor,
         color: prismTheme.color,
-        padding: 1
-      }
-    }
-  }
+        padding: 1,
+      },
+    },
+  },
 };
 
 export default defaultTheme;
