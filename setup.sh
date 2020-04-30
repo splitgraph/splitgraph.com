@@ -9,24 +9,16 @@
 
 SPLITGRAPH_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 
-# set -x
-
 prep_env() {
     echo "Ensure certs..." \
         && echo "Ensure yarn..." \
         && ensure_yarn \
-        && export_envvars \
         && return 0
     return 1
 }
 
-export_envvars() {
-    export YARN_CACHE_FOLDER="/root/.yarn/berry/cache"
-}
-
 ensure_yarn() {
     set -e
-
     if ! dir_has_yarn_release "$SPLITGRAPH_DIR" ; then
         echo "Install yarn berry"
         pushd "$SPLITGRAPH_DIR" && yarn set version berry && popd
@@ -36,7 +28,6 @@ ensure_yarn() {
         echo "Install yarn plugins"
         pushd "$SPLITGRAPH_DIR" && yarn plugin import plugin-workspace-tools && popd
     fi
-
     set +e
 
     pushd "$SPLITGRAPH_DIR"
@@ -104,7 +95,7 @@ has_correct_config() {
     # this is set by an environment variable (see export_envvars)
 
     yarn config \
-        | grep -E '/root/.yarn/berry/cache|node-modules' \
+        | grep -E 'node-modules' \
         | wc -l \
         | grep -qE 1$ \
     && return 0

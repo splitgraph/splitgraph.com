@@ -14,6 +14,7 @@ pushd "$SPLITGRAPH_DIR" \
         -m COMMIT_BRANCH="$COMMIT_BRANCH" \
     && echo "Deployment successful" \
     && echo "Deployment URL: $("$CI_DIR"/get_preview_url.sh)" \
+    && echo \
     && exit 0
 
 exit 1
