@@ -22,6 +22,15 @@ ensure_yarn() {
     if ! dir_has_yarn_release "$SPLITGRAPH_DIR" ; then
         echo "Install yarn berry"
         pushd "$SPLITGRAPH_DIR" && yarn set version berry && popd
+
+        # For some reason, some splitgraph devs get a file called yarn-rc.js
+        # we want to make sure it's called yarn-berry.js for consistency.
+        if test -f "$SPLITGRAPH_DIR"/.yarn/releases/yarn-rc.js ; then
+            mv "$SPLITGRAPH_DIR"/.yarn/releases/yarn-rc.js \
+                "$SPLITGRAPH_DIR"/.yarn/releases/yarn-berry.js \
+            && sed -i 's/yarn-rc/yarn-berry/' "$SPLITGRAPH_DIR"/.yarnrc.yml
+        fi
+
     fi
 
     if ! dir_has_yarn_plugins "$SPLITGRAPH_DIR" ; then
@@ -41,15 +50,18 @@ dir_has_yarn_release() {
     local prefixDir="$1"
     shift
 
+    if test -f "$prefixDir"/.yarn/releases/yarn-rc.js ; then
+        rm "$prefixDir"/.yarn/releases/yarn-rc.js
+    fi
+
     if has_broken_yarn "$prefixDir" ; then
         echo "yarn seems broken in $prefixDir, remove .yarnrc.yml"
         rm "$prefixDir"/.yarnrc.yml
         return 1
     fi
 
-    test -f "$prefixDir"/.yarn/releases/yarn-rc.js \
-        || test -f "$prefixDir"/.yarn/releases/yarn-berry.js \
-    && return 0
+    test -f "$prefixDir"/.yarn/releases/yarn-berry.js \
+        && return 0
 
     return 1
 }
@@ -74,6 +86,7 @@ has_broken_yarn() {
 
     pushd "$prefixDir"
     if ! yarn config >/dev/null 2>/dev/null ; then
+    echo "Broken yarn"
         popd && return 0
     fi
     popd && return 1
