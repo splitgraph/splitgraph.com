@@ -88,6 +88,10 @@ get or share public data or have a [REST API](../splitgraph_cloud/publish_rest_a
 There are plenty of great tools around for building datasets and managing ETL pipelines. Firstly,
 they can also work against Splitgraph, since a Splitgraph engine is also a PostgreSQL instance.
 After the dataset is built, one can snapshot the schema it was built in and package it up as a Splitgraph image.
+This enriches the tool by adding version control, packaging and sharing to datasets that it uses and builds.
+
+We have an example of running [dbt](../integrating_splitgraph/dbt) against Splitgraph, swapping between different versions of the
+source dataset and looking at their effect on the built dbt model.
 
 Secondly, Splitgraph offers its own method of building datasets: [Splitfiles](../concepts/splitfiles). Splitfiles offer Dockerfile-like caching, provenance tracking, fast dataset rebuilds, joins between datasets and full SQL support.
 
