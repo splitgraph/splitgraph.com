@@ -2220,7 +2220,7 @@ span.cursor {
   font-weight: bold;
 }
 .asciinema-theme-splitgraph .asciinema-terminal {
-  color: #9efeff;
+  color: #e0ffff;
   background-color: #36678d;
   border-color: #36678d;
 }
@@ -2228,102 +2228,101 @@ span.cursor {
   color: #36678d;
 }
 .asciinema-theme-splitgraph .bg-fg {
-  background-color: #9efeff;
+  background-color: #e0ffff;
 }
 .asciinema-theme-splitgraph .fg-0 {
-  color: #073642;
+  color: #000000;
 }
 .asciinema-theme-splitgraph .bg-0 {
-  background-color: #073642;
+  background-color: #000000;
 }
 .asciinema-theme-splitgraph .fg-1 {
-  color: #f8d6d5;
+  color: #2b0000;
 }
 .asciinema-theme-splitgraph .bg-1 {
-  background-color: #f8d6d5;
+  background-color: #2b0000;
 }
 .asciinema-theme-splitgraph .fg-2 {
-  color: #859900;
+  color: #9acd32;
 }
 .asciinema-theme-splitgraph .bg-2 {
-  background-color: #859900;
+  background-color: #9acd32;
 }
 .asciinema-theme-splitgraph .fg-3 {
-  color: #b58900;
+  color: #66cc99;
 }
 .asciinema-theme-splitgraph .bg-3 {
-  background-color: #b58900;
+  background-color: #66cc99;
 }
 .asciinema-theme-splitgraph .fg-4 {
-  color: #268bd2;
+  color: #000036;
 }
 .asciinema-theme-splitgraph .bg-4 {
-  background-color: #268bd2;
+  background-color: #000036;
 }
 .asciinema-theme-splitgraph .fg-5 {
-  color: #d33682;
+  color: #ffecdb;
 }
 .asciinema-theme-splitgraph .bg-5 {
-  background-color: #d33682;
+  background-color: #ffecdb;
 }
 .asciinema-theme-splitgraph .fg-6 {
-  color: #2aa198;
+  color: #36d7b7;
 }
 .asciinema-theme-splitgraph .bg-6 {
-  background-color: #2aa198;
+  background-color: #36d7b7;
 }
 .asciinema-theme-splitgraph .fg-7 {
-  color: #eee8d5;
+  color: #d3d3d3;
 }
 .asciinema-theme-splitgraph .bg-7 {
-  background-color: #eee8d5;
+  background-color: #d3d3d3;
 }
 .asciinema-theme-splitgraph .fg-8 {
-  color: #002b36;
+  color: #bfbfbf;
 }
 .asciinema-theme-splitgraph .bg-8 {
-  background-color: #002b36;
+  background-color: #bfbfbf;
 }
-/* Switch red color used by comments to be viewable on sgblue */
 .asciinema-theme-splitgraph .fg-9 {
-  color: #f4c1c0;
+  color: #ffa07a;
 }
 .asciinema-theme-splitgraph .bg-9 {
-  background-color: #f4c1c0;
+  background-color: #ffa07a;
 }
 .asciinema-theme-splitgraph .fg-10 {
-  color: #7868e95;
+  color: #00ff7f;
 }
 .asciinema-theme-splitgraph .bg-10 {
-  background-color: #7868e95;
+  background-color: #00ff7f;
 }
 .asciinema-theme-splitgraph .fg-11 {
-  color: #859ba3;
+  color: #ffd700;
 }
 .asciinema-theme-splitgraph .bg-11 {
-  background-color: #859ba3;
+  background-color: #ffd700;
 }
 .asciinema-theme-splitgraph .fg-12 {
-  color: #befeff;
+  color: #89c4f4;
 }
 .asciinema-theme-splitgraph .bg-12 {
-  background-color: #befeff;
+  background-color: #89c4f4;
 }
 .asciinema-theme-splitgraph .fg-13 {
-  color: #6c71c4;
+  color: #dcc6e0;
 }
 .asciinema-theme-splitgraph .bg-13 {
-  background-color: #6c71c4;
+  background-color: #dcc6e0;
 }
 .asciinema-theme-splitgraph .fg-14 {
-  color: #93a1a1;
+  color: #81cfe0;
 }
 .asciinema-theme-splitgraph .bg-14 {
-  background-color: #93a1a1;
+  background-color: #81cfe0;
 }
 .asciinema-theme-splitgraph .fg-15 {
-  color: #fdf6e3;
+  color: #e0ffff;
 }
 .asciinema-theme-splitgraph .bg-15 {
-  background-color: #fdf6e3;
+  background-color: #e0ffff;
 }
