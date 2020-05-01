@@ -8,8 +8,29 @@ export const meta = {
 ## Python
 
 ```py
-# Tell the world that you want to say hello
-print("ummmm")
+partial_failure: Optional[BaseException] = None
+try:
+    successful = self.download_objects(
+        upstream_manager, objects_to_fetch=to_fetch, object_locations=object_locations
+    )
+    difference = []
+except IncompleteObjectDownloadError as e:
+    successful = e.successful_objects
+    difference = list(set(to_fetch).difference(successful))
+    if difference:
+        if e.reason:
+            partial_failure = e.reason
+        else:
+            partial_failure = self._generate_download_error(table, difference)
+except Exception as e:
+    successful = self.get_downloaded_objects(to_fetch)
+    difference = list(set(to_fetch).difference(successful))
+    partial_failure = self._generate_download_error(table, difference, cause=e)
+
+logging.info("Did a thing", thing // 42.0)
+
+# No matter what, claim the space required by the newly downloaded objects.
+self._increase_cache_occupancy(successful)
 ```
 
 ## Javascript
@@ -17,6 +38,60 @@ print("ummmm")
 ```js
 // Tell the world that you want to say hello
 console.log("Hello world");
+```
+
+## Bash
+
+```bash
+$ sgr sql --set-thing 25 "SELECT * FROM table"
+$ sgr sql $(cat thing.sql)
+```
+
+## YAML
+
+```yaml
+version: '3'
+services:
+  engine:
+    image: splitgraph/engine:${DOCKER_TAG-stable}
+    ports:
+      - '0.0.0.0:5432:5432'
+    environment:
+      - POSTGRES_USER=sgr
+      - POSTGRES_PASSWORD=supersecure
+      - POSTGRES_DB=splitgraph
+      - SG_LOGLEVEL=INFO
+    expose:
+      - 5432
+  postgrest:
+    image: postgrest/postgrest:latest
+    ports:
+      - '0.0.0.0:8080:8080'
+    volumes:
+      - ./postgrest.conf:/etc/postgrest.conf
+```
+
+## INI
+
+```ini
+SG_LOGLEVEL=INFO
+
+[remote:thing]
+
+SG_ENGINE_USER=splitgraph
+SG_ENGINE_POOL=42
+```
+
+## Dockerfile
+
+```docker
+FROM ubuntu:18.10 AS builder
+
+RUN sudo apt-get update
+
+FROM builder
+
+CMD ["thing", "--yep"]
 ```
 
 ## SQL

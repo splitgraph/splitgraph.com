@@ -40,7 +40,7 @@ so Splitgraph needs some context when creating an object index.
 
 Indexes can be added at commit time by passing `--index-options` to `sgr commit`:
 
-```
+```python
 $ sgr commit namespace/repository --index-options \\
     '{\\
         "table_name": {\\
@@ -63,9 +63,8 @@ Reindexing is currently only supported for objects that haven't been delta compr
 
 To reindex objects that a table consists of, use [`sgr reindex`](../sgr/image_management_creation/reindex). For example:
 
-```
-$ sgr reindex -i '{"bloom": {"county_name": {"probability": 0.01}}}' \\
-               splitgraph/2016_election:latest precinct_results
+```shell-session
+$ sgr reindex -i '{"bloom": {"county_name": {"probability": 0.01}}}' splitgraph/2016_election:latest precinct_results
 ```
 
 This will add the new index to the object metadata, keeping existing indexes.
@@ -83,8 +82,9 @@ Note that if you wish to push new object metadata after reindexing, you'll need 
 
 This is an object from the `splitgraph/geonames` dataset with a range index and some bloom indexes.
 
-```
+```shell-session
 $ sgr object -r data.splitgraph.com ob729bf7d604891a1948140d082429638ae9e8a4041a6fc1c91bcae002c2fce
+
 Object ID: ob729bf7d604891a1948140d082429638ae9e8a4041a6fc1c91bcae002c2fce
 
 Namespace: splitgraph
@@ -130,8 +130,9 @@ By default, Splitgraph adds range indexes to all columns, but they're not very u
 span A-Z. However, this dataset also has a bloom filter index on `asciiname` and `country_code`, amongst
 other columns, which lets us filter on those columns without downloading the whole dataset.
 
-```
+```shell-session
 $ sgr clone splitgraph/geonames
+
 Gathering remote metadata...
 Fetched metadata for 2 images, 1 table, 120 objects and 0 tags.
 

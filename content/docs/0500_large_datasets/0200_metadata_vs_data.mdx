@@ -17,4 +17,22 @@ can be evicted if the free cache space is limited. The cache size can be control
 `SG_OBJECT_CACHE_SIZE` variable in `.sgconfig` and the default value is 10240 (10GB).
 
 It is possible to find out how much data a query against a layered checkout will need by running
-`EXPLAIN` on the query.
+`EXPLAIN` on the query, for example:
+
+```shell-session
+$ sgr sql -s splitgraph/2016_election "EXPLAIN SELECT candidate_normalized, SUM(votes) FROM precinct_results WHERE county_fips=11001 GROUP BY candidate_normalized"
+
+GroupAggregate  (cost=71991481.18..71992900.45 rows=1 width=64)
+  Group Key: candidate_normalized
+  ->  Sort  (cost=71991481.18..71991954.27 rows=189234 width=380)
+        Sort Key: candidate_normalized
+        ->  Foreign Scan on precinct_results  (cost=20.00..71908920.00 rows=189234 width=380)
+              Filter: (county_fips = 11001)
+              Multicorn: Objects removed by filter: 18
+              Multicorn: Scan through 2 object(s) (2.55 MiB)
+JIT:
+  Functions: 7
+...
+```
+
+This query will need to scan (and download, if it's not already locally cached) through 2.5 MiB of data.

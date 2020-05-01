@@ -9,9 +9,7 @@ a new image with those objects.
 
 ## Example
 
-Let's commit the changes to the new repository to create a new image:
-
-```
+```shell-session
 $ sgr commit example/repo_2 --message "My first image"
 $ sgr show example/repo_2:latest
 $ sgr table example/repo_2:latest demo
@@ -48,7 +46,7 @@ have been stored in it, as opposed to the whole table.
 
 Tag the new image and check out the old one:
 
-```
+```shell-session
 $ sgr tag example/repo_2 new_data
 $ sgr checkout example/repo_2:original_data
 $ sgr sql --schema example/repo_2 "SELECT * FROM demo ORDER BY key"
@@ -57,7 +55,7 @@ $ sgr sql --schema example/repo_2 "SELECT * FROM demo ORDER BY key"
 You should see the original contents of the table before all changes.
 Check out the new copy:
 
-```
+```shell-session
 $ sgr checkout example/repo_2:new_data
 $ sgr sql --schema example/repo_2 "SELECT * FROM demo ORDER BY key"
 ```

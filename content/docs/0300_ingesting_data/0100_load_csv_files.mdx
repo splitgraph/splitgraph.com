@@ -4,6 +4,7 @@ export const meta = {
 };
 
 <cast src="@splitgraph/content/casts/versioned/latest/import-from-csv.cast" />
+
 [Link to example](https://github.com/splitgraph/splitgraph/tree/master/examples/import-from-csv)
 
 Splitgraph supports importing data from CSV files into Postgres tables. It uses [TableSchema](https://github.com/frictionlessdata/tableschema-py)'s schema inference functionality and
@@ -11,9 +12,10 @@ Postgres' `COPY FROM STDIN` command to ingest the actual data.
 
 To create a Splitgraph image from a CSV file:
 
-```
-    sgr init [repository_name]
-    sgr csv import -f [filename] -k [primary_key] ... [repository_name] [table_name]
-    # Import more data or alter the schema of table_name as you see fit
-    sgr commit [repository_name]
+```bash
+sgr init [repository_name]
+sgr csv import -f [filename] -k [primary_key] ... [repository_name] [table_name]
+
+# Import more data or alter the schema of table_name as you see fit
+sgr commit [repository_name]
 ```

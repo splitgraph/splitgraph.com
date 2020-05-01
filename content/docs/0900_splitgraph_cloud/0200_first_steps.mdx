@@ -11,7 +11,7 @@ The 2016 US Presidential Election precinct-level returns dataset ([source](https
 
 Clone the image. Note this will only download the image's metadata. No actual data is transferred until it's required, unless you explicitly ask for it.
 
-```
+```shell-session
 $ sgr clone splitgraph/2016_election:latest
 Gathering remote metadata...
 Fetched metadata for 1 image, 1 table, 20 objects and 1 tag.
@@ -102,15 +102,17 @@ Let's check out the image into a so called "layered querying" schema. This sets 
 foreign data wrapper for this image that acts as a shim and presents itself as normal Postgres
 table to clients.
 
-```
+```shell-session
 $ sgr checkout --layered splitgraph/2016_election:latest
+
 Checked out splitgraph/2016_election:3835145ada3f.
 ```
 
 We're interested in precinct-level election result for District of Columbia (FIPS code 11001).
 
-```
+```shell-session
 $ sgr sql -s splitgraph/2016_election "EXPLAIN SELECT candidate_normalized, SUM(votes) FROM precinct_results WHERE county_fips=11001 GROUP BY candidate_normalized"
+
 GroupAggregate  (cost=71991481.18..71992900.45 rows=1 width=64)
   Group Key: candidate_normalized
   ->  Sort  (cost=71991481.18..71991954.27 rows=189234 width=380)
@@ -127,8 +129,9 @@ JIT:
 Here, we can see that this query will only download two objects. Let's actually run it: behind
 the scenes, this will lazily download required data.
 
-```
-sgr sql -s splitgraph/2016_election "SELECT candidate_normalized, SUM(votes) FROM precinct_results WHERE county_fips=11001 GROUP BY candidate_normalized"
+```shell-session
+$ sgr sql -s splitgraph/2016_election "SELECT candidate_normalized, SUM(votes) FROM precinct_results WHERE county_fips=11001 GROUP BY candidate_normalized"
+
 clinton 282830
 in      6551
 johnson 4906

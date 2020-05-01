@@ -19,7 +19,7 @@ this renders the whole repository as a tree.
 
 Let's create another example repository and give the new image a tag:
 
-```
+```shell-session
 $ sgr example generate example/repo_2
 $ sgr sql --schema example/repo_2 "SELECT * FROM demo ORDER BY key"
 $ sgr tag example/repo_2 original_data
@@ -29,7 +29,7 @@ The next step can be done from any application that can access the
 PostgreSQL database backing the Splitgraph engine, but `sgr` provides a
 shorthand to alter the generated image:
 
-```
+```shell-session
 $ sgr example alter example/repo_2
 
 Deleting 2 rows...
@@ -39,7 +39,7 @@ Adding 2 rows...
 
 Let's inspect the current state of the repository:
 
-```
+```shell-session
 $ sgr sql --schema example/repo_2 "SELECT * FROM demo ORDER BY key"
 ```
 
@@ -48,7 +48,7 @@ rows have been altered and two more rows have been added.
 
 Let's compare the `demo` table to its previous version:
 
-```
+```shell-session
 $ sgr diff example/repo_2 -v
 
 Between 97900a827962 and the current working copy:

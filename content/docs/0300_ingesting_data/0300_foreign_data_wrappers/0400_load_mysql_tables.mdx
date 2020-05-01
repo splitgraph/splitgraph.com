@@ -5,7 +5,7 @@ export const meta = {
 
 To mount a MySQL database into the Splitgraph engine using [`mysql_fdw`](https://github.com/EnterpriseDB/mysql_fdw), first, add this to your `.sgconfig`'s `mount_handlers` section:
 
-```
+```ini
 mysql_fdw=splitgraph.hooks.mount_handlers.mount_mysql
 ```
 

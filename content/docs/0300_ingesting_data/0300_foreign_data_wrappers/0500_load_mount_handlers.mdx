@@ -10,10 +10,11 @@ To mount a custom database into your Splitgraph engine, you have to do three thi
 - Write a Python function that, when invoked, will create the required mountpoint on the engine and initialize
   the remote foreign data wrapper. For an example, see `mount_postgres` in `splitgraph.hooks.mount_handlers`.
 - Register the handler in your `.sgconfig` file:
-  ```ini
-  [mount_handlers]
-  handler_name=your.handler.module.handler_function
-  ```
+
+```ini
+[mount_handlers]
+handler_name=your.handler.module.handler_function
+```
 
 Registering the handler in such a way will also parse its function signature and docstring, adding the handler automatically to the `sgr` client as a subcommand, as well as making it available to be used in Splitfiles.
 
@@ -57,7 +58,7 @@ def mount_postgres(mountpoint, server, port, username, password, dbname, remote_
 
 gets made available in the `sgr` client with this help message:
 
-```
+```bash
 $ sgr mount postgres_fdw --help
 Usage: sgr mount postgres_fdw [OPTIONS] SCHEMA
 

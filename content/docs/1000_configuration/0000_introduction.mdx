@@ -9,7 +9,7 @@ directory or the environment variable `SG_CONFIG_FILE` is set, that file is used
 
 It's possible to generate a configuration file with defaults by doing:
 
-```
+```shell-session
 $ sgr config -sc > ~/.splitgraph/.sgconfig
 ```
 
@@ -19,7 +19,7 @@ that are equal to their default values get deleted.
 It's also possible to override various other configuration flags using environment variables. You
 can inspect the current configuration in use by Splitgraph by running
 
-```
+```shell-session
 $ sgr config
 ```
 
@@ -60,7 +60,7 @@ section take precedence.
 By default, Splitgraph has a remote `data.splitgraph.com` registered for it. To add another remote,
 add this to the `.sgconfig` file:
 
-```
+```ini
 [remote: other_engine]
 SG_ENGINE_ADMIN_USER=sgr
 SG_ENGINE_ADMIN_PWD=supersecure

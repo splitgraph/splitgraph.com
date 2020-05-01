@@ -60,7 +60,7 @@ from an image and not have it in the history at all.
 
 To rechunk an image, splitting every table in it into disjoint objects again, check it out and recommit it as a snapshot, adding necessary indexes. For example:
 
-```
+```shell-session
 $ sgr checkout my/big_image:latest
 $ sgr commit my/big_image --snap --chunk-size 100000
 ```
