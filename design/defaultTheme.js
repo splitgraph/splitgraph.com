@@ -26,6 +26,13 @@ const prismTheme = {
   ".builtin,.char,.constant,.function,.class-name": {
     color: "#ffa07a",
   },
+  // Used by shell-session
+  ".output": {
+    color: "#e0ffff",
+  },
+  ".important,.language-bash": {
+    color: "#ffa07a",
+  },
 };
 
 export const asciinemaEmbedStyles = {

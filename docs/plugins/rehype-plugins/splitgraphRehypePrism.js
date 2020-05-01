@@ -16,6 +16,7 @@ const javascript = require("refractor/lang/javascript");
 const json = require("refractor/lang/json");
 const plsql = require("refractor/lang/plsql");
 const python = require("refractor/lang/python");
+const shell_session = require("refractor/lang/shell-session");
 const sql = require("refractor/lang/sql");
 const yaml = require("refractor/lang/yaml");
 
@@ -29,6 +30,7 @@ refractor.register(javascript);
 refractor.register(json);
 refractor.register(plsql);
 refractor.register(python);
+refractor.register(shell_session);
 refractor.register(sql);
 refractor.register(yaml);
 
