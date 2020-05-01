@@ -48,7 +48,7 @@ const getConfig = ({ tmpDir }) => ({
     newBranch: `splitbot/update-docs`,
 
     // Submit a pull request against this branch
-    targetBranch: "next",
+    targetBranch: "master",
 
     // When creating/modifying a version, call these functions according to
     // the name of each subdirectory in the extracted tarball of the asset
