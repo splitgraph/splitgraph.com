@@ -8,23 +8,23 @@
 // import prismTheme from "@theme-ui/prism/presets/shades-of-purple.json";
 
 const prismTheme = {
-  color: "#9EFEFF",
-  backgroundColor: "#2D2A55",
-  ".changed": { color: "rgb(255, 238, 128)" },
-  ".deleted": { color: "rgba(239, 83, 80, 0.56)" },
-  ".inserted": { color: "rgb(173, 219, 103)" },
-  ".comment": { color: "rgb(179, 98, 255)", fontStyle: "italic" },
-  ".punctuation": { color: "rgb(255, 255, 255)" },
-  ".constant": { color: "rgb(255, 98, 140)" },
-  ".string,.url": { color: "rgb(165, 255, 144)" },
-  ".variable": { color: "rgb(255, 238, 128)" },
-  ".number,.boolean,.operator": { color: "rgb(255, 98, 140)" },
-  ".attr-name": { color: "rgb(255, 180, 84)" },
-  ".keyword,.property,.namespace,.tag,.selector,.doctype": {
-    color: "rgb(255, 157, 0)",
+  color: "#e0ffff",
+  backgroundColor: "#36678d",
+  ".changed,.operator": { color: "#ffd700" },
+  ".deleted": { color: "#ffa07a77" },
+  ".inserted": { color: "#66cc99" },
+  ".comment": { color: "#81cfe0", fontStyle: "italic" },
+  ".punctuation": { color: "#e0ffff" },
+  ".constant": { color: "#dcc6e0" },
+  ".string,.url": { color: "#00ff7f" },
+  ".variable": { color: "#36d7b7" },
+  ".number,.boolean,.attr-value": { color: "#ffecdb" },
+  ".attr-name": { color: "#ffb454" },
+  ".keyword,.key,.property,.namespace,.tag,.selector,.doctype": {
+    color: "#00ffff",
   },
   ".builtin,.char,.constant,.function,.class-name": {
-    color: "rgb(250, 208, 0)",
+    color: "#ffa07a",
   },
 };
 
