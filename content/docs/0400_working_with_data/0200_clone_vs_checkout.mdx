@@ -5,7 +5,7 @@ export const meta = {
 
 A Splitgraph repository can be cloned using [`sgr clone`](../sgr/sharing_images/clone):
 
-```
+```shell-session
 $ sgr clone some_namespace/some_repository
 ```
 
@@ -16,9 +16,10 @@ By default, cloning a Splitgraph repository is different than what happens with 
 In this case, only the repository's metadata is cloned, which is lightweight compared to the
 actual data but still lets the user to get an overview of the repository.
 
-```
+```shell-session
 # This only transfers a few KB of metadata.
 $ sgr clone splitgraph/2016_election
+
 Gathering remote metadata...
 Fetched metadata for 1 image, 1 table, 20 objects and 1 tag.
 
@@ -42,8 +43,9 @@ checkout requires it. This behaviour can be overridden by passing `--download-al
 On checkout of an image, all objects that are required by that image are gathered, downloaded and
 assembled into tables in a process called "materialization".
 
-```
+```shell-session
 $ sgr checkout splitgraph/2016_election:latest
+
 Need to download 20 objects (26.75 MiB), cache occupancy: 492.69 MiB/10.00 GiB
 Fetching 20 objects, total size 26.75 MiB
 Getting download URLs from registry PostgresEngine data.splitgraph.com (5a87...@data.splitgraph.com:5432/sgregistry)...

@@ -12,7 +12,9 @@ Optionally, the table name can be replaced with a SELECT query in curly
 braces that will get executed against the source repository in order to
 create a table. This will be stored as a snapshot. For example:
 
-**`FROM internal_data:latest IMPORT {SELECT name, age FROM staff WHERE is_restricted = FALSE} AS visible_staff`**
+```splitfile
+FROM internal_data:latest IMPORT {SELECT name, age FROM staff WHERE is_restricted = FALSE} AS visible_staff
+```
 
 Will create a new table that contains non-restricted staff names and
 ages in `internal_data.staff` without including any other entries in

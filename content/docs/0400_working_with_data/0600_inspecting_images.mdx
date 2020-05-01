@@ -5,19 +5,19 @@ export const meta = {
 
 Image metadata can be inspected using the [`sgr show`](../sgr/image_information/show) command:
 
-```
+```bash
 $ sgr show namespace/repository:image_hash
 ```
 
 Tables in a given image can be inspected using the [`sgr table`](../sgr/image_information/table) command:
 
-```
+```bash
 $ sgr table namespace/repository:image_hash table_name
 ```
 
 Finally, object metadata can be inspected with [`sgr object`](../sgr/image_information/object):
 
-```
+```bash
 $ sgr object object_id
 ```
 
@@ -25,7 +25,7 @@ These commands require the repository (but not its actual data) to be cloned. It
 to inspect the metadata on a remote repository without cloning any images by passing the
 `-r` or `--remote` flag to these commands:
 
-```
+```bash
 $ sgr show -r data.splitgraph.com splitgraph/geonames:latest
 Image splitgraph/geonames:0b77a102cbabe2de8597dcab71f1c333f16f9e1963c9c8982988e10e65989c62
 
@@ -41,7 +41,7 @@ Tables:
 
 Let's further inspect the object that the first example image, `example/repo_1`, used.
 
-```
+```bash
 $ sgr object o26c6d8345cba276f807d7bcf906531568f309c2609a3420d98c01a6c99b166
 
 Object ID: o26c6d8345cba276f807d7bcf906531568f309c2609a3420d98c01a6c99b166
@@ -81,8 +81,9 @@ hash of the schema of a given object. This means that Splitgraph fragments are c
 
 Now, let's look at the second object that the new version of the `demo` table in `example/repo_2:new_data` is linked to.
 
-```
+```shell-session
 $ sgr object o4882c12cdc4cb5b4e89481ebdb71585998633f19a72652debbb80980ae0f0b
+
 Object ID: o4882c12cdc4cb5b4e89481ebdb71585998633f19a72652debbb80980ae0f0b
 
 Namespace: example
@@ -114,7 +115,7 @@ that query.
 We can also inspect the actual object: every object in the Splitgraph cache is stored as a
 [CStore](https://github.com/citusdata/cstore_fdw) columnar storage file.
 
-```
+```shell-session
 $ sgr sql "SELECT * FROM splitgraph_meta.o4882c12cdc4cb5b4e89481ebdb71585998633f19a72652debbb80980ae0f0b"
 
 2       d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35_UPDATED        True

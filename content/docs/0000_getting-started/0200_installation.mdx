@@ -17,7 +17,7 @@ To run the Splitgraph engine, you will need to be able to run [Docker](https://w
 
 For Linux and OSX, there's a single script:
 
-```
+```bash
 $ bash -c "$(curl -sL https://github.com/splitgraph/splitgraph/releases/latest/download/install.sh)"
 ```
 
@@ -36,7 +36,7 @@ First, get the binary for `sgr` from [the releases page](https://github.com/spli
 
 Then, create a new Splitgraph engine. Do:
 
-```
+```shell-session
 $ sgr engine add
 ```
 
@@ -68,7 +68,7 @@ The simplest way to do this is by adding `alias sgr='winpty sgr'` to your `.bash
 You can also install the Splitgraph library from pip. This is useful if you want to use the
 [Splitgraph Python API](../python_api/splitgraph) to manipulate images from your code:
 
-```
+```bash
 $ pip install splitgraph
 ```
 
@@ -81,7 +81,7 @@ on our GitHub.
 You can use Docker directly to pull and start the
 [engine](https://hub.docker.com/r/splitgraph/engine/):
 
-```
+```python
 $ docker run -d \\
     -e POSTGRES_PASSWORD=supersecure \\
     -p 5432:5432 \\
@@ -97,14 +97,14 @@ can be changed by changing the [configuration file](#configuration-file).
 
 To complete the installation, run:
 
-```
+```shell-session
 $ sgr init
 ```
 
 You can also use [docker-compose](https://docs.docker.com/compose/). A sample
 Compose configuration for the service is as follows:
 
-```
+```yaml
 version: '3'
 services:
   engine:

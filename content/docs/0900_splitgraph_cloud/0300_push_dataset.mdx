@@ -7,7 +7,7 @@ Let's create a Splitfile that summarizes the vote counts for every candidate in 
 
 You don't need to worry about pulling this dataset or checking it out: Splitgraph will do it for you.
 
-```
+```shell-session
 $ echo "FROM splitgraph/2016_election IMPORT { SELECT candidate_normalized, state_postal, SUM(votes) AS total_votes FROM precinct_results GROUP BY candidate_normalized, state_postal } AS votes_by_state" > votes_by_state.splitfile
 
 $ sgr build votes_by_state.splitfile -o votes_by_state
@@ -45,8 +45,9 @@ Objects:
 Let's push the dataset out to Splitgraph Cloud. By default, the dataset gets pushed out a repository
 with the same name in your own namespace.
 
-```
+```shell-session
 $ sgr push votes_by_state
+
 Pushing votes_by_state to YOUR_USERNAME/votes_by_state on remote data.splitgraph.com
 Gathering remote metadata...
 Uploading 1 object, total size 6.36 KiB

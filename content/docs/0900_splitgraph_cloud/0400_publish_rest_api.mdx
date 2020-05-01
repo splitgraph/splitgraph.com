@@ -5,7 +5,7 @@ export const meta = {
 
 Every public dataset on the Splitgraph registry has a read-only OpenAPI-compatible endpoint that can be used to query it, provided by [PostgREST](http://postgrest.org/en/latest/). It can be accessed by curl:
 
-```
+```shell-session
 $ curl https://data.splitgraph.com/YOUR_USERNAME/votes_by_state/latest/-/rest/votes_by_state?state_postal=eq.DC
 
 [{"candidate_normalized":"clinton","state_postal":"DC","total_votes":282830},
@@ -18,7 +18,7 @@ $ curl https://data.splitgraph.com/YOUR_USERNAME/votes_by_state/latest/-/rest/vo
 You can also use a shorthand, `sgr cloud curl`, that takes care of all the scaffolding around
 generating the URL and making sure you're logged into the registry:
 
-```
+```shell-session
 $ sgr cloud curl YOUR_USERNAME/votes_by_state "votes_by_state?state_postal=eq.DC"
 
 [{"candidate_normalized":"clinton","state_postal":"DC","total_votes":282830},

@@ -15,6 +15,13 @@ previous image to create the hash of the new image.
 Additionally, the custom command can also implement `calc_hash()` if it's able to calculate the
  command context hash without actually running the command.
 
+The Python class can then be registered in the `.sgconfig` file as follows:
+
+```ini
+[commands]
+COMMAND_NAME=module.with.my.CommandClass
+```
+
 For example, for a simple data importer that loads a file from HTTP,
 `calc_hash()` could return the hash of the file's last modified
 timestamp and `execute()` would perform the actual computation-heavy
