@@ -55,6 +55,12 @@ This will:
 There are extra options in `sgr engine` for advanced users. To see them, run `sgr engine --help` or
 see [the CLI reference](../sgr/engine_management/engine_add).
 
+#### Note for Windows users
+
+If you're running `sgr` in a MINGW terminal (for example, Git Bash), you have to [prefix its invocations with `winpty`](https://stackoverflow.com/questions/32597209/python-not-working-in-the-command-line-of-git-bash/32599341#32599341) to avoid output errors and make sure password inputs work properly.
+
+The simplest way to do this is by adding `alias sgr='winpty sgr'` to your `.bashrc`.
+
 ## Advanced installation
 
 ### `sgr`
