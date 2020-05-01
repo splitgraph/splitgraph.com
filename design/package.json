@@ -7,14 +7,14 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@csstools/normalize.css": "^10.1.0",
-    "@emotion/core": "^10.0.17",
-    "@mdx-js/react": "^1.4.5",
-    "@rebass/forms": "^4.0.5",
-    "@rebass/preset": "^4.0.5",
-    "@theme-ui/prism": "^0.2.46",
-    "rebass": "^4.0.5",
-    "theme-ui": "^0.2.43"
+    "@csstools/normalize.css": "10.1.0",
+    "@emotion/core": "10.0.28",
+    "@mdx-js/react": "1.6.0",
+    "@rebass/forms": "4.0.6",
+    "@rebass/preset": "4.0.5",
+    "@theme-ui/prism": "0.2.50",
+    "rebass": "4.0.7",
+    "theme-ui": "0.2.52"
   },
   "peerDependencies": {
     "react": "^16.13.0",

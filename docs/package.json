@@ -40,6 +40,6 @@
     "unist-util-find": "^1.0.1"
   },
   "devDependencies": {
-    "now": "^18.0.0"
+    "now": "18.0.0"
   }
 }
