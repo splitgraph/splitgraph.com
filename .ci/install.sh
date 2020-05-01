@@ -5,7 +5,7 @@ SPLITGRAPH_DIR="$CI_DIR/.."
 
 if test ! -z "$YARN_CACHE_FOLDER" ; then
 
-    if git log --format=%B HEAD | grep -q '[clear cache]' ; then
+    if git log --format=%B HEAD -n1 | grep -q '[clear cache]' ; then
         >&2 echo "Clear cache ${YARN_CACHE_FOLDER}..."
         test -d "$YARN_CACHE_FOLDER" && rm -r "$YARN_CACHE_FOLDER"
     fi
