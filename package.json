@@ -1,0 +1,34 @@
+{
+  "name": "splitgraph.com",
+  "version": "0.0.1",
+  "description": "Monorepo for splitgraph.com JS projects (docs, website)",
+  "main": "index.js",
+  "repository": "git@github.com:splitgraph/splitgraph.com.git",
+  "author": "Splitgraph",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "design",
+    "tdesign",
+    "docs",
+    "content",
+    "content-scripts",
+    "templaters",
+    "lib",
+    "tlib"
+  ],
+  "scripts": {
+    "build": "./scripts/build_js_static.sh",
+    "buildlibs": "./scripts/buildlibs.sh",
+    "dev": "yarn run buildlibs && yarn run run-p -l watch:@splitgraph/tdesign watch:@splitgraph/tlib dev:@splitgraph/docs",
+    "deploy": "yarn workspace @splitgraph/docs run deploy",
+    "update-docs": "node ./content-scripts/updateDocs.js",
+    "dev:@splitgraph/docs": "yarn workspace @splitgraph/docs run dev",
+    "watch:@splitgraph/tdesign": "yarn workspace @splitgraph/tdesign run watch",
+    "watch:@splitgraph/tlib": "yarn workspace @splitgraph/tdesign run watch"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "tsdx": "^0.12.3"
+  }
+}

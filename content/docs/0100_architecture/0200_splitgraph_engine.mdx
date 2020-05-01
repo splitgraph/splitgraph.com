@@ -1,0 +1,20 @@
+export const meta = {
+  id: "splitgraph_engine",
+  title: "Splitgraph Engine"
+};
+
+The Splitgraph Engine is where datasets are stored and queried. It's built on top of the PostgreSQL
+database with a few extensions, including the `splitgraph` Python library itself. Because of that,
+the Splitgraph engine can be queried by any application that can work with PostgreSQL, including
+[pgcli](https://www.pgcli.com/), [PostgREST](http://postgrest.org/) or
+[PostGraphile](https://www.graphile.org/postgraphile/). You do not need to rewrite any of your
+tools to use Splitgraph.
+
+Whilst it is possible to add Splitgraph to existing PostgreSQL deployments, there isn't currently
+a simple installation method. If you're interested in doing so, you can follow the instructions
+in the [Dockerfile](https://github.com/splitgraph/splitgraph/blob/master/engine/Dockerfile) used
+to build the engine or contact us.
+
+The simplest way to manage the Splitgraph engine is by using [`sgr engine`](../sgr/engine_management/engine_add). `sgr engine` is a
+wrapper around Docker that manages the Docker container the Splitgraph engine runs in, as well as
+Docker volumes with Splitgraph data and metadata.

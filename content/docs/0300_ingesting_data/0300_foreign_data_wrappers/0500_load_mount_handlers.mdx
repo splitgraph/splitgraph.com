@@ -1,0 +1,81 @@
+export const meta = {
+  id: "load_mount_handlers",
+  title: "Writing custom mount handlers"
+};
+
+
+To mount a custom database into your Splitgraph engine, you have to do three things:
+
+- Install the foreign data wrapper into the engine (either using PGXN or compiling the wrapper by yourself)
+- Write a Python function that, when invoked, will create the required mountpoint on the engine and initialize
+  the remote foreign data wrapper. For an example, see `mount_postgres` in `splitgraph.hooks.mount_handlers`.
+- Register the handler in your `.sgconfig` file:
+  ```ini
+  [mount_handlers]
+  handler_name=your.handler.module.handler_function
+  ```
+
+Registering the handler in such a way will also parse its function signature and docstring, adding the handler automatically to the `sgr` client as a subcommand, as well as making it available to be used in Splitfiles.
+
+For example, the `mount_postgres` function:
+
+```py
+def mount_postgres(mountpoint, server, port, username, password, dbname, remote_schema, tables=[]):
+    """
+    Mount a Postgres database.
+
+    Mounts a schema on a remote Postgres database as a set of foreign tables locally.
+    \b
+
+    :param mountpoint: Schema to mount the remote into.
+    :param server: Database hostname.
+    :param port: Port the Postgres server is running on.
+    :param username: A read-only user that the database will be accessed as.
+    :param password: Password for the read-only user.
+    :param dbname: Remote database name.
+    :param remote_schema: Remote schema name.
+    :param tables: Tables to mount (default all).
+    """
+    engine = get_engine()
+    logging.info("Importing foreign Postgres schema...")
+
+    # Name foreign servers based on their targets so that we can reuse them.
+    server_id = '%s_%s_%s_server' % (server, str(port), dbname)
+    init_fdw(engine, server_id, "postgres_fdw", {'host': server, 'port': str(port), 'dbname': dbname},
+             {'user': username, 'password': password}, overwrite=False)
+
+    engine.run_sql(SQL("CREATE SCHEMA {}").format(Identifier(mountpoint)))
+
+    # Construct a query: import schema limit to (%s, %s, ...) from server mountpoint_server into mountpoint
+    query = "IMPORT FOREIGN SCHEMA {} "
+    if tables:
+        query += "LIMIT TO (" + ",".join("%s" for _ in tables) + ") "
+    query += "FROM SERVER {} INTO {}"
+    engine.run_sql(SQL(query).format(Identifier(remote_schema), Identifier(server_id),
+                                     Identifier(mountpoint)), tables)
+```
+
+gets made available in the `sgr` client with this help message:
+
+```
+$ sgr mount postgres_fdw --help
+Usage: sgr mount postgres_fdw [OPTIONS] SCHEMA
+
+      Mount a Postgres database.
+
+      Mounts a schema on a remote Postgres database as a set of foreign
+      tables locally.
+
+Options:
+  -c, --connection TEXT       Connection string in the form
+                              username:password@server:port
+  -o, --handler-options TEXT  JSON-encoded dictionary of handler options:
+                              dbname: Remote database name.
+                              remote_schema:
+                              Remote schema name.
+                              tables: Tables to mount
+                              (default all).
+  --help                      Show this message and exit.
+```
+
+The connection string gets parsed and passed to the mount handler as `server`, `port`, `username` and `password` parameters. The remaining options are converted from a JSON dictionary and passed to the handler as extra kwargs.

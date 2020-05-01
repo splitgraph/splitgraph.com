@@ -1,0 +1,12 @@
+export const meta = {id: "status", title: "sgr status", sidebarTitle: "status"};
+
+```sgr status [OPTIONS] [REPOSITORY]```
+
+Show the status of the Splitgraph engine.
+
+If a repository is passed, show in-depth information about a repository.
+
+If not, show information about all repositories local to the engine. This will show a list
+of all repositories, number of local images and tags, total repository size (theoretical
+maximum size and current on-disk footprint of cached objects) and the current checked
+out image (with LQ if the image is checked out using read-only layered querying).

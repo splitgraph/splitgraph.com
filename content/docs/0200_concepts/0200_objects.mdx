@@ -1,0 +1,29 @@
+export const meta = {
+  id: "objects",
+  title: "Objects"
+};
+
+Splitgraph objects, or fragments, are building blocks of Splitgraph tables. Each object is immutable and
+content-addressable (objects with same contents have the same object ID).
+Multiple tables can link to a single object.
+
+Splitgraph object metadata is stored in the `splitgraph_meta.objects` table on the engine. The
+metadata contains the [LTHash](https://engineering.fb.com/security/homomorphic-hashing/) of rows
+added/deleted by the object and the [object index](../large_datasets/indexing)
+that is a very short (a few KB) summary of the contents of the object.
+
+These allow Splitgraph to satisfy queries to large datasets by only downloading a few objects instead of the whole image.
+
+Splitgraph objects are represented as tables in the `splitgraph_meta` schema on the engine. Each
+object has an extra Boolean column, `sg_ud_flag`, that determines whether the corresponding
+row in this object overwrites (upserts) or deletes a row in case of a primary key conflict.
+This allows Splitgraph objects to support delta compression.
+
+Physically, objects are backed by [cstore_fdw](https://github.com/citusdata/cstore_fdw) files, a
+columnar store for PostgreSQL that allows for
+[superior read performance and low IO load](https://tech.marksblogg.com/billion-nyc-taxi-rides-postgresql.html).
+CStore fragments can be swapped in as flat files without extra overhead of loading them into PostgreSQL.
+
+It is also possible to extend Splitgraph to use a different storage layer for fragments, storing them as normal PostgreSQL tables or using other formats like Apache ORC or Parquet.
+
+For more information on Splitgraph object internals, see [this page](../working_with_data/inspecting_images#example).

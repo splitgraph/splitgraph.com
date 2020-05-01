@@ -1,0 +1,9 @@
+{
+  "name": "@splitgraph/content",
+  "version": "0.0.1",
+  "description": "mdx files for content in splitgraph.com",
+  "main": "index.js",
+  "author": "Splitgraph",
+  "license": "MIT",
+  "private": true
+}

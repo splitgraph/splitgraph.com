@@ -1,0 +1,79 @@
+export const meta = {
+  id: "introduction",
+  title: "Introduction"
+};
+
+The Splitgraph configuration file is usually stored in the user's home directory
+(`~/.splitgraph/.sgconfig`). If there's a configuration file in the current working
+directory or the environment variable `SG_CONFIG_FILE` is set, that file is used instead.
+
+It's possible to generate a configuration file with defaults by doing:
+
+```
+$ sgr config -sc > ~/.splitgraph/.sgconfig
+```
+
+Note that the `.sgconfig` file gets edited automatically by `sgr` and any values there
+that are equal to their default values get deleted.
+
+It's possible to also override various other configuration flags using environment variables. You
+can inspect the current configuration in use by Splitgraph by running
+
+```
+$ sgr config
+```
+
+## In-engine configuration
+
+Note that the Splitgraph library that's running inside the engine also needs configuration. This
+is mostly required for layered querying, in which case Splitgraph inside the engine connects
+to the engine itself to read object metadata and needs credentials to the remote engine in
+order to download the actual objects.
+
+It's often the case that connection parameters used by the engine to connect to itself are
+different than ones used by `sgr` to connect to the engine. This happens with engines managed
+by `sgr engine` that run the PostgreSQL server on port 5432 but use Docker's port forwarding
+to publish the service on a different port on the host.
+
+When the engine connects to itself, `SG_ENGINE_FDW_HOST`/`PORT` connection parameters are used.
+
+If the engine is managed by `sgr engine`, the configuration file gets reinjected into it
+by most `sgr` operations that change it, for example,
+[`sgr engine add`](../sgr/engine_management/engine_add),
+[`sgr cloud register`](../sgr/splitgraph_cloud/cloud_register)
+or [`sgr cloud login`](../sgr/splitgraph_cloud/cloud_login). However,
+if there is any out-of-band change to `.sgconfig` or issues with running layered queries,
+the configuration file can be reinjected into the engine by running
+ [`sgr engine configure`](../sgr/engine_management/engine_configure).
+
+If the engine is managed manually or through Docker Compose, the configuration file can be
+bind-mounted into the engine. See this example
+[Compose file](https://github.com/splitgraph/splitgraph/blob/master/examples/push-to-other-engine/docker-compose.yml) for reference.
+
+## Adding a new remote
+
+The default section in the configuration file contains flags in use by the default Splitgraph
+engine. When the engine is switched to a different global engine using the `SG_ENGINE` flag
+or when Splitgraph is connecting to that engine for a push/pull, the configuration flags in that
+section take precedence.
+
+By default, Splitgraph has a remote `data.splitgraph.com` registered for it. To add another remote,
+add this to your `.sgconfig`:
+
+```
+[remote: other_engine]
+SG_ENGINE_ADMIN_USER=sgr
+SG_ENGINE_ADMIN_PWD=supersecure
+SG_ENGINE_POSTGRES_DB_NAME=splitgraph
+SG_ENGINE_HOST=localhost
+SG_ENGINE_PORT=5431
+SG_ENGINE_USER=sgr
+SG_ENGINE_PWD=supersecure
+SG_ENGINE_DB_NAME=splitgraph
+```
+
+See [the engine-to-engine sync example](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-other-engine) for a setup showcasing pushing data between two Splitgraph engines.
+
+## Configuration flag reference
+
+The [next page](config_flag_reference) lists all flags supported by the configuration file.

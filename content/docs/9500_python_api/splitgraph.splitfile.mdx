@@ -1,0 +1,89 @@
+
+import "@splitgraph/design/css/sphinxtheme.css";
+
+export const meta = {
+  title: "splitgraph.splitfile package",
+  id: "splitgraph.splitfile package"
+};
+
+<div className=" rst-content"><nav className="toc"><ol className="toc-level toc-level-1"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#module-contents">Module contents</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#submodules">Submodules</a><ol className="toc-level toc-level-2"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphsplitfileexecution-module">splitgraph.splitfile.execution module</a></li></ol></li></ol></nav><div className="section" id="module-splitgraph.splitfile">
+<span id="module-contents"></span><h2 id="module-contents">Module contents<a className="headerlink" href="#module-splitgraph.splitfile" title="Permalink to this headline">¶</a></h2>
+<p>Splitfile interpreter: a set of tools on top of the core Splitgraph versioning and image management to give
+the user a Dockerfile-like experience for building Splitgraph images (caching, consistent hashing, a declarative
+language).</p>
+</div><div className="section" id="splitgraph-splitfile-package">
+
+<div className="section" id="submodules">
+<h2 id="submodules">Submodules<a className="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div className="section" id="module-splitgraph.splitfile.execution">
+<span id="splitgraph-splitfile-execution-module"></span><h2 id="splitgraphsplitfileexecution-module">splitgraph.splitfile.execution module<a className="headerlink" href="#module-splitgraph.splitfile.execution" title="Permalink to this headline">¶</a></h2>
+<p>Functions for executing Splitfiles.</p>
+<dl className="py class">
+<dt id="splitgraph.splitfile.execution.ImageMapper">
+<em className="property">class </em><code className="sig-prename descclassname">splitgraph.splitfile.execution.</code><code className="sig-name descname">ImageMapper</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">object_engine</span><span className="p">:</span> <span className="n"><a className="reference internal" href="splitgraph.engine.postgres/#splitgraph.engine.postgres.engine.PostgresEngine" title="splitgraph.engine.postgres.engine.PostgresEngine">splitgraph.engine.postgres.engine.PostgresEngine</a></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.splitfile.execution.ImageMapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">object</span></code></p>
+<dl className="py method">
+<dt id="splitgraph.splitfile.execution.ImageMapper.get_provenance_data">
+<code className="sig-name descname">get_provenance_data</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>List<span className="p">[</span>str<span className="p">]</span><span className="p">, </span>List<span className="p">[</span>bool<span className="p">]</span><span className="p">, </span>List<span className="p">[</span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.splitfile.execution.ImageMapper.get_provenance_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.splitfile.execution.ImageMapper.setup_lq_mounts">
+<code className="sig-name descname">setup_lq_mounts</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.splitfile.execution.ImageMapper.setup_lq_mounts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.splitfile.execution.ImageMapper.teardown_lq_mounts">
+<code className="sig-name descname">teardown_lq_mounts</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.splitfile.execution.ImageMapper.teardown_lq_mounts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.splitfile.execution.execute_commands">
+<code className="sig-prename descclassname">splitgraph.splitfile.execution.</code><code className="sig-name descname">execute_commands</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">commands</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">params</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">output</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span><a className="reference internal" href="splitgraph.core/#splitgraph.core.repository.Repository" title="splitgraph.core.repository.Repository">splitgraph.core.repository.Repository</a><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">output_base</span><span className="p">:</span> <span className="n">str</span> <span className="o">=</span> <span className="default_value">'00000000000000000000000000000000'</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.splitfile.execution.execute_commands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes a series of Splitfile commands.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>commands</strong> – A string with the raw Splitfile.</p></li>
+<li><p><strong>params</strong> – A dictionary of parameters to be applied to the Splitfile (<cite>$&#38;lbrace;PARAM&#38;rbrace;</cite> is replaced with the specified
+parameter value).</p></li>
+<li><p><strong>output</strong> – Output repository to execute the Splitfile against.</p></li>
+<li><p><strong>output_base</strong> – If not None, a revision that gets checked out for all Splitfile actions to be committed
+on top of it.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.splitfile.execution.getrandbits">
+<code className="sig-prename descclassname">splitgraph.splitfile.execution.</code><code className="sig-name descname">getrandbits</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">k</span></em><span className="sig-paren">)</span> → x.  Generates an int with k random bits.<a className="headerlink" href="#splitgraph.splitfile.execution.getrandbits" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.splitfile.execution.prevalidate_imports">
+<code className="sig-prename descclassname">splitgraph.splitfile.execution.</code><code className="sig-name descname">prevalidate_imports</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">table_names</span><span className="p">:</span> <span className="n">List<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">table_queries</span><span className="p">:</span> <span className="n">List<span className="p">[</span>bool<span className="p">]</span></span></em><span className="sig-paren">)</span> → List<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.splitfile.execution.prevalidate_imports" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.splitfile.execution.rebuild_image">
+<code className="sig-prename descclassname">splitgraph.splitfile.execution.</code><code className="sig-name descname">rebuild_image</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">image</span><span className="p">:</span> <span className="n"><a className="reference internal" href="splitgraph.core/#splitgraph.core.image.Image" title="splitgraph.core.image.Image">splitgraph.core.image.Image</a></span></em>, <em className="sig-param"><span className="n">source_replacement</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span><a className="reference internal" href="splitgraph.core/#splitgraph.core.repository.Repository" title="splitgraph.core.repository.Repository">splitgraph.core.repository.Repository</a><span className="p">, </span>str<span className="p">]</span></span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.splitfile.execution.rebuild_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recreates the Splitfile used to create a given image and reruns it, replacing its dependencies with a different
+set of versions.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>image</strong> – Image object</p></li>
+<li><p><strong>source_replacement</strong> – A map that specifies replacement images/tags for repositories that the image depends on</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+</div>
+</div>

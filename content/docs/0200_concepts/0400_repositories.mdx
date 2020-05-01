@@ -1,0 +1,20 @@
+export const meta = {
+  id: "repositories",
+  title: "Repositories"
+};
+
+A repository is a collection of Splitgraph images. The repository's name consists of two parts:
+the namespace and the actual repository. For example, in this image reference:
+
+```
+splitgraph/geonames:0b77a102cbabe2de8597dcab71f1c333f16f9e1963c9c8982988e10e65989c62
+```
+
+`splitgraph` is a namespace, `geonames` is a repository and `0b77a102cbabe2de8597dcab71f1c333f16f9e1963c9c8982988e10e65989c62` is the image hash.
+
+Repositories are checked out into PostgreSQL schemata with the same name. So the aforementioned
+repository would end up in a PostgreSQL schema `"splitgraph/geonames"` on checkout, allowing
+any application to use that schema to modify the repository.
+
+Access control is based on namespaces. When pushing a dataset to another Splitgraph engine,
+a user is only allowed to push to the same namespace as their `session_user`.

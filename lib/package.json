@@ -1,0 +1,9 @@
+{
+  "name": "@splitgraph/lib",
+  "version": "0.0.1",
+  "description": "utilities and library functions",
+  "main": "index.js",
+  "author": "Splitgraph",
+  "license": "MIT",
+  "private": true
+}

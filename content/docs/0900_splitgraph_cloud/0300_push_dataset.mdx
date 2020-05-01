@@ -1,0 +1,63 @@
+export const meta = {
+  id: "push_dataset",
+  title: "Pushing a derivative dataset"
+};
+
+# Creating and Pushing a Derivative Dataset
+
+Let's create a Splitfile that summarizes the vote counts for every candidate in every state.
+
+You don't need to worry about pulling this dataset or checking it out: Splitgraph will do it for you.
+
+```
+$ echo "FROM splitgraph/2016_election IMPORT { SELECT candidate_normalized, state_postal, SUM(votes) AS total_votes FROM precinct_results GROUP BY candidate_normalized, state_postal } AS votes_by_state" > votes_by_state.splitfile
+
+$ sgr build votes_by_state.splitfile -o votes_by_state
+
+Executing Splitfile votes_by_state.splitfile with arguments {}
+
+Step 1/1 : FROM splitgraph/2016_election IMPORT { SELECT candidate_n...
+Resolving repository splitgraph/2016_election
+Gathering remote metadata...
+No image/object metadata to pull.
+Importing 1 table from splitgraph/2016_election:3835145ada3f into votes_by_state
+Processing table sg_tmp_4c37a2fb468588cc4f0c1084e607d1b4
+Computing table partitions
+Indexing the partition key
+Storing and indexing the table
+100%|███████████████| 1/1 [00:00<00:00, 18.14objs/s]
+ ---> ee8dc4bb7c47
+
+$ sgr table votes_by_state:latest votes_by_state
+Table votes_by_state:ee8dc4bb7c4766cc30593b77e0b6b3dbb2863c06a4ed2274127d558901abeb2f/votes_by_state
+
+Size: 6.36 KiB
+Rows: 793
+Columns:
+  candidate_normalized (character varying)
+  state_postal (character varying)
+  total_votes (numeric)
+
+Objects:
+  o91e4939e520a19c02ca876c7c5248dcf96f9c3fa55552c6ed8359caea842e9
+```
+
+### Push it out
+
+Let's push the dataset out to Splitgraph Cloud. By default, the dataset gets pushed out a repository
+with the same name in your own namespace.
+
+```
+$ sgr push votes_by_state
+Pushing votes_by_state to YOUR_USERNAME/votes_by_state on remote data.splitgraph.com
+Gathering remote metadata...
+Uploading 1 object, total size 6.36 KiB
+Getting upload URLs from the registry...
+100%|█████████████████| 1/1 [00:01<00:00,  1.03s/objs, object=o91e4939e5...]
+Uploaded metadata for 2 images, 1 table, 1 object and 0 tags.
+Setting upstream for votes_by_state to YOUR_USERNAME/votes_by_state.
+```
+
+It's possible that the object that you have just created won't actually be uploaded. This is because
+Splitgraph objects are content-addressable and so objects that already exist upstream won't be
+recreated, avoiding redundant data transfers.

@@ -1,0 +1,17 @@
+export const meta = {
+  id: "sgr_client",
+  title: "sgr client"
+};
+
+Most Splitgraph functionality is implemented in the `sgr` command line client that submits SQL queries
+to the engine over a normal Postgres connection to manage Splitgraph metadata and perform operations
+on data images.
+
+Whilst the client is written in Python, this doesn't negatively impact Splitgraph's performance,
+since the heavy lifting is done by PostgreSQL itself and almost all of Splitgraph's operations
+are implemented on top of the SQL standard.
+
+The client ships as a single Python package, [`splitgraph`](../python_api/splitgraph), which allows a user to also call
+Splitgraph in Python to perform the same operations. However, it is not necessary to have a working
+Python environment to use Splitgraph: the easiest way to get `sgr` is by using a single [PyInstaller](https://www.pyinstaller.org/)
+binary from the [releases page](https://github.com/splitgraph/splitgraph/releases).

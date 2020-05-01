@@ -1,0 +1,25 @@
+export const meta = {id: "config", title: "sgr config", sidebarTitle: "config"};
+
+```sgr config [OPTIONS] ```
+
+Print the current Splitgraph configuration.
+
+This takes into account the local config file, the default values
+and all overrides specified via environment variables.
+
+This command can be used to dump the current Splitgraph configuration into a file:
+
+```
+sgr config --no-shielding --config-format > .sgconfig
+```
+
+...or save a config file overriding an entry:
+
+```
+SG_REPO_LOOKUP=engine1,engine2 sgr config -sc > .sgconfig
+```
+
+### Options
+
+  * **`-s, --no-shielding`**: If set, doesn't replace sensitive values (like passwords) with asterisks
+  * **`-c, --config-format`**: Output configuration in the Splitgraph config file format

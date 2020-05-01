@@ -1,0 +1,12 @@
+export const meta = {
+  id: "postgis",
+  title: "PostGIS"
+};
+
+Splitgraph can also work with [PostGIS](https://postgis.net/), an extension for PostgreSQL that adds support for geospatial data. By default, due to space requirements, the Splitgraph engine image doesn't come with PostGIS installed, but you can upgrade your engine to use a PostGIS-enabled image (`splitgraph/engine:[version]-postgis`):
+
+```
+$ sgr engine upgrade --image splitgraph/engine:stable-postgis
+```
+
+The [PostGIS example](https://github.com/splitgraph/splitgraph/tree/v0.1.0/examples/postgis) will guide you through plotting a map of votes in New York City in the 2016 US Presidential Election using Splitgraph, PostGIS and [GeoPandas](https://geopandas.org/).

@@ -1,0 +1,33 @@
+export const meta = {
+  id: "push_data",
+  title: "Pushing datasets"
+};
+
+## Pushing data to other engines
+
+Like Git, Splitgraph allows sharing datasets with other Splitgraph engines in a decentralized
+fashion. The [two-engine example](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-other-engine)
+showcases pushing data between two engines linked together with docker-compose.
+
+## Publishing data on Splitgraph Cloud
+
+If you're interesting in pushing your dataset to the Splitgraph registry, please follow the
+[Splitgraph Cloud guide](../splitgraph_cloud/introduction).
+
+## Merging changes and pull requests
+
+Splitgraph currently doesn't support merging changes and pull requests. Instead, images are assumed to be immutable and on push, all images that don't exist on the remote engine are uploaded, with an option to overwrite image tags that already exist or push/pull a single image.
+
+We have found that pull requests aren't as useful for continuously changing datasets as they are
+for code. This is because these datasets are often ingested from outside sources (CSV files, scraped
+data, other databases) and so any changes or patches should be applied to the source dataset
+after it's been ingested.
+
+In this respect, Splitgraph is closer to Docker than to Git. There is no point in submitting a pull
+request to a Docker image, as any results will be overwritten the next time the image is built.
+Changes are instead proposed to the code that builds the image. Similarly, Splitgraph supports
+the workflow in which pull requests are submitted to the Splitfile that builds the dataset,
+allowing proposed changes to persist in future datasets.
+
+A workflow similar to pull requests can be approximated by using tags and forwarding a tag to the
+agreed-upon "master" version of the dataset.

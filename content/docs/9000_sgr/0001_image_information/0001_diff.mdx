@@ -1,0 +1,25 @@
+export const meta = {id: "diff", title: "sgr diff", sidebarTitle: "diff"};
+
+```sgr diff [OPTIONS] REPOSITORY [TAG_OR_HASH_1] [TAG_OR_HASH_2]```
+
+Show differences between two Splitgraph images.
+
+The two images must be in the same repository. The actual targets of this command depend
+on the number of arguments passed:
+
+``sgr diff REPOSITORY``
+
+Return the differences between the current HEAD image and the checked out schema.
+
+``sgr diff REPOSITORY TAG_OR_HASH``
+
+Return the differences between the image and its parent.
+
+``sgr diff REPOSITORY TAG_OR_HASH_1 TAG_OR_HASH_2``
+
+Return the differences from the first (earlier) image to the second image.
+
+### Options
+
+  * **`-v, --verbose`**: Include the actual differences rather than just the total number of updated rows.
+  * **`-t, --table-name TEXT`**: Show the differences for a single table.

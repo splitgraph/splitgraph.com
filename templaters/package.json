@@ -1,0 +1,9 @@
+{
+  "name": "@splitgraph/templaters",
+  "version": "0.0.1",
+  "description": "templating files for different content types",
+  "main": "index.js",
+  "author": "Splitgraph",
+  "license": "MIT",
+  "private": true
+}

@@ -1,0 +1,29 @@
+export const meta = {id: "build", title: "sgr build", sidebarTitle: "build"};
+
+```sgr build [OPTIONS] SPLITFILE```
+
+Build Splitgraph images.
+
+This executes a Splitfile, building a new image or checking it out from cache if the same
+image had already been built.
+
+### Examples
+
+``sgr build my.splitfile``
+
+Executes ``my.splitfile`` and writes its output into a new repository with the same name
+as the Splitfile (my) unless the name is specified in the Splitfile.
+
+``sgr build my.splitfile -o mynew/repo``
+
+Executes ``my.splitfile`` and writes its output into ``mynew/repo``.
+
+``sgr build my_other.splitfile -o mynew/otherrepo --args PARAM1 VAL1 --args PARAM2 VAL2``
+
+Executes ``my_other.splitfile`` with parameters ``PARAM1`` and ``PARAM2`` set to
+``VAL1`` and  ``VAL2``, respectively.
+
+### Options
+
+  * **`-a, --args <TEXT TEXT>...`**: Parameters to be substituted into the Splitfile. All parameters mentioned in the file must be specified in order for the Splitfile to be executed.
+  * **`-o, --output-repository REPOSITORY`**: Repository to store the result in.

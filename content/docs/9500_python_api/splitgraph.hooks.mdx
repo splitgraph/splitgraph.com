@@ -1,0 +1,356 @@
+
+import "@splitgraph/design/css/sphinxtheme.css";
+
+export const meta = {
+  title: "splitgraph.hooks package",
+  id: "splitgraph.hooks package"
+};
+
+<div className=" rst-content"><nav className="toc"><ol className="toc-level toc-level-1"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#module-contents">Module contents</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#submodules">Submodules</a><ol className="toc-level toc-level-2"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphhooksexternal_objects-module">splitgraph.hooks.external_objects module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphhooksmount_handlers-module">splitgraph.hooks.mount_handlers module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphhookss3-module">splitgraph.hooks.s3 module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphhookssplitfile_commands-module">splitgraph.hooks.splitfile_commands module</a></li></ol></li></ol></nav><div className="section" id="module-splitgraph.hooks">
+<span id="module-contents"></span><h2 id="module-contents">Module contents<a className="headerlink" href="#module-splitgraph.hooks" title="Permalink to this headline">¶</a></h2>
+<p>Various hooks for extending Splitgraph, including:</p>
+<blockquote>
+<div><ul className="simple">
+<li><p>External object handlers (<a className="reference internal" href="#module-splitgraph.hooks.external_objects" title="splitgraph.hooks.external_objects"><code className="xref py py-mod docutils literal notranslate"><span className="pre">splitgraph.hooks.external_objects</span></code></a>) allowing to download/upload objects
+to locations other than the remote Splitgraph engine.</p></li>
+<li><p>FDW handlers (<a className="reference internal" href="#module-splitgraph.hooks.mount_handlers" title="splitgraph.hooks.mount_handlers"><code className="xref py py-mod docutils literal notranslate"><span className="pre">splitgraph.hooks.mount_handlers</span></code></a>) that allow to use the Postgres engine’s FDW interface
+to mount other external databases on the engine.</p></li>
+<li><p>Splitfile commands (<a className="reference internal" href="#module-splitgraph.hooks.splitfile_commands" title="splitgraph.hooks.splitfile_commands"><code className="xref py py-mod docutils literal notranslate"><span className="pre">splitgraph.hooks.splitfile_commands</span></code></a>) to define custom data transformation steps
+compatible with the Splitfile framework.</p></li>
+</ul>
+</div></blockquote>
+</div><div className="section" id="splitgraph-hooks-package">
+
+<div className="section" id="submodules">
+<h2 id="submodules">Submodules<a className="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div className="section" id="module-splitgraph.hooks.external_objects">
+<span id="splitgraph-hooks-external-objects-module"></span><h2 id="splitgraphhooksexternal_objects-module">splitgraph.hooks.external_objects module<a className="headerlink" href="#module-splitgraph.hooks.external_objects" title="Permalink to this headline">¶</a></h2>
+<p>Hooks for registering handlers to upload/download objects from external locations into Splitgraph’s cache.</p>
+<dl className="py class">
+<dt id="splitgraph.hooks.external_objects.ExternalObjectHandler">
+<em className="property">class </em><code className="sig-prename descclassname">splitgraph.hooks.external_objects.</code><code className="sig-name descname">ExternalObjectHandler</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">params</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>Any<span className="p">, </span>Any<span className="p">]</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.hooks.external_objects.ExternalObjectHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">object</span></code></p>
+<p>Framework for allowing to dump objects from the Splitgraph cache to an external location. This allows
+the objects to be stored somewhere other than the actual remote engine.</p>
+<p>External object handlers must extend this class and be registered in the Splitgraph config.</p>
+<p>For an example of how this can be used, see splitgraph.hooks.s3: it’s a handler allowing objects to be
+uploaded to S3/S3-compatible host using the Minio API. It’s registered in the config as follows:</p>
+<div className="highlight-default notranslate"><div className="highlight"><pre><span></span><span className="p">[</span><span className="n">external_handlers</span><span className="p">]</span>
+<span className="n">S3</span><span className="o">=</span><span className="n">splitgraph</span><span className="o">.</span><span className="n">hooks</span><span className="o">.</span><span className="n">s3</span><span className="o">.</span><span className="n">S3ExternalObjectHandler</span>
+</pre></div>
+</div>
+<p>The protocol and the URLs returned by this handler are stored in splitgraph_meta.external_objects
+and used to download the objects back into the Splitgraph cache when they are needed.</p>
+<dl className="py method">
+<dt id="splitgraph.hooks.external_objects.ExternalObjectHandler.download_objects">
+<code className="sig-name descname">download_objects</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">objects</span><span className="p">:</span> <span className="n">List<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span></span></em>, <em className="sig-param"><span className="n">remote_engine</span><span className="p">:</span> <span className="n">PsycopgEngine</span></em><span className="sig-paren">)</span> → Sequence<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.hooks.external_objects.ExternalObjectHandler.download_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download objects from the external location into the Splitgraph cache.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>objects</strong> – List of tuples <cite>(object_id, object_url)</cite> that this handler had previosly
+uploaded the objects to.</p></li>
+<li><p><strong>remote_engine</strong> – An instance of Engine class that the objects will be registered on</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>A list of object IDs that have been successfully downloaded.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.hooks.external_objects.ExternalObjectHandler.upload_objects">
+<code className="sig-name descname">upload_objects</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">objects</span><span className="p">:</span> <span className="n">List<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">remote_engine</span><span className="p">:</span> <span className="n">PsycopgEngine</span></em><span className="sig-paren">)</span> → Sequence<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.hooks.external_objects.ExternalObjectHandler.upload_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload objects from the Splitgraph cache to an external location</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>objects</strong> – List of object IDs to upload</p></li>
+<li><p><strong>remote_engine</strong> – An instance of Engine class that the objects will be registered on</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>A list of successfully uploaded object IDs and URLs they can be found at.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.hooks.external_objects.get_external_object_handler">
+<code className="sig-prename descclassname">splitgraph.hooks.external_objects.</code><code className="sig-name descname">get_external_object_handler</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">name</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">handler_params</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>Any<span className="p">, </span>Any<span className="p">]</span></span></em><span className="sig-paren">)</span> → <a className="reference internal" href="#splitgraph.hooks.external_objects.ExternalObjectHandler" title="splitgraph.hooks.external_objects.ExternalObjectHandler">splitgraph.hooks.external_objects.ExternalObjectHandler</a><a className="headerlink" href="#splitgraph.hooks.external_objects.get_external_object_handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load an external protocol handler by its name, initializing it with optional parameters.</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.hooks.external_objects.register_upload_download_handler">
+<code className="sig-prename descclassname">splitgraph.hooks.external_objects.</code><code className="sig-name descname">register_upload_download_handler</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">name</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">handler_class</span><span className="p">:</span> <span className="n">Callable[…, splitgraph.hooks.external_objects.ExternalObjectHandler]</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.hooks.external_objects.register_upload_download_handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register an external protocol handler. See the docstring for <cite>get_upload_download_handler</cite> for the required
+signatures of the handler functions.</p>
+</dd></dl>
+
+</div>
+<div className="section" id="module-splitgraph.hooks.mount_handlers">
+<span id="splitgraph-hooks-mount-handlers-module"></span><h2 id="splitgraphhooksmount_handlers-module">splitgraph.hooks.mount_handlers module<a className="headerlink" href="#module-splitgraph.hooks.mount_handlers" title="Permalink to this headline">¶</a></h2>
+<p>Hooks for additional handlers used to mount other databases via FDW. These handlers become available
+in the command line tool (via <cite>sgr mount</cite>) and in the Splitfile interpreter (via <cite>FROM MOUNT</cite>).</p>
+<dl className="py function">
+<dt id="splitgraph.hooks.mount_handlers.get_mount_handler">
+<code className="sig-prename descclassname">splitgraph.hooks.mount_handlers.</code><code className="sig-name descname">get_mount_handler</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">mount_handler</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → Callable<a className="headerlink" href="#splitgraph.hooks.mount_handlers.get_mount_handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a mount function for a given handler.
+The mount function must have a signature <cite>(mountpoint, server, port, username, password, handler_kwargs)</cite>.</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.hooks.mount_handlers.get_mount_handlers">
+<code className="sig-prename descclassname">splitgraph.hooks.mount_handlers.</code><code className="sig-name descname">get_mount_handlers</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → List<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.hooks.mount_handlers.get_mount_handlers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the names of all registered mount handlers.</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.hooks.mount_handlers.init_fdw">
+<code className="sig-prename descclassname">splitgraph.hooks.mount_handlers.</code><code className="sig-name descname">init_fdw</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">engine</span><span className="p">:</span> <span className="n">PostgresEngine</span></em>, <em className="sig-param"><span className="n">server_id</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">wrapper</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">server_options</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Dict<span className="p">[</span>str<span className="p">, </span>Optional<span className="p">[</span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">user_options</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em>, <em className="sig-param"><span className="n">overwrite</span><span className="p">:</span> <span className="n">bool</span> <span className="o">=</span> <span className="default_value">True</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.hooks.mount_handlers.init_fdw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets up a foreign data server on the engine.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>engine</strong> – PostgresEngine</p></li>
+<li><p><strong>server_id</strong> – Name to call the foreign server, must be unique. Will be deleted if exists.</p></li>
+<li><p><strong>wrapper</strong> – Name of the foreign data wrapper (must be installed as an extension on the engine)</p></li>
+<li><p><strong>server_options</strong> – Dictionary of FDW options</p></li>
+<li><p><strong>user_options</strong> – Dictionary of user options</p></li>
+<li><p><strong>overwrite</strong> – If the server already exists, delete and recreate it.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.hooks.mount_handlers.mount">
+<code className="sig-prename descclassname">splitgraph.hooks.mount_handlers.</code><code className="sig-name descname">mount</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">mountpoint</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">mount_handler</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">handler_kwargs</span><span className="p">:</span> <span className="n">Dict[str, Union[str, int, None, List[str], Dict[str, Union[Dict[str, str], str]]]]</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.hooks.mount_handlers.mount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mounts a foreign database via Postgres FDW (without creating new Splitgraph objects)</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>mountpoint</strong> – Mountpoint to import the new tables into.</p></li>
+<li><p><strong>mount_handler</strong> – The type of the mounted database. Must be one of <cite>postgres_fdw</cite> or <cite>mongo_fdw</cite>.</p></li>
+<li><p><strong>handler_kwargs</strong> – Dictionary of options to pass to the mount handler.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.hooks.mount_handlers.mount_mongo">
+<code className="sig-prename descclassname">splitgraph.hooks.mount_handlers.</code><code className="sig-name descname">mount_mongo</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">mountpoint</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">server</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">port</span><span className="p">:</span> <span className="n">int</span></em>, <em className="sig-param"><span className="n">username</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">password</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="o">**</span><span className="n">table_spec</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.hooks.mount_handlers.mount_mongo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mount a Mongo database.</p>
+<p>Mounts one or more collections on a remote Mongo database as a set of foreign tables locally.
+</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>mountpoint</strong> – Schema to mount the remote into.</p></li>
+<li><p><strong>server</strong> – Database hostname.</p></li>
+<li><p><strong>port</strong> – Port the Mongo server is running on.</p></li>
+<li><p><strong>username</strong> – A read-only user that the database will be accessed as.</p></li>
+<li><p><strong>password</strong> – Password for the read-only user.</p></li>
+<li><p><strong>table_spec</strong> – A dictionary of form <cite>&#38;lbrace;“table_name”: &#38;lbrace;“db”: &lt;dbname>, “coll”: &lt;collection>,
+“schema”: &#38;lbrace;“col1”: “type1”…&#38;rbrace;&#38;rbrace;&#38;rbrace;</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.hooks.mount_handlers.mount_mysql">
+<code className="sig-prename descclassname">splitgraph.hooks.mount_handlers.</code><code className="sig-name descname">mount_mysql</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">mountpoint</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">server</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">port</span><span className="p">:</span> <span className="n">int</span></em>, <em className="sig-param"><span className="n">username</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">password</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">remote_schema</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">tables</span><span className="p">:</span> <span className="n">List<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.hooks.mount_handlers.mount_mysql" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mount a MySQL database.</p>
+<p>Mounts a schema on a remote MySQL database as a set of foreign tables locally.
+</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>mountpoint</strong> – Schema to mount the remote into.</p></li>
+<li><p><strong>server</strong> – Database hostname.</p></li>
+<li><p><strong>port</strong> – Database port</p></li>
+<li><p><strong>username</strong> – A read-only user that the database will be accessed as.</p></li>
+<li><p><strong>password</strong> – Password for the read-only user.</p></li>
+<li><p><strong>remote_schema</strong> – Remote schema name.</p></li>
+<li><p><strong>tables</strong> – Tables to mount (default all).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.hooks.mount_handlers.mount_postgres">
+<code className="sig-prename descclassname">splitgraph.hooks.mount_handlers.</code><code className="sig-name descname">mount_postgres</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">mountpoint</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">server</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">port</span><span className="p">:</span> <span className="n">Union<span className="p">[</span>int<span className="p">, </span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">username</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">password</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">dbname</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">remote_schema</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">tables</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>List<span className="p">[</span>str<span className="p">]</span><span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.hooks.mount_handlers.mount_postgres" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mount a Postgres database.</p>
+<p>Mounts a schema on a remote Postgres database as a set of foreign tables locally.
+</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>mountpoint</strong> – Schema to mount the remote into.</p></li>
+<li><p><strong>server</strong> – Database hostname.</p></li>
+<li><p><strong>port</strong> – Port the Postgres server is running on.</p></li>
+<li><p><strong>username</strong> – A read-only user that the database will be accessed as.</p></li>
+<li><p><strong>password</strong> – Password for the read-only user.</p></li>
+<li><p><strong>dbname</strong> – Remote database name.</p></li>
+<li><p><strong>remote_schema</strong> – Remote schema name.</p></li>
+<li><p><strong>tables</strong> – Tables to mount (default all).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.hooks.mount_handlers.register_mount_handler">
+<code className="sig-prename descclassname">splitgraph.hooks.mount_handlers.</code><code className="sig-name descname">register_mount_handler</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">name</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">mount_function</span><span className="p">:</span> <span className="n">Callable</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.hooks.mount_handlers.register_mount_handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a mount function under a given name. See <cite>get_mount_handler</cite> for the mount handler spec.</p>
+</dd></dl>
+
+</div>
+<div className="section" id="module-splitgraph.hooks.s3">
+<span id="splitgraph-hooks-s3-module"></span><h2 id="splitgraphhookss3-module">splitgraph.hooks.s3 module<a className="headerlink" href="#module-splitgraph.hooks.s3" title="Permalink to this headline">¶</a></h2>
+<p>Plugin for uploading Splitgraph objects from the cache to an external S3-like object store</p>
+<dl className="py class">
+<dt id="splitgraph.hooks.s3.S3ExternalObjectHandler">
+<em className="property">class </em><code className="sig-prename descclassname">splitgraph.hooks.s3.</code><code className="sig-name descname">S3ExternalObjectHandler</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">params</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>Any<span className="p">, </span>Any<span className="p">]</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.hooks.s3.S3ExternalObjectHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a className="reference internal" href="#splitgraph.hooks.external_objects.ExternalObjectHandler" title="splitgraph.hooks.external_objects.ExternalObjectHandler"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.hooks.external_objects.ExternalObjectHandler</span></code></a></p>
+<p>Uploads/downloads the objects to/from S3/S3-compatible host using the Minio client.</p>
+<p>The handler is “attached” to a given registry which manages issuing pre-signed
+GET/PUT URLs.</p>
+<p>The handler supports a parameter <cite>threads</cite> specifying the number of threads
+used to upload the objects.</p>
+<dl className="py method">
+<dt id="splitgraph.hooks.s3.S3ExternalObjectHandler.download_objects">
+<code className="sig-name descname">download_objects</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">objects</span><span className="p">:</span> <span className="n">List<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span></span></em>, <em className="sig-param"><span className="n">remote_engine</span><span className="p">:</span> <span className="n">PsycopgEngine</span></em><span className="sig-paren">)</span> → List<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.hooks.s3.S3ExternalObjectHandler.download_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download objects from Minio.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><p><strong>objects</strong> – List of (object ID, object URL (object ID it’s stored under))</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.hooks.s3.S3ExternalObjectHandler.upload_objects">
+<code className="sig-name descname">upload_objects</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">objects</span><span className="p">:</span> <span className="n">List<span className="p">[</span>str<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">remote_engine</span><span className="p">:</span> <span className="n">PsycopgEngine</span></em><span className="sig-paren">)</span> → List<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.hooks.s3.S3ExternalObjectHandler.upload_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload objects to Minio</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>remote_engine</strong> – Remote Engine class</p></li>
+<li><p><strong>objects</strong> – List of object IDs to upload</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>List of tuples with successfully uploaded objects and their URLs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.hooks.s3.get_object_download_urls">
+<code className="sig-prename descclassname">splitgraph.hooks.s3.</code><code className="sig-name descname">get_object_download_urls</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">remote_engine</span></em>, <em className="sig-param"><span className="n">remote_object_ids</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.hooks.s3.get_object_download_urls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.hooks.s3.get_object_upload_urls">
+<code className="sig-prename descclassname">splitgraph.hooks.s3.</code><code className="sig-name descname">get_object_upload_urls</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">remote_engine</span></em>, <em className="sig-param"><span className="n">objects</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.hooks.s3.get_object_upload_urls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div className="section" id="module-splitgraph.hooks.splitfile_commands">
+<span id="splitgraph-hooks-splitfile-commands-module"></span><h2 id="splitgraphhookssplitfile_commands-module">splitgraph.hooks.splitfile_commands module<a className="headerlink" href="#module-splitgraph.hooks.splitfile_commands" title="Permalink to this headline">¶</a></h2>
+<p>A framework for custom Splitfile commands. The execution flow is as follows:</p>
+<blockquote>
+<div><ul>
+<li><p>When the Splitfile executor finds an unknown command, it looks for an entry in the config file:</p>
+<div className="highlight-default notranslate"><div className="highlight"><pre><span></span><span className="p">[</span><span className="n">commands</span><span className="p">]</span>
+<span className="n">RUN</span><span className="o">=</span><span className="n">splitgraph</span><span className="o">.</span><span className="n">plugins</span><span className="o">.</span><span className="n">Run</span>
+</pre></div>
+</div>
+</li>
+<li><p>The command class must extend this class, initialized at every invocation time.</p></li>
+<li><p>The command’s <cite>calc_hash()</cite> method is run. The resultant command context hash is combined with the current
+image hash to produce the new image hash: if it already exists, then the image is simply checked out.</p></li>
+<li><p>Otherwise (or if calc_hash is undefined or returns None), <cite>execute()</cite>, where the actual command should be
+implemented, is run. If it returns a hash, this hash is used for the new image. If this hash already exists,
+the existing image is checked out instead. If the command returns None, a random hash is generated for the
+new image.</p></li>
+</ul>
+</div></blockquote>
+<dl className="py class">
+<dt id="splitgraph.hooks.splitfile_commands.PluginCommand">
+<em className="property">class </em><code className="sig-prename descclassname">splitgraph.hooks.splitfile_commands.</code><code className="sig-name descname">PluginCommand</code><a className="headerlink" href="#splitgraph.hooks.splitfile_commands.PluginCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">object</span></code></p>
+<p>Base class for custom Splitfile commands.</p>
+<dl className="py method">
+<dt id="splitgraph.hooks.splitfile_commands.PluginCommand.calc_hash">
+<code className="sig-name descname">calc_hash</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">repository</span></em>, <em className="sig-param"><span className="n">args</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.hooks.splitfile_commands.PluginCommand.calc_hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the command context hash for this custom command. If either the command context hash or the
+previous image hash has changed, then the image hash produced by this command will change.
+Consequently, two commands with the same command context hashes are assumed to have the same effect
+on any Splitgraph images.</p>
+<p>This is supposed to be a lightweight method intended for pre-flight image hash calculations
+(without performing the actual transformation). If it returns None, the actual transformation is run anyway.</p>
+<p>For example, for a command that imports some data from an external URL, this could be the hash of the last
+modified timestamp provided by the external data vendor. If the timestamp is unchanged, the data is unchanged
+and so actual command won’t be re-executed.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>repository</strong> – SG Repository object pointed to a schema with the checked out image
+the command is being run against.</p></li>
+<li><p><strong>args</strong> – Positional arguments to the command</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>Command context hash (a string of 64 hexadecimal digits)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.hooks.splitfile_commands.PluginCommand.execute">
+<code className="sig-name descname">execute</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">repository</span></em>, <em className="sig-param"><span className="n">args</span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.hooks.splitfile_commands.PluginCommand.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the custom command against the target schema, optionally returning the new image hash. The contract
+for the command is as follows (though it is not currently enforced by the runtime):</p>
+<blockquote>
+<div><ul className="simple">
+<li><p>Has to use get_engine().run_sql (or run_sql_batch) to interact with the engine.</p></li>
+<li><p>Can only write to the schema with the checked-out repository (run_sql runs non-schema-qualified
+statements against the correct schema).</p></li>
+<li><p>Can inspect splitgraph_meta (e.g. to find the current HEAD) for the repository.</p></li>
+<li><p>Can’t alter the versioning of the repository.</p></li>
+</ul>
+</div></blockquote>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>repository</strong> – SG Repository object pointed to a schema with the checked out image
+the command is being run against.</p></li>
+<li><p><strong>args</strong> – Positional arguments to the command</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>Command context hash (a string of 64 hexadecimal digits). If calc_hash() had previously returned
+a hash, this hash is ignored. If both this command and calc_hash() return None, the hash is randomly
+generated.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+</div>
+</div>

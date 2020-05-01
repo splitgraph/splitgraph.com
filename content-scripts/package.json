@@ -1,0 +1,30 @@
+{
+  "name": "@splitgraph/content-scripts",
+  "version": "0.0.1",
+  "description": "scripts for keeping content updated, pulling from other repos, etc",
+  "main": "index.js",
+  "author": "Splitgraph",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@octokit/core": "^2.4.2",
+    "@octokit/plugin-paginate-rest": "^2.0.2",
+    "@octokit/rest": "^17.1.0",
+    "download-tarball": "^2.0.0",
+    "fs-extra": "^8.1.0",
+    "globby": "^10.0.1",
+    "object-hash": "^2.0.3",
+    "rehype-parse": "^6.0.1",
+    "rehype-slug": "^2.0.3",
+    "rehype-stringify": "^6.0.0",
+    "rehype-toc": "^2.2.2",
+    "rehype-urls": "^1.0.0",
+    "shelljs": "^0.8.3",
+    "unified": "^8.4.1",
+    "unist-util-find": "^1.0.1",
+    "unist-util-find-all-after": "^1.0.4",
+    "unist-util-remove": "^1.0.3",
+    "unist-util-visit": "^2.0.0",
+    "yargs": "^14.2.0"
+  }
+}

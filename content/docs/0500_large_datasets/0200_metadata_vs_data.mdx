@@ -1,0 +1,20 @@
+export const meta = {
+  id: "metadata_vs_data",
+  title: "Metadata vs data"
+};
+
+When an image is cloned or used in the Splitfile executor, only the repository (or single image)'s
+metadata is downloaded. The metadata consists of all Splitgraph state tables in `splitgraph_meta`:
+`images`, `objects`, `tags` and `tables`. Compared to the actual data, it's very lightweight,
+most of its footprint being taken up by the object index.
+
+Data downloads are forced during a checkout (which downloads all objects required by an image).
+Queries to tables in layered checkouts only download objects that are required to satisfy that
+query, as determined by the object index.
+
+Objects that were downloaded from a remote engine are considered to be "cached" and
+can be evicted if the free cache space is limited. The cache size can be controlled by the
+`SG_OBJECT_CACHE_SIZE` variable in `.sgconfig` and the default value is 10240 (10GB).
+
+It is possible to find out how much data a query against a layered checkout will need by running
+`EXPLAIN` on the query.

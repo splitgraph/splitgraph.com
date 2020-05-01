@@ -1,0 +1,81 @@
+export const meta = {
+  id: "query_the_engine",
+  title: "Querying the engine"
+};
+
+Splitgraph images can be checked out into schemata with the same name as the repository that
+the image belongs to. For example:
+
+```
+$ sgr checkout example/repo_1:latest
+```
+
+will create a schema on the engine with name `example/repo_1`. This means that any application that
+can access the engine via a normal database connection can interact with the checked-out repository.
+
+`sgr` provides a shorthand, [`sgr sql`](../sgr/image_information/sql), to run arbitrary SQL queries against the engine:
+
+```
+$ sgr sql --schema example/repo_1 "SELECT * FROM demo"
+```
+
+However, any other SQL client will do. For example, you can use [pgcli](https://www.pgcli.com/) to
+query and write data to the engine. In the default `sgr engine add` configuration, the connection
+string is:
+
+```
+pgcli postgresql://sgr:password@localhost:5432/splitgraph
+```
+
+## Example
+
+In these subsections, we'll create a couple of example repositories and
+some images and then use the Splitfile language to define a reproducible
+transformation on these datasets.
+
+`sgr` comes with a few routines to set up repositories with some example data:
+
+```
+$ sgr example generate example/repo_1
+
+Generated example/repo_1:demo with 10 rows, image hash 103cb2da2da0
+```
+
+This creates a single repository, `example/repo_1`, with a single table
+in it called `demo`. The table has two columns, `key` (an integer) and
+`value` (a hexadecimal string).
+
+You can also inspect the currently checked out image in-depth:
+
+```
+$ sgr show example/repo_1:latest
+Image example/repo_1:103cb2da2da000f3dce9512e3cc67434d7a3c977c0df259411c73a2687244706
+
+Created at 2020-04-06T10:14:54.184552
+Size: 963.00 B
+Parent: 0000000000000000000000000000000000000000000000000000000000000000
+
+Tables:
+  demo
+```
+
+This image has a parent with hash `00000...`, denoting an empty image,
+and one table, `demo`.
+
+Let's take a closer look at the new table.
+
+```
+$ sgr table example/repo_1:latest demo
+Table example/repo_1:103cb2da2da000f3dce9512e3cc67434d7a3c977c0df259411c73a2687244706/demo
+
+Size: 963.00 B
+Rows: 10
+Columns:
+  key (integer, PK)
+  value (character varying)
+
+Objects:
+  o26c6d8345cba276f807d7bcf906531568f309c2609a3420d98c01a6c99b166
+```
+
+This table is currently mapped to a single object.

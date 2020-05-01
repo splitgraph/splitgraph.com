@@ -1,0 +1,45 @@
+{
+  "name": "@splitgraph/docs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "yarn run clean && node server.js",
+    "build": "next build && next export",
+    "deploy": "cp now.json out/ && yarn run now",
+    "start": "serve out",
+    "clean": "./clean.sh"
+  },
+  "dependencies": {
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "@next/bundle-analyzer": "^9.1.1",
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-mdx": "^1.2.0",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "babel-plugin-macros": "^2.6.1",
+    "babel-plugin-preval": "^3.0.1",
+    "babel-plugin-react-require": "^3.1.1",
+    "directory-tree": "^2.2.4",
+    "express": "^4.17.1",
+    "mdx": "^0.3.1",
+    "mdx-prism": "^0.3.1",
+    "next": "^9.3.0",
+    "next-compose-plugins": "^2.2.0",
+    "next-transpile-modules": "^2.3.1",
+    "pirates": "^4.0.1",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "rehype": "^9.0.0",
+    "rehype-raw": "^4.0.1",
+    "rehype-slug": "^2.0.3",
+    "rehype-toc": "^2.2.2",
+    "remark-disable-tokenizers": "^1.0.23",
+    "rimraf": "^3.0.0",
+    "serve": "^11.2.0",
+    "unist-util-find": "^1.0.1"
+  },
+  "devDependencies": {
+    "now": "^18.0.0"
+  }
+}
