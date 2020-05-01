@@ -7,12 +7,6 @@ node_modules
 lib/core/metadata.js
 lib/core/MetadataBlog.js
 
-website/translated_docs
-website/build/
-website/yarn.lock
-website/node_modules
-website/i18n/*
-
 .next
 .cache
 yarn-error.log
@@ -23,6 +17,18 @@ libmdx
 # TODO: This is a bit crude, but suits our purposes for now while everything
 # is in docker upstream of this repository
 */**/build-state.yml
-*/**/yarn-rc.js
+# */**/yarn-rc.js
 .yarnrc.yml
-.yarn
+
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+
+# .yarn/*
+# .yarn/*
+
+# Check in the release/plugin directories to ensure consistency
+# This also allows CI services like dependabot to run without needing ./setup.sh
+# (although setup.sh can still be useful to run locally)
+# !.yarn/releases/yarn-berry.js
+# !.yarn/plugins/*
