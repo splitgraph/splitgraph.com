@@ -7,7 +7,7 @@
 # Simply run:
 # ./setup.sh
 
-SPLITGRAPH_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
+SPLITGRAPH_DIR=${1-"$(cd -P -- "$(dirname -- "$0")" && pwd -P)"}
 
 prep_env() {
     echo "Ensure certs..." \
