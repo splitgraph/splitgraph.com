@@ -16,6 +16,9 @@ Turning the source and the target schemas that dbt uses into Splitgraph reposito
 * Built datasets can be pushed to other Splitgraph engines, shared publicly or serve as inputs to a pipeline of Splitfiles.
 * Input datasets can leverage Splitgraph's [layered querying](../large_datasets/layered_querying),
     allowing dbt to seamlessly query huge datasets with a limited amount of local disk space.
+* Input datasets can be backed by [foreign data wrappers](../ingesting_data/foreign_data_wrappers), allowing dbt
+  to directly use data from a wide variety of databases without having to write an extra ETL job to load the data
+  into the warehouse.
 
 ## Example
 

@@ -76,27 +76,41 @@ PostgreSQL deployment can also be used on Splitgraph.
 No. Splitgraph can be used in a decentralized way, sharing data between two engines like one would
 with Git. Here's an [example](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-other-engine) of getting two Splitgraph instances to synchronize with each other.
 
-It is also possible to push data to S3-compatible storage (like [Minio](https://github.com/splitgraph/splitgraph/tree/487c704eb6aba5025708215bfa80399723c530b1/examples/push-to-object-storage)).
+It is also possible to push data to S3-compatible storage (like [Minio](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-object-storage)).
 
 You can use [Splitgraph Cloud](../splitgraph_cloud/introduction) if you wish to
 get or share public data or have a [REST API](../splitgraph_cloud/publish_rest_api) generated for your dataset.
 
 ### Why not just use...
 
-#### dbt, Pachyderm, ...
+#### dbt
 
-There are plenty of great tools around for building datasets and managing ETL pipelines. Firstly,
-they can also work against Splitgraph, since a Splitgraph engine is also a PostgreSQL instance.
-After the dataset is built, one can snapshot the schema it was built in and package it up as a Splitgraph image.
-This enriches the tool by adding version control, packaging and sharing to datasets that it uses and builds.
+dbt is a tool for transforming data inside of the data warehouse that allows users to build up
+transformations from reusable and versionable SQL snippets.
 
-We have an example of running [dbt](../integrating_splitgraph/dbt) against Splitgraph, swapping between different versions of the
+dbt is enhanced by Splitgraph: since a Splitgraph engine is also a PostgreSQL instance, dbt can
+work against it, getting benefits like version control, packaging and sharing to datasets that it uses and builds.
+
+We have an example of running [dbt](../integrating_splitgraph/dbt) in such way, swapping between different versions of the
 source dataset and looking at their effect on the built dbt model.
 
-Secondly, Splitgraph offers its own method of building datasets: [Splitfiles](../concepts/splitfiles). Splitfiles offer Dockerfile-like caching, provenance tracking, fast dataset rebuilds, joins between datasets and full SQL support.
+Splitgraph also offers its own method of building datasets: [Splitfiles](../concepts/splitfiles). Splitfiles offer Dockerfile-like caching, provenance tracking, fast dataset rebuilds, joins between datasets and full SQL support.
 
 We envision Splitfiles as a replacement for ETL pipelines: instead of a series of processes that transform data between tables in a data warehouse,
 transformations are treated as pure functions between isolated self-contained datasets, allowing one to replay any part of their pipeline at any point in time.
+
+#### Pachyderm
+
+Pachyderm is used mostly for managing and running distributed data pipelines on flat files (images,
+genomics data etc). By specializing in datasets that can be represented as tables in a database,
+Splitgraph gets benefits like delta compression on changed data or faster querying speeds.
+
+Similarly to Pachyderm, Splitgraph supports [data lineage (or provenance)](../working_with_data/inspecting_provenance) tracking where the
+commands and source datasets that were used to build a particular dataset are recorded in that
+dataset's metadata, allowing for them to be replayed or inspected.
+
+Splitgraph can be integrated with Pachyderm using the same methods one would use [for PostgreSQL](https://docs.pachyderm.com/latest/how-tos/splitting-data/splitting/#ingesting-postgressql-data). This can then be used to run a [Splitfile](../concepts/splitfiles) to build a dataset as a
+Pachyderm stage.
 
 #### dvc, DataLad, ...
 
