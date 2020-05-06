@@ -112,6 +112,10 @@ export const makeDefaultTheme = () => ({
         'linear-gradient(180deg, #f6f6f9 55%, #36678d 55%)',
       ],
     },
+    dark2light: {
+      background:
+        'linear-gradient(180deg, rgba(13,24,33,1) 0%, rgba(54,102,141,1) 100%)',
+    },
   },
   fonts: {
     body: 'system-ui, sans-serif',
