@@ -11,6 +11,9 @@ export default ({}: IHeaderRightProps) => {
   return (
     <>
       <Link href="/docs/getting-started/introduction">Docs</Link>
+      <Link className="button-link" href="/auth/sign_up">
+        Sign Up
+      </Link>
     </>
   );
 };

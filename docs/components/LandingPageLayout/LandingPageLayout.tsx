@@ -12,7 +12,12 @@ export interface ILandingPageLayoutProps {
 
 export default ({ children }: ILandingPageLayoutProps) => {
   return (
-    <BaseLayout renderHeaderRight={() => <HeaderRight />}>
+    <BaseLayout
+      extraHeaderStyle={{
+        borderWidth: "0 !important",
+      }}
+      renderHeaderRight={() => <HeaderRight />}
+    >
       <MainContent>{children}</MainContent>
     </BaseLayout>
   );

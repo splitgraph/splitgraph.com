@@ -12,20 +12,36 @@ export interface BaseLayoutProps {
   children?: React.ReactNode;
   renderHeaderRight?: () => React.ReactNode;
   renderHeaderCenter?: () => React.ReactNode;
+  extraHeaderStyle?: SystemStyleObject;
 }
-
-const headerStyle = {
-  minWidth: '-webkit-fit-content',
-  '.logo-link': {
-    variant: 'links.unstyled',
-  },
-} as SystemStyleObject;
 
 export default ({
   children,
   renderHeaderCenter,
   renderHeaderRight,
+  extraHeaderStyle = {},
 }: BaseLayoutProps) => {
+  const headerStyle = {
+    // maxWidth: '100vw',
+    minWidth: '-webkit-fit-content',
+    // width: '100vw',
+    '.logo-link': {
+      variant: 'links.unstyled',
+    },
+    '.button-link': {
+      variant: 'links.button',
+      display: 'inline-table',
+    },
+    // weird hack needs two class names to refer to same element...
+    '.logo-link-flex': {
+      display: 'flex',
+      alignItems: 'center',
+    },
+    '.header--container': {
+      ...extraHeaderStyle,
+    },
+  } as SystemStyleObject;
+
   const headerCenter = !!renderHeaderCenter ? renderHeaderCenter() : null;
   const headerRight = !!renderHeaderRight ? renderHeaderRight() : null;
 
@@ -33,7 +49,7 @@ export default ({
     <Box sx={headerStyle}>
       <Header>
         <HeaderLeft>
-          <Link className="logo-link" as={'/'} href={'/'}>
+          <Link className="logo-link logo-link-flex" as={'/'} href={'/'}>
             <LogoImage />
             <LogoText />
           </Link>
