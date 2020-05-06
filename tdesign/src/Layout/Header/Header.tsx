@@ -19,6 +19,7 @@ const headerSx: any = {
   gridColumnGap: '0px',
   gridRowGap: '0px',
   minHeight: '5vh',
+  padding: '1em',
   '.header--left': {
     gridArea: '1 / 1 / 2 / 2',
     backgroundColor: 'heavy',
@@ -57,8 +58,13 @@ const headerSx: any = {
     borderBottomWidth: '1px',
     borderBottomColor: 'light',
   },
+  '.button-link': {
+    variant: 'links.button',
+  },
 };
 
 export default ({ children }: HeaderProps) => (
-  <Box sx={headerSx}>{children}</Box>
+  <Box className="header--container" sx={headerSx}>
+    {children}
+  </Box>
 );

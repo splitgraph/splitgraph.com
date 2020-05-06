@@ -7,14 +7,19 @@ export interface IMainContentProps {
   children: React.ReactNode;
 }
 
-const outerContainerStyle = {
-  backgroundColor: 'gray',
-  minHeight: '100vh',
-} as SystemStyleObject;
-
 const mainContentStyle = {} as SystemStyleObject;
 
 export default ({ children }: IMainContentProps) => {
+  const outerContainerStyle = {
+    backgroundColor: 'gray',
+    minHeight: '100vh',
+    fontFamily: '"Cambria", sans-serif',
+    // maxWidth: '100vw',
+    // minWidth: '100vw',
+    // width: '100vw',
+    // maxWidth: '100vw',
+  } as SystemStyleObject;
+
   return (
     <Box sx={outerContainerStyle}>
       <Box sx={mainContentStyle}>{children}</Box>
