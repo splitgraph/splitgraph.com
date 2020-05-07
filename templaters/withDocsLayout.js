@@ -14,7 +14,7 @@ import {
   Heading,
   HolyGrail,
   LogoImage,
-  InterPageNav
+  InterPageNav,
 } from "@splitgraph/design";
 import { BaseLayout } from "@splitgraph/design/Layout";
 
@@ -39,7 +39,7 @@ const mdxComponents = {
     <code sx={defaultTheme.styles.inlineCode} {...rest}>
       {children}
     </code>
-  )
+  ),
 };
 
 // TODO: Move this back into the docs repository (?) so no need to do this dumb
@@ -55,7 +55,7 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
         <a
           {...rest}
           sx={defaultTheme.links.primary}
-          onClick={e => {
+          onClick={(e) => {
             console.log("clicked");
           }}
         >
@@ -85,7 +85,7 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
       () =>
         findNodeInTree({
           root: contentTree,
-          match: node => node.url && node.url === currentURL
+          match: (node) => node.url && node.url === currentURL,
         }),
       [currentURL]
     );
@@ -100,7 +100,7 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
     );
 
     const matchActiveNode = useMemo(
-      () => node => node.url && node.url === currentURL,
+      () => (node) => node.url && node.url === currentURL,
       [currentURL]
     );
 
@@ -141,7 +141,10 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
 
           <Box
             gridArea={HolyGrail.GridArea.Side}
-            sx={{ a: defaultTheme.links.primary }}
+            sx={{
+              a: defaultTheme.links.primary,
+              display: ["none", "none", "initial"],
+            }}
           >
             <TocMdx />
           </Box>
