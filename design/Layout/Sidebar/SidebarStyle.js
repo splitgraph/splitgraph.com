@@ -2,21 +2,23 @@ const BaseStyle = {
   Container: {
     position: "relative",
     left: 0,
-    right: 0
+    right: 0,
   },
   ListContainer: {
-    display: "inline-flex"
+    // display: "inline-flex",
+    // Required to work in safari
+    display: "-webkit-box",
   },
   List: {
     listStyleType: "none",
-    padding: 0
+    padding: 0,
   },
   Item: {
     // whiteSpace: "nowrap",
     // padding: 100,
-    color: "blue"
+    color: "blue",
   },
-  Label: {}
+  Label: {},
 };
 
 const HorizontalStyle = {
@@ -25,7 +27,7 @@ const HorizontalStyle = {
     // overflowY: "scroll",
     backgroundColor: "background",
     // WebkitOverflowScrolling: "touch",
-    padding: 0
+    padding: 0,
     // maxHeight: 75,
   },
   ListContainer: {
@@ -49,7 +51,7 @@ const HorizontalStyle = {
     borderTopStyle: "dotted",
     borderTopColor: "secondary",
     height: "4rem",
-    backgroundColor: "background"
+    backgroundColor: "background",
   },
   List: {
     display: "inline-flex",
@@ -64,18 +66,18 @@ const HorizontalStyle = {
     // scrollMarginInlineEnd: "200px",
     scrollSnapType: "x mandatory",
     scrollPaddingRight: "200px",
-    scrollPaddingLeft: "200px"
+    scrollPaddingLeft: "200px",
     // lineHeight:
     // paddingBottom: "2rem"
   },
   Item: {
     display: "flex",
-    whiteSpace: "nowrap"
+    whiteSpace: "nowrap",
   },
   Label: {
     whiteSpace: "nowrap",
-    zIndex: 10
-  }
+    zIndex: 10,
+  },
 };
 
 const VerticalStyle = {
@@ -98,7 +100,7 @@ const VerticalStyle = {
     // scrollPaddingRight: "200px",
     scrollPaddingBottom: "200px",
 
-    backgroundColor: "#efefef"
+    backgroundColor: "#efefef",
   },
   ListContainer: {
     direction: "rtl",
@@ -108,7 +110,7 @@ const VerticalStyle = {
     flexBasis: "100%",
     // display: "flex",
     // flexDirection: "column",
-    backgroundColor: "#efefef"
+    backgroundColor: "#efefef",
   },
   List: {
     // flexBasis: "100%",
@@ -116,16 +118,16 @@ const VerticalStyle = {
     display: "flex",
     flexDirection: "column",
     margin: 0,
-    backgroundColor: "background"
+    backgroundColor: "background",
   },
   Item: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   Label: {
     display: "block",
-    flexBasis: "100%"
-  }
+    flexBasis: "100%",
+  },
 };
 
 const breakStyle = (
@@ -134,11 +136,11 @@ const breakStyle = (
 ) => ({
   ...styles.BaseStyle[key],
   "@media (min-width: 769px)": {
-    ...styles.VerticalStyle[key]
+    ...styles.VerticalStyle[key],
   },
   "@media (max-width: 768px)": {
-    ...styles.HorizontalStyle[key]
-  }
+    ...styles.HorizontalStyle[key],
+  },
 });
 
 const Style = {
@@ -146,7 +148,7 @@ const Style = {
   List: breakStyle("List"),
   ListContainer: breakStyle("ListContainer"),
   Item: breakStyle("Item"),
-  Label: breakStyle("Label")
+  Label: breakStyle("Label"),
 };
 
 export const getListStyle = ({ isInActivePath = false }) => {
@@ -154,8 +156,8 @@ export const getListStyle = ({ isInActivePath = false }) => {
     BaseStyle,
     HorizontalStyle,
     VerticalStyle: {
-      ...VerticalStyle
-    }
+      ...VerticalStyle,
+    },
   });
 };
 
@@ -163,7 +165,7 @@ export const getListContainerStyle = ({
   hiddenHorizontally = false,
   hiddenVertically = false,
   depth = 0,
-  minLabelDepth = 0
+  minLabelDepth = 0,
 }) => {
   return breakStyle("ListContainer", {
     BaseStyle,
@@ -176,8 +178,8 @@ export const getListContainerStyle = ({
           : { display: HorizontalStyle.ListContainer.display }),
         ...(depth < 1
           ? { marginTop: "0 !important" }
-          : { marginTop: HorizontalStyle.ListContainer.marginTop })
-      }
+          : { marginTop: HorizontalStyle.ListContainer.marginTop }),
+      },
     },
     VerticalStyle: {
       ...VerticalStyle,
@@ -186,10 +188,10 @@ export const getListContainerStyle = ({
         ...(hiddenVertically
           ? { display: "none !important" }
           : {
-              display: VerticalStyle.ListContainer.display
-            })
-      }
-    }
+              display: VerticalStyle.ListContainer.display,
+            }),
+      },
+    },
   });
 };
 
