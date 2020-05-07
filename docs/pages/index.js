@@ -338,7 +338,7 @@ const LandingPage = () => {
               where you get an{" "}
               <strong>instant REST API for every version of your data</strong>.
             </p>
-            <Link href="https://splitgraph-web-8wolwyelj.now.sh/docs/splitgraph_cloud/introduction">
+            <Link href="/docs/splitgraph_cloud/introduction">
               Learn more about Splitgraph cloud.
             </Link>
           </Box>
@@ -406,8 +406,9 @@ const LandingPage = () => {
               <p>
                 Benefit from the performance of a nearly 30 year old,
                 battle-tested database. Gain features without sacrificing speed.
-                Splitgraph leverages the <strong>power of Postgres and cstore_fdw</strong> so
-                that you can write blazing-fast queries against versioned data.
+                Splitgraph leverages the{" "}
+                <strong>power of Postgres and cstore_fdw</strong> so that you
+                can write blazing-fast queries against versioned data.
               </p>
               <Link href="/docs/getting-started/frequently_asked_questions">
                 Read more about speed in the FAQ.
@@ -419,8 +420,8 @@ const LandingPage = () => {
               <p>
                 Because Splitgraph images are Postgres databases, the whole
                 ecosystem of Postgres is available to you. Splitgraph works with
-                all your favorite Postgres tools and extensions, including PostGIS,
-                pgcli, and postgrest.
+                all your favorite Postgres tools and extensions, including
+                PostGIS, pgcli, and postgrest.
               </p>
               <Link href="/docs/integrating_splitgraph/jupyter_notebooks">
                 Get started with integrations.

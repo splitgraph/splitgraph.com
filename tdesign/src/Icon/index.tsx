@@ -134,3 +134,11 @@ export { IconUpdateImages };
 import IconUploadDatabase from './IconUploadDatabase';
 export { IconUploadDatabase };
 
+
+import IconChevronLeftPrimaryColor from './IconChevronLeftPrimaryColor';
+export { IconChevronLeftPrimaryColor };
+
+
+import IconChevronRightPrimaryColor from './IconChevronRightPrimaryColor';
+export { IconChevronRightPrimaryColor };
+

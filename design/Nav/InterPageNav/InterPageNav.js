@@ -1,51 +1,106 @@
+import {
+  IconChevronLeftPrimaryColor,
+  IconChevronRightPrimaryColor,
+} from "@splitgraph/tdesign";
+
 import { Box, Flex } from "../../index";
 
-const NavLink = ({ title, url, Link }) => {
+const linkBoxStyle = {
+  padding: "1rem",
+  borderRadius: "1rem",
+  boxShadow: "0 0 4px rgba(0, 0, 0, .125)",
+  margin: "1rem",
+  display: "flex",
+  alignItems: "center",
+  ":hover": {
+    cursor: "pointer",
+    boxShadow: "0 0 4px rgba(0, 0, 0, .5)",
+    textDecoration: "none",
+  },
+  ".link-text-container": {
+    display: "flex",
+    flexDirection: "column",
+    ".link-meta": {
+      textTransform: "uppercase",
+      color: "primary",
+      opacity: "0.5",
+      fontSize: "x-small",
+      marginTop: "1em",
+      display: ["none", "initial", "initial"],
+      ":hover": {
+        textDecoration: "none",
+      },
+    },
+  },
+  ".link-text-container--right": {
+    alignItems: "flex-end",
+  },
+};
+
+const NavLink = ({ node, Link, children, justifyContent = "flex-start" }) => {
   return (
-    <Box>
-      {url ? (
-        <Link href={url} title={title}>
-          {title}
-        </Link>
-      ) : (
-        <span>{title}</span>
-      )}
+    <Box
+      sx={{
+        "> a": {
+          ...linkBoxStyle,
+          justifyContent,
+        },
+      }}
+    >
+      <Link href={node.url} title={node.title}>
+        {children}
+      </Link>
     </Box>
   );
 };
 
-const LeftNav = ({ node, ...rest }) => {
-  return <NavLink {...node} {...rest} />;
+const LeftNav = ({ node, Link, ...rest }) => {
+  return node && node.url ? (
+    <NavLink node={node} Link={Link} {...rest}>
+      <IconChevronLeftPrimaryColor size="3rem" />
+      <Box className="link-text-container link-text-container--left">
+        <Link href={node.url} title={node.title}>
+          {node.title}
+        </Link>
+        <span className="link-meta">Previous</span>
+      </Box>
+    </NavLink>
+  ) : null;
 };
 
-const UpNav = ({ node, ...rest }) => {
-  return <NavLink {...node} {...rest} />;
-};
-
-const RightNav = ({ node, ...rest }) => {
-  return <NavLink {...node} {...rest} />;
+const RightNav = ({ node, Link, ...rest }) => {
+  return node && node.url ? (
+    <NavLink justifyContent="flex-end" node={node} Link={Link} {...rest}>
+      <Box className="link-text-container link-text-container--right">
+        <Link href={node.url} title={node.title}>
+          {node.title}
+        </Link>
+        <span className="link-meta">Next</span>
+      </Box>
+      <IconChevronRightPrimaryColor size="3rem" />
+    </NavLink>
+  ) : null;
 };
 
 const InterPageNav = ({ Link, up, right, left }) => {
   const style = {
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "space-between",
     justifyContent: "space-between",
-    paddingTop: "8rem",
-    marginTop: "8rem",
+    paddingTop: ["initial", "initial", "8rem"],
+    paddingBottom: ["initial", "initial", "8rem"],
     borderTopColor: "#efefef",
     borderTopStyle: "solid",
     borderTopWidth: "1px",
     a: {
-      color: "primary"
-    }
+      color: "primary",
+    },
   };
 
   return (
     <Flex sx={style}>
-      <LeftNav node={left} Link={Link} />
-      <UpNav node={up} Link={Link} />
       <RightNav node={right} Link={Link} />
+      <LeftNav node={left} Link={Link} />
     </Flex>
   );
 };
