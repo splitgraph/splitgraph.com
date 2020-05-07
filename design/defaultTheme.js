@@ -37,7 +37,7 @@ const prismTheme = {
 
 export const asciinemaEmbedStyles = {
   "div.asciinema-embed-container": {
-    backgroundColor: "red",
+    backgroundColor: "primary",
     marginLeft: -4,
     marginRight: -4,
     // paddingTop: "80vh !important"
