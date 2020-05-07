@@ -14,11 +14,8 @@ export default ({ children, extraStyle = {} }: IMainContentProps) => {
   const outerContainerStyle = {
     backgroundColor: 'gray',
     minHeight: '100vh',
-    fontFamily: '"Cambria", sans-serif',
-    // maxWidth: '100vw',
-    // minWidth: '100vw',
-    // width: '100vw',
-    // maxWidth: '100vw',
+    fontFamily:
+      '-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji',
     ...extraStyle,
   } as SystemStyleObject;
 
