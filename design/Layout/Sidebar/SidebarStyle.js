@@ -5,9 +5,7 @@ const BaseStyle = {
     right: 0,
   },
   ListContainer: {
-    // display: "inline-flex",
-    // Required to work in safari
-    display: "-webkit-box",
+    display: "inline-flex",
   },
   List: {
     listStyleType: "none",
@@ -104,6 +102,8 @@ const VerticalStyle = {
   },
   ListContainer: {
     direction: "rtl",
+    // Required to work in safari
+    display: "-webkit-box",
     // borderLeftWidth: 10,
     // borderLeftStyle: "solid",
     // paddingLeft: 2,
