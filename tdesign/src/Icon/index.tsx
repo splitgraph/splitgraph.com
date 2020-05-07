@@ -118,3 +118,19 @@ export { IconClipboard };
 import IconAlertTriangle from './IconAlertTriangle';
 export { IconAlertTriangle };
 
+
+import IconPostgresLogo from './IconPostgresLogo';
+export { IconPostgresLogo };
+
+
+import IconComposeImages from './IconComposeImages';
+export { IconComposeImages };
+
+
+import IconUpdateImages from './IconUpdateImages';
+export { IconUpdateImages };
+
+
+import IconUploadDatabase from './IconUploadDatabase';
+export { IconUploadDatabase };
+
