@@ -5,11 +5,12 @@ import * as React from 'react';
 
 export interface IMainContentProps {
   children: React.ReactNode;
+  extraStyle?: SystemStyleObject;
 }
 
 const mainContentStyle = {} as SystemStyleObject;
 
-export default ({ children }: IMainContentProps) => {
+export default ({ children, extraStyle = {} }: IMainContentProps) => {
   const outerContainerStyle = {
     backgroundColor: 'gray',
     minHeight: '100vh',
@@ -18,6 +19,7 @@ export default ({ children }: IMainContentProps) => {
     // minWidth: '100vw',
     // width: '100vw',
     // maxWidth: '100vw',
+    ...extraStyle,
   } as SystemStyleObject;
 
   return (
