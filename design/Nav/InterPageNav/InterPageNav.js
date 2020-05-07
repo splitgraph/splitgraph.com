@@ -40,6 +40,7 @@ const linkBoxStyle = {
 const NavLink = ({ node, Link, children, justifyContent = "flex-start" }) => {
   return (
     <Box
+      className="link-box"
       sx={{
         "> a": {
           ...linkBoxStyle,
@@ -84,9 +85,6 @@ const RightNav = ({ node, Link, ...rest }) => {
 
 const InterPageNav = ({ Link, up, right, left }) => {
   const style = {
-    flexDirection: "column",
-    alignItems: "space-between",
-    justifyContent: "space-between",
     paddingTop: ["initial", "initial", "8rem"],
     paddingBottom: ["initial", "initial", "8rem"],
     borderTopColor: "#efefef",
@@ -99,8 +97,21 @@ const InterPageNav = ({ Link, up, right, left }) => {
 
   return (
     <Flex sx={style}>
-      <RightNav node={right} Link={Link} />
-      <LeftNav node={left} Link={Link} />
+      <Box
+        sx={{
+          minWidth: "100%",
+          display: "flex",
+          flexDirection: ["column", "column", "row-reverse"],
+          ".link-box": {
+            flexGrow: 0,
+            flexShrink: 1,
+            minWidth: ["100%", "100%", "50%"],
+          },
+        }}
+      >
+        <RightNav node={right} Link={Link} />
+        <LeftNav node={left} Link={Link} />
+      </Box>
     </Flex>
   );
 };
