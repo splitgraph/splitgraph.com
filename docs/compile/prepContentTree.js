@@ -14,11 +14,7 @@ const prepContentTree = ({
   rootOutDir = PAGES_DIR,
   writePage = ({ templater, item, contentTreeLocation }) => "",
 }) => {
-  const exportMap = {
-    "/": {
-      page: "/",
-    },
-  };
+  const exportMap = {};
   const pagesToMake = [];
 
   new ContentTree(inputDir, {
