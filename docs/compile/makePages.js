@@ -13,6 +13,7 @@ const EXPORT_PATH_MAP = path.join(ROOT_DIR, "exports.json");
 const CONTENT_TREE = path.join(ROOT_DIR, "compile/compiledSidebar");
 
 const prepContentTree = require("./prepContentTree");
+const makeDefaultExportPathMap = require("./makeDefaultExportPathMap");
 
 const DOCS_DIR = `${path.join(CONTENT_DIR, "docs")}`;
 const prepDocsPages = () =>
@@ -94,9 +95,18 @@ module.exports = {
   },
   makePages: () => {
     const { pagesToMake, exportMap } = prepPages();
+    const defaultExportPathMap = makeDefaultExportPathMap({
+      rootPagesDir: PAGES_DIR,
+      ignoreTest: (page) => page.startsWith("_content"),
+    });
 
     writePages({ pagesToMake });
-    writeExportMap({ exportMap });
+    writeExportMap({
+      exportMap: {
+        ...defaultExportPathMap,
+        ...exportMap,
+      },
+    });
   },
   EXPORT_PATH_MAP,
 };
