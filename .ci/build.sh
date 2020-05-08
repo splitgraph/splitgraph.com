@@ -5,7 +5,7 @@ SPLITGRAPH_DIR="$CI_DIR/.."
 
 pushd "$SPLITGRAPH_DIR" \
     && yarn build \
-    && cp proxyDirectories.txt out/proxyDirectories.txt \
+    && cp "$SPLITGRAPH_DIR"/docs/proxyDirectories.txt "$SPLITGRAPH_DIR"/docs/out/proxyDirectories.txt \
     && echo "Build successful" \
     && exit 0
 
