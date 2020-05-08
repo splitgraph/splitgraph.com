@@ -76,10 +76,12 @@ const writeProxyDirectoryFile = ({ exportMap }) => {
 
   const urls = Object.keys(exportMap);
 
+  const staticBaseDirs = ["_next", "static"];
+
   const dirs = urls.reduce(
     (acc, url) =>
       url === "/" ? acc : Array.from(new Set([...acc, url.split("/")[1]])),
-    []
+    staticBaseDirs
   );
 
   const dirRegex = dirs.join("|");
