@@ -10,6 +10,7 @@ const PAGES_DIR = path.resolve(
 const ROOT_DIR = path.resolve(path.join(PAGES_DIR, ".."));
 const PAGES_OUT_DIR = path.join(PAGES_DIR, "_content");
 const EXPORT_PATH_MAP = path.join(ROOT_DIR, "exports.json");
+const PROXY_DIRECTORIES = path.join(ROOT_DIR, "proxyDirectories.txt");
 const CONTENT_TREE = path.join(ROOT_DIR, "compile/compiledSidebar");
 
 const prepContentTree = require("./prepContentTree");
@@ -70,6 +71,24 @@ const writeExportMap = ({ exportMap }) => {
   fs.writeFileSync(EXPORT_PATH_MAP, JSON.stringify(exportMap, null, 2));
 };
 
+const writeProxyDirectoryFile = ({ exportMap }) => {
+  console.log("Writing proxyDirectories regex:");
+
+  const urls = Object.keys(exportMap);
+
+  const dirs = urls.reduce(
+    (acc, url) =>
+      url === "/" ? acc : Array.from(new Set([...acc, url.split("/")[1]])),
+    []
+  );
+
+  const dirRegex = dirs.join("|");
+
+  console.log(dirRegex);
+
+  fs.writeFileSync(PROXY_DIRECTORIES, dirRegex);
+};
+
 const prepPages = () => {
   const preppedDocsPages = prepDocsPages();
   const preppedBlogPages = prepBlogPages();
@@ -100,13 +119,16 @@ module.exports = {
       ignoreTest: (page) => page.startsWith("_content"),
     });
 
+    const combinedExportMap = {
+      ...defaultExportPathMap,
+      ...exportMap,
+    };
+
     writePages({ pagesToMake });
     writeExportMap({
-      exportMap: {
-        ...defaultExportPathMap,
-        ...exportMap,
-      },
+      exportMap: combinedExportMap,
     });
+    writeProxyDirectoryFile({ exportMap: combinedExportMap });
   },
   EXPORT_PATH_MAP,
 };
