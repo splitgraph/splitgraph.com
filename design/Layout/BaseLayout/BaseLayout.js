@@ -1,7 +1,7 @@
 import "@csstools/normalize.css";
 import "../../css/base.css";
 
-import defaultTheme from "../../defaultTheme";
+import defaultTheme from "../../themes/defaultTheme";
 
 import { ThemeProvider } from "theme-ui";
 
