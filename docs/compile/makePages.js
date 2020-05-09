@@ -118,7 +118,8 @@ module.exports = {
     const { pagesToMake, exportMap } = prepPages();
     const defaultExportPathMap = makeDefaultExportPathMap({
       rootPagesDir: PAGES_DIR,
-      ignoreTest: (page) => page.startsWith("_content"),
+      ignoreTest: (page) =>
+        page.startsWith("_content") || page === "_document" || page === "_app",
     });
 
     const combinedExportMap = {
