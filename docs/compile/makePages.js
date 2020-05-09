@@ -119,7 +119,9 @@ module.exports = {
     const defaultExportPathMap = makeDefaultExportPathMap({
       rootPagesDir: PAGES_DIR,
       ignoreTest: (page) =>
-        page.startsWith("_content") || page === "_document" || page === "_app",
+        page.startsWith("_content") ||
+        page === "_document.js" ||
+        page === "_app.js",
     });
 
     const combinedExportMap = {
