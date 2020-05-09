@@ -1,5 +1,9 @@
+import { Link } from "@splitgraph/design";
+
 const LogoImage = ({ logoURL }) => (
-  <img src={logoURL} style={{ maxHeight: "2rem", marginLeft: 4 }} />
+  <Link variant="links.unstyled" href="/" as="/">
+    <img src={logoURL} style={{ maxHeight: "2rem", margin: 4 }} />
+  </Link>
 );
 
 export default LogoImage;
