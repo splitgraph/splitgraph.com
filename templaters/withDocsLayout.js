@@ -24,6 +24,8 @@ import { OnlyTOC } from "./contentWrappers";
 
 import { defaultTheme } from "@splitgraph/design";
 
+import { NextSeo } from "next-seo";
+
 const mdxComponents = {
   pre: ({ children, ...rest }) => (
     <pre sx={defaultTheme.styles.pre} {...rest}>
@@ -46,6 +48,21 @@ const mdxComponents = {
 // dependency injection. It was only put into its own so that autogenned scripts
 // could reference it by name instead of relative path, but that's fixed now.
 const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
+  const DocsPageSeo = ({ currentURL }) => {
+    const SEO_BASE_URL = process.env.SEO_CANONICAL_BASE_URL;
+
+    const pageSeo = {
+      title: `Documentation - ${meta.title}`,
+      ...(meta.description ? { description: meta.description } : {}),
+      canonical: `${SEO_BASE_URL}${currentURL}`,
+      openGraph: {
+        url: `${SEO_BASE_URL}${currentURL}`,
+      },
+    };
+
+    return <NextSeo {...pageSeo} />;
+  };
+
   // Because we rewrite URLs, when using next/link, we need to specify
   // the mapping so next.js loads the right script. If we do not do this,
   // client side routing does not work and we get "content flashes"
@@ -106,6 +123,8 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
 
     return (
       <BaseLayout>
+        <DocsPageSeo currentURL={currentURL} />
+
         <HolyGrail.Layout>
           <Header gridArea={HolyGrail.GridArea.Header}>
             <LogoImage logoURL="/static/splitgraph_logo.svg" />

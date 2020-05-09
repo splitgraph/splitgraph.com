@@ -5,5 +5,12 @@
   "main": "index.js",
   "author": "Splitgraph",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "peerDependencies": {
+    "next": "*",
+    "react": "*",
+    "react-dom": "*",
+    "next-seo": "*",
+    "react-helmet": "*"
+  }
 }

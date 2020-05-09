@@ -2,8 +2,9 @@
 // @ts-ignore
 import { jsx, Box, SystemStyleObject } from "theme-ui";
 
-import { Link } from "@splitgraph/tdesign";
 import React from "react";
+
+import { NextSeo } from "next-seo"
 
 import withTheme from "../hocs/withTheme";
 import { LandingPageLayout } from "../components/LandingPageLayout";
@@ -14,6 +15,7 @@ import { keyframes, css } from "@emotion/core";
 import LandingPageSplitfile from "@splitgraph/content/marketing/LandingPageSplitfile.mdx";
 
 import {
+  Link,
   IconPostgresLogo,
   IconComposeImages,
   IconUpdateImages,
@@ -243,6 +245,8 @@ const featurePanelStyle = {
 const LandingPage = () => {
   return (
     <LandingPageLayout>
+      <NextSeo title="Work with data like you work with code" />
+
       <HeroBox>
         <h1>Get your data sorted.</h1>
 
