@@ -28,7 +28,7 @@ const prepDocsPages = () =>
     writePage: ({ templater, item, contentTreeLocation }) => `
 import Link from "next/link";
 import { withRouter } from "next/router";
-import ${templater} from "@splitgraph/templaters/${templater}";
+import ${templater} from "@splitgraph/templaters/layouts/${templater}";
 import MdxPage, { meta } from "@splitgraph/content${item.path.fromSiteRoot}";
 import contentTree from "${contentTreeLocation}";
 export default withRouter(${templater}({ MdxPage, meta, contentTree, Link }));
@@ -47,7 +47,7 @@ const prepBlogPages = () =>
     writePage: ({ templater, item, contentTreeLocation }) => `
 import Link from "next/link";
 import { withRouter } from "next/router";
-import ${templater} from "@splitgraph/templaters/${templater}";
+import ${templater} from "@splitgraph/templaters/layouts/${templater}";
 import MdxPage, { meta } from "@splitgraph/content${item.path.fromSiteRoot}";
 import contentTree from "${contentTreeLocation}";
 export default withRouter(${templater}({ MdxPage, meta, contentTree, Link }));
