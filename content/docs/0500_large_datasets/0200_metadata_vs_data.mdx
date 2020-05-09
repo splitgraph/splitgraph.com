@@ -17,7 +17,7 @@ can be evicted if the free cache space is limited. The cache size can be control
 `SG_OBJECT_CACHE_SIZE` variable in `.sgconfig` and the default value is 10240 (10GB).
 
 It is possible to find out how much data a query against a layered checkout will need by running
-`EXPLAIN` on the query, for example:
+`EXPLAIN` on the query. For example, in the [2016 US Presidential Election precinct-level returns](/splitgraph/2016_election/) dataset:
 
 ```shell-session
 $ sgr sql -s splitgraph/2016_election "EXPLAIN SELECT candidate_normalized, SUM(votes) FROM precinct_results WHERE county_fips=11001 GROUP BY candidate_normalized"

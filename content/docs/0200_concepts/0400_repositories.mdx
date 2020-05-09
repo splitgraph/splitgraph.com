@@ -4,13 +4,13 @@ export const meta = {
 };
 
 A repository is a collection of Splitgraph images. The repository's name consists of two parts:
-the namespace and the actual repository. For example, in this image reference:
+the namespace and the actual repository. For example, this:
 
 ```
 splitgraph/geonames:0b77a102cbabe2de8597dcab71f1c333f16f9e1963c9c8982988e10e65989c62
 ```
 
-`splitgraph` is a namespace, `geonames` is a repository and `0b77a102cbabe2de8597dcab71f1c333f16f9e1963c9c8982988e10e65989c62` is the image hash.
+refers to the [Geonames image](/splitgraph/geonames/0b77a102cbabe2de8597dcab71f1c333f16f9e1963c9c8982988e10e65989c62/-/overview) in the namespace `splitgraph`, repository `geonames` with image hash `0b77a102cbabe2de8597dcab71f1c333f16f9e1963c9c8982988e10e65989c62`.
 
 Repositories are checked out into PostgreSQL schemata with the same name. So the aforementioned
 repository would end up in a PostgreSQL schema `"splitgraph/geonames"` on checkout, allowing
