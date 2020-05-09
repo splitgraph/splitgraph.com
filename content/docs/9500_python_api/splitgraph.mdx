@@ -117,6 +117,34 @@ export const meta = {
 </dd></dl>
 
 <dl className="py exception">
+<dt id="splitgraph.exceptions.GQLAPIError">
+<em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">GQLAPIError</code><a className="headerlink" href="#splitgraph.exceptions.GQLAPIError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
+<p>GQL API errors</p>
+</dd></dl>
+
+<dl className="py exception">
+<dt id="splitgraph.exceptions.GQLRepoDoesntExistError">
+<em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">GQLRepoDoesntExistError</code><a className="headerlink" href="#splitgraph.exceptions.GQLRepoDoesntExistError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.GQLAPIError" title="splitgraph.exceptions.GQLAPIError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.GQLAPIError</span></code></a></p>
+<p>Repository doesn’t exist</p>
+</dd></dl>
+
+<dl className="py exception">
+<dt id="splitgraph.exceptions.GQLUnauthenticatedError">
+<em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">GQLUnauthenticatedError</code><a className="headerlink" href="#splitgraph.exceptions.GQLUnauthenticatedError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.GQLAPIError" title="splitgraph.exceptions.GQLAPIError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.GQLAPIError</span></code></a></p>
+<p>Unauthenticated (user not logged in)</p>
+</dd></dl>
+
+<dl className="py exception">
+<dt id="splitgraph.exceptions.GQLUnauthorizedError">
+<em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">GQLUnauthorizedError</code><a className="headerlink" href="#splitgraph.exceptions.GQLUnauthorizedError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.GQLAPIError" title="splitgraph.exceptions.GQLAPIError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.GQLAPIError</span></code></a></p>
+<p>Unauthorized (e.g. repository isn’t writeable by the user)</p>
+</dd></dl>
+
+<dl className="py exception">
 <dt id="splitgraph.exceptions.ImageNotFoundError">
 <em className="property">exception </em><code className="sig-prename descclassname">splitgraph.exceptions.</code><code className="sig-name descname">ImageNotFoundError</code><a className="headerlink" href="#splitgraph.exceptions.ImageNotFoundError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a className="reference internal" href="#splitgraph.exceptions.SplitGraphError" title="splitgraph.exceptions.SplitGraphError"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.exceptions.SplitGraphError</span></code></a></p>
