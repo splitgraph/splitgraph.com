@@ -10,24 +10,11 @@ const { makePages, EXPORT_PATH_MAP } = require("./compile/makePages");
 
 const { makeCasts, getCastManifest } = require("./compile/makeCasts");
 
-const DOCS_ENV = process.env.DOCS_ENV || "dev";
-
-const CONFIG_FILE = process.env.CONFIG_FILE || `./config/${DOCS_ENV}.config.js`;
-
-const VALID_ENVS = ["dev", "build", "staging"];
-
 const customizeTOC = require("./plugins/rehype-plugins/customizeTOC");
 
 const injectAsciicasts = require("./plugins/rehype-plugins/injectAsciicasts");
 
 const splitgraphRehypePrism = require("./plugins/rehype-plugins/splitgraphRehypePrism");
-
-if (!VALID_ENVS.includes(DOCS_ENV)) {
-  console.error("Fatal: Bad DOCS_ENV");
-  process.exit(1);
-}
-
-const CONFIG = require(CONFIG_FILE);
 
 const fs = require("fs").promises;
 
@@ -43,7 +30,12 @@ for (let castKey of Object.keys(castManifest)) {
 
 const nextConfig = {
   env: {
-    ...CONFIG,
+    // This is a build time config variable, but in practice, since we should
+    // only have one website deployed that is accessible to search engines,
+    // that's okay. For testing purposes, use the staging URL right now.
+    // TODO: Before launch, make sure to change to www.splitgraph.com
+    SEO_CANONICAL_BASE_URL:
+      process.env.SEO_CANONICAL_BASE_URL || `https://web.splitgraph.com`,
   },
   resolve: {
     alias: aliasConfig,
