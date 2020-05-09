@@ -12,7 +12,7 @@ export {
   MutedText,
   SubHeading,
   SuccessText,
-  WarningText
+  WarningText,
 } from "./Text";
 
 export {
@@ -24,11 +24,11 @@ export {
   ContentFooter,
   ContentHeader,
   Sidebar,
-  HolyGrail
+  HolyGrail,
 } from "./Layout";
 
 export { LogoImage } from "./Logo";
 
 export { InterPageNav } from "./Nav";
 
-export { defaultTheme, tocStyles } from "./defaultTheme";
+export { defaultTheme, tocStyles } from "./themes/defaultTheme";
