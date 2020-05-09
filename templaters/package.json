@@ -8,9 +8,9 @@
   "private": true,
   "peerDependencies": {
     "next": "*",
+    "next-seo": "*",
     "react": "*",
     "react-dom": "*",
-    "next-seo": "*",
     "react-helmet": "*"
   }
 }

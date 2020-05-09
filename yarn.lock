@@ -2395,6 +2395,12 @@ __metadata:
 "@splitgraph/templaters@workspace:templaters":
   version: 0.0.0-use.local
   resolution: "@splitgraph/templaters@workspace:templaters"
+  peerDependencies:
+    next: "*"
+    next-seo: "*"
+    react: "*"
+    react-dom: "*"
+    react-helmet: "*"
   languageName: unknown
   linkType: soft
 
