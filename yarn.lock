@@ -13099,6 +13099,17 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"next-seo@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "next-seo@npm:4.4.0"
+  peerDependencies:
+    prop-types: ^15.6.0
+    react: ^16.0.0
+    react-dom: ^16.0.0
+  checksum: 3/3f9ad32e2a6dcba19a40512e8361d02bdff0a4ae693adfeb4b1876df39e5314f730007964735fd7b4734b86a901957c584d15484788ae3810613e801ac096975
+  languageName: node
+  linkType: hard
+
 "next-tick@npm:~1.0.0":
   version: 1.0.0
   resolution: "next-tick@npm:1.0.0"
@@ -15508,6 +15519,13 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"react-fast-compare@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "react-fast-compare@npm:2.0.4"
+  checksum: 3/4e4bfc3597414a36ee35977259012fff30c4f13a0e5dcabf958e91991bef8e9a3faee9dd666cfbdb0c2a0f0ddaf242ac2912054caa956a793c4cdff274dc5aec
+  languageName: node
+  linkType: hard
+
 "react-fast-compare@npm:^3.0.1":
   version: 3.0.1
   resolution: "react-fast-compare@npm:3.0.1"
@@ -15544,6 +15562,20 @@ fsevents@~2.1.2:
     react: ^16.6.0
     react-dom: ^16.6.0
   checksum: 3/9fb45a3f60e33ef96bcefb1626925aafde741e9694ff46a54f17d5b555b519c596ab307cd4a2e13884ed147ee2f1bac4da1268c51a4885539f60234d6325ef8d
+  languageName: node
+  linkType: hard
+
+"react-helmet@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "react-helmet@npm:6.0.0"
+  dependencies:
+    object-assign: ^4.1.1
+    prop-types: ^15.7.2
+    react-fast-compare: ^2.0.4
+    react-side-effect: ^2.1.0
+  peerDependencies:
+    react: ">=16.3.0"
+  checksum: 3/c0bcafb562616525cd1c759cf96820a6455071289f60496726ed7fe5636b166198f685fab11c6fc5c03274d1c451f059cbfc965f39e2c4ffd9ee2b3284b0a569
   languageName: node
   linkType: hard
 
@@ -15649,6 +15681,15 @@ fsevents@~2.1.2:
     react: ^16.8.0
     react-dom: ^16.8.0
   checksum: 3/95881de591b4b11f434ac0310d9e1f84e0794e6e485d8e131003e298ded230852799962a267e5513b3bdf598e6a9869a38cfcc946bfb5fe649eb5cf41b0c0731
+  languageName: node
+  linkType: hard
+
+"react-side-effect@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "react-side-effect@npm:2.1.0"
+  peerDependencies:
+    react: ^16.3.0
+  checksum: 3/643a9898953776783515df3510a438f262f6dff059c3f880b7bbc180957cd0f9a0c4d7b3ae72c347d0f7c56bbd16466e850c5d9e213abad024df3b6c3a430564
   languageName: node
   linkType: hard
 
@@ -17422,7 +17463,9 @@ resolve@1.12.0:
   version: 0.0.0-use.local
   resolution: "splitgraph.com@workspace:."
   dependencies:
+    next-seo: ^4.4.0
     npm-run-all: ^4.1.5
+    react-helmet: ^6.0.0
     tsdx: ^0.12.3
   languageName: unknown
   linkType: soft
