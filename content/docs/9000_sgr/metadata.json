@@ -1,20 +1,20 @@
 {
   "title": "sgr CLI",
-  "updated_at": "2020-05-01T14:56:41.723Z",
+  "updated_at": "2020-05-09T14:32:20.183Z",
   "release": {
     "id": 23967035,
     "tag_name": "v0.1.0",
-    "target_commitish": "61c1d45028345fcae4e44e4a15b35ffba8b0cfe3",
-    "created_at": "2020-05-01T14:12:30Z",
-    "published_at": "2020-05-01T14:52:59Z",
+    "target_commitish": "cfbcd48730f468a3482e50bc501edb16d584419b",
+    "created_at": "2020-05-09T13:23:04Z",
+    "published_at": "2020-05-09T14:04:34Z",
     "assets": [
       {
-        "id": 20330912,
-        "url": "https://api.github.com/repos/splitgraph/splitgraph/releases/assets/20330912",
+        "id": 20573243,
+        "url": "https://api.github.com/repos/splitgraph/splitgraph/releases/assets/20573243",
         "name": "sgr-docs-bin.tar.gz",
         "label": "",
-        "created_at": "2020-05-01T14:49:01Z",
-        "updated_at": "2020-05-01T14:49:02Z",
+        "created_at": "2020-05-09T13:45:21Z",
+        "updated_at": "2020-05-09T13:45:22Z",
         "browser_download_url": "https://github.com/splitgraph/splitgraph/releases/download/v0.1.0/sgr-docs-bin.tar.gz"
       }
     ]
