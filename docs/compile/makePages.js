@@ -54,6 +54,25 @@ export default withRouter(${templater}({ MdxPage, meta, contentTree, Link }));
 `,
   });
 
+const ROOT_CONTENT_DIR = `${path.join(CONTENT_DIR, "root")}`;
+const prepRootPages = () =>
+  prepContentTree({
+    compiledContentTree: CONTENT_TREE,
+    urlPrefix: "/",
+    templater: "withBasicLayout",
+    inputDir: ROOT_CONTENT_DIR,
+    outDir: PAGES_OUT_DIR,
+    rootOutDir: PAGES_DIR,
+    writePage: ({ templater, item, contentTreeLocation }) => `
+import Link from "next/link";
+import { withRouter } from "next/router";
+import ${templater} from "@splitgraph/templaters/layouts/${templater}";
+import MdxPage, { meta } from "@splitgraph/content/root${item.path.fromSiteRoot}";
+import contentTree from "${contentTreeLocation}";
+export default withRouter(${templater}({ MdxPage, meta, contentTree, Link }));
+`,
+  });
+
 const writePages = ({ pagesToMake }) => {
   console.log("Bake content...");
   rimraf(PAGES_OUT_DIR);
@@ -94,15 +113,18 @@ const writeProxyDirectoryFile = ({ exportMap }) => {
 const prepPages = () => {
   const preppedDocsPages = prepDocsPages();
   const preppedBlogPages = prepBlogPages();
+  const preppedRootPages = prepRootPages();
 
   const pagesToMake = [
     ...preppedDocsPages.pagesToMake,
     ...preppedBlogPages.pagesToMake,
+    ...preppedRootPages.pagesToMake,
   ];
 
   const exportMap = {
     ...preppedDocsPages.exportMap,
     ...preppedBlogPages.exportMap,
+    ...preppedRootPages.exportMap,
   };
 
   return { pagesToMake, exportMap };
