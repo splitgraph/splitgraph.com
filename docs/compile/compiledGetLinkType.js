@@ -15,23 +15,30 @@ const { dirs, nonAutogenContent } = preval`
 */
 
 const getLinkType = ({ currentURL, href }) => {
+  const defaultReturn = {
+    isWebsiteLink: false,
+    isContentLink: false,
+    isCatalogLink: false,
+    isExternalLink: false,
+    isAnchorLink: false,
+    resolvedHref: href,
+  };
+
   if (!href) {
     return {
-      isWebsiteLink: false,
-      isContentLink: false,
-      isCatalogLink: false,
-      isExternalLink: false,
-      resolvedHref: href,
+      ...defaultReturn,
     };
   }
 
-  if (href.startsWith("https://") || href.startsWith("http://")) {
+  if (href.includes("#")) {
     return {
-      isWebsiteLink: false,
-      isContentLink: false,
-      isCatalogLink: false,
+      ...defaultReturn,
+      isAnchorLink: true,
+    };
+  } else if (href.startsWith("https://") || href.startsWith("http://")) {
+    return {
+      ...defaultReturn,
       isExternalLink: true,
-      resolvedHref: href,
     };
   }
 
@@ -60,11 +67,11 @@ const getLinkType = ({ currentURL, href }) => {
   const isCatalogLink = !isWebsiteLink;
 
   return {
+    ...defaultReturn,
     isWebsiteLink,
     isContentLink,
     isCatalogLink,
     resolvedHref,
-    isExternalLink: false,
   };
 };
 

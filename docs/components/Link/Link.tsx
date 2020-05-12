@@ -25,7 +25,15 @@ const getRoutingProps = ({
     isCatalogLink,
     resolvedHref,
     isExternalLink,
+    isAnchorLink,
   } = getLinkType({ href, currentURL });
+
+  if (isAnchorLink) {
+    return {
+      href: resolvedHref,
+      as: resolvedHref,
+    };
+  }
 
   if (isContentLink) {
     return {
@@ -60,7 +68,7 @@ export default ({ href, ...rest }: LinkProps) => {
 
   const routingProps = React.useMemo(
     () => getRoutingProps({ href, currentURL }),
-    [href, currentURL]
+    [href, currentURL, rest]
   );
 
   return <Link {...rest} {...routingProps} />;
