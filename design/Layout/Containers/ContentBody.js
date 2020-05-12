@@ -1,10 +1,11 @@
 import { Box } from "../../index";
 import { defaultTheme } from "@splitgraph/design";
 
-const getStyle = depth => ({
+const getStyle = (depth) => ({
   paddingLeft: 4,
   paddingRight: 4,
-  ...defaultTheme.styles.root
+  ...defaultTheme.styles.root,
+  a: defaultTheme.links.primary,
 });
 
 export default ({ children, depth }) => {

@@ -2,6 +2,8 @@
 import { jsx } from "theme-ui";
 import React, { useMemo } from "react";
 
+import { Link } from "@splitgraph/docs/components/Link";
+
 import {
   Box,
   Header,
@@ -47,7 +49,13 @@ const mdxComponents = {
 // TODO: Move this back into the docs repository (?) so no need to do this dumb
 // dependency injection. It was only put into its own so that autogenned scripts
 // could reference it by name instead of relative path, but that's fixed now.
-const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
+const withDocsLayout = ({
+  MdxPage,
+  meta = {},
+  contentTree,
+  // Link,
+  // getLinkType,
+}) => {
   const DocsPageSeo = ({ currentURL }) => {
     const SEO_BASE_URL = process.env.SEO_CANONICAL_BASE_URL;
 
@@ -66,28 +74,47 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
   // Because we rewrite URLs, when using next/link, we need to specify
   // the mapping so next.js loads the right script. If we do not do this,
   // client side routing does not work and we get "content flashes"
-  const ContentLink = ({ href, children, ...rest }) => {
-    return (
-      <Link href={`/_content${href}`} as={href} passHref>
-        <a
-          {...rest}
-          sx={defaultTheme.links.primary}
-          onClick={(e) => {
-            console.log("clicked");
-          }}
-        >
-          {children}
-        </a>
-      </Link>
-    );
-  };
+  // const ContentLink = ({ href, children, ...rest }) => {
+  //   // console.log("getLinkType:", getLinkType);
 
-  mdxComponents.a = ContentLink;
+  //   const router = useRouter();
+
+  //   const currentURL = useMemo(
+  //     () => router.pathname.replace(/^\/\_content/gm, ""),
+  //     [router]
+  //   );
+
+  //   console.log(`currentURL = ${currentURL}`);
+
+  //   console.log(
+  //     `getLinkType(${href}) = ${JSON.stringify(
+  //       getLinkType({ currentURL, href }),
+  //       null,
+  //       2
+  //     )}`
+  //   );
+
+  //   return (
+  //     <Link href={`/_content${href}`} as={href} passHref>
+  //       <a
+  //         {...rest}
+  //         sx={defaultTheme.links.primary}
+  //         onClick={(e) => {
+  //           console.log("clicked");
+  //         }}
+  //       >
+  //         {children}
+  //       </a>
+  //     </Link>
+  //   );
+  // };
+
+  mdxComponents.a = Link;
 
   // Grab the TOC out of the tree from MdxPage so we can render it separately
   // This is easier than writing a webpack loader. Tried portals, bad with SSR.
   const TocMdx = () => {
-    return <MdxPage components={{ wrapper: OnlyTOC, a: ContentLink }} />;
+    return <MdxPage components={{ wrapper: OnlyTOC, a: Link }} />;
   };
 
   const WithDocsLayout = ({ router }) => {
@@ -134,7 +161,7 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
             gridArea={HolyGrail.GridArea.Nav}
             rootNode={contentTree}
             matchActiveNode={matchActiveNode}
-            Link={ContentLink}
+            Link={Link}
             activeNodeId={activeNodeId}
             // 1 for depth 2, because it's zero based
             maxInitialStackDepth={1}
@@ -150,7 +177,7 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
             </ContentBody>
             <ContentFooter>
               <InterPageNav
-                Link={ContentLink}
+                Link={Link}
                 up={activeNode.up}
                 left={activeNode.left}
                 right={activeNode.right}
@@ -171,13 +198,13 @@ const withDocsLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
           <Footer gridArea={HolyGrail.GridArea.Footer}>
             <ul>
               <li>
-                <ContentLink href="/">Index</ContentLink>
+                <Link href="/">Index</Link>
               </li>
               <li>
-                <ContentLink href="/">Somewhere</ContentLink>
+                <Link href="/">Somewhere</Link>
               </li>
               <li>
-                <ContentLink href="/">Else</ContentLink>
+                <Link href="/">Else</Link>
               </li>
             </ul>
           </Footer>
