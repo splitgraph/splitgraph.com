@@ -62,6 +62,7 @@ export default ({
   const mergedPopoutContainerStyle = {
     zIndex: 10,
     position: 'absolute',
+    boxShadow: 'hovering',
     ...anchorPositionStyle,
     ...popoutContainerStyle,
   } as SystemStyleObject;
