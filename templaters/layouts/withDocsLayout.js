@@ -2,7 +2,7 @@
 import { jsx } from "theme-ui";
 import React, { useMemo } from "react";
 
-import { Link } from "@splitgraph/docs/components/Link";
+import { Link } from "@splitgraph/docs/components";
 
 import {
   Box,

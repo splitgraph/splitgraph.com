@@ -3,7 +3,7 @@
 import { jsx } from "theme-ui";
 import * as React from "react";
 
-import { Link } from "@splitgraph/tdesign";
+import { Link } from "../Link";
 
 export interface IHeaderRightProps {}
 

@@ -4,7 +4,7 @@ import { jsx, Box, SystemStyleObject } from "theme-ui";
 
 import React from "react";
 
-import { NextSeo } from "next-seo"
+import { NextSeo } from "next-seo";
 
 import withTheme from "../hocs/withTheme";
 import { LandingPageLayout } from "../components/LandingPageLayout";
@@ -15,12 +15,13 @@ import { keyframes, css } from "@emotion/core";
 import LandingPageSplitfile from "@splitgraph/content/marketing/LandingPageSplitfile.mdx";
 
 import {
-  Link,
   IconPostgresLogo,
   IconComposeImages,
   IconUpdateImages,
   IconUploadDatabase,
 } from "@splitgraph/tdesign";
+
+import { Link } from "@splitgraph/docs/components";
 
 /*
   TODO / temp:
