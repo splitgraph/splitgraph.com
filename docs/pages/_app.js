@@ -1,3 +1,6 @@
+import "@csstools/normalize.css";
+import "@splitgraph/design/css/base.css";
+
 import { DefaultSeo } from "next-seo";
 
 const SEO_BASE_URL = process.env.SEO_CANONICAL_BASE_URL;
