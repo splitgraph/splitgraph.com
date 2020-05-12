@@ -92,6 +92,7 @@ const InterPageNav = ({ Link, up, right, left }) => {
     borderTopWidth: "1px",
     a: {
       color: "primary",
+      textDecoration: "none",
     },
   };
 
