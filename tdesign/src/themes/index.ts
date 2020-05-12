@@ -142,6 +142,7 @@ export const makeDefaultTheme = () => ({
   },
   shadows: {
     card: '0 0 4px rgba(0, 0, 0, .125)',
+    hovering: '0 0 1rem rgba(0, 0, 0, .5)',
     cardHover: '0 0 4px rgba(0, 0, 0, .5)',
     leftHighlightPrimary: '-5px 0 #36678d',
   },
