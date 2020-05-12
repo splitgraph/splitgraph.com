@@ -60,9 +60,9 @@ const LeftNav = ({ node, Link, ...rest }) => {
     <NavLink node={node} Link={Link} {...rest}>
       <IconChevronLeftPrimaryColor size="3rem" />
       <Box className="link-text-container link-text-container--left">
-        <Link href={node.url} title={node.title}>
+        <span className="link-anchor-text" title={node.title}>
           {node.title}
-        </Link>
+        </span>
         <span className="link-meta">Previous</span>
       </Box>
     </NavLink>
@@ -73,9 +73,9 @@ const RightNav = ({ node, Link, ...rest }) => {
   return node && node.url ? (
     <NavLink justifyContent="flex-end" node={node} Link={Link} {...rest}>
       <Box className="link-text-container link-text-container--right">
-        <Link href={node.url} title={node.title}>
+        <span className="link-anchor-text" title={node.title}>
           {node.title}
-        </Link>
+        </span>
         <span className="link-meta">Next</span>
       </Box>
       <IconChevronRightPrimaryColor size="3rem" />
