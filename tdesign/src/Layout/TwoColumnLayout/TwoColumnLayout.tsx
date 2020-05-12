@@ -67,6 +67,8 @@ const useResponsiveStyle = (): ILayoutContext => {
     '.two-col-main': {
       gridArea: rightArea,
       backgroundColor: 'light',
+      maxWidth: ['100vw', '100vw', '75vw'],
+      overflowX: 'hidden',
     },
   };
 
