@@ -7,12 +7,14 @@ const PAGES_DIR = path.resolve(
 
 const prepContentTree = ({
   compiledContentTree,
+  compiledGetLinkType,
   urlPrefix,
   templater,
   inputDir,
   outDir,
   rootOutDir = PAGES_DIR,
-  writePage = ({ templater, item, contentTreeLocation }) => "",
+  writePage = ({ templater, item, contentTreeLocation, getLinkTypeLocation }) =>
+    "",
 }) => {
   const exportMap = {};
   const pagesToMake = [];
@@ -41,10 +43,20 @@ const prepContentTree = ({
         compiledContentTree
       );
 
+      const getLinkTypeLocation = path.relative(
+        path.dirname(pathToSave),
+        compiledGetLinkType
+      );
+
       pagesToMake.push({
         nextjsPagePath,
         page: pathToSave,
-        source: writePage({ templater, item, contentTreeLocation }),
+        source: writePage({
+          templater,
+          item,
+          contentTreeLocation,
+          getLinkTypeLocation,
+        }),
       });
     },
   }).init();
