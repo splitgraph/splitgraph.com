@@ -6,6 +6,7 @@ const getStyle = (depth) => ({
   paddingRight: 4,
   ...defaultTheme.styles.root,
   a: defaultTheme.links.primary,
+  ".link-anchor-text": defaultTheme.links.primary,
 });
 
 export default ({ children, depth }) => {
