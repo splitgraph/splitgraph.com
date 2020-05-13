@@ -13,6 +13,7 @@ export interface LinkProps
   variant?: string;
   sx?: any;
   children: React.ReactNode;
+  target?: '_blank' | '_self' | '_parent' | '_top' | string;
 }
 
 export default React.forwardRef(
