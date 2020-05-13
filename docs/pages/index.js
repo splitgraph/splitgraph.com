@@ -214,7 +214,7 @@ const featurePanelStyle = {
   display: "flex",
   flexWrap: "wrap",
   justifyContent: "center",
-  width: "90vw",
+  // width: "90vw",
   maxWidth: "90vw",
   "-webkit-box-pack": "center",
   ".feature": {
@@ -476,141 +476,28 @@ const LandingPage = () => {
           color: "light",
         }}
       >
+        <h2>Explore Public Data</h2>
+
+        <iframe
+          src="/explore?embed=1"
+          allowTransparency={true}
+          style={{
+            position: "position: absolute",
+            left: 0,
+            top: 0,
+            minWidth: "100vw",
+            width: "100vw",
+            height: "400px",
+            border: "none",
+            background: "none",
+          }}
+        />
+
         <h2>
           Build, Maintain and Share <br className="mobile-line-break" />{" "}
           Versioned Data Images
         </h2>
-
-        <Box sx={featureCardStyle}>
-          <h2>Build composable data images.</h2>
-
-          <p>
-            Data is at its best when it's joined with other data. Splitgraph
-            makes it easy to <strong>compose data images together</strong>
-          </p>
-        </Box>
-
-        <Box sx={featureCardStyle}>
-          <h2>Keep data fresh.</h2>
-
-          <p>
-            Nobody likes stale data. It's no fun to spend a day putting together
-            a report, only for the upstream data to change the next day.
-            Splitgraph gives you tools to keep your data up to date.
-          </p>
-
-          <p>
-            Mix and mash your data together with open-source, proprietary or
-            internal data. Then{" "}
-            <strong>keep your data up-to-date with upstream changes.</strong>
-          </p>
-        </Box>
-
-        <Box sx={featureCardStyle}>
-          <h2>Publish data to the cloud.</h2>
-
-          <p>
-            <strong>Share your data with others.</strong>
-            <br />
-            Push your data to splitgraph cloud to share it with others. As a
-            bonus, get an <strong>instant REST API</strong> for every version of
-            your data, <strong>immediately after publishing it</strong>.
-          </p>
-        </Box>
       </section>
-
-      <h2>Explore Data</h2>
-
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "spaceBetween",
-          maxWidth: "90vw",
-          overflowX: "scroll",
-        }}
-      >
-        <Box flex={1 / 4} sx={exploreRepoBoxStyle}>
-          <strong className="repo-name">splitgraph/geonames</strong>
-          <br />
-          <br />
-          An up-to-date database of countries and cities throughout the world.
-        </Box>
-
-        <Box flex={1 / 4} sx={exploreRepoBoxStyle}>
-          <strong className="repo-name">splitgraph/geonames</strong>
-          <br />
-          <br />
-          An up-to-date database of countries and cities throughout the world.
-        </Box>
-
-        <Box flex={1 / 4} sx={exploreRepoBoxStyle}>
-          <strong className="repo-name">splitgraph/geonames</strong>
-          <br />
-          <br />
-          An up-to-date database of countries and cities throughout the world.
-        </Box>
-      </Box>
-
-      <h2>Works with existing tools</h2>
-
-      <Box sx={featureCardStyle}>
-        <h2>
-          <IconPostgresLogo /> Powered by Postgres.
-        </h2>
-
-        <p>
-          <strong>There's no need to rewrite your existing tools.</strong>
-          <br />
-          Splitgraph has one core philosophy:{" "}
-          <strong>stay out of the way</strong>. It's easy to adopt Splitgraph
-          incrementally without changing your workflow.
-          <br />
-          <br />
-          Splitgraph works on top of PostgreSQL, integrating seamlessly with
-          anything that uses PostgreSQL.
-          <strong>
-            You do not need to rewrite any of your tools to use Splitgraph
-          </strong>
-        </p>
-      </Box>
-
-      <Box sx={featureCardStyle}>
-        <h2>Ingest data from anywhere.</h2>
-
-        <p>
-          <strong>Publish your data from where it lives.</strong>
-          It's easy to bring your data into Splitgraph. Whether it lives in
-          mongo, postgres, mysql, or a bunch of CSV files, there's a way to
-          import your data into splitgraph and query it with SQL.
-        </p>
-      </Box>
-
-      <Box sx={{ ...featureCardStyle, textAlign: "center" }}>
-        <p sx={{ textAlign: "left" }}>
-          Splitgraph is a <strong>data management tool</strong> that allows you
-          to work with data like you work with code repositories or docker
-          images.
-        </p>
-
-        <p sx={{ textAlign: "left" }}>
-          <strong>Treat your data like cattle.</strong>
-          <br />
-          Wrangle your data into <strong>data images</strong>, snapshots of SQL
-          tables at a point in time. Version them, push them, or pull them.
-        </p>
-
-        <p sx={{ textAlign: "left" }}>
-          Splitgraph <strong>works with your existing tools</strong>, so you can
-          adopt it incrementally without affecting your workflow. It's built
-          especially for Postgres, and it speaks SQL. As far as your tools are
-          concerned, Splitgraph is just another Postgres database.
-        </p>
-
-        <Box className="feature-card--link-row">
-          <Link href="#">Learn more about xxx</Link>
-        </Box>
-      </Box>
     </LandingPageLayout>
   );
 };
