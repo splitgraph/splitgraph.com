@@ -1,6 +1,6 @@
 // @jsx jsx
 // @ts-ignore
-import { jsx, Box } from 'theme-ui';
+import { jsx, Box, SystemStyleObject } from 'theme-ui';
 import * as React from 'react';
 import { useContext } from 'react';
 
@@ -71,7 +71,7 @@ export default ({ children }: MenuProps) => {
     '.menu-item--active': {
       borderLeftWidth: '5px',
       borderLeftColor: 'primary',
-      'border-left-style': 'solid',
+      borderLeftStyle: 'solid',
     },
     '.menu-item--inactive': {
       filter: [
@@ -99,7 +99,7 @@ export default ({ children }: MenuProps) => {
         expanded ? 'heavy' : 'secondary',
         'heavy',
       ],
-      'border-bottom-style': 'solid',
+      borderBottomStyle: 'solid',
       borderBottomWidth: '1px',
       ':hover': {
         borderBottomColor: 'light',
@@ -113,7 +113,7 @@ export default ({ children }: MenuProps) => {
         'initial',
       ],
     },
-  };
+  } as SystemStyleObject;
 
   return (
     <Box sx={containerStyle}>

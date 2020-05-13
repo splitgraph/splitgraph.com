@@ -216,7 +216,7 @@ const featurePanelStyle = {
   justifyContent: "center",
   // width: "90vw",
   maxWidth: "90vw",
-  "-webkit-box-pack": "center",
+  WebkitBoxPack: "center",
   ".feature": {
     margin: "2rem",
     padding: "1rem",
@@ -480,7 +480,7 @@ const LandingPage = () => {
 
         <iframe
           src="/explore?embed=1"
-          allowTransparency={true}
+          allowtransparency="true"
           style={{
             position: "position: absolute",
             left: 0,
