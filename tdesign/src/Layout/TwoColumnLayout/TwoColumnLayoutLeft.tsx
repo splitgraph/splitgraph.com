@@ -1,6 +1,6 @@
 // @jsx jsx
 // @ts-ignore
-import { jsx, Box } from 'theme-ui';
+import { jsx, Box, SystemStyleObject } from 'theme-ui';
 import * as React from 'react';
 import { useContext } from 'react';
 import { ILayoutContext, LayoutContext } from './TwoColumnLayout';
@@ -58,7 +58,7 @@ export default ({ children }: TwoColumnLayoutLeftProps) => {
 
   const containerStyle = {
     display: 'flex',
-    'flex-direction': 'column',
+    flexDirection: 'column',
     'justify-content': 'space-between',
     '.two-col-left-inner': {
       minHeight: '10vh',
@@ -66,7 +66,7 @@ export default ({ children }: TwoColumnLayoutLeftProps) => {
     '.expand-col-pushdown': {
       minHeight: '5vh',
     },
-  };
+  } as SystemStyleObject;
 
   return (
     <Box sx={containerStyle} className="two-col-left">
