@@ -71,8 +71,13 @@ dir_has_yarn_plugins() {
     local prefixDir="$1"
     shift
 
-    grep 'plugin-workspace-tools' "$prefixDir"/.yarnrc \
-        && return 0
+    if test -f "$prefixDir"/.yarnrc ; then
+        grep 'plugin-workspace-tools' "$prefixDir"/.yarnrc \
+            && return 0
+    elif test -f "$prefixDir"/.yarnrc.yml ; then
+        grep 'plugin-workspace-tools' "$prefixDir"/.yarnrc.yml \
+            && return 0
+    fi
 
     return 1
 }
