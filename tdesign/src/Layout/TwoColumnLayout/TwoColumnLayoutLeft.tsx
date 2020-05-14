@@ -59,7 +59,7 @@ export default ({ children }: TwoColumnLayoutLeftProps) => {
   const containerStyle = {
     display: 'flex',
     flexDirection: 'column',
-    'justify-content': 'space-between',
+    justifyContent: 'space-between',
     '.two-col-left-inner': {
       minHeight: '10vh',
     },
