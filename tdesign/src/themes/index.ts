@@ -223,6 +223,12 @@ export const makeDefaultTheme = () => ({
     },
   },
   buttons: {
+    icon: {
+      bg: 'transparent',
+      ':hover': {
+        cursor: 'pointer',
+      },
+    },
     primary: {
       fontSize: 2,
       fontWeight: 'bold',

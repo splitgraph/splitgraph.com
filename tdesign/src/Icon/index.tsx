@@ -142,3 +142,7 @@ export { IconChevronLeftPrimaryColor };
 import IconChevronRightPrimaryColor from './IconChevronRightPrimaryColor';
 export { IconChevronRightPrimaryColor };
 
+
+import IconPencilBlue from './IconPencilBlue';
+export { IconPencilBlue };
+
