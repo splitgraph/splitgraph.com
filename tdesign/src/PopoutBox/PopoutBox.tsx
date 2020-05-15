@@ -8,11 +8,20 @@ export interface IRenderPopoutButtonProps {
   isOpen: boolean;
 }
 
-export type PopoutAnchorPosition =
+export type PopoutAnchorPositionString =
   | 'topLeft'
   | 'topRight'
+  | 'bottom'
   | 'bottomRight'
   | 'bottomLeft';
+
+export type PopoutAnchorPosition =
+  | PopoutAnchorPositionString
+  | [
+      PopoutAnchorPositionString,
+      PopoutAnchorPositionString,
+      PopoutAnchorPositionString
+    ];
 
 export interface IPopoutBoxProps {
   renderButton: (opts: IRenderPopoutButtonProps) => React.ReactNode;
@@ -24,23 +33,56 @@ export interface IPopoutBoxProps {
 const getAnchorPositionStyle = (
   pos?: PopoutAnchorPosition
 ): SystemStyleObject => {
-  const style = {} as SystemStyleObject;
+  const posInitial = {
+    top: 'initial',
+    bottom: 'initial',
+    left: 'initial',
+    right: 'initial',
+  };
 
-  if (pos === 'topLeft') {
-    style.bottom = '100%';
-    style.right = '100%';
-  } else if (pos === 'topRight') {
-    style.bottom = '100%';
-    style.left = '100%';
-  } else if (pos === 'bottomRight') {
-    style.top = '100%';
-    style.left = '100%';
-  } else if (pos === 'bottomLeft') {
-    style.top = '100%';
-    style.right = '100%';
+  const posMap = {
+    topLeft: {
+      ...posInitial,
+      bottom: '100%',
+      right: '100%',
+    },
+    topRight: {
+      ...posInitial,
+      bottom: '100%',
+      left: '100%',
+    },
+    bottom: {
+      ...posInitial,
+      top: '100%',
+    },
+    bottomRight: {
+      ...posInitial,
+      top: '100%',
+      left: '100%',
+    },
+    bottomLeft: {
+      ...posInitial,
+      top: '100%',
+      right: '100%',
+    },
+  };
+
+  if (Array.isArray(pos)) {
+    return {
+      top: [posMap[pos[0]].top, posMap[pos[1]].top, posMap[pos[2]].top],
+      bottom: [
+        posMap[pos[0]].bottom,
+        posMap[pos[1]].bottom,
+        posMap[pos[2]].bottom,
+      ],
+      left: [posMap[pos[0]].left, posMap[pos[1]].left, posMap[pos[2]].left],
+      right: [posMap[pos[0]].right, posMap[pos[1]].right, posMap[pos[2]].right],
+    } as SystemStyleObject;
+  } else if (pos) {
+    return posMap[pos] as SystemStyleObject;
   }
 
-  return style;
+  return posInitial as SystemStyleObject;
 };
 
 const containerStyle = {
