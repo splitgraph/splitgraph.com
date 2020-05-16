@@ -264,19 +264,10 @@ const LandingPage = () => {
             color: "white",
             // width: "80ch",
             maxWidth: "90vw",
-            minHeight: "80vh",
             boxShadow: "card",
           }}
         >
           <LandingPageSplitfile components={mdxComponents} />
-
-          {/* <MDXProvider
-            components={{
-              h1: (props) => <h1 style={{ color: "tomato" }} {...props} />,
-            }}
-          >
-            <Splitfile />
-          </MDXProvider> */}
         </Box>
 
         <br />

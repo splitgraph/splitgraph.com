@@ -4,9 +4,10 @@ export default ({ children, sx = {}, ...rest }) => (
   <Text
     sx={{
       color: "danger",
-      ...sx
+      ...sx,
     }}
     {...rest}
+    className="danger-text"
   >
     {children}
   </Text>
