@@ -239,6 +239,10 @@ export const makeDefaultTheme = () => ({
         cursor: 'pointer',
       },
     },
+    danger: {
+      variant: 'buttons.primary',
+      backgroundColor: 'danger',
+    },
     primaryDisabled: {
       variant: 'buttons.primary',
       backgroundColor: 'primaryHalfOpacity',
