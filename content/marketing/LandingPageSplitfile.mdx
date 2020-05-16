@@ -1,7 +1,7 @@
 ```splitfile
 FROM splitgraph/geonames:latest IMPORT {
   SELECT
-      substring(alternatenames FROM ',([A-Z]{3\}),') AS iata_code,
+      substring(alternatenames FROM ',([A-Z]{3\\}),') AS iata_code,
       name,
       latitude,
       longitude,
@@ -9,7 +9,7 @@ FROM splitgraph/geonames:latest IMPORT {
   FROM all_countries
   WHERE feature_code = 'AIRP'
   AND country_code = 'US'
-  AND substring(alternatenames FROM ',([A-Z]{3\}),') IS NOT NULL
+  AND substring(alternatenames FROM ',([A-Z]{3\\}),') IS NOT NULL
 } AS airports
 
 SQL {
