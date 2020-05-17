@@ -31,3 +31,5 @@ export * from './Icon';
 export { Card } from './Card';
 
 export { PopoutBox, IRenderPopoutButtonProps } from './PopoutBox';
+
+export { StatusChip } from './StatusChip';
