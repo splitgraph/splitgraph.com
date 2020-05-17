@@ -19,6 +19,7 @@ const StatusChip = ({
   extraStyle = {},
 }: IStatusChipProps) => {
   const containerStyle = {
+    ...extraStyle,
     '.status-chip': {
       display: 'inline-flex',
       alignItems: 'center',
