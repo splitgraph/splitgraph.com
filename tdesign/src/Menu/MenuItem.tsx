@@ -13,7 +13,7 @@ export interface MenuItemProps {
   Icon?: any;
   href?: string;
   as?: string;
-  text?: string;
+  text?: React.ReactNode;
   iconProps?: IIconProps;
   iconSx?: any;
   isActive?: boolean;
