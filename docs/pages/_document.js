@@ -32,7 +32,39 @@ export default class extends Document {
   render() {
     return (
       <html {...this.helmetHtmlAttrComponents}>
-        <Head>{this.helmetHeadComponents}</Head>
+        <Head>
+          {this.helmetHeadComponents}
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/static/icons/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/static/icons/favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/static/icons/favicon-16x16.png"
+          />
+          <link rel="manifest" href="/static/icons/site.webmanifest" />
+          <link
+            rel="mask-icon"
+            href="/static/icons/safari-pinned-tab.svg"
+            color="#36678d"
+          />
+          <link rel="shortcut icon" href="/static/icons/favicon.ico" />
+          <meta name="msapplication-TileColor" content="#36678d" />
+          <meta
+            name="msapplication-config"
+            content="/static/icons/browserconfig.xml"
+          />
+          <meta name="theme-color" content="#ffffff" />
+        </Head>
         <body {...this.helmetBodyAttrComponents}>
           <Main />
           <NextScript />
