@@ -16243,6 +16243,16 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"remark-sectionize@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "remark-sectionize@npm:1.1.1"
+  dependencies:
+    unist-util-find-after: ^2.0.2
+    unist-util-visit-parents: ^2.0.1
+  checksum: 3/03e4a7a7f2d119c59362dfc87eb060de544fc9ed71be12a16691b78a824268a01eeb35936fba0478d13bfc6246bf296d8d1f19a78c4b346993ec32a3b34a7e4c
+  languageName: node
+  linkType: hard
+
 "remark-squeeze-paragraphs@npm:^3.0.1":
   version: 3.0.4
   resolution: "remark-squeeze-paragraphs@npm:3.0.4"
@@ -17472,6 +17482,7 @@ resolve@1.12.0:
     next-seo: ^4.4.0
     npm-run-all: ^4.1.5
     react-helmet: ^6.0.0
+    remark-sectionize: ^1.1.1
     tsdx: ^0.12.3
   languageName: unknown
   linkType: soft
@@ -18974,6 +18985,15 @@ resolve@1.12.0:
   languageName: node
   linkType: hard
 
+"unist-util-find-after@npm:^2.0.2":
+  version: 2.0.4
+  resolution: "unist-util-find-after@npm:2.0.4"
+  dependencies:
+    unist-util-is: ^3.0.0
+  checksum: 3/1407df51f55f073ac8bec734314e45006ccfb83287118d366b32163041528c52114c596b63907bb3698f4ee3ff296ebe3d44347c7ce4630ca418cbe907c995c0
+  languageName: node
+  linkType: hard
+
 "unist-util-find-all-after@npm:^1.0.4":
   version: 1.0.5
   resolution: "unist-util-find-all-after@npm:1.0.5"
@@ -19056,7 +19076,7 @@ resolve@1.12.0:
   languageName: node
   linkType: hard
 
-"unist-util-visit-parents@npm:^2.0.0":
+"unist-util-visit-parents@npm:^2.0.0, unist-util-visit-parents@npm:^2.0.1":
   version: 2.1.2
   resolution: "unist-util-visit-parents@npm:2.1.2"
   dependencies:
