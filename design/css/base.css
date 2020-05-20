@@ -38,11 +38,24 @@ body {
 *::-webkit-scrollbar {
   width: 7px;
   height: 7px;
+  opacity: 0;
 }
 
 /* sidebar scrollbar should be color of content area */
 .sgr-sidebar--root::-webkit-scrollbar-track {
   background: #fff;
+}
+
+.sgr-sidebar--root::-webkit-scrollbar-thumb {
+  background: #fff;
+}
+
+.sgr-sidebar--root::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+.sgr-sidebar--root:hover::-webkit-scrollbar-thumb {
+  background: #888;
 }
 
 /* pre scrollbar should be color of pre */

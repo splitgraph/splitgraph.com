@@ -229,15 +229,9 @@ const withDocsLayout = ({
             </Footer>
           </Box>
 
-          <Box
-            className="right-sidebar"
-            sx={{
-              a: defaultTheme.links.primary,
-              display: ["none", "none", "initial"],
-            }}
-          >
+          <aside className="right-sidebar">
             <TocMdx />
-          </Box>
+          </aside>
         </HolyGrail.Layout>
       </BaseLayout>
     );
