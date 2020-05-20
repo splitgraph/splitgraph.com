@@ -53,6 +53,7 @@ const _configs = {
     options: {
       mdPlugins: [
         [require("remark-disable-tokenizers"), { block: ["indentedCode"] }],
+        require("remark-sectionize"),
       ],
       hastPlugins: [
         splitgraphRehypePrism,
