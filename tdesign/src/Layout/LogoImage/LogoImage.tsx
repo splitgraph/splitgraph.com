@@ -15,5 +15,5 @@ const logoImageStyle = {
 const defaultLogoURL = '/static/splitgraph_logo.svg';
 
 export default ({ logoURL = defaultLogoURL }: ILogoImageProps) => {
-  return <img src={logoURL} style={logoImageStyle} />;
+  return <img src={logoURL} style={logoImageStyle} alt="splitgraph logo" />;
 };

@@ -1,3 +1,1 @@
-import { Box } from "../../index";
-
-export default ({ children }) => <Box className="footer">{children}</Box>;
+export default ({ children }) => <footer className="footer">{children}</footer>;
