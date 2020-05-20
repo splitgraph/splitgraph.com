@@ -1,13 +1,11 @@
-import { Link } from "@splitgraph/design";
-
 const LogoImage = ({ logoURL }) => (
-  <Link ariaLabel="Homepage" variant="links.unstyled" href="/" as="/">
+  <a ariaLabel="Homepage" variant="links.unstyled" href="/">
     <img
       src={logoURL}
       style={{ maxHeight: "2rem", margin: 4 }}
       alt="splitgraph logo"
     />
-  </Link>
+  </a>
 );
 
 export default LogoImage;
