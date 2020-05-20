@@ -94,7 +94,7 @@ const VerticalStyle = {
     MsOverflowStyle: "-ms-autohiding-scrollbar",
     scrollbarWidth: "thin",
     paddingBottom: "8rem",
-    scrollSnapType: "y mandatory",
+    // scrollSnapType: "y mandatory",
     // scrollPaddingRight: "200px",
     scrollPaddingBottom: "200px",
 

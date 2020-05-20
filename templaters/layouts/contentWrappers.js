@@ -6,12 +6,13 @@ const TocStyle = {
   ...tocStyles,
   "ol.toc-level": {
     ...tocStyles["ol.toc-level"],
-    fontSize: 1,
-    padding: "0.5em !important",
-    whiteSpace: "nowrap",
-    overflowX: "hidden",
-    listStyleType: "none"
-  }
+    // fontSize: 1,
+    padding: "0.75em !important",
+    listStyleType: "none",
+    li: {
+      marginBottom: "0.5em",
+    },
+  },
 };
 
 const findMatchingElement = (children = [], matchFunc) => {
@@ -45,7 +46,7 @@ const findMatchingElement = (children = [], matchFunc) => {
 export const OnlyTOC = ({ children, ...rest }) => {
   const originalToc = findMatchingElement(
     React.Children.toArray(children),
-    el =>
+    (el) =>
       el.props &&
       (el.props.name === "nav" ||
         (el.type === "nav" && el.props.className === "toc"))

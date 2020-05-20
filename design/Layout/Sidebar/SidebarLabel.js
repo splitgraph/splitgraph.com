@@ -45,7 +45,7 @@ const ClassNames = {
   // This is dynamic, and we use it for padding, but realistically there is a
   // max, so we can still use the selector system to assign
   Depth: (depth, minLabelDepth = 0) =>
-    `sgr-sidebar-depth-${depth - minLabelDepth}`
+    `sgr-sidebar-depth-${depth - minLabelDepth}`,
 };
 
 const Selectors = Object.keys(ClassNames).reduce(
@@ -55,7 +55,7 @@ const Selectors = Object.keys(ClassNames).reduce(
       typeof ClassNames[classNameKey] === "string"
         ? ClassNames[classNameKey]
         : "doesnotexist"
-    }`
+    }`,
   }),
   {}
 );
@@ -65,7 +65,7 @@ const getHardcodedDepthStyles = (maxHardCodedDepth = 10) => {
   const depthStyles = {
     Base: {},
     Vertical: {},
-    Horizontal: {}
+    Horizontal: {},
   };
 
   // Don't count the root nodes, we want to set their style separately
@@ -80,7 +80,7 @@ const getHardcodedDepthStyles = (maxHardCodedDepth = 10) => {
 
       paddingLeft:
         depth >= 1 ? `${marginLeft + paddingLeft}rem !important` : "initial",
-      marginRight: depth >= 1 ? `${marginLeft}rem` : "initial"
+      marginRight: depth >= 1 ? `${marginLeft}rem` : "initial",
     };
 
     depthStyles.Vertical[
@@ -90,7 +90,7 @@ const getHardcodedDepthStyles = (maxHardCodedDepth = 10) => {
     ] = {
       borderBottomStyle: "solid",
       borderBottomWidth: "2px",
-      borderBottomColor: "lightgray"
+      borderBottomColor: "lightgray",
     };
 
     depthStyles.Vertical[
@@ -102,7 +102,7 @@ const getHardcodedDepthStyles = (maxHardCodedDepth = 10) => {
       borderBottomWidth: "2px",
       borderBottomColor: "lightgray",
       borderLeftColor: "primary",
-      borderRightStyle: "solid"
+      borderRightStyle: "solid",
     };
   }
 
@@ -112,12 +112,12 @@ const getHardcodedDepthStyles = (maxHardCodedDepth = 10) => {
 const hideSidebars = {
   "ul::-webkit-scrollbar": {
     width: 0,
-    height: 0
+    height: 0,
   },
   "ul::-webkit-scrollbar-button": {
     width: 0,
-    height: 0
-  }
+    height: 0,
+  },
 };
 
 const styles = {
@@ -126,18 +126,18 @@ const styles = {
     ...hideSidebars,
     BaseLabel: {},
     RootLabel: {},
-    ChildLabel: {}
+    ChildLabel: {},
   },
   Horizontal: {
     [`${Selectors.ActiveParentNodeAndNothingClicked}:after,
       ${Selectors.ClickedParentNode}:after`]: {
       content: '"\\25BC"',
       fontSize: ".7em",
-      paddingLeft: 2
+      paddingLeft: 2,
     },
 
     [`a${Selectors.ChildNode}`]: {
-      boxShadow: "0 0 4px rgba(0, 0, 0, .125)"
+      boxShadow: "0 0 4px rgba(0, 0, 0, .125)",
     },
 
     [`${Selectors.Base}`]: {
@@ -152,28 +152,28 @@ const styles = {
       borderBottom: "1px",
       borderBottomColor: "primary",
       color: "primary",
-      scrollSnapAlign: "center"
+      scrollSnapAlign: "center",
     },
 
     [`${Selectors.LastClicked}`]: {
-      textDecoration: "underline"
+      textDecoration: "underline",
     },
 
     [`${Selectors.ActiveNode}, ${Selectors.InActivePath}`]: {
       // color: "purple",
       borderLeftWidth: "2px",
       borderLeftStyle: "solid",
-      borderLeftColor: "primary"
+      borderLeftColor: "primary",
     },
 
     [`${Selectors.MutedNode}`]: {
       opacity: 0.5,
-      backgroundColor: "gray"
+      backgroundColor: "gray",
     },
 
     [`${Selectors.ActiveNode},${Selectors.InActivePath}`]: {
-      fontWeight: "bold"
-    }
+      fontWeight: "bold",
+    },
   },
   Vertical: {
     [`${Selectors.Base}`]: {
@@ -182,10 +182,10 @@ const styles = {
       alignItems: "center",
       height: "2rem",
       cursor: "pointer",
-      borderRightWidth: "1px",
+      borderRightWidth: "0px",
       borderRightColor: "lightgray",
       borderRightStyle: "solid",
-      backgroundColor: "#efefef"
+      backgroundColor: "#efefef",
     },
 
     [`${Selectors.MutedNode}`]: {
@@ -210,26 +210,28 @@ const styles = {
 
     // 1. Child node, may also be parent node. Definitely not root node.
     [`${Selectors.ChildNode}`]: {
-      paddingTop: 1,
-      paddingBottom: 1,
+      // paddingTop: 1,
+      // paddingBottom: 1,
+      paddingTop: 0,
+      paddingBottom: 0,
       borderLeftWidth: "4px",
       borderLeftStyle: "solid",
       ":hover": {
         borderColor: "white",
         // backgroundColor: "white"
-        textDecoration: "underline"
-      }
+        textDecoration: "underline",
+      },
     },
 
     [`${Selectors.ChildOfActiveParent}`]: {
       borderLeftWidth: "4px",
       ":hover": {
-        borderLeftColor: "primary"
-      }
+        borderLeftColor: "primary",
+      },
     },
 
     [`${Selectors.ActiveParentNode} ul`]: {
-      backgroundColor: "primary !important"
+      backgroundColor: "primary !important",
     },
 
     // 2. Parent Node, may also be child node or root node.
@@ -242,7 +244,7 @@ const styles = {
       fontWeight: "bold",
       fontVariant: "small-caps",
       fontSize: "0.8em",
-      textTransform: "uppercase"
+      textTransform: "uppercase",
     },
 
     [`${Selectors.InActivePath}`]: {
@@ -252,38 +254,38 @@ const styles = {
       ":hover": {
         borderLeftColor: "primary",
         borderLeftStyle: "solid",
-        borderLeftWidth: "4px"
-      }
+        borderLeftWidth: "4px",
+      },
     },
 
     // 3. Root node, may also be parent node. Definitely not child node.
     [`${Selectors.RootNode}`]: {
-      paddingTop: "1rem",
+      // paddingTop: "1rem",
+      paddingTop: 0,
       paddingLeft: "8px",
       justifyContent: "flex-end",
       paddingRight: "8px",
       borderLeftStyle: "none",
       backgroundColor: "#efefef",
-      paddingTop: "8px",
       borderTopStyle: "none",
       borderTopColor: "primary",
       borderTopWidth: "4px",
       ":hover": {
         borderLeftWidth: "0px",
-        borderLeftStyle: "none"
-      }
+        borderLeftStyle: "none",
+      },
     },
 
     [`${Selectors.RootNode}${Selectors.InActivePath}`]: {
-      backgroundColor: "#fff"
+      backgroundColor: "#fff",
     },
 
     [`${Selectors.ParentNode}${Selectors.InActivePath}, ${Selectors.ParentNode}${Selectors.InLastClickedPath}`]: {
-      backgroundColor: "#fff"
+      backgroundColor: "#fff",
     },
 
     [`${Selectors.ParentNode}${Selectors.LastClicked}`]: {
-      backgroundColor: "#fff"
+      backgroundColor: "#fff",
     },
 
     [`${Selectors.ActiveNode}`]: {
@@ -309,10 +311,10 @@ const styles = {
         borderTopColor: "lightgray",
         borderBottomColor: "lightgray",
         borderTopWidth: "1px",
-        borderBottomWidth: "1px"
-      }
-    }
-  }
+        borderBottomWidth: "1px",
+      },
+    },
+  },
 };
 
 const Style = {
@@ -320,12 +322,12 @@ const Style = {
   ...getHardcodedDepthStyles().Base,
   "@media (min-width: 769px)": {
     ...styles.Vertical,
-    ...getHardcodedDepthStyles().Vertical
+    ...getHardcodedDepthStyles().Vertical,
   },
   "@media (max-width: 768px)": {
     ...styles.Horizontal,
-    ...getHardcodedDepthStyles().Horizontal
-  }
+    ...getHardcodedDepthStyles().Horizontal,
+  },
 };
 
 const getClassNames = ({
@@ -340,7 +342,7 @@ const getClassNames = ({
   isChildOfActiveParent,
   isChildOfClickedParent,
   depth,
-  minLabelDepth
+  minLabelDepth,
 }) => {
   const classNames = [ClassNames.Base];
 
@@ -408,14 +410,14 @@ const getClassNames = ({
   return classNames.join(" ");
 };
 
-const hideScrollbars = el => {
+const hideScrollbars = (el) => {
   el.style["::-webkit-scrollbar"] =
     "width: 0 !important; background: transparent;";
   el.style["overflow"] = "-moz-scrollbars-none";
   el.style["-ms-overflow-style"] = "none";
 };
 
-const revealScrollbars = el => {
+const revealScrollbars = (el) => {
   el.style["-webkit-scrollbar"] = "initial";
   // el.style["overflow"] = "initial";
   el.style["-ms-overflow-style"] = "initial";
@@ -426,7 +428,7 @@ const useScrollToActiveNode = ({
   isInActivePath,
   isInLastClickedPath,
   containerEl,
-  anythingBeenClicked
+  anythingBeenClicked,
 }) => {
   useLayoutEffect(() => {
     const scrollTarget = containerEl.current;
@@ -462,7 +464,7 @@ const SidebarLabel = ({
   isLastClicked,
   isInActivePath,
   isInLastClickedPath,
-  anythingBeenClicked
+  anythingBeenClicked,
 }) => {
   const {
     depth,
@@ -471,7 +473,7 @@ const SidebarLabel = ({
     slug,
     metadata: { title, sidebarTitle = null } = {},
     children,
-    parentNodeId
+    parentNodeId,
   } = node;
   const isParent = children && children.length > 0;
   const isChild = !!parentNodeId;
@@ -488,7 +490,7 @@ const SidebarLabel = ({
     isChildOfActiveParent,
     isChildOfClickedParent,
     depth,
-    minLabelDepth
+    minLabelDepth,
   });
 
   const labelContainerId = `sgr-sidebar-label-container-${nodeId}`;
@@ -500,7 +502,7 @@ const SidebarLabel = ({
     isInActivePath,
     isInLastClickedPath,
     containerEl,
-    anythingBeenClicked
+    anythingBeenClicked,
   });
 
   const _title = sidebarTitle || title;
