@@ -478,9 +478,11 @@ const LandingPage = () => {
             top: 0,
             minWidth: "100%",
             width: "100%",
-            height: "400px",
+            maxHeight: "calc(200px + 1rem)",
+            height: "calc(200px + 1rem)",
             border: "none",
             background: "none",
+            overflowY: "hidden",
           }}
         />
 
