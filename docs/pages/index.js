@@ -430,9 +430,9 @@ const LandingPage = () => {
       <section
         className="lp-section lp-cta"
         sx={{
-          minWidth: "100vw",
-          maxWidth: "100vw",
-          width: "100vw",
+          minWidth: "100%",
+          maxWidth: "100%",
+          width: "100%",
           backgroundColor: "heavy",
           paddingTop: "3rem",
           paddingBottom: "3rem",
@@ -476,8 +476,8 @@ const LandingPage = () => {
             position: "position: absolute",
             left: 0,
             top: 0,
-            minWidth: "100vw",
-            width: "100vw",
+            minWidth: "100%",
+            width: "100%",
             height: "400px",
             border: "none",
             background: "none",

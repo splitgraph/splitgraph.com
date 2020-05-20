@@ -27,6 +27,7 @@ import { OnlyTOC } from "./contentWrappers";
 import { defaultTheme } from "@splitgraph/design";
 
 import { NextSeo } from "next-seo";
+import { Helmet } from "react-helmet";
 
 const mdxComponents = {
   pre: ({ children, ...rest }) => (
@@ -152,6 +153,34 @@ const withDocsLayout = ({
       <BaseLayout>
         <DocsPageSeo currentURL={currentURL} />
 
+        <Helmet
+          style={[
+            {
+              cssText: `
+            body {
+                overflow-x: hidden;
+
+                /* so header doesn't disappear when clicking anchor tags */
+                scroll-padding-top: 75px;
+            }
+
+            @media (min-width: 769px) {
+              body {
+                overflow-y: hidden !important;
+              }
+            }
+
+            /* 1570px is when the right sidebar appears */
+            @media (min-width: 1571px) {
+              .main-content nav.toc {
+                display: none;
+              }
+            }
+        `,
+            },
+          ]}
+        />
+
         <HolyGrail.Layout>
           <Header gridArea={HolyGrail.GridArea.Header}>
             <LogoImage logoURL="/static/splitgraph_logo.svg" />
@@ -168,25 +197,40 @@ const withDocsLayout = ({
             initialDepth={activeNodeDepth}
           />
 
-          <MainContent gridArea={HolyGrail.GridArea.Content}>
-            <ContentHeader depth={activeNode.depth}>
-              <Heading>{meta.title}</Heading>
-            </ContentHeader>
-            <ContentBody>
-              <MdxPage components={mdxComponents} />
-            </ContentBody>
-            <ContentFooter>
-              <InterPageNav
-                Link={Link}
-                up={activeNode.up}
-                left={activeNode.left}
-                right={activeNode.right}
-              />
-            </ContentFooter>
-          </MainContent>
+          <Box className="content-wrapper">
+            <MainContent>
+              <ContentHeader depth={activeNode.depth}>
+                <Heading>{meta.title}</Heading>
+              </ContentHeader>
+              <ContentBody>
+                <MdxPage components={mdxComponents} />
+              </ContentBody>
+              <ContentFooter>
+                <InterPageNav
+                  Link={Link}
+                  up={activeNode.up}
+                  left={activeNode.left}
+                  right={activeNode.right}
+                />
+              </ContentFooter>
+            </MainContent>
+            <Footer gridArea={HolyGrail.GridArea.Footer}>
+              <ul>
+                <li>
+                  <Link href="/">Index</Link>
+                </li>
+                <li>
+                  <Link href="/">Somewhere</Link>
+                </li>
+                <li>
+                  <Link href="/">Else</Link>
+                </li>
+              </ul>
+            </Footer>
+          </Box>
 
           <Box
-            gridArea={HolyGrail.GridArea.Side}
+            className="right-sidebar"
             sx={{
               a: defaultTheme.links.primary,
               display: ["none", "none", "initial"],
@@ -194,20 +238,6 @@ const withDocsLayout = ({
           >
             <TocMdx />
           </Box>
-
-          <Footer gridArea={HolyGrail.GridArea.Footer}>
-            <ul>
-              <li>
-                <Link href="/">Index</Link>
-              </li>
-              <li>
-                <Link href="/">Somewhere</Link>
-              </li>
-              <li>
-                <Link href="/">Else</Link>
-              </li>
-            </ul>
-          </Footer>
         </HolyGrail.Layout>
       </BaseLayout>
     );

@@ -116,7 +116,8 @@ export const defaultTheme = {
     },
   },
   fonts: {
-    body: "system-ui, sans-serif",
+    body:
+      "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji",
     heading: "inherit",
     monospace: "Menlo, monospace",
   },
@@ -127,6 +128,8 @@ export const defaultTheme = {
     bold: 700,
   },
   lineHeights: {
+    // body: 1.5,
+    // heading: 1.25,
     body: 1.5,
     heading: 1.25,
   },
@@ -294,6 +297,8 @@ export const defaultTheme = {
     },
     inlineCode: {
       ...prismTheme,
+      color: prismTheme.backgroundColor,
+      backgroundColor: prismTheme.color,
       "@media (min-width: 749px)": {
         minWidth: "initial",
       },
@@ -305,7 +310,7 @@ export const defaultTheme = {
       display: "inline-flex",
       alignContent: "center",
       overflowX: "auto",
-      backgroundColor: "primary",
+      // backgroundColor: "primary",
     },
     code: {
       backgroundColor: "primary",

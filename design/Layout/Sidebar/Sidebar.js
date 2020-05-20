@@ -41,12 +41,12 @@ const getInlineFooterStyle = ({ depth, show, initialDepth, loading }) => ({
       align: "flex",
       alignItems: "flex-end",
       justifyContent: "center",
-      display: "flex"
-    }
+      display: "flex",
+    },
   },
   "@media (min-width: 769px)": {
-    display: "none"
-  }
+    display: "none",
+  },
 });
 
 const DopeWaterLoadingAnimation = ({ loading }) => {
@@ -73,28 +73,28 @@ const DopeWaterLoadingAnimation = ({ loading }) => {
       WebkitAnimation: "animtop 5s forwards, animtop2 2s forwards",
       animation: "animtop 5s forwards, animtop2 2s forwards",
       borderBottomLeftRadius: "40px",
-      borderBottomRightRadius: "40px"
+      borderBottomRightRadius: "40px",
     },
     "@-webkit-keyframes animtop": {
       "0%": {
-        top: "100%"
+        top: "100%",
       },
       "75%": {
-        top: 0
-      }
+        top: 0,
+      },
     },
     "@keyframes animtop": {
       "0%": { top: "100%" },
-      "100%": { top: "25%" }
+      "100%": { top: "25%" },
     },
     "@-webkit-keyframes animtop2": {
       "75%": { top: "25%" },
-      "100%": { top: 0 }
+      "100%": { top: 0 },
     },
     "@keyframes animtop2": {
       "75%": { top: "25%" },
-      "100%": { top: 0 }
-    }
+      "100%": { top: 0 },
+    },
   };
 
   const containerStyle = useMemo(
@@ -116,9 +116,9 @@ const ResetButton = ({ reset, show }) => {
         textTransform: "uppercase",
         fontSize: "1rem",
         ":hover": {
-          cursor: "pointer"
+          cursor: "pointer",
         },
-        display: show ? "initial" : "none"
+        display: show ? "initial" : "none",
       }}
       onClick={reset}
     >
@@ -132,7 +132,7 @@ const SidebarInlineFooter = ({
   lastClickedDepth,
   initialDepth,
   loading,
-  reset
+  reset,
 }) => {
   const visibleDepth = nextDepth || lastClickedDepth || initialDepth;
   const show = loading || visibleDepth > initialDepth;
@@ -141,7 +141,7 @@ const SidebarInlineFooter = ({
     depth: visibleDepth,
     show,
     initialDepth,
-    loading
+    loading,
   });
 
   return (
@@ -167,7 +167,7 @@ const SidebarNode = ({
   activeNodePath,
   onClickNode,
   acquireMutex,
-  mutex
+  mutex,
 }) => {
   const {
     depth,
@@ -175,7 +175,7 @@ const SidebarNode = ({
     parentNodeId,
     slug,
     metadata: { title } = {},
-    children
+    children,
   } = node;
 
   const isParent = !!children && children.length > 0;
@@ -192,7 +192,7 @@ const SidebarNode = ({
     isInLastClickedPath,
     anythingBeenClicked,
     isChildOfClickedParent,
-    isChildOfActiveParent
+    isChildOfActiveParent,
   } = useSidebarNode({
     nodeId,
     onClickNode,
@@ -206,7 +206,7 @@ const SidebarNode = ({
     minLabelDepth,
     depth,
     isParent,
-    isNavigable
+    isNavigable,
   });
 
   const item = (
@@ -227,7 +227,7 @@ const SidebarNode = ({
       {children && (
         <div className="ul-wrapper" sx={childListContainerStyle}>
           <ul key={`${slug}`} sx={childListStyle}>
-            {children.map(child => (
+            {children.map((child) => (
               <SidebarNode
                 key={`${child.slug}`}
                 Link={Link}
@@ -268,7 +268,7 @@ const Sidebar = ({
   lastClickedDepth,
   nextDepth,
   initialDepth,
-  reset
+  reset,
 }) => {
   return (
     <>
@@ -314,7 +314,7 @@ const SidebarRoot = ({
   matchActiveNode,
   activeNodeId,
   idKey,
-  initialDepth
+  initialDepth,
 }) => {
   const {
     loading,
@@ -326,24 +326,25 @@ const SidebarRoot = ({
     onClickNode,
     acquireMutex,
     mutex,
-    reset
+    reset,
   } = useSidebar({
     contentTree: rootNode,
     activeNodeId,
     matchActiveNode,
     idKey,
-    initialDepth
+    initialDepth,
   });
 
   return (
     <Box
+      className="sgr-sidebar--root"
       sx={{
         gridArea,
         ...SidebarStyle.Container,
         ul: SidebarStyle.List,
         ".ul-wrapper": SidebarStyle.ListContainer,
         ".li-selector": SidebarStyle.Item,
-        "span,a": SidebarStyle.Label
+        "span,a": SidebarStyle.Label,
       }}
       fontSize={2}
     >

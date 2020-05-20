@@ -9,13 +9,25 @@ html,
 body {
   margin: 0;
   padding: 0;
-  scrollbar-width: none;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none;
+}
+
+* > * {
+  -ms-overflow-style: none;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+* > *::--webkit-scrollbar {
+  width: 0px !important;
 }
 
 .asciinema-player-wrapper {
   position: relative;
   text-align: center;
   outline: none;
+  background-color: white;
 }
 .asciinema-player-wrapper .title-bar {
   display: none;
@@ -156,6 +168,10 @@ body {
   }
 }
 
+.asciinema-terminal::-webkit-scrollbar {
+  width: 0px;
+}
+
 .asciinema-terminal {
   box-sizing: content-box;
   -moz-box-sizing: content-box;
@@ -180,7 +196,7 @@ body {
   /* 47px = height of control bar (32px + 15px padding) */
   /* use vh instead of % or it won't work in FF */
   height: calc(100vh - 47px) !important;
-  overflow-y: scroll;
+  overflow-y: auto;
   scroll-snap-type: y mandatory;
   scroll-padding-top: calc(100vh - 100px);
   scrollbar-width: none;
