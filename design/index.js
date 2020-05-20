@@ -4,7 +4,7 @@ export { ErrorAlert, SuccessAlert } from "./Alert";
 export { SubmitButton } from "./Button";
 export { DividerWithMiddleText, HorizontalDivider } from "./Divider";
 export { Input, Label } from "./Form";
-export { Octicon } from "./Icon";
+export { Octicon, GitLabLogoIcon, GoogleLogoIcon } from "./Icon";
 export { Link, MutedLink } from "./Link";
 export {
   DangerText,
