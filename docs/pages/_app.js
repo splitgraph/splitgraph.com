@@ -8,7 +8,7 @@ const SEO_BASE_URL = process.env.SEO_CANONICAL_BASE_URL;
 export default function SplitgraphWebsiteApp({ Component, pageProps }) {
   const defaultDescription =
     "Work with data like you work with code. Create, share and extend" +
-    "reproducible data. Inspired by Docker and Git, built for PostgresSQL.";
+    " reproducible data. Inspired by Docker and Git, built for PostgreSQL.";
 
   const DEFAULT_SEO = {
     title: "Splitgraph",

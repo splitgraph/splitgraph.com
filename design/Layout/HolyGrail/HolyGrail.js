@@ -30,7 +30,7 @@ export default ({ children }) => (
         "@media (min-width: 769px)": {
           position: "absolute",
           top: "75px",
-          left: "calc((100vw - 600px - 80ch)/2 + 300px + 80ch + 2rem)",
+          left: "calc((100vw - 600px - 100ch)/2 + 300px + 100ch + 2rem)",
           maxWidth: "300px",
           maxHeight: "calc(100vh - 100px)",
           overflowY: "auto",
@@ -53,8 +53,8 @@ export default ({ children }) => (
         },
         "@media (min-width: 769px)": {
           MsOverflowStyle: "-ms-autohiding-scrollbar",
-          paddingLeft: "calc((100vw - 600px - 80ch)/2)",
-          paddingRight: "calc((100vw - 600px - 80ch)/2 + 300px)",
+          paddingLeft: "calc((100vw - 600px - 100ch)/2)",
+          paddingRight: "calc((100vw - 600px - 100ch)/2 + 300px)",
           scrollbarWidth: "thin",
         },
       },
