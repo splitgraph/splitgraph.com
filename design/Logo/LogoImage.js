@@ -1,5 +1,5 @@
 const LogoImage = ({ logoURL }) => (
-  <a ariaLabel="Homepage" variant="links.unstyled" href="/">
+  <a aria-label="Homepage" variant="links.unstyled" href="/">
     <img
       src={logoURL}
       style={{ maxHeight: "2rem", margin: 4 }}
