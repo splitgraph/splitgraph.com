@@ -48,6 +48,9 @@ export default ({ children }) => (
       ".main-content": {
         backgroundColor: "background",
         minHeight: "calc(100vh - 3rem)",
+        img: {
+          maxWidth: "100%",
+        },
         "@media (min-width: 769px)": {
           MsOverflowStyle: "-ms-autohiding-scrollbar",
           paddingLeft: "calc((100vw - 600px - 80ch)/2)",
