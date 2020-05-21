@@ -13,6 +13,7 @@ export interface BaseLayoutProps {
   renderHeaderRight?: () => React.ReactNode;
   renderHeaderCenter?: () => React.ReactNode;
   extraHeaderStyle?: SystemStyleObject;
+  extraStyle?: SystemStyleObject;
 }
 
 export default ({
@@ -20,8 +21,9 @@ export default ({
   renderHeaderCenter,
   renderHeaderRight,
   extraHeaderStyle = {},
+  extraStyle = {},
 }: BaseLayoutProps) => {
-  const headerStyle = {
+  const containerStyle = {
     // maxWidth: '100vw',
     minWidth: '-webkit-fit-content',
     // width: '100vw',
@@ -40,13 +42,14 @@ export default ({
     '.header--container': {
       ...extraHeaderStyle,
     },
+    ...extraStyle,
   } as SystemStyleObject;
 
   const headerCenter = !!renderHeaderCenter ? renderHeaderCenter() : null;
   const headerRight = !!renderHeaderRight ? renderHeaderRight() : null;
 
   return (
-    <Box sx={headerStyle}>
+    <Box sx={containerStyle}>
       <Header>
         <HeaderLeft>
           <Link className="logo-link logo-link-flex" as={'/'} href={'/'}>

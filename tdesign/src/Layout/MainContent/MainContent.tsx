@@ -20,7 +20,7 @@ export default ({ children, extraStyle = {} }: IMainContentProps) => {
   } as SystemStyleObject;
 
   return (
-    <Box sx={outerContainerStyle}>
+    <Box className="main-content" sx={outerContainerStyle}>
       <Box sx={mainContentStyle}>{children}</Box>
     </Box>
   );
