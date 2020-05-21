@@ -1,0 +1,74 @@
+export const meta = {
+  id: "datagrip",
+  title: "DataGrip"
+};
+
+JetBrains DataGrip can connect to the Splitgraph engine and use it as a data source to query checked out Splitgraph tables directly or through [layered querying](../large_datasets/layered_querying).
+
+#### Add PostgreSQL data source
+
+![Add PostgreSQL data source](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/datagrip/1-add-postgres-db.png)
+
+#### Configure PostgreSQL database
+
+Use a JDBC connection string to add the Splitgraph engine to DataGrip:
+
+```
+jdbc:postgresql://localhost:5432/splitgraph?user=sgr&password=[password]
+```
+
+![Configure PostgreSQL database](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/datagrip/2-configure-postgres-db.png)
+
+#### Missing schemas
+
+By default, DataGrip only shows the "public" schema in the selector. Splitgraph checks data images out into
+schemas with the same name as the repository.
+
+![Splitgraph schemas missing](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/datagrip/3-schemas-missing.png)
+
+To solve this, right click on the database, then go to Tools, Manage Shown Schemas and check "All Schemas".
+
+![Go to Database -> Database Tools -> Manage Shown Schemas](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/datagrip/4-solution-manage-shown-schemas.png)
+
+![Check All Schemas](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/datagrip/5-check-all-schemas.png)
+
+Your checked-out Splitgraph datasets will appear in the schema selector.
+
+![The checked-out datasets in the schema selector](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/datagrip/6-everything-there-all-good.png)
+
+#### Making geo queries
+
+DataGrip has support for plotting geospatial data using [PostGIS](https://postgis.net).
+
+Make sure you have upgraded your engine to be PostGIS-enabled:
+
+```shell-session
+$ sgr engine upgrade --image splitgraph/engine:stable-postgis
+$ sgr sql "CREATE EXTENSION IF NOT EXISTS postgis"
+```
+
+Clone a dataset and check it out:
+
+```shell-session
+$ sgr clone splitgraph/london_wards
+$ sgr checkout --layered splitgraph/london_wards:latest
+```
+
+A good sample query is just plotting the geometry column in the dataset. This column is in the
+ [British National Grid](https://epsg.io/27700) and we need to convert it to the standard
+ [WGS 84](https://epsg.io/4326) projection in order for DataGrip to plot it with an
+ [OpenStreetMap](https://www.openstreetmap.org/) overlay:
+
+```sql
+SELECT name, gss_code, ST_Transform(ST_SetSRID(geom, 27700), 4326) FROM "splitgraph/london_wards".city_merged_2018
+```
+
+Toggle geo viewer by pressing gear in bottom right hand side of window.
+
+![Toggle geo viewer by pressing gear in bottom right hand side of window](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/datagrip/7-making-geo-query.png)
+
+Use mouse/keyboard to select one or multiple rows containing polygons to plot (select all with Cmd+A / Ctrl+A).
+
+![Select one row](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/datagrip/9-select-one.png)
+
+![Select multiple rows](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/datagrip/10-select-multiple.png)

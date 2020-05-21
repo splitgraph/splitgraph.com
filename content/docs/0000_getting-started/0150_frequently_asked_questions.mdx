@@ -27,6 +27,16 @@ PostgreSQL is a battle-tested RDBMS with a mature feature set (ACID transactions
 indexing, crash safety), a long list of commercial and enthusiast users and a rich ecosystem
 of extensions and applications. We don't think that features added by Splitgraph warrant building a brand new database.
 
+### Can I use Splitgraph with my existing tools?
+
+Yes. Any PostgreSQL client is able to query Splitgraph datasets (directly or through [layered querying](../large_datasets/layered_querying)),
+including [DataGrip](../integrating_splitgraph/datagrip), [pgAdmin](../integrating_splitgraph/pgadmin) or [other clients like pgcli or DBeaver](../integrating_splitgraph/other_clients).
+
+In addition, a lot of existing applications and extensions that work with PostgreSQL can be enhanced
+by Splitgraph. We have examples of using Splitgraph with [Jupyter notebooks](../integrating_splitgraph/jupyter_notebooks),
+[PostGIS](../integrating_splitgraph/postgis), [PostgREST](../integrating_splitgraph/postgrest) or
+[dbt](../integrating_splitgraph/dbt).
+
 Philosophically, we believe that great tools enhance existing abstractions without breaking them:
 
   * Git adds versioning to the filesystem, enhancing it for any tools that use the filesystem. Compilers,
@@ -35,10 +45,7 @@ Philosophically, we believe that great tools enhance existing abstractions witho
     for installing the application on a bare machine. The application itself has no idea it's running
     inside of a container and doesn't need to be rewritten to run in Docker.
 
-We were guided by the same principles when building Splitgraph. Any application that works
-with PostgreSQL can work with a Splitgraph table without any changes. We have examples of using
-Splitgraph with [Jupyter notebooks](../integrating_splitgraph/jupyter_notebooks),
-[PostGIS](../integrating_splitgraph/postgis) or [PostgREST](../integrating_splitgraph/postgrest).
+We were guided by the same principles when building Splitgraph.
 
 ### What's the performance like? Do you have any benchmarks?
 
@@ -66,7 +73,8 @@ Yes. Splitgraph has a few optimizations that make it suitable for working with l
 
   * Datasets are partitioned into fragments stored in a [columnar format](../concepts/objects) which is
     superior to row-format storage for OLAP workloads.
-  * Splitgraph images can be queried without checking them out [(layered querying)](../large_datasets/layered_querying) which lazily downloads a small fraction of the table needed for the query. This is still completely seamless to the client application.
+  * Splitgraph images can be queried without checking them out or even downloading them completely
+   [(layered querying)](../large_datasets/layered_querying): Splitgraph can lazily download a small fraction of the table needed for the query. This is still completely seamless to the client application.
 
 Since Splitgraph is built on top of PostgreSQL, same methods that are used for horizontally scaling a
 PostgreSQL deployment can also be used on Splitgraph.
@@ -80,6 +88,13 @@ It is also possible to push data to S3-compatible storage (like [Minio](https://
 
 You can use [Splitgraph Cloud](../splitgraph_cloud/introduction) if you wish to
 get or share public data or have a [REST API](../splitgraph_cloud/publish_rest_api) generated for your dataset.
+
+### Is Splitgraph "X for data"?
+
+Splitgraph tries to provide an end-to-end framework for dealing with common data science problems.
+Rather than taking an existing tool and asking "what would it look like if we applied it to data", we asked ourselves "what do current data management workflows look like, how are they lacking and what can we borrow from other disciplines that can be useful?"
+
+We tried to get our inspiration from multiple tools and best practices in software engineering: versioning, self-contained artifacts, continuous integration and the idea of tools that improve existing workflows without breaking them and forcing users to change them.
 
 ### Why not just use...
 
@@ -119,13 +134,9 @@ Splitgraph's versioning improves on that by delta compressing changes (which mea
 a dataset up to date only requires downloading the changes, rather than the new version) and putting
 the data inside of an actual database, making querying it more efficient.
 
-#### FoundationDB, Noms, ...
+#### FoundationDB, Dolt, ...
 
 A lot of tools that do data versioning also require users to learn to use a brand new database
 and rewrite their existing applications to use it. We don't think the benefits from writing a new
 database system from scratch outweigh the costs of bringing it up to feature and performance parity with existing
 databases and bootstrapping an ecosystem of extensions and applications.
-
-Splitgraph tries to provide an end-to-end framework for dealing with common data science problems.
-Rather than taking one tool and adapting it for data, we tried to get our inspiration from multiple
-best practices in software engineering.
