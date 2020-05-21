@@ -932,7 +932,7 @@ const makePullRequestIfNecessary = async ({
   const { data } = await client.request("GET /repos/:owner/:repo/pulls", {
     owner: config.docs.owner,
     repo: config.docs.repo,
-    head: config.docs.newBranch,
+    head: `${config.docs.owner}:${config.docs.newBranch}`,
     base: config.docs.targetBranch,
     state: "open",
   });
