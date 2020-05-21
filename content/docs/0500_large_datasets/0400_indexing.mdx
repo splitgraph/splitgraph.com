@@ -5,7 +5,7 @@ export const meta = {
 
 Every Splitgraph object has an index in its metadata. This is distinct from Postgres indexes,
 which can be created on checked out Splitgraph tables. Splitgraph indexes are higher-level and are
-used by [layered querying](large_datasets/layered_querying) to determine which objects need to
+used by [layered querying](layered_querying) to determine which objects need to
 be downloaded to satisfy a query.
 
 The main idea behind Splitgraph indexes is that they give false positives but don't give false negatives:

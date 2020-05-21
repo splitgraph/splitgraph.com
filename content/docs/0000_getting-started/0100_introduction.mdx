@@ -8,7 +8,7 @@ Splitgraph is a data management, building and sharing tool inspired by Docker an
 Splitgraph allows the user to manipulate [data images](../concepts/images) (snapshots of SQL tables at a given point in time) as if they
 were code repositories by versioning, pushing and pulling them.
 
-It works on top of PostgreSQL and all versioning is done by SQL operations. Data is checked out into actual PostgreSQL tables, offering read/write performance and feature parity with PostgreSQL. The client application has no idea that it's talking to a Splitgraph table and you don't need to rewrite any of your tools to use Splitgraph.
+It works on top of PostgreSQL and all versioning is done by SQL operations. Data is checked out into actual PostgreSQL tables, offering read/write performance and feature parity with PostgreSQL. The client application has no idea that it's talking to a Splitgraph table and you don't need to rewrite any of your tools to use Splitgraph. Anything that works with PostgreSQL will work with Splitgraph.
 
 Furthermore, Splitgraph also defines [the Splitfile language](../concepts/splitfiles) that has Dockerfile-like caching semantics and allows to build Splitgraph data images in a composable, maintainable and reproducible way. Images built this way have [provenance tracking](../working_with_data/inspecting_provenance): just from looking at the image's metadata it's possible to find out which exact upstream images, tables and columns went into it or rebuild the image against a newer version of the source.
 

@@ -1,0 +1,24 @@
+export const meta = {
+  id: "other_clients",
+  title: "Other SQL clients"
+};
+
+Since the Splitgraph engine is a PostgreSQL instance, most SQL clients will be able to
+connect to it and read/write to checked out Splitgraph tables without issues. You can use
+
+```bash
+sgr config -n
+```
+
+to print out a libpq connection string used by the current engine that you can paste into your
+client. For example:
+
+```bash
+pgcli $(sgr config -n)
+```
+
+will run [pgcli](https://www.pgcli.com/) against the default engine.
+
+Note that since [layered querying](../large_datasets/layered_querying) is implemented through
+PostgreSQL foreign tables, some tools might not show them in the list of tables or show them
+in a different list of foreign tables.
