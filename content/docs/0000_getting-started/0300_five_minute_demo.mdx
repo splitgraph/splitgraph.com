@@ -26,10 +26,8 @@ so replace `splitgraph-demo` with your own username in command invocations.
 
 ```shell-session
 $ sgr init
-$ sgr sql -r data.splitgraph.com "SELECT splitgraph_api.get_current_username()"
-
 Initializing engine PostgresEngine LOCAL (sgr@localhost:5432/splitgraph)...
-Waiting for connection....
+Waiting for connection.....
 Database splitgraph already exists, skipping
 Ensuring the metadata schema at splitgraph_meta exists...
 Running splitgraph_meta--0.0.1.sql
@@ -40,6 +38,8 @@ Installing CStore management functions...
 Installing the audit trigger...
 Engine PostgresEngine LOCAL (sgr@localhost:5432/splitgraph) initialized.
 
+
+$ sgr sql -r data.splitgraph.com "SELECT splitgraph_api.get_current_username()"
 splitgraph-demo
 ```
 
@@ -55,7 +55,6 @@ so the same commands can be used for both local and remote operations.
 
 ```shell-session
 $ sgr show -r data.splitgraph.com splitgraph/2016_election:latest
-
 Image splitgraph/2016_election:3835145ada3f07cad99087d1b1071122d58c48783cbfe4694c101d35651fba90
 
 Created at 2019-10-10T15:51:41.122370
@@ -73,7 +72,6 @@ When stored in Splitgraph, tables are composed of multiple content-addressable, 
 
 ```shell-session
 $ sgr table -r data.splitgraph.com splitgraph/2016_election:latest precinct_results
-
 Table splitgraph/2016_election:3835145ada3f07cad99087d1b1071122d58c48783cbfe4694c101d35651fba90/precinct_resul
 ts
 
@@ -140,7 +138,6 @@ No actual data is transferred until it's required, unless you explicitly ask for
 
 ```shell-session
 $ sgr clone splitgraph/2016_election
-
 Gathering remote metadata...
 Fetched metadata for 1 image, 1 table, 20 objects and 1 tag.
 ```
@@ -159,7 +156,6 @@ Let's check out the image into a so called ["layered querying"](../large_dataset
 
 ```shell-session
 $ sgr checkout --layered splitgraph/2016_election:latest
-
 Checked out splitgraph/2016_election:3835145ada3f.
 ```
 
@@ -168,10 +164,9 @@ We're interested in precinct-level election results for District of Columbia (FI
 
 
 ```python
-$ sgr sql -s splitgraph/2016_election "EXPLAIN SELECT \\
-  candidate_normalized, SUM(votes) FROM precinct_results \\
+$ sgr sql -s splitgraph/2016_election "EXPLAIN SELECT \
+  candidate_normalized, SUM(votes) FROM precinct_results \
   WHERE county_fips=11001 GROUP BY candidate_normalized"
-
 GroupAggregate  (cost=5698135.18..5699554.45 rows=1 width=64)
 Group Key: candidate_normalized
 ->  Sort  (cost=5698135.18..5698608.27 rows=189234 width=30)
@@ -190,10 +185,9 @@ Here, we can see that this query will only download two objects. Let's actually 
 
 
 ```python
-$ sgr sql -s splitgraph/2016_election "SELECT \\
-  candidate_normalized, SUM(votes) FROM precinct_results \\
+$ sgr sql -s splitgraph/2016_election "SELECT \
+  candidate_normalized, SUM(votes) FROM precinct_results \
   WHERE county_fips=11001 GROUP BY candidate_normalized"
-
 clinton  282830
 in         6551
 johnson    4906
@@ -202,14 +196,13 @@ trump     12723
 ```
 
 
-[`sgr sql`](../sgr/image_information/sql) is a shorthand to run an SQL query against the current engine. However, [any PostgreSQL client](../integrating_splitgraph/other_clients) will work with Splitgraph, allowing you to work with Splitgraph using your favourite tools, including [DataGrip](../integrating_splitgraph/datagrip), [pgAdmin](../integrating_splitgraph/pgadmin) or [other clients like pgcli or DBeaver](../integrating_splitgraph/other_clients).
+[`sgr sql`](../sgr/image_information/sql) is a shorthand to run an SQL query against the current engine. However, [any PostgreSQL client](../integrating_splitgraph/other_clients) will work with Splitgraph, allowing you to work with Splitgraph using your favorite tools, including [DataGrip](../integrating_splitgraph/datagrip), [pgAdmin](../integrating_splitgraph/pgadmin) or [other clients like pgcli or DBeaver](../integrating_splitgraph/other_clients).
 
 You can use `sgr config -n` to print out a libpq connection string to the current engine.
 
 
 ```shell-session
 $ sgr config -n
-
 postgresql://sgr:supersecure@localhost:5432/splitgraph
 ```
 
@@ -239,7 +232,6 @@ EOF
 
 ```shell-session
 $ sgr build votes_by_state.splitfile
-
 Executing Splitfile votes_by_state.splitfile with arguments {}
 
 Step 1/1 : FROM splitgraph/2016_election IMPORT {  SELECT candidate...
@@ -247,7 +239,7 @@ Resolving repository splitgraph/2016_election
 Gathering remote metadata...
 No image/object metadata to pull.
 Importing 1 table from splitgraph/2016_election:3835145ada3f into votes_by_state
-Processing table sg_tmp_83918185ae99d2cf49cb10fbe42dd723
+Processing table sg_tmp_6d1225f2b5d123e5a40cb1ab96c6851c
  ---> ee8dc4bb7c47
 Successfully built votes_by_state:ee8dc4bb7c47.
 ```
@@ -258,8 +250,6 @@ Take a look at the new image and run a query against it.
 
 ```shell-session
 $ sgr table votes_by_state:latest votes_by_state
-$ sgr sql -s votes_by_state "SELECT * FROM votes_by_state LIMIT 10"
-
 Table votes_by_state:ee8dc4bb7c4766cc30593b77e0b6b3dbb2863c06a4ed2274127d558901abeb2f/votes_by_state
 
 Size: 6.38 KiB
@@ -272,7 +262,9 @@ Columns:
 Objects:
   o91e4939e520a19c02ca876c7c5248dcf96f9c3fa55552c6ed8359caea842e9
 
-         FL  72993
+
+$ sgr sql -s votes_by_state "SELECT * FROM votes_by_state LIMIT 10"
+FL  72993
          IN    603
          MD  22131
          ND   6397
@@ -290,7 +282,6 @@ Like Dockerfiles, Splitfile outputs are cached: if the source data hasn't change
 
 ```shell-session
 $ sgr build votes_by_state.splitfile
-
 Executing Splitfile votes_by_state.splitfile with arguments {}
 
 Step 1/1 : FROM splitgraph/2016_election IMPORT {  SELECT candidate...
@@ -313,17 +304,17 @@ Let's push your image to the Splitgraph registry, making it available publicly. 
 
 ```shell-session
 $ sgr push votes_by_state
-$ sgr show -r data.splitgraph.com splitgraph-demo/votes_by_state:latest
-
 Pushing votes_by_state to splitgraph-demo/votes_by_state on remote data.splitgraph.com
 Gathering remote metadata...
 No objects to upload.
 Uploaded metadata for 2 images, 1 table, 0 objects and 0 tags.
 Setting upstream for votes_by_state to splitgraph-demo/votes_by_state.
 
+
+$ sgr show -r data.splitgraph.com splitgraph-demo/votes_by_state:latest
 Image splitgraph-demo/votes_by_state:ee8dc4bb7c4766cc30593b77e0b6b3dbb2863c06a4ed2274127d558901abeb2f
 Importing 1 table from splitgraph/2016_election
-Created at 2020-05-22T15:18:46.339966
+Created at 2020-05-22T16:47:19.279024
 Size: 6.38 KiB
 Parent: 0000000000000000000000000000000000000000000000000000000000000000
 
@@ -343,7 +334,9 @@ This dataset summarizes votes by state in the 2016 US Presidential Election.
 
 This is also my first dataset (woohoo!)
 EOF
-$ cat <<EOF > dataset-metadata.yml
+
+
+$ cat <<EOF > splitgraph.yml
 readme: dataset-readme.md
 description: US 2016 Election votes summary by state.
 EOF
@@ -354,14 +347,13 @@ Upload the metadata to Splitgraph Cloud (replace `splitgraph-demo` with your use
 
 
 ```shell-session
-$ sgr cloud metadata splitgraph-demo/votes_by_state dataset-metadata.yml
-
+$ sgr cloud metadata splitgraph-demo/votes_by_state
 README updated for repository splitgraph-demo/votes_by_state.
 Description updated for repository splitgraph-demo/votes_by_state.
 ```
 
 
-The dataset is now available on https://www.splitgraph.com/YOUR_USERNAME/votes_by_state.
+The dataset is now available on `https://www.splitgraph.com/YOUR_USERNAME/votes_by_state.`
 
 The image's [provenance](/splitgraph-demo/votes_by_state/latest/-/provenance) is also uploaded to Splitgraph Cloud, allowing anyone to see how the image was built and sourced. In addition, the new image will now be referenced in the [dependents](/splitgraph/2016_election/latest/-/dependents) page for the 2016 Election dataset.
 
