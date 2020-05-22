@@ -2,63 +2,60 @@
 import { jsx } from "theme-ui";
 import React, { useMemo } from "react";
 
-import { BaseLayout } from "@splitgraph/design/Layout";
-import { defaultTheme } from "@splitgraph/design";
+import { defaultTheme, mdxComponents } from "@splitgraph/design";
 
-const mdxComponents = {
-  pre: ({ children, ...rest }) => (
-    <pre sx={defaultTheme.styles.pre} {...rest}>
-      {children}
-    </pre>
-  ),
-  code: ({ children, ...rest }) => (
-    <code sx={defaultTheme.styles.code} {...rest}>
-      {children}
-    </code>
-  ),
-  inlineCode: ({ children, ...rest }) => (
-    <code sx={defaultTheme.styles.inlineCode} {...rest}>
-      {children}
-    </code>
-  ),
-};
+import { Link, DividedBox } from "@splitgraph/docs/components";
+import { InnerPageLayout } from "@splitgraph/docs/components/InnerPageLayout";
+import withTheme from "@splitgraph/docs/hocs/withTheme";
 
-// TODO: Move this back into the docs repository (?) so no need to do this dumb
-// dependency injection. It was only put into its own so that autogenned scripts
-// could reference it by name instead of relative path, but that's fixed now.
-const withBlogLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
-  // Because we rewrite URLs, when using next/link, we need to specify
-  // the mapping so next.js loads the right script. If we do not do this,
-  // client side routing does not work and we get "content flashes"
-  const ContentLink = ({ href, children, ...rest }) => {
+import { NextSeo } from "next-seo";
+
+const withBlogLayout = ({ MdxPage, meta = {}, contentTree }) => {
+  mdxComponents.a = Link;
+
+  const WithBlogLayout = () => {
     return (
-      <Link href={`/_content${href}`} as={href} passHref>
-        <a
-          {...rest}
-          sx={defaultTheme.links.primary}
-          onClick={(e) => {
-            console.log("clicked");
+      <InnerPageLayout
+        charWidth={80}
+        extraStyle={{
+          ".main-content": {
+            backgroundColor: "#fff",
+            a: {
+              variant: "links.primary",
+            },
+          },
+          "nav.toc": {
+            display: "none",
+          },
+        }}
+      >
+        <NextSeo title={meta.title} />
+        <DividedBox
+          colors={[
+            "rgba(13,24,33,1) 0%,rgba(54,102,141,1) 60%,#000000 40%",
+            "#fff",
+          ]}
+          TopComponent={({ ...rest }) => <h1 {...rest}>{meta.title}</h1>}
+          MidComponent={({ children, ...rest }) => (
+            <div {...rest}>{children}</div>
+          )}
+          containerStyle={{
+            // paddingBottom: "2rem",
+            paddingTop: "2rem",
           }}
         >
-          {children}
-        </a>
-      </Link>
-    );
-  };
-
-  mdxComponents.a = ContentLink;
-
-  const WithBlogLayout = ({ router }) => {
-    return (
-      <BaseLayout>
-        <MdxPage components={mdxComponents} />
-      </BaseLayout>
+          {meta.description}
+        </DividedBox>
+        <article className="main-content">
+          <MdxPage components={mdxComponents} />
+        </article>
+      </InnerPageLayout>
     );
   };
 
   WithBlogLayout.displayName = `WithBlogLayout`;
 
-  return WithBlogLayout;
+  return withTheme(WithBlogLayout);
 };
 
 export default withBlogLayout;
