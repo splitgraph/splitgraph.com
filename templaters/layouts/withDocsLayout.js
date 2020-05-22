@@ -72,44 +72,6 @@ const withDocsLayout = ({
     return <NextSeo {...pageSeo} />;
   };
 
-  // Because we rewrite URLs, when using next/link, we need to specify
-  // the mapping so next.js loads the right script. If we do not do this,
-  // client side routing does not work and we get "content flashes"
-  // const ContentLink = ({ href, children, ...rest }) => {
-  //   // console.log("getLinkType:", getLinkType);
-
-  //   const router = useRouter();
-
-  //   const currentURL = useMemo(
-  //     () => router.pathname.replace(/^\/\_content/gm, ""),
-  //     [router]
-  //   );
-
-  //   console.log(`currentURL = ${currentURL}`);
-
-  //   console.log(
-  //     `getLinkType(${href}) = ${JSON.stringify(
-  //       getLinkType({ currentURL, href }),
-  //       null,
-  //       2
-  //     )}`
-  //   );
-
-  //   return (
-  //     <Link href={`/_content${href}`} as={href} passHref>
-  //       <a
-  //         {...rest}
-  //         sx={defaultTheme.links.primary}
-  //         onClick={(e) => {
-  //           console.log("clicked");
-  //         }}
-  //       >
-  //         {children}
-  //       </a>
-  //     </Link>
-  //   );
-  // };
-
   mdxComponents.a = Link;
 
   // Grab the TOC out of the tree from MdxPage so we can render it separately
