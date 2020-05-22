@@ -36,7 +36,7 @@ Your checked-out Splitgraph datasets will appear in the schema selector.
 
 ![The checked-out datasets in the schema selector](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/datagrip/6-everything-there-all-good.png)
 
-#### Making geo queries
+#### Making geospatial queries
 
 DataGrip has support for plotting geospatial data using [PostGIS](https://postgis.net).
 
@@ -54,8 +54,8 @@ $ sgr clone splitgraph/london_wards
 $ sgr checkout --layered splitgraph/london_wards:latest
 ```
 
-A good sample query is just plotting the geometry column in the dataset. This column is in the
- [British National Grid](https://epsg.io/27700) and we need to convert it to the standard
+A good sample query is just plotting the geometry column in this dataset. This column is in the
+ [British National Grid](https://epsg.io/27700) projection and we need to convert it to the standard
  [WGS 84](https://epsg.io/4326) projection in order for DataGrip to plot it with an
  [OpenStreetMap](https://www.openstreetmap.org/) overlay:
 

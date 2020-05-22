@@ -5,74 +5,31 @@ export const meta = {
 
 ## Introduction
 
-This demo will guide you through using Splitgraph to:
+This demo will show you how to use Splitgraph to:
 
-  * Ingest a dataset from a CSV file
-  * Build a derivative dataset using Splitfiles
-  * Make some changes to the dataset and commit those changes
-  * Check the dataset's provenance and rebuild it against a changed upstream
-  * Share a dataset with another Splitgraph engine
+  * query a large remote public data image (dataset) with any of your favourite tools, without having to download it completely
+  * write a [Splitfile](../concepts/splitfiles) that can build a derivative image from it
+  * publish your derivative image on Splitgraph Cloud.
 
+## Prerequisites
 
+You need to be registered on [Splitgraph Cloud](../splitgraph_cloud/introduction) to pull and publish data. If you followed the [installation instructions](../installation), this should be already done for you. You can also use [`sgr cloud register`](../sgr/splitgraph_cloud/register) or [`sgr cloud login`](../sgr/splitgraph_cloud/login) to register or log in from the `sgr` client.
 
-## Building and starting the engine
-Build and start the Docker Compose stack: we will be running two Splitgraph engines here
-to demonstrate sharing data between two Splitgraph instances.
+If you do not wish to register on Splitgraph Cloud, you can still use Splitgraph in a decentralized fashion, sharing data with other Splitgraph instances. See the [decentralized demo](./decentralized_demo) for an introduction that showcases importing data from CSV files and tracking changes to images, using Splitgraph's version control functionality.
 
 
-```shell-session
-$ cat docker-compose.yml
-$ docker-compose --project-name splitgraph_example build
-$ docker-compose --project-name splitgraph_example up -d
 
-version: '3'
-services:
-  engine_1:
-    image: splitgraph/engine:${DOCKER_TAG-stable}
-    ports:
-      - '0.0.0.0:5432:5432'
-    environment:
-      - POSTGRES_USER=sgr
-      - POSTGRES_PASSWORD=supersecure
-      - POSTGRES_DB=splitgraph
-      - SG_LOGLEVEL=INFO
-      - SG_CONFIG_FILE=/.sgconfig
-    expose:
-      - 5432
-    # Need to mount this into the engine so that access credentials to
-    # the second engine are available to it
-    volumes:
-      - ${SG_CONFIG_FILE-./.sgconfig}:/.sgconfig
-
-  engine_2:
-    image: splitgraph/engine:${DOCKER_TAG-stable}
-    ports:
-      - '0.0.0.0:5431:5432'
-    environment:
-      - POSTGRES_USER=sgr
-      - POSTGRES_PASSWORD=supersecure
-      - POSTGRES_DB=splitgraph
-      - SG_LOGLEVEL=INFO
-    expose:
-      - 5432
-
-engine_1 uses an image, skipping
-engine_2 uses an image, skipping
-
-Creating network "splitgraph_example_default" with the default driver
-Creating splitgraph_example_engine_2_1 ... done
-Creating splitgraph_example_engine_1_1 ... done
-```
-
-
-Initialize our local engine.
+First, make sure that your Splitgraph engine is initialized and test your connection to
+Splitgraph Cloud. This demo is written from the point of view of the `splitgraph-demo` user,
+so replace `splitgraph-demo` with your own username in command invocations.
 
 
 ```shell-session
 $ sgr init
+$ sgr sql -r data.splitgraph.com "SELECT splitgraph_api.get_current_username()"
 
 Initializing engine PostgresEngine LOCAL (sgr@localhost:5432/splitgraph)...
-Waiting for connection.....
+Waiting for connection....
 Database splitgraph already exists, skipping
 Ensuring the metadata schema at splitgraph_meta exists...
 Running splitgraph_meta--0.0.1.sql
@@ -82,584 +39,339 @@ Installing Splitgraph API functions...
 Installing CStore management functions...
 Installing the audit trigger...
 Engine PostgresEngine LOCAL (sgr@localhost:5432/splitgraph) initialized.
+
+splitgraph-demo
 ```
 
 
-## Importing data from a CSV file
-Let's download a CSV file to ingest into Splitgraph. We will be using the [weather data from Raleigh-Durham International Airport](https://data.townofcary.org/api/v2/catalog/datasets/rdu-weather-history/exports/csv) file.
+## Pulling a data image
+The [2016 US Presidential Election precinct-level returns](/splitgraph/2016_election/) dataset ([source](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LYWX3D)) has 2 million rows, takes up 500MB as a CSV file and only 25MB in Splitgraph. It's a perfect example to showcase Splitgraph's features.
+
+Let's inspect this image remotely without cloning it, using [`sgr show`](../sgr/image_information/show).
+The [`sgr` client](../concepts/sgr_client)
+uses the same protocol to communicate with the registry as with the local Splitgraph engine,
+so the same commands can be used for both local and remote operations.
 
 
 ```shell-session
-$ head -n5 rdu-weather-history.csv
+$ sgr show -r data.splitgraph.com splitgraph/2016_election:latest
 
-date;temperaturemin;temperaturemax;precipitation;snowfall;snowdepth;avgwindspeed;fastest2minwinddir;fastest2minwindspeed
-;fastest5secwinddir;fastest5secwindspeed;fog;fogheavy;mist;rain;fogground;ice;glaze;drizzle;snow;freezingrain;smokehaze;
-thunder;highwind;hail;blowingsnow;dust;freezingfog
-2007-01-06;50.0;71.1;0.13;0.0;0.0;8.05;230;17.9;230;21.92;Yes;No;Yes;Yes;No;No;No;No;No;No;No;No;No;No;No;No;No
-2007-01-09;30.0;55.0;0.0;0.0;0.0;7.61;280;23.04;270;29.08;No;No;No;Yes;No;No;No;No;No;No;No;No;No;No;No;No;No
-2007-01-14;50.0;73.9;0.0;0.0;0.0;8.5;230;21.03;230;25.05;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No
-2007-01-15;57.0;73.9;0.0;0.0;0.0;13.2;230;23.94;230;29.08;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No
+Image splitgraph/2016_election:3835145ada3f07cad99087d1b1071122d58c48783cbfe4694c101d35651fba90
+
+Created at 2019-10-10T15:51:41.122370
+Size: 26.81 MiB
+No parent (root image)
+
+Tables:
+  precinct_results
 ```
 
 
-Initialize the repository that we will be ingesting the data into.
+Let's also inspect the `precinct_results` [table](../sgr/image_information/table) in this image.
+When stored in Splitgraph, tables are composed of multiple content-addressable, immutable [objects](../concepts/objects).
 
 
 ```shell-session
-$ sgr init demo/weather
+$ sgr table -r data.splitgraph.com splitgraph/2016_election:latest precinct_results
 
-Initialized empty repository demo/weather
+Table splitgraph/2016_election:3835145ada3f07cad99087d1b1071122d58c48783cbfe4694c101d35651fba90/precinct_resul
+ts
+
+Size: 26.81 MiB
+Rows: 1989234
+Columns:
+  year (integer)
+  stage (character varying)
+  special (boolean)
+  state (character varying)
+  state_postal (character varying)
+  state_fips (bigint)
+  state_icpsr (bigint)
+  county_name (character varying)
+  county_fips (bigint)
+  county_ansi (bigint)
+  county_lat (numeric)
+  county_long (numeric)
+  jurisdiction (character varying)
+  precinct (character varying)
+  candidate (character varying)
+  candidate_normalized (character varying)
+  office (character varying)
+  district (character varying)
+  writein (boolean)
+  party (character varying)
+  mode (character varying)
+  votes (bigint)
+  candidate_opensecrets (character varying)
+  candidate_wikidata (character varying)
+  candidate_party (character varying)
+  candidate_last (character varying)
+  candidate_first (character varying)
+  candidate_middle (character varying)
+  candidate_full (character varying)
+  candidate_suffix (character varying)
+  candidate_nickname (character varying)
+  candidate_fec (character varying)
+  candidate_fec_name (character varying)
+  candidate_google (character varying)
+  candidate_govtrack (character varying)
+  candidate_icpsr (character varying)
+  candidate_maplight (character varying)
+  id (integer, PK)
+
+Objects:
+  o960395135f32c2da7b4b9371da06b0a9d00925472df2ec1ef687acf6f24894
+  o07f95f9944d673d8cc05a5b5174253adc513d377ccd811928ae0fe6923e451
+  o40e4e46594064e402ccdb914ffb8c9f59267a67b33420cf704073729a6671b
+  o1ccf32547f73be8047c3de06760b32c1077c3bd0b0d8309575ebe9ab8eb86c
+  oaf3cca3210e1903f06872d0041097dd284423958352d5cd7b5209eceec6cbf
+  odc1546c25cac950eca4b551642305d548172b554643f046a16cd9da236c895
+  oe60d81ef239980ceb5869fd787d159f227b59b66ab6ceef18aed45cd62ae8f
+  o9e77e782f8bda76be6a3f4d29b82661e32d614f7d63230619e8635b9b2b512
+  of06f6cfb7bd95047bb49bcd3ab6b98da63c2605aa9659c064cee3bd708b0e4
+  o0671aabeb9d4ce362515624616a5a202503db99d7a83007bfdf63fd71b91af
+  ...
 ```
 
 
-Use [sgr csv import](../sgr/data_import_export/csv_import) to load the CSV file. This is a wrapper around PostgreSQL's [`COPY FROM STDIN`](https://www.postgresql.org/docs/current/sql-copy.html) with some schema inference functionality.
+Now let's actually [clone](../sgr/sharing_images/clone) the image. By default, this will only download the image's metadata.
+No actual data is transferred until it's required, unless you explicitly ask for it.
+
+
+```shell-session
+$ sgr clone splitgraph/2016_election
+
+Gathering remote metadata...
+Fetched metadata for 1 image, 1 table, 20 objects and 1 tag.
+```
+
+
+## Querying the image
+To interact with this image, you could [check it out](../working_with_data/clone_vs_checkout),
+which turns the image into a schema with PostgreSQL tables.
+
+However, imagine if this dataset were a few hundred gigabytes large. Should you really need to download all of it to query a few rows?
+
+Splitgraph objects contain metadata that can help it to discard objects that are irrelevant to a query. The US election dataset is stored ordered by county FIPS code and so queries that filter on this column only need to download a couple of objects instead of the whole dataset.
+
+Let's check out the image into a so called ["layered querying"](../large_datasets/layered_querying) schema. This sets up a Postgres foreign data wrapper for this image that acts as a shim and presents itself as normal Postgres table to clients.
+
+
+```shell-session
+$ sgr checkout --layered splitgraph/2016_election:latest
+
+Checked out splitgraph/2016_election:3835145ada3f.
+```
+
+
+We're interested in precinct-level election results for District of Columbia (FIPS code 11001).
 
 
 ```python
-$ sgr csv import -f rdu-weather-history.csv \\
-               -k date \\
-               -t date timestamp \\
-               --separator ";" \\
-               demo/weather rdu
+$ sgr sql -s splitgraph/2016_election "EXPLAIN SELECT \\
+  candidate_normalized, SUM(votes) FROM precinct_results \\
+  WHERE county_fips=11001 GROUP BY candidate_normalized"
 
-
+GroupAggregate  (cost=5698135.18..5699554.45 rows=1 width=64)
+Group Key: candidate_normalized
+->  Sort  (cost=5698135.18..5698608.27 rows=189234 width=30)
+Sort Key: candidate_normalized
+->  Foreign Scan on precinct_results  (cost=20.00..5677020.00 rows=189234 width=30)
+Filter: (county_fips = 11001)
+Multicorn: Objects removed by filter: 18
+Multicorn: Scan through 2 object(s) (2.56 MiB)
+JIT:
+Functions: 7
+...
 ```
 
 
-The data is now in a table but not committed as a Splitgraph image. Inspect the repository with [`sgr status`](../sgr/image_information/status) and diff it with [`sgr diff`](../sgr/image_information/diff).
+Here, we can see that this query will only download two objects. Let's actually run it: behind the scenes, this will lazily download required data.
 
 
-```shell-session
-$ sgr status demo/weather
-$ sgr diff demo/weather
+```python
+$ sgr sql -s splitgraph/2016_election "SELECT \\
+  candidate_normalized, SUM(votes) FROM precinct_results \\
+  WHERE county_fips=11001 GROUP BY candidate_normalized"
 
-demo/weather: on image 0000000000000000000000000000000000000000000000000000000000000000.
-
-Between 000000000000 and the current working copy:
-rdu: table added
+clinton  282830
+in         6551
+johnson    4906
+stein      4258
+trump     12723
 ```
 
 
-Now we can [commit](../sgr/image_management_creation/commit) the repository, creating a new image, and give it a tag `initial_data`.
+[`sgr sql`](../sgr/image_information/sql) is a shorthand to run an SQL query against the current engine. However, [any PostgreSQL client](../integrating_splitgraph/other_clients) will work with Splitgraph, allowing you to work with Splitgraph using your favourite tools, including [DataGrip](../integrating_splitgraph/datagrip), [pgAdmin](../integrating_splitgraph/pgadmin) or [other clients like pgcli or DBeaver](../integrating_splitgraph/other_clients).
+
+You can use `sgr config -n` to print out a libpq connection string to the current engine.
 
 
 ```shell-session
-$ sgr commit demo/weather
-$ sgr tag demo/weather initial_data
+$ sgr config -n
 
-Committing demo/weather...
-Processing table rdu
-Committed demo/weather as 5f3f7d2cd583.
-
-Tagged demo/weather:5f3f7d2cd5837ad35f8aea6d80d54fc1fdf3860d345e642466e3a79659aa64b3 with initial_data.
+postgresql://sgr:supersecure@localhost:5432/splitgraph
 ```
 
 
-Inspect the image using [`sgr show`](../sgr/image_information/show) and the freshly-created `rdu` [table](../sgr/image_information/table). This table consists of one Splitgraph [object](../concepts/objects).
+## Using Splitfiles to build derivative images
+
+[Splitfiles](../concepts/splitfiles) are similar to Dockerfiles and are the easiest way to build Splitgraph images. They offer Dockerfile-like caching, provenance tracking, fast rebuilds, joins between datasets and full SQL support.
+
+Let's create a Splitfile that summarizes the vote counts for every candidate in every state.
 
 
 ```shell-session
-$ sgr show demo/weather:initial_data
-$ sgr table demo/weather:initial_data rdu
+$ cat <<EOF > votes_by_state.splitfile
+FROM splitgraph/2016_election IMPORT {
+  SELECT candidate_normalized, state_postal,
+    SUM(votes) AS total_votes
+  FROM precinct_results
+  GROUP BY candidate_normalized,
+    state_postal
+} AS votes_by_state
+EOF
+```
 
-Image demo/weather:5f3f7d2cd5837ad35f8aea6d80d54fc1fdf3860d345e642466e3a79659aa64b3
 
-Created at 2020-05-22T11:11:16.223291
-Size: 109.61 KiB
+[Build](../sgr/splitfile_execution/build) this image. Even though we have it pulled locally, this isn't necessary to build it: Splitgraph downloads required image fragments automatically.
+
+
+```shell-session
+$ sgr build votes_by_state.splitfile
+
+Executing Splitfile votes_by_state.splitfile with arguments {}
+
+Step 1/1 : FROM splitgraph/2016_election IMPORT {  SELECT candidate...
+Resolving repository splitgraph/2016_election
+Gathering remote metadata...
+No image/object metadata to pull.
+Importing 1 table from splitgraph/2016_election:3835145ada3f into votes_by_state
+Processing table sg_tmp_83918185ae99d2cf49cb10fbe42dd723
+ ---> ee8dc4bb7c47
+Successfully built votes_by_state:ee8dc4bb7c47.
+```
+
+
+Take a look at the new image and run a query against it.
+
+
+```shell-session
+$ sgr table votes_by_state:latest votes_by_state
+$ sgr sql -s votes_by_state "SELECT * FROM votes_by_state LIMIT 10"
+
+Table votes_by_state:ee8dc4bb7c4766cc30593b77e0b6b3dbb2863c06a4ed2274127d558901abeb2f/votes_by_state
+
+Size: 6.38 KiB
+Rows: 793
+Columns:
+  candidate_normalized (character varying)
+  state_postal (character varying)
+  total_votes (numeric)
+
+Objects:
+  o91e4939e520a19c02ca876c7c5248dcf96f9c3fa55552c6ed8359caea842e9
+
+         FL  72993
+         IN    603
+         MD  22131
+         ND   6397
+         PA  39004
+         RI   9439
+         WY   6904
+above    NY      1
+abraham  NY      0
+adams    MD     44
+```
+
+
+Like Dockerfiles, Splitfile outputs are cached: if the source data hasn't changed, the data image isn't rebuilt.
+
+
+```shell-session
+$ sgr build votes_by_state.splitfile
+
+Executing Splitfile votes_by_state.splitfile with arguments {}
+
+Step 1/1 : FROM splitgraph/2016_election IMPORT {  SELECT candidate...
+Resolving repository splitgraph/2016_election
+Gathering remote metadata...
+No image/object metadata to pull.
+ ---> Using cache
+ ---> ee8dc4bb7c47
+Successfully built votes_by_state:ee8dc4bb7c47.
+```
+
+
+Splitfiles also support joins between Splitgraph images. For an example or to learn more about Splitfiles, check out the [Splitfile reference](../splitfiles/splitfile_intro) or some [sample Splitfiles](../working_with_data/using_splitfiles#sample-splitfiles).
+
+
+
+## Publishing a dataset on Splitgraph Cloud
+Let's push your image to the Splitgraph registry, making it available publicly. By default, the image gets pushed out to a repository with the same name in your own namespace. In the case of this demo user, the freshly built dataset is going to be available as [`splitgraph-demo/votes_by_state`](/splitgraph-demo/votes_by_state).
+
+
+```shell-session
+$ sgr push votes_by_state
+$ sgr show -r data.splitgraph.com splitgraph-demo/votes_by_state:latest
+
+Pushing votes_by_state to splitgraph-demo/votes_by_state on remote data.splitgraph.com
+Gathering remote metadata...
+No objects to upload.
+Uploaded metadata for 2 images, 1 table, 0 objects and 0 tags.
+Setting upstream for votes_by_state to splitgraph-demo/votes_by_state.
+
+Image splitgraph-demo/votes_by_state:ee8dc4bb7c4766cc30593b77e0b6b3dbb2863c06a4ed2274127d558901abeb2f
+Importing 1 table from splitgraph/2016_election
+Created at 2020-05-22T15:18:46.339966
+Size: 6.38 KiB
 Parent: 0000000000000000000000000000000000000000000000000000000000000000
 
 Tables:
-  rdu
-
-Table demo/weather:5f3f7d2cd5837ad35f8aea6d80d54fc1fdf3860d345e642466e3a79659aa64b3/rdu
-
-Size: 109.61 KiB
-Rows: 4633
-Columns:
-  date (timestamp without time zone, PK)
-  temperaturemin (numeric)
-  temperaturemax (numeric)
-  precipitation (numeric)
-  snowfall (numeric)
-  snowdepth (numeric)
-  avgwindspeed (numeric)
-  fastest2minwinddir (integer)
-  fastest2minwindspeed (numeric)
-  fastest5secwinddir (integer)
-  fastest5secwindspeed (numeric)
-  fog (character varying)
-  fogheavy (character varying)
-  mist (character varying)
-  rain (character varying)
-  fogground (character varying)
-  ice (character varying)
-  glaze (character varying)
-  drizzle (character varying)
-  snow (character varying)
-  freezingrain (character varying)
-  smokehaze (character varying)
-  thunder (character varying)
-  highwind (character varying)
-  hail (character varying)
-  blowingsnow (character varying)
-  dust (character varying)
-  freezingfog (character varying)
-
-Objects:
-  ob799ca761ea638c0dbb4df3e59ab6a995d87999909d008a3495711c9009f8f
+  votes_by_state
 ```
 
 
-Inspect the [object metadata](../sgr/image_information/object). Splitgraph objects are content-addressable and the original CSV file can change, so the object ID might be different between this demo and the actual data.
+Splitgraph lets you upload a README and a description for your dataset directly from the CLI. Create a README and a metadata file.
 
 
 ```shell-session
-$ sgr object ob799ca761ea638c0dbb4df3e59ab6a995d87999909d008a3495711c9009f8f
+$ cat <<EOF > dataset-readme.md
+## votes_by_state
 
-Object ID: ob799ca761ea638c0dbb4df3e59ab6a995d87999909d008a3495711c9009f8f
+This dataset summarizes votes by state in the 2016 US Presidential Election.
 
-Namespace: demo
-Format: FRAG
-Size: 109.61 KiB
-Created: 2020-05-22 11:11:16.669166
-Rows inserted: 4633
-Insertion hash: 4b49b5701a582aa5c418238e4bf75c84d0dcd2ec993fb4e7fe1d0dfcf6ef6877
-Rows deleted: 0
-Deletion hash: 0000000000000000000000000000000000000000000000000000000000000000
-Column index:
-  fog: ['No', 'Yes']
-  ice: ['No', 'Yes']
-  date: ['2007-01-01 00:00:00', '2019-09-07 00:00:00']
-  dust: ['No', 'Yes']
-  hail: ['No', 'Yes']
-  mist: ['No', 'Yes']
-  rain: ['No', 'Yes']
-  snow: ['No', 'Yes']
-  glaze: ['No', 'Yes']
-  drizzle: ['No', 'Yes']
-  thunder: ['No', 'Yes']
-  fogheavy: ['No', 'Yes']
-  highwind: ['No', 'Yes']
-  snowfall: ['0.0', '7.01']
-  fogground: ['No', 'Yes']
-  smokehaze: ['No', 'Yes']
-  snowdepth: ['0.0', '5.91']
-  blowingsnow: ['No', 'Yes']
-  freezingfog: ['No', 'Yes']
-  avgwindspeed: ['0.0', '20.36']
-  freezingrain: ['No', 'Yes']
-  precipitation: ['0.0', '6.45']
-  temperaturemax: ['23.2', '105.1']
-  temperaturemin: ['4.1', '80.1']
-  fastest2minwinddir: [10, 360]
-  fastest5secwinddir: [10, 360]
-  fastest2minwindspeed: ['4.92', '59.95']
-  fastest5secwindspeed: ['6.93', '86.12']
-
-Location: created locally
+This is also my first dataset (woohoo!)
+EOF
+$ cat <<EOF > dataset-metadata.yml
+readme: dataset-readme.md
+description: US 2016 Election votes summary by state.
+EOF
 ```
 
 
-## Using Splitfiles to build derivative datasets
-[Splitfiles](../concepts/splitfiles) are similar to Dockerfiles and are the easiest way to build Splitgraph datasets. They offer Dockerfile-like caching, provenance tracking, fast dataset rebuilds, joins between datasets and full SQL support.
-Create a Splitfile that will summarize the data image we've just built.
+Upload the metadata to Splitgraph Cloud (replace `splitgraph-demo` with your username).
 
 
 ```shell-session
-$ cat rdu-weather-summary.splitfile
+$ sgr cloud metadata splitgraph-demo/votes_by_state dataset-metadata.yml
 
-# First, import the original data table: this doesn't consume extra space (reuses the same
-# object that's used by the demo/weather repository.
-
-FROM demo/weather IMPORT rdu AS source_data
-
-# Now summarize the data
-SQL {
-CREATE TABLE monthly_summary AS (
-    SELECT to_char(date, 'YYYYMM') AS month,
-        AVG(precipitation) AS average_precipitation,
-        AVG(snowfall) AS average_snowfall
-    FROM source_data
-    GROUP BY month
-    ORDER BY month ASC)
-}
+README updated for repository splitgraph-demo/votes_by_state.
+Description updated for repository splitgraph-demo/votes_by_state.
 ```
 
 
-Run the Splitfile to [build](../sgr/splitfile_execution/provenance) a new image. This image will be saved in a repository `demo/summary`. Let's also tag it with `based_on_initial`.
+The dataset is now available on https://www.splitgraph.com/YOUR_USERNAME/votes_by_state.
 
+The image's [provenance](/splitgraph-demo/votes_by_state/latest/-/provenance) is also uploaded to Splitgraph Cloud, allowing anyone to see how the image was built and sourced. In addition, the new image will now be referenced in the [dependents](/splitgraph/2016_election/latest/-/dependents) page for the 2016 Election dataset.
 
-```shell-session
-$ sgr build rdu-weather-summary.splitfile -o demo/summary
-$ sgr tag demo/summary based_on_initial
+You also have an OpenAPI-compatible [REST API](/splitgraph-demo/votes_by_state/latest/-/api-schema) generated for the dataset, provided by [PostgREST](http://postgrest.org/en/latest/).
 
-Executing Splitfile rdu-weather-summary.splitfile with arguments {}
 
-Step 1/2 : FROM demo/weather IMPORT rdu AS source_data
-Resolving repository demo/weather
-Importing 1 table from demo/weather:5f3f7d2cd583 into demo/summary
- ---> f68ad0e1769b
 
-Step 2/2 : SQL {CREATE TABLE monthly_summary AS (    SELECT to_cha...
-Executing SQL...
-Committing demo/summary...
-Processing table monthly_summary
- ---> 248f2675b37a
-Successfully built demo/summary:248f2675b37a.
+## Further reading
 
-Tagged demo/summary:248f2675b37a6ee08836ae8c068ac5b7b6f990dfbcb3379e663a3c8933662b6b with based_on_initial.
-```
-
-
-Much like with Docker, the build result is cached, so running build again checks out the existing image. Try building the image again:
-
-
-```shell-session
-$ sgr build rdu-weather-summary.splitfile -o demo/summary
-
-Executing Splitfile rdu-weather-summary.splitfile with arguments {}
-
-Step 1/2 : FROM demo/weather IMPORT rdu AS source_data
-Resolving repository demo/weather
- ---> Using cache
- ---> f68ad0e1769b
-
-Step 2/2 : SQL {CREATE TABLE monthly_summary AS (    SELECT to_cha...
- ---> Using cache
- ---> 248f2675b37a
-Successfully built demo/summary:248f2675b37a.
-```
-
-
-Inspect the new dataset and the table `monthly_summary` that was created in it.
-
-
-```shell-session
-$ sgr show demo/summary:based_on_initial
-$ sgr table demo/summary:based_on_initial monthly_summary
-
-Image demo/summary:248f2675b37a6ee08836ae8c068ac5b7b6f990dfbcb3379e663a3c8933662b6b
-
-CREATE TABLE monthly_summary AS (
-    SELECT to_char(date, 'YYYYMM') AS month,
-        AVG(precipitation) AS average_precipitation,
-        AVG(snowfall) AS average_snowfall
-    FROM source_data
-    GROUP BY month
-    ORDER BY month ASC)
-
-Created at 2020-05-22T11:11:23.584369
-Size: 111.78 KiB
-Parent: f68ad0e1769b6df9a5581581bff2203ea88becec0024b5b3f64c6f94aa7c0f87
-
-Tables:
-  monthly_summary
-  source_data
-
-Table demo/summary:248f2675b37a6ee08836ae8c068ac5b7b6f990dfbcb3379e663a3c8933662b6b/monthly_summary
-
-Size: 2.17 KiB
-Rows: 153
-Columns:
-  month (text)
-  average_precipitation (numeric)
-  average_snowfall (numeric)
-
-Objects:
-  o5e29c3cf82603335df66690a448ca1f604f0002d5a3496b18c982a5ea835f3
-```
-
-
-Run a query against the new dataset. This can be done with [any PostgreSQL client](../integrating_splitgraph/other_clients) but Splitgraph offers a shorthand to run SQL against the current Splitgraph engine.
-
-
-```shell-session
-$ sgr sql -s demo/summary "SELECT * FROM monthly_summary ORDER BY month DESC LIMIT 5"
-
-201909  0.171667  0
-201908  0.139032  0
-201907  0.117097  0
-201906  0.12      0
-201905  0.103548  0
-```
-
-
-## Inspecting provenance and rebuilding datasets
-Images built with Splitfiles have their provenance (commands used to create them and sources) recorded in their metadata. Let's inspect the [provenance](../sgr/splitfile_execution/provenance) that the image we just built has.
-
-
-```shell-session
-$ sgr provenance demo/summary
-$ sgr provenance --full demo/summary
-
-demo/summary:248f2675b37a6ee08836ae8c068ac5b7b6f990dfbcb3379e663a3c8933662b6b depends on:
-demo/weather:5f3f7d2cd5837ad35f8aea6d80d54fc1fdf3860d345e642466e3a79659aa64b3
-
-# Splitfile commands used to recreate demo/summary:248f2675b37a6ee08836ae8c068ac5b7b6f990dfbcb3379e663a3c8933662b6b
-FROM demo/weather:5f3f7d2cd5837ad35f8aea6d80d54fc1fdf3860d345e642466e3a79659aa64b3 IMPORT rdu AS source_data
-SQL {CREATE TABLE monthly_summary
-  AS SELECT to_char(date, 'YYYYMM') AS month
-          , avg(precipitation) AS average_precipitation
-          , avg(snowfall) AS average_snowfall
-     FROM source_data
-     GROUP BY month
-     ORDER BY month ASC}
-```
-
-
-We can also [invert the provenance query](../sgr/splitfile_execution/dependents), listing all images that were built from `demo/weather` on the local engine.
-
-
-```shell-session
-$ sgr dependents demo/weather
-
-demo/weather:5f3f7d2cd5837ad35f8aea6d80d54fc1fdf3860d345e642466e3a79659aa64b3 is depended on by:
-demo/summary:248f2675b37a6ee08836ae8c068ac5b7b6f990dfbcb3379e663a3c8933662b6b
-```
-
-
-Keeping track of the image provenance allows Splitgraph to rebuild images against upstream data when it changes and know when there's no need to rebuild an image.
-Let's pretend there's been a revision to the source historical weather data.
-
-
-```shell-session
-$ sgr sql -s demo/weather "UPDATE rdu SET precipitation = precipitation * 1.2 WHERE EXTRACT (year FROM date) = 2012"
-$ sgr commit -m "Revision to the 2012 rainfall data" demo/weather
-$ sgr tag demo/weather revised_data
-
-Committing demo/weather...
-Storing and indexing table rdu
-Committed demo/weather as 4a8ef61bdc05.
-
-Tagged demo/weather:4a8ef61bdc0511051ce84032cd1772eca77d7dbd4af877092830090c1ff3d321 with revised_data.
-```
-
-
-Now we can use the derivative image's provenance to [rebuild](../sgr/splitfile_execution/rebuild) it against the source data without knowing the original Splitfile that built it.
-
-
-```shell-session
-$ sgr rebuild demo/summary --against demo/weather:revised_data
-
-Rerunning demo/summary:248f2675b37a6ee08836ae8c068ac5b7b6f990dfbcb3379e663a3c8933662b6b against:
-demo/weather:revised_data
-
-Step 1/2 : FROM demo/weather:revised_data IMPORT rdu AS source_data
-Resolving repository demo/weather
-Importing 1 table from demo/weather:4a8ef61bdc05 into demo/summary
- ---> adc4c5a55fd3
-
-Step 2/2 : SQL {CREATE TABLE monthly_summary  AS SELECT to_char(dat...
-Executing SQL...
-Committing demo/summary...
-Processing table monthly_summary
- ---> 723016296bda
-Successfully built demo/summary:723016296bda.
-```
-
-
-Tag the new dataset and compare it with its predecessor. We can now see how the changes in the upstream data influenced the final dataset.
-
-
-```shell-session
-$ sgr tag demo/summary based_on_revised
-$ sgr diff demo/summary based_on_initial based_on_revised --verbose --table-name monthly_summary
-
-Tagged demo/summary:723016296bda5adbf1f3fa229868359da4e413c78365b6079470ec7669816c12 with based_on_revised.
-
-Between 248f2675b37a and 723016296bda:
-monthly_summary: added 12 rows, removed 12 rows.
-- ('201201', Decimal('0.06322580645161290323'), Decimal('0E-20'))
-- ('201202', Decimal('0.06689655172413793103'), Decimal('0.03137931034482758621'))
-- ('201203', Decimal('0.17290322580645161290'), Decimal('0E-20'))
-- ('201204', Decimal('0.08766666666666666667'), Decimal('0E-20'))
-- ('201205', Decimal('0.12806451612903225806'), Decimal('0E-20'))
-- ('201206', Decimal('0.10333333333333333333'), Decimal('0E-20'))
-- ('201207', Decimal('0.14967741935483870968'), Decimal('0E-20'))
-- ('201208', Decimal('0.13000000000000000000'), Decimal('0E-20'))
-- ('201209', Decimal('0.26100000000000000000'), Decimal('0E-20'))
-- ('201210', Decimal('0.05903225806451612903'), Decimal('0E-20'))
-- ('201211', Decimal('0.01866666666666666667'), Decimal('0E-20'))
-- ('201212', Decimal('0.09483870967741935484'), Decimal('0E-20'))
-+ ('201201', Decimal('0.07587096774193548387'), Decimal('0E-20'))
-+ ('201202', Decimal('0.08027586206896551724'), Decimal('0.03137931034482758621'))
-+ ('201203', Decimal('0.20748387096774193548'), Decimal('0E-20'))
-+ ('201204', Decimal('0.10520000000000000000'), Decimal('0E-20'))
-+ ('201205', Decimal('0.15367741935483870968'), Decimal('0E-20'))
-+ ('201206', Decimal('0.12400000000000000000'), Decimal('0E-20'))
-+ ('201207', Decimal('0.17961290322580645161'), Decimal('0E-20'))
-+ ('201208', Decimal('0.15600000000000000000'), Decimal('0E-20'))
-+ ('201209', Decimal('0.31320000000000000000'), Decimal('0E-20'))
-+ ('201210', Decimal('0.07083870967741935484'), Decimal('0E-20'))
-+ ('201211', Decimal('0.02240000000000000000'), Decimal('0E-20'))
-+ ('201212', Decimal('0.11380645161290322581'), Decimal('0E-20'))
-```
-
-
-## Sharing data between Splitgraph engines
-The Compose stack that we started has two engines running in it. Splitgraph can share data between engines in a decentralized manner, like Git.
-
-Your .sgconfig file should have two engines registered in it: local and remote. For more information on configuring extra remotes, see the [configuration reference](../configuration/introduction).
-
-
-```shell-session
-$ cat .sgconfig
-$ SG_ENGINE=engine_2 sgr init
-
-[defaults]
-SG_LOGLEVEL=INFO
-SG_ENGINE_HOST=localhost
-SG_ENGINE_PORT=5432
-SG_ENGINE_USER=sgr
-SG_ENGINE_PWD=supersecure
-
-[remote: engine_2]
-SG_ENGINE_ADMIN_USER=sgr
-SG_ENGINE_ADMIN_PWD=supersecure
-SG_ENGINE_POSTGRES_DB_NAME=splitgraph
-SG_ENGINE_HOST=localhost
-SG_ENGINE_PORT=5431
-SG_ENGINE_USER=sgr
-SG_ENGINE_PWD=supersecure
-SG_ENGINE_DB_NAME=splitgraph
-Initializing engine PostgresEngine engine_2 (sgr@localhost:5431/splitgraph)...
-Database splitgraph already exists, skipping
-Ensuring the metadata schema at splitgraph_meta exists...
-Running splitgraph_meta--0.0.1.sql
-Running splitgraph_meta--0.0.1--0.0.2.sql
-Running splitgraph_meta--0.0.2--0.0.3.sql
-Installing Splitgraph API functions...
-Installing CStore management functions...
-Installing the audit trigger...
-Engine PostgresEngine engine_2 (sgr@localhost:5431/splitgraph) initialized.
-```
-
-
-[Push](../sgr/sharing_images/push) the RDU weather dataset that we ingested to the remote engine.
-Since by default Splitgraph is configured to use S3 for uploading, we need
-to override the upload handler and upload data to the actual database as tables.
-
-
-```shell-session
-$ sgr push demo/weather --remote engine_2 demo/weather --upload-handler DB
-
-Pushing demo/weather to demo/weather on remote engine_2
-Gathering remote metadata...
-Uploading 2 objects, total size 122.18 KiB
-100% 2/2 [00:00<00:00,  3.73objs/s, object=o8bc6629c4...]
-Uploaded metadata for 3 images, 2 tables, 2 objects and 2 tags.
-Setting upstream for demo/weather to demo/weather.
-```
-
-
-Now we can inspect the data on the remote engine.
-The `sgr` client uses the same protocol to talk to the remote engine as to the local one, so we can use it to perform the same operations.
-
-
-```shell-session
-$ SG_ENGINE=engine_2 sgr show demo/weather:latest
-$ SG_ENGINE=engine_2 sgr log -t demo/weather
-
-Image demo/weather:4a8ef61bdc0511051ce84032cd1772eca77d7dbd4af877092830090c1ff3d321
-Revision to the 2012 rainfall data
-Created at 2020-05-22T11:11:37.464850
-Size: 122.18 KiB
-Parent: 5f3f7d2cd5837ad35f8aea6d80d54fc1fdf3860d345e642466e3a79659aa64b3
-
-Tables:
-  rdu
-
-0000000000 2020-05-22 11:11:09
- └ 5f3f7d2cd5 [initial_data] 2020-05-22 11:11:16
-   └ 4a8ef61bdc [revised_data, latest] 2020-05-22 11:11:37 Revision to the 2012 rainfall data
-```
-
-
-Make yet another change to the original data and commit it.
-
-
-```shell-session
-$ sgr sql -s demo/weather "UPDATE rdu SET temperaturemax = temperaturemax * 1.05 WHERE EXTRACT(year FROM date) = 2007"
-$ sgr commit demo/weather
-$ sgr tag demo/weather temperature_revision
-
-Committing demo/weather...
-Storing and indexing table rdu
-Committed demo/weather as a8af3798d104.
-
-Tagged demo/weather:a8af3798d1040eb932a517d3f10c7526f0ca85adf82c66544a2c4ac6d68b7de3 with temperature_revision.
-```
-
-
-Inspect our changes.
-
-
-```shell-session
-$ sgr diff demo/weather initial_data temperature_revision
-
-Between 5f3f7d2cd583 and a8af3798d104:
-rdu: added 486 rows, removed 486 rows.
-```
-
-
-Push the changes out to the remote engine.
-Changes are delta-compressed, so only the rows that have been replaced will be uploaded to the remote engine.
-
-
-```shell-session
-$ sgr push demo/weather --upload-handler DB
-
-Pushing demo/weather to demo/weather on remote engine_2
-Gathering remote metadata...
-Uploading 1 object, total size 12.72 KiB
-100% 1/1 [00:00<00:00,  3.19objs/s, object=of3816fed9...]
-Uploaded metadata for 1 image, 1 table, 1 object and 1 tag.
-```
-
-
-Inspect the dataset on the remote engine. We can see that a new image has been added to the remote `demo/weather` repository.
-
-
-```shell-session
-$ SG_ENGINE=engine_2 sgr show demo/weather:latest
-$ SG_ENGINE=engine_2 sgr log -t demo/weather:latest
-
-Image demo/weather:a8af3798d1040eb932a517d3f10c7526f0ca85adf82c66544a2c4ac6d68b7de3
-
-Created at 2020-05-22T11:11:52.302430
-Size: 134.90 KiB
-Parent: 4a8ef61bdc0511051ce84032cd1772eca77d7dbd4af877092830090c1ff3d321
-
-Tables:
-  rdu
-
-0000000000 2020-05-22 11:11:09
- └ 5f3f7d2cd5 [initial_data] 2020-05-22 11:11:16
-   └ 4a8ef61bdc [revised_data] 2020-05-22 11:11:37 Revision to the 2012 rainfall data
-     └ a8af3798d1 [temperature_revision, latest] 2020-05-22 11:11:52
-```
-
-
-## Asciicasts
-
-This demo is also available as a series of Asciicasts.
-
-### Ingesting CSV files
-
-[Link to example](https://github.com/splitgraph/splitgraph/tree/master/examples/import-from-csv)
-
-<cast src="@splitgraph/content/casts/versioned/latest/import-from-csv.cast" />
-
-### Splitfiles for building datasets
-
-[Link to example](https://github.com/splitgraph/splitgraph/tree/master/examples/splitfile)
-
-<cast src="@splitgraph/content/casts/versioned/latest/splitfiles.cast" />
-
-### Sharing datasets with other engines
-
-This requires you to use docker-compose to run the two engines instead of `sgr engine`.
-
-[Link to example](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-other-engine)
-
-<cast src="@splitgraph/content/casts/versioned/latest/push-to-other-engine.cast" />
+  * [Decentralized demo](/decentralized_demo)
+  * [Splitfile reference](../splitfiles/splitfile_intro)
+  * [Sample Splitfiles](https://github.com/splitgraph/splitgraph/tree/master/examples/sample_splitfiles)
+  * [Splitgraph Cloud reference](../splitgraph_cloud/introduction)
