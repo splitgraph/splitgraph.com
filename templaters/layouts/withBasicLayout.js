@@ -2,8 +2,13 @@
 import { jsx } from "theme-ui";
 import React, { useMemo } from "react";
 
-import { BaseLayout } from "@splitgraph/design/Layout";
 import { defaultTheme } from "@splitgraph/design";
+
+import { Link } from "@splitgraph/docs/components";
+import { InnerPageLayout } from "@splitgraph/docs/components/InnerPageLayout";
+import withTheme from "@splitgraph/docs/hocs/withTheme";
+
+import { NextSeo } from "next-seo";
 
 const mdxComponents = {
   pre: ({ children, ...rest }) => (
@@ -23,42 +28,39 @@ const mdxComponents = {
   ),
 };
 
-// TODO: Move this back into the docs repository (?) so no need to do this dumb
-// dependency injection. It was only put into its own so that autogenned scripts
-// could reference it by name instead of relative path, but that's fixed now.
-const withBlogLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
-  // Because we rewrite URLs, when using next/link, we need to specify
-  // the mapping so next.js loads the right script. If we do not do this,
-  // client side routing does not work and we get "content flashes"
-  const ContentLink = ({ href, children, ...rest }) => {
+const withBasicLayout = ({ MdxPage, meta = {}, contentTree, Link }) => {
+  mdxComponents.a = Link;
+
+  const WithBasicLayout = ({ router }) => {
     return (
-      <Link href={`/_content${href}`} as={href} passHref>
-        <a
-          {...rest}
-          sx={defaultTheme.links.primary}
-          onClick={(e) => {
-            console.log("clicked");
-          }}
-        >
-          {children}
-        </a>
-      </Link>
+      <InnerPageLayout
+        extraStyle={{
+          ".main-content": {
+            backgroundColor: "white",
+            a: {
+              variant: "links.primary",
+            },
+          },
+          "header, article": {
+            paddingLeft: "calc((100vw - 100ch)/2)",
+            paddingRight: "calc((100vw - 100ch)/2)",
+          },
+        }}
+      >
+        <NextSeo title={meta.title} />
+        <header>
+          <h1>{meta.title}</h1>
+        </header>
+        <article>
+          <MdxPage components={mdxComponents} />
+        </article>
+      </InnerPageLayout>
     );
   };
 
-  mdxComponents.a = ContentLink;
+  WithBasicLayout.displayName = `WithBasicLayout`;
 
-  const WithBlogLayout = ({ router }) => {
-    return (
-      <BaseLayout>
-        <MdxPage components={mdxComponents} />
-      </BaseLayout>
-    );
-  };
-
-  WithBlogLayout.displayName = `WithBlogLayout`;
-
-  return WithBlogLayout;
+  return withTheme(WithBasicLayout);
 };
 
-export default withBlogLayout;
+export default withBasicLayout;
