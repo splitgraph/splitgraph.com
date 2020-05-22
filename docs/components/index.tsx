@@ -7,3 +7,5 @@ export { Link } from "./Link";
 export { InnerPageLayout } from "./InnerPageLayout";
 
 export * from "./Boxes";
+export { BlogPostItem } from './BlogPostItem';
+
