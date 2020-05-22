@@ -69,8 +69,8 @@ engine_2 uses an image, skipping
 
 $ docker-compose --project-name splitgraph_example up -d
 Creating network "splitgraph_example_default" with the default driver
-Creating splitgraph_example_engine_1_1 ... done
 Creating splitgraph_example_engine_2_1 ... done
+Creating splitgraph_example_engine_1_1 ... done
 ```
 
 
@@ -99,11 +99,10 @@ Let's download a CSV file to ingest into Splitgraph. We will be using the [weath
 
 ```shell-session
 $ head -n5 rdu-weather-history.csv
-date;temperaturemin;temperaturemax;precipitation;snowfall;snowdepth;avgwindspeed;fastest2minwinddir;fastest2mi
-nwindspeed;fastest5secwinddir;fastest5secwindspeed;fog;fogheavy;mist;rain;fogground;ice;glaze;drizzle;snow;fre
-ezingrain;smokehaze;thunder;highwind;hail;blowingsnow;dust;freezingfog
-2007-01-06;50.0;71.1;0.13;0.0;0.0;8.05;230;17.9;230;21.92;Yes;No;Yes;Yes;No;No;No;No;No;No;No;No;No;No;No;No;N
-o
+date;temperaturemin;temperaturemax;precipitation;snowfall;snowdepth;avgwindspeed;fastest2minwinddir;fastest2minwindspeed
+;fastest5secwinddir;fastest5secwindspeed;fog;fogheavy;mist;rain;fogground;ice;glaze;drizzle;snow;freezingrain;smokehaze;
+thunder;highwind;hail;blowingsnow;dust;freezingfog
+2007-01-06;50.0;71.1;0.13;0.0;0.0;8.05;230;17.9;230;21.92;Yes;No;Yes;Yes;No;No;No;No;No;No;No;No;No;No;No;No;No
 2007-01-09;30.0;55.0;0.0;0.0;0.0;7.61;280;23.04;270;29.08;No;No;No;Yes;No;No;No;No;No;No;No;No;No;No;No;No;No
 2007-01-14;50.0;73.9;0.0;0.0;0.0;8.5;230;21.03;230;25.05;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No
 2007-01-15;57.0;73.9;0.0;0.0;0.0;13.2;230;23.94;230;29.08;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No
@@ -123,10 +122,10 @@ Use [sgr csv import](../sgr/data_import_export/csv_import) to load the CSV file.
 
 
 ```python
-$ sgr csv import -f rdu-weather-history.csv \
-               -k date \
-               -t date timestamp \
-               --separator ";" \
+$ sgr csv import -f rdu-weather-history.csv \\
+               -k date \\
+               -t date timestamp \\
+               --separator ";" \\
                demo/weather rdu
 ```
 
@@ -152,11 +151,11 @@ Now we can [commit](../sgr/image_management_creation/commit) the repository, cre
 $ sgr commit demo/weather
 Committing demo/weather...
 Processing table rdu
-Committed demo/weather as febb1e8427f5.
+Committed demo/weather as f5f8151e5a7b.
 
 
 $ sgr tag demo/weather initial_data
-Tagged demo/weather:febb1e8427f52bb523d7bf060fd592779f086e5fb8a816d9081b91b938385b44 with initial_data.
+Tagged demo/weather:f5f8151e5a7be4f097b276f4e7897ec267feb0f3f3f694dd2f2b677a3e5b2b7b with initial_data.
 ```
 
 
@@ -165,9 +164,9 @@ Inspect the image using [`sgr show`](../sgr/image_information/show) and the fres
 
 ```shell-session
 $ sgr show demo/weather:initial_data
-Image demo/weather:febb1e8427f52bb523d7bf060fd592779f086e5fb8a816d9081b91b938385b44
+Image demo/weather:f5f8151e5a7be4f097b276f4e7897ec267feb0f3f3f694dd2f2b677a3e5b2b7b
 
-Created at 2020-05-22T16:49:59.607744
+Created at 2020-05-22T18:04:21.911111
 Size: 109.61 KiB
 Parent: 0000000000000000000000000000000000000000000000000000000000000000
 
@@ -176,7 +175,7 @@ Tables:
 
 
 $ sgr table demo/weather:initial_data rdu
-Table demo/weather:febb1e8427f52bb523d7bf060fd592779f086e5fb8a816d9081b91b938385b44/rdu
+Table demo/weather:f5f8151e5a7be4f097b276f4e7897ec267feb0f3f3f694dd2f2b677a3e5b2b7b/rdu
 
 Size: 109.61 KiB
 Rows: 4633
@@ -225,7 +224,7 @@ Object ID: ob799ca761ea638c0dbb4df3e59ab6a995d87999909d008a3495711c9009f8f
 Namespace: demo
 Format: FRAG
 Size: 109.61 KiB
-Created: 2020-05-22 16:50:00.088631
+Created: 2020-05-22 18:04:22.774448
 Rows inserted: 4633
 Insertion hash: 4b49b5701a582aa5c418238e4bf75c84d0dcd2ec993fb4e7fe1d0dfcf6ef6877
 Rows deleted: 0
@@ -298,19 +297,19 @@ Executing Splitfile rdu-weather-summary.splitfile with arguments {}
 
 Step 1/2 : FROM demo/weather IMPORT rdu AS source_data
 Resolving repository demo/weather
-Importing 1 table from demo/weather:febb1e8427f5 into demo/summary
- ---> 041faf4f2adf
+Importing 1 table from demo/weather:f5f8151e5a7b into demo/summary
+ ---> f06d8a3a2855
 
 Step 2/2 : SQL {CREATE TABLE monthly_summary AS (    SELECT to_cha...
 Executing SQL...
 Committing demo/summary...
 Processing table monthly_summary
- ---> 826633d53627
-Successfully built demo/summary:826633d53627.
+ ---> de84e0dbee23
+Successfully built demo/summary:de84e0dbee23.
 
 
 $ sgr tag demo/summary based_on_initial
-Tagged demo/summary:826633d53627b5c21276d2aab1c7eddbd0f60b94fb4eedad868a85f3270da409 with based_on_initial.
+Tagged demo/summary:de84e0dbee234d45d7a5adab03405044e907d40ce92f3aec40e112b2d6c18bfa with based_on_initial.
 ```
 
 
@@ -324,12 +323,12 @@ Executing Splitfile rdu-weather-summary.splitfile with arguments {}
 Step 1/2 : FROM demo/weather IMPORT rdu AS source_data
 Resolving repository demo/weather
  ---> Using cache
- ---> 041faf4f2adf
+ ---> f06d8a3a2855
 
 Step 2/2 : SQL {CREATE TABLE monthly_summary AS (    SELECT to_cha...
  ---> Using cache
- ---> 826633d53627
-Successfully built demo/summary:826633d53627.
+ ---> de84e0dbee23
+Successfully built demo/summary:de84e0dbee23.
 ```
 
 
@@ -338,7 +337,7 @@ Inspect the new dataset and the table `monthly_summary` that was created in it.
 
 ```shell-session
 $ sgr show demo/summary:based_on_initial
-Image demo/summary:826633d53627b5c21276d2aab1c7eddbd0f60b94fb4eedad868a85f3270da409
+Image demo/summary:de84e0dbee234d45d7a5adab03405044e907d40ce92f3aec40e112b2d6c18bfa
 
 CREATE TABLE monthly_summary AS (
     SELECT to_char(date, 'YYYYMM') AS month,
@@ -348,9 +347,9 @@ CREATE TABLE monthly_summary AS (
     GROUP BY month
     ORDER BY month ASC)
 
-Created at 2020-05-22T16:50:08.194216
+Created at 2020-05-22T18:04:30.020782
 Size: 111.78 KiB
-Parent: 041faf4f2adfad32516301b60ee94385e37b92246b344ac11f4935a518578b08
+Parent: f06d8a3a28551c587010af09e95d10a0195b1e90d8c64e16b7ae10a6a9ebc3b1
 
 Tables:
   monthly_summary
@@ -358,7 +357,7 @@ Tables:
 
 
 $ sgr table demo/summary:based_on_initial monthly_summary
-Table demo/summary:826633d53627b5c21276d2aab1c7eddbd0f60b94fb4eedad868a85f3270da409/monthly_summary
+Table demo/summary:de84e0dbee234d45d7a5adab03405044e907d40ce92f3aec40e112b2d6c18bfa/monthly_summary
 
 Size: 2.17 KiB
 Rows: 153
@@ -375,8 +374,9 @@ Objects:
 Run a query against the new dataset. This can be done with [any PostgreSQL client](../integrating_splitgraph/other_clients) but Splitgraph offers a shorthand to run SQL against the current Splitgraph engine.
 
 
-```shell-session
-$ sgr sql -s demo/summary "SELECT * FROM monthly_summary ORDER BY month DESC LIMIT 5"
+```python
+$ sgr sql -s demo/summary "SELECT * FROM monthly_summary \\
+  ORDER BY month DESC LIMIT 5"
 201909  0.171667  0
 201908  0.139032  0
 201907  0.117097  0
@@ -391,14 +391,13 @@ Images built with Splitfiles have their provenance (commands used to create them
 
 ```shell-session
 $ sgr provenance demo/summary
-demo/summary:826633d53627b5c21276d2aab1c7eddbd0f60b94fb4eedad868a85f3270da409 depends on:
-demo/weather:febb1e8427f52bb523d7bf060fd592779f086e5fb8a816d9081b91b938385b44
+demo/summary:de84e0dbee234d45d7a5adab03405044e907d40ce92f3aec40e112b2d6c18bfa depends on:
+demo/weather:f5f8151e5a7be4f097b276f4e7897ec267feb0f3f3f694dd2f2b677a3e5b2b7b
 
 
 $ sgr provenance --full demo/summary
-# Splitfile commands used to recreate demo/summary:826633d53627b5c21276d2aab1c7eddbd0f60b94fb4eedad868a85f3270
-da409
-FROM demo/weather:febb1e8427f52bb523d7bf060fd592779f086e5fb8a816d9081b91b938385b44 IMPORT rdu AS source_data
+# Splitfile commands used to recreate demo/summary:de84e0dbee234d45d7a5adab03405044e907d40ce92f3aec40e112b2d6c18bfa
+FROM demo/weather:f5f8151e5a7be4f097b276f4e7897ec267feb0f3f3f694dd2f2b677a3e5b2b7b IMPORT rdu AS source_data
 SQL {CREATE TABLE monthly_summary
   AS SELECT to_char(date, 'YYYYMM') AS month
           , avg(precipitation) AS average_precipitation
@@ -414,8 +413,8 @@ We can also [invert the provenance query](../sgr/splitfile_execution/dependents)
 
 ```shell-session
 $ sgr dependents demo/weather
-demo/weather:febb1e8427f52bb523d7bf060fd592779f086e5fb8a816d9081b91b938385b44 is depended on by:
-demo/summary:826633d53627b5c21276d2aab1c7eddbd0f60b94fb4eedad868a85f3270da409
+demo/weather:f5f8151e5a7be4f097b276f4e7897ec267feb0f3f3f694dd2f2b677a3e5b2b7b is depended on by:
+demo/summary:de84e0dbee234d45d7a5adab03405044e907d40ce92f3aec40e112b2d6c18bfa
 ```
 
 
@@ -423,19 +422,20 @@ Keeping track of the image provenance allows Splitgraph to rebuild images agains
 Let's pretend there's been a revision to the source historical weather data.
 
 
-```shell-session
-$ sgr sql -s demo/weather "UPDATE rdu SET precipitation = precipitation * 1.2 WHERE EXTRACT (year FROM date) =
- 2012"
+```python
+$ sgr sql -s demo/weather "UPDATE rdu \\
+  SET precipitation = precipitation * 1.2 \\
+  WHERE EXTRACT (year FROM date) = 2012"
 
 
 $ sgr commit -m "Revision to the 2012 rainfall data" demo/weather
 Committing demo/weather...
 Storing and indexing table rdu
-Committed demo/weather as a5e7ebb88d26.
+Committed demo/weather as 0b5f9102f955.
 
 
 $ sgr tag demo/weather revised_data
-Tagged demo/weather:a5e7ebb88d2689e19014b7a184511444c84042751c80d6f121d10b17579ca3f4 with revised_data.
+Tagged demo/weather:0b5f9102f95565dda07cefec818c79a775797b50f8912cb0b4164420d28a7fe4 with revised_data.
 ```
 
 
@@ -444,20 +444,20 @@ Now we can use the derivative image's provenance to [rebuild](../sgr/splitfile_e
 
 ```shell-session
 $ sgr rebuild demo/summary --against demo/weather:revised_data
-Rerunning demo/summary:826633d53627b5c21276d2aab1c7eddbd0f60b94fb4eedad868a85f3270da409 against:
+Rerunning demo/summary:de84e0dbee234d45d7a5adab03405044e907d40ce92f3aec40e112b2d6c18bfa against:
 demo/weather:revised_data
 
 Step 1/2 : FROM demo/weather:revised_data IMPORT rdu AS source_data
 Resolving repository demo/weather
-Importing 1 table from demo/weather:a5e7ebb88d26 into demo/summary
- ---> 240e6269d072
+Importing 1 table from demo/weather:0b5f9102f955 into demo/summary
+ ---> bf57026d3dc8
 
 Step 2/2 : SQL {CREATE TABLE monthly_summary  AS SELECT to_char(dat...
 Executing SQL...
 Committing demo/summary...
 Processing table monthly_summary
- ---> f9a1bec2dd20
-Successfully built demo/summary:f9a1bec2dd20.
+ ---> 3a56c822a0ae
+Successfully built demo/summary:3a56c822a0ae.
 ```
 
 
@@ -466,11 +466,11 @@ Tag the new dataset and compare it with its predecessor. We can now see how the 
 
 ```shell-session
 $ sgr tag demo/summary based_on_revised
-Tagged demo/summary:f9a1bec2dd20b88adc90046ab18ee71aca6bde54ba3301a414c9bbaf75187b32 with based_on_revised.
+Tagged demo/summary:3a56c822a0ae1631690af393dfe9148b7b6fcbcbcf243b7f7f4c144e5555d20b with based_on_revised.
 
 
 $ sgr diff demo/summary based_on_initial based_on_revised --verbose --table-name monthly_summary
-Between 826633d53627 and f9a1bec2dd20:
+Between de84e0dbee23 and 3a56c822a0ae:
 monthly_summary: added 12 rows, removed 12 rows.
 - ('201201', Decimal('0.06322580645161290323'), Decimal('0E-20'))
 - ('201202', Decimal('0.06689655172413793103'), Decimal('0.03137931034482758621'))
@@ -548,8 +548,8 @@ to override the upload handler and upload data to the actual database as tables.
 $ sgr push demo/weather --remote engine_2 demo/weather --upload-handler DB
 Pushing demo/weather to demo/weather on remote engine_2
 Gathering remote metadata...
-Uploading 2 objects, total size 122.20 KiB
-100% 2/2 [00:00<00:00,  4.34objs/s, object=o8bc6629c4...]
+Uploading 2 objects, total size 122.18 KiB
+100% 2/2 [00:00<00:00,  3.79objs/s, object=o8bc6629c4...]
 Uploaded metadata for 3 images, 2 tables, 2 objects and 2 tags.
 Setting upstream for demo/weather to demo/weather.
 ```
@@ -561,40 +561,40 @@ The `sgr` client uses the same protocol to talk to the remote engine as to the l
 
 ```shell-session
 $ SG_ENGINE=engine_2 sgr show demo/weather:latest
-Image demo/weather:a5e7ebb88d2689e19014b7a184511444c84042751c80d6f121d10b17579ca3f4
+Image demo/weather:0b5f9102f95565dda07cefec818c79a775797b50f8912cb0b4164420d28a7fe4
 Revision to the 2012 rainfall data
-Created at 2020-05-22T16:50:21.680526
-Size: 122.20 KiB
-Parent: febb1e8427f52bb523d7bf060fd592779f086e5fb8a816d9081b91b938385b44
+Created at 2020-05-22T18:04:42.919127
+Size: 122.18 KiB
+Parent: f5f8151e5a7be4f097b276f4e7897ec267feb0f3f3f694dd2f2b677a3e5b2b7b
 
 Tables:
   rdu
 
 
 $ SG_ENGINE=engine_2 sgr log -t demo/weather
-0000000000 2020-05-22 16:49:52
- └ febb1e8427 [initial_data] 2020-05-22 16:49:59
-   └ a5e7ebb88d [revised_data, latest] 2020-05-22 16:50:21 Revision to the 2012 rainfall data
+0000000000 2020-05-22 18:04:16
+ └ f5f8151e5a [initial_data] 2020-05-22 18:04:21
+   └ 0b5f9102f9 [revised_data, latest] 2020-05-22 18:04:42 Revision to the 2012 rainfall data
 ```
 
 
 Make yet another change to the original data and commit it.
 
 
-```shell-session
-$ sgr sql -s demo/weather "UPDATE rdu SET temperaturemax = temperaturemax * 1.05 WHERE EXTRACT(year FROM date)
- = 2007"
+```python
+$ sgr sql -s demo/weather "UPDATE rdu \\
+  SET temperaturemax = temperaturemax * 1.05 \\
+  WHERE EXTRACT(year FROM date) = 2007"
 
 
 $ sgr commit demo/weather
 Committing demo/weather...
 Storing and indexing table rdu
-Committed demo/weather as 52b4d3a3746c.
+Committed demo/weather as 407633bb77dc.
 
 
 $ sgr tag demo/weather temperature_revision
-Tagged demo/weather:52b4d3a3746c9be9f7892b5f7235813c37e4e2e48a955b918158f9ab95629061 with temperature_revision
-.
+Tagged demo/weather:407633bb77dc45aeabbd9efd6102981478fde5971061841709a397b8932d449f with temperature_revision.
 ```
 
 
@@ -603,7 +603,7 @@ Inspect our changes.
 
 ```shell-session
 $ sgr diff demo/weather initial_data temperature_revision
-Between febb1e8427f5 and 52b4d3a3746c:
+Between f5f8151e5a7b and 407633bb77dc:
 rdu: added 486 rows, removed 486 rows.
 ```
 
@@ -617,7 +617,7 @@ $ sgr push demo/weather --upload-handler DB
 Pushing demo/weather to demo/weather on remote engine_2
 Gathering remote metadata...
 Uploading 1 object, total size 12.72 KiB
-100% 1/1 [00:00<00:00,  3.46objs/s, object=of3816fed9...]
+100% 1/1 [00:00<00:00,  3.42objs/s, object=of3816fed9...]
 Uploaded metadata for 1 image, 1 table, 1 object and 1 tag.
 ```
 
@@ -627,22 +627,23 @@ Inspect the dataset on the remote engine. We can see that a new image has been a
 
 ```shell-session
 $ SG_ENGINE=engine_2 sgr show demo/weather:latest
-Image demo/weather:52b4d3a3746c9be9f7892b5f7235813c37e4e2e48a955b918158f9ab95629061
+Image demo/weather:407633bb77dc45aeabbd9efd6102981478fde5971061841709a397b8932d449f
 
-Created at 2020-05-22T16:50:36.871561
-Size: 134.92 KiB
-Parent: a5e7ebb88d2689e19014b7a184511444c84042751c80d6f121d10b17579ca3f4
+Created at 2020-05-22T18:04:57.268766
+Size: 134.90 KiB
+Parent: 0b5f9102f95565dda07cefec818c79a775797b50f8912cb0b4164420d28a7fe4
 
 Tables:
   rdu
 
 
 $ SG_ENGINE=engine_2 sgr log -t demo/weather:latest
-0000000000 2020-05-22 16:49:52
- └ febb1e8427 [initial_data] 2020-05-22 16:49:59
-   └ a5e7ebb88d [revised_data] 2020-05-22 16:50:21 Revision to the 2012 rainfall data
-     └ 52b4d3a374 [temperature_revision, latest] 2020-05-22 16:50:36
+0000000000 2020-05-22 18:04:16
+ └ f5f8151e5a [initial_data] 2020-05-22 18:04:21
+   └ 0b5f9102f9 [revised_data] 2020-05-22 18:04:42 Revision to the 2012 rainfall data
+     └ 407633bb77 [temperature_revision, latest] 2020-05-22 18:04:57
 ```
+
 
 ## Asciicasts
 

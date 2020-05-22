@@ -13,7 +13,7 @@ This demo will show you how to use Splitgraph to:
 
 ## Prerequisites
 
-You need to be registered on [Splitgraph Cloud](../splitgraph_cloud/introduction) to pull and publish data. If you followed the [installation instructions](../installation), this should be already done for you. You can also use [`sgr cloud register`](../sgr/splitgraph_cloud/register) or [`sgr cloud login`](../sgr/splitgraph_cloud/login) to register or log in from the `sgr` client.
+You need to be registered on [Splitgraph Cloud](../splitgraph_cloud/introduction) to pull and publish data. If you followed the [installation instructions](./installation), this should be already done for you. You can also use [`sgr cloud register`](../sgr/splitgraph_cloud/cloud_register) or [`sgr cloud login`](../sgr/splitgraph_cloud/cloud_login) to register or log in from the `sgr` client.
 
 If you do not wish to register on Splitgraph Cloud, you can still use Splitgraph in a decentralized fashion, sharing data with other Splitgraph instances. See the [decentralized demo](./decentralized_demo) for an introduction that showcases importing data from CSV files and tracking changes to images, using Splitgraph's version control functionality.
 
@@ -27,7 +27,7 @@ so replace `splitgraph-demo` with your own username in command invocations.
 ```shell-session
 $ sgr init
 Initializing engine PostgresEngine LOCAL (sgr@localhost:5432/splitgraph)...
-Waiting for connection.....
+Waiting for connection......
 Database splitgraph already exists, skipping
 Ensuring the metadata schema at splitgraph_meta exists...
 Running splitgraph_meta--0.0.1.sql
@@ -72,8 +72,7 @@ When stored in Splitgraph, tables are composed of multiple content-addressable, 
 
 ```shell-session
 $ sgr table -r data.splitgraph.com splitgraph/2016_election:latest precinct_results
-Table splitgraph/2016_election:3835145ada3f07cad99087d1b1071122d58c48783cbfe4694c101d35651fba90/precinct_resul
-ts
+Table splitgraph/2016_election:3835145ada3f07cad99087d1b1071122d58c48783cbfe4694c101d35651fba90/precinct_results
 
 Size: 26.81 MiB
 Rows: 1989234
@@ -164,8 +163,8 @@ We're interested in precinct-level election results for District of Columbia (FI
 
 
 ```python
-$ sgr sql -s splitgraph/2016_election "EXPLAIN SELECT \
-  candidate_normalized, SUM(votes) FROM precinct_results \
+$ sgr sql -s splitgraph/2016_election "EXPLAIN SELECT \\
+  candidate_normalized, SUM(votes) FROM precinct_results \\
   WHERE county_fips=11001 GROUP BY candidate_normalized"
 GroupAggregate  (cost=5698135.18..5699554.45 rows=1 width=64)
 Group Key: candidate_normalized
@@ -185,8 +184,8 @@ Here, we can see that this query will only download two objects. Let's actually 
 
 
 ```python
-$ sgr sql -s splitgraph/2016_election "SELECT \
-  candidate_normalized, SUM(votes) FROM precinct_results \
+$ sgr sql -s splitgraph/2016_election "SELECT \\
+  candidate_normalized, SUM(votes) FROM precinct_results \\
   WHERE county_fips=11001 GROUP BY candidate_normalized"
 clinton  282830
 in         6551
@@ -239,7 +238,7 @@ Resolving repository splitgraph/2016_election
 Gathering remote metadata...
 No image/object metadata to pull.
 Importing 1 table from splitgraph/2016_election:3835145ada3f into votes_by_state
-Processing table sg_tmp_6d1225f2b5d123e5a40cb1ab96c6851c
+Processing table sg_tmp_32eba453c2f1dd1a13ca58ae3b901a47
  ---> ee8dc4bb7c47
 Successfully built votes_by_state:ee8dc4bb7c47.
 ```
@@ -314,7 +313,7 @@ Setting upstream for votes_by_state to splitgraph-demo/votes_by_state.
 $ sgr show -r data.splitgraph.com splitgraph-demo/votes_by_state:latest
 Image splitgraph-demo/votes_by_state:ee8dc4bb7c4766cc30593b77e0b6b3dbb2863c06a4ed2274127d558901abeb2f
 Importing 1 table from splitgraph/2016_election
-Created at 2020-05-22T16:47:19.279024
+Created at 2020-05-22T18:07:44.828748
 Size: 6.38 KiB
 Parent: 0000000000000000000000000000000000000000000000000000000000000000
 
