@@ -2306,6 +2306,7 @@ __metadata:
     rebass: ^4.0.5
     theme-ui: ^0.2.43
   peerDependencies:
+    dayjs: "*"
     react: ^16.13.0
     react-dom: ^16.13.0
   languageName: unknown
@@ -2324,6 +2325,7 @@ __metadata:
     babel-plugin-macros: ^2.6.1
     babel-plugin-preval: ^3.0.1
     babel-plugin-react-require: ^3.1.1
+    dayjs: ^1.8.27
     directory-tree: ^2.2.4
     express: ^4.17.1
     mdx: ^0.3.1
@@ -2387,6 +2389,7 @@ __metadata:
     tslib: ^1.11.1
     typescript: ^3.8.3
   peerDependencies:
+    dayjs: "*"
     next: "*"
     react: ">=16"
   languageName: unknown
@@ -2396,6 +2399,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@splitgraph/templaters@workspace:templaters"
   peerDependencies:
+    dayjs: "*"
     next: "*"
     next-seo: "*"
     react: "*"
@@ -7230,6 +7234,13 @@ __metadata:
     whatwg-mimetype: ^2.2.0
     whatwg-url: ^7.0.0
   checksum: 3/04d211e1e9f83bab75450487da34b124b32beacd1ad0df96e3a747b705c24c65579833a04a6ea30a528ea5b99d5247660408c513b38905bf855f2de585b9e91c
+  languageName: node
+  linkType: hard
+
+"dayjs@npm:^1.8.27":
+  version: 1.8.27
+  resolution: "dayjs@npm:1.8.27"
+  checksum: 3/e7b40dd16a536ad454c669ab499c068e90fb6f4c98d168d0836a92f5b61030d4c25ba03365b2b39ebd564c8a8adc0f17bd334e22d7ae9f93e00ddb1c6643ff6a
   languageName: node
   linkType: hard
 

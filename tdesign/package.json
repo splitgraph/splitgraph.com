@@ -17,6 +17,7 @@
     "clean": "./clean.sh"
   },
   "peerDependencies": {
+    "dayjs": "*",
     "next": "*",
     "react": ">=16"
   },
