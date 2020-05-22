@@ -42,11 +42,14 @@ const InnerPageLayout = ({
         },
         ".main-content": {
           maxWidth: "100vw",
+          a: {
+            variant: "links.primary",
+          },
           ...(extraStyle.hasOwnProperty(".main-content")
             ? extraStyle[".main-content"]
             : {}),
         },
-        section: {
+        "section, article": {
           paddingLeft: ["0.5rem", "2rem", "calc((100% - 120ch)/2)"],
           paddingRight: ["0.5rem", "2rem", "calc((100% - 120ch)/2)"],
           maxWidth: "100vw",
