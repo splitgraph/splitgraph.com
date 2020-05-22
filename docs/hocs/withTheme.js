@@ -6,8 +6,8 @@ import { ThemeProvider, makeDefaultTheme } from "@splitgraph/tdesign";
 
 const defaultTheme = !!makeDefaultTheme ? makeDefaultTheme() : {};
 
-const withTheme = Page => {
-  const WithTheme = props => (
+const withTheme = (Page) => {
+  const WithTheme = (props) => (
     <OurThemeProvider theme={defaultTheme}>
       <ThemeProvider theme={defaultTheme}>
         <Page {...props} />

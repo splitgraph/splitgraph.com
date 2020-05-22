@@ -32,3 +32,5 @@ export { LogoImage } from "./Logo";
 export { InterPageNav } from "./Nav";
 
 export { defaultTheme, tocStyles } from "./themes/defaultTheme";
+
+export { mdxComponents } from "./themes/mdxComponents";
