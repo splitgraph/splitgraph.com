@@ -3,7 +3,9 @@ export const meta = {
   title: "Five minute demo"
 };
 
-This quick series of Asciicasts will guide you through using Splitgraph to:
+## Introduction
+
+This demo will guide you through using Splitgraph to:
 
   * Ingest a dataset from a CSV file
   * Build a derivative dataset using Splitfiles
@@ -11,19 +13,650 @@ This quick series of Asciicasts will guide you through using Splitgraph to:
   * Check the dataset's provenance and rebuild it against a changed upstream
   * Share a dataset with another Splitgraph engine
 
-## Ingesting CSV files
+
+
+## Building and starting the engine
+Build and start the Docker Compose stack: we will be running two Splitgraph engines here
+to demonstrate sharing data between two Splitgraph instances.
+
+
+```shell-session
+$ cat docker-compose.yml
+$ docker-compose --project-name splitgraph_example build
+$ docker-compose --project-name splitgraph_example up -d
+
+version: '3'
+services:
+  engine_1:
+    image: splitgraph/engine:${DOCKER_TAG-stable}
+    ports:
+      - '0.0.0.0:5432:5432'
+    environment:
+      - POSTGRES_USER=sgr
+      - POSTGRES_PASSWORD=supersecure
+      - POSTGRES_DB=splitgraph
+      - SG_LOGLEVEL=INFO
+      - SG_CONFIG_FILE=/.sgconfig
+    expose:
+      - 5432
+    # Need to mount this into the engine so that access credentials to
+    # the second engine are available to it
+    volumes:
+      - ${SG_CONFIG_FILE-./.sgconfig}:/.sgconfig
+
+  engine_2:
+    image: splitgraph/engine:${DOCKER_TAG-stable}
+    ports:
+      - '0.0.0.0:5431:5432'
+    environment:
+      - POSTGRES_USER=sgr
+      - POSTGRES_PASSWORD=supersecure
+      - POSTGRES_DB=splitgraph
+      - SG_LOGLEVEL=INFO
+    expose:
+      - 5432
+
+engine_1 uses an image, skipping
+engine_2 uses an image, skipping
+
+Creating network "splitgraph_example_default" with the default driver
+Creating splitgraph_example_engine_2_1 ... done
+Creating splitgraph_example_engine_1_1 ... done
+```
+
+
+Initialize our local engine.
+
+
+```shell-session
+$ sgr init
+
+Initializing engine PostgresEngine LOCAL (sgr@localhost:5432/splitgraph)...
+Waiting for connection.....
+Database splitgraph already exists, skipping
+Ensuring the metadata schema at splitgraph_meta exists...
+Running splitgraph_meta--0.0.1.sql
+Running splitgraph_meta--0.0.1--0.0.2.sql
+Running splitgraph_meta--0.0.2--0.0.3.sql
+Installing Splitgraph API functions...
+Installing CStore management functions...
+Installing the audit trigger...
+Engine PostgresEngine LOCAL (sgr@localhost:5432/splitgraph) initialized.
+```
+
+
+## Importing data from a CSV file
+Let's download a CSV file to ingest into Splitgraph. We will be using the [weather data from Raleigh-Durham International Airport](https://data.townofcary.org/api/v2/catalog/datasets/rdu-weather-history/exports/csv) file.
+
+
+```shell-session
+$ head -n5 rdu-weather-history.csv
+
+date;temperaturemin;temperaturemax;precipitation;snowfall;snowdepth;avgwindspeed;fastest2minwinddir;fastest2minwindspeed
+;fastest5secwinddir;fastest5secwindspeed;fog;fogheavy;mist;rain;fogground;ice;glaze;drizzle;snow;freezingrain;smokehaze;
+thunder;highwind;hail;blowingsnow;dust;freezingfog
+2007-01-06;50.0;71.1;0.13;0.0;0.0;8.05;230;17.9;230;21.92;Yes;No;Yes;Yes;No;No;No;No;No;No;No;No;No;No;No;No;No
+2007-01-09;30.0;55.0;0.0;0.0;0.0;7.61;280;23.04;270;29.08;No;No;No;Yes;No;No;No;No;No;No;No;No;No;No;No;No;No
+2007-01-14;50.0;73.9;0.0;0.0;0.0;8.5;230;21.03;230;25.05;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No
+2007-01-15;57.0;73.9;0.0;0.0;0.0;13.2;230;23.94;230;29.08;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No
+```
+
+
+Initialize the repository that we will be ingesting the data into.
+
+
+```shell-session
+$ sgr init demo/weather
+
+Initialized empty repository demo/weather
+```
+
+
+Use [sgr csv import](../sgr/data_import_export/csv_import) to load the CSV file. This is a wrapper around PostgreSQL's [`COPY FROM STDIN`](https://www.postgresql.org/docs/current/sql-copy.html) with some schema inference functionality.
+
+
+```python
+$ sgr csv import -f rdu-weather-history.csv \\
+               -k date \\
+               -t date timestamp \\
+               --separator ";" \\
+               demo/weather rdu
+
+
+```
+
+
+The data is now in a table but not committed as a Splitgraph image. Inspect the repository with [`sgr status`](../sgr/image_information/status) and diff it with [`sgr diff`](../sgr/image_information/diff).
+
+
+```shell-session
+$ sgr status demo/weather
+$ sgr diff demo/weather
+
+demo/weather: on image 0000000000000000000000000000000000000000000000000000000000000000.
+
+Between 000000000000 and the current working copy:
+rdu: table added
+```
+
+
+Now we can [commit](../sgr/image_management_creation/commit) the repository, creating a new image, and give it a tag `initial_data`.
+
+
+```shell-session
+$ sgr commit demo/weather
+$ sgr tag demo/weather initial_data
+
+Committing demo/weather...
+Processing table rdu
+Committed demo/weather as 5f3f7d2cd583.
+
+Tagged demo/weather:5f3f7d2cd5837ad35f8aea6d80d54fc1fdf3860d345e642466e3a79659aa64b3 with initial_data.
+```
+
+
+Inspect the image using [`sgr show`](../sgr/image_information/show) and the freshly-created `rdu` [table](../sgr/image_information/table). This table consists of one Splitgraph [object](../concepts/objects).
+
+
+```shell-session
+$ sgr show demo/weather:initial_data
+$ sgr table demo/weather:initial_data rdu
+
+Image demo/weather:5f3f7d2cd5837ad35f8aea6d80d54fc1fdf3860d345e642466e3a79659aa64b3
+
+Created at 2020-05-22T11:11:16.223291
+Size: 109.61 KiB
+Parent: 0000000000000000000000000000000000000000000000000000000000000000
+
+Tables:
+  rdu
+
+Table demo/weather:5f3f7d2cd5837ad35f8aea6d80d54fc1fdf3860d345e642466e3a79659aa64b3/rdu
+
+Size: 109.61 KiB
+Rows: 4633
+Columns:
+  date (timestamp without time zone, PK)
+  temperaturemin (numeric)
+  temperaturemax (numeric)
+  precipitation (numeric)
+  snowfall (numeric)
+  snowdepth (numeric)
+  avgwindspeed (numeric)
+  fastest2minwinddir (integer)
+  fastest2minwindspeed (numeric)
+  fastest5secwinddir (integer)
+  fastest5secwindspeed (numeric)
+  fog (character varying)
+  fogheavy (character varying)
+  mist (character varying)
+  rain (character varying)
+  fogground (character varying)
+  ice (character varying)
+  glaze (character varying)
+  drizzle (character varying)
+  snow (character varying)
+  freezingrain (character varying)
+  smokehaze (character varying)
+  thunder (character varying)
+  highwind (character varying)
+  hail (character varying)
+  blowingsnow (character varying)
+  dust (character varying)
+  freezingfog (character varying)
+
+Objects:
+  ob799ca761ea638c0dbb4df3e59ab6a995d87999909d008a3495711c9009f8f
+```
+
+
+Inspect the [object metadata](../sgr/image_information/object). Splitgraph objects are content-addressable and the original CSV file can change, so the object ID might be different between this demo and the actual data.
+
+
+```shell-session
+$ sgr object ob799ca761ea638c0dbb4df3e59ab6a995d87999909d008a3495711c9009f8f
+
+Object ID: ob799ca761ea638c0dbb4df3e59ab6a995d87999909d008a3495711c9009f8f
+
+Namespace: demo
+Format: FRAG
+Size: 109.61 KiB
+Created: 2020-05-22 11:11:16.669166
+Rows inserted: 4633
+Insertion hash: 4b49b5701a582aa5c418238e4bf75c84d0dcd2ec993fb4e7fe1d0dfcf6ef6877
+Rows deleted: 0
+Deletion hash: 0000000000000000000000000000000000000000000000000000000000000000
+Column index:
+  fog: ['No', 'Yes']
+  ice: ['No', 'Yes']
+  date: ['2007-01-01 00:00:00', '2019-09-07 00:00:00']
+  dust: ['No', 'Yes']
+  hail: ['No', 'Yes']
+  mist: ['No', 'Yes']
+  rain: ['No', 'Yes']
+  snow: ['No', 'Yes']
+  glaze: ['No', 'Yes']
+  drizzle: ['No', 'Yes']
+  thunder: ['No', 'Yes']
+  fogheavy: ['No', 'Yes']
+  highwind: ['No', 'Yes']
+  snowfall: ['0.0', '7.01']
+  fogground: ['No', 'Yes']
+  smokehaze: ['No', 'Yes']
+  snowdepth: ['0.0', '5.91']
+  blowingsnow: ['No', 'Yes']
+  freezingfog: ['No', 'Yes']
+  avgwindspeed: ['0.0', '20.36']
+  freezingrain: ['No', 'Yes']
+  precipitation: ['0.0', '6.45']
+  temperaturemax: ['23.2', '105.1']
+  temperaturemin: ['4.1', '80.1']
+  fastest2minwinddir: [10, 360]
+  fastest5secwinddir: [10, 360]
+  fastest2minwindspeed: ['4.92', '59.95']
+  fastest5secwindspeed: ['6.93', '86.12']
+
+Location: created locally
+```
+
+
+## Using Splitfiles to build derivative datasets
+[Splitfiles](../concepts/splitfiles) are similar to Dockerfiles and are the easiest way to build Splitgraph datasets. They offer Dockerfile-like caching, provenance tracking, fast dataset rebuilds, joins between datasets and full SQL support.
+Create a Splitfile that will summarize the data image we've just built.
+
+
+```shell-session
+$ cat rdu-weather-summary.splitfile
+
+# First, import the original data table: this doesn't consume extra space (reuses the same
+# object that's used by the demo/weather repository.
+
+FROM demo/weather IMPORT rdu AS source_data
+
+# Now summarize the data
+SQL {
+CREATE TABLE monthly_summary AS (
+    SELECT to_char(date, 'YYYYMM') AS month,
+        AVG(precipitation) AS average_precipitation,
+        AVG(snowfall) AS average_snowfall
+    FROM source_data
+    GROUP BY month
+    ORDER BY month ASC)
+}
+```
+
+
+Run the Splitfile to [build](../sgr/splitfile_execution/provenance) a new image. This image will be saved in a repository `demo/summary`. Let's also tag it with `based_on_initial`.
+
+
+```shell-session
+$ sgr build rdu-weather-summary.splitfile -o demo/summary
+$ sgr tag demo/summary based_on_initial
+
+Executing Splitfile rdu-weather-summary.splitfile with arguments {}
+
+Step 1/2 : FROM demo/weather IMPORT rdu AS source_data
+Resolving repository demo/weather
+Importing 1 table from demo/weather:5f3f7d2cd583 into demo/summary
+ ---> f68ad0e1769b
+
+Step 2/2 : SQL {CREATE TABLE monthly_summary AS (    SELECT to_cha...
+Executing SQL...
+Committing demo/summary...
+Processing table monthly_summary
+ ---> 248f2675b37a
+Successfully built demo/summary:248f2675b37a.
+
+Tagged demo/summary:248f2675b37a6ee08836ae8c068ac5b7b6f990dfbcb3379e663a3c8933662b6b with based_on_initial.
+```
+
+
+Much like with Docker, the build result is cached, so running build again checks out the existing image. Try building the image again:
+
+
+```shell-session
+$ sgr build rdu-weather-summary.splitfile -o demo/summary
+
+Executing Splitfile rdu-weather-summary.splitfile with arguments {}
+
+Step 1/2 : FROM demo/weather IMPORT rdu AS source_data
+Resolving repository demo/weather
+ ---> Using cache
+ ---> f68ad0e1769b
+
+Step 2/2 : SQL {CREATE TABLE monthly_summary AS (    SELECT to_cha...
+ ---> Using cache
+ ---> 248f2675b37a
+Successfully built demo/summary:248f2675b37a.
+```
+
+
+Inspect the new dataset and the table `monthly_summary` that was created in it.
+
+
+```shell-session
+$ sgr show demo/summary:based_on_initial
+$ sgr table demo/summary:based_on_initial monthly_summary
+
+Image demo/summary:248f2675b37a6ee08836ae8c068ac5b7b6f990dfbcb3379e663a3c8933662b6b
+
+CREATE TABLE monthly_summary AS (
+    SELECT to_char(date, 'YYYYMM') AS month,
+        AVG(precipitation) AS average_precipitation,
+        AVG(snowfall) AS average_snowfall
+    FROM source_data
+    GROUP BY month
+    ORDER BY month ASC)
+
+Created at 2020-05-22T11:11:23.584369
+Size: 111.78 KiB
+Parent: f68ad0e1769b6df9a5581581bff2203ea88becec0024b5b3f64c6f94aa7c0f87
+
+Tables:
+  monthly_summary
+  source_data
+
+Table demo/summary:248f2675b37a6ee08836ae8c068ac5b7b6f990dfbcb3379e663a3c8933662b6b/monthly_summary
+
+Size: 2.17 KiB
+Rows: 153
+Columns:
+  month (text)
+  average_precipitation (numeric)
+  average_snowfall (numeric)
+
+Objects:
+  o5e29c3cf82603335df66690a448ca1f604f0002d5a3496b18c982a5ea835f3
+```
+
+
+Run a query against the new dataset. This can be done with [any PostgreSQL client](../integrating_splitgraph/other_clients) but Splitgraph offers a shorthand to run SQL against the current Splitgraph engine.
+
+
+```shell-session
+$ sgr sql -s demo/summary "SELECT * FROM monthly_summary ORDER BY month DESC LIMIT 5"
+
+201909  0.171667  0
+201908  0.139032  0
+201907  0.117097  0
+201906  0.12      0
+201905  0.103548  0
+```
+
+
+## Inspecting provenance and rebuilding datasets
+Images built with Splitfiles have their provenance (commands used to create them and sources) recorded in their metadata. Let's inspect the [provenance](../sgr/splitfile_execution/provenance) that the image we just built has.
+
+
+```shell-session
+$ sgr provenance demo/summary
+$ sgr provenance --full demo/summary
+
+demo/summary:248f2675b37a6ee08836ae8c068ac5b7b6f990dfbcb3379e663a3c8933662b6b depends on:
+demo/weather:5f3f7d2cd5837ad35f8aea6d80d54fc1fdf3860d345e642466e3a79659aa64b3
+
+# Splitfile commands used to recreate demo/summary:248f2675b37a6ee08836ae8c068ac5b7b6f990dfbcb3379e663a3c8933662b6b
+FROM demo/weather:5f3f7d2cd5837ad35f8aea6d80d54fc1fdf3860d345e642466e3a79659aa64b3 IMPORT rdu AS source_data
+SQL {CREATE TABLE monthly_summary
+  AS SELECT to_char(date, 'YYYYMM') AS month
+          , avg(precipitation) AS average_precipitation
+          , avg(snowfall) AS average_snowfall
+     FROM source_data
+     GROUP BY month
+     ORDER BY month ASC}
+```
+
+
+We can also [invert the provenance query](../sgr/splitfile_execution/dependents), listing all images that were built from `demo/weather` on the local engine.
+
+
+```shell-session
+$ sgr dependents demo/weather
+
+demo/weather:5f3f7d2cd5837ad35f8aea6d80d54fc1fdf3860d345e642466e3a79659aa64b3 is depended on by:
+demo/summary:248f2675b37a6ee08836ae8c068ac5b7b6f990dfbcb3379e663a3c8933662b6b
+```
+
+
+Keeping track of the image provenance allows Splitgraph to rebuild images against upstream data when it changes and know when there's no need to rebuild an image.
+Let's pretend there's been a revision to the source historical weather data.
+
+
+```shell-session
+$ sgr sql -s demo/weather "UPDATE rdu SET precipitation = precipitation * 1.2 WHERE EXTRACT (year FROM date) = 2012"
+$ sgr commit -m "Revision to the 2012 rainfall data" demo/weather
+$ sgr tag demo/weather revised_data
+
+Committing demo/weather...
+Storing and indexing table rdu
+Committed demo/weather as 4a8ef61bdc05.
+
+Tagged demo/weather:4a8ef61bdc0511051ce84032cd1772eca77d7dbd4af877092830090c1ff3d321 with revised_data.
+```
+
+
+Now we can use the derivative image's provenance to [rebuild](../sgr/splitfile_execution/rebuild) it against the source data without knowing the original Splitfile that built it.
+
+
+```shell-session
+$ sgr rebuild demo/summary --against demo/weather:revised_data
+
+Rerunning demo/summary:248f2675b37a6ee08836ae8c068ac5b7b6f990dfbcb3379e663a3c8933662b6b against:
+demo/weather:revised_data
+
+Step 1/2 : FROM demo/weather:revised_data IMPORT rdu AS source_data
+Resolving repository demo/weather
+Importing 1 table from demo/weather:4a8ef61bdc05 into demo/summary
+ ---> adc4c5a55fd3
+
+Step 2/2 : SQL {CREATE TABLE monthly_summary  AS SELECT to_char(dat...
+Executing SQL...
+Committing demo/summary...
+Processing table monthly_summary
+ ---> 723016296bda
+Successfully built demo/summary:723016296bda.
+```
+
+
+Tag the new dataset and compare it with its predecessor. We can now see how the changes in the upstream data influenced the final dataset.
+
+
+```shell-session
+$ sgr tag demo/summary based_on_revised
+$ sgr diff demo/summary based_on_initial based_on_revised --verbose --table-name monthly_summary
+
+Tagged demo/summary:723016296bda5adbf1f3fa229868359da4e413c78365b6079470ec7669816c12 with based_on_revised.
+
+Between 248f2675b37a and 723016296bda:
+monthly_summary: added 12 rows, removed 12 rows.
+- ('201201', Decimal('0.06322580645161290323'), Decimal('0E-20'))
+- ('201202', Decimal('0.06689655172413793103'), Decimal('0.03137931034482758621'))
+- ('201203', Decimal('0.17290322580645161290'), Decimal('0E-20'))
+- ('201204', Decimal('0.08766666666666666667'), Decimal('0E-20'))
+- ('201205', Decimal('0.12806451612903225806'), Decimal('0E-20'))
+- ('201206', Decimal('0.10333333333333333333'), Decimal('0E-20'))
+- ('201207', Decimal('0.14967741935483870968'), Decimal('0E-20'))
+- ('201208', Decimal('0.13000000000000000000'), Decimal('0E-20'))
+- ('201209', Decimal('0.26100000000000000000'), Decimal('0E-20'))
+- ('201210', Decimal('0.05903225806451612903'), Decimal('0E-20'))
+- ('201211', Decimal('0.01866666666666666667'), Decimal('0E-20'))
+- ('201212', Decimal('0.09483870967741935484'), Decimal('0E-20'))
++ ('201201', Decimal('0.07587096774193548387'), Decimal('0E-20'))
++ ('201202', Decimal('0.08027586206896551724'), Decimal('0.03137931034482758621'))
++ ('201203', Decimal('0.20748387096774193548'), Decimal('0E-20'))
++ ('201204', Decimal('0.10520000000000000000'), Decimal('0E-20'))
++ ('201205', Decimal('0.15367741935483870968'), Decimal('0E-20'))
++ ('201206', Decimal('0.12400000000000000000'), Decimal('0E-20'))
++ ('201207', Decimal('0.17961290322580645161'), Decimal('0E-20'))
++ ('201208', Decimal('0.15600000000000000000'), Decimal('0E-20'))
++ ('201209', Decimal('0.31320000000000000000'), Decimal('0E-20'))
++ ('201210', Decimal('0.07083870967741935484'), Decimal('0E-20'))
++ ('201211', Decimal('0.02240000000000000000'), Decimal('0E-20'))
++ ('201212', Decimal('0.11380645161290322581'), Decimal('0E-20'))
+```
+
+
+## Sharing data between Splitgraph engines
+The Compose stack that we started has two engines running in it. Splitgraph can share data between engines in a decentralized manner, like Git.
+
+Your .sgconfig file should have two engines registered in it: local and remote. For more information on configuring extra remotes, see the [configuration reference](../configuration/introduction).
+
+
+```shell-session
+$ cat .sgconfig
+$ SG_ENGINE=engine_2 sgr init
+
+[defaults]
+SG_LOGLEVEL=INFO
+SG_ENGINE_HOST=localhost
+SG_ENGINE_PORT=5432
+SG_ENGINE_USER=sgr
+SG_ENGINE_PWD=supersecure
+
+[remote: engine_2]
+SG_ENGINE_ADMIN_USER=sgr
+SG_ENGINE_ADMIN_PWD=supersecure
+SG_ENGINE_POSTGRES_DB_NAME=splitgraph
+SG_ENGINE_HOST=localhost
+SG_ENGINE_PORT=5431
+SG_ENGINE_USER=sgr
+SG_ENGINE_PWD=supersecure
+SG_ENGINE_DB_NAME=splitgraph
+Initializing engine PostgresEngine engine_2 (sgr@localhost:5431/splitgraph)...
+Database splitgraph already exists, skipping
+Ensuring the metadata schema at splitgraph_meta exists...
+Running splitgraph_meta--0.0.1.sql
+Running splitgraph_meta--0.0.1--0.0.2.sql
+Running splitgraph_meta--0.0.2--0.0.3.sql
+Installing Splitgraph API functions...
+Installing CStore management functions...
+Installing the audit trigger...
+Engine PostgresEngine engine_2 (sgr@localhost:5431/splitgraph) initialized.
+```
+
+
+[Push](../sgr/sharing_images/push) the RDU weather dataset that we ingested to the remote engine.
+Since by default Splitgraph is configured to use S3 for uploading, we need
+to override the upload handler and upload data to the actual database as tables.
+
+
+```shell-session
+$ sgr push demo/weather --remote engine_2 demo/weather --upload-handler DB
+
+Pushing demo/weather to demo/weather on remote engine_2
+Gathering remote metadata...
+Uploading 2 objects, total size 122.18 KiB
+100% 2/2 [00:00<00:00,  3.73objs/s, object=o8bc6629c4...]
+Uploaded metadata for 3 images, 2 tables, 2 objects and 2 tags.
+Setting upstream for demo/weather to demo/weather.
+```
+
+
+Now we can inspect the data on the remote engine.
+The `sgr` client uses the same protocol to talk to the remote engine as to the local one, so we can use it to perform the same operations.
+
+
+```shell-session
+$ SG_ENGINE=engine_2 sgr show demo/weather:latest
+$ SG_ENGINE=engine_2 sgr log -t demo/weather
+
+Image demo/weather:4a8ef61bdc0511051ce84032cd1772eca77d7dbd4af877092830090c1ff3d321
+Revision to the 2012 rainfall data
+Created at 2020-05-22T11:11:37.464850
+Size: 122.18 KiB
+Parent: 5f3f7d2cd5837ad35f8aea6d80d54fc1fdf3860d345e642466e3a79659aa64b3
+
+Tables:
+  rdu
+
+0000000000 2020-05-22 11:11:09
+ └ 5f3f7d2cd5 [initial_data] 2020-05-22 11:11:16
+   └ 4a8ef61bdc [revised_data, latest] 2020-05-22 11:11:37 Revision to the 2012 rainfall data
+```
+
+
+Make yet another change to the original data and commit it.
+
+
+```shell-session
+$ sgr sql -s demo/weather "UPDATE rdu SET temperaturemax = temperaturemax * 1.05 WHERE EXTRACT(year FROM date) = 2007"
+$ sgr commit demo/weather
+$ sgr tag demo/weather temperature_revision
+
+Committing demo/weather...
+Storing and indexing table rdu
+Committed demo/weather as a8af3798d104.
+
+Tagged demo/weather:a8af3798d1040eb932a517d3f10c7526f0ca85adf82c66544a2c4ac6d68b7de3 with temperature_revision.
+```
+
+
+Inspect our changes.
+
+
+```shell-session
+$ sgr diff demo/weather initial_data temperature_revision
+
+Between 5f3f7d2cd583 and a8af3798d104:
+rdu: added 486 rows, removed 486 rows.
+```
+
+
+Push the changes out to the remote engine.
+Changes are delta-compressed, so only the rows that have been replaced will be uploaded to the remote engine.
+
+
+```shell-session
+$ sgr push demo/weather --upload-handler DB
+
+Pushing demo/weather to demo/weather on remote engine_2
+Gathering remote metadata...
+Uploading 1 object, total size 12.72 KiB
+100% 1/1 [00:00<00:00,  3.19objs/s, object=of3816fed9...]
+Uploaded metadata for 1 image, 1 table, 1 object and 1 tag.
+```
+
+
+Inspect the dataset on the remote engine. We can see that a new image has been added to the remote `demo/weather` repository.
+
+
+```shell-session
+$ SG_ENGINE=engine_2 sgr show demo/weather:latest
+$ SG_ENGINE=engine_2 sgr log -t demo/weather:latest
+
+Image demo/weather:a8af3798d1040eb932a517d3f10c7526f0ca85adf82c66544a2c4ac6d68b7de3
+
+Created at 2020-05-22T11:11:52.302430
+Size: 134.90 KiB
+Parent: 4a8ef61bdc0511051ce84032cd1772eca77d7dbd4af877092830090c1ff3d321
+
+Tables:
+  rdu
+
+0000000000 2020-05-22 11:11:09
+ └ 5f3f7d2cd5 [initial_data] 2020-05-22 11:11:16
+   └ 4a8ef61bdc [revised_data] 2020-05-22 11:11:37 Revision to the 2012 rainfall data
+     └ a8af3798d1 [temperature_revision, latest] 2020-05-22 11:11:52
+```
+
+
+## Asciicasts
+
+This demo is also available as a series of Asciicasts.
+
+### Ingesting CSV files
 
 [Link to example](https://github.com/splitgraph/splitgraph/tree/master/examples/import-from-csv)
 
 <cast src="@splitgraph/content/casts/versioned/latest/import-from-csv.cast" />
 
-## Splitfiles for building datasets
+### Splitfiles for building datasets
 
 [Link to example](https://github.com/splitgraph/splitgraph/tree/master/examples/splitfile)
 
 <cast src="@splitgraph/content/casts/versioned/latest/splitfiles.cast" />
 
-## Sharing datasets with other engines
+### Sharing datasets with other engines
 
 This requires you to use docker-compose to run the two engines instead of `sgr engine`.
 
