@@ -1,17 +1,17 @@
 const path = require("path");
 const dirTree = require("directory-tree");
 
-const { walkTree, mapTree } = require("@splitgraph/lib/tree");
+const { walkTree, mapTree, sortTree } = require("@splitgraph/lib/tree");
 
 const defaultOpts = {
   urlPrefix: "/",
   importMdxMetadata: true,
   onWalk: (item, parent) => {},
-  onMap: (item, parent) => {}
+  onMap: (item, parent) => {},
 };
 
 // https://stackoverflow.com/a/7616484/3793499
-const simpleStringHash = inputStr => {
+const simpleStringHash = (inputStr) => {
   var hash = 0,
     i,
     chr;
@@ -29,7 +29,7 @@ class ContentTree {
     this.rootPath = rootPath;
     this.opts = Object.assign({}, defaultOpts, opts);
 
-    this.tree = {};
+    this.tree = opts.hasOwnProperty("tree") ? opts.tree : {};
 
     this.metaFiles = [];
     this.mdxFiles = [];
@@ -53,7 +53,7 @@ class ContentTree {
     const contentTree = dirTree(
       this.rootPath,
       { extensions: /\.(md|mdx|json)$/ },
-      item => {
+      (item) => {
         if (
           path.basename(item.path).endsWith(".meta.json") ||
           item.path.endsWith("metadata.json")
@@ -113,18 +113,18 @@ class ContentTree {
       item.path = {
         system: item.path,
         fromContentRoot,
-        fromSiteRoot: path.join(this.opts.urlPrefix, fromContentRoot)
+        fromSiteRoot: path.join(this.opts.urlPrefix, fromContentRoot),
       };
 
       // Remove the lexiographical sort 0100, 0200 and the .mdx extension
       const LEXICAL_JUNK = /\/\d{1,5}\_|\.mdx?$/gm;
-      const delexify = s => s.replace(LEXICAL_JUNK, "/").replace(/\/$/, "");
+      const delexify = (s) => s.replace(LEXICAL_JUNK, "/").replace(/\/$/, "");
 
       item.slug = delexify(`/${item.name}`).replace("/", "");
 
       item.url = {
         fromContentRoot: delexify(item.path.fromContentRoot),
-        fromSiteRoot: delexify(item.path.fromSiteRoot)
+        fromSiteRoot: delexify(item.path.fromSiteRoot),
       };
 
       item.isDirectory = item.type === "directory";
@@ -150,6 +150,10 @@ class ContentTree {
 
   map(callback) {
     return mapTree({ root: this.tree, callback });
+  }
+
+  sort(callback) {
+    return sortTree({ root: this.tree, comparator: callback });
   }
 }
 
