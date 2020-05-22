@@ -7,15 +7,24 @@ interface IRenderMidArgs {
   children?: React.ReactNode;
 }
 
+interface ChildProps {
+  children?: React.ReactNode;
+  className?: string;
+}
+
 export interface IDividedBoxProps {
   children?: React.ReactNode;
   renderTop?: () => React.ReactNode;
-  renderMid: (IRenderMidArgs) => React.ReactNode;
+  renderMid?: (IRenderMidArgs) => React.ReactNode;
   background?: string;
   colors?: [string, string];
   containerStyle?: SystemStyleObject;
+  midStyle?: SystemStyleObject;
+  topStyle?: SystemStyleObject;
   direction?: "vertical" | "horizontal";
   angle?: number;
+  TopComponent?: React.FunctionComponent<ChildProps>;
+  MidComponent?: React.FunctionComponent<ChildProps>;
 }
 
 const DividedBox = ({
@@ -25,8 +34,12 @@ const DividedBox = ({
   background,
   colors,
   containerStyle = {},
+  midStyle = {},
+  topStyle = {},
   direction = "vertical",
   angle,
+  TopComponent = Box,
+  MidComponent = Box,
 }: IDividedBoxProps) => {
   background = !!background
     ? background
@@ -57,10 +70,10 @@ const DividedBox = ({
       ...(containerStyle.hasOwnProperty(".divided-top")
         ? containerStyle[".divided-top"]
         : ({} as SystemStyleObject)),
+      ...topStyle,
     },
     ".divided-mid": {
       backgroundColor: "white",
-      color: "primary",
       paddingTop: "4rem",
       paddingBottom: "4rem",
       marginLeft: ["0.5rem", "0.5rem", "2rem"],
@@ -74,13 +87,16 @@ const DividedBox = ({
       ...(containerStyle.hasOwnProperty(".divided-mid")
         ? containerStyle[".divided-mid"]
         : ({} as SystemStyleObject)),
+      ...midStyle,
     },
   } as SystemStyleObject;
 
   return (
     <Box sx={containerStyle}>
-      <Box className="divided-top">{renderTop()}</Box>
-      <Box className="divided-mid">{renderMid({ children })}</Box>
+      <TopComponent className="divided-top">{renderTop()}</TopComponent>
+      <MidComponent className="divided-mid">
+        {renderMid ? renderMid({ children }) : children}
+      </MidComponent>
     </Box>
   );
 };
