@@ -12,197 +12,149 @@ import {
   Link,
   DividedBox,
   BoxSet,
-  BoxOne,
   BoxTwo,
   BoxThree,
 } from "@splitgraph/docs/components";
 
-const DocsIndexPage = () => {
+import Octicon from "@splitgraph/design/Icon/ThirdParty/GitHub/Octicon";
+
+const DocsBox = ({ header, body, anchor, href }) => {
   return (
-    <InnerPageLayout
-      extraStyle={{
-        minHeight: "100vh",
-        ".main-content": {
-          maxWidth: "100vw",
-        },
-        header: {
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "baseline",
+    <BoxThree
+      renderHeading={() => header}
+      renderBody={() => body}
+      renderFooter={() => <Link href={href}>{anchor}</Link>}
+      footerStyle={{
+        a: {
+          backgroundColor: "secondary",
           width: "100%",
-          maxWidth: "100vw",
-          paddingLeft: ["1rem", "1rem", "calc((100% - 100ch)/2)"],
-          paddingRight: ["1rem", "1rem", "calc((100% - 100ch)/2)"],
-          background:
-            "linear-gradient(to bottom,rgba(13,24,33,1) 0%,rgba(54,102,141,1) 60%,#000000 40%,#dddddf 40%,#dddddf 60%)",
-          h1: {
-            color: "light",
-            fontSize: [5, 5, 6],
-            paddingLeft: ["1rem", "1rem", "4rem"],
-            paddingRight: "4rem",
-            marginBottom: "0",
-          },
-          h2: {
-            backgroundColor: "white",
-            color: "primary",
-            paddingTop: "4rem",
-            paddingBottom: "4rem",
-            marginLeft: ["0.5rem", "0.5rem", "2rem"],
-            marginRight: ["0.5rem", "0.5rem", "2rem"],
-            paddingLeft: "1rem",
-            paddingRight: "1rem",
-            width: [
-              "calc(100% - 1rem)",
-              "calc(100% - 1rem)",
-              "calc(100% - 4rem)",
-            ],
-            borderRadius: 8,
-            border: "1px solid heavy",
-            boxShadow: "0 0 1rem rgba(0, 0, 0, .25)",
-          },
-        },
-        section: {
-          paddingLeft: ["0.5rem", "2rem", "calc((100% - 120ch)/2)"],
-          paddingRight: ["0.5rem", "2rem", "calc((100% - 120ch)/2)"],
-          maxWidth: "100vw",
+          textAlign: "center",
         },
       }}
-    >
+    />
+  );
+};
+
+const DocsIndexPage = () => {
+  return (
+    <InnerPageLayout>
       <NextSeo title="Documentation" />
-      {/* <header>
+      <header>
         <h1>Documentation</h1>
-        <h2>
-          Learn how to use Splitgraph <br /> <br /> to work with data like you
-          work with code
-        </h2>
-      </header> */}
-
+      </header>
       <section>
-        <h2>Box 3</h2>
-
+        <h2>Orientation</h2>
         <BoxSet>
-          <BoxThree
-            renderHeading={() =>
-              "Header of varying length, sometimes really long"
+          <DocsBox
+            header={"Introduction"}
+            body={
+              "Learn the basics of Splitgraph, and how you can use it to work with data like you work with code."
             }
-            renderBody={() =>
-              "Some blurb about doing things and being nice about them and stuff"
-            }
-            renderFooter={() => <a href="#">Learn more about the thing</a>}
+            anchor={"Read the Intro"}
+            href={"/docs/getting-started/introduction"}
           />
 
-          <BoxThree
-            renderHeading={() =>
-              "Header of varying length, sometimes really long"
+          <DocsBox
+            header={"Five Minute Demo"}
+            body={
+              "In the five minute demo, you'll learn the most important features" +
+              " of Splitgraph. Start with ingesting some data, then build a derivative " +
+              " dataset from it using Splitfiles. Learn about provenance and how you" +
+              " can push data back upstream."
             }
-            renderBody={() =>
-              "Some blurb about doing things and being nice about them and stuff"
-            }
-            renderFooter={() => <a href="#">Learn more about the thing</a>}
+            anchor={"Try it in Five Minutes"}
+            href={"/docs/getting-started/five_minute_demo"}
           />
 
-          <BoxThree
-            renderHeading={() =>
-              "Header of varying length, sometimes really long"
+          <DocsBox
+            header={"Frequently Asked Questions"}
+            body={
+              "Get answers to frequently asked questions about Splitgraph." +
+              " Learn what Splitgraph is, why and when to use it, and about its performance."
             }
-            renderBody={() =>
-              "Some blurb about doing things and being nice about them and stuff"
-            }
-            renderFooter={() => <a href="#">Learn more about the thing</a>}
+            anchor={"See the FAQ"}
+            href={"/docs/getting-started/frequently_asked_questions"}
           />
         </BoxSet>
       </section>
-
-      <DividedBox
-        topColor={"yellow"}
-        botColor={"red"}
-        colors={[
-          "rgba(13,24,33,1) 0%,rgba(54,102,141,1) 60%,#000000 40%",
-          "red",
-        ]}
-        renderMid={({ children }) => <h2>{children}</h2>}
-        containerStyle={{
-          paddingBottom: "2rem",
-          paddingTop: "2rem",
-        }}
+      <section>
+        <h2>Reference</h2>
+        <BoxSet>
+          <BoxTwo
+            renderHeading={() => (
+              <>
+                <code>sgr</code> Command Line Interface
+              </>
+            )}
+            renderBody={() =>
+              "sgr is the main command line tool used to work with" +
+              " splitgraph images. Use it to ingest data, work with splitfiles," +
+              " and push data to splitgraph cloud."
+            }
+            renderFooter={() => (
+              <Link href="/docs/sgr/image_management_creation/checkout">
+                <code>sgr</code> CLI reference
+              </Link>
+            )}
+          />
+          <BoxTwo
+            renderHeading={() => "Python API"}
+            renderBody={() =>
+              "All Splitgraph functionality is available in the Python API," +
+              " offering first-class support for data science workflows including" +
+              " Jupyter notebooks and Pandas dataframes."
+            }
+            renderFooter={() => (
+              <Link href="/docs/python_api/splitgraph.core">
+                Python API Docs
+              </Link>
+            )}
+          />
+        </BoxSet>
+      </section>
+      <section
+        sx={{ paddingLeft: "0 !important", paddingRight: "0 !important" }}
       >
-        Learn how to use Splitgraph <br /> <br /> to work with data like you
-        work with code
-      </DividedBox>
-
-      {/* "linear-gradient(to bottom,rgba(13,24,33,1) 0%,rgba(54,102,141,1) 60%,#000000 40%,#dddddf 40%,#dddddf 60%)", */}
-
-      <section>
-        <h2>Box 2</h2>
-
-        <BoxSet>
-          <BoxTwo
-            renderHeading={() =>
-              "Header of varying length, sometimes really long"
-            }
-            renderBody={() =>
-              "Some blurb about doing things and being nice about them and stuff"
-            }
-            renderFooter={() => <a href="#">Learn more about the thing</a>}
-          />
-
-          <BoxTwo
-            renderHeading={() =>
-              "Header of varying length, sometimes really long"
-            }
-            renderBody={() =>
-              "Some blurb about doing things and being nice about them and stuff"
-            }
-            renderFooter={() => <a href="#">Learn more about the thing</a>}
-          />
-
-          <BoxTwo
-            renderHeading={() =>
-              "Header of varying length, sometimes really long"
-            }
-            renderBody={() =>
-              "Some blurb about doing things and being nice about them and stuff"
-            }
-            renderFooter={() => <a href="#">Learn more about the thing</a>}
-          />
-
-          <BoxTwo
-            renderHeading={() =>
-              "Header of varying length, sometimes really long"
-            }
-            renderBody={() =>
-              "Some blurb about doing things and being nice about them and stuff"
-            }
-            renderFooter={() => <a href="#">Learn more about the thing</a>}
-          />
-        </BoxSet>
+        <DividedBox
+          colors={["#dddddf", "#0d1821"]}
+          MidComponent={({ children, ...rest }) => (
+            <Box {...rest}>{children}</Box>
+          )}
+          containerStyle={{
+            paddingBottom: "2rem",
+            paddingTop: "2rem",
+          }}
+          midStyle={{
+            paddingTop: 0,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            a: {
+              variant: "links.primary",
+            },
+          }}
+        >
+          <h2>Community</h2>
+          <Box
+            sx={{
+              padding: "1rem",
+              border: "1px solid",
+              borderColor: "gray",
+              display: "inline-flex",
+              alignItems: "center",
+            }}
+          >
+            <Octicon />
+            <Link href="https://www.github.com/splitgraph/splitgraph">
+              Splitgraph on GitHub
+            </Link>
+          </Box>
+        </DividedBox>
       </section>
 
-      <section>
-        <h2>Box 1</h2>
-
-        <BoxSet>
-          <BoxOne
-            renderHeading={() =>
-              "Header of varying length, sometimes really long"
-            }
-            renderBody={() =>
-              "Some blurb about doing things and being nice about them and stuff"
-            }
-            renderFooter={() => <a href="#">Learn more about the thing</a>}
-          />
-
-          <BoxOne
-            renderHeading={() =>
-              "Header of varying length, sometimes really long"
-            }
-            renderBody={() =>
-              "Some blurb about doing things and being nice about them and stuff"
-            }
-            renderFooter={() => <a href="#">Learn more about the thing</a>}
-          />
-        </BoxSet>
-      </section>
+      {/* TODO: footer */}
+      <Box sx={{ padding: "8rem", backgroundColor: "heavy" }}>&nbsp;</Box>
     </InnerPageLayout>
   );
 };
