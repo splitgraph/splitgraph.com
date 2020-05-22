@@ -9,11 +9,13 @@ import { HeaderRight } from "../HeaderRight";
 export interface IInnerPageLayoutProps {
   children?: React.ReactNode;
   extraStyle?: SystemStyleObject;
+  charWidth?: number;
 }
 
 const InnerPageLayout = ({
   children,
   extraStyle = {},
+  charWidth = 120,
 }: IInnerPageLayoutProps) => {
   return (
     <BaseLayout
@@ -29,7 +31,7 @@ const InnerPageLayout = ({
           alignItems: "baseline",
           width: "100%",
           maxWidth: "100vw",
-          paddingLeft: ["0.5rem", "2rem", "calc((100% - 120ch)/2)"],
+          paddingLeft: ["0.5rem", "2rem", `calc((100% - ${charWidth}ch)/2)`],
           // paddingLeft: ["1rem", "1rem", "calc((100% - 100ch)/2)"],
           // paddingRight: ["1rem", "1rem", "calc((100% - 100ch)/2)"],
           background:
@@ -49,9 +51,13 @@ const InnerPageLayout = ({
             ? extraStyle[".main-content"]
             : {}),
         },
-        "section, article": {
-          paddingLeft: ["0.5rem", "2rem", "calc((100% - 120ch)/2)"],
-          paddingRight: ["0.5rem", "2rem", "calc((100% - 120ch)/2)"],
+        "header, article": {
+          paddingLeft: ["0.5rem", "2rem", `calc((100vw - ${charWidth}ch)/2)`],
+          paddingRight: ["0.5rem", "2rem", `calc((100vw - ${charWidth}ch)/2)`],
+        },
+        section: {
+          paddingLeft: ["0.5rem", "2rem", `calc((100% - ${charWidth}ch)/2)`],
+          paddingRight: ["0.5rem", "2rem", `calc((100% - ${charWidth}ch)/2)`],
           maxWidth: "100vw",
           ...(extraStyle.hasOwnProperty("section")
             ? extraStyle["section"]

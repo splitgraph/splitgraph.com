@@ -23,6 +23,7 @@ export interface IDividedBoxProps {
   topStyle?: SystemStyleObject;
   direction?: "vertical" | "horizontal";
   angle?: number;
+  ContainerComponent?: React.FunctionComponent<ChildProps>;
   TopComponent?: React.FunctionComponent<ChildProps>;
   MidComponent?: React.FunctionComponent<ChildProps>;
 }
@@ -38,6 +39,7 @@ const DividedBox = ({
   topStyle = {},
   direction = "vertical",
   angle,
+  ContainerComponent = Box,
   TopComponent = Box,
   MidComponent = Box,
 }: IDividedBoxProps) => {
@@ -92,12 +94,12 @@ const DividedBox = ({
   } as SystemStyleObject;
 
   return (
-    <Box sx={containerStyle}>
+    <ContainerComponent sx={containerStyle}>
       <TopComponent className="divided-top">{renderTop()}</TopComponent>
       <MidComponent className="divided-mid">
         {renderMid ? renderMid({ children }) : children}
       </MidComponent>
-    </Box>
+    </ContainerComponent>
   );
 };
 

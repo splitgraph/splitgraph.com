@@ -5,7 +5,7 @@ import * as React from "react";
 
 import { GenericBox, IGenericBoxProps } from "../GenericBox";
 
-export interface IBoxTwoProps extends IGenericBoxProps {}
+export type IBoxTwoProps = Omit<IGenericBoxProps, "classNames">;
 
 const BoxTwo = (props: IBoxTwoProps) => {
   return <GenericBox classNames="box-2" {...props} />;
