@@ -1,7 +1,7 @@
 const path = require("path");
 const dirTree = require("directory-tree");
 
-const { walkTree, mapTree, sortTree } = require("@splitgraph/lib/tree");
+const { walkTree, mapTree } = require("@splitgraph/lib/tree");
 
 const defaultOpts = {
   urlPrefix: "/",
@@ -94,6 +94,16 @@ class ContentTree {
         return;
       }
 
+      // Directory may be empty if it has no matching files in it (e.g. images)
+      // Set isMeta = true so it gets filtered by mapTree in @splitgraph/lib/tree
+      let isEmptyDirectory =
+        item.type === "directory" &&
+        (!item.children || item.children.length === 0);
+      if (isEmptyDirectory) {
+        item.isMeta = true;
+        return;
+      }
+
       let isMdxFile = [".mdx", ".md"].includes(path.extname(item.path));
       if (isMdxFile && this.opts.importMdxMetadata) {
         // We can require the mdx file because we made babel transform it
@@ -150,10 +160,6 @@ class ContentTree {
 
   map(callback) {
     return mapTree({ root: this.tree, callback });
-  }
-
-  sort(callback) {
-    return sortTree({ root: this.tree, comparator: callback });
   }
 }
 

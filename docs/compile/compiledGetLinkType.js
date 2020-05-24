@@ -30,7 +30,7 @@ const getLinkType = ({ currentURL, href }) => {
     };
   }
 
-  if (href.includes("#")) {
+  if (href.includes("mailto:") || href.includes("#")) {
     return {
       ...defaultReturn,
       isAnchorLink: true,

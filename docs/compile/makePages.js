@@ -39,7 +39,7 @@ import ${templater} from "@splitgraph/templaters/layouts/${templater}";
 import MdxPage, { meta } from "@splitgraph/content${item.path.fromSiteRoot}";
 import contentTree from "${contentTreeLocation}";
 import getLinkType from "${getLinkTypeLocation}";
-export default withRouter(${templater}({ MdxPage, meta, contentTree, getLinkType, Link }));
+export default withRouter(${templater}({ MdxPage, meta, contentTree }));
 `,
   });
 
