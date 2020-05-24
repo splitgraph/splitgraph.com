@@ -1,6 +1,6 @@
 const { addHook: overrideRequire } = require("pirates");
 const { transform: babelTransform } = require("@babel/core");
-const { flattenTree } = require("@splitgraph/lib/tree");
+const { flattenTree, sortTree } = require("@splitgraph/lib/tree");
 
 // We need Babel to be able to parse the .mdx so we can extract the exported metadata
 // Note we are not actually using the parsed mdx component here, as we are only
@@ -144,9 +144,7 @@ const compileContentTree = ({
     return unsorted;
   }
 
-  return new ContentTree(contentTree.rootPath, { tree: unsorted })
-    .init()
-    .sort(sort);
+  return sortTree({ root: unsorted, comparator: sort });
 };
 
 module.exports = compileContentTree;
