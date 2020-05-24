@@ -1,14 +1,10 @@
 // @jsx jsx
 import { jsx } from "theme-ui";
-import React, { useMemo } from "react";
+import React from "react";
 
-import { defaultTheme, mdxComponents } from "@splitgraph/design";
-
-import { Link, DividedBox } from "@splitgraph/docs/components";
-import { InnerPageLayout } from "@splitgraph/docs/components/InnerPageLayout";
+import { mdxComponents } from "@splitgraph/design";
+import { Link, BlogPost, InnerPageLayout } from "@splitgraph/docs/components";
 import withTheme from "@splitgraph/docs/hocs/withTheme";
-
-import { NextSeo } from "next-seo";
 
 const withBlogLayout = ({ MdxPage, meta = {}, contentTree }) => {
   mdxComponents.a = Link;
@@ -29,26 +25,9 @@ const withBlogLayout = ({ MdxPage, meta = {}, contentTree }) => {
           },
         }}
       >
-        <NextSeo title={meta.title} />
-        <DividedBox
-          colors={[
-            "rgba(13,24,33,1) 0%,rgba(54,102,141,1) 60%,#000000 40%",
-            "#fff",
-          ]}
-          TopComponent={({ ...rest }) => <h1 {...rest}>{meta.title}</h1>}
-          MidComponent={({ children, ...rest }) => (
-            <div {...rest}>{children}</div>
-          )}
-          containerStyle={{
-            // paddingBottom: "2rem",
-            paddingTop: "2rem",
-          }}
-        >
-          {meta.description}
-        </DividedBox>
-        <article className="main-content">
+        <BlogPost meta={meta}>
           <MdxPage components={mdxComponents} />
-        </article>
+        </BlogPost>
       </InnerPageLayout>
     );
   };

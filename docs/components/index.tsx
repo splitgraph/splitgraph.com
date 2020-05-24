@@ -9,3 +9,5 @@ export { InnerPageLayout } from "./InnerPageLayout";
 export * from "./Boxes";
 export { BlogPostItem } from './BlogPostItem';
 
+export { BlogPost } from './BlogPost';
+
