@@ -13,8 +13,10 @@ interface IBlogPostMetadata {
   date: string;
   topics?: string[];
   related?: string[];
-  description: string[];
+  description: string;
 }
+
+export type { IBlogPostMetadata };
 
 export interface IBlogPostItemProps {
   url: string;

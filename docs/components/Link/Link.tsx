@@ -55,6 +55,12 @@ const getRoutingProps = ({
       as: resolvedHref,
       href: resolvedHref,
     };
+  } else {
+    console.warn("Warning: unknown href");
+    return {
+      as: href,
+      href: href,
+    };
   }
 };
 

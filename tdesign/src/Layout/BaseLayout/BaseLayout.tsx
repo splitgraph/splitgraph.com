@@ -53,7 +53,7 @@ export default ({
       <Header>
         <HeaderLeft>
           <Link className="logo-link logo-link-flex" as={'/'} href={'/'}>
-            <LogoImage />
+            <LogoImage logoURL={'/static/splitgraph_logo_light_nocircle.svg'} />
             <LogoText />
           </Link>
         </HeaderLeft>
