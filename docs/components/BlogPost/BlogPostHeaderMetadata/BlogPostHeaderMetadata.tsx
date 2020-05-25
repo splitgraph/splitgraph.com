@@ -2,32 +2,10 @@
 // @ts-ignore
 import { jsx, Box, SystemStyleObject } from "theme-ui";
 import * as React from "react";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import updateLocale from "dayjs/plugin/updateLocale";
+
 import { IBlogPostMetadata } from "../../BlogPostItem";
 
-dayjs.extend(relativeTime, {
-  // thresholds: [{ l: "dd", r: -23, d: "day" }],
-});
-dayjs.extend(updateLocale);
-dayjs.updateLocale("en", {
-  relativeTime: {
-    future: "today",
-    past: "%s",
-    s: "today",
-    m: "today",
-    mm: "today",
-    h: "today",
-    hh: "today",
-    d: "yesterday",
-    dd: "%d days ago",
-    M: "a month ago",
-    MM: "%d months ago",
-    y: "a year ago",
-    yy: "%d years ago",
-  },
-});
+import formatDate from "../formatDate";
 
 type IBlogPostHeaderMetadataProps = Pick<
   IBlogPostMetadata,
@@ -38,11 +16,14 @@ const containerStyle = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
-  ".description": {},
+  ".description": {
+    marginBottom: "2rem",
+  },
   ".bot-row": {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    opacity: "0.5",
   },
   ".metadata-container": {
     display: "flex",
@@ -62,8 +43,8 @@ const BlogPostHeaderMetadata = ({
 }: IBlogPostHeaderMetadataProps) => {
   const authorsLabel = authors.length > 1 ? "Authors" : "Author";
   const authorsValue = authors.join(", ");
-  const dateValue = dayjs(date).fromNow();
-  const dateHoverValue = `Published on ${dayjs(date).format("MMMM D, YYYY")}`;
+
+  const formattedDate = formatDate(date);
 
   return (
     <Box sx={containerStyle}>
@@ -77,10 +58,10 @@ const BlogPostHeaderMetadata = ({
         </Box>
         <Box
           className="metadata-container date-container"
-          title={dateHoverValue}
+          title={formattedDate.hoverValue}
         >
           <span className="metadata-label date-label">Published</span>
-          <span className="date-value">{dateValue}</span>
+          <span className="date-value">{formattedDate.value}</span>
         </Box>
       </Box>
     </Box>

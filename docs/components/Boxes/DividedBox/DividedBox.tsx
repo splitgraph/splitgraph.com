@@ -26,6 +26,8 @@ export interface IDividedBoxProps {
   ContainerComponent?: React.FunctionComponent<ChildProps>;
   TopComponent?: React.FunctionComponent<ChildProps>;
   MidComponent?: React.FunctionComponent<ChildProps>;
+  topClassName?: string;
+  containerClassName?: string;
 }
 
 const DividedBox = ({
@@ -42,6 +44,8 @@ const DividedBox = ({
   ContainerComponent = Box,
   TopComponent = Box,
   MidComponent = Box,
+  topClassName = "",
+  containerClassName,
 }: IDividedBoxProps) => {
   background = !!background
     ? background
@@ -94,8 +98,10 @@ const DividedBox = ({
   } as SystemStyleObject;
 
   return (
-    <ContainerComponent sx={containerStyle}>
-      <TopComponent className="divided-top">{renderTop()}</TopComponent>
+    <ContainerComponent sx={containerStyle} className={containerClassName}>
+      <TopComponent className={`divided-top ${topClassName}`}>
+        {renderTop()}
+      </TopComponent>
       <MidComponent className="divided-mid">
         {renderMid ? renderMid({ children }) : children}
       </MidComponent>

@@ -1,5 +1,7 @@
-import BlogPost from './BlogPost';
+import BlogPost from "./BlogPost";
 export { BlogPost };
 
-export { BlogPostHeaderMetadata } from './BlogPostHeaderMetadata';
+export { BlogPostHeaderMetadata } from "./BlogPostHeaderMetadata";
 
+import formatDate from "./formatDate";
+export { formatDate };
