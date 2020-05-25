@@ -19,12 +19,11 @@ app.prepare().then(() => {
       let { page, ...rest } = exportMap[req.url];
       return app.render(req, res, page, rest);
     } else {
-      console.log("Unhandled URL:", req.url);
       return handle(req, res);
     }
   });
 
-  server.listen(port, err => {
+  server.listen(port, (err) => {
     if (err) throw err;
     console.log(`> Ready on http://localhost:${port}`);
   });
