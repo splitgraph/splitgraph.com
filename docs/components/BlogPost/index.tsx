@@ -5,3 +5,5 @@ export { BlogPostHeaderMetadata } from "./BlogPostHeaderMetadata";
 
 import formatDate from "./formatDate";
 export { formatDate };
+export { BlogTopicLink } from './BlogTopicLink';
+

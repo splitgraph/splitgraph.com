@@ -168,6 +168,7 @@ const makeExportMap = () => {
     rootPagesDir: PAGES_DIR,
     ignoreTest: (page) =>
       page.startsWith("_content") ||
+      page.match(/\[.*\]\.(js|ts)x?/) ||
       page === "_document.js" ||
       page === "_app.js",
   });
