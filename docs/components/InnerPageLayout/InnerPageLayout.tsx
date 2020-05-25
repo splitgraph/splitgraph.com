@@ -51,7 +51,7 @@ const InnerPageLayout = ({
             ? extraStyle[".main-content"]
             : {}),
         },
-        "header, article, .padded-header": {
+        "header, .padded-header": {
           paddingLeft: ["0.5rem", "2rem", `calc((100vw - ${charWidth}ch)/2)`],
           paddingRight: ["0.5rem", "2rem", `calc((100vw - ${charWidth}ch)/2)`],
         },
@@ -62,6 +62,21 @@ const InnerPageLayout = ({
           ...(extraStyle.hasOwnProperty("section")
             ? extraStyle["section"]
             : {}),
+        },
+
+        // Compensate for double counting <section> selector when <section> is
+        // part of the <article>
+        "article section": {
+          marginLeft: [
+            "-0.5rem !important",
+            "-2rem !important",
+            `calc(-1 * (100% - ${charWidth}ch)/2) !important`,
+          ],
+          marginRight: [
+            "-0.5rem !important",
+            "-2rem !important",
+            `calc(-1 * (100% - ${charWidth}ch)/2) !important`,
+          ],
         },
         pre: {
           marginLeft: ["-1.5rem", 0, 0],

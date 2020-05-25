@@ -9,6 +9,7 @@ import { NextSeo } from "next-seo";
 
 import { IBlogPostMetadata, BlogPostItem } from "../BlogPostItem";
 import { BlogPostHeaderMetadata } from "./BlogPostHeaderMetadata";
+import { BlogTopicLink } from "./BlogTopicLink";
 import { Breadcrumbs } from "../Breadcrumbs";
 
 export interface IBlogPostProps {
@@ -44,7 +45,19 @@ const BlogPost = ({ children, meta }: IBlogPostProps) => {
           ]}
         />
       </section>
-      <article className="main-content">{children}</article>
+      <section
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+        }}
+      >
+        {meta.topics &&
+          meta.topics.length > 0 &&
+          meta.topics.map((topic) => <BlogTopicLink topic={topic} />)}
+      </section>
+      <section>
+        <article className="main-content">{children}</article>
+      </section>
       <section
         className="related-posts"
         aria-label="related posts"

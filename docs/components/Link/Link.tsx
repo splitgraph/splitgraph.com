@@ -68,12 +68,15 @@ export default ({ href, ...rest }: LinkProps) => {
   const router = useRouter();
 
   const currentURL = React.useMemo(
-    () => router.pathname.replace(/^\/\_content/gm, ""),
+    () => (router ? router.pathname.replace(/^\/\_content/gm, "") : ""),
     [router]
   );
 
   const routingProps = React.useMemo(
-    () => getRoutingProps({ href, currentURL }),
+    () =>
+      rest.hasOwnProperty("as")
+        ? { href }
+        : getRoutingProps({ href, currentURL }),
     [href, currentURL, rest]
   );
 
