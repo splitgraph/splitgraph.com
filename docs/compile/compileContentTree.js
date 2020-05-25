@@ -34,7 +34,7 @@ const transform = (code) => {
   // Note: This will not match nested JSON objects
   // There is a more complex regex which works 100% here: https://stackoverflow.com/a/60556735/3793499
   // ...but unfortunately it does not work in JS, which does not support lookbehinds.
-  const exportRegex = /export const meta = \{\s?[A-za-z0-9:"\s\.-_\,\-\+]+}\;?/gm;
+  const exportRegex = /export const meta = \{\s?[šA-za-z0-9:"\s\.-_\,\-\+]+}\;?/gm;
 
   let exportMatch = exportRegex.exec(code);
 
