@@ -51,7 +51,7 @@ const InnerPageLayout = ({
             ? extraStyle[".main-content"]
             : {}),
         },
-        "header, article": {
+        "header, article, .padded-header": {
           paddingLeft: ["0.5rem", "2rem", `calc((100vw - ${charWidth}ch)/2)`],
           paddingRight: ["0.5rem", "2rem", `calc((100vw - ${charWidth}ch)/2)`],
         },
@@ -62,6 +62,12 @@ const InnerPageLayout = ({
           ...(extraStyle.hasOwnProperty("section")
             ? extraStyle["section"]
             : {}),
+        },
+        pre: {
+          marginLeft: ["-1.5rem", 0, 0],
+          marginRight: ["-1.5rem", 0, 0],
+          paddingLeft: ["1.5rem", "1ch", "1ch"],
+          paddingRight: ["1.5rem", "1ch", "1ch"],
         },
         ...extraStyle,
       }}
