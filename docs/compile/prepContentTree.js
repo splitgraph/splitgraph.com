@@ -38,10 +38,9 @@ const prepContentTree = ({
 
       const pathToSave = path.join(rootOutDir, nextjsPagePath);
 
-      const contentTreeLocation = path.relative(
-        path.dirname(pathToSave),
-        compiledContentTree
-      );
+      const contentTreeLocation = compiledContentTree
+        ? path.relative(path.dirname(pathToSave), compiledContentTree)
+        : undefined;
 
       const getLinkTypeLocation = path.relative(
         path.dirname(pathToSave),
