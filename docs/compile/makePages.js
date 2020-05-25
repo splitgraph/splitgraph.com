@@ -11,16 +11,15 @@ const ROOT_DIR = path.resolve(path.join(PAGES_DIR, ".."));
 const PAGES_OUT_DIR = path.join(PAGES_DIR, "_content");
 const EXPORT_PATH_MAP = path.join(ROOT_DIR, "exports.json");
 const PROXY_DIRECTORIES = path.join(ROOT_DIR, "proxyDirectories.txt");
-const CONTENT_TREE = path.join(ROOT_DIR, "compile/compiledSidebar");
 const GET_LINK_TYPE = path.join(ROOT_DIR, "compile/compiledGetLinkType");
-
 const prepContentTree = require("./prepContentTree");
 const makeDefaultExportPathMap = require("./makeDefaultExportPathMap");
 
 const DOCS_DIR = `${path.join(CONTENT_DIR, "docs")}`;
+const DOCS_CONTENT_TREE = path.join(ROOT_DIR, "compile/compiledSidebar");
 const prepDocsPages = () =>
   prepContentTree({
-    compiledContentTree: CONTENT_TREE,
+    compiledContentTree: DOCS_CONTENT_TREE,
     compiledGetLinkType: GET_LINK_TYPE,
     urlPrefix: "/docs",
     templater: "withDocsLayout",
@@ -44,9 +43,10 @@ export default withRouter(${templater}({ MdxPage, meta, contentTree }));
   });
 
 const BLOG_DIR = `${path.join(CONTENT_DIR, "blog")}`;
+const BLOG_CONTENT_TREE = path.join(ROOT_DIR, "compile/compiledBlogPosts");
 const prepBlogPages = () =>
   prepContentTree({
-    compiledContentTree: CONTENT_TREE,
+    compiledContentTree: BLOG_CONTENT_TREE,
     compiledGetLinkType: GET_LINK_TYPE,
     urlPrefix: "/blog",
     templater: "withBlogLayout",
@@ -58,40 +58,44 @@ const prepBlogPages = () =>
       item,
       contentTreeLocation,
       getLinkTypeLocation,
-    }) => `
+    }) => {
+      const slug = item.slug;
+
+      return `
 import Link from "next/link";
 import { withRouter } from "next/router";
 import ${templater} from "@splitgraph/templaters/layouts/${templater}";
 import MdxPage, { meta } from "@splitgraph/content${item.path.fromSiteRoot}";
 import contentTree from "${contentTreeLocation}";
 import getLinkType from "${getLinkTypeLocation}";
-export default withRouter(${templater}({ MdxPage, meta, contentTree, getLinkType, Link }));
-`,
+const { flattenTree } = require("@splitgraph/lib/tree");
+
+const matchingBlogPost =
+        flattenTree({ root: contentTree }).find(
+          ({ slug }) => slug === "${slug}"
+        ) || {};
+
+export default withRouter(${templater}({ MdxPage, meta, item: matchingBlogPost }));
+`;
+    },
   });
 
 const ROOT_CONTENT_DIR = `${path.join(CONTENT_DIR, "root")}`;
 const prepRootPages = () =>
   prepContentTree({
-    compiledContentTree: CONTENT_TREE,
     compiledGetLinkType: GET_LINK_TYPE,
     urlPrefix: "/",
     templater: "withBasicLayout",
     inputDir: ROOT_CONTENT_DIR,
     outDir: PAGES_OUT_DIR,
     rootOutDir: PAGES_DIR,
-    writePage: ({
-      templater,
-      item,
-      contentTreeLocation,
-      getLinkTypeLocation,
-    }) => `
+    writePage: ({ templater, item, getLinkTypeLocation }) => `
 import Link from "next/link";
 import { withRouter } from "next/router";
 import ${templater} from "@splitgraph/templaters/layouts/${templater}";
 import MdxPage, { meta } from "@splitgraph/content/root${item.path.fromSiteRoot}";
-import contentTree from "${contentTreeLocation}";
 import getLinkType from "${getLinkTypeLocation}";
-export default withRouter(${templater}({ MdxPage, meta, contentTree, getLinkType, Link }));
+export default withRouter(${templater}({ MdxPage, meta }));
 `,
   });
 

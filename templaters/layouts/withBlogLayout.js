@@ -6,7 +6,9 @@ import { mdxComponents } from "@splitgraph/design";
 import { Link, BlogPost, InnerPageLayout } from "@splitgraph/docs/components";
 import withTheme from "@splitgraph/docs/hocs/withTheme";
 
-const withBlogLayout = ({ MdxPage, meta = {}, contentTree }) => {
+import blogPosts from "@splitgraph/docs/compile/compiledBlogPosts";
+
+const withBlogLayout = ({ MdxPage, item: { metadata } }) => {
   mdxComponents.a = Link;
 
   const WithBlogLayout = () => {
@@ -25,7 +27,7 @@ const withBlogLayout = ({ MdxPage, meta = {}, contentTree }) => {
           },
         }}
       >
-        <BlogPost meta={meta}>
+        <BlogPost meta={metadata}>
           <MdxPage components={mdxComponents} />
         </BlogPost>
       </InnerPageLayout>
