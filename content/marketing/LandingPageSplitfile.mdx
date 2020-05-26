@@ -1,40 +1,34 @@
 ```splitfile
-FROM splitgraph/geonames:latest IMPORT {
-  SELECT
-      substring(alternatenames FROM ',([A-Z]{3\\}),') AS iata_code,
-      name,
-      latitude,
-      longitude,
-      geonameid
-  FROM all_countries
-  WHERE feature_code = 'AIRP'
-  AND country_code = 'US'
-  AND substring(alternatenames FROM ',([A-Z]{3\\}),') IS NOT NULL
-} AS airports
+FROM splitgraph/uk_2017_ge:latest IMPORT {
+    SELECT
+        ons_code,
+        SUM(CASE WHEN party_id = 'Conservative'
+            THEN valid_votes ELSE 0 END)
+            AS conservative_votes,
+        SUM(CASE WHEN party_id = 'Labour'
+            THEN valid_votes ELSE 0 END)
+            AS labour_votes,
+        SUM(valid_votes) AS total_votes
+    FROM ward_results
+    GROUP BY ons_code
+} AS votes_by_party
 
 SQL {
-  CREATE TABLE us_flights_2009 AS
-  SELECT
-      origin_airport AS origin_iata,
-      ao.name AS origin_name,
-      ao.latitude AS origin_lat,
-      ao.longitude AS origin_lon,
-
-      destination_airport AS destination_iata,
-      ad.name AS destination_name,
-      ad.latitude AS destination_lat,
-      ad.longitude AS destination_lon,
-
-      SUM(passengers) AS total_passengers,
-      SUM(seats) AS total_seats,
-      SUM(flights) AS flights
-  FROM "splitgraph/domestic_us_flights:latest".flights f
-      JOIN airports ao ON f.origin_airport = ao.iata_code
-      JOIN airports ad ON f.destination_airport = ad.iata_code
-  WHERE
-      EXTRACT('year' FROM fly_month) = 2009
-      GROUP BY origin_airport, destination_airport,
-          ao.name, ao.latitude, ao.longitude,
-          ad.name, ad.latitude, ad.longitude
+CREATE TABLE london_votes AS
+    SELECT
+        lookup."PCON18NM" AS constituency,
+        v.conservative_votes,
+        v.labour_votes,
+        v.total_votes,
+        ST_Union(london.geom) AS geom
+    FROM "splitgraph/london_wards:latest".city_merged_2018 london
+    JOIN "splitgraph/uk_wards".lookup_table lookup
+        ON london.gss_code = lookup."WD18CD"
+    JOIN votes_by_party v
+        ON v.ons_code = lookup."PCON18CD"
+    GROUP BY constituency,
+        conservative_votes,
+        labour_votes,
+        total_votes
 }
 ```

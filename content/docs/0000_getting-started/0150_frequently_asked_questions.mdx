@@ -91,10 +91,10 @@ get or share public data or have a [REST API](../splitgraph_cloud/publish_rest_a
 
 ### Is Splitgraph "X for data"?
 
-Splitgraph tries to provide an end-to-end framework for dealing with common data science problems.
+Splitgraph tries to provide a framework for dealing with common data science problems.
 Rather than taking an existing tool and asking "what would it look like if we applied it to data", we asked ourselves "what do current data management workflows look like, how are they lacking and what can we borrow from other disciplines that can be useful?"
 
-We tried to get our inspiration from multiple tools and best practices in software engineering: versioning, self-contained artifacts, continuous integration and the idea of tools that improve existing workflows without breaking them and forcing users to change them.
+We tried to get our inspiration from multiple tools and best practices in software engineering: versioning, self-contained artifacts, continuous integration, reproducible builds and the idea of tools that improve existing workflows without breaking them and forcing users to change them.
 
 ### Why not just use...
 
@@ -113,6 +113,14 @@ Splitgraph also offers its own method of building datasets: [Splitfiles](../conc
 
 We envision Splitfiles as a replacement for ETL pipelines: instead of a series of processes that transform data between tables in a data warehouse,
 transformations are treated as pure functions between isolated self-contained datasets, allowing one to replay any part of their pipeline at any point in time.
+
+#### Databricks
+
+Databricks offers a full take-it-or-leave-it platform for data governance, whereas Splitgraph allows you to pick and choose parts of your workflow that you wish to swap out with Splitgraph.
+
+Splitgraph encourages users to transform data using reproducible [Splitfiles](../concepts/splitfiles) that allow hermetic dataset builds rather than ad hoc notebooks.
+
+Same Splitgraph workflows can be applied in development as in production, with the user's local engine. This brings iteration times down and lets you maintain a single codebase for your data transformations.
 
 #### Pachyderm
 

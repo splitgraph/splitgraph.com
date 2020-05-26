@@ -251,7 +251,7 @@ const LandingPage = () => {
       <HeroBox>
         <h1>Get your data sorted.</h1>
 
-        <Typewriter>sgr build geonames.splitfile</Typewriter>
+        <Typewriter>sgr build votes.splitfile</Typewriter>
 
         <h2>
           Work with data
