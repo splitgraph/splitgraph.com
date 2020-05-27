@@ -329,14 +329,13 @@ const LandingPage = () => {
             />
             <h3>Build composable data images.</h3>
             <p>
-              Splitgraph makes it easy to compose data, so you can mix{" "}
-              <Link href="/explore">public data</Link> and internal data
-              together into a single, <strong>versioned data image</strong>.
-              Harness the declarative syntax of Splitfiles to describe your data
-              in terms of SQL.
+              Splitfiles allow you to use familiar SQL to build{" "}
+              <strong>versioned data images</strong>. Merging in{" "}
+              <Link href="/explore">public</Link> and internal datasets
+              is as easy as referencing them through a <tt>JOIN</tt>.
             </p>
             <Link href="/docs/concepts/splitfiles">
-              Learn more about splitfiles.
+              Learn more about Splitfiles.
             </Link>
           </Box>
 
@@ -347,9 +346,9 @@ const LandingPage = () => {
             />
             <h3>Keep data fresh and reproducible.</h3>
             <p>
-              Rebuild your data when the upstream changes (and know when it
-              doesn't). <strong>Keeping your data up-to-date</strong> is as
-              simple as running one command, on your laptop or in CI.
+              With Splitgraph's provenance tracking, you know exactly where your data came from.{" "}
+              <strong>Keep data images up-to-date</strong> with a single command
+              when the sources change.
             </p>
             <Link href="/docs/working_with_data/inspecting_provenance">
               Learn more about data provenance and rebuilding data images.
@@ -363,13 +362,12 @@ const LandingPage = () => {
             />
             <h3>Share data with peers.</h3>
             <p>
-              Like git, Splitgraph is peer-to-peer. You can push data to other
-              splitgraph instances. And you can push it to Splitgraph Cloud,
-              where you get an{" "}
+              Like Git, Splitgraph is peer-to-peer. Push data to any other Splitgraph instance
+              or publish it to Splitgraph Cloud, where you get an{" "}
               <strong>instant REST API for every version of your data</strong>.
             </p>
             <Link href="/docs/splitgraph_cloud/introduction">
-              Learn more about Splitgraph cloud.
+              Learn more about Splitgraph Cloud.
             </Link>
           </Box>
         </Box>
@@ -606,18 +604,55 @@ const LandingPage = () => {
             },
           }}
         >
+          {/* Several categories of features. From the POV of the lifecycle of a dataset, we have:
+              * Ingestion/creation
+                * Ingest data from anywhere
+                * Splitfiles?
+              * Storage
+                * Delta Compression
+                * content addressability
+                * maybe S3
+              * Transformations
+                * Extract, transform, transform
+                * Provenance?
+                * Caching
+              * Querying
+                * LQ
+                * Python
+                * Other SQL clients?
+              * Big Data?
+                * Big-data ready
+                * S3 compatible
+                * Layered querying
+              * Sharing
+                * P2P
+                * Rest API
+
+            Splitgraph can enhance any part of your data life cycle without forcing you to
+            adopt it completely.
+
+          Potential sections:
+
+
+          # ingestion */}
+
           <li>
             <Box className="feature-icon">
-              <IconFeatureVersioning size={"3rem"} />
+              <IconFeatureIntegrateOtherDatabases size={"3rem"} />
             </Box>
             <Box className="feature-body">
-              <span className="feature-heading">Data Versioning</span>
+              <span className="feature-heading">
+                Ingest data from anywhere
+              </span>
               <span className="feature-description">
-                Version your data in a way similar to git. Easily create
-                multiple versions of data and keep them up to date.
+                Import data from all major data sources, setup Splitgraph as a
+                Postgres replication client, or write a custom mount handler to
+                cover your unique use case.
               </span>
             </Box>
           </li>
+
+          {/* # storage */}
 
           <li>
             <Box className="feature-icon">
@@ -626,8 +661,9 @@ const LandingPage = () => {
             <Box className="feature-body">
               <span className="feature-heading">Delta Compression</span>
               <span className="feature-description">
-                Versions are stored as delta compressed chunks, so you can
-                efficiently store multiple versions of data
+                Splitgraph tables are composed of delta compressed objects. Keep track of how
+                your data changed through history at low storage cost and bring your datasets
+                up to date without redownloading them.
               </span>
             </Box>
           </li>
@@ -641,119 +677,9 @@ const LandingPage = () => {
                 Content addressable chunks
               </span>
               <span className="feature-description">
-                Save space and speed up queries with content addressable chunks.
-                Delta compressed changes are content addressable, so versions
-                are deduplicated and you can efficiently store multiple versions
-                of data.
-              </span>
-            </Box>
-          </li>
-
-          <li>
-            <Box className="feature-icon">
-              <IconFeatureLayeredQuerying size={"3rem"} />
-            </Box>
-            <Box className="feature-body">
-              <span className="feature-heading">Layered querying</span>
-              <span className="feature-description">
-                Explore big data sets from your laptop, by only downloading the
-                data you need to answer a query
-              </span>
-            </Box>
-          </li>
-
-          <li>
-            <Box className="feature-icon">
-              <IconFeatureProvenance size={"3rem"} />
-            </Box>
-            <Box className="feature-body">
-              <span className="feature-heading">Provenance</span>
-              <span className="feature-description">
-                Keep track of where data comes from, and easily rebuild it when
-                upstream data changes (and know when it doesn't).
-              </span>
-            </Box>
-          </li>
-
-          <li>
-            <Box className="feature-icon">
-              <IconFeatureCache size={"3rem"} />
-            </Box>
-            <Box className="feature-body">
-              <span className="feature-heading">Caching</span>
-              <span className="feature-description">
-                Rebuild data while only downloading the changes, so you can
-                confidently add it to your CI system, just like building docker
-                images.
-              </span>
-            </Box>
-          </li>
-
-          <li>
-            <Box className="feature-icon">
-              <IconFeaturePeerToPeer size={"3rem"} />
-            </Box>
-            <Box className="feature-body">
-              <span className="feature-heading">Peer-to-Peer</span>
-              <span className="feature-description">
-                Push data between Splitgraph installations, or push it to
-                Splitgraph Cloud to share it with the public.
-              </span>
-            </Box>
-          </li>
-
-          <li>
-            <Box className="feature-icon">
-              <IconFeatureAutogeneratedAPI size={"3rem"} />
-            </Box>
-            <Box className="feature-body">
-              <span className="feature-heading">Auto-generated API</span>
-              <span className="feature-description">
-                Get a REST API for every version or tag of your data when you
-                push it to Splitgraph Cloud.
-              </span>
-            </Box>
-          </li>
-
-          <li>
-            <Box className="feature-icon">
-              <IconFeatureIntegrateOtherDatabases size={"3rem"} />
-            </Box>
-            <Box className="feature-body">
-              <span className="feature-heading">
-                Ingest data from anywhere.
-              </span>
-              <span className="feature-description">
-                Import data from all major data sources, setup Splitgraph as a
-                Postgres replication client, or write a custom mount handler to
-                cover your unique use case.
-              </span>
-            </Box>
-          </li>
-
-          <li>
-            <Box className="feature-icon">
-              <IconFeaturePythonLogo size={"3rem"} />
-            </Box>
-            <Box className="feature-body">
-              <span className="feature-heading">Python Library</span>
-              <span className="feature-description">
-                Interact with spltigraph repositories and images using the full
-                suite of python data science tools, including jupyter notebooks
-                and pandas data frames
-              </span>
-            </Box>
-          </li>
-
-          <li>
-            <Box className="feature-icon">
-              <IconFeatureCommandLineClient size={"3rem"} />
-            </Box>
-            <Box className="feature-body">
-              <span className="feature-heading">Command Line Client</span>
-              <span className="feature-description">
-                Manage splitgraph data using a familiar command line interface
-                inspired by docker and git
+                Splitgraph objects are immutable and content-addressable, letting it automatically
+                deduplicate data and store multiple versions efficiently.
+                {/* letting you focus on what to put into your data warehouse, not how to store it.*/}
               </span>
             </Box>
           </li>
@@ -767,10 +693,100 @@ const LandingPage = () => {
                 S3 Compatible Blob Storage
               </span>
               <span className="feature-description">
-                Track lots of data in one Splitgraph installation, and only
-                check it out as you need it. Store chunks in any S3 compatible
-                storage provider, while only tracking metadata in the Splitgraph
-                engine.
+                Store only lightweight metadata in a Splitgraph installation and keep
+                actual data in S3 compatible storage. Download data only when you need it,
+                without having to run a bulky always-on warehouse.
+              </span>
+            </Box>
+          </li>
+
+          {/* # research/management */}
+
+          <li>
+            <Box className="feature-icon">
+              <IconFeatureVersioning size={"3rem"} />
+            </Box>
+            <Box className="feature-body">
+              <span className="feature-heading">Data Versioning</span>
+              <span className="feature-description">
+                Switch between different versions of your data, capture changes, send
+                and receive revisions and do it without rewriting any of your tools &mdash; just like Git.
+              </span>
+            </Box>
+          </li>
+
+          <li>
+            <Box className="feature-icon">
+              <IconFeaturePythonLogo size={"3rem"} />
+            </Box>
+            <Box className="feature-body">
+              <span className="feature-heading">Python Library</span>
+              <span className="feature-description">
+                Interact with Splitgraph repositories and images using the full
+                suite of Python data science tools, including Jupyter notebooks
+                and Pandas DataFrames.
+              </span>
+            </Box>
+          </li>
+
+          <li>
+            <Box className="feature-icon">
+              <IconFeatureCommandLineClient size={"3rem"} />
+            </Box>
+            <Box className="feature-body">
+              <span className="feature-heading">Command Line Client</span>
+              <span className="feature-description">
+                Manage Splitgraph data using a familiar command line interface
+                inspired by Docker and Git.
+              </span>
+            </Box>
+          </li>
+
+          {/* # querying */}
+
+          <li>
+            <Box className="feature-icon">
+              <IconFeatureBigData size={"3rem"} />
+            </Box>
+            <Box className="feature-body">
+              <span className="feature-heading">Big-data Ready</span>
+              <span className="feature-description">
+                Splitgraph uses a columnar storage format for its data, offering
+                a smaller (5x-10x) on-disk footprint and faster read performance
+                than PostgreSQL tables.
+
+                {/*Splitgraph tables can be located in
+                S3-compatible storage, with only a required subset of the table
+                being downloaded.*/}
+              </span>
+            </Box>
+          </li>
+
+          <li>
+            <Box className="feature-icon">
+              <IconFeatureLayeredQuerying size={"3rem"} />
+            </Box>
+            <Box className="feature-body">
+              <span className="feature-heading">Layered querying</span>
+              <span className="feature-description">
+                Don't download the whole dataset just to run one <tt>SELECT</tt>. Splitgraph lets
+                your software query remote data by lazily downloading only the required fragments.
+              </span>
+            </Box>
+          </li>
+
+          {/* transformations */}
+
+          <li>
+            <Box className="feature-icon">
+              <IconFeatureSplitfiles size={"3rem"} />
+            </Box>
+            <Box className="feature-body">
+              <span className="feature-heading">Splitfiles</span>
+              <span className="feature-description">
+                Define transformations on data with declarative syntax that will
+                be familiar to anyone who's written a Dockerfile. Reference other
+                Splitgraph data images with a simple <tt>JOIN</tt>.
               </span>
             </Box>
           </li>
@@ -792,29 +808,54 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureSplitfiles size={"3rem"} />
+              <IconFeatureProvenance size={"3rem"} />
             </Box>
             <Box className="feature-body">
-              <span className="feature-heading">Splitfiles</span>
+              <span className="feature-heading">Provenance</span>
               <span className="feature-description">
-                Define transformations on data with declarative syntax that will
-                be familiar to anyone who's written a Dockerfile.
+                Datasets built with Splitfiles have all their sources recorded,
+                meaning you know exactly where your data came from and when to rebuild it.
               </span>
             </Box>
           </li>
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureBigData size={"3rem"} />
+              <IconFeatureCache size={"3rem"} />
             </Box>
             <Box className="feature-body">
-              <span className="feature-heading">Big-data Ready</span>
+              <span className="feature-heading">Caching</span>
               <span className="feature-description">
-                Splitgraph uses a columnar storage format for its data, offering
-                a smaller (5x-10x) on-disk footprint and faster read performance
-                than PostgreSQL tables. Splitgraph tables can be located in
-                S3-compatible storage, with only a required subset of the table
-                being downloaded.
+                Rebuild data only if the sources have changed. Use Splitfiles in CI to
+                keep your data up to date and only download the changes to upstream datasets.
+              </span>
+            </Box>
+          </li>
+
+          {/* # sharing */}
+
+          <li>
+            <Box className="feature-icon">
+              <IconFeaturePeerToPeer size={"3rem"} />
+            </Box>
+            <Box className="feature-body">
+              <span className="feature-heading">Peer-to-Peer</span>
+              <span className="feature-description">
+                Any Splitgraph engine can act as a remote.
+                Push data between Splitgraph installations or publish it on Splitgraph Cloud.
+              </span>
+            </Box>
+          </li>
+
+          <li>
+            <Box className="feature-icon">
+              <IconFeatureAutogeneratedAPI size={"3rem"} />
+            </Box>
+            <Box className="feature-body">
+              <span className="feature-heading">Auto-generated API</span>
+              <span className="feature-description">
+                Get a REST API for every version or tag of your data when you
+                push it to Splitgraph Cloud.
               </span>
             </Box>
           </li>
