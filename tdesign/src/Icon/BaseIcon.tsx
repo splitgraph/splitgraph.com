@@ -13,6 +13,7 @@ export interface IBaseIconProps {
   svgURI: string;
   iconSlug: string;
   size?: string;
+  color?: string;
 
   // TODO: sx is deprecated here, but leave it around in case somewhere is using it
   sx?: any;
@@ -25,12 +26,24 @@ export default ({
   svgURI,
   sx,
   extraStyle = {},
+  color,
 }: IBaseIconProps) => {
+  const svgDataURI = `url("${svgURI}")`;
+
+  // When color is specified, since the svg likely does not contain a color,
+  // we must use a "mask" to change the color dynamically
+  // https://stackoverflow.com/a/46904983/3793499
   return (
     <Text
       className={`sg-icon-${iconSlug}`}
       sx={{
-        backgroundImage: `url("${svgURI}")`,
+        ...(color
+          ? {
+              backgroundColor: color,
+              WebkitMaskImage: svgDataURI,
+              MaskImage: svgDataURI,
+            }
+          : { backgroundImage: svgDataURI }),
         backgroundRepeat: 'no-repeat',
         backgroundSize: size,
         minWidth: size,
