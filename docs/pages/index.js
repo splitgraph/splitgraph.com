@@ -144,33 +144,6 @@ const marketingTheme = {
   },
 };
 
-const featureCardStyle = {
-  margin: "1rem",
-  backgroundColor: "light",
-  padding: "1rem",
-  boxShadow: "card",
-  minWidth: "90vw",
-  maxWidth: "90vw",
-  border: "1px solid",
-  borderColor: "sgdarkblue",
-  color: "heavy",
-  textAlign: "left",
-  h2: {
-    color: "sgdarkblue",
-  },
-};
-
-const exploreRepoBoxStyle = {
-  color: "heavy",
-  margin: "5px",
-  backgroundColor: "light",
-  padding: "5px",
-  textAlign: "left",
-  ".repo-name": {
-    color: "sgdarkblue",
-  },
-};
-
 const mdxComponents = {
   pre: ({ children, ...rest }) => (
     <pre sx={marketingTheme.styles.pre} {...rest}>
@@ -232,6 +205,7 @@ const Typewriter = ({ children }) => {
 
 const featurePanelStyle = {
   display: "flex",
+  color: "primary",
   flexWrap: "wrap",
   justifyContent: "center",
   // width: "90vw",
@@ -252,9 +226,11 @@ const featurePanelStyle = {
     minHeight: "200px",
     h3: {
       marginTop: "2rem",
+      color: "primary",
     },
     p: {
       textAlign: "justify",
+      color: "primary",
     },
     a: {
       variant: "links.primary",
@@ -331,8 +307,8 @@ const LandingPage = () => {
             <p>
               Splitfiles allow you to use familiar SQL to build{" "}
               <strong>versioned data images</strong>. Merging in{" "}
-              <Link href="/explore">public</Link> and internal datasets
-              is as easy as referencing them through a <tt>JOIN</tt>.
+              <Link href="/explore">public</Link> and internal datasets is as
+              easy as referencing them through a <tt>JOIN</tt>.
             </p>
             <Link href="/docs/concepts/splitfiles">
               Learn more about Splitfiles.
@@ -346,9 +322,9 @@ const LandingPage = () => {
             />
             <h3>Keep data fresh and reproducible.</h3>
             <p>
-              With Splitgraph's provenance tracking, you know exactly where your data came from.{" "}
-              <strong>Keep data images up-to-date</strong> with a single command
-              when the sources change.
+              With Splitgraph's provenance tracking, you know exactly where your
+              data came from. <strong>Keep data images up-to-date</strong> with
+              a single command when the sources change.
             </p>
             <Link href="/docs/working_with_data/inspecting_provenance">
               Learn more about data provenance and rebuilding data images.
@@ -362,8 +338,9 @@ const LandingPage = () => {
             />
             <h3>Share data with peers.</h3>
             <p>
-              Like Git, Splitgraph is peer-to-peer. Push data to any other Splitgraph instance
-              or publish it to Splitgraph Cloud, where you get an{" "}
+              Like Git, Splitgraph is peer-to-peer. Push data to any other
+              Splitgraph instance or publish it to Splitgraph Cloud, where you
+              get an{" "}
               <strong>instant REST API for every version of your data</strong>.
             </p>
             <Link href="/docs/splitgraph_cloud/introduction">
@@ -412,7 +389,7 @@ const LandingPage = () => {
       <section
         className="lp-section"
         sx={{
-          color: "sgdarkblue",
+          color: "primary",
           background:
             "linear-gradient(180deg, rgba(221,221,223,1) 0%, rgba(255,255,255,1) 72%)",
           paddingLeft: ["1rem", "1rem", "3rem"],
@@ -450,6 +427,7 @@ const LandingPage = () => {
         <Box sx={{ ...featurePanelStyle, color: "initial" }}>
           <Box className="feature">
             <IconConceptWorkflowGantChart
+              color="primary"
               size={"6rem"}
               extraStyle={{ display: "inline-flex" }}
             />
@@ -472,6 +450,7 @@ const LandingPage = () => {
 
           <Box className="feature">
             <IconFeatureIntegrateOtherDatabases
+              color="primary"
               size={"6rem"}
               extraStyle={{ display: "inline-flex" }}
             />
@@ -489,6 +468,7 @@ const LandingPage = () => {
 
           <Box className="feature">
             <IconConceptMoneyDatabase
+              color="primary"
               size={"6rem"}
               extraStyle={{ display: "inline-flex" }}
             />
@@ -511,6 +491,9 @@ const LandingPage = () => {
           background:
             "linear-gradient(180deg, rgba(13,24,33,1) 0%, rgba(54,103,141,1) 50%)",
           color: "light",
+          h2: {
+            color: "light",
+          },
           borderTop: "0.5ch solid",
           borderTopColor: "primary",
           borderBottom: "0.5ch solid",
@@ -542,6 +525,7 @@ const LandingPage = () => {
       <section
         className="lp-section"
         sx={{
+          color: "primary",
           paddingBottom: "8rem",
           paddingLeft: ["1rem", "1rem", "max(3rem, calc((100vw - 120ch)/2))"],
           paddingRight: ["1rem", "1rem", "max(3rem, calc((100vw - 120ch)/2))"],
@@ -638,12 +622,13 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureIntegrateOtherDatabases size={"3rem"} />
+              <IconFeatureIntegrateOtherDatabases
+                color="primary"
+                size={"3rem"}
+              />
             </Box>
             <Box className="feature-body">
-              <span className="feature-heading">
-                Ingest data from anywhere
-              </span>
+              <span className="feature-heading">Ingest data from anywhere</span>
               <span className="feature-description">
                 Import data from all major data sources, setup Splitgraph as a
                 Postgres replication client, or write a custom mount handler to
@@ -656,29 +641,31 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureDeltaCompression size={"3rem"} />
+              <IconFeatureDeltaCompression color="primary" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Delta Compression</span>
               <span className="feature-description">
-                Splitgraph tables are composed of delta compressed objects. Keep track of how
-                your data changed through history at low storage cost and bring your datasets
-                up to date without redownloading them.
+                Splitgraph tables are composed of delta compressed objects. Keep
+                track of how your data changed through history at low storage
+                cost and bring your datasets up to date without redownloading
+                them.
               </span>
             </Box>
           </li>
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureContentAddressable size={"3rem"} />
+              <IconFeatureContentAddressable color="primary" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">
                 Content addressable chunks
               </span>
               <span className="feature-description">
-                Splitgraph objects are immutable and content-addressable, letting it automatically
-                deduplicate data and store multiple versions efficiently.
+                Splitgraph objects are immutable and content-addressable,
+                letting it automatically deduplicate data and store multiple
+                versions efficiently.
                 {/* letting you focus on what to put into your data warehouse, not how to store it.*/}
               </span>
             </Box>
@@ -686,16 +673,17 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureCloudStorage size={"3rem"} />
+              <IconFeatureCloudStorage color="primary" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">
                 S3 Compatible Blob Storage
               </span>
               <span className="feature-description">
-                Store only lightweight metadata in a Splitgraph installation and keep
-                actual data in S3 compatible storage. Download data only when you need it,
-                without having to run a bulky always-on warehouse.
+                Store only lightweight metadata in a Splitgraph installation and
+                keep actual data in S3 compatible storage. Download data only
+                when you need it, without having to run a bulky always-on
+                warehouse.
               </span>
             </Box>
           </li>
@@ -704,20 +692,21 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureVersioning size={"3rem"} />
+              <IconFeatureVersioning color="primary" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Data Versioning</span>
               <span className="feature-description">
-                Switch between different versions of your data, capture changes, send
-                and receive revisions and do it without rewriting any of your tools &mdash; just like Git.
+                Switch between different versions of your data, capture changes,
+                send and receive revisions and do it without rewriting any of
+                your tools &mdash; just like Git.
               </span>
             </Box>
           </li>
 
           <li>
             <Box className="feature-icon">
-              <IconFeaturePythonLogo size={"3rem"} />
+              <IconFeaturePythonLogo color="primary" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Python Library</span>
@@ -731,7 +720,7 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureCommandLineClient size={"3rem"} />
+              <IconFeatureCommandLineClient color="primary" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Command Line Client</span>
@@ -746,7 +735,7 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureBigData size={"3rem"} />
+              <IconFeatureBigData color="primary" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Big-data Ready</span>
@@ -754,7 +743,6 @@ const LandingPage = () => {
                 Splitgraph uses a columnar storage format for its data, offering
                 a smaller (5x-10x) on-disk footprint and faster read performance
                 than PostgreSQL tables.
-
                 {/*Splitgraph tables can be located in
                 S3-compatible storage, with only a required subset of the table
                 being downloaded.*/}
@@ -764,13 +752,14 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureLayeredQuerying size={"3rem"} />
+              <IconFeatureLayeredQuerying color="primary" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Layered querying</span>
               <span className="feature-description">
-                Don't download the whole dataset just to run one <tt>SELECT</tt>. Splitgraph lets
-                your software query remote data by lazily downloading only the required fragments.
+                Don't download the whole dataset just to run one <tt>SELECT</tt>
+                . Splitgraph lets your software query remote data by lazily
+                downloading only the required fragments.
               </span>
             </Box>
           </li>
@@ -779,21 +768,24 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureSplitfiles size={"3rem"} />
+              <IconFeatureSplitfiles color="primary" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Splitfiles</span>
               <span className="feature-description">
                 Define transformations on data with declarative syntax that will
-                be familiar to anyone who's written a Dockerfile. Reference other
-                Splitgraph data images with a simple <tt>JOIN</tt>.
+                be familiar to anyone who's written a Dockerfile. Reference
+                other Splitgraph data images with a simple <tt>JOIN</tt>.
               </span>
             </Box>
           </li>
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureExtractTransformTransform size={"3rem"} />
+              <IconFeatureExtractTransformTransform
+                color="primary"
+                size={"3rem"}
+              />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">
@@ -808,26 +800,28 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureProvenance size={"3rem"} />
+              <IconFeatureProvenance color="primary" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Provenance</span>
               <span className="feature-description">
                 Datasets built with Splitfiles have all their sources recorded,
-                meaning you know exactly where your data came from and when to rebuild it.
+                meaning you know exactly where your data came from and when to
+                rebuild it.
               </span>
             </Box>
           </li>
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureCache size={"3rem"} />
+              <IconFeatureCache color="primary" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Caching</span>
               <span className="feature-description">
-                Rebuild data only if the sources have changed. Use Splitfiles in CI to
-                keep your data up to date and only download the changes to upstream datasets.
+                Rebuild data only if the sources have changed. Use Splitfiles in
+                CI to keep your data up to date and only download the changes to
+                upstream datasets.
               </span>
             </Box>
           </li>
@@ -836,20 +830,20 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeaturePeerToPeer size={"3rem"} />
+              <IconFeaturePeerToPeer color="primary" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Peer-to-Peer</span>
               <span className="feature-description">
-                Any Splitgraph engine can act as a remote.
-                Push data between Splitgraph installations or publish it on Splitgraph Cloud.
+                Any Splitgraph engine can act as a remote. Push data between
+                Splitgraph installations or publish it on Splitgraph Cloud.
               </span>
             </Box>
           </li>
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureAutogeneratedAPI size={"3rem"} />
+              <IconFeatureAutogeneratedAPI color="primary" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Auto-generated API</span>
@@ -901,7 +895,7 @@ const LandingPage = () => {
       <section
         className="lp-section"
         sx={{
-          color: "sgdarkblue",
+          color: "primary",
           background:
             "linear-gradient(180deg, rgba(221,221,223,1) 0%, rgba(255,255,255,1) 72%)",
           paddingLeft: ["1rem", "1rem", "3rem"],
@@ -931,6 +925,11 @@ const LandingPage = () => {
 
         <Box sx={featurePanelStyle}>
           <Box className="feature">
+            <IconConceptContainerCrane
+              color="primary"
+              size={"6rem"}
+              extraStyle={{ display: "inline-flex" }}
+            />
             <h3>Work with data like you work with code.</h3>
             <p>
               Benefit from familiar conventions and concepts. We took the best
@@ -943,6 +942,11 @@ const LandingPage = () => {
           </Box>
 
           <Box className="feature">
+            {/* Already has a color set */}
+            <IconComposeImages
+              size={"6rem"}
+              extraStyle={{ display: "inline-flex" }}
+            />
             <h3>Build composable data images.</h3>
             <p>
               Write familiar SQL with simple JOINs to combine public and private
@@ -954,6 +958,11 @@ const LandingPage = () => {
           </Box>
 
           <Box className="feature">
+            <IconConceptCow
+              color="primary"
+              size={"6rem"}
+              extraStyle={{ display: "inline-flex" }}
+            />
             <h3>Treat your data like cattle.</h3>
             <p>
               Stop wrangling data, and start wrangling databases. There's a
