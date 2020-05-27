@@ -20,6 +20,10 @@ export default ({ children }: ILandingPageLayoutProps) => {
     >
       <MainContent
         extraStyle={{
+          h2: {
+            fontSize: ["1.25rem", "1.25rem", "2rem"],
+            marginBottom: "2rem",
+          },
           ".lp-section": {
             display: "flex",
             flexDirection: "column",
@@ -29,16 +33,12 @@ export default ({ children }: ILandingPageLayoutProps) => {
             h1: {
               fontSize: ["1.75rem", "1.75rem", "3rem"],
             },
-            h2: {
-              fontSize: ["1.25rem", "1.25rem", "2rem"],
-              marginBottom: "2rem",
-            },
-            ".mobile-line-break": {
-              display: ["block", "block", "none"],
-            },
             "pre, code": {
               textAlign: "initial",
               // maxWidth: "100%",
+            },
+            ".mobile-line-break": {
+              display: ["block", "block", "none"],
             },
           },
         }}
