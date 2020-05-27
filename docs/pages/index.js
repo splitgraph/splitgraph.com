@@ -203,6 +203,7 @@ const Typewriter = ({ children }) => {
   );
 };
 
+// todo: rename to benefitPanelStyle, and .feature -> .benefit
 const featurePanelStyle = {
   display: "flex",
   color: "primary",
@@ -241,6 +242,125 @@ const featurePanelStyle = {
       alignSelf: "flex-end",
       ":hover": {
         borderBottom: "3px solid",
+      },
+    },
+  },
+};
+
+const featureSectionStyle = {
+  color: "primary",
+  // paddingBottom: "8rem",
+  // paddingLeft: ["1rem", "1rem", "max(3rem, calc((100vw - 120ch)/2))"],
+  // paddingRight: ["1rem", "1rem", "max(3rem, calc((100vw - 120ch)/2))"],
+  // backgroundColor: "white",
+  display: ["inherit", "inherit", "flex"],
+  paddingTop: "4rem",
+  paddingBottom: "4rem",
+
+  // left list, right header
+  ":nth-child(odd)": {
+    backgroundColor: "#ebebeb",
+    flexDirection: ["inherit", "inherit", "row-reverse"],
+    ".feature-section-header": {
+      // borderRight: "1rem solid",
+      // borderRightColor: "primary",
+      justifyContent: ["center", "center", "flex-end"],
+      paddingRight: [
+        "inherit",
+        "inherit",
+        "max(3rem, calc((100vw - 120ch)/2))",
+      ],
+    },
+    ul: {
+      paddingRight: ["1rem", "1rem", "inherit"],
+      paddingLeft: ["1rem", "1rem", "max(3rem, calc((100vw - 120ch)/2))"],
+    },
+  },
+
+  // left header, right list
+  ":nth-child(even)": {
+    backgroundColor: "white",
+    flexDirection: ["inherit", "inherit", "row"],
+    ".feature-section-header": {
+      // borderLeft: "1rem solid",
+      // borderLeftColor: "primary",
+      justifyContent: ["center", "center", "flex-start"],
+      paddingLeft: ["inherit", "inherit", "max(3rem, calc((100vw - 120ch)/2))"],
+    },
+    ul: {
+      paddingLeft: ["1rem", "1rem", "inherit"],
+      paddingRight: ["1rem", "1rem", "max(3rem, calc((100vw - 120ch)/2))"],
+    },
+  },
+  ".feature-section-header": {
+    // background: [
+    //   "inherit",
+    //   "inherit",
+    //   "primary",
+    //   // "linear-gradient(180deg, rgba(13,24,33,1) 0%, rgba(54,103,141,1) 50%)",
+    // ],
+    // backgroundColor: ["inherit", "inherit", "white"],
+    paddingBottom: ["4rem", "4rem", "inherit"],
+    color: ["inherit", "inherit", "primary"],
+    width: ["inherit", "inherit", "50%"],
+    display: "flex",
+    // justifyContent: "center",
+    alignItems: "center",
+    h2: {
+      margin: 0,
+    },
+  },
+  ul: {
+    // backgroundColor: ["inherit", "inherit", "white"],
+    width: ["inherit", "inherit", "50%"],
+    // paddingLeft: [0, 0, "1rem"],
+    // paddingRight: [0, 0, "1rem"],
+    // paddingLeft: ["1rem", "1rem", "inherit"],
+    // paddingRight: ["1rem", "1rem", "inherit"],
+    paddingTop: 0,
+    paddingBottom: 0,
+    padding: 0,
+    margin: 0,
+    textAlign: "left",
+    display: "flex",
+    flexWrap: "wrap",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    // maxWidth: "100%",
+    li: {
+      // width: ["100%", "100%", "calc(100% - 2rem)"],
+      width: "100%",
+      display: "inline-flex",
+      flexDirection: "row",
+      alignItems: "center",
+      flexGrow: 0,
+      flexShrink: 1,
+      marginBottom: "1rem",
+      marginTop: "1rem",
+    },
+    // "li:nth-child(even)": {
+    //   marginRight: [0, 0, "1rem"],
+    // },
+    // "li:nth-child(odd)": {
+    //   marginLeft: [0, 0, "1rem"],
+    // },
+    ".feature-icon": {
+      display: "inline-flex",
+      alignItems: "center",
+      marginRight: "2rem",
+      minWidth: "3rem", // must be size of icon
+      'div[class^="sg-icon-"]': {
+        display: "inline-flex",
+      },
+    },
+    ".feature-body": {
+      display: "flex",
+      flexDirection: "column",
+      ".feature-heading": {
+        fontWeight: "bold",
+      },
+      ".feature-description": {
+        textAlign: "justify",
       },
     },
   },
@@ -497,7 +617,7 @@ const LandingPage = () => {
           borderTop: "0.5ch solid",
           borderTopColor: "primary",
           borderBottom: "0.5ch solid",
-          borderBottomColor: "primary",
+          borderBottomColor: "rgba(13,24,33,1)",
           paddingTop: "2rem",
           paddingBottom: "2rem",
         }}
@@ -526,100 +646,37 @@ const LandingPage = () => {
         className="lp-section"
         sx={{
           color: "primary",
-          paddingBottom: "8rem",
-          paddingLeft: ["1rem", "1rem", "max(3rem, calc((100vw - 120ch)/2))"],
-          paddingRight: ["1rem", "1rem", "max(3rem, calc((100vw - 120ch)/2))"],
           backgroundColor: "light",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          // width: "90vw",
-          // maxWidth: "90vw",
-          WebkitBoxPack: "center",
+          textAlign: "center",
+          paddingTop: "4rem",
+          // paddingBottom: "4rem",
+          margin: 0,
+          h2: {
+            marginBottom: "1rem !important",
+            marginTop: "0 !important",
+          },
         }}
       >
-        <h2 sx={{ marginTop: "2rem", marginBottom: "2rem" }}>
-          What's in the box?
+        <h2>
+          Enhance every stage of the data lifecycle
+          {/* Features to enhance every point{" "}
+          <br sx={{ display: ["block", "block", "none"] }} /> throughout the
+          entire data lifecycle. */}
         </h2>
 
-        <ul
-          sx={{
-            padding: 0,
-            textAlign: "left",
-            display: "flex",
-            flexWrap: "wrap",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            maxWidth: "100%",
-            li: {
-              width: ["100%", "100%", "calc(50% - 2rem)"],
-              display: "inline-flex",
-              flexDirection: "row",
-              alignItems: "center",
-              flexGrow: 0,
-              flexShrink: 1,
-              marginBottom: "1rem",
-              marginTop: "1rem",
-            },
-            "li:nth-child(even)": {
-              marginRight: [0, 0, "1rem"],
-            },
-            "li:nth-child(odd)": {
-              marginLeft: [0, 0, "1rem"],
-            },
-            ".feature-icon": {
-              display: "inline-flex",
-              alignItems: "center",
-              marginRight: "2rem",
-              minWidth: "3rem", // must be size of icon
-              'div[class^="sg-icon-"]': {
-                display: "inline-flex",
-              },
-            },
-            ".feature-body": {
-              display: "flex",
-              flexDirection: "column",
-              ".feature-heading": {
-                fontWeight: "bold",
-              },
-              ".feature-description": {
-                textAlign: "justify",
-              },
-            },
-          }}
-        >
-          {/* Several categories of features. From the POV of the lifecycle of a dataset, we have:
-              * Ingestion/creation
-                * Ingest data from anywhere
-                * Splitfiles?
-              * Storage
-                * Delta Compression
-                * content addressability
-                * maybe S3
-              * Transformations
-                * Extract, transform, transform
-                * Provenance?
-                * Caching
-              * Querying
-                * LQ
-                * Python
-                * Other SQL clients?
-              * Big Data?
-                * Big-data ready
-                * S3 compatible
-                * Layered querying
-              * Sharing
-                * P2P
-                * Rest API
+        <h2 sx={{ marginTop: "2rem !important", fontWeight: "200" }}>
+          Adopt Splitgraph incrementally,{" "}
+          <br sx={{ display: ["block", "block", "none"] }} /> where and when you
+          need it.
+        </h2>
+      </section>
 
-            Splitgraph can enhance any part of your data life cycle without forcing you to
-            adopt it completely.
+      <section className="lp-feature-section" sx={featureSectionStyle}>
+        <Box className="feature-section-header">
+          <h2>Ingestion</h2>
+        </Box>
 
-          Potential sections:
-
-
-          # ingestion */}
-
+        <ul>
           <li>
             <Box className="feature-icon">
               <IconFeatureIntegrateOtherDatabases
@@ -637,8 +694,28 @@ const LandingPage = () => {
             </Box>
           </li>
 
-          {/* # storage */}
+          <li>
+            <Box className="feature-icon">
+              <IconFeatureLayeredQuerying color="primary" size={"3rem"} />
+            </Box>
+            <Box className="feature-body">
+              <span className="feature-heading">Layered querying</span>
+              <span className="feature-description">
+                Don't download the whole dataset just to run one <tt>SELECT</tt>
+                . Splitgraph lets your software query remote data by lazily
+                downloading only the required fragments.
+              </span>
+            </Box>
+          </li>
+        </ul>
+      </section>
 
+      <section className="lp-feature-section" sx={featureSectionStyle}>
+        <Box className="feature-section-header">
+          <h2>Storage</h2>
+        </Box>
+
+        <ul>
           <li>
             <Box className="feature-icon">
               <IconFeatureDeltaCompression color="primary" size={"3rem"} />
@@ -687,9 +764,15 @@ const LandingPage = () => {
               </span>
             </Box>
           </li>
+        </ul>
+      </section>
 
-          {/* # research/management */}
+      <section className="lp-feature-section" sx={featureSectionStyle}>
+        <Box className="feature-section-header">
+          <h2>Research</h2>
+        </Box>
 
+        <ul>
           <li>
             <Box className="feature-icon">
               <IconFeatureVersioning color="primary" size={"3rem"} />
@@ -700,6 +783,19 @@ const LandingPage = () => {
                 Switch between different versions of your data, capture changes,
                 send and receive revisions and do it without rewriting any of
                 your tools &mdash; just like Git.
+              </span>
+            </Box>
+          </li>
+
+          <li>
+            <Box className="feature-icon">
+              <IconFeatureCommandLineClient color="primary" size={"3rem"} />
+            </Box>
+            <Box className="feature-body">
+              <span className="feature-heading">Command Line Client</span>
+              <span className="feature-description">
+                Manage Splitgraph data using a familiar command line interface
+                inspired by Docker and Git.
               </span>
             </Box>
           </li>
@@ -720,21 +816,6 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureCommandLineClient color="primary" size={"3rem"} />
-            </Box>
-            <Box className="feature-body">
-              <span className="feature-heading">Command Line Client</span>
-              <span className="feature-description">
-                Manage Splitgraph data using a familiar command line interface
-                inspired by Docker and Git.
-              </span>
-            </Box>
-          </li>
-
-          {/* # querying */}
-
-          <li>
-            <Box className="feature-icon">
               <IconFeatureBigData color="primary" size={"3rem"} />
             </Box>
             <Box className="feature-body">
@@ -749,23 +830,15 @@ const LandingPage = () => {
               </span>
             </Box>
           </li>
+        </ul>
+      </section>
 
-          <li>
-            <Box className="feature-icon">
-              <IconFeatureLayeredQuerying color="primary" size={"3rem"} />
-            </Box>
-            <Box className="feature-body">
-              <span className="feature-heading">Layered querying</span>
-              <span className="feature-description">
-                Don't download the whole dataset just to run one <tt>SELECT</tt>
-                . Splitgraph lets your software query remote data by lazily
-                downloading only the required fragments.
-              </span>
-            </Box>
-          </li>
+      <section className="lp-feature-section" sx={featureSectionStyle}>
+        <Box className="feature-section-header">
+          <h2>Transformations</h2>
+        </Box>
 
-          {/* transformations */}
-
+        <ul>
           <li>
             <Box className="feature-icon">
               <IconFeatureSplitfiles color="primary" size={"3rem"} />
@@ -776,24 +849,6 @@ const LandingPage = () => {
                 Define transformations on data with declarative syntax that will
                 be familiar to anyone who's written a Dockerfile. Reference
                 other Splitgraph data images with a simple <tt>JOIN</tt>.
-              </span>
-            </Box>
-          </li>
-
-          <li>
-            <Box className="feature-icon">
-              <IconFeatureExtractTransformTransform
-                color="primary"
-                size={"3rem"}
-              />
-            </Box>
-            <Box className="feature-body">
-              <span className="feature-heading">
-                Extract, transform, transform
-              </span>
-              <span className="feature-description">
-                Spend less time loading. Spend more time defining
-                transformations between self-contained, immutable data images.
               </span>
             </Box>
           </li>
@@ -826,8 +881,32 @@ const LandingPage = () => {
             </Box>
           </li>
 
-          {/* # sharing */}
+          <li>
+            <Box className="feature-icon">
+              <IconFeatureExtractTransformTransform
+                color="primary"
+                size={"3rem"}
+              />
+            </Box>
+            <Box className="feature-body">
+              <span className="feature-heading">
+                Extract, transform, transform
+              </span>
+              <span className="feature-description">
+                Spend less time loading. Spend more time defining
+                transformations between self-contained, immutable data images.
+              </span>
+            </Box>
+          </li>
+        </ul>
+      </section>
 
+      <section className="lp-feature-section" sx={featureSectionStyle}>
+        <Box className="feature-section-header">
+          <h2>Sharing</h2>
+        </Box>
+
+        <ul>
           <li>
             <Box className="feature-icon">
               <IconFeaturePeerToPeer color="primary" size={"3rem"} />
