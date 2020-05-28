@@ -10,7 +10,7 @@ export const meta = {
 Query a Splitgraph REST API.
 
 This is a thin wrapper around curl that performs an HTTP request to Splitgraph Cloud to
-interact with a dataset using PostgREST (http://postgrest.org) or the Splitfile execution service.
+interact with a dataset using PostgREST (https://postgrest.org) or the Splitfile execution service.
 
 The actual invocation is:
 
@@ -23,7 +23,7 @@ The image must be of the form `namespace/repository:[hash_or_tag (default latest
 The actual request parameters depend on the request type:
 
 - For PostgREST: `/table?[postgrest request]` or empty to get the OpenAPI spec for this image.
-  For a reference on how to perform Postgrest requests, see http://postgrest.org/en/latest/api.html.
+  For a reference on how to perform Postgrest requests, see https://postgrest.org/en/latest/api.html.
 - For the Splitfile executor: a JSON array to be POSTed to the executor, e.g.
   `'{"command": "FROM some/repo IMPORT some_table AS alias", "tag": "new_tag"}'`.
 

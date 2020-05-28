@@ -1,6 +1,6 @@
 export const meta = {
   id: "socrata",
-  title: "Socrata"
+  title: "Socrata",
 };
 
 ## Introduction
@@ -60,7 +60,7 @@ data.cdc.gov          kn79-hsxy  Provisional COVID-19 Death Counts in the United
 ...
 ```
 
-This is not an exhaustive list: it is populated from the Socrata Discovery API at http://api.us.socrata.com/api/catalog/v1. See the [Socrata Discovery API documentation](https://socratadiscovery.docs.apiary.io/#) for reference.
+This is not an exhaustive list: it is populated from the Socrata Discovery API at https://api.us.socrata.com/api/catalog/v1. See the [Socrata Discovery API documentation](https://socratadiscovery.docs.apiary.io/#) for reference.
 
 ### Other Socrata domains
 
@@ -194,7 +194,7 @@ ORDER BY date ASC;
 
 ![Metabase plot of two datasets](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting_data/images/socrata/5_metabase_join.png)
 
-Behind the scenes, this queries the [Chicago COVID-19 Daily Cases and Deaths](https://data.cityofchicago.org/Health-Human-Services/COVID-19-Daily-Cases-and-Deaths/naz8-j4nc) and the  [Cambridge COVID-19 Cumulative Cases by Date](https://data.cambridgema.gov/Public-Safety/COVID-19-Cumulative-Cases-by-Date/tdt9-vq5y) Socrata datasets using SoQL and the actual JOIN is performed in PostgreSQL. However, Metabase and any other PostgreSQL client doesn't need to know about that: to them, these look like normal PostgreSQL tables.
+Behind the scenes, this queries the [Chicago COVID-19 Daily Cases and Deaths](https://data.cityofchicago.org/Health-Human-Services/COVID-19-Daily-Cases-and-Deaths/naz8-j4nc) and the [Cambridge COVID-19 Cumulative Cases by Date](https://data.cambridgema.gov/Public-Safety/COVID-19-Cumulative-Cases-by-Date/tdt9-vq5y) Socrata datasets using SoQL and the actual JOIN is performed in PostgreSQL. However, Metabase and any other PostgreSQL client doesn't need to know about that: to them, these look like normal PostgreSQL tables.
 
 ## Licensing and contact
 
