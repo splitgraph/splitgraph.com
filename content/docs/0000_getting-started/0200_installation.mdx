@@ -1,11 +1,11 @@
 export const meta = {
   id: "installation",
-  title: "Installation"
+  title: "Installation",
 };
 
 ## Requirements
 
-A Splitgraph installation consists of two components: [the Splitgraph engine](../architecture/splitgraph_engine) and [the Splitgraph client (`sgr`)](../architecture/sgr_client).
+A Splitgraph installation consists of two components: [the Splitgraph engine](../architecture/splitgraph-engine) and [the Splitgraph client (`sgr`)](../architecture/sgr-client).
 
 The client ships as a self-contained binary but can also be installed with `pip`.
 
@@ -23,10 +23,10 @@ $ bash -c "$(curl -sL https://github.com/splitgraph/splitgraph/releases/latest/d
 
 This script will:
 
-  * Download the `sgr` binary from [the releases page](https://github.com/splitgraph/splitgraph/releases/latest)
-  * Set up and initialize the Splitgraph Engine
-  * Register you on Splitgraph Cloud (data.splitgraph.com). This is completely optional:
-   Splitgraph can be used in a decentralized manner, like Git.
+- Download the `sgr` binary from [the releases page](https://github.com/splitgraph/splitgraph/releases/latest)
+- Set up and initialize the Splitgraph Engine
+- Register you on Splitgraph Cloud (data.splitgraph.com). This is completely optional:
+  Splitgraph can be used in a decentralized manner, like Git.
 
 If you're running Windows or would like to follow the steps manually, read on.
 
@@ -42,18 +42,18 @@ $ sgr engine add
 
 This will:
 
-  * Prompt you for a password: this is just the password used to protect your
-    local engine and will be stored in the generated configuration file.
-  * Pull and start the latest [Splitgraph engine](https://hub.docker.com/r/splitgraph/engine/) image
-  * By default, the engine container will be named `splitgraph_engine_default` and two Docker volumes
-    will be created:
-    * `splitgraph_engine_default_data` to store the physical data
-    * `splitgraph_engine_default_metadata` to store the metadata about composition of Splitgraph images.
-  * Initialize the engine
-  * Generate a minimal `.sgconfig` file for you in your home directory (`~/.splitgraph/.sgconfig`).
+- Prompt you for a password: this is just the password used to protect your
+  local engine and will be stored in the generated configuration file.
+- Pull and start the latest [Splitgraph engine](https://hub.docker.com/r/splitgraph/engine/) image
+- By default, the engine container will be named `splitgraph_engine_default` and two Docker volumes
+  will be created:
+  - `splitgraph_engine_default_data` to store the physical data
+  - `splitgraph_engine_default_metadata` to store the metadata about composition of Splitgraph images.
+- Initialize the engine
+- Generate a minimal `.sgconfig` file for you in your home directory (`~/.splitgraph/.sgconfig`).
 
 There are extra options in `sgr engine` for advanced users. To see them, run `sgr engine --help` or
-see [the CLI reference](../sgr/engine-management/engine_add).
+see [the CLI reference](../sgr/engine-management/engine-add).
 
 #### Note for Windows users
 
@@ -66,7 +66,7 @@ The simplest way to do this is by adding `alias sgr='winpty sgr'` to your `.bash
 ### `sgr`
 
 You can also install the Splitgraph library from pip. This is useful if you want to use the
-[Splitgraph Python API](../python_api/splitgraph) to manipulate images from your code:
+[Splitgraph Python API](../python-api/splitgraph) to manipulate images from your code:
 
 ```bash
 $ pip install splitgraph
@@ -105,12 +105,12 @@ You can also use [docker-compose](https://docs.docker.com/compose/). A sample
 Compose configuration for the service is as follows:
 
 ```yaml
-version: '3'
+version: "3"
 services:
   engine:
     image: splitgraph/engine:${DOCKER_TAG-stable}
     ports:
-      - '0.0.0.0:5432:5432'
+      - "0.0.0.0:5432:5432"
     environment:
       - POSTGRES_USER=sgr
       - POSTGRES_PASSWORD=supersecure
@@ -142,6 +142,6 @@ For more information on configuring Splitgraph, see the [configuration reference
 
 ## Next Steps
 
-You can take a look at the [five minute demo](five_minute_demo) that will go through the basics of building
+You can take a look at the [five minute demo](five-minute-demo) that will go through the basics of building
 and extending data images. You can also try out some self-contained example Splitgraph projects
 on [our GitHub](https://github.com/splitgraph/splitgraph/tree/master/examples).

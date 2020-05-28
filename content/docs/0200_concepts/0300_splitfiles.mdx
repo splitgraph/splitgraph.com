@@ -1,6 +1,6 @@
 export const meta = {
   id: "splitfiles",
-  title: "Splitfiles"
+  title: "Splitfiles",
 };
 
 Splitfiles are inspired by Dockerfiles and are the simplest way to build Splitgraph images.
@@ -52,18 +52,18 @@ SQL {
 
 They offer multiple advantages over using ad hoc queries or other tools:
 
-  * **Dockerfile-like caching**: every Splitfile line defines a layer. If data sources
-    and the actual command haven't changed, the image doesn't need to be rebuilt.
-  * **Referencing other datasets**: Splitfiles can import data from other Splitgraph images
-    (using the `FROM ... IMPORT ...` command) or perform joins on other datasets (by referencing
-    them in the `SQL` command as schemata).
-  * **Provenance tracking**: images built with Splitfiles have all their sources and commands
-    used to build them recorded in their metadata. This lets the user know exactly where
-    their dataset came from and quickly rebuild it if the upstream data has changed.
-  * **Full SQL support**: Splitgraph only does some minor rewriting and validation on SQL in Splitfiles
-    and defers to PostgreSQL for running actual queries, which means that all SQL constructs
-    are supported.
-  * **Efficient data imports**: The Splitfile executor uses [layered querying](../large_datasets/layered_querying) to import data.
-    This allows it to satisfy queries to huge remote datasets by only downloading a few fragments.
+- **Dockerfile-like caching**: every Splitfile line defines a layer. If data sources
+  and the actual command haven't changed, the image doesn't need to be rebuilt.
+- **Referencing other datasets**: Splitfiles can import data from other Splitgraph images
+  (using the `FROM ... IMPORT ...` command) or perform joins on other datasets (by referencing
+  them in the `SQL` command as schemata).
+- **Provenance tracking**: images built with Splitfiles have all their sources and commands
+  used to build them recorded in their metadata. This lets the user know exactly where
+  their dataset came from and quickly rebuild it if the upstream data has changed.
+- **Full SQL support**: Splitgraph only does some minor rewriting and validation on SQL in Splitfiles
+  and defers to PostgreSQL for running actual queries, which means that all SQL constructs
+  are supported.
+- **Efficient data imports**: The Splitfile executor uses [layered querying](../large-datasets/layered-querying) to import data.
+  This allows it to satisfy queries to huge remote datasets by only downloading a few fragments.
 
-See the [Splitfile introduction](../working_with_data/using_splitfiles) or the [Splitfile reference](../splitfiles/splitfile_intro) for more information on using Splitfiles to build datasets.
+See the [Splitfile introduction](../working-with-data/using-splitfiles) or the [Splitfile reference](../splitfiles/splitfile-intro) for more information on using Splitfiles to build datasets.

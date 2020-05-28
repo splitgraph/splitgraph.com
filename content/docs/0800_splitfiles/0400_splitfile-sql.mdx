@@ -14,7 +14,7 @@ on this SQL statement:
   non-schema-qualified tables will reference the current image.
 - In schema-qualified tables, the schema is treated as a reference to a Splitgraph image,
   for example, `"namespace/repository:latest".table_name`. This gets temporarily mounted
-  in the engine at execution time as a [layered checkout](../large_datasets/layered_querying)
+  in the engine at execution time as a [layered checkout](../large-datasets/layered-querying)
   with the effect that queries in `SQL` can perform joins or queries on other Splitgraph images.
   This is recorded in image provenance as normal.
 - There's a blacklist of table names that can't be used in Splitfiles. These names reference

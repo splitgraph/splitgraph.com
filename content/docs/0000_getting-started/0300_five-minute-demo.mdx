@@ -13,9 +13,9 @@ This demo will show you how to use Splitgraph to:
 
 ## Prerequisites
 
-You need to be registered on [Splitgraph Cloud](../splitgraph_cloud/introduction) to pull and publish data. If you followed the [installation instructions](./installation), this should be already done for you. You can also use [`sgr cloud register`](../sgr/splitgraph-cloud/cloud-register) or [`sgr cloud login`](../sgr/splitgraph-cloud/cloud-login) to register or log in from the `sgr` client.
+You need to be registered on [Splitgraph Cloud](../splitgraph-cloud/introduction) to pull and publish data. If you followed the [installation instructions](./installation), this should be already done for you. You can also use [`sgr cloud register`](../sgr/splitgraph-cloud/cloud-register) or [`sgr cloud login`](../sgr/splitgraph-cloud/cloud-login) to register or log in from the `sgr` client.
 
-If you do not wish to register on Splitgraph Cloud, you can still use Splitgraph in a decentralized fashion, sharing data with other Splitgraph instances. See the [decentralized demo](./decentralized_demo) for an introduction that showcases importing data from CSV files and tracking changes to images, using Splitgraph's version control functionality.
+If you do not wish to register on Splitgraph Cloud, you can still use Splitgraph in a decentralized fashion, sharing data with other Splitgraph instances. See the [decentralized demo](./decentralized-demo) for an introduction that showcases importing data from CSV files and tracking changes to images, using Splitgraph's version control functionality.
 
 First, make sure that your Splitgraph engine is initialized and test your connection to
 Splitgraph Cloud. This demo is written from the point of view of the `splitgraph-demo` user,
@@ -45,7 +45,7 @@ splitgraph-demo
 The [2016 US Presidential Election precinct-level returns](/splitgraph/2016_election/) dataset ([source](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LYWX3D)) has 2 million rows, takes up 500MB as a CSV file and only 25MB in Splitgraph. It's a perfect example to showcase Splitgraph's features.
 
 Let's inspect this image remotely without cloning it, using [`sgr show`](../sgr/image-information/show).
-The [`sgr` client](../concepts/sgr_client)
+The [`sgr` client](../concepts/sgr-client)
 uses the same protocol to communicate with the registry as with the local Splitgraph engine,
 so the same commands can be used for both local and remote operations.
 
@@ -135,14 +135,14 @@ Fetched metadata for 1 image, 1 table, 20 objects and 1 tag.
 
 ## Querying the image
 
-To interact with this image, you could [check it out](../working_with_data/clone_vs_checkout),
+To interact with this image, you could [check it out](../working-with-data/clone-vs-checkout),
 which turns the image into a schema with PostgreSQL tables.
 
 However, imagine if this dataset were a few hundred gigabytes large. Should you really need to download all of it to query a few rows?
 
 Splitgraph objects contain metadata that can help it to discard objects that are irrelevant to a query. The US election dataset is stored ordered by county FIPS code and so queries that filter on this column only need to download a couple of objects instead of the whole dataset.
 
-Let's check out the image into a so called ["layered querying"](../large_datasets/layered_querying) schema. This sets up a Postgres foreign data wrapper for this image that acts as a shim and presents itself as normal Postgres table to clients.
+Let's check out the image into a so called ["layered querying"](../large-datasets/layered-querying) schema. This sets up a Postgres foreign data wrapper for this image that acts as a shim and presents itself as normal Postgres table to clients.
 
 ```shell-session
 $ sgr checkout --layered splitgraph/2016_election:latest
@@ -181,7 +181,7 @@ stein      4258
 trump     12723
 ```
 
-[`sgr sql`](../sgr/image-information/sql) is a shorthand to run an SQL query against the current engine. However, [any PostgreSQL client](../integrating_splitgraph/other_clients) will work with Splitgraph, allowing you to work with Splitgraph using your favorite tools, including [DataGrip](../integrating_splitgraph/datagrip), [pgAdmin](../integrating_splitgraph/pgadmin) or [other clients like pgcli or DBeaver](../integrating_splitgraph/other_clients).
+[`sgr sql`](../sgr/image-information/sql) is a shorthand to run an SQL query against the current engine. However, [any PostgreSQL client](../integrating-splitgraph/other-clients) will work with Splitgraph, allowing you to work with Splitgraph using your favorite tools, including [DataGrip](../integrating-splitgraph/datagrip), [pgAdmin](../integrating-splitgraph/pgadmin) or [other clients like pgcli or DBeaver](../integrating-splitgraph/other-clients).
 
 You can use `sgr config -n` to print out a libpq connection string to the current engine.
 
@@ -269,7 +269,7 @@ No image/object metadata to pull.
 Successfully built votes_by_state:ee8dc4bb7c47.
 ```
 
-Splitfiles also support joins between Splitgraph images. For an example or to learn more about Splitfiles, check out the [Splitfile reference](../splitfiles/splitfile_intro) or some [sample Splitfiles](../working_with_data/using_splitfiles#sample-splitfiles).
+Splitfiles also support joins between Splitgraph images. For an example or to learn more about Splitfiles, check out the [Splitfile reference](../splitfiles/splitfile-intro) or some [sample Splitfiles](../working-with-data/using-splitfiles#sample-splitfiles).
 
 ## Publishing a dataset on Splitgraph Cloud
 
@@ -329,7 +329,7 @@ You also have an OpenAPI-compatible [REST API](/splitgraph-demo/votes_by_state/l
 
 ## Further reading
 
-- [Decentralized demo](./decentralized_demo)
-- [Splitfile reference](../splitfiles/splitfile_intro)
+- [Decentralized demo](./decentralized-demo)
+- [Splitfile reference](../splitfiles/splitfile-intro)
 - [Sample Splitfiles](https://github.com/splitgraph/splitgraph/tree/master/examples/sample_splitfiles)
-- [Splitgraph Cloud reference](../splitgraph_cloud/introduction)
+- [Splitgraph Cloud reference](../splitgraph-cloud/introduction)
