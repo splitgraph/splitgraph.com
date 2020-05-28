@@ -63,7 +63,7 @@ const DocsIndexPage = () => {
               " can push data back upstream."
             }
             anchor={"Try it in Five Minutes"}
-            href={"/docs/getting-started/five_minute_demo"}
+            href={"/docs/getting-started/five-minute-demo"}
           />
 
           <DocsBox
@@ -73,7 +73,7 @@ const DocsIndexPage = () => {
               " Learn what Splitgraph is, why and when to use it, and about its performance."
             }
             anchor={"See the FAQ"}
-            href={"/docs/getting-started/frequently_asked_questions"}
+            href={"/docs/getting-started/frequently-asked-questions"}
           />
         </BoxSet>
       </section>
