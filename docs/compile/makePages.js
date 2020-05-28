@@ -42,6 +42,36 @@ export default withRouter(${templater}({ MdxPage, meta, contentTree }));
 `,
   });
 
+const PRODUCT_DIR = `${path.join(CONTENT_DIR, "product")}`;
+const PRODUCT_CONTENT_TREE = path.join(
+  ROOT_DIR,
+  "compile/compiledProductSidebar"
+);
+const prepProductPages = () =>
+  prepContentTree({
+    compiledContentTree: PRODUCT_CONTENT_TREE,
+    compiledGetLinkType: GET_LINK_TYPE,
+    urlPrefix: "/product",
+    templater: "withProductLayout",
+    inputDir: PRODUCT_DIR,
+    outDir: PAGES_OUT_DIR,
+    rootOutDir: PAGES_DIR,
+    writePage: ({
+      templater,
+      item,
+      contentTreeLocation,
+      getLinkTypeLocation,
+    }) => `
+import Link from "next/link";
+import { withRouter } from "next/router";
+import ${templater} from "@splitgraph/templaters/layouts/${templater}";
+import MdxPage, { meta } from "@splitgraph/content${item.path.fromSiteRoot}";
+import contentTree from "${contentTreeLocation}";
+import getLinkType from "${getLinkTypeLocation}";
+export default withRouter(${templater}({ MdxPage, meta, contentTree }));
+`,
+  });
+
 const BLOG_DIR = `${path.join(CONTENT_DIR, "blog")}`;
 const BLOG_CONTENT_TREE = path.join(ROOT_DIR, "compile/compiledBlogPosts");
 const prepBlogPages = () =>
@@ -144,17 +174,20 @@ const writeProxyDirectoryFile = ({ exportMap }) => {
 
 const prepPages = () => {
   const preppedDocsPages = prepDocsPages();
+  const preppedProductPages = prepProductPages();
   const preppedBlogPages = prepBlogPages();
   const preppedRootPages = prepRootPages();
 
   const pagesToMake = [
     ...preppedDocsPages.pagesToMake,
+    ...preppedProductPages.pagesToMake,
     ...preppedBlogPages.pagesToMake,
     ...preppedRootPages.pagesToMake,
   ];
 
   const exportMap = {
     ...preppedDocsPages.exportMap,
+    ...preppedProductPages.exportMap,
     ...preppedBlogPages.exportMap,
     ...preppedRootPages.exportMap,
   };
