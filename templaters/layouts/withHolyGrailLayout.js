@@ -101,7 +101,27 @@ const withHolyGrailLayout = ({
 
         <HolyGrail.Layout>
           <Header gridArea={HolyGrail.GridArea.Header}>
-            <LogoImage logoURL="/static/splitgraph_logo.svg" />
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                ".logo-text": {
+                  color: "sglightblue",
+                  display: ["none", "inherit", "inherit"],
+                },
+              }}
+            >
+              <LogoImage logoURL="/static/splitgraph_logo.svg" />
+              <span className="logo-text">Splitgraph</span>
+            </Box>
+            <Box sx={{ color: "muted" }}>
+              <Link href="/explore">Explore Data</Link>
+              <>&bull;&nbsp;&nbsp;</>
+              <Link href="/docs">Docs</Link>
+              <Link className="button-link" href="/auth/sign_up">
+                Sign Up
+              </Link>
+            </Box>
           </Header>
 
           <Sidebar
