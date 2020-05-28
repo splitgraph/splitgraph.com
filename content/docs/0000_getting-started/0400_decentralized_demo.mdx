@@ -118,7 +118,7 @@ Initialized empty repository demo/weather
 ```
 
 
-Use [sgr csv import](../sgr/data_import_export/csv_import) to load the CSV file. This is a wrapper around PostgreSQL's [`COPY FROM STDIN`](https://www.postgresql.org/docs/current/sql-copy.html) with some schema inference functionality.
+Use [sgr csv import](../sgr/data-import-export/csv-import) to load the CSV file. This is a wrapper around PostgreSQL's [`COPY FROM STDIN`](https://www.postgresql.org/docs/current/sql-copy.html) with some schema inference functionality.
 
 
 ```python
@@ -130,7 +130,7 @@ $ sgr csv import -f rdu-weather-history.csv \\
 ```
 
 
-The data is now in a table but not committed as a Splitgraph image. Inspect the repository with [`sgr status`](../sgr/image_information/status) and diff it with [`sgr diff`](../sgr/image_information/diff).
+The data is now in a table but not committed as a Splitgraph image. Inspect the repository with [`sgr status`](../sgr/image-information/status) and diff it with [`sgr diff`](../sgr/image-information/diff).
 
 
 ```shell-session
@@ -144,7 +144,7 @@ rdu: table added
 ```
 
 
-Now we can [commit](../sgr/image_management_creation/commit) the repository, creating a new image, and give it a tag `initial_data`.
+Now we can [commit](../sgr/image-management-creation/commit) the repository, creating a new image, and give it a tag `initial_data`.
 
 
 ```shell-session
@@ -159,7 +159,7 @@ Tagged demo/weather:f5f8151e5a7be4f097b276f4e7897ec267feb0f3f3f694dd2f2b677a3e5b
 ```
 
 
-Inspect the image using [`sgr show`](../sgr/image_information/show) and the freshly-created `rdu` [table](../sgr/image_information/table). This table consists of one Splitgraph [object](../concepts/objects).
+Inspect the image using [`sgr show`](../sgr/image-information/show) and the freshly-created `rdu` [table](../sgr/image-information/table). This table consists of one Splitgraph [object](../concepts/objects).
 
 
 ```shell-session
@@ -214,7 +214,7 @@ Objects:
 ```
 
 
-Inspect the [object metadata](../sgr/image_information/object). Splitgraph objects are content-addressable and the original CSV file can change, so the object ID might be different between this demo and the actual data.
+Inspect the [object metadata](../sgr/image-information/object). Splitgraph objects are content-addressable and the original CSV file can change, so the object ID might be different between this demo and the actual data.
 
 
 ```shell-session
@@ -288,7 +288,7 @@ CREATE TABLE monthly_summary AS (
 ```
 
 
-Run the Splitfile to [build](../sgr/splitfile_execution/build) a new image. This image will be saved in a repository `demo/summary`. Let's also tag it with `based_on_initial`.
+Run the Splitfile to [build](../sgr/splitfile-execution/build) a new image. This image will be saved in a repository `demo/summary`. Let's also tag it with `based_on_initial`.
 
 
 ```shell-session
@@ -386,7 +386,7 @@ $ sgr sql -s demo/summary "SELECT * FROM monthly_summary \\
 
 
 ## Inspecting provenance and rebuilding datasets
-Images built with Splitfiles have their provenance (commands used to create them and sources) recorded in their metadata. Let's inspect the [provenance](../sgr/splitfile_execution/provenance) that the image we just built has.
+Images built with Splitfiles have their provenance (commands used to create them and sources) recorded in their metadata. Let's inspect the [provenance](../sgr/splitfile-execution/provenance) that the image we just built has.
 
 
 ```shell-session
@@ -408,7 +408,7 @@ SQL {CREATE TABLE monthly_summary
 ```
 
 
-We can also [invert the provenance query](../sgr/splitfile_execution/dependents), listing all images that were built from `demo/weather` on the local engine.
+We can also [invert the provenance query](../sgr/splitfile-execution/dependents), listing all images that were built from `demo/weather` on the local engine.
 
 
 ```shell-session
@@ -439,7 +439,7 @@ Tagged demo/weather:0b5f9102f95565dda07cefec818c79a775797b50f8912cb0b4164420d28a
 ```
 
 
-Now we can use the derivative image's provenance to [rebuild](../sgr/splitfile_execution/rebuild) it against the source data without knowing the original Splitfile that built it.
+Now we can use the derivative image's provenance to [rebuild](../sgr/splitfile-execution/rebuild) it against the source data without knowing the original Splitfile that built it.
 
 
 ```shell-session
@@ -539,7 +539,7 @@ Engine PostgresEngine engine_2 (sgr@localhost:5431/splitgraph) initialized.
 ```
 
 
-[Push](../sgr/sharing_images/push) the RDU weather dataset that we ingested to the remote engine.
+[Push](../sgr/sharing-images/push) the RDU weather dataset that we ingested to the remote engine.
 Since by default Splitgraph is configured to use S3 for uploading, we need
 to override the upload handler and upload data to the actual database as tables.
 

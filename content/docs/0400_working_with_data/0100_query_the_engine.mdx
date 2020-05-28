@@ -13,7 +13,7 @@ $ sgr checkout example/repo_1:latest
 will create a schema on the engine with name `example/repo_1`. This means that any application that
 can access the engine via a normal database connection can interact with the checked-out repository.
 
-`sgr` provides a shorthand, [`sgr sql`](../sgr/image_information/sql), to run arbitrary SQL queries against the engine:
+`sgr` provides a shorthand, [`sgr sql`](../sgr/image-information/sql), to run arbitrary SQL queries against the engine:
 
 ```bash
 $ sgr sql --schema example/repo_1 "SELECT * FROM demo"

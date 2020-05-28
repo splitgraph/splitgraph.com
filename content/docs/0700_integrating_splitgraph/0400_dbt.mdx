@@ -12,7 +12,7 @@ One such tool is [dbt](https://getdbt.com) that assembles data transformations f
 Turning the source and the target schemas that dbt uses into Splitgraph repositories opens up a lot of opportunities:
 
 * No need to run development and production dbt models against the same warehouse. A Splitgraph image can be cloned and checked out on the development engine.
-* Performing what-if analyses becomes simple by switching between different versions of the source dataset and comparing the resultant images with [`sgr diff`](../sgr/image_information/diff).
+* Performing what-if analyses becomes simple by switching between different versions of the source dataset and comparing the resultant images with [`sgr diff`](../sgr/image-information/diff).
 * Built datasets can be pushed to other Splitgraph engines, shared publicly or serve as inputs to a pipeline of Splitfiles.
 * Input datasets can leverage Splitgraph's [layered querying](../large_datasets/layered_querying),
     allowing dbt to seamlessly query huge datasets with a limited amount of local disk space.

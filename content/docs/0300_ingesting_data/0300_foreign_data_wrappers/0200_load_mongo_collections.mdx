@@ -22,7 +22,7 @@ will be converted to a MongoDB query behind the scenes and forwarded to the targ
 $ sgr sql -s example/mongo "SELECT * FROM example_table"
 ```
 
-To snapshot the table, making it part of an actual Splitgraph image, use the [`sgr import`](../../sgr/image_management_creation/import) command:
+To snapshot the table, making it part of an actual Splitgraph image, use the [`sgr import`](../../sgr/image-management-creation/import) command:
 
 ```
 $ sgr import example/mongo \\
@@ -32,7 +32,7 @@ $ sgr import example/mongo \\
 example/mongo_repo:example_table has been imported from example/mongo:select column_1, column_2 from example_table
 ```
 
-`sgr import` can also be used to import tables between Splitgraph repositories without consuming extra space. For more information, see the [command line reference](../../sgr/image_management_creation/import).
+`sgr import` can also be used to import tables between Splitgraph repositories without consuming extra space. For more information, see the [command line reference](../../sgr/image-management-creation/import).
 
 ## Example
 
