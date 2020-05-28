@@ -3,16 +3,10 @@ export const meta = {
   title: "Loading Postgres tables"
 };
 
-Add this to your `.sgconfig`'s `mount_handlers` section to use [`postgres_fdw`](https://www.postgresql.org/docs/12/postgres-fdw.html).
-
-```ini
-postgres_fdw=splitgraph.hooks.mount_handlers.mount_postgres
-```
-
-Then:
+To use [`postgres_fdw`](https://www.postgresql.org/docs/12/postgres-fdw.html) and mount remote PostgreSQL databases, run:
 
 ```
-sgr mount postgres_fdw \\
+$ sgr mount postgres_fdw \\
     -c username:password@server:port \\
     -o '{"dbname": remote_db_name, "remote_schema": remote_schema_name, \\
         "tables_to_mount": ["table_1", "table_2"]}' \\

@@ -3,13 +3,7 @@ export const meta = {
   title: "Loading MongoDB collections"
 };
 
-First, add this to your `.sgconfig`'s `mount_handlers` section to use [`mongo_fdw`](https://github.com/EnterpriseDB/mongo_fdw):
-
-```ini
-mongo_fdw=splitgraph.hooks.mount_handlers.mount_mongo
-```
-
-Then:
+To use [`mongo_fdw`](https://github.com/EnterpriseDB/mongo_fdw) and mount Mongo collections, run:
 
 ```
 $ sgr mount mongo_fdw example/mongo \\

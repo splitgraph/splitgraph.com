@@ -3,16 +3,10 @@ export const meta = {
   title: "Loading MySQL tables"
 };
 
-To mount a MySQL database into the Splitgraph engine using [`mysql_fdw`](https://github.com/EnterpriseDB/mysql_fdw), first, add this to your `.sgconfig`'s `mount_handlers` section:
-
-```ini
-mysql_fdw=splitgraph.hooks.mount_handlers.mount_mysql
-```
-
-Then:
+To mount a MySQL database into the Splitgraph engine using [`mysql_fdw`](https://github.com/EnterpriseDB/mysql_fdw), run:
 
 ```
-sgr mount mysql_fdw -c username:password@host:port \\
+$ sgr mount mysql_fdw -c username:password@host:port \\
     -o '{"remote_schema": "remote_schema"}' schema_name
 ```
 
