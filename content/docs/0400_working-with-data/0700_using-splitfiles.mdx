@@ -1,6 +1,6 @@
 export const meta = {
-  id: "using_splitfiles",
-  title: "Using Splitfiles to build datasets"
+  id: "using-splitfiles",
+  title: "Using Splitfiles to build datasets",
 };
 
 Whilst you can create new images using `sgr commit`, there is a better
@@ -88,7 +88,6 @@ Storing and indexing the table
  ---> 4fd86d48715d
 ```
 
-
 If you have seen the output of a Dockerfile being executed, this will
 also look familiar to you. Let's inspect the repository that we've just
 created:
@@ -171,9 +170,9 @@ RDU weather dataset from [data.gov](https://catalog.data.gov/dataset/local-weath
 
 This example uses a Splitfile to build a dataset that joins several datasets together:
 
-  * US Census demographic data ([source](https://www.kaggle.com/muonneutrino/us-census-demographic-data/download))
-  * Census tracts designated as Qualified Opportunity Zones ([source](https://www.cdfifund.gov/Documents/Designated%20QOZs.12.14.18.xlsx))
-  * 2016 US Presidential Election precinct-level returns ([source](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LYWX3D))
+- US Census demographic data ([source](https://www.kaggle.com/muonneutrino/us-census-demographic-data/download))
+- Census tracts designated as Qualified Opportunity Zones ([source](https://www.cdfifund.gov/Documents/Designated%20QOZs.12.14.18.xlsx))
+- 2016 US Presidential Election precinct-level returns ([source](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LYWX3D))
 
 It then runs a quick linear regression against the resultant dataset to see if there is a
 correlation between the voting patterns in a given county and the fraction of QOZ-qualified
