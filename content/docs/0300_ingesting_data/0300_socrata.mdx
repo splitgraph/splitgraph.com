@@ -8,7 +8,7 @@ export const meta = {
 The [Socrata data platform](https://www.tylertech.com/products/socrata) hosts tens of thousands of government datasets. Governments large and small publish data on crime, permits, finance, healthcare, research, performance, and more for citizens to use.
 
 Splitgraph has first-class support for querying Socrata datasets through SQL and using them in
-[Splitfiles](../concepts/splitfiles). The Socrata connector is implemented as a [foreign data wrapper](../foreign_data_wrappers/introduction). This allows Splitgraph to also be used as a PostgreSQL-to-Socrata connector. Any PostgreSQL application, client or dashboarding tool can query Socrata datasets through Splitgraph and even run joins on datasets from different Socrata endpoints or between Socrata datasets and Splitgraph images.
+[Splitfiles](../concepts/splitfiles). The Socrata connector is implemented as a [foreign data wrapper](../foreign-data-wrappers/introduction). This allows Splitgraph to also be used as a PostgreSQL-to-Socrata connector. Any PostgreSQL application, client or dashboarding tool can query Socrata datasets through Splitgraph and even run joins on datasets from different Socrata endpoints or between Socrata datasets and Splitgraph images.
 
 ## Usage
 
@@ -95,7 +95,7 @@ IMPORT {
 } AS chicago_bars
 ```
 
-This Splitfile mounts two Socrata datasets: [Chicago Business Licenses](https://data.cityofchicago.org/widgets/r5kz-chrr) and [Chicago Business Owners](https://data.cityofchicago.org/widgets/ezma-pppn) and runs an [`IMPORT`](../splitfiles/splitfile_import) to join between them and snapshot the data.
+This Splitfile mounts two Socrata datasets: [Chicago Business Licenses](https://data.cityofchicago.org/widgets/r5kz-chrr) and [Chicago Business Owners](https://data.cityofchicago.org/widgets/ezma-pppn) and runs an [`IMPORT`](../splitfiles/splitfile-import) to join between them and snapshot the data.
 
 The result is a list of all bar owners in Chicago with current liquor licenses.
 
@@ -125,7 +125,7 @@ This doesn't actually load any data and only loads metadata for all available da
 PostgreSQL foreign tables for each one of them. Such tables act as lightweight shims that are treated
 like normal tables by most clients.
 
-Open a PostgreSQL client (instructions are available for [DataGrip](../integrating_splitgraph/datagrip), [pgAdmin](../integrating_splitgraph/pgadmin) or [other clients like pgcli or DBeaver](../integrating_splitgraph/other_clients)) and connect to the Splitgraph engine. In these screenshots, [DBeaver](https://dbeaver.io/) is used.
+Open a PostgreSQL client (instructions are available for [DataGrip](../integrating-splitgraph/datagrip), [pgAdmin](../integrating-splitgraph/pgadmin) or [other clients like pgcli or DBeaver](../integrating-splitgraph/other-clients)) and connect to the Splitgraph engine. In these screenshots, [DBeaver](https://dbeaver.io/) is used.
 
 ![DBeaver schema overview](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting_data/images/socrata/0_dbeaver_schemas.png)
 
@@ -138,7 +138,7 @@ Socrata ID.
 Splitgraph also grabs descriptions for each dataset and every column from Socrata metadata,
 if it exists. These descriptions are added as PostgreSQL `COMMENT` entries on tables and columns.
 
-Data is loaded on demand, similar to [layered querying](../large_datasets/layered_querying). Socrata
+Data is loaded on demand, similar to [layered querying](../large-datasets/layered-querying). Socrata
 queries are only sent out when a table is opened.
 
 ![DBeaver querying overview](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting_data/images/socrata/2_dbeaver_query.png)
@@ -152,7 +152,7 @@ doesn't need to load the whole dataset.
 
 In this section, we'll use [Metabase](https://www.metabase.com/), a powerful visualization and dashboarding tool, to plot a table that joins data from two distinct Socrata endpoints. Normally, this would involve some ETL jobs and a Jupyter notebook, but with Splitgraph, we'll be able to do this directly in one simple SQL query.
 
-Follow the [Metabase integration guide](../integrating_splitgraph/metabase) to set up Metabase with Splitgraph and make sure the Chicago and Cambridge data endpoints are mounted (see previous section).
+Follow the [Metabase integration guide](../integrating-splitgraph/metabase) to set up Metabase with Splitgraph and make sure the Chicago and Cambridge data endpoints are mounted (see previous section).
 
 First, let's try plotting the [COVID-19 Daily Cases and Deaths](https://data.cityofchicago.org/Health-Human-Services/COVID-19-Daily-Cases-and-Deaths/naz8-j4nc) Socrata dataset (Socrata ID `naz8-j4nc`):
 
