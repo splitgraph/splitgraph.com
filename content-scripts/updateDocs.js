@@ -56,7 +56,7 @@ const getConfig = ({ tmpDir }) => ({
       asciinema: processAsciinema,
       json: processPythonApiDocs,
       sgr: processSgrCliDocs,
-      "0100_config_flag_reference.mdx": processConfigFlagReference,
+      "0100_config-flag-reference.mdx": processConfigFlagReference,
     },
 
     // When deleting a version, call each one of these functions
@@ -78,7 +78,7 @@ const getConfig = ({ tmpDir }) => ({
       manifest: path.join(cloneTo, "content/docs-manifest.json"),
       configFlagReference: path.join(
         cloneTo,
-        "content/docs/1000_configuration/0100_config_flag_reference.mdx"
+        "content/docs/1000_configuration/0100_config-flag-reference.mdx"
       ),
       asciinema: {
         latest: path.join(cloneTo, "content/casts/versioned/latest"),
@@ -89,10 +89,10 @@ const getConfig = ({ tmpDir }) => ({
         archive: path.join(cloneTo, "content/docs/9000_sgr/9000_versions"),
       },
       pythonApiDocs: {
-        latest: path.join(cloneTo, "content/docs/9500_python_api"),
+        latest: path.join(cloneTo, "content/docs/9500_python-api"),
         archive: path.join(
           cloneTo,
-          "content/docs/9500_python_api/9000_versions"
+          "content/docs/9500_python-api/9000_versions"
         ),
       },
     }),
