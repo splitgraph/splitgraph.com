@@ -395,7 +395,7 @@ const LandingPage = () => {
               data came from. <strong>Keep data images up-to-date</strong> with
               a single command when the sources change.
             </p>
-            <Link href="/docs/working_with_data/inspecting_provenance">
+            <Link href="/docs/working-with-data/inspecting-provenance">
               Learn more about data provenance and rebuilding data images.
             </Link>
           </Box>
@@ -412,7 +412,7 @@ const LandingPage = () => {
               get an{" "}
               <strong>instant REST API for every version of your data</strong>.
             </p>
-            <Link href="/docs/splitgraph_cloud/introduction">
+            <Link href="/docs/splitgraph-cloud/introduction">
               Learn more about Splitgraph Cloud.
             </Link>
           </Box>
@@ -445,7 +445,7 @@ const LandingPage = () => {
       >
         <Link
           className="button-link"
-          href="/docs/getting-started/five_minute_demo"
+          href="/docs/getting-started/five-minute-demo"
         >
           Try it in five minutes
         </Link>
@@ -512,7 +512,7 @@ const LandingPage = () => {
               <strong>enhance existing abstractions</strong> without breaking
               them. */}
             </p>
-            <Link href="/docs/integrating_splitgraph/dbt">
+            <Link href="/docs/integrating-splitgraph/dbt">
               See examples of common integrations
             </Link>
           </Box>
@@ -530,7 +530,7 @@ const LandingPage = () => {
               data from common databases. Or, write a custom mount handler to
               import data from wherever you need.
             </p>
-            <Link href="/docs/ingesting_data/foreign_data_wrappers/introduction">
+            <Link href="/docs/ingesting-data/foreign-data-wrappers/introduction">
               Read more about ingesting data with FDWs
             </Link>
           </Box>
@@ -547,7 +547,7 @@ const LandingPage = () => {
               can be stored in any S3-compatible object storage and downloaded
               on demand when it needs to be queried.
             </p>
-            <Link href="/docs/large_datasets/layered_querying">
+            <Link href="/docs/large-datasets/layered-querying">
               Read about layered querying
             </Link>
           </Box>

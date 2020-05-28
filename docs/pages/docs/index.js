@@ -92,7 +92,7 @@ const DocsIndexPage = () => {
               " and push data to splitgraph cloud."
             }
             renderFooter={() => (
-              <Link href="/docs/sgr/image_management_creation/checkout">
+              <Link href="/docs/sgr/image-management-creation/checkout">
                 <code>sgr</code> CLI reference
               </Link>
             )}
@@ -105,7 +105,7 @@ const DocsIndexPage = () => {
               " Jupyter notebooks and Pandas dataframes."
             }
             renderFooter={() => (
-              <Link href="/docs/python_api/splitgraph.core">
+              <Link href="/docs/python-api/splitgraph.core">
                 Python API Docs
               </Link>
             )}
