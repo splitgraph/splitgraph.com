@@ -1,6 +1,6 @@
 export const meta = {
-  id: "splitfile_custom",
-  title: "Custom Splitfile commands"
+  id: "splitfile-custom",
+  title: "Custom Splitfile commands",
 };
 
 It is possible to define custom Splitfile commands that follow the
@@ -13,7 +13,7 @@ returns the command context hash which is combined with the hash of the
 previous image to create the hash of the new image.
 
 Additionally, the custom command can also implement `calc_hash()` if it's able to calculate the
- command context hash without actually running the command.
+command context hash without actually running the command.
 
 The Python class can then be registered in the `.sgconfig` file as follows:
 

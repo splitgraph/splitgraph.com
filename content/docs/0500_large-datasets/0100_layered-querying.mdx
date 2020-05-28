@@ -1,6 +1,6 @@
 export const meta = {
-  id: "layered_querying",
-  title: "Layered querying"
+  id: "layered-querying",
+  title: "Layered querying",
 };
 
 Splitgraph tries to not redo work that can be done more efficiently by the database. A Splitgraph
@@ -46,30 +46,30 @@ querying a native PostgreSQL table.
 
 Layered querying (`sgr checkout --layered`) should work better for your use case when:
 
-  * Your queries are read-only. Layered querying doesn't support writes.
-  * You are querying a dataset for which you only have cloned some metadata and your query is
-    only going to need a small part of the dataset. For example, if you're filtering on a single
-    value for the primary key or have an equality filter on a column that has [bloom filtering](indexing)
-    enabled, Splitgraph will only download a few objects to satisfy the query. You can check
-    the amount of data that a query will download by running it with `EXPLAIN` first.
-  * You have limited disk space. `cstore_fdw` has a massive space advantage over PostgreSQL tables
-    because data is organized in columns which lends itself well to compression. This also means
-    that full table scans are going to be faster and have a smaller IO load in Splitgraph.
+- Your queries are read-only. Layered querying doesn't support writes.
+- You are querying a dataset for which you only have cloned some metadata and your query is
+  only going to need a small part of the dataset. For example, if you're filtering on a single
+  value for the primary key or have an equality filter on a column that has [bloom filtering](indexing)
+  enabled, Splitgraph will only download a few objects to satisfy the query. You can check
+  the amount of data that a query will download by running it with `EXPLAIN` first.
+- You have limited disk space. `cstore_fdw` has a massive space advantage over PostgreSQL tables
+  because data is organized in columns which lends itself well to compression. This also means
+  that full table scans are going to be faster and have a smaller IO load in Splitgraph.
 
 You should instead check an image out into a PostgreSQL schema (`sgr checkout`) if:
 
-  * You want to modify it.
-  * You want to query images that have had a lot of changes made to them. Instead of forwarding
-    queries to objects directly, layered querying materializes subsets of objects that overlap
-    into a temporary table, the overhead of which might be bigger than savings from scanning
-    through less data. You can also consider [rechunking](chunking#rechunking-images) the image
-    to make it easier to query.
-  * You want to extract maximum read performance from the image by using PostgreSQL indexes.
-    After the image is checked out, it becomes a set of normal PostgreSQL tables that you can create
-    any index on.
-  * You are intending to run multiple small queries against the dataset. Splitgraph's query planning
-    has a considerable latency overhead over PostgreSQL's and so this kind of workload will be more
-    expensive than with native PostgreSQL tables.
+- You want to modify it.
+- You want to query images that have had a lot of changes made to them. Instead of forwarding
+  queries to objects directly, layered querying materializes subsets of objects that overlap
+  into a temporary table, the overhead of which might be bigger than savings from scanning
+  through less data. You can also consider [rechunking](chunking#rechunking-images) the image
+  to make it easier to query.
+- You want to extract maximum read performance from the image by using PostgreSQL indexes.
+  After the image is checked out, it becomes a set of normal PostgreSQL tables that you can create
+  any index on.
+- You are intending to run multiple small queries against the dataset. Splitgraph's query planning
+  has a considerable latency overhead over PostgreSQL's and so this kind of workload will be more
+  expensive than with native PostgreSQL tables.
 
 You can find some Jupyter notebooks with benchmarks comparing layered querying and querying native
 PostgreSQL tables on [GitHub](https://github.com/splitgraph/splitgraph/tree/master/examples/benchmarking).

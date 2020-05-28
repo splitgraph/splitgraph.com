@@ -1,6 +1,6 @@
 export const meta = {
-  id: "decentralized_demo",
-  title: "Decentralized demo"
+  id: "decentralized-demo",
+  title: "Decentralized demo",
 };
 
 ## Introduction
@@ -10,23 +10,21 @@ and pull data between other Splitgraph images.
 
 This demo will guide you through using Splitgraph to:
 
-  * Ingest a dataset from a CSV file
-  * Build a derivative dataset using Splitfiles
-  * Make some changes to the dataset and commit those changes
-  * Check the dataset's provenance and rebuild it against a changed upstream
-  * Share a dataset with another Splitgraph engine
+- Ingest a dataset from a CSV file
+- Build a derivative dataset using Splitfiles
+- Make some changes to the dataset and commit those changes
+- Check the dataset's provenance and rebuild it against a changed upstream
+- Share a dataset with another Splitgraph engine
 
 ## Prerequisites
 
 Instead of using the `sgr engine` wrapper, this demo will use Docker Compose to start
 two Splitgraph engines and link them together.
 
-
-
 ## Building and starting the engine
+
 Build and start the Docker Compose stack: we will be running two Splitgraph engines here
 to demonstrate sharing data between two Splitgraph instances.
-
 
 ```shell-session
 $ cat docker-compose.yml
@@ -73,9 +71,7 @@ Creating splitgraph_example_engine_2_1 ... done
 Creating splitgraph_example_engine_1_1 ... done
 ```
 
-
 Initialize our local engine.
-
 
 ```shell-session
 $ sgr init
@@ -92,10 +88,9 @@ Installing the audit trigger...
 Engine PostgresEngine LOCAL (sgr@localhost:5432/splitgraph) initialized.
 ```
 
-
 ## Importing data from a CSV file
-Let's download a CSV file to ingest into Splitgraph. We will be using the [weather data from Raleigh-Durham International Airport](https://data.townofcary.org/api/v2/catalog/datasets/rdu-weather-history/exports/csv) file.
 
+Let's download a CSV file to ingest into Splitgraph. We will be using the [weather data from Raleigh-Durham International Airport](https://data.townofcary.org/api/v2/catalog/datasets/rdu-weather-history/exports/csv) file.
 
 ```shell-session
 $ head -n5 rdu-weather-history.csv
@@ -108,18 +103,14 @@ thunder;highwind;hail;blowingsnow;dust;freezingfog
 2007-01-15;57.0;73.9;0.0;0.0;0.0;13.2;230;23.94;230;29.08;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No;No
 ```
 
-
 Initialize the repository that we will be ingesting the data into.
-
 
 ```shell-session
 $ sgr init demo/weather
 Initialized empty repository demo/weather
 ```
 
-
 Use [sgr csv import](../sgr/data-import-export/csv-import) to load the CSV file. This is a wrapper around PostgreSQL's [`COPY FROM STDIN`](https://www.postgresql.org/docs/current/sql-copy.html) with some schema inference functionality.
-
 
 ```python
 $ sgr csv import -f rdu-weather-history.csv \\
@@ -129,9 +120,7 @@ $ sgr csv import -f rdu-weather-history.csv \\
                demo/weather rdu
 ```
 
-
 The data is now in a table but not committed as a Splitgraph image. Inspect the repository with [`sgr status`](../sgr/image-information/status) and diff it with [`sgr diff`](../sgr/image-information/diff).
-
 
 ```shell-session
 $ sgr status demo/weather
@@ -143,9 +132,7 @@ Between 000000000000 and the current working copy:
 rdu: table added
 ```
 
-
 Now we can [commit](../sgr/image-management-creation/commit) the repository, creating a new image, and give it a tag `initial_data`.
-
 
 ```shell-session
 $ sgr commit demo/weather
@@ -158,9 +145,7 @@ $ sgr tag demo/weather initial_data
 Tagged demo/weather:f5f8151e5a7be4f097b276f4e7897ec267feb0f3f3f694dd2f2b677a3e5b2b7b with initial_data.
 ```
 
-
 Inspect the image using [`sgr show`](../sgr/image-information/show) and the freshly-created `rdu` [table](../sgr/image-information/table). This table consists of one Splitgraph [object](../concepts/objects).
-
 
 ```shell-session
 $ sgr show demo/weather:initial_data
@@ -213,9 +198,7 @@ Objects:
   ob799ca761ea638c0dbb4df3e59ab6a995d87999909d008a3495711c9009f8f
 ```
 
-
 Inspect the [object metadata](../sgr/image-information/object). Splitgraph objects are content-addressable and the original CSV file can change, so the object ID might be different between this demo and the actual data.
-
 
 ```shell-session
 $ sgr object ob799ca761ea638c0dbb4df3e59ab6a995d87999909d008a3495711c9009f8f
@@ -262,11 +245,10 @@ Column index:
 Location: created locally
 ```
 
-
 ## Using Splitfiles to build derivative datasets
+
 [Splitfiles](../concepts/splitfiles) are similar to Dockerfiles and are the easiest way to build Splitgraph datasets. They offer Dockerfile-like caching, provenance tracking, fast dataset rebuilds, joins between datasets and full SQL support.
 Create a Splitfile that will summarize the data image we've just built.
-
 
 ```shell-session
 $ cat rdu-weather-summary.splitfile
@@ -287,9 +269,7 @@ CREATE TABLE monthly_summary AS (
 }
 ```
 
-
 Run the Splitfile to [build](../sgr/splitfile-execution/build) a new image. This image will be saved in a repository `demo/summary`. Let's also tag it with `based_on_initial`.
-
 
 ```shell-session
 $ sgr build rdu-weather-summary.splitfile -o demo/summary
@@ -312,9 +292,7 @@ $ sgr tag demo/summary based_on_initial
 Tagged demo/summary:de84e0dbee234d45d7a5adab03405044e907d40ce92f3aec40e112b2d6c18bfa with based_on_initial.
 ```
 
-
 Much like with Docker, the build result is cached, so running build again checks out the existing image. Try building the image again:
-
 
 ```shell-session
 $ sgr build rdu-weather-summary.splitfile -o demo/summary
@@ -331,9 +309,7 @@ Step 2/2 : SQL {CREATE TABLE monthly_summary AS (    SELECT to_cha...
 Successfully built demo/summary:de84e0dbee23.
 ```
 
-
 Inspect the new dataset and the table `monthly_summary` that was created in it.
-
 
 ```shell-session
 $ sgr show demo/summary:based_on_initial
@@ -370,9 +346,7 @@ Objects:
   o5e29c3cf82603335df66690a448ca1f604f0002d5a3496b18c982a5ea835f3
 ```
 
-
 Run a query against the new dataset. This can be done with [any PostgreSQL client](../integrating_splitgraph/other_clients) but Splitgraph offers a shorthand to run SQL against the current Splitgraph engine.
-
 
 ```python
 $ sgr sql -s demo/summary "SELECT * FROM monthly_summary \\
@@ -384,10 +358,9 @@ $ sgr sql -s demo/summary "SELECT * FROM monthly_summary \\
 201905  0.103548  0
 ```
 
-
 ## Inspecting provenance and rebuilding datasets
-Images built with Splitfiles have their provenance (commands used to create them and sources) recorded in their metadata. Let's inspect the [provenance](../sgr/splitfile-execution/provenance) that the image we just built has.
 
+Images built with Splitfiles have their provenance (commands used to create them and sources) recorded in their metadata. Let's inspect the [provenance](../sgr/splitfile-execution/provenance) that the image we just built has.
 
 ```shell-session
 $ sgr provenance demo/summary
@@ -407,9 +380,7 @@ SQL {CREATE TABLE monthly_summary
      ORDER BY month ASC}
 ```
 
-
 We can also [invert the provenance query](../sgr/splitfile-execution/dependents), listing all images that were built from `demo/weather` on the local engine.
-
 
 ```shell-session
 $ sgr dependents demo/weather
@@ -417,10 +388,8 @@ demo/weather:f5f8151e5a7be4f097b276f4e7897ec267feb0f3f3f694dd2f2b677a3e5b2b7b is
 demo/summary:de84e0dbee234d45d7a5adab03405044e907d40ce92f3aec40e112b2d6c18bfa
 ```
 
-
 Keeping track of the image provenance allows Splitgraph to rebuild images against upstream data when it changes and know when there's no need to rebuild an image.
 Let's pretend there's been a revision to the source historical weather data.
-
 
 ```python
 $ sgr sql -s demo/weather "UPDATE rdu \\
@@ -438,9 +407,7 @@ $ sgr tag demo/weather revised_data
 Tagged demo/weather:0b5f9102f95565dda07cefec818c79a775797b50f8912cb0b4164420d28a7fe4 with revised_data.
 ```
 
-
 Now we can use the derivative image's provenance to [rebuild](../sgr/splitfile-execution/rebuild) it against the source data without knowing the original Splitfile that built it.
-
 
 ```shell-session
 $ sgr rebuild demo/summary --against demo/weather:revised_data
@@ -460,9 +427,7 @@ Processing table monthly_summary
 Successfully built demo/summary:3a56c822a0ae.
 ```
 
-
 Tag the new dataset and compare it with its predecessor. We can now see how the changes in the upstream data influenced the final dataset.
-
 
 ```shell-session
 $ sgr tag demo/summary based_on_revised
@@ -498,12 +463,11 @@ monthly_summary: added 12 rows, removed 12 rows.
 + ('201212', Decimal('0.11380645161290322581'), Decimal('0E-20'))
 ```
 
-
 ## Sharing data between Splitgraph engines
+
 The Compose stack that we started has two engines running in it. Splitgraph can share data between engines in a decentralized manner, like Git.
 
 Your .sgconfig file should have two engines registered in it: local and remote. For more information on configuring extra remotes, see the [configuration reference](../configuration/introduction).
-
 
 ```shell-session
 $ cat .sgconfig
@@ -538,11 +502,9 @@ Installing the audit trigger...
 Engine PostgresEngine engine_2 (sgr@localhost:5431/splitgraph) initialized.
 ```
 
-
 [Push](../sgr/sharing-images/push) the RDU weather dataset that we ingested to the remote engine.
 Since by default Splitgraph is configured to use S3 for uploading, we need
 to override the upload handler and upload data to the actual database as tables.
-
 
 ```shell-session
 $ sgr push demo/weather --remote engine_2 demo/weather --upload-handler DB
@@ -554,10 +516,8 @@ Uploaded metadata for 3 images, 2 tables, 2 objects and 2 tags.
 Setting upstream for demo/weather to demo/weather.
 ```
 
-
 Now we can inspect the data on the remote engine.
 The `sgr` client uses the same protocol to talk to the remote engine as to the local one, so we can use it to perform the same operations.
-
 
 ```shell-session
 $ SG_ENGINE=engine_2 sgr show demo/weather:latest
@@ -577,9 +537,7 @@ $ SG_ENGINE=engine_2 sgr log -t demo/weather
    └ 0b5f9102f9 [revised_data, latest] 2020-05-22 18:04:42 Revision to the 2012 rainfall data
 ```
 
-
 Make yet another change to the original data and commit it.
-
 
 ```python
 $ sgr sql -s demo/weather "UPDATE rdu \\
@@ -597,9 +555,7 @@ $ sgr tag demo/weather temperature_revision
 Tagged demo/weather:407633bb77dc45aeabbd9efd6102981478fde5971061841709a397b8932d449f with temperature_revision.
 ```
 
-
 Inspect our changes.
-
 
 ```shell-session
 $ sgr diff demo/weather initial_data temperature_revision
@@ -607,10 +563,8 @@ Between f5f8151e5a7b and 407633bb77dc:
 rdu: added 486 rows, removed 486 rows.
 ```
 
-
 Push the changes out to the remote engine.
 Changes are delta-compressed, so only the rows that have been replaced will be uploaded to the remote engine.
-
 
 ```shell-session
 $ sgr push demo/weather --upload-handler DB
@@ -621,9 +575,7 @@ Uploading 1 object, total size 12.72 KiB
 Uploaded metadata for 1 image, 1 table, 1 object and 1 tag.
 ```
 
-
 Inspect the dataset on the remote engine. We can see that a new image has been added to the remote `demo/weather` repository.
-
 
 ```shell-session
 $ SG_ENGINE=engine_2 sgr show demo/weather:latest
@@ -643,7 +595,6 @@ $ SG_ENGINE=engine_2 sgr log -t demo/weather:latest
    └ 0b5f9102f9 [revised_data] 2020-05-22 18:04:42 Revision to the 2012 rainfall data
      └ 407633bb77 [temperature_revision, latest] 2020-05-22 18:04:57
 ```
-
 
 ## Asciicasts
 

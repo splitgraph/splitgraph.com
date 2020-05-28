@@ -1,15 +1,15 @@
 export const meta = {
-  id: "five_minute_demo",
-  title: "Five minute demo"
+  id: "five-minute-demo",
+  title: "Five minute demo",
 };
 
 ## Introduction
 
 This demo will show you how to use Splitgraph to:
 
-  * query a large remote public data image (dataset) with any of your favourite tools, without having to download it completely
-  * write a [Splitfile](../concepts/splitfiles) that can build a derivative image from it
-  * publish your derivative image on Splitgraph Cloud.
+- query a large remote public data image (dataset) with any of your favourite tools, without having to download it completely
+- write a [Splitfile](../concepts/splitfiles) that can build a derivative image from it
+- publish your derivative image on Splitgraph Cloud.
 
 ## Prerequisites
 
@@ -17,12 +17,9 @@ You need to be registered on [Splitgraph Cloud](../splitgraph_cloud/introduction
 
 If you do not wish to register on Splitgraph Cloud, you can still use Splitgraph in a decentralized fashion, sharing data with other Splitgraph instances. See the [decentralized demo](./decentralized_demo) for an introduction that showcases importing data from CSV files and tracking changes to images, using Splitgraph's version control functionality.
 
-
-
 First, make sure that your Splitgraph engine is initialized and test your connection to
 Splitgraph Cloud. This demo is written from the point of view of the `splitgraph-demo` user,
 so replace `splitgraph-demo` with your own username in command invocations.
-
 
 ```shell-session
 $ sgr init
@@ -43,15 +40,14 @@ $ sgr sql -r data.splitgraph.com "SELECT splitgraph_api.get_current_username()"
 splitgraph-demo
 ```
 
-
 ## Pulling a data image
+
 The [2016 US Presidential Election precinct-level returns](/splitgraph/2016_election/) dataset ([source](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LYWX3D)) has 2 million rows, takes up 500MB as a CSV file and only 25MB in Splitgraph. It's a perfect example to showcase Splitgraph's features.
 
 Let's inspect this image remotely without cloning it, using [`sgr show`](../sgr/image-information/show).
 The [`sgr` client](../concepts/sgr_client)
 uses the same protocol to communicate with the registry as with the local Splitgraph engine,
 so the same commands can be used for both local and remote operations.
-
 
 ```shell-session
 $ sgr show -r data.splitgraph.com splitgraph/2016_election:latest
@@ -65,10 +61,8 @@ Tables:
   precinct_results
 ```
 
-
 Let's also inspect the `precinct_results` [table](../sgr/image-information/table) in this image.
 When stored in Splitgraph, tables are composed of multiple content-addressable, immutable [objects](../concepts/objects).
-
 
 ```shell-session
 $ sgr table -r data.splitgraph.com splitgraph/2016_election:latest precinct_results
@@ -130,10 +124,8 @@ Objects:
   ...
 ```
 
-
 Now let's actually [clone](../sgr/sharing-images/clone) the image. By default, this will only download the image's metadata.
 No actual data is transferred until it's required, unless you explicitly ask for it.
-
 
 ```shell-session
 $ sgr clone splitgraph/2016_election
@@ -141,8 +133,8 @@ Gathering remote metadata...
 Fetched metadata for 1 image, 1 table, 20 objects and 1 tag.
 ```
 
-
 ## Querying the image
+
 To interact with this image, you could [check it out](../working_with_data/clone_vs_checkout),
 which turns the image into a schema with PostgreSQL tables.
 
@@ -152,15 +144,12 @@ Splitgraph objects contain metadata that can help it to discard objects that are
 
 Let's check out the image into a so called ["layered querying"](../large_datasets/layered_querying) schema. This sets up a Postgres foreign data wrapper for this image that acts as a shim and presents itself as normal Postgres table to clients.
 
-
 ```shell-session
 $ sgr checkout --layered splitgraph/2016_election:latest
 Checked out splitgraph/2016_election:3835145ada3f.
 ```
 
-
 We're interested in precinct-level election results for District of Columbia (FIPS code 11001).
-
 
 ```python
 $ sgr sql -s splitgraph/2016_election "EXPLAIN SELECT \\
@@ -179,9 +168,7 @@ Functions: 7
 ...
 ```
 
-
 Here, we can see that this query will only download two objects. Let's actually run it: behind the scenes, this will lazily download required data.
-
 
 ```python
 $ sgr sql -s splitgraph/2016_election "SELECT \\
@@ -194,24 +181,20 @@ stein      4258
 trump     12723
 ```
 
-
 [`sgr sql`](../sgr/image-information/sql) is a shorthand to run an SQL query against the current engine. However, [any PostgreSQL client](../integrating_splitgraph/other_clients) will work with Splitgraph, allowing you to work with Splitgraph using your favorite tools, including [DataGrip](../integrating_splitgraph/datagrip), [pgAdmin](../integrating_splitgraph/pgadmin) or [other clients like pgcli or DBeaver](../integrating_splitgraph/other_clients).
 
 You can use `sgr config -n` to print out a libpq connection string to the current engine.
-
 
 ```shell-session
 $ sgr config -n
 postgresql://sgr:supersecure@localhost:5432/splitgraph
 ```
 
-
 ## Using Splitfiles to build derivative images
 
 [Splitfiles](../concepts/splitfiles) are similar to Dockerfiles and are the easiest way to build Splitgraph images. They offer Dockerfile-like caching, provenance tracking, fast rebuilds, joins between datasets and full SQL support.
 
 Let's create a Splitfile that summarizes the vote counts for every candidate in every state.
-
 
 ```shell-session
 $ cat <<EOF > votes_by_state.splitfile
@@ -225,9 +208,7 @@ FROM splitgraph/2016_election IMPORT {
 EOF
 ```
 
-
 [Build](../sgr/splitfile-execution/build) this image. Even though we have it pulled locally, this isn't necessary to build it: Splitgraph downloads required image fragments automatically.
-
 
 ```shell-session
 $ sgr build votes_by_state.splitfile
@@ -243,9 +224,7 @@ Processing table sg_tmp_32eba453c2f1dd1a13ca58ae3b901a47
 Successfully built votes_by_state:ee8dc4bb7c47.
 ```
 
-
 Take a look at the new image and run a query against it.
-
 
 ```shell-session
 $ sgr table votes_by_state:latest votes_by_state
@@ -275,9 +254,7 @@ abraham  NY      0
 adams    MD     44
 ```
 
-
 Like Dockerfiles, Splitfile outputs are cached: if the source data hasn't changed, the data image isn't rebuilt.
-
 
 ```shell-session
 $ sgr build votes_by_state.splitfile
@@ -292,14 +269,11 @@ No image/object metadata to pull.
 Successfully built votes_by_state:ee8dc4bb7c47.
 ```
 
-
 Splitfiles also support joins between Splitgraph images. For an example or to learn more about Splitfiles, check out the [Splitfile reference](../splitfiles/splitfile_intro) or some [sample Splitfiles](../working_with_data/using_splitfiles#sample-splitfiles).
 
-
-
 ## Publishing a dataset on Splitgraph Cloud
-Let's push your image to the Splitgraph registry, making it available publicly. By default, the image gets pushed out to a repository with the same name in your own namespace. In the case of this demo user, the freshly built dataset is going to be available as [`splitgraph-demo/votes_by_state`](/splitgraph-demo/votes_by_state).
 
+Let's push your image to the Splitgraph registry, making it available publicly. By default, the image gets pushed out to a repository with the same name in your own namespace. In the case of this demo user, the freshly built dataset is going to be available as [`splitgraph-demo/votes_by_state`](/splitgraph-demo/votes_by_state).
 
 ```shell-session
 $ sgr push votes_by_state
@@ -321,9 +295,7 @@ Tables:
   votes_by_state
 ```
 
-
 Splitgraph lets you upload a README and a description for your dataset directly from the CLI. Create a README and a metadata file.
-
 
 ```shell-session
 $ cat <<EOF > dataset-readme.md
@@ -341,9 +313,7 @@ description: US 2016 Election votes summary by state.
 EOF
 ```
 
-
 Upload the metadata to Splitgraph Cloud (replace `splitgraph-demo` with your username).
-
 
 ```shell-session
 $ sgr cloud metadata splitgraph-demo/votes_by_state
@@ -351,18 +321,15 @@ README updated for repository splitgraph-demo/votes_by_state.
 Description updated for repository splitgraph-demo/votes_by_state.
 ```
 
-
 The dataset is now available on `https://www.splitgraph.com/YOUR_USERNAME/votes_by_state.`
 
 The image's [provenance](/splitgraph-demo/votes_by_state/latest/-/provenance) is also uploaded to Splitgraph Cloud, allowing anyone to see how the image was built and sourced. In addition, the new image will now be referenced in the [dependents](/splitgraph/2016_election/latest/-/dependents) page for the 2016 Election dataset.
 
 You also have an OpenAPI-compatible [REST API](/splitgraph-demo/votes_by_state/latest/-/api-schema) generated for the dataset, provided by [PostgREST](http://postgrest.org/en/latest/).
 
-
-
 ## Further reading
 
-  * [Decentralized demo](./decentralized_demo)
-  * [Splitfile reference](../splitfiles/splitfile_intro)
-  * [Sample Splitfiles](https://github.com/splitgraph/splitgraph/tree/master/examples/sample_splitfiles)
-  * [Splitgraph Cloud reference](../splitgraph_cloud/introduction)
+- [Decentralized demo](./decentralized_demo)
+- [Splitfile reference](../splitfiles/splitfile_intro)
+- [Sample Splitfiles](https://github.com/splitgraph/splitgraph/tree/master/examples/sample_splitfiles)
+- [Splitgraph Cloud reference](../splitgraph_cloud/introduction)
