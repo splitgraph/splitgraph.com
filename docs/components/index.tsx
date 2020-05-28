@@ -13,3 +13,5 @@ export { BlogPost } from './BlogPost';
 
 export { Breadcrumbs } from './Breadcrumbs';
 
+export { Footer } from './Footer';
+

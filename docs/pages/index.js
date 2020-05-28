@@ -1,6 +1,6 @@
 // @jsx jsx
 // @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
+import { jsx, Box } from "theme-ui";
 
 import React from "react";
 
@@ -9,6 +9,7 @@ import { NextSeo } from "next-seo";
 import withTheme from "../hocs/withTheme";
 import { LandingPageLayout } from "../components/LandingPageLayout";
 import { HeroBox } from "../components/HeroBox";
+import { Footer } from "../components/Footer";
 
 import { keyframes, css } from "@emotion/core";
 
@@ -17,7 +18,6 @@ import LandingPageSplitfile from "@splitgraph/content/marketing/LandingPageSplit
 import {
   IconConceptContainerCrane,
   IconConceptCow,
-  IconConceptDataInPalmOfHand,
   IconConceptMoneyDatabase,
   IconConceptWorkflowGantChart,
   IconPostgresLogo,
@@ -86,32 +86,13 @@ const marketingTheme = {
     pre: {
       ...prismTheme,
       padding: "1ch",
-      "@media (max-width: 768px)": {
-        // marginLeft: -4,
-        // marginRight: -4,
-        // paddingLeft: "1ch",
-        // paddingRight: "1ch",
-        // paddingTop: "1rem",
-        // paddingBottom: "1rem",
-        // borderTop: "4px solid #efefef",
-        // borderBottom: "4px solid #efefef",
-      },
-      // "@media (min-width: 769px)": {
-      //   minWidth: "80ch",
-      // },
+      "@media (max-width: 768px)": {},
       fontSize: "0.8rem",
-      // padding: 10,
       overflowX: "auto",
       MsOverflowStyle: "none",
-      // maxWidth:
       backgroundColor: "primary",
       ".mdx-marker": {
-        // backgroundColor: "rgba(255,255,255,0.1)",
         display: "block",
-        // marginLeft: "-1em",
-        // marginRight: "-1em",
-        // paddingRight: "1em",
-        // paddingLeft: "1em",
         borderLeft: `.25em solid ${prismTheme[".punctuation"].color}`,
       },
     },
@@ -120,8 +101,6 @@ const marketingTheme = {
       "@media (min-width: 749px)": {
         minWidth: "initial",
       },
-      // paddingLeft: "0.5ch",
-      // paddingRight: "0.5ch",
       paddingTop: 0,
       paddingBottom: 0,
       minHeight: "1rem",
@@ -209,7 +188,6 @@ const featurePanelStyle = {
   color: "primary",
   flexWrap: "wrap",
   justifyContent: "center",
-  // width: "90vw",
   maxWidth: "90vw",
   WebkitBoxPack: "center",
   ".feature:nth-child(even)": {
@@ -218,12 +196,9 @@ const featurePanelStyle = {
   },
   ".feature": {
     marginBottom: ["4rem", "4rem", 0],
-    // padding: "1rem",
     width: ["100%", "50%", "25%"],
     flexGrow: 0,
     flexShrink: 1,
-    // padding: "0.75em 3em",
-    // border: "1px solid #000",
     minHeight: "200px",
     h3: {
       marginTop: "2rem",
@@ -237,10 +212,10 @@ const featurePanelStyle = {
       variant: "links.primary",
       textDecoration: "underline",
       color: "sgdarkblue",
-      borderBottom: "2px solid",
-      borderBottomColor: "accent",
       alignSelf: "flex-end",
       ":hover": {
+        borderBottom: "2px solid",
+        borderBottomColor: "accent",
         borderBottom: "3px solid",
       },
     },
@@ -249,21 +224,19 @@ const featurePanelStyle = {
 
 const featureSectionStyle = {
   color: "primary",
-  // paddingBottom: "8rem",
-  // paddingLeft: ["1rem", "1rem", "max(3rem, calc((100vw - 120ch)/2))"],
-  // paddingRight: ["1rem", "1rem", "max(3rem, calc((100vw - 120ch)/2))"],
-  // backgroundColor: "white",
   display: ["inherit", "inherit", "flex"],
   paddingTop: "4rem",
   paddingBottom: "4rem",
+
+  // Note: this is even/odd of all <section> on the page, so which one is first
+  // depends on how many sections come before it. If adding a section, may
+  // want to flip "odd" and "even" here to make sure first section is gray
 
   // left list, right header
   ":nth-child(odd)": {
     backgroundColor: "#ebebeb",
     flexDirection: ["inherit", "inherit", "row-reverse"],
     ".feature-section-header": {
-      // borderRight: "1rem solid",
-      // borderRightColor: "primary",
       justifyContent: ["center", "center", "flex-end"],
       paddingRight: [
         "inherit",
@@ -282,8 +255,6 @@ const featureSectionStyle = {
     backgroundColor: "white",
     flexDirection: ["inherit", "inherit", "row"],
     ".feature-section-header": {
-      // borderLeft: "1rem solid",
-      // borderLeftColor: "primary",
       justifyContent: ["center", "center", "flex-start"],
       paddingLeft: ["inherit", "inherit", "max(3rem, calc((100vw - 120ch)/2))"],
     },
@@ -293,30 +264,17 @@ const featureSectionStyle = {
     },
   },
   ".feature-section-header": {
-    // background: [
-    //   "inherit",
-    //   "inherit",
-    //   "primary",
-    //   // "linear-gradient(180deg, rgba(13,24,33,1) 0%, rgba(54,103,141,1) 50%)",
-    // ],
-    // backgroundColor: ["inherit", "inherit", "white"],
     paddingBottom: ["4rem", "4rem", "inherit"],
     color: ["inherit", "inherit", "primary"],
     width: ["inherit", "inherit", "50%"],
     display: "flex",
-    // justifyContent: "center",
     alignItems: "center",
     h2: {
       margin: 0,
     },
   },
   ul: {
-    // backgroundColor: ["inherit", "inherit", "white"],
     width: ["inherit", "inherit", "50%"],
-    // paddingLeft: [0, 0, "1rem"],
-    // paddingRight: [0, 0, "1rem"],
-    // paddingLeft: ["1rem", "1rem", "inherit"],
-    // paddingRight: ["1rem", "1rem", "inherit"],
     paddingTop: 0,
     paddingBottom: 0,
     padding: 0,
@@ -326,9 +284,7 @@ const featureSectionStyle = {
     flexWrap: "wrap",
     flexDirection: "row",
     justifyContent: "space-between",
-    // maxWidth: "100%",
     li: {
-      // width: ["100%", "100%", "calc(100% - 2rem)"],
       width: "100%",
       display: "inline-flex",
       flexDirection: "row",
@@ -338,12 +294,6 @@ const featureSectionStyle = {
       marginBottom: "1rem",
       marginTop: "1rem",
     },
-    // "li:nth-child(even)": {
-    //   marginRight: [0, 0, "1rem"],
-    // },
-    // "li:nth-child(odd)": {
-    //   marginLeft: [0, 0, "1rem"],
-    // },
     ".feature-icon": {
       display: "inline-flex",
       alignItems: "center",
@@ -385,7 +335,6 @@ const LandingPage = () => {
           sx={{
             backgroundColor: "sgdarkblue",
             color: "white",
-            // width: "80ch",
             maxWidth: "90vw",
             boxShadow: "card",
           }}
@@ -657,12 +606,7 @@ const LandingPage = () => {
           },
         }}
       >
-        <h2>
-          Enhance every stage of the data lifecycle
-          {/* Features to enhance every point{" "}
-          <br sx={{ display: ["block", "block", "none"] }} /> throughout the
-          entire data lifecycle. */}
-        </h2>
+        <h2>Enhance every stage of the data lifecycle</h2>
 
         <h2 sx={{ marginTop: "2rem !important", fontWeight: "200" }}>
           Adopt Splitgraph incrementally,{" "}
@@ -1054,6 +998,7 @@ const LandingPage = () => {
           </Box>
         </Box>
       </section>
+      <Footer />
     </LandingPageLayout>
   );
 };

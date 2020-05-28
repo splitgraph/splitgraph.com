@@ -7,7 +7,6 @@ import { Helmet } from "react-helmet";
 import {
   Box,
   Header,
-  Footer,
   ContentHeader,
   ContentFooter,
   ContentBody,
@@ -21,7 +20,7 @@ import {
 } from "@splitgraph/design";
 
 import { BaseLayout } from "@splitgraph/design/Layout";
-import { Link } from "@splitgraph/docs/components";
+import { Footer, Link } from "@splitgraph/docs/components";
 
 import { OnlyTOC } from "./contentWrappers";
 import useActiveNode from "./util/useActiveNode";
@@ -135,19 +134,15 @@ const withHolyGrailLayout = ({
                 ) : null}
               </ContentFooter>
             </MainContent>
-            <Footer gridArea={HolyGrail.GridArea.Footer}>
-              <ul>
-                <li>
-                  <Link href="/">Index</Link>
-                </li>
-                <li>
-                  <Link href="/">Somewhere</Link>
-                </li>
-                <li>
-                  <Link href="/">Else</Link>
-                </li>
-              </ul>
-            </Footer>
+            <Footer
+              footerVariant="dark"
+              extraStyle={{
+                paddingBottom: "8rem",
+                paddingLeft: "4rem",
+                paddingRight: "4rem",
+                paddingTop: "4rem",
+              }}
+            />
           </Box>
 
           <aside className="right-sidebar">
