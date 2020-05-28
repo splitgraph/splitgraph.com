@@ -61,7 +61,7 @@ creation, this is done on tables, rather than on objects.
 
 Reindexing is currently only supported for objects that haven't been delta compressed (no overlapping objects). Images with overlapping objects should be [rechunked](large_datasets/chunking) first.
 
-To reindex objects that a table consists of, use [`sgr reindex`](../sgr/image_management_creation/reindex). For example:
+To reindex objects that a table consists of, use [`sgr reindex`](../sgr/image-management-creation/reindex). For example:
 
 ```shell-session
 $ sgr reindex -i '{"bloom": {"county_name": {"probability": 0.01}}}' splitgraph/2016_election:latest precinct_results
@@ -70,7 +70,7 @@ $ sgr reindex -i '{"bloom": {"county_name": {"probability": 0.01}}}' splitgraph/
 This will add the new index to the object metadata, keeping existing indexes.
 
 Note that if you wish to push new object metadata after reindexing, you'll need to add
-`--overwrite-object-meta` to your [`sgr push`](../sgr/sharing_images/push) command. Pushed objects are not overwritten by default.
+`--overwrite-object-meta` to your [`sgr push`](../sgr/sharing-images/push) command. Pushed objects are not overwritten by default.
 
 ## Reindexing example
 

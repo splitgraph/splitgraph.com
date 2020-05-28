@@ -37,7 +37,7 @@ services:
       - 3000:3000
 ```
 
-You can also use a Splitgraph engine managed by [`sgr engine`](../sgr/engine_management/engine_add): you will have to connect it to the Docker network set up by Metabase. For example:
+You can also use a Splitgraph engine managed by [`sgr engine`](../sgr/engine-management/engine_add): you will have to connect it to the Docker network set up by Metabase. For example:
 
 ```shell-session
 $ docker network connect metabase_default splitgraph_engine_default

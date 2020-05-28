@@ -39,12 +39,12 @@ When the engine connects to itself, `SG_ENGINE_FDW_HOST`/`PORT` connection param
 
 If the engine is managed by `sgr engine`, the configuration file gets reinjected into it
 by most `sgr` operations that change it, for example,
-[`sgr engine add`](../sgr/engine_management/engine_add),
-[`sgr cloud register`](../sgr/splitgraph_cloud/cloud_register)
-or [`sgr cloud login`](../sgr/splitgraph_cloud/cloud_login). However,
+[`sgr engine add`](../sgr/engine-management/engine_add),
+[`sgr cloud register`](../sgr/splitgraph-cloud/cloud-register)
+or [`sgr cloud login`](../sgr/splitgraph-cloud/cloud-login). However,
 if there is any out-of-band change to `.sgconfig` or issues with running layered queries,
 the configuration file can be reinjected into the engine by running
- [`sgr engine configure`](../sgr/engine_management/engine_configure).
+ [`sgr engine configure`](../sgr/engine-management/engine_configure).
 
 If the engine is managed manually or through Docker Compose, the configuration file can be
 bind-mounted into the engine. See this example

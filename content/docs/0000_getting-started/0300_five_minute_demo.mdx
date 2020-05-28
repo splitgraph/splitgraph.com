@@ -13,7 +13,7 @@ This demo will show you how to use Splitgraph to:
 
 ## Prerequisites
 
-You need to be registered on [Splitgraph Cloud](../splitgraph_cloud/introduction) to pull and publish data. If you followed the [installation instructions](./installation), this should be already done for you. You can also use [`sgr cloud register`](../sgr/splitgraph_cloud/cloud_register) or [`sgr cloud login`](../sgr/splitgraph_cloud/cloud_login) to register or log in from the `sgr` client.
+You need to be registered on [Splitgraph Cloud](../splitgraph_cloud/introduction) to pull and publish data. If you followed the [installation instructions](./installation), this should be already done for you. You can also use [`sgr cloud register`](../sgr/splitgraph-cloud/cloud-register) or [`sgr cloud login`](../sgr/splitgraph-cloud/cloud-login) to register or log in from the `sgr` client.
 
 If you do not wish to register on Splitgraph Cloud, you can still use Splitgraph in a decentralized fashion, sharing data with other Splitgraph instances. See the [decentralized demo](./decentralized_demo) for an introduction that showcases importing data from CSV files and tracking changes to images, using Splitgraph's version control functionality.
 
@@ -47,7 +47,7 @@ splitgraph-demo
 ## Pulling a data image
 The [2016 US Presidential Election precinct-level returns](/splitgraph/2016_election/) dataset ([source](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LYWX3D)) has 2 million rows, takes up 500MB as a CSV file and only 25MB in Splitgraph. It's a perfect example to showcase Splitgraph's features.
 
-Let's inspect this image remotely without cloning it, using [`sgr show`](../sgr/image_information/show).
+Let's inspect this image remotely without cloning it, using [`sgr show`](../sgr/image-information/show).
 The [`sgr` client](../concepts/sgr_client)
 uses the same protocol to communicate with the registry as with the local Splitgraph engine,
 so the same commands can be used for both local and remote operations.
@@ -66,7 +66,7 @@ Tables:
 ```
 
 
-Let's also inspect the `precinct_results` [table](../sgr/image_information/table) in this image.
+Let's also inspect the `precinct_results` [table](../sgr/image-information/table) in this image.
 When stored in Splitgraph, tables are composed of multiple content-addressable, immutable [objects](../concepts/objects).
 
 
@@ -131,7 +131,7 @@ Objects:
 ```
 
 
-Now let's actually [clone](../sgr/sharing_images/clone) the image. By default, this will only download the image's metadata.
+Now let's actually [clone](../sgr/sharing-images/clone) the image. By default, this will only download the image's metadata.
 No actual data is transferred until it's required, unless you explicitly ask for it.
 
 
@@ -195,7 +195,7 @@ trump     12723
 ```
 
 
-[`sgr sql`](../sgr/image_information/sql) is a shorthand to run an SQL query against the current engine. However, [any PostgreSQL client](../integrating_splitgraph/other_clients) will work with Splitgraph, allowing you to work with Splitgraph using your favorite tools, including [DataGrip](../integrating_splitgraph/datagrip), [pgAdmin](../integrating_splitgraph/pgadmin) or [other clients like pgcli or DBeaver](../integrating_splitgraph/other_clients).
+[`sgr sql`](../sgr/image-information/sql) is a shorthand to run an SQL query against the current engine. However, [any PostgreSQL client](../integrating_splitgraph/other_clients) will work with Splitgraph, allowing you to work with Splitgraph using your favorite tools, including [DataGrip](../integrating_splitgraph/datagrip), [pgAdmin](../integrating_splitgraph/pgadmin) or [other clients like pgcli or DBeaver](../integrating_splitgraph/other_clients).
 
 You can use `sgr config -n` to print out a libpq connection string to the current engine.
 
@@ -226,7 +226,7 @@ EOF
 ```
 
 
-[Build](../sgr/splitfile_execution/build) this image. Even though we have it pulled locally, this isn't necessary to build it: Splitgraph downloads required image fragments automatically.
+[Build](../sgr/splitfile-execution/build) this image. Even though we have it pulled locally, this isn't necessary to build it: Splitgraph downloads required image fragments automatically.
 
 
 ```shell-session
