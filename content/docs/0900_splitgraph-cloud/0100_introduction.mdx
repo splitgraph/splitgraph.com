@@ -1,6 +1,6 @@
 export const meta = {
   id: "introduction",
-  title: "Introduction"
+  title: "Introduction",
 };
 
 Whilst you can push and pull data to/from other Splitgraph engines, using Splitgraph Cloud offers
@@ -9,9 +9,9 @@ multiple advantages over that.
 Splitgraph Cloud is the analog of the Docker registry for Docker: it's a repository of
 publicly available data images that you can experiment with.
 
-Every dataset pushed out to the Splitgraph registry gets multiple perks. One of them is an automatic read-only OpenAPI-compatible endpoint that can be used to query it, provided by [PostgREST](http://postgrest.org/en/latest/).
+Every dataset pushed out to the Splitgraph registry gets multiple perks. One of them is an automatic read-only OpenAPI-compatible endpoint that can be used to query it, provided by [PostgREST](https://postgrest.org/en/latest/).
 
-For example, [this](https://data.splitgraph.com/splitgraph/domestic_us_flights/latest/-/rest/flights?and=(origin_airport.eq.JFK,destination_airport.eq.LAX)) link runs the following PostgREST query against
+For example, [this](<https://data.splitgraph.com/splitgraph/domestic_us_flights/latest/-/rest/flights?and=(origin_airport.eq.JFK,destination_airport.eq.LAX)>) link runs the following PostgREST query against
 the [`splitgraph/domestic_us_flights:latest`](/splitgraph/domestic_us_flights/latest/-/overview) image:
 
 ```
@@ -30,8 +30,8 @@ This will prompt you for a username, password, e-mail, ask you to accept our Ter
 and log you into the registry.
 
 Your API keys to communicate with the Splitgraph registry and the REST API are stored in your `.sgconfig` file.
- The only password stored in the `.sgconfig` file is the password protecting your local engine. Your
- cloud password is never stored in the config or by the registry.
+The only password stored in the `.sgconfig` file is the password protecting your local engine. Your
+cloud password is never stored in the config or by the registry.
 
 To log into the registry again or get a new set of API keys, use [`sgr cloud login`](../sgr/splitgraph-cloud/cloud-login).
 

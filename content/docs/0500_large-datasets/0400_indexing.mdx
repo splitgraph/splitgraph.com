@@ -1,6 +1,6 @@
 export const meta = {
   id: "indexing",
-  title: "Range and bloom indexes"
+  title: "Range and bloom indexes",
 };
 
 Every Splitgraph object has an index in its metadata. This is distinct from Postgres indexes,
@@ -143,7 +143,7 @@ $ pgcli postgres://sgr:password@localhost:5432/splitgraph
 Server: PostgreSQL 12.2 (Debian 12.2-2.pgdg100+1)
 Version: 2.2.0
 Chat: https://gitter.im/dbcli/pgcli
-Home: http://pgcli.com
+Home: https://pgcli.com
 
 sgr@localhost:splitgraph> EXPLAIN SELECT * FROM "splitgraph/geonames".all_countries WHERE asciiname = 'Cambridge' AND country_code = 'GB';
 +---------------------------------------------------------------------------------------------+
