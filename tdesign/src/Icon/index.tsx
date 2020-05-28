@@ -230,3 +230,19 @@ export { IconConceptMoneyDatabase };
 import IconConceptWorkflowGantChart from './IconConceptWorkflowGantChart';
 export { IconConceptWorkflowGantChart };
 
+
+import IconLogoLinkedIn from './IconLogoLinkedIn';
+export { IconLogoLinkedIn };
+
+
+import IconLogoTwitter from './IconLogoTwitter';
+export { IconLogoTwitter };
+
+
+import IconLogoReddit from './IconLogoReddit';
+export { IconLogoReddit };
+
+
+import IconLogoHackerNews from './IconLogoHackerNews';
+export { IconLogoHackerNews };
+
