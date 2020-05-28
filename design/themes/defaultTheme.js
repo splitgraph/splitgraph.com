@@ -104,6 +104,7 @@ export const defaultTheme = {
     warning: "orange",
     darkgray: "#3c",
     sgdarkblue: "#36678d",
+    sglightblue: "#d5f6fe",
     accent: "secondary",
   },
   backgrounds: {
