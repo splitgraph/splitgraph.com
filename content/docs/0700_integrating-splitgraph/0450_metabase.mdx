@@ -1,11 +1,11 @@
 export const meta = {
   id: "metabase",
-  title: "Metabase"
+  title: "Metabase",
 };
 
 A [Metabase](https://www.metabase.com/) instance can be connected to a Splitgraph engine,
 allowing you to visualize datasets that were cloned and checked out on the engine. Metabase
-also works with [layered querying](../large_datasets/layered_querying), letting it query
+also works with [layered querying](../large-datasets/layered-querying), letting it query
 huge datasets by only downloading a required fraction of the data.
 
 However, there is currently an issue with Metabase Explore Data view: it doesn't support schemata with slashes in them that Splitgraph normally uses to check data out into. There's an [open GitHub issue](https://github.com/metabase/metabase/issues/12450) for this.
@@ -15,7 +15,7 @@ However, there is currently an issue with Metabase Explore Data view: it doesn't
 Here is a sample Docker Compose service definition for Metabase running against a Splitgraph engine:
 
 ```yaml
-version: '3'
+version: "3"
 services:
   engine:
     image: splitgraph/engine:${DOCKER_TAG-stable-postgis}
@@ -37,7 +37,7 @@ services:
       - 3000:3000
 ```
 
-You can also use a Splitgraph engine managed by [`sgr engine`](../sgr/engine-management/engine_add): you will have to connect it to the Docker network set up by Metabase. For example:
+You can also use a Splitgraph engine managed by [`sgr engine`](../sgr/engine-management/engine-add): you will have to connect it to the Docker network set up by Metabase. For example:
 
 ```shell-session
 $ docker network connect metabase_default splitgraph_engine_default
@@ -73,7 +73,7 @@ Click on "Write SQL" and select the Splitgraph database that you set up.
 This sections contains some sample datasets that are hosted on Splitgraph and are ready for visualization
 in Metabase.
 
-You can use [layered querying](../large_datasets/layered_querying) to query these datasets, which
+You can use [layered querying](../large-datasets/layered-querying) to query these datasets, which
 lazily downloads required fragments on the fly. For maximum performance, you can check the image
 out into a real PostgreSQL table and create indexes on it (use `sgr checkout` instead of `sgr checkout --layered`)
 

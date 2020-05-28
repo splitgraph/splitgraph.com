@@ -23,11 +23,11 @@ it's interpreted:
 
 The Splitfile executor currently supports the following commands:
 
-- [`IMPORT`](splitfile_import): import data from other Splitgraph images or Postgres schemata (including FDW mounts)
-- [`SQL`](splitfile_sql): run SQL statements referencing data in the current image or other Splitgraph images.
-- [`FROM`](splitfile_from): derive images from other images or perform multistage builds.
+- [`IMPORT`](splitfile-import): import data from other Splitgraph images or Postgres schemata (including FDW mounts)
+- [`SQL`](splitfile-sql): run SQL statements referencing data in the current image or other Splitgraph images.
+- [`FROM`](splitfile-from): derive images from other images or perform multistage builds.
 
-It is also possible to add [custom commands](splitfile_custom) to the Splitfile executor. They also
+It is also possible to add [custom commands](splitfile-custom) to the Splitfile executor. They also
 follow the same caching rules but are currently not supported by provenance tracking.
 
 ## Note on Splitfile safety

@@ -1,9 +1,9 @@
 export const meta = {
   id: "datagrip",
-  title: "DataGrip"
+  title: "DataGrip",
 };
 
-JetBrains DataGrip can connect to the Splitgraph engine and use it as a data source to query checked out Splitgraph tables directly or through [layered querying](../large_datasets/layered_querying).
+JetBrains DataGrip can connect to the Splitgraph engine and use it as a data source to query checked out Splitgraph tables directly or through [layered querying](../large-datasets/layered-querying).
 
 #### Add PostgreSQL data source
 
@@ -55,9 +55,9 @@ $ sgr checkout --layered splitgraph/london_wards:latest
 ```
 
 A good sample query is just plotting the geometry column in this dataset. This column is in the
- [British National Grid](https://epsg.io/27700) projection and we need to convert it to the standard
- [WGS 84](https://epsg.io/4326) projection in order for DataGrip to plot it with an
- [OpenStreetMap](https://www.openstreetmap.org/) overlay:
+[British National Grid](https://epsg.io/27700) projection and we need to convert it to the standard
+[WGS 84](https://epsg.io/4326) projection in order for DataGrip to plot it with an
+[OpenStreetMap](https://www.openstreetmap.org/) overlay:
 
 ```sql
 SELECT name, gss_code, ST_Transform(ST_SetSRID(geom, 27700), 4326) FROM "splitgraph/london_wards".city_merged_2018

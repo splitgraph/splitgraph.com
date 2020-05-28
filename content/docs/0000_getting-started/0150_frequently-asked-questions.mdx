@@ -9,7 +9,7 @@ Splitgraph is a tool for building, versioning, querying and sharing datasets tha
 
 ### Is Splitgraph a PostgreSQL extension?
 
-Not quite. The [Splitgraph engine](../architecture/splitgraph_engine) ships as a Docker image and is a customized version of PostgreSQL that is fully compatible with existing clients. In the future, we might repackage Splitgraph as a PostgreSQL extension.
+Not quite. The [Splitgraph engine](../architecture/splitgraph-engine) ships as a Docker image and is a customized version of PostgreSQL that is fully compatible with existing clients. In the future, we might repackage Splitgraph as a PostgreSQL extension.
 
 ### Can I add Splitgraph to my existing PostgreSQL deployment?
 
@@ -18,7 +18,7 @@ a simple installation method. If you're interested in doing so, you can follow t
 in the [Dockerfile](https://github.com/splitgraph/splitgraph/blob/master/engine/Dockerfile) used
 to build the engine or contact us.
 
-You can also add the Splitgraph engine as a PostgreSQL [logical replication client](../ingesting_data/postgres_replication),
+You can also add the Splitgraph engine as a PostgreSQL [logical replication client](../ingesting-data/postgres-replication),
 which will let you ingest data from existing databases without installing Splitgraph on them.
 
 ### Why PostgreSQL? Why not write your own database?
@@ -29,13 +29,13 @@ of extensions and applications. We don't think that features added by Splitgraph
 
 ### Can I use Splitgraph with my existing tools?
 
-Yes. Any PostgreSQL client is able to query Splitgraph datasets (directly or through [layered querying](../large_datasets/layered_querying)),
-including [DataGrip](../integrating_splitgraph/datagrip), [pgAdmin](../integrating_splitgraph/pgadmin) or [other clients like pgcli or DBeaver](../integrating_splitgraph/other_clients).
+Yes. Any PostgreSQL client is able to query Splitgraph datasets (directly or through [layered querying](../large-datasets/layered-querying)),
+including [DataGrip](../integrating-splitgraph/datagrip), [pgAdmin](../integrating-splitgraph/pgadmin) or [other clients like pgcli or DBeaver](../integrating-splitgraph/other-clients).
 
 In addition, a lot of existing applications and extensions that work with PostgreSQL can be enhanced
-by Splitgraph. We have examples of using Splitgraph with [Jupyter notebooks](../integrating_splitgraph/jupyter_notebooks),
-[PostGIS](../integrating_splitgraph/postgis), [PostgREST](../integrating_splitgraph/postgrest),
-[dbt](../integrating_splitgraph/dbt) or [Metabase](../integrating_splitgraph/metabase).
+by Splitgraph. We have examples of using Splitgraph with [Jupyter notebooks](../integrating-splitgraph/jupyter-notebooks),
+[PostGIS](../integrating-splitgraph/postgis), [PostgREST](../integrating-splitgraph/postgrest),
+[dbt](../integrating-splitgraph/dbt) or [Metabase](../integrating-splitgraph/metabase).
 
 Philosophically, we believe that great tools enhance existing abstractions without breaking them:
 
@@ -64,7 +64,7 @@ In short:
   diffing the table at commit time).
 - Splitgraph images take up much less (5x-10x) space than equivalent PostgreSQL tables due to it
   using [`cstore_fdw`](https://github.com/citusdata/cstore_fdw) for storage.
-- Querying Splitgraph images directly without checkout [(layered querying)](../large_datasets/layered_querying) can sometimes be faster and use less IO
+- Querying Splitgraph images directly without checkout [(layered querying)](../large-datasets/layered-querying) can sometimes be faster and use less IO
   than querying PostgreSQL tables.
 
 ### Can Splitgraph be used for big datasets?
@@ -74,7 +74,7 @@ Yes. Splitgraph has a few optimizations that make it suitable for working with l
 - Datasets are partitioned into fragments stored in a [columnar format](../concepts/objects) which is
   superior to row-format storage for OLAP workloads.
 - Splitgraph images can be queried without checking them out or even downloading them completely
-  [(layered querying)](../large_datasets/layered_querying): Splitgraph can lazily download a small fraction of the table needed for the query. This is still completely seamless to the client application.
+  [(layered querying)](../large-datasets/layered-querying): Splitgraph can lazily download a small fraction of the table needed for the query. This is still completely seamless to the client application.
 
 Since Splitgraph is built on top of PostgreSQL, same methods that are used for horizontally scaling a
 PostgreSQL deployment can also be used on Splitgraph.
@@ -86,8 +86,8 @@ with Git. Here's an [example](https://github.com/splitgraph/splitgraph/tree/mast
 
 It is also possible to push data to S3-compatible storage (like [Minio](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-object-storage)).
 
-You can use [Splitgraph Cloud](../splitgraph_cloud/introduction) if you wish to
-get or share public data or have a [REST API](../splitgraph_cloud/publish_rest_api) generated for your dataset.
+You can use [Splitgraph Cloud](../splitgraph-cloud/introduction) if you wish to
+get or share public data or have a [REST API](../splitgraph-cloud/publish-rest-api) generated for your dataset.
 
 ### Is Splitgraph "X for data"?
 
@@ -106,7 +106,7 @@ transformations from reusable and versionable SQL snippets.
 dbt is enhanced by Splitgraph: since a Splitgraph engine is also a PostgreSQL instance, dbt can
 work against it, getting benefits like version control, packaging and sharing to datasets that it uses and builds.
 
-We have an example of running [dbt](../integrating_splitgraph/dbt) in such way, swapping between different versions of the
+We have an example of running [dbt](../integrating-splitgraph/dbt) in such way, swapping between different versions of the
 source dataset and looking at their effect on the built dbt model.
 
 Splitgraph also offers its own method of building datasets: [Splitfiles](../concepts/splitfiles). Splitfiles offer Dockerfile-like caching, provenance tracking, fast dataset rebuilds, joins between datasets and full SQL support.
@@ -128,7 +128,7 @@ Pachyderm is used mostly for managing and running distributed data pipelines on 
 genomics data etc). By specializing in datasets that can be represented as tables in a database,
 Splitgraph gets benefits like delta compression on changed data or faster querying speeds.
 
-Similarly to Pachyderm, Splitgraph supports [data lineage (or provenance)](../working_with_data/inspecting_provenance) tracking where the
+Similarly to Pachyderm, Splitgraph supports [data lineage (or provenance)](../working-with-data/inspecting-provenance) tracking where the
 commands and source datasets that were used to build a particular dataset are recorded in that
 dataset's metadata, allowing for them to be replayed or inspected.
 

@@ -9,32 +9,32 @@ Splitgraph's Git-like version control capabilities allow you to see what changes
 or switch between different versions of a schema on the fly. Existing applications can get benefits
 of Splitgraph's version control without having to be changed at all.
 
-The [decentralized demo](docs/getting-started/decentralized_demo) shows the basics of running Git operations on data.
+The [decentralized demo](docs/getting-started/decentralized-demo) shows the basics of running Git operations on data.
 
-Our [Jupyter/scikit-learn](docs/integrating_splitgraph/jupyter_notebooks) demo shows using Splitgraph
-to switch between training and validation versions of a machine learning dataset, whereas the [dbt](docs/integrating_splitgraph/dbt)
+Our [Jupyter/scikit-learn](docs/integrating-splitgraph/jupyter-notebooks) demo shows using Splitgraph
+to switch between training and validation versions of a machine learning dataset, whereas the [dbt](docs/integrating-splitgraph/dbt)
 example uses Splitgraph to run [dbt](https://www.getdbt.com/) against two different sources and see their effects on the built dbt model.
 
 ### Ingesting data from MongoDB, MySQL or other databases
 
-Forget BI connectors or ETL jobs. With PostgreSQL [foreign data wrappers](docs/ingesting_data/foreign_data_wrappers/introduction),
+Forget BI connectors or ETL jobs. With PostgreSQL [foreign data wrappers](docs/ingesting-data/foreign-data-wrappers/introduction),
 your applications can query other databases directly through Splitgraph, using a single protocol.
 
 Since the Splitgraph engine is based on PostgreSQL, it can even be added as a PostgreSQL
-[logical replication client](docs/ingesting_data/postgres_replication) and ingest data directly
+[logical replication client](docs/ingesting-data/postgres-replication) and ingest data directly
 from your production database.
 
 ### Sharing and publishing datasets
 
 Much like Git, Splitgraph is decentralized and any Splitgraph engine can act as a remote. Changes
 pushed to and pulled from other Splitgraph instances are delta compressed, letting you keep your
-dataset's history without sacrificing storage. See the [decentralized demo](docs/getting-started/decentralized_demo)
+dataset's history without sacrificing storage. See the [decentralized demo](docs/getting-started/decentralized-demo)
 for an introduction to using Splitgraph in a peer-to-peer fashion.
 
-[Splitgraph Cloud](docs/splitgraph_cloud/introduction) is the analog of the Docker registry for
+[Splitgraph Cloud](docs/splitgraph-cloud/introduction) is the analog of the Docker registry for
 Docker: it's a repository of publicly available data images that you can experiment with.
 
-See the [five-minute demo](docs/getting-started/five_minute_demo) that will take you through
+See the [five-minute demo](docs/getting-started/five-minute-demo) that will take you through
 the basics of building and publishing a dataset on Splitgraph Cloud, complete with provenance
 tracking and an automatic OpenAPI-compatible REST API.
 
@@ -44,7 +44,7 @@ When Docker and Dockerfiles came along, they changed the way we view software bu
 [Splitfiles](docs/concepts/splitfiles) were inspired by the same ideas. Splitfiles let you build
 Splitgraph images by using standard SQL statements, with efficient rebuilds and provenance tracking.
 
-See the [five-minute demo](docs/getting-started/five_minute_demo) that shows you how to build a
+See the [five-minute demo](docs/getting-started/five-minute-demo) that shows you how to build a
 dataset using a Splitfile and publish it on Splitgraph.
 
 ### Combining existing data images to build new data
@@ -53,18 +53,18 @@ Data is most interesting when it's combined with other data. Splitfiles make it 
 multiple data images together using familiar SQL and referencing them through `JOIN` operators.
 
 See the [US Election](https://github.com/splitgraph/splitgraph/tree/master/examples/us-election)
-Splitfile that joins several source data images in multiple stages or the [PostGIS example](docs/integrating_splitgraph/postgis)
+Splitfile that joins several source data images in multiple stages or the [PostGIS example](docs/integrating-splitgraph/postgis)
 that uses a Splitfile to build a geospatial dataset and plot it as a [Choropleth map](https://en.wikipedia.org/wiki/Choropleth_map).
 
 ### Querying large datasets with your existing tools
 
 Splitgraph checks data out into normal PostgreSQL tables, offering read-write performance and
-feature parity with PostgreSQL. [Layered querying](docs/large_datasets/layered_querying) expands
+feature parity with PostgreSQL. [Layered querying](docs/large-datasets/layered-querying) expands
 on that and allows Splitgraph to lazily download required table regions on demand at query
 execution time, which lets any of your existing tools query huge remote datasets with
 limited local cache space.
 
-Check our our [five-minute demo](docs/getting-started/five_minute_demo) for an introduction on
-using Splitgraph to query public data. The [Metabase example](docs/integrating_splitgraph/metabase)
+Check our our [five-minute demo](docs/getting-started/five-minute-demo) for an introduction on
+using Splitgraph to query public data. The [Metabase example](docs/integrating-splitgraph/metabase)
 demonstrates using [Metabase](https://www.metabase.com/) with Splitgraph to easily access and
 plot timeseries, categorical and geospatial data.
