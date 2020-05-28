@@ -26,7 +26,7 @@ const DocsBox = ({ header, body, anchor, href }) => {
       renderFooter={() => <Link href={href}>{anchor}</Link>}
       footerStyle={{
         a: {
-          backgroundColor: "secondary",
+          backgroundColor: "primary",
           width: "100%",
           textAlign: "center",
         },
@@ -116,7 +116,7 @@ const DocsIndexPage = () => {
         sx={{ paddingLeft: "0 !important", paddingRight: "0 !important" }}
       >
         <DividedBox
-          colors={["#dddddf", "#0d1821"]}
+          colors={["#dddddf", "#36678d"]}
           MidComponent={({ children, ...rest }) => (
             <Box {...rest}>{children}</Box>
           )}
@@ -152,9 +152,6 @@ const DocsIndexPage = () => {
           </Box>
         </DividedBox>
       </section>
-
-      {/* TODO: footer */}
-      <Box sx={{ padding: "8rem", backgroundColor: "heavy" }}>&nbsp;</Box>
     </InnerPageLayout>
   );
 };

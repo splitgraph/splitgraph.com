@@ -4,6 +4,7 @@ import { jsx, SystemStyleObject } from "theme-ui";
 import * as React from "react";
 
 import { BaseLayout, MainContent } from "@splitgraph/tdesign";
+import { Footer } from "../Footer";
 import { HeaderRight } from "../HeaderRight";
 
 export interface IInnerPageLayoutProps {
@@ -24,7 +25,8 @@ const InnerPageLayout = ({
       }}
       renderHeaderRight={() => <HeaderRight />}
       extraStyle={{
-        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
         header: {
           display: "flex",
           flexDirection: "column",
@@ -44,7 +46,7 @@ const InnerPageLayout = ({
         },
         ".main-content": {
           maxWidth: "100vw",
-          a: {
+          "a :not(footer a)": {
             variant: "links.primary",
           },
           ...(extraStyle.hasOwnProperty(".main-content")
@@ -88,6 +90,7 @@ const InnerPageLayout = ({
       }}
     >
       <MainContent>{children}</MainContent>
+      <Footer />
     </BaseLayout>
   );
 };

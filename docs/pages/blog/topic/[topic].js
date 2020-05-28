@@ -33,8 +33,6 @@ const BlogTopicPage = ({ topic, blogPosts }) => {
           <BlogPostItem key={slug} url={url} metadata={metadata} />
         ))}
       </section>
-      {/* TODO: footer */}
-      <Box sx={{ padding: "8rem", backgroundColor: "heavy" }}>&nbsp;</Box>
     </InnerPageLayout>
   );
 };
