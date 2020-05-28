@@ -16,6 +16,7 @@ const withBasicLayout = ({ MdxPage, meta = {}, contentTree }) => {
   const WithBasicLayout = () => {
     return (
       <InnerPageLayout
+        charWidth={80}
         extraStyle={{
           ".main-content": {
             backgroundColor: "white",
@@ -26,6 +27,9 @@ const withBasicLayout = ({ MdxPage, meta = {}, contentTree }) => {
           "header, article": {
             paddingLeft: "calc((100vw - 100ch)/2)",
             paddingRight: "calc((100vw - 100ch)/2)",
+          },
+          "nav.toc": {
+            display: "none",
           },
         }}
       >

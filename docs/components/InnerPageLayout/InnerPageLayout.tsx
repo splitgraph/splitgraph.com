@@ -55,7 +55,7 @@ const InnerPageLayout = ({
           paddingLeft: ["0.5rem", "2rem", `calc((100vw - ${charWidth}ch)/2)`],
           paddingRight: ["0.5rem", "2rem", `calc((100vw - ${charWidth}ch)/2)`],
         },
-        section: {
+        "section, nav": {
           paddingLeft: ["0.5rem", "2rem", `calc((100% - ${charWidth}ch)/2)`],
           paddingRight: ["0.5rem", "2rem", `calc((100% - ${charWidth}ch)/2)`],
           maxWidth: "100vw",
