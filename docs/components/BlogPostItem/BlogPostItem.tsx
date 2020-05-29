@@ -30,9 +30,6 @@ export interface IBlogPostItemProps {
 const itemBoxStyle = {
   variant: "links.unstyled",
   backgroundColor: "white !important",
-  borderWidth: "1px",
-  borderStyle: "solid",
-  borderColor: "primary",
   padding: "1rem",
   boxShadow: "card",
   display: "flex",

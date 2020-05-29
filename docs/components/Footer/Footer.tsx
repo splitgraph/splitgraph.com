@@ -118,8 +118,8 @@ const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
           header={"Company"}
           links={[
             ["/blog", "Blog"],
-            ["/company/team", "Team"],
-            ["/company/contact", "Contact"],
+            ["/about/company/team", "Team"],
+            ["/about/company/contact", "Contact"],
           ]}
         />
 

@@ -1,7 +1,7 @@
 const preval = require("babel-plugin-preval/macro");
 
 const DOCS = preval`
-  const sidebar = require("./compileSidebar");
+  const sidebar = require("./compileDocsSidebar");
   module.exports = sidebar;
 `;
 
