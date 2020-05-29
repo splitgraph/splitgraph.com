@@ -154,15 +154,7 @@ const withHolyGrailLayout = ({
                 ) : null}
               </ContentFooter>
             </MainContent>
-            <Footer
-              footerVariant="dark"
-              extraStyle={{
-                paddingBottom: "8rem",
-                paddingLeft: "4rem",
-                paddingRight: "4rem",
-                paddingTop: "4rem",
-              }}
-            />
+            <Footer />
           </Box>
 
           <aside className="right-sidebar">
