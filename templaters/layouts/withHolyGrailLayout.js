@@ -30,18 +30,23 @@ const withHolyGrailLayout = ({
   renderTOC = true,
   renderTitleHeading = true,
   renderInterPageNav = true,
+  getSEO = ({ currentURL, meta, contentTree, SEO_BASE_URL }) => ({}),
 }) => ({ MdxPage, meta = {}, contentTree }) => {
-  const DocsPageSeo = ({ currentURL }) => {
+  const HolyGrailSEO = ({ currentURL }) => {
     const SEO_BASE_URL = process.env.SEO_CANONICAL_BASE_URL;
+
+    const injectSEO = getSEO({ currentURL, meta, contentTree, SEO_BASE_URL });
 
     const pageSeo = {
       title: `${meta.title}`,
       titleTemplate,
       ...(meta.description ? { description: meta.description } : {}),
       canonical: `${SEO_BASE_URL}${currentURL}`,
+      ...injectSEO,
       opengraph: {
         ...(meta.description ? { description: meta.description } : {}),
         url: `${SEO_BASE_URL}${currentURL}`,
+        ...(injectSEO.hasOwnProperty("opengraph") ? injectSEO.opengraph : {}),
       },
     };
 
@@ -67,7 +72,7 @@ const withHolyGrailLayout = ({
 
     return (
       <BaseLayout>
-        <DocsPageSeo currentURL={currentURL} />
+        <HolyGrailSEO currentURL={currentURL} />
 
         <Helmet
           style={[
