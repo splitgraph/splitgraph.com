@@ -111,13 +111,21 @@ const withHolyGrailLayout = ({
                 display: "flex",
                 alignItems: "center",
                 ".logo-text": {
+                  variant: "links.unstyled",
                   color: "sglightblue",
                   display: ["none", "inherit", "inherit"],
                 },
               }}
             >
               <LogoImage logoURL="/static/splitgraph_logo.svg" />
-              <span className="logo-text">Splitgraph</span>
+              <a
+                href="/"
+                aria-label="homepage"
+                title="Home"
+                className="logo-text"
+              >
+                Splitgraph
+              </a>
             </Box>
             <Box sx={{ color: "muted" }}>
               <Link href="/explore">Explore Data</Link>
