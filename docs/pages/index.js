@@ -183,6 +183,31 @@ const Typewriter = ({ children }) => {
   );
 };
 
+const ctaSectionStyle = {
+  minWidth: "100%",
+  maxWidth: "100%",
+  width: "100%",
+  backgroundColor: "heavy",
+  paddingTop: "3rem",
+  paddingBottom: "3rem",
+  paddingLeft: ["1rem", "1rem", "3rem"],
+  paddingRight: ["1rem", "1rem", "3rem"],
+  borderTop: "0.5ch solid",
+  borderTopColor: "primary",
+  borderBottom: "0.5ch solid",
+  borderBottomColor: "primary",
+  h2: {
+    color: "white",
+  },
+  ".button-link": {
+    marginBottom: "2rem",
+    fontSize: ["1.5rem", "1.5rem", "2rem"],
+  },
+  ".muted-link": {
+    variant: "links.muted",
+  },
+};
+
 // todo: rename to benefitPanelStyle, and .feature -> .benefit
 const featurePanelStyle = {
   display: "flex",
@@ -422,30 +447,7 @@ const LandingPage = () => {
         </Box>
       </section>
 
-      <section
-        className="lp-section lp-cta"
-        sx={{
-          minWidth: "100%",
-          maxWidth: "100%",
-          width: "100%",
-          backgroundColor: "heavy",
-          paddingTop: "3rem",
-          paddingBottom: "3rem",
-          paddingLeft: ["1rem", "1rem", "3rem"],
-          paddingRight: ["1rem", "1rem", "3rem"],
-          borderTop: "0.5ch solid",
-          borderTopColor: "primary",
-          borderBottom: "0.5ch solid",
-          borderBottomColor: "primary",
-          ".button-link": {
-            marginBottom: "2rem",
-            fontSize: ["1.5rem", "1.5rem", "2rem"],
-          },
-          ".muted-link": {
-            variant: "links.muted",
-          },
-        }}
-      >
+      <section className="lp-section lp-cta" sx={ctaSectionStyle}>
         <Link
           className="button-link"
           href="/docs/getting-started/five-minute-demo"
@@ -922,30 +924,7 @@ const LandingPage = () => {
         </ul>
       </section>
 
-      <section
-        className="lp-section lp-cta"
-        sx={{
-          minWidth: "100%",
-          maxWidth: "100%",
-          width: "100%",
-          backgroundColor: "heavy",
-          paddingTop: "3rem",
-          paddingBottom: "3rem",
-          paddingLeft: ["1rem", "1rem", "3rem"],
-          paddingRight: ["1rem", "1rem", "3rem"],
-          borderTop: "0.5ch solid",
-          borderTopColor: "primary",
-          borderBottom: "0.5ch solid",
-          borderBottomColor: "primary",
-          ".button-link": {
-            marginBottom: "2rem",
-            fontSize: ["1.5rem", "1.5rem", "2rem"],
-          },
-          ".muted-link": {
-            variant: "links.muted",
-          },
-        }}
-      >
+      <section className="lp-section lp-cta" sx={ctaSectionStyle}>
         <Link className="button-link" href="/docs/">
           Read the Docs
         </Link>
@@ -1039,6 +1018,30 @@ const LandingPage = () => {
           </Box>
         </Box>
       </section>
+
+      <section className="lp-section lp-cta" sx={ctaSectionStyle}>
+        <h2 sx={{ textTransform: "uppercase" }}>
+          <span sx={{ fontWeight: 200 }}>Data scientists</span>
+          <br />
+          <br />
+          spend 80% of their time
+          <br />
+          <br />
+          <span sx={{ fontWeight: 200 }}>cleaning and preparing data</span>
+        </h2>
+
+        <Link
+          className="button-link"
+          href="/docs/getting-started/five-minute-demo"
+        >
+          Try something new
+        </Link>
+
+        <Link className="muted-link" href="/explore">
+          Or, explore public data &raquo;
+        </Link>
+      </section>
+
       <Footer />
     </LandingPageLayout>
   );
