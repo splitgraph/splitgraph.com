@@ -89,13 +89,13 @@ pre::-webkit-scrollbar-track {
 
 @media (max-width: 768px) {
   .desktop-only {
-    display: none;
+    display: none !important;
   }
 }
 
 @media (min-width: 769px) {
   .mobile-only {
-    display: none;
+    display: none !important;
   }
 }
 
