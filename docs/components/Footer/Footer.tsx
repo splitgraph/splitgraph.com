@@ -19,10 +19,6 @@ export interface IFooterProps {
 }
 
 const darkVariant = {
-  paddingBottom: "8rem",
-  paddingLeft: ["2rem", "2rem", "4rem"],
-  paddingRight: ["2rem", "2rem", "4rem"],
-  paddingTop: "4rem",
   ".footer-section-header": {
     color: "muted",
   },
@@ -56,6 +52,10 @@ const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
         maxWidth: "100%",
         display: "flex",
         flexDirection: "column",
+        paddingBottom: "8rem",
+        paddingTop: "4rem",
+        paddingLeft: ["2rem", "2rem", "max(3rem, calc((100vw - 100ch)/2))"],
+        paddingRight: ["2rem", "2rem", "max(3rem, calc((100vw - 100ch)/2))"],
         ...baseVariant,
         ...extraStyle,
         ".footer-links-row": {
@@ -183,14 +183,6 @@ const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
             11657324
           </a>
           <br />
-          <br />
-          6 Prince Andrew Court
-          <br />
-          166 High Street Chesterton
-          <br />
-          Cambridge, CB4 1NS
-          <br />
-          United Kingdom
         </Box>
       </Box>
     </footer>
