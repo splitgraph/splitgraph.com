@@ -1,185 +1,149 @@
-export const meta = {
-  id: "config-flag-reference",
-  title: "Configuration flag reference",
-  sidebarTitle: "Configuration flag reference",
-  description: null,
-};
+export const meta = {id: "config_flag_reference", title: "Configuration flag reference", sidebarTitle: "Configuration flag reference", description: null};
+
 
 ### `SG_ENGINE`
-
 Current engine name in use by Splitgraph. By default, this is the local engine.
 
 This can be overridden to make `sgr` use a different engine in cases where the `--remote` flag is not supported.
 
 ### `SG_LOGLEVEL`
-
-Logging threshold (log messages not emitted below this).
-Accepted values are CRITICAL, ERROR, WARNING, INFO and DEBUG.
-This can also be changed by passing `--verbosity` to `sgr`, e.g. `sgr --verbosity DEBUG init`.
+Logging threshold (log messages not emitted below this).  
+Accepted values are CRITICAL, ERROR, WARNING, INFO and DEBUG.  
+This can also be changed by passing `--verbosity` to `sgr`, e.g. `sgr --verbosity DEBUG init`.  
 **Default**: `WARNING`
 
 ### `SG_ENGINE_PREFIX`
-
-Prefix for Docker containers that are treated as Splitgraph engines by `sgr engine`.
+Prefix for Docker containers that are treated as Splitgraph engines by `sgr engine`.  
 **Default**: `splitgraph_engine_`
 
 ### `SG_NAMESPACE`
-
 Namespace used by default when pushing to this engine, if not explicitly specified. Normally this is set to the user's username on the registry.
 
 ### `SG_IS_REGISTRY`
-
 Whether this engine is a registry (access only via the SQL API) or an actual Splitgraph engine that supports checkouts.
 
 ### `SG_CHECK_VERSION`
-
-Whether to check the version of the Splitgraph library installed on this engine when a connection to it is first made.
+Whether to check the version of the Splitgraph library installed on this engine when a connection to it is first made.  
 **Default**: `true`
 
 ### `SG_ENGINE_FDW_HOST`
-
-Hostname to use for this engine when it's connecting to itself (during layered querying).
+Hostname to use for this engine when it's connecting to itself (during layered querying).  
 **Default**: `localhost`
 
 ### `SG_ENGINE_FDW_PORT`
-
-Port to use for this engine when it's connecting to itself (during layered querying).
+Port to use for this engine when it's connecting to itself (during layered querying).  
 **Default**: `5432`
 
 ### `SG_ENGINE_HOST`
-
-Hostname to use for sgr to connect to the engine.
+Hostname to use for sgr to connect to the engine.  
 **Default**: `localhost`
 
 ### `SG_ENGINE_PORT`
-
-Port to use for sgr to connect to the engine.
+Port to use for sgr to connect to the engine.  
 **Default**: `5432`
 
 ### `SG_ENGINE_DB_NAME`
-
-Database used by Splitgraph.
+Database used by Splitgraph.  
 **Default**: `splitgraph`
 
 ### `SG_ENGINE_USER`
-
-Username used by sgr.
+Username used by sgr.  
 **Default**: `sgr`
 
 ### `SG_ENGINE_PWD`
-
-Password used by sgr.
+Password used by sgr.  
 **Default**: `supersecure`
 
 ### `SG_ENGINE_ADMIN_USER`
-
-Superuser username for the engine, used to first initialize it and create the required Splitgraph schemata and extensions.
+Superuser username for the engine, used to first initialize it and create the required Splitgraph schemata and extensions.  
 **Default**: `sgr`
 
 ### `SG_ENGINE_ADMIN_PWD`
-
-Superuser password for the engine, used to first initialize it and create the required Splitgraph schemata and extensions.
+Superuser password for the engine, used to first initialize it and create the required Splitgraph schemata and extensions.  
 **Default**: `supersecure`
 
 ### `SG_ENGINE_POSTGRES_DB_NAME`
-
-Name of the default database that the superuser connects to to initialize Splitgraph.
+Name of the default database that the superuser connects to to initialize Splitgraph.  
 **Default**: `postgres`
 
 ### `SG_ENGINE_OBJECT_PATH`
-
-Path on the engine's filesystem where Splitgraph physical object files are stored.
+Path on the engine's filesystem where Splitgraph physical object files are stored.  
 **Default**: `/var/lib/splitgraph/objects`
 
 ### `SG_LQ_TUNING`
-
-Postgres query planner configuration for Splitfile execution and table imports. This is run before a layered query is executed and allows to tune query planning in case of LQ performance issues. For possible values, see the [PostgreSQL documentation](https://www.postgresql.org/docs/12/runtime-config-query.html).
+Postgres query planner configuration for Splitfile execution and table imports. This is run before a layered query is executed and allows to tune query planning in case of LQ performance issues. For possible values, see the [PostgreSQL documentation](https://www.postgresql.org/docs/12/runtime-config-query.html).  
 **Default**: `SET enable_sort=off; SET enable_hashagg=on;`
 
-### `SG_ENGINE_POOL`
+### `SG_COMMIT_CHUNK_SIZE`
+Default chunk size when `sgr commit` is run. Can be overriden in the command line client by passing `--chunk-size`  
+**Default**: `10000`
 
-Size of the connection pool used to download/upload objects. Note that in the case of layered querying with joins on multiple tables, each table will use this many parallel threads to download objects, which can overwhelm the engine. Decrease this value in that case.
+### `SG_ENGINE_POOL`
+Size of the connection pool used to download/upload objects. Note that in the case of layered querying with joins on multiple tables, each table will use this many parallel threads to download objects, which can overwhelm the engine. Decrease this value in that case.  
 **Default**: `16`
 
 ### `SG_CONFIG_FILE`
-
 Location of the Splitgraph configuration file. By default, Splitgraph looks for the configuration in `~/.splitgraph/.sgconfig` and then the current directory.
 
 ### `SG_META_SCHEMA`
-
-Name of the metadata schema. Note that whilst this can be changed, it hasn't been tested and won't be taken into account by engines connecting to this one.
+Name of the metadata schema. Note that whilst this can be changed, it hasn't been tested and won't be taken into account by engines connecting to this one.  
 **Default**: `splitgraph_meta`
 
 ### `SG_CONFIG_DIRS`
-
 List of directories used to look up the configuration file.
 
 ### `SG_CONFIG_DIR`
-
 Directory the current configuration file is located in.
 
 ### `SG_REPO_LOOKUP`
-
 List of remote names, comma-separated, used for repository lookups during Splitfile execution and `sgr clone` (if a remote name is not specified explicitly).
 
 ### `SG_REPO_LOOKUP_OVERRIDE`
-
 List of overrides for remote engines for some repositories. For example, `override_repo_1:local,override_repo_2:data.splitgraph.com`.
 
 ### `SG_S3_HOST`
-
-Hostname used by the remote engine for object storage. Note that the S3 settings are only used by the remote engine when constructing the URL to give to the client wishing to download/upload objects to S3, not by `sgr` itself.
+Hostname used by the remote engine for object storage. Note that the S3 settings are only used by the remote engine when constructing the URL to give to the client wishing to download/upload objects to S3, not by `sgr` itself.  
 **Default**: `//localhost`
 
 ### `SG_S3_PORT`
-
-Port used by the remote engine for object storage.
+Port used by the remote engine for object storage.  
 **Default**: `9000`
 
 ### `SG_S3_SECURE`
-
-Whether to use HTTPS for object storage.
+Whether to use HTTPS for object storage.  
 **Default**: `false`
 
 ### `SG_S3_BUCKET`
-
-S3 bucket used by the engine for object storage.
+S3 bucket used by the engine for object storage.  
 **Default**: `splitgraph`
 
 ### `SG_S3_KEY`
-
 S3 access key.
 
 ### `SG_S3_PWD`
-
 S3 secure key.
 
 ### `SG_OBJECT_CACHE_SIZE`
-
-Object cache size, in megabytes. This only concerns objects downloaded from an external location or a remote engine. When there is no space in the object cache, an eviction is run and objects that haven't been used recently or that are small enough to be easily redownloaded are deleted to free up space.
+Object cache size, in megabytes. This only concerns objects downloaded from an external location or a remote engine. When there is no space in the object cache, an eviction is run and objects that haven't been used recently or that are small enough to be easily redownloaded are deleted to free up space.  
 **Default**: `10240`
 
 ### `SG_EVICTION_DECAY`
-
-Significance of recent usage time and object size in cache eviction. See documentation for splitgraph.core.object_manager for an explanation.
+Significance of recent usage time and object size in cache eviction. See documentation for splitgraph.core.object_manager for an explanation.  
 **Default**: `0.002`
 
 ### `SG_EVICTION_FLOOR`
-
-Significance of recent usage time and object size in cache eviction. See documentation for splitgraph.core.object_manager for an explanation.
+Significance of recent usage time and object size in cache eviction. See documentation for splitgraph.core.object_manager for an explanation.  
 **Default**: `1`
 
 ### `SG_EVICTION_MIN_FRACTION`
-
-Minimum fraction of the total cache size that has to get freed when an eviction is run. This is to avoid frequent evictions.
+Minimum fraction of the total cache size that has to get freed when an eviction is run. This is to avoid frequent evictions.  
 **Default**: `0.05`
 
 ### `SG_FDW_CLASS`
-
-Name of the class used by the layered querying foreign data wrapper on the engine. Internal.
+Name of the class used by the layered querying foreign data wrapper on the engine. Internal.  
 **Default**: `splitgraph.core.fdw_checkout.QueryingForeignDataWrapper`
 
 ### `SG_CMD_ASCII`
-
-Set to `true` to disable Unicode output in sgr. Note that `sgr sql` will still output Unicode data.
+Set to `true` to disable Unicode output in sgr. Note that `sgr sql` will still output Unicode data.  
 **Default**: `false`
+

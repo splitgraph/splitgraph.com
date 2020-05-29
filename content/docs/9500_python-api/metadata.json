@@ -1,20 +1,20 @@
 {
   "title": "Python API",
-  "updated_at": "2020-05-21T18:29:00.900Z",
+  "updated_at": "2020-05-29T02:09:53.188Z",
   "release": {
-    "id": 26768153,
+    "id": 27010209,
     "tag_name": "v0.1.0",
     "target_commitish": "master",
-    "created_at": "2020-05-21T17:52:30Z",
-    "published_at": "2020-05-21T18:22:00Z",
+    "created_at": "2020-05-28T21:34:11Z",
+    "published_at": "2020-05-28T21:49:51Z",
     "assets": [
       {
-        "id": 20950697,
-        "url": "https://api.github.com/repos/splitgraph/splitgraph/releases/assets/20950697",
+        "id": 21159701,
+        "url": "https://api.github.com/repos/splitgraph/splitgraph/releases/assets/21159701",
         "name": "sgr-docs-bin.tar.gz",
         "label": "",
-        "created_at": "2020-05-21T18:09:45Z",
-        "updated_at": "2020-05-21T18:09:45Z",
+        "created_at": "2020-05-28T21:49:28Z",
+        "updated_at": "2020-05-28T21:49:28Z",
         "browser_download_url": "https://github.com/splitgraph/splitgraph/releases/download/v0.1.0/sgr-docs-bin.tar.gz"
       }
     ]
