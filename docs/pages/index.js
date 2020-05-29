@@ -633,7 +633,7 @@ const LandingPage = () => {
                 Import data from all major databases, setup Splitgraph as a
                 Postgres replication client, or write a custom mount handler to
                 cover your unique use case. Transform the data into a Splitgraph
-                image, or just leave it as-is and query it on demand.
+                image, or leave it as-is and query it on demand.
               </span>
             </Box>
           </li>
@@ -719,10 +719,11 @@ const LandingPage = () => {
                 S3 Compatible Blob Storage
               </span>
               <span className="feature-description">
-                Store only lightweight metadata in a Splitgraph installation and
-                keep actual data in S3 compatible storage. Download data only
-                when you need it, without the need for a bulky always-on
-                warehouse.
+                Splitgraph stores your data as columnar chunks in any
+                S3-compatible object store, and Postgres only needs to keep
+                track of lightweight metadata until you're ready to query it.
+                Download data only when you need it, without the need for a
+                bulky always-on warehouse.
               </span>
             </Box>
           </li>
@@ -785,7 +786,7 @@ const LandingPage = () => {
               <span className="feature-description">
                 Splitgraph uses a columnar storage format for its data, offering
                 a smaller (5x-10x) on-disk footprint and faster read performance
-                native than PostgreSQL tables. Keep your data in S3-compatible
+                than native PostgreSQL tables. Keep your data in S3-compatible
                 storage, and only download it when you need it.
               </span>
             </Box>
@@ -806,8 +807,8 @@ const LandingPage = () => {
             <Box className="feature-body">
               <span className="feature-heading">Splitfiles</span>
               <span className="feature-description">
-                Define transformations on data using declarative syntax that
-                will be familiar to you if you've written a Dockerfile. Enjoy
+                Define transformations on data using a declarative syntax that
+                will be familiar to anyone who has written a Dockerfile. Enjoy
                 full access to the <tt>SQL</tt> language, and reference other
                 Splitgraph data images or foreign tables with a simple{" "}
                 <tt>JOIN</tt>.
@@ -823,9 +824,9 @@ const LandingPage = () => {
               <span className="feature-heading">Provenance</span>
               <span className="feature-description">
                 Datasets built with Splitfiles have all their sources recorded,
-                meaning you know exactly where your data came from and when to
-                rebuild it. Easily stay on top of your data, without drifting
-                out of date when upstream data sources change.
+                meaning Splitgraph knows exactly where your data came from and
+                when to rebuild it. Easily stay on top of your data, without
+                drifting out of date when upstream data sources change.
               </span>
             </Box>
           </li>
@@ -879,8 +880,9 @@ const LandingPage = () => {
             <Box className="feature-body">
               <span className="feature-heading">Peer-to-Peer</span>
               <span className="feature-description">
-                Any Splitgraph engine can act as a remote. Push data between
-                Splitgraph installations or publish it to Splitgraph Cloud.
+                Any Splitgraph engine can act as a remote peer. Push and pull
+                data between Splitgraph installations, or publish it to
+                Splitgraph Cloud using the same protocol.
               </span>
             </Box>
           </li>
@@ -911,7 +913,9 @@ const LandingPage = () => {
               <span className="feature-description">
                 Splitgraph Cloud is like GitHub is to git, a place where you can
                 share and find public data. Enrich your private reports by
-                joining your internal data with public data.
+                joining your internal data with public data. Give back to the
+                community by sharing your data, whether it's a brand-new
+                dataset, or a fresh take on public data.
               </span>
             </Box>
           </li>
