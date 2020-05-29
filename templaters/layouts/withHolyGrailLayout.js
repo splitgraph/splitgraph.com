@@ -30,6 +30,7 @@ const withHolyGrailLayout = ({
   renderTOC = true,
   renderTitleHeading = true,
   renderInterPageNav = true,
+  renderDocsHeaderLink = true,
   getSEO = ({ currentURL, meta, contentTree, SEO_BASE_URL }) => ({}),
 }) => ({ MdxPage, meta = {}, contentTree }) => {
   const HolyGrailSEO = ({ currentURL }) => {
@@ -129,8 +130,12 @@ const withHolyGrailLayout = ({
             </Box>
             <Box sx={{ color: "muted" }}>
               <Link href="/explore">Explore Data</Link>
-              <>&bull;&nbsp;&nbsp;</>
-              <Link href="/docs">Docs</Link>
+              {renderDocsHeaderLink ? (
+                <>
+                  <>&bull;&nbsp;&nbsp;</>
+                  <Link href="/docs">Docs</Link>
+                </>
+              ) : null}
               <Link className="button-link" href="/auth/sign_up">
                 Sign Up
               </Link>
