@@ -206,6 +206,9 @@ const ctaSectionStyle = {
   ".muted-link": {
     variant: "links.muted",
   },
+  ".mobile-shrink": {
+    fontSize: ["1.2rem", "1.5rem", "2rem"],
+  },
 };
 
 // todo: rename to benefitPanelStyle, and .feature -> .benefit
@@ -1026,8 +1029,8 @@ const LandingPage = () => {
                 community by sharing your data, whether it's a brand-new
                 dataset, or a fresh take on public data.
               </span>
-              <Link href="/splitgraph/socrata" className="feature-cta">
-                Explore the <tt>splitgraph/socrata</tt> repository
+              <Link href="/explore" className="feature-cta">
+                Explore the Splitgraph catalog
               </Link>
             </Box>
           </li>
@@ -1043,7 +1046,7 @@ const LandingPage = () => {
           className="muted-link"
           href="https://www.github.com/splitgraph/splitgraph"
         >
-          Visit Splitgraph on GitHub &raquo;
+          Visit Splitgraph at GitHub &raquo;
         </Link>
       </section>
 
@@ -1141,14 +1144,14 @@ const LandingPage = () => {
         </h2>
 
         <Link
-          className="button-link"
+          className="button-link mobile-shrink"
           href="/docs/getting-started/five-minute-demo"
         >
-          Try something new
+          Time to try something new?
         </Link>
 
         <Link className="muted-link" href="/explore">
-          Or, explore public data &raquo;
+          Explore public data &raquo;
         </Link>
       </section>
 

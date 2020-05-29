@@ -69,7 +69,7 @@ const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
         ".footer-section": {
           flexGrow: 0,
           flexShrink: 1,
-          minWidth: "16ch", // Make length of longest item ("Terms of Service") to line up end columns
+          minWidth: ["inherit", "16ch", "16ch"], // Make length of longest item ("Terms of Service") to line up end columns
           ...mixStyles(".footer-section", baseVariant, extraStyle),
         },
         ".footer-community-row, .footer-copyright-row": {
@@ -96,6 +96,7 @@ const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
           a: {
             variant: "links.unstyled",
           },
+          marginBottom: ["2rem", "inherit", "inherit"],
           ...mixStyles(".community-logos", baseVariant, extraStyle),
         },
         ul: {
