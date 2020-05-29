@@ -43,10 +43,10 @@ const withHolyGrailLayout = ({
       ...(meta.description ? { description: meta.description } : {}),
       canonical: `${SEO_BASE_URL}${currentURL}`,
       ...injectSEO,
-      opengraph: {
+      openGraph: {
         ...(meta.description ? { description: meta.description } : {}),
         url: `${SEO_BASE_URL}${currentURL}`,
-        ...(injectSEO.hasOwnProperty("opengraph") ? injectSEO.opengraph : {}),
+        ...(injectSEO.hasOwnProperty("openGraph") ? injectSEO.openGraph : {}),
       },
     };
 
