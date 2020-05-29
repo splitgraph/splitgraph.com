@@ -127,13 +127,13 @@ like normal tables by most clients.
 
 Open a PostgreSQL client (instructions are available for [DataGrip](../integrating-splitgraph/datagrip), [pgAdmin](../integrating-splitgraph/pgadmin) or [other clients like pgcli or DBeaver](../integrating-splitgraph/other-clients)) and connect to the Splitgraph engine. In these screenshots, [DBeaver](https://dbeaver.io/) is used.
 
-![DBeaver schema overview](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting_data/images/socrata/0_dbeaver_schemas.png)
+![DBeaver schema overview](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting-data/images/socrata/0_dbeaver_schemas.png)
 
 Chicago data is now mounted in the `chicago` schema and Cambridge in `cambridge`. Every table maps
 to a Socrata dataset, with the name being automatically generated from the dataset name and the
 Socrata ID.
 
-![DBeaver overview](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting_data/images/socrata/1_dbeaver_overview.png)
+![DBeaver overview](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting-data/images/socrata/1_dbeaver_overview.png)
 
 Splitgraph also grabs descriptions for each dataset and every column from Socrata metadata,
 if it exists. These descriptions are added as PostgreSQL `COMMENT` entries on tables and columns.
@@ -141,12 +141,12 @@ if it exists. These descriptions are added as PostgreSQL `COMMENT` entries on ta
 Data is loaded on demand, similar to [layered querying](../large-datasets/layered-querying). Socrata
 queries are only sent out when a table is opened.
 
-![DBeaver querying overview](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting_data/images/socrata/2_dbeaver_query.png)
+![DBeaver querying overview](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting-data/images/socrata/2_dbeaver_query.png)
 
 In addition, filters, `ORDER`, `LIMIT` and `OFFSET` clauses are also rewritten into [SoQL](https://dev.socrata.com/docs/queries/) queries by Splitgraph and sent to Socrata, so your local Splitgraph instance
 doesn't need to load the whole dataset.
 
-![DBeaver filtering overview](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting_data/images/socrata/3_dbeaver_filtering.png)
+![DBeaver filtering overview](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting-data/images/socrata/3_dbeaver_filtering.png)
 
 ### Joining and plotting data with Metabase
 
@@ -164,7 +164,7 @@ FROM
 ORDER BY lab_report_date ASC;
 ```
 
-![Metabase plot of one dataset](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting_data/images/socrata/4_metabase_chicago.png)
+![Metabase plot of one dataset](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting-data/images/socrata/4_metabase_chicago.png)
 
 Note that this is run against the `chicago` schema that has all available tables from the
 [`data.cityofchicago.org`](https://data.cityofchicago.org) Socrata domain mounted. You can also
@@ -192,7 +192,7 @@ ON
 ORDER BY date ASC;
 ```
 
-![Metabase plot of two datasets](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting_data/images/socrata/5_metabase_join.png)
+![Metabase plot of two datasets](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting-data/images/socrata/5_metabase_join.png)
 
 Behind the scenes, this queries the [Chicago COVID-19 Daily Cases and Deaths](https://data.cityofchicago.org/Health-Human-Services/COVID-19-Daily-Cases-and-Deaths/naz8-j4nc) and the [Cambridge COVID-19 Cumulative Cases by Date](https://data.cambridgema.gov/Public-Safety/COVID-19-Cumulative-Cases-by-Date/tdt9-vq5y) Socrata datasets using SoQL and the actual JOIN is performed in PostgreSQL. However, Metabase and any other PostgreSQL client doesn't need to know about that: to them, these look like normal PostgreSQL tables.
 

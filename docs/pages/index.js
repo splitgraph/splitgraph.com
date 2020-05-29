@@ -701,6 +701,10 @@ const LandingPage = () => {
               <Link href="/splitgraph/socrata" className="feature-cta">
                 Explore the Socrata repository
               </Link>
+
+              <Link href="/docs/ingesting-data/socrata" className="feature-cta">
+                Try joining data from two Socrata data portals
+              </Link>
             </Box>
           </li>
         </ul>
