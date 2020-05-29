@@ -7,6 +7,7 @@ export interface IIconProps {
   size?: string;
   sx?: any;
   extraStyle?: SystemStyleObject;
+  color?: string;
 }
 
 export interface IBaseIconProps {
