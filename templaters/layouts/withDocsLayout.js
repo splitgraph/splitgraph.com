@@ -30,4 +30,5 @@ const getDocsSEO = ({ currentURL, meta, SEO_BASE_URL }) => {
 export default withHolyGrailLayout({
   titleTemplate: "%s - Documentation | Splitgraph",
   getSEO: getDocsSEO,
+  renderDocsHeaderLink: false,
 });

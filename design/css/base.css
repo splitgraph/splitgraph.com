@@ -86,3 +86,19 @@ pre::-webkit-scrollbar-track {
     scrollbar-width: none !important;
   }
 }
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none;
+  }
+}
+
+.no-underline {
+  text-decoration: none !important;
+}
