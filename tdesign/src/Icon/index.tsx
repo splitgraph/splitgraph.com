@@ -246,3 +246,7 @@ export { IconLogoReddit };
 import IconLogoHackerNews from './IconLogoHackerNews';
 export { IconLogoHackerNews };
 
+
+import IconHeart from './IconHeart';
+export { IconHeart };
+

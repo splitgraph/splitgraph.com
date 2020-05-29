@@ -11,6 +11,7 @@ import {
   IconLogoTwitter,
   IconLogoLinkedIn,
   IconLogoReddit,
+  IconHeart,
 } from "@splitgraph/tdesign";
 
 export interface IFooterProps {
@@ -192,11 +193,25 @@ const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
 
       <Box className="footer-copyright-row">
         <Box className="footer-section">
-          Splitgraph Limited, U.K. company no.{" "}
+          Splitgraph Limited, Registered in England and Wales no.{" "}
           <a href="https://beta.companieshouse.gov.uk/company/11657324">
             11657324
           </a>
           <br />
+          <br />
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <span>Made with</span>
+            <IconHeart
+              size={"1rem"}
+              color="muted"
+              extraStyle={{
+                display: "inline-flex",
+                marginRight: "1ch",
+                marginLeft: "1ch",
+              }}
+            />
+            <span>in Cambridge</span>
+          </Box>
         </Box>
       </Box>
     </footer>

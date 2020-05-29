@@ -41,7 +41,9 @@ export default ({
           ? {
               backgroundColor: color,
               WebkitMaskImage: svgDataURI,
-              MaskImage: svgDataURI,
+              maskImage: svgDataURI,
+              WebkitMaskRepeat: 'no-repeat',
+              maskRepeat: 'no-repeat',
             }
           : { backgroundImage: svgDataURI }),
         backgroundRepeat: 'no-repeat',
