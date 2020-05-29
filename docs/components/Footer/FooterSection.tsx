@@ -1,6 +1,6 @@
 // @jsx jsx
 // @ts-ignore
-import { jsx, Box } from "theme-ui";
+import { jsx, Box, SystemStyleObject } from "theme-ui";
 import * as React from "react";
 
 import FooterLink from "./FooterLink";
@@ -8,11 +8,16 @@ import FooterLink from "./FooterLink";
 export interface IFooterSectionProps {
   header: string;
   links: [string, string][];
+  extraStyle?: SystemStyleObject;
 }
 
-const FooterSection = ({ header, links }: IFooterSectionProps) => {
+const FooterSection = ({
+  header,
+  links,
+  extraStyle = {},
+}: IFooterSectionProps) => {
   return (
-    <Box className="footer-section">
+    <Box className="footer-section" sx={extraStyle}>
       <h3 className="footer-section-header">{header}</h3>
       <ul>
         {links.map(([href, anchor]) => (
