@@ -324,6 +324,7 @@ const featureSectionStyle = {
       display: "inline-flex",
       alignItems: "center",
       marginRight: "2rem",
+      marginTop: "-1.75rem", // don't count the CTA row in centering
       minWidth: "3rem", // must be size of icon
       'div[class^="sg-icon-"]': {
         display: "inline-flex",
@@ -337,6 +338,19 @@ const featureSectionStyle = {
       },
       ".feature-description": {
         textAlign: "justify",
+      },
+      ".feature-cta": {
+        variant: "links.primary",
+        marginTop: "1rem",
+        textAlign: "left",
+        // fontWeight: "bold",
+        // textTransform: "uppercase",
+        fontSize: "small",
+      },
+      ".feature-cta:after": {
+        paddingLeft: "1ch",
+        paddingRight: "1ch",
+        content: '"\\27F6"',
       },
     },
   },
@@ -637,6 +651,12 @@ const LandingPage = () => {
                 cover your unique use case. Transform the data into a Splitgraph
                 image, or leave it as-is and query it on demand.
               </span>
+              <Link
+                href="/docs/ingesting-data/foreign-data-wrappers/introduction"
+                className="feature-cta"
+              >
+                Read the FDW Documentation
+              </Link>
             </Box>
           </li>
 
@@ -651,6 +671,12 @@ const LandingPage = () => {
                 . Splitgraph lets your software query remote data by lazily
                 downloading only the required fragments.
               </span>
+              <Link
+                href="/docs/large-datasets/layered-querying"
+                className="feature-cta"
+              >
+                Learn about Layered Querying
+              </Link>
             </Box>
           </li>
 
@@ -669,6 +695,9 @@ const LandingPage = () => {
                 a Postgres table. You can even write <tt>JOIN</tt> queries
                 across different data portals.
               </span>
+              <Link href="/splitgraph/socrata" className="feature-cta">
+                Explore the Socrata repository
+              </Link>
             </Box>
           </li>
         </ul>
@@ -692,6 +721,9 @@ const LandingPage = () => {
                 cost and bring your datasets up to date without redownloading
                 them.
               </span>
+              <Link href="/docs/concepts/objects" className="feature-cta">
+                Learn how Splitgraph stores objects
+              </Link>
             </Box>
           </li>
 
@@ -709,6 +741,12 @@ const LandingPage = () => {
                 multiple versions efficiently. Focus on what to put into your
                 data warehouse, not how to store it.
               </span>
+              <Link
+                href="/docs/working-with-data/inspecting-images#example"
+                className="feature-cta"
+              >
+                See content addressability in action
+              </Link>
             </Box>
           </li>
 
@@ -727,6 +765,12 @@ const LandingPage = () => {
                 Download data only when you need it, without the need for a
                 bulky always-on warehouse.
               </span>
+              <Link
+                href="https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-object-storage"
+                className="feature-cta"
+              >
+                Try an example of pushing to object storage
+              </Link>
             </Box>
           </li>
         </ul>
@@ -749,6 +793,12 @@ const LandingPage = () => {
                 send and receive revisions and do it without rewriting any of
                 your tools &mdash; just like Git.
               </span>
+              <Link
+                href="/docs/working-with-data/tracking-changes"
+                className="feature-cta"
+              >
+                Discover how change tracking works
+              </Link>
             </Box>
           </li>
 
@@ -762,6 +812,12 @@ const LandingPage = () => {
                 Manage Splitgraph data using a familiar command line interface
                 inspired by Docker and Git.
               </span>
+              <Link
+                href="/docs/architecture/sgr-client"
+                className="feature-cta"
+              >
+                Discover the <tt>sgr</tt> CLI
+              </Link>
             </Box>
           </li>
 
@@ -776,6 +832,12 @@ const LandingPage = () => {
                 suite of Python data science tools, including Jupyter notebooks
                 and Pandas DataFrames.
               </span>
+              <Link
+                href="/docs/integrating-splitgraph/jupyter-notebooks"
+                className="feature-cta"
+              >
+                Try an example Jupyter notebook
+              </Link>
             </Box>
           </li>
 
@@ -791,6 +853,12 @@ const LandingPage = () => {
                 than native PostgreSQL tables. Keep your data in S3-compatible
                 storage, and only download it when you need it.
               </span>
+              <Link
+                href="https://github.com/splitgraph/splitgraph/blob/master/examples/benchmarking/benchmarking_real_data.ipynb"
+                className="feature-cta"
+              >
+                See benchmarking data on GitHub
+              </Link>
             </Box>
           </li>
         </ul>
@@ -815,6 +883,9 @@ const LandingPage = () => {
                 Splitgraph data images or foreign tables with a simple{" "}
                 <tt>JOIN</tt>.
               </span>
+              <Link href="/docs/concepts/splitfiles" className="feature-cta">
+                Discover Splitfiles
+              </Link>
             </Box>
           </li>
 
@@ -830,6 +901,18 @@ const LandingPage = () => {
                 when to rebuild it. Easily stay on top of your data, without
                 drifting out of date when upstream data sources change.
               </span>
+              <Link
+                href="/mildbyte/complex_dataset/latest/-/provenance"
+                className="feature-cta"
+              >
+                See an example of provenance in the catalog
+              </Link>
+              <Link
+                href="/docs/working-with-data/inspecting-provenance"
+                className="feature-cta"
+              >
+                Learn more about provenance
+              </Link>
             </Box>
           </li>
 
@@ -844,6 +927,12 @@ const LandingPage = () => {
                 Splitfiles into your CI pipeline to keep your data up to date
                 and only download the changes to upstream datasets.
               </span>
+              <Link
+                href="/docs/working-with-data/using-splitfiles"
+                className="feature-cta"
+              >
+                See how Splitfiles can fit in your CI pipeline
+              </Link>
             </Box>
           </li>
 
@@ -864,6 +953,12 @@ const LandingPage = () => {
                 Let Splitgraph worry about dependency graphs, so you can focus
                 on results.
               </span>
+              <Link
+                href="/docs/splitfiles/splitfile-sql"
+                className="feature-cta"
+              >
+                Read about <tt>SQL</tt> layers in Splitfiles
+              </Link>
             </Box>
           </li>
         </ul>
@@ -886,6 +981,12 @@ const LandingPage = () => {
                 data between Splitgraph installations, or publish it to
                 Splitgraph Cloud using the same protocol.
               </span>
+              <Link
+                href="/docs/getting-started/decentralized-demo"
+                className="feature-cta"
+              >
+                Try a decentralized demo
+              </Link>
             </Box>
           </li>
 
@@ -901,6 +1002,12 @@ const LandingPage = () => {
                 thanks to the power of PostgREST. Query any version of your data
                 with a simple HTTP request. More tools coming soon.
               </span>
+              <Link
+                href="/splitgraph/socrata/latest/-/api-schema"
+                className="feature-cta"
+              >
+                Try the <tt>splitgraph/socrata</tt> REST API
+              </Link>
             </Box>
           </li>
 
@@ -919,6 +1026,9 @@ const LandingPage = () => {
                 community by sharing your data, whether it's a brand-new
                 dataset, or a fresh take on public data.
               </span>
+              <Link href="/splitgraph/socrata" className="feature-cta">
+                Explore the <tt>splitgraph/socrata</tt> repository
+              </Link>
             </Box>
           </li>
         </ul>
