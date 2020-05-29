@@ -51,7 +51,7 @@ An example `index-options` dictionary:
 ### Options
 
   * **`-s, --snap`**: Do not delta compress the changes and instead store the whole table again. This consumes more space, but makes checkouts faster.
-  * **`-c, --chunk-size INTEGER`**: Split new tables into chunks of this many rows (by primary key).
+  * **`-c, --chunk-size INTEGER`**: Split new tables into chunks of this many rows (by primary key). The default value is governed by the SG_COMMIT_CHUNK_SIZE configuration parameter.
   * **`-k, --chunk-sort-keys JSON`**: Sort the data inside each chunk by this/these key(s)
   * **`-t, --split-changesets`**: Split changesets for existing tables across original chunk boundaries.
   * **`-i, --index-options JSON`**: JSON dictionary of extra indexes to calculate on the new objects.

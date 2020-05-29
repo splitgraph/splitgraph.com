@@ -168,6 +168,13 @@ tqdm every <cite>progress_every</cite> objects.</p></li>
 </dd></dl>
 
 <dl className="py method">
+<dt id="splitgraph.engine.postgres.engine.PostgresEngine.get_change_key">
+<code className="sig-name descname">get_change_key</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">table</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → List<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.get_change_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the key used to identify a row in a change (list of column name, column type).
+If the tracked table has a PK, we use that; if it doesn’t, the whole row is used.</p>
+</dd></dl>
+
+<dl className="py method">
 <dt id="splitgraph.engine.postgres.engine.PostgresEngine.get_object_schema">
 <code className="sig-name descname">get_object_schema</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">object_id</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → List<span className="p">[</span>splitgraph.core.types.TableColumn<span className="p">]</span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.get_object_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the schema of a given object, returned as a list of
@@ -413,6 +420,11 @@ and by association the version of the engine itself.</p>
 <dl className="py function">
 <dt id="splitgraph.engine.postgres.engine.chunk">
 <code className="sig-prename descclassname">splitgraph.engine.postgres.engine.</code><code className="sig-name descname">chunk</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">sequence</span><span className="p">:</span> <span className="n">Sequence<span className="p">[</span>T<span className="p">]</span></span></em>, <em className="sig-param"><span className="n">chunk_size</span><span className="p">:</span> <span className="n">int</span> <span className="o">=</span> <span className="default_value">1000</span></em><span className="sig-paren">)</span> → Iterator<span className="p">[</span>List<span className="p">[</span>T<span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.engine.postgres.engine.chunk" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.engine.postgres.engine.get_change_key">
+<code className="sig-prename descclassname">splitgraph.engine.postgres.engine.</code><code className="sig-name descname">get_change_key</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">schema_spec</span><span className="p">:</span> <span className="n">List<span className="p">[</span>splitgraph.core.types.TableColumn<span className="p">]</span></span></em><span className="sig-paren">)</span> → List<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.engine.postgres.engine.get_change_key" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>

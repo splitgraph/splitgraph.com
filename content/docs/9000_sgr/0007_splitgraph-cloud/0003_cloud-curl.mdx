@@ -1,16 +1,11 @@
-export const meta = {
-  id: "cloud-curl",
-  title: "sgr cloud curl",
-  sidebarTitle: "cloud curl",
-  description: "Query a Splitgraph REST API.",
-};
+export const meta = {id: "cloud-curl", title: "sgr cloud curl", sidebarTitle: "cloud curl", description: "Query a Splitgraph REST API."};
 
-`sgr cloud curl [OPTIONS] IMAGE [REQUEST_PARAMS]`
+```sgr cloud curl [OPTIONS] IMAGE [REQUEST_PARAMS]```
 
 Query a Splitgraph REST API.
 
 This is a thin wrapper around curl that performs an HTTP request to Splitgraph Cloud to
-interact with a dataset using PostgREST (https://postgrest.org) or the Splitfile execution service.
+interact with a dataset using PostgREST (http://postgrest.org) or the Splitfile execution service.
 
 The actual invocation is:
 
@@ -22,16 +17,16 @@ The image must be of the form `namespace/repository:[hash_or_tag (default latest
 
 The actual request parameters depend on the request type:
 
-- For PostgREST: `/table?[postgrest request]` or empty to get the OpenAPI spec for this image.
-  For a reference on how to perform Postgrest requests, see https://postgrest.org/en/latest/api.html.
-- For the Splitfile executor: a JSON array to be POSTed to the executor, e.g.
-  `'{"command": "FROM some/repo IMPORT some_table AS alias", "tag": "new_tag"}'`.
+  * For PostgREST: `/table?[postgrest request]` or empty to get the OpenAPI spec for this image.
+    For a reference on how to perform Postgrest requests, see http://postgrest.org/en/latest/api.html.
+  * For the Splitfile executor: a JSON array to be POSTed to the executor, e.g.
+    `'{"command": "FROM some/repo IMPORT some_table AS alias", "tag": "new_tag"}'`.
 
 `--curl-args` allows to pass extra arguments to curl. Note that every argument must be prefixed
 with `--curl-args`, e.g. `--curl-args --cacert --curl-args /path/to/ca.pem`.
 
 ### Options
 
-- **`--remote TEXT`**: Name of the remote registry to use.
-- **`-t, --request-type [postgrest|splitfile]`**:
-- **`-c, --curl-args TEXT`**: Extra arguments to be passed to curl
+  * **`--remote TEXT`**: Name of the remote registry to use.
+  * **`-t, --request-type [postgrest|splitfile]`**: 
+  * **`-c, --curl-args TEXT`**: Extra arguments to be passed to curl

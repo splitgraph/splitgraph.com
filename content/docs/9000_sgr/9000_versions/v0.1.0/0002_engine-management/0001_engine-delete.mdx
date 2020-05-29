@@ -1,16 +1,11 @@
-export const meta = {
-  id: "engine-delete",
-  title: "sgr engine delete",
-  sidebarTitle: "engine delete",
-  description: "Delete the Splitgraph engine container.",
-};
+export const meta = {id: "engine-delete", title: "sgr engine delete", sidebarTitle: "engine delete", description: "Delete the Splitgraph engine container."};
 
-`sgr engine delete [OPTIONS] [NAME]`
+```sgr engine delete [OPTIONS] [NAME]```
 
 Delete the Splitgraph engine container.
 
 ### Options
 
-- **`-y, --yes`**: Do not prompt for confirmation.
-- **`-f, --force`**: Delete the engine anyway if it's running.
-- **`-v, --with-volumes`**: Include the engine's volumes (if not specified, volumes will be reattached when an engine with the same name is created).
+  * **`-y, --yes`**: Do not prompt for confirmation.
+  * **`-f, --force`**: Delete the engine anyway if it's running.
+  * **`-v, --with-volumes`**: Include the engine's volumes (if not specified, volumes will be reattached when an engine with the same name is created).

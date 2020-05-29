@@ -1,11 +1,6 @@
-export const meta = {
-  id: "csv-import",
-  title: "sgr csv import",
-  sidebarTitle: "csv import",
-  description: "Import a CSV file into a checked-out Splitgraph repository.",
-};
+export const meta = {id: "csv-import", title: "sgr csv import", sidebarTitle: "csv import", description: "Import a CSV file into a checked-out Splitgraph repository."};
 
-`sgr csv import [OPTIONS] REPOSITORY TABLE`
+```sgr csv import [OPTIONS] REPOSITORY TABLE```
 
 Import a CSV file into a checked-out Splitgraph repository. This doesn't create a new image, use `sgr commit`
 after the import and any adjustments (e.g. adding primary keys or converting column types) to do so.
@@ -20,11 +15,11 @@ If `-r` is passed, the table will instead be deleted and recreated from the CSV 
 
 ### Options
 
-- **`-f, --file FILENAME`**: File name to import data from, default stdin.
-- **`-r, --replace`**: Replace the table if it already exists.
-- **`-k, --primary-key TEXT`**: Use the specified column(s) as primary key(s)
-- **`-t, --override-type <TEXT TEXT>...`**: Explicitly set types of these columns to PG types
-- **`--encoding TEXT`**: Encoding to use for the CSV file
-- **`--separator TEXT`**: CSV separator to use
-- **`--no-header`**: Treats the first line of the CSV as data rather than a header.
-- **`--skip-schema-check`**: Skips checking that the dataframe is compatible with the target schema.
+  * **`-f, --file FILENAME`**: File name to import data from, default stdin.
+  * **`-r, --replace`**: Replace the table if it already exists.
+  * **`-k, --primary-key TEXT`**: Use the specified column(s) as primary key(s)
+  * **`-t, --override-type <TEXT TEXT>...`**: Explicitly set types of these columns to PG types
+  * **`--encoding TEXT`**: Encoding to use for the CSV file
+  * **`--separator TEXT`**: CSV separator to use
+  * **`--no-header`**: Treats the first line of the CSV as data rather than a header.
+  * **`--skip-schema-check`**: Skips checking that the dataframe is compatible with the target schema.
