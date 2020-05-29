@@ -1,7 +1,7 @@
 const path = require("path");
 const dirTree = require("directory-tree");
 
-const { walkTree, mapTree } = require("@splitgraph/lib/tree");
+const { walkTree, mapTree, flattenTree } = require("@splitgraph/lib/tree");
 
 const defaultOpts = {
   urlPrefix: "/",
@@ -94,12 +94,16 @@ class ContentTree {
         return;
       }
 
-      // Directory may be empty if it has no matching files in it (e.g. images)
+      // We want to exclude "empty" directories like image directories, which have no
+      // content files below them (but may have subdirectories that are also empty)
+      const hasNoProgeny =
+        flattenTree({
+          root: item,
+          filter: ({ type }) => type !== "directory",
+        }).length === 0;
+
       // Set isMeta = true so it gets filtered by mapTree in @splitgraph/lib/tree
-      let isEmptyDirectory =
-        item.type === "directory" &&
-        (!item.children || item.children.length === 0);
-      if (isEmptyDirectory) {
+      if (hasNoProgeny) {
         item.isMeta = true;
         return;
       }
