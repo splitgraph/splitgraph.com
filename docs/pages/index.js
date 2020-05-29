@@ -17,6 +17,7 @@ import LandingPageSplitfile from "@splitgraph/content/marketing/LandingPageSplit
 
 import {
   IconConceptContainerCrane,
+  IconConceptDataInPalmOfHand,
   IconConceptCow,
   IconConceptMoneyDatabase,
   IconConceptWorkflowGantChart,
@@ -372,15 +373,16 @@ const LandingPage = () => {
               size={"6rem"}
               extraStyle={{ display: "inline-flex" }}
             />
-            <h3>Build composable data images.</h3>
+            <h3>Build composable datasets</h3>
             <p>
-              Splitfiles allow you to use familiar SQL to build{" "}
-              <strong>versioned data images</strong>. Merging in{" "}
-              <Link href="/explore">public</Link> and internal datasets is as
-              easy as referencing them through a <tt>JOIN</tt>.
+              Splitfiles allow you to use familiar SQL to build versioned
+              datasets, or "data images," which are snapshots of a database
+              similar to how a Docker image is a snapshot of a filesystem.
+              Merging in <Link href="/explore">public</Link> and internal
+              datasets is as simple as referencing them through a <tt>JOIN</tt>.
             </p>
             <Link href="/docs/concepts/splitfiles">
-              Learn more about Splitfiles.
+              Learn more about Splitfiles
             </Link>
           </Box>
 
@@ -389,11 +391,12 @@ const LandingPage = () => {
               size={"6rem"}
               extraStyle={{ display: "inline-flex" }}
             />
-            <h3>Keep data fresh and reproducible.</h3>
+            <h3>Keep data fresh and reproducible</h3>
             <p>
               With Splitgraph's provenance tracking, you know exactly where your
-              data came from. <strong>Keep data images up-to-date</strong> with
-              a single command when the sources change.
+              data came from. Keep data images up-to-date with a single command
+              when the sources change. Easily integrate Splitgraph into your CI
+              pipeline to stay on top of changes to your data sources.
             </p>
             <Link href="/docs/working-with-data/inspecting-provenance">
               Learn more about data provenance and rebuilding data images.
@@ -405,12 +408,12 @@ const LandingPage = () => {
               size={"6rem"}
               extraStyle={{ display: "inline-flex", color: "red" }}
             />
-            <h3>Share data with peers.</h3>
+            <h3>Share data with peers</h3>
             <p>
               Like Git, Splitgraph is peer-to-peer. Push data to any other
-              Splitgraph instance or publish it to Splitgraph Cloud, where you
-              get an{" "}
-              <strong>instant REST API for every version of your data</strong>.
+              Splitgraph instance or publish it to the catalog at Splitgraph
+              Cloud, where you get bonus features like an instant,
+              OpenAPI-compatible REST API for every version of your data.
             </p>
             <Link href="/docs/splitgraph-cloud/introduction">
               Learn more about Splitgraph Cloud.
@@ -499,7 +502,7 @@ const LandingPage = () => {
               size={"6rem"}
               extraStyle={{ display: "inline-flex" }}
             />
-            <h3>Keep your existing tools.</h3>
+            <h3>Keep your existing tools</h3>
             <p>
               Anything that works with Postgres will work with Splitgraph. As
               far as your tools are concerned, a Splitgraph image is just
@@ -518,12 +521,13 @@ const LandingPage = () => {
               size={"6rem"}
               extraStyle={{ display: "inline-flex" }}
             />
-            <h3>Ingest data from anywhere.</h3>
+            <h3>Ingest data from anywhere</h3>
             <p>
               Forget ETL and BI connectors. Splitgraph leverages the native
               PostgreSQL feature of Foreign Data Wrappers. Use any FDW to import
-              data from common databases. Or, write a custom mount handler to
-              import data from wherever you need.
+              data from common databases, or thousands of open government
+              datasets. Or, write a custom mount handler to import data from
+              wherever you need.
             </p>
             <Link href="/docs/ingesting-data/foreign-data-wrappers/introduction">
               Read more about ingesting data with FDWs
@@ -536,7 +540,7 @@ const LandingPage = () => {
               size={"6rem"}
               extraStyle={{ display: "inline-flex" }}
             />
-            <h3>Save on costs.</h3>
+            <h3>Save on costs</h3>
             <p>
               Stop paying for a bulky, always-on data warehouse. Splitgraph data
               can be stored in any S3-compatible object storage and downloaded
@@ -626,9 +630,10 @@ const LandingPage = () => {
             <Box className="feature-body">
               <span className="feature-heading">Ingest data from anywhere</span>
               <span className="feature-description">
-                Import data from all major data sources, setup Splitgraph as a
+                Import data from all major databases, setup Splitgraph as a
                 Postgres replication client, or write a custom mount handler to
-                cover your unique use case.
+                cover your unique use case. Transform the data into a Splitgraph
+                image, or just leave it as-is and query it on demand.
               </span>
             </Box>
           </li>
@@ -643,6 +648,24 @@ const LandingPage = () => {
                 Don't download the whole dataset just to run one <tt>SELECT</tt>
                 . Splitgraph lets your software query remote data by lazily
                 downloading only the required fragments.
+              </span>
+            </Box>
+          </li>
+
+          <li>
+            <Box className="feature-icon">
+              <IconConceptDataInPalmOfHand color="primary" size={"3rem"} />
+            </Box>
+            <Box className="feature-body">
+              <span className="feature-heading">
+                Instantly access thousands of open datasets
+              </span>
+              <span className="feature-description">
+                Splitgraph comes bundled with a mount handler for Socrata, an
+                open data platform that hosts tens of thousands of government
+                datasets. You can use Splitgraph to mount any Socrata dataset as
+                a Postgres table. You can even write <tt>JOIN</tt> queries
+                across different data portals.
               </span>
             </Box>
           </li>
@@ -680,9 +703,9 @@ const LandingPage = () => {
               </span>
               <span className="feature-description">
                 Splitgraph objects are immutable and content-addressable,
-                letting it automatically deduplicate data and store multiple
-                versions efficiently.
-                {/* letting you focus on what to put into your data warehouse, not how to store it.*/}
+                allowing Splitgraph to automatically deduplicate data and store
+                multiple versions efficiently. Focus on what to put into your
+                data warehouse, not how to store it.
               </span>
             </Box>
           </li>
@@ -698,7 +721,7 @@ const LandingPage = () => {
               <span className="feature-description">
                 Store only lightweight metadata in a Splitgraph installation and
                 keep actual data in S3 compatible storage. Download data only
-                when you need it, without having to run a bulky always-on
+                when you need it, without the need for a bulky always-on
                 warehouse.
               </span>
             </Box>
@@ -708,7 +731,7 @@ const LandingPage = () => {
 
       <section className="lp-feature-section" sx={featureSectionStyle}>
         <Box className="feature-section-header">
-          <h2>Research</h2>
+          <h2>Research and Reporting</h2>
         </Box>
 
         <ul>
@@ -762,10 +785,8 @@ const LandingPage = () => {
               <span className="feature-description">
                 Splitgraph uses a columnar storage format for its data, offering
                 a smaller (5x-10x) on-disk footprint and faster read performance
-                than PostgreSQL tables.
-                {/*Splitgraph tables can be located in
-                S3-compatible storage, with only a required subset of the table
-                being downloaded.*/}
+                native than PostgreSQL tables. Keep your data in S3-compatible
+                storage, and only download it when you need it.
               </span>
             </Box>
           </li>
@@ -785,9 +806,11 @@ const LandingPage = () => {
             <Box className="feature-body">
               <span className="feature-heading">Splitfiles</span>
               <span className="feature-description">
-                Define transformations on data with declarative syntax that will
-                be familiar to anyone who's written a Dockerfile. Reference
-                other Splitgraph data images with a simple <tt>JOIN</tt>.
+                Define transformations on data using declarative syntax that
+                will be familiar to you if you've written a Dockerfile. Enjoy
+                full access to the <tt>SQL</tt> language, and reference other
+                Splitgraph data images or foreign tables with a simple{" "}
+                <tt>JOIN</tt>.
               </span>
             </Box>
           </li>
@@ -801,7 +824,8 @@ const LandingPage = () => {
               <span className="feature-description">
                 Datasets built with Splitfiles have all their sources recorded,
                 meaning you know exactly where your data came from and when to
-                rebuild it.
+                rebuild it. Easily stay on top of your data, without drifting
+                out of date when upstream data sources change.
               </span>
             </Box>
           </li>
@@ -813,9 +837,9 @@ const LandingPage = () => {
             <Box className="feature-body">
               <span className="feature-heading">Caching</span>
               <span className="feature-description">
-                Rebuild data only if the sources have changed. Use Splitfiles in
-                CI to keep your data up to date and only download the changes to
-                upstream datasets.
+                Rebuild data only if the sources have changed. Easily integrate
+                Splitfiles into your CI pipeline to keep your data up to date
+                and only download the changes to upstream datasets.
               </span>
             </Box>
           </li>
@@ -834,6 +858,8 @@ const LandingPage = () => {
               <span className="feature-description">
                 Spend less time loading. Spend more time defining
                 transformations between self-contained, immutable data images.
+                Let Splitgraph worry about dependency graphs, so you can focus
+                on results.
               </span>
             </Box>
           </li>
@@ -854,7 +880,7 @@ const LandingPage = () => {
               <span className="feature-heading">Peer-to-Peer</span>
               <span className="feature-description">
                 Any Splitgraph engine can act as a remote. Push data between
-                Splitgraph installations or publish it on Splitgraph Cloud.
+                Splitgraph installations or publish it to Splitgraph Cloud.
               </span>
             </Box>
           </li>
@@ -864,10 +890,28 @@ const LandingPage = () => {
               <IconFeatureAutogeneratedAPI color="primary" size={"3rem"} />
             </Box>
             <Box className="feature-body">
-              <span className="feature-heading">Auto-generated API</span>
+              <span className="feature-heading">Auto-generated REST API</span>
               <span className="feature-description">
-                Get a REST API for every version or tag of your data when you
-                push it to Splitgraph Cloud.
+                Get an instant, auto-generated OpenAPI-compatible REST API for
+                every version of your data when you push to Splitgraph Cloud,
+                thanks to the power of PostgREST. Query any version of your data
+                with a simple HTTP request. More tools coming soon.
+              </span>
+            </Box>
+          </li>
+
+          <li>
+            <Box className="feature-icon">
+              <IconConceptDataInPalmOfHand color="primary" size={"3rem"} />
+            </Box>
+            <Box className="feature-body">
+              <span className="feature-heading">
+                Access an ever-growing library of data
+              </span>
+              <span className="feature-description">
+                Splitgraph Cloud is like GitHub is to git, a place where you can
+                share and find public data. Enrich your private reports by
+                joining your internal data with public data.
               </span>
             </Box>
           </li>
@@ -948,7 +992,7 @@ const LandingPage = () => {
               size={"6rem"}
               extraStyle={{ display: "inline-flex" }}
             />
-            <h3>Work with data like you work with code.</h3>
+            <h3>Work with data like code</h3>
             <p>
               Benefit from familiar conventions and concepts. We took the best
               ideas from our favorite development tools and applied them to the
@@ -965,7 +1009,7 @@ const LandingPage = () => {
               size={"6rem"}
               extraStyle={{ display: "inline-flex" }}
             />
-            <h3>Build composable data images.</h3>
+            <h3>Build composable data images</h3>
             <p>
               Write familiar SQL with simple JOINs to combine public and private
               datasets into versioned data images with provenance tracking.
@@ -981,11 +1025,9 @@ const LandingPage = () => {
               size={"6rem"}
               extraStyle={{ display: "inline-flex" }}
             />
-            <h3>Treat your data like cattle.</h3>
+            <h3>Treat your data like cattle</h3>
             <p>
-              Stop wrangling data, and start wrangling databases. There's a
-              saying in dev-ops that you should treat your servers like cattle,
-              rather than individual pets that demand attention. Use Splitgraph
+              Stop wrangling data, and start wrangling databases. Use Splitgraph
               to escape the fragility of spaghetti ETL code and deploy
               confidently to production.
             </p>
