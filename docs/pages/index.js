@@ -492,7 +492,6 @@ const LandingPage = () => {
           </h2>
         </Box>
 
-        {/* TODO: Make color blue, but then icons need to be blue too */}
         <Box sx={{ ...featurePanelStyle, color: "initial" }}>
           <Box className="feature">
             <IconConceptWorkflowGantChart
@@ -503,14 +502,10 @@ const LandingPage = () => {
             <h3>Keep your existing tools.</h3>
             <p>
               Anything that works with Postgres will work with Splitgraph. As
-              far as your tools are concerned, a Splitgraph image is{" "}
-              <strong>just another Postgres database</strong>. You can adopt
-              Splitgraph incrementally while keeping your existing workflows and
-              benefitting from the Postgres ecosystem.
-              {/* It's all part of the core
-              philosophy of Splitgraph, to{" "}
-              <strong>enhance existing abstractions</strong> without breaking
-              them. */}
+              far as your tools are concerned, a Splitgraph image is just
+              another Postgres database. You can adopt Splitgraph incrementally
+              while keeping your existing workflows and benefitting from the
+              Postgres ecosystem.
             </p>
             <Link href="/docs/integrating-splitgraph/dbt">
               See examples of common integrations

@@ -68,13 +68,14 @@ const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
         ".footer-section": {
           flexGrow: 0,
           flexShrink: 1,
+          minWidth: "16ch", // Make length of longest item ("Terms of Service") to line up end columns
           ...mixStyles(".footer-section", baseVariant, extraStyle),
         },
         ".footer-community-row, .footer-copyright-row": {
           marginTop: "2rem",
           display: "flex",
           flexDirection: "row",
-          justifyContent: "flex-start",
+          justifyContent: "space-between",
           flexWrap: "wrap",
           ...mixStyles(".footer-community-row", baseVariant, extraStyle),
         },
@@ -107,10 +108,22 @@ const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
         <FooterSection
           header={"Product"}
           links={[
+            ["/", "Home"],
             ["/explore", "Explore Data"],
-            ["/docs", "Documentation"],
             ["/product/splitgraph/use-cases", "Use Cases"],
             ["/product/splitgraph/integrations", "Integrations"],
+          ]}
+        />
+
+        <FooterSection
+          header={"Support"}
+          links={[
+            ["/docs", "Documentation"],
+            ["/docs/getting-started/frequently-asked-questions", "FAQ"],
+            [
+              "https://github.com/splitgraph/splitgraph/tree/master/examples",
+              "Examples",
+            ],
           ]}
         />
 
@@ -120,14 +133,6 @@ const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
             ["/blog", "Blog"],
             ["/about/company/team", "Team"],
             ["/about/company/contact", "Contact"],
-          ]}
-        />
-
-        <FooterSection
-          header={"Legal"}
-          links={[
-            ["/terms", "Terms of Service"],
-            ["/privacy", "Privacy Policy"],
           ]}
         />
       </Box>
@@ -174,6 +179,15 @@ const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
             </a>
           </Box>
         </Box>
+
+        <FooterSection
+          extraStyle={{ alignSelf: "flex-end" }}
+          header={"Legal"}
+          links={[
+            ["/terms", "Terms of Service"],
+            ["/privacy", "Privacy Policy"],
+          ]}
+        />
       </Box>
 
       <Box className="footer-copyright-row">
