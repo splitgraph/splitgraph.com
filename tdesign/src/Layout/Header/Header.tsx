@@ -46,6 +46,9 @@ const headerSx: any = {
     color: 'sglightblue',
     // fontSize: '1.5rem',
     paddingLeft: '1ch',
+    ':hover': {
+      color: 'white',
+    },
   },
   a: {
     color: 'light',

@@ -295,6 +295,8 @@ export const makeDefaultTheme = () => ({
       borderRadius: '0.5em',
       ':hover': {
         cursor: 'pointer',
+        color: 'sglightblue',
+        border: 0,
       },
     },
     primary: {
