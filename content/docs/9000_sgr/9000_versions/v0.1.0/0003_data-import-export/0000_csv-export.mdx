@@ -1,11 +1,6 @@
-export const meta = {
-  id: "csv-export",
-  title: "sgr csv export",
-  sidebarTitle: "csv export",
-  description: "Export the result of a query as CSV.",
-};
+export const meta = {id: "csv-export", title: "sgr csv export", sidebarTitle: "csv export", description: "Export the result of a query as CSV."};
 
-`sgr csv export [OPTIONS] IMAGE_SPEC QUERY`
+```sgr csv export [OPTIONS] IMAGE_SPEC QUERY```
 
 Export the result of a query as CSV.
 
@@ -26,5 +21,5 @@ having to check the image out).
 
 ### Options
 
-- **`-f, --file FILENAME`**: File name to export to, default stdout.
-- **`-l, --layered`**: Don't materialize the tables, use layered querying instead.
+  * **`-f, --file FILENAME`**: File name to export to, default stdout.
+  * **`-l, --layered`**: Don't materialize the tables, use layered querying instead.

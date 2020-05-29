@@ -1,11 +1,6 @@
-export const meta = {
-  id: "engine-upgrade",
-  title: "sgr engine upgrade",
-  sidebarTitle: "engine upgrade",
-  description: "Upgrade a Splitgraph engine.",
-};
+export const meta = {id: "engine-upgrade", title: "sgr engine upgrade", sidebarTitle: "engine upgrade", description: "Upgrade a Splitgraph engine."};
 
-`sgr engine upgrade [OPTIONS] [NAME]`
+```sgr engine upgrade [OPTIONS] [NAME]```
 
 Upgrade a Splitgraph engine.
 
@@ -16,5 +11,5 @@ image and finally reinitializing the engine to perform needed migrations.
 
 ### Options
 
-- **`-i, --image TEXT`**: Docker image with the Splitgraph engine
-- **`--no-pull`**: Don't pull the new engine image
+  * **`-i, --image TEXT`**: Docker image with the Splitgraph engine
+  * **`--no-pull`**: Don't pull the new engine image
