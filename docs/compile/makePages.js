@@ -16,7 +16,7 @@ const prepContentTree = require("./prepContentTree");
 const makeDefaultExportPathMap = require("./makeDefaultExportPathMap");
 
 const DOCS_DIR = `${path.join(CONTENT_DIR, "docs")}`;
-const DOCS_CONTENT_TREE = path.join(ROOT_DIR, "compile/compiledSidebar");
+const DOCS_CONTENT_TREE = path.join(ROOT_DIR, "compile/compiledDocsSidebar");
 const prepDocsPages = () =>
   prepContentTree({
     compiledContentTree: DOCS_CONTENT_TREE,
@@ -26,18 +26,11 @@ const prepDocsPages = () =>
     inputDir: DOCS_DIR,
     outDir: PAGES_OUT_DIR,
     rootOutDir: PAGES_DIR,
-    writePage: ({
-      templater,
-      item,
-      contentTreeLocation,
-      getLinkTypeLocation,
-    }) => `
-import Link from "next/link";
+    writePage: ({ templater, item, contentTreeLocation }) => `
 import { withRouter } from "next/router";
 import ${templater} from "@splitgraph/templaters/layouts/${templater}";
 import MdxPage, { meta } from "@splitgraph/content${item.path.fromSiteRoot}";
 import contentTree from "${contentTreeLocation}";
-import getLinkType from "${getLinkTypeLocation}";
 export default withRouter(${templater}({ MdxPage, meta, contentTree }));
 `,
   });
@@ -56,18 +49,31 @@ const prepProductPages = () =>
     inputDir: PRODUCT_DIR,
     outDir: PAGES_OUT_DIR,
     rootOutDir: PAGES_DIR,
-    writePage: ({
-      templater,
-      item,
-      contentTreeLocation,
-      getLinkTypeLocation,
-    }) => `
-import Link from "next/link";
+    writePage: ({ templater, item, contentTreeLocation }) => `
 import { withRouter } from "next/router";
 import ${templater} from "@splitgraph/templaters/layouts/${templater}";
 import MdxPage, { meta } from "@splitgraph/content${item.path.fromSiteRoot}";
 import contentTree from "${contentTreeLocation}";
-import getLinkType from "${getLinkTypeLocation}";
+export default withRouter(${templater}({ MdxPage, meta, contentTree }));
+`,
+  });
+
+const ABOUT_DIR = `${path.join(CONTENT_DIR, "about")}`;
+const ABOUT_CONTENT_TREE = path.join(ROOT_DIR, "compile/compiledAboutSidebar");
+const prepAboutPages = () =>
+  prepContentTree({
+    compiledContentTree: ABOUT_CONTENT_TREE,
+    compiledGetLinkType: GET_LINK_TYPE,
+    urlPrefix: "/about",
+    templater: "withAboutLayout",
+    inputDir: ABOUT_DIR,
+    outDir: PAGES_OUT_DIR,
+    rootOutDir: PAGES_DIR,
+    writePage: ({ templater, item, contentTreeLocation }) => `
+import { withRouter } from "next/router";
+import ${templater} from "@splitgraph/templaters/layouts/${templater}";
+import MdxPage, { meta } from "@splitgraph/content${item.path.fromSiteRoot}";
+import contentTree from "${contentTreeLocation}";
 export default withRouter(${templater}({ MdxPage, meta, contentTree }));
 `,
   });
@@ -83,21 +89,14 @@ const prepBlogPages = () =>
     inputDir: BLOG_DIR,
     outDir: PAGES_OUT_DIR,
     rootOutDir: PAGES_DIR,
-    writePage: ({
-      templater,
-      item,
-      contentTreeLocation,
-      getLinkTypeLocation,
-    }) => {
+    writePage: ({ templater, item, contentTreeLocation }) => {
       const slug = item.slug;
 
       return `
-import Link from "next/link";
 import { withRouter } from "next/router";
 import ${templater} from "@splitgraph/templaters/layouts/${templater}";
 import MdxPage, { meta } from "@splitgraph/content${item.path.fromSiteRoot}";
 import contentTree from "${contentTreeLocation}";
-import getLinkType from "${getLinkTypeLocation}";
 const { flattenTree } = require("@splitgraph/lib/tree");
 
 const matchingBlogPost =
@@ -119,12 +118,10 @@ const prepRootPages = () =>
     inputDir: ROOT_CONTENT_DIR,
     outDir: PAGES_OUT_DIR,
     rootOutDir: PAGES_DIR,
-    writePage: ({ templater, item, getLinkTypeLocation }) => `
-import Link from "next/link";
+    writePage: ({ templater, item }) => `
 import { withRouter } from "next/router";
 import ${templater} from "@splitgraph/templaters/layouts/${templater}";
 import MdxPage, { meta } from "@splitgraph/content/root${item.path.fromSiteRoot}";
-import getLinkType from "${getLinkTypeLocation}";
 export default withRouter(${templater}({ MdxPage, meta }));
 `,
   });
@@ -177,12 +174,14 @@ const prepPages = () => {
   const preppedProductPages = prepProductPages();
   const preppedBlogPages = prepBlogPages();
   const preppedRootPages = prepRootPages();
+  const preppedAboutPages = prepAboutPages();
 
   const pagesToMake = [
     ...preppedDocsPages.pagesToMake,
     ...preppedProductPages.pagesToMake,
     ...preppedBlogPages.pagesToMake,
     ...preppedRootPages.pagesToMake,
+    ...preppedAboutPages.pagesToMake,
   ];
 
   const exportMap = {
@@ -190,6 +189,7 @@ const prepPages = () => {
     ...preppedProductPages.exportMap,
     ...preppedBlogPages.exportMap,
     ...preppedRootPages.exportMap,
+    ...preppedAboutPages.exportMap,
   };
 
   return { pagesToMake, exportMap };

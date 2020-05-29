@@ -8,7 +8,7 @@ import { NextSeo } from "next-seo";
 
 import withTheme from "@splitgraph/docs/hocs/withTheme";
 import { InnerPageLayout } from "@splitgraph/docs/components/InnerPageLayout";
-import { BlogPostItem, Footer } from "@splitgraph/docs/components";
+import { BlogPostItem } from "@splitgraph/docs/components";
 
 import blogPosts from "../../compile/compiledBlogPosts";
 
