@@ -6,7 +6,6 @@ import * as React from 'react';
 import { Header, HeaderLeft, HeaderCenter, HeaderRight } from '../Header';
 import { LogoImage } from '../LogoImage';
 import { LogoText } from '../LogoText';
-import { Link } from '../../Link';
 
 export interface BaseLayoutProps {
   children?: React.ReactNode;
@@ -52,10 +51,10 @@ export default ({
     <Box sx={containerStyle}>
       <Header>
         <HeaderLeft>
-          <Link className="logo-link logo-link-flex" as={'/'} href={'/'}>
+          <a className="logo-link logo-link-flex" aria-label="home" href={'/'}>
             <LogoImage logoURL={'/static/splitgraph_logo_light_nocircle.svg'} />
             <LogoText />
-          </Link>
+          </a>
         </HeaderLeft>
         <HeaderCenter>{headerCenter}</HeaderCenter>
         <HeaderRight>{headerRight}</HeaderRight>
