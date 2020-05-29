@@ -220,12 +220,12 @@ const featurePanelStyle = {
   maxWidth: "90vw",
   WebkitBoxPack: "center",
   ".feature:nth-child(even)": {
-    marginRight: [0, 0, "4rem"],
-    marginLeft: [0, 0, "4rem"],
+    marginRight: [0, "2rem", "4rem"],
+    marginLeft: [0, "2rem", "4rem"],
   },
   ".feature": {
     marginBottom: ["4rem", "4rem", 0],
-    width: ["100%", "50%", "25%"],
+    width: ["100%", "calc(50% - 4rem)", "25%"],
     flexGrow: 0,
     flexShrink: 1,
     minHeight: "200px",
@@ -420,8 +420,8 @@ const LandingPage = () => {
               Splitfiles allow you to use familiar SQL to build versioned
               datasets, or "data images," which are snapshots of a database
               similar to how a Docker image is a snapshot of a filesystem.
-              Merging in <Link href="/explore">public</Link> and internal
-              datasets is as simple as referencing them through a <tt>JOIN</tt>.
+              Merging public data with internal datasets is as simple as
+              referencing them through a <tt>JOIN</tt>.
             </p>
             <Link href="/docs/concepts/splitfiles">
               Learn more about Splitfiles
@@ -587,6 +587,8 @@ const LandingPage = () => {
           borderBottomColor: "rgba(13,24,33,1)",
           paddingTop: "2rem",
           paddingBottom: "2rem",
+          paddingLeft: "max(3rem, calc((100vw - 120ch)/2))",
+          paddingRight: "max(3rem, calc((100vw - 120ch)/2))",
         }}
       >
         <h2>Explore Public Data</h2>
@@ -595,7 +597,6 @@ const LandingPage = () => {
           src="/explore?embed=1"
           allowtransparency="true"
           style={{
-            position: "position: absolute",
             left: 0,
             top: 0,
             minWidth: "100%",
@@ -1111,8 +1112,9 @@ const LandingPage = () => {
             />
             <h3>Build composable data images</h3>
             <p>
-              Write familiar SQL with simple JOINs to combine public and private
-              datasets into versioned data images with provenance tracking.
+              Write familiar SQL with simple <tt>JOIN</tt>s to combine public
+              and private datasets into versioned data images with provenance
+              tracking.
             </p>
             <Link href="/docs/concepts/splitfiles">
               Read more about Splitfiles
