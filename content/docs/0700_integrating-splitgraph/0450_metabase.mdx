@@ -47,26 +47,26 @@ $ docker network connect metabase_default splitgraph_engine_default
 
 Go to `localhost:3000` and set up your Metabase account.
 
-![Set up Metabase account](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/metabase/1_initial_setup.png)
+![Set up Metabase account](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating-splitgraph/images/metabase/1_initial_setup.png)
 
 Use `engine` as the database hostname if you're using the Compose file or `splitgraph_engine_default` (or the Docker container name) if you're using `sgr engine`.
 
-![Set up PostgreSQL connection](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/metabase/2_database_setup.png)
+![Set up PostgreSQL connection](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating-splitgraph/images/metabase/2_database_setup.png)
 
 #### Browse Data issue
 
 As discussed, the "Browse Data" functionality currently doesn't work on Splitgraph, since
 Splitgraph schemas contain slashes in them.
 
-![Browse Data dialog](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/metabase/3_browse_data.png)
+![Browse Data dialog](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating-splitgraph/images/metabase/3_browse_data.png)
 
 #### Write SQL
 
 Click on "Write SQL" and select the Splitgraph database that you set up.
 
-![Click on Write SQL](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/metabase/4_write_sql.png)
+![Click on Write SQL](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating-splitgraph/images/metabase/4_write_sql.png)
 
-![Select Splitgraph database](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/metabase/5_select_database.png)
+![Select Splitgraph database](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating-splitgraph/images/metabase/5_select_database.png)
 
 #### Sample datasets and queries
 
@@ -95,7 +95,7 @@ WHERE text ILIKE '%coronavirus%'
 GROUP BY date;
 ```
 
-![Congress Tweets query example](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/metabase/6_congress_tweets.png)
+![Congress Tweets query example](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating-splitgraph/images/metabase/6_congress_tweets.png)
 
 ```sql
 WITH hourly_counts AS (
@@ -109,7 +109,7 @@ WITH hourly_counts AS (
     GROUP BY hour;
 ```
 
-![Congress Tweets query example](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/metabase/7_congress_tweets.png)
+![Congress Tweets query example](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating-splitgraph/images/metabase/7_congress_tweets.png)
 
 ##### Domestic US Flights
 
@@ -130,7 +130,7 @@ GROUP BY origin_airport
 ORDER BY total_passengers DESC;
 ```
 
-![Domestic US flights query example](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/metabase/8_domestic_us_flights.png)
+![Domestic US flights query example](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating-splitgraph/images/metabase/8_domestic_us_flights.png)
 
 ##### 2016 US Election votes
 
@@ -149,7 +149,7 @@ FROM "splitgraph/2016_election".precinct_results
 GROUP BY state_postal;
 ```
 
-![2016 US Election query example](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/metabase/9_us_election.png)
+![2016 US Election query example](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating-splitgraph/images/metabase/9_us_election.png)
 
 ##### Geonames
 
@@ -169,7 +169,7 @@ ORDER BY elevation DESC
 LIMIT 100;
 ```
 
-![Geonames query example](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/metabase/10_geonames.png)
+![Geonames query example](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating-splitgraph/images/metabase/10_geonames.png)
 
 ```sql
 SELECT
@@ -178,7 +178,7 @@ FROM "splitgraph/geonames".all_countries
 WHERE feature_code = 'PPL' AND name = 'Cambridge'
 ```
 
-![Geonames query example](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/metabase/11_geonames.png)
+![Geonames query example](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating-splitgraph/images/metabase/11_geonames.png)
 
 ##### London Wards
 
@@ -203,4 +203,4 @@ SELECT name, ST_Y(centroid) AS lat, ST_X(centroid) AS lon
 FROM ward_centres;
 ```
 
-![London Wards Election query example](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating_splitgraph/images/metabase/12_london_wards.png)
+![London Wards Election query example](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0700_integrating-splitgraph/images/metabase/12_london_wards.png)
