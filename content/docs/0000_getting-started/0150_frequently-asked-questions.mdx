@@ -21,6 +21,12 @@ to build the engine or contact us.
 You can also add the Splitgraph engine as a PostgreSQL [logical replication client](../ingesting-data/postgres-replication),
 which will let you ingest data from existing databases without installing Splitgraph on them.
 
+### Does my data have to be in PostgreSQL to use Splitgraph?
+
+With [foreign data wrappers](../ingesting-data/foreign-data-wrappers/introduction), you can query
+data in other databases (including MongoDB, MySQL or PostgreSQL) directly through Spligraph with
+[any PostgreSQL client](../integrating-splitgraph/other-clients). You do not need to copy your data into PostgreSQL to use Splitgraph.
+
 ### Why PostgreSQL? Why not write your own database?
 
 PostgreSQL is a battle-tested RDBMS with a mature feature set (ACID transactions, authentication,
@@ -52,7 +58,7 @@ We were guided by the same principles when building Splitgraph.
 We maintain a couple of Jupyter notebooks with benchmarks on [our GitHub](https://github.com/splitgraph/splitgraph/tree/master/examples/benchmarking).
 
 It's difficult to specify what is considered a benchmark for Splitgraph, as for a lot of operations
-one would be benchmarking PostgreSQL itself. This is why we haven't run benchmarks like [TPC-DS](https://www.tpc.org/tpcds/) on Splitgraph
+one would be benchmarking PostgreSQL itself. This is why we haven't run benchmarks like [TPC-DS](http://www.tpc.org/tpcds/) on Splitgraph
 (since for maximum performance, it's easy to check out a Splitgraph image into a PostgreSQL schema)
 but have tested the overhead of various Splitgraph workloads over PostgreSQL.
 
@@ -106,7 +112,7 @@ transformations from reusable and versionable SQL snippets.
 dbt is enhanced by Splitgraph: since a Splitgraph engine is also a PostgreSQL instance, dbt can
 work against it, getting benefits like version control, packaging and sharing to datasets that it uses and builds.
 
-We have an example of running [dbt](../integrating-splitgraph/dbt) in such way, swapping between different versions of the
+We have an example of running [dbt](../integrating-splitgraph/dbt) in such a way, swapping between different versions of the
 source dataset and looking at their effect on the built dbt model.
 
 Splitgraph also offers its own method of building datasets: [Splitfiles](../concepts/splitfiles). Splitfiles offer Dockerfile-like caching, provenance tracking, fast dataset rebuilds, joins between datasets and full SQL support.
@@ -116,9 +122,9 @@ transformations are treated as pure functions between isolated self-contained da
 
 #### Databricks
 
-Databricks offers a full take-it-or-leave-it platform for data governance, whereas Splitgraph allows you to pick and choose parts of your workflow that you wish to swap out with Splitgraph.
+Databricks offers a full take-it-or-leave-it platform for doing data science, including a managed Spark cluster, whereas Splitgraph allows you to pick and choose parts of your workflow that you wish to swap out with Splitgraph.
 
-Splitgraph encourages users to transform data using reproducible [Splitfiles](../concepts/splitfiles) that allow hermetic dataset builds rather than ad hoc notebooks.
+Rather than ad hoc notebooks, Splitgraph encourages users to transform data using reproducible [Splitfiles](../concepts/splitfiles) that allow hermetic dataset builds.
 
 Same Splitgraph workflows can be applied in development as in production, with the user's local engine. This brings iteration times down and lets you maintain a single codebase for your data transformations.
 

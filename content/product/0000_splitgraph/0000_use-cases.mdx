@@ -24,9 +24,19 @@ Since the Splitgraph engine is based on PostgreSQL, it can even be added as a Po
 [logical replication client](/docs/ingesting-data/postgres-replication) and ingest data directly
 from your production database.
 
+### Querying and plotting Socrata data
+
+Splitgraph has [first-class support](/docs/ingesting-data/socrata/) for querying datasets on the
+[Socrata open data platform](https://www.tylertech.com/products/socrata) through SQL and using them
+in [Splitfiles](../concepts/splitfiles). We also maintain a catalog of [almost 20000 open government datasets](/splitgraph/socrata)
+available for immediate querying.
+
+See the [Socrata example](/docs/ingesting-data/socrata/) for a demonstration of exploring a
+Socrata endpoint with [DBeaver](https://dbeaver.io/) and plotting a dataset with [Metabase](https://www.metabase.com/).
+
 ### Sharing and publishing datasets
 
-Much like Git, Splitgraph is decentralized and any Splitgraph engine can act as a remote. Changes
+Much like Git, Splitgraph is decentralized and any Splitgraph engine can act as a [remote](/docs/architecture/splitgraph-remotes). Changes
 pushed to and pulled from other Splitgraph instances are delta compressed, letting you keep your
 dataset's history without sacrificing storage. See the [decentralized demo](/docs/getting-started/decentralized-demo)
 for an introduction to using Splitgraph in a peer-to-peer fashion.

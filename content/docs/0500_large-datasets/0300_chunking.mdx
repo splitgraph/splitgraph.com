@@ -4,8 +4,8 @@ export const meta = {
 };
 
 Large Splitgraph tables are usually split up into multiple objects. At commit time, new tables in
-an image are chunked up into fragments into 10000 rows by default. This can be changed by passing
-`--chunk-size` to `sgr commit`.
+an image are chunked up into fragments of 10000 rows by default. This can be changed by passing
+`--chunk-size` to `sgr commit` or changing the `SG_COMMIT_CHUNK_SIZE` configuration flag/environment variable.
 
 Chunking is done by primary key. It is also possible to sort data inside a chunk by passing
 `--chunk-sort-keys` to `sgr commit`. This lets [`cstore_fdw`](https://github.com/citusdata/cstore_fdw),

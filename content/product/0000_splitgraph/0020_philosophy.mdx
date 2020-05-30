@@ -3,6 +3,57 @@ export const meta = {
   title: "Philosophy",
 };
 
-# Philosophy
+This page summarizes some core ideas that we had in mind when designing Splitgraph.
 
-Philosophy
+### Borrow concepts but don't blindly apply them
+
+Even though we were inspired by those tools a lot when building Splitgraph, we don't like to think
+of Splitgraph as **Git for data or Docker for data**. We think that the work of a data engineer
+or a data scientist is sufficiently different from software engineering that one can't just take an
+existing tool and remap all of its concepts to the problem of working with data.
+
+However, we still think that data can benefit a lot from [tools and best practices](/product/splitgraph/motivation) in software engineering:
+versioning, self-contained artifacts, continuous integration, reproducible builds and the idea of tools that improve existing workflows without breaking them and forcing users to change them.
+
+### Enhance existing abstractions without breaking them
+
+Would Git be a good revision control system if it required every editor or IDE to be
+rewritten to be aware of Git? Would Docker have taken off like it did if Dockerizing an application
+meant recompiling it to use specific system calls?
+
+We think that great tools **enhance existing abstractions without breaking them**. Git enhances the
+abstraction of the filesystem (by adding versioning to it) using the tools provided by the filesystem
+itself (copying files). The result is that anything that uses the filesystem is enhanced by Git without
+needing to be aware of it. Most editors and IDEs have Git integrations but those are not necessary
+for them to benefit from versioning.
+
+Similarly, Docker enhances the abstraction of Linux system calls (by adding isolation to them) using
+the tools provided by Linux itself (cgroups, namespaces, iptables). Applications don't need to be aware
+that they're running in Docker to benefit from containerization.
+
+We were guided by the same principles when building Splitgraph. We tried carefully to not break
+the abstraction of a PostgreSQL table and wire protocol, because doing otherwise would mean throwing
+away a vast existing ecosystem of applications, users, libraries and extensions. This means that
+a lot of **tools that work with PostgreSQL work with Splitgraph out of the box**.
+
+We collect examples of the most interesting ones on the [integrations page](/product/splitgraph/integrations).
+
+### Data as cattle
+
+There is an idea in DevOps of [cattle and pet servers](http://cloudscaling.com/blog/cloud-computing/the-history-of-pets-vs-cattle/). We think that a similar concept can be applied to data in a warehouse and propose a similar test: if it's a disaster that a dataset gets deleted, it's a pet dataset. If it's OK that a dataset gets deleted, then it's a cattle dataset.
+
+**We think that more datasets should be like cattle than like pets**.
+
+Pet datasets are assembled and curated manually over the course of many years. This could be a production database, a mapping table or data in a CRM.
+
+Cattle datasets are clearly defined and have all their dependencies recorded. It should be possible to recreate cattle datasets from pet datasets.
+ In the very extreme, it should be possible to delete all derived tables in a data warehouse and recreate it from scratch.
+
+Here's what we think are the definitions and benefits of cattle data:
+
+  * Datasets are built from self-contained definition files that explicitly enumerate every dependency that is required.
+  * It's possible to experiment with datasets, rebuilding them against data from a different vendor or seeing the impact on the final model of excluding some dataset from a pipeline.
+  * A library of public datasets is available, ready to be referenced and joined to enrich private data.
+  * When research is put into production, it's easy to see where a dataset came from and what it needs. Sometimes, just running the same dataset build process in production is good enough. Similarly to software, this decreases iteration times and prevents having to maintain two separate codebases.
+  * An ETL pipeline can be replayed at any point in time in an isolated environment to debug issues.
+  * If a source dataset becomes "tainted" (for example, because it has personal information), it's easy to see which data it affected and what needs to be rebuilt.

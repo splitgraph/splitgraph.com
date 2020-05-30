@@ -3,4 +3,39 @@ export const meta = {
   title: "Transformation",
 };
 
-# Data transformations
+When [Docker](https://www.docker.com/) came around, it revolutionized the way we think about
+services, making it easy for anyone to build, run, deploy and share self-contained filesystem images.
+
+Instead of handcrafting and looking after ["cattle" servers](/product/splitgraph/philosophy#data-as-cattle), Docker let developers define explicitly
+what libraries, code and environment variables their services needed in a single file
+that could be run by anyone to build an image that could run anywhere, in development or production.
+
+When designing Splitgraph, we were partially inspired by the same ideas.
+
+### Splitfiles
+
+[Splitfiles](/docs/concepts/splitfiles) are a declarative language that is used to build Splitgraph
+data images.
+
+Splitfiles let you [build](/docs/sgr/splitfile-execution/build) datasets in a composable, maintable and reproducible way by using [any SQL DDL or DML statement](/docs/splitfiles/splitfile-sql) to express your ideas.
+
+You can reference [other Splitgraph images](/docs/splitfiles/splitfile-import) or other databases directly from the Splitfile and Splitgraph will take care of downloading images and [mounting](/docs/sgr/data-import-export/mount) databases for you, letting you focus on what to do with the data,
+rather than how to acquire it.
+
+### Provenance tracking and caching
+
+Every data image that is built with a Splitfile has its [provenance](/docs/working-with-data/inspecting-provenance) recorded in it, including all images referenced by it.
+
+Provenance tracking lets you know exactly where each table in your warehouse came from and when to [rebuild](/docs/sgr/splitfile-execution/rebuild) it.
+
+When the time comes to productionize some research, you can use provenance tracking to know which data feeds
+you need to purchase or whether you can use use the same Splitfile to build the data in production.
+
+### Extract, transform, transform
+
+We envision Splitfiles as a replacement for ETL pipelines.
+
+Splitfiles free you from having to run your transformations as processes that move data between tables
+in a single data warehouse and instead allow you to treat transformations as pure functions between isolated, self-contained data images. Any transformation can be replayed at any point in time, helping you debug your data pipeline and easily backfill fixes to historical data.
+
+To get started with Splitfiles, you can follow the [five-minute demo](/docs/getting-started/five-minute-demo) that will take you through the basics of building and publishing a dataset on Splitgraph Cloud, complete with provenance tracking and an automatic OpenAPI-compatible REST API. Alternatively, you can take a look at [sample Splitfiles](https://github.com/splitgraph/splitgraph/tree/master/examples/sample_splitfiles) on our GitHub.

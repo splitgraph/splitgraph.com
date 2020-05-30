@@ -1,12 +1,29 @@
-import { Box } from "theme-ui";
-
 export const meta = {
   id: "motivation",
   title: "Motivation",
 };
 
-# Motivation
+The motivation behind building Splitgraph is simple: advancements made in the last decade in software
+engineering and operations, as well as existing best practices, are mostly yet to make their way
+to data science and data engineering.
 
-Motivation
+There are currently tens of thousands of open-source **off-the-shelf services and libraries** available,
+most of them well documented and with clear installation instructions. With Docker, those components can be
+packaged into **self-contained images** that can be dropped into any stack with little extra work required.
 
-<Box sx={{color: "red"}}>Hello</Box>
+Instead of server fleets being configured manually, the rise of infrastructure-as-code has meant that
+whole clusters are now defined in **version-controlled definition files** and can be provisioned, scaled and reconfigured
+automatically.
+
+**Versioning and revision control** is something that every software engineer knows about. Every change
+to code is tracked. Software builds are performed on isolated **CI machines**: there's a clear
+build process that avoids the "works on my machine" class of problems.
+
+Finally, good tools that implement all of this **enhance existing abstractions without breaking them**.
+Any compiler, IDE or editor can benefit from Git, Mercurial or SVN without having to be aware of them.
+Any Unix application can be Dockerized and deployed without being recompiled to use Docker version of system calls.
+
+When we started building Splitgraph in 2018, there was nothing around that hit all these points. Things
+are beginning to change and a lot of interesting tools are getting released to help data work. However,
+we still don't feel like any of them completely satisfy our vision. We list applications and services that
+are most similar to Splitgraph on our [Frequently Asked Questions](/docs/getting-started/frequently-asked-questions#why-not-just-use) page.

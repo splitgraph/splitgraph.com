@@ -3,7 +3,7 @@ export const meta = {
   title: "PostgreSQL replication client",
 };
 
-It is possible to add a Splitgraph engine as a replication client to a production PostgreSQL database, occasionally committing the changes as new Splitgraph images. This is done through PostgreSQL logical replication and has many uses:
+It is possible to add a Splitgraph engine as a [logical replication client](https://www.postgresql.org/docs/current/logical-replication.html) to a production PostgreSQL database, occasionally committing the changes as new Splitgraph images. This has many uses:
 
 - Recording the history of the upstream database for audit purposes
 - Using anonymized production data snapshots for integration testing

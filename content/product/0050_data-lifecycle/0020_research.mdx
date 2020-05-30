@@ -3,4 +3,32 @@ export const meta = {
   title: "Research",
 };
 
-# Data research
+Splitgraph lets you work on data with your existing tools whilst also introducing [concepts and
+best practices](/product/splitgraph/motivation) from the software engineering discipline.
+
+### Data Versioning
+
+Splitgraph was partially inspired by Git and implements some of Git's most useful functions. You can
+[check out](/docs/sgr/image-management-creation/checkout), [commit](/docs/sgr/image-management-creation/commit),
+[tag](/docs/sgr/image-management-creation/tag), [push](/docs/sgr/sharing-images/push) and [pull](/docs/sgr/sharing-images/pull) Splitgraph datasets just like you would with Git.
+
+Splitgraph's versioning is implemented on top of the SQL standard. Any existing tool can interact
+with a Splitgraph table and benefit from its change tracking capabilities, for example, [dbt](/docs/integrating-splitgraph/dbt), [Jupyter](/docs/integrating-splitgraph/jupyter-notebooks) or
+[Metabase](/docs/integrating-splitgraph/metabase)
+
+The [decentralized demo](/docs/getting-started/decentralized-demo) shows the basics of running Git operations on data.
+
+### `sgr` CLI
+
+The [`sgr` command line client](/docs/architecture/sgr-cli) is the easiest way to manipulate data
+images and manage your [Splitgraph engine](/docs/architecture/splitgraph-engine). It ships as a
+single binary, freeing you from needing to set up a working Python environment, and takes care
+of running the Splitgraph engine in Docker with [`sgr engine`](/docs/sgr/engine-management/engine-add) commands.
+
+### Python Library
+
+Splitgraph is partially written in Python, letting it directly integrate with Python's vast data science
+ecosystem. You can manipulate Splitgraph images and repositories directly from your Python code
+or [Jupyter](https://jupyter.org/) notebook and export Splitgraph data directly to [Pandas](https://pandas.pydata.org/) DataFrames, including using [layered querying](/docs/large-datasets/layered-querying).
+
+See the [Jupyter/scikit-learn](/docs/integrating-splitgraph/jupyter-notebooks) demo for a showcase.
