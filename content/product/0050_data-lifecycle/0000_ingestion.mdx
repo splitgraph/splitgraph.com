@@ -3,4 +3,50 @@ export const meta = {
   title: "Ingestion",
 };
 
-# Data ingestion
+Since the [Splitgraph engine](/docs/architecture/splitgraph-engine) is also a PostgreSQL instance,
+you can connect to it with any client, including [DataGrip](/docs/integrating-splitgraph/datagrip), [pgAdmin](/docs/integrating-splitgraph/pgadmin) or [other clients like pgcli or DBeaver](/docs/integrating-splitgraph/other-clients)
+to ingest and explore data. Applications can use [any PostgreSQL driver](https://wiki.postgresql.org/wiki/List_of_drivers)
+to write data to Splitgraph and snapshot it as Splitgraph [images](/docs/concepts/images).
+
+However, Splitgraph comes with some features that make data ingestion easier or redundant.
+
+### Foreign Data Wrappers
+
+[Foreign Data Wrappers](/docs/ingesting-data/foreign-data-wrappers/introduction) are a PostgreSQL feature
+that allows users to write a custom handler for any other database or data source. This turns the source into a set of
+foreign tables that act like normal tables and can be queried by any PostgreSQL client.
+
+The [`sgr mount`](/docs/sgr/data-import-export/mount) CLI command takes care of PostgreSQL foreign
+data wrapper boilerplate for you, creating a "mountpoint" on the engine and letting you query
+the remote database directly through Splitgraph, [snapshot it as an image](/docs/sgr/image-management-creation/import)
+or use it in a [Splitfile](/docs/splitfiles/splitfile-import).
+
+Splitgraph comes with with several open-source foreign data wrappers:
+
+   * [`postgres_fdw`](/docs/ingesting-data/foreign-data-wrappers/load-postgres-tables)
+   * [`mongo_fdw`](/docs/ingesting-data/foreign-data-wrappers/load-mongo-collections)
+   * [`mysql_fdw`](/docs/ingesting-data/foreign-data-wrappers/load-mysql-tables)
+
+Splitgraph also comes with [a fork](https://github.com/splitgraph/Multicorn)
+of [Multicorn](https://multicorn.org/), an extension that allows you to write foreign data
+wrappers in Python and add them as [custom mount handlers](/docs/ingesting-data/foreign-data-wrappers/load-mount-handlers) to Splitgraph.
+
+### Layered querying
+
+[Layered querying](/docs/large-datasets/layered-querying) is implemented as a foreign data wrapper.
+It allows any PostgreSQL client to query large remote Splitgraph datasets by downloading just the
+required table regions on the fly, using [bloom filters](/docs/large-datasets/indexing) and other metadata.
+
+In addition, layered querying runs directly against [`cstore_fdw`](/docs/concepts/objects) fragments
+without checking data out, which can sometimes result in faster read performance
+and lower IO load than normal PostgreSQL tables.
+
+### Socrata
+
+Splitgraph has [first-class support](/docs/ingesting-data/socrata/) for querying datasets on the [Socrata open data platform](https://www.tylertech.com/products/socrata) through SQL and using them in [Splitfiles](/docs/concepts/splitfiles).
+
+Support for Socrata is also implemented using a foreign data wrapper. This allows Splitgraph to be used as a PostgreSQL-to-Socrata connector. Any PostgreSQL application, client or dashboarding tool can query Socrata datasets through Splitgraph and even run joins on datasets from different Socrata endpoints or between Socrata datasets and Splitgraph images.
+
+### Replication
+
+It is possible to add a Splitgraph engine as a [logical replication client](https://www.postgresql.org/docs/current/logical-replication.html) to a production PostgreSQL database, occasionally committing the changes as new Splitgraph images. See the [replication guide](/docs/ingesting-data/postgres-replication) for an example.

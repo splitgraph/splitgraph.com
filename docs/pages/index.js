@@ -301,6 +301,9 @@ const featureSectionStyle = {
     h2: {
       margin: 0,
     },
+    // TODO I added this to get line breaks in feature subheadings but it broke the layout
+    //   (no longer vertically centred)
+    flexDirection: "column",
   },
   ul: {
     width: ["inherit", "inherit", "50%"],
@@ -529,7 +532,7 @@ const LandingPage = () => {
               while keeping your existing workflows and benefitting from the
               Postgres ecosystem.
             </p>
-            <Link href="/docs/integrating-splitgraph/dbt">
+            <Link href="/product/splitgraph/motivation">
               See examples of common integrations
             </Link>
           </Box>
@@ -637,6 +640,9 @@ const LandingPage = () => {
       <section className="lp-feature-section" sx={featureSectionStyle}>
         <Box className="feature-section-header">
           <h2>Ingestion</h2>
+          <Link href="/product/data-lifecycle/ingestion">
+            <p>Go beyond ETL and query other databases directly from Splitgraph.</p>
+          </Link>
         </Box>
 
         <ul>
@@ -714,6 +720,9 @@ const LandingPage = () => {
       <section className="lp-feature-section" sx={featureSectionStyle}>
         <Box className="feature-section-header">
           <h2>Storage</h2>
+          <Link href="/product/data-lifecycle/storage">
+            <p>Save on storage costs with a columnar format and delta compression.</p>
+          </Link>
         </Box>
 
         <ul>
@@ -787,6 +796,9 @@ const LandingPage = () => {
       <section className="lp-feature-section" sx={featureSectionStyle}>
         <Box className="feature-section-header">
           <h2>Research and Reporting</h2>
+          <Link href="/product/data-lifecycle/research">
+            <p>Work on data with familiar tools and paradigms.</p>
+          </Link>
         </Box>
 
         <ul>
@@ -875,6 +887,9 @@ const LandingPage = () => {
       <section className="lp-feature-section" sx={featureSectionStyle}>
         <Box className="feature-section-header">
           <h2>Transformations</h2>
+          <Link href="/product/data-lifecycle/transformation">
+            Build datasets in a composable and maintainable way, suitable for research or production.
+          </Link>
         </Box>
 
         <ul>
@@ -975,6 +990,7 @@ const LandingPage = () => {
       <section className="lp-feature-section" sx={featureSectionStyle}>
         <Box className="feature-section-header">
           <h2>Sharing</h2>
+          <p>Go beyond one machine and collaborate on data with others.</p>
         </Box>
 
         <ul>
@@ -1129,11 +1145,10 @@ const LandingPage = () => {
             />
             <h3>Treat your data like cattle</h3>
             <p>
-              Stop wrangling data, and start wrangling databases. Use Splitgraph
-              to escape the fragility of spaghetti ETL code and deploy
-              confidently to production.
+              Stop treating your datasets like pets. Use Splitgraph to gain confidence
+              about where data in your warehouse came from and how to rebuild it from scratch.
             </p>
-            <Link href="#">Read about our philosophy</Link>
+            <Link href="/product/splitgraph/philosophy#data-as-cattle">Read about our philosophy</Link>
           </Box>
         </Box>
       </section>

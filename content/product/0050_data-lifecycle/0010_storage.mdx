@@ -3,4 +3,38 @@ export const meta = {
   title: "Storage",
 };
 
-# Data storage features
+### Storage format
+
+Behind the scenes, Splitgraph tables are stored as multiple content-addressable, immutable
+[chunks](/docs/concepts/objects) (we also use terms "object" or "fragment").
+
+Splitgraph uses [cstore_fdw](https://github.com/citusdata/cstore_fdw) as its storage backend. `cstore_fdw` is a
+columnar store for PostgreSQL that allows for [superior read performance and low IO load](https://tech.marksblogg.com/billion-nyc-taxi-rides-postgresql.html). Data stored in `cstore_fdw` can take [up to 5x less space](https://github.com/splitgraph/splitgraph/blob/master/examples/benchmarking/benchmarking_real_data.ipynb) than equivalent PostgreSQL tables.
+
+### Delta compression
+
+There's no limitations to how a Splitgraph table is partitioned: it can be represented by one object,
+multiple disjoint objects (responsible for different regions of the table) or multiple objects
+that overlap each other. This allows Splitgraph to store [just the changes](/docs/working-with-data/inspecting-images#example) that were made to a table,
+letting you keep all of your data's history at low storage cost.
+
+Delta compression is optional: if sensitive data made its way into the history, you can always
+[rechunk](/docs/large-datasets/chunking#rechunking-images) your image to delete it.
+
+### Content addressability
+
+Every Splitgraph object is **immutable** and **content-addressable**: the object's ID identifies
+is contents and objects can't change once they have been created. This lets Splitgraph quickly
+determine what needs to be downloaded to bring a [dataset up to date](/docs/sgr/sharing-images/pull) and optimize storage by
+deduplicating data.
+
+### S3 storage
+
+When Splitgraph images are pushed out to [other instances](/docs/getting-started/decentralized-demo), the objects containing the data itself can be uploaded to an S3-compatible storage provider like [MinIO](https://min.io/).
+
+This lets the remote Splitgraph engine to act as a lightweight metadata store, allowing for cheaper
+data warehousing: unused objects can be stored in object storage and only download to the engine
+on demand when they need to be queried.
+
+See the [object storage example](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-object-storage)
+for more information.
