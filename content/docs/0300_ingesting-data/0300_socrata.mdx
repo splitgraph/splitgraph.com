@@ -8,7 +8,7 @@ export const meta = {
 The [Socrata data platform](https://www.tylertech.com/products/socrata) hosts tens of thousands of government datasets. Governments large and small publish data on crime, permits, finance, healthcare, research, performance, and more for citizens to use.
 
 Splitgraph has first-class support for querying Socrata datasets through SQL and using them in
-[Splitfiles](../concepts/splitfiles). The Socrata connector is implemented as a [foreign data wrapper](foreign-data-wrappers/introduction). This allows Splitgraph to also be used as a PostgreSQL-to-Socrata connector. Any PostgreSQL application, client or dashboarding tool can query Socrata datasets through Splitgraph and even run joins on datasets from different Socrata endpoints or between Socrata datasets and Splitgraph images.
+[Splitfiles](../concepts/splitfiles). Support for Socrata is implemented as a [foreign data wrapper](foreign-data-wrappers/introduction). This allows Splitgraph to also be used as a PostgreSQL-to-Socrata connector. Any PostgreSQL application, client or dashboarding tool can query Socrata datasets through Splitgraph and even run joins on datasets from different Socrata endpoints or between Socrata datasets and Splitgraph images.
 
 ## Usage
 
@@ -101,7 +101,7 @@ The result is a list of all bar owners in Chicago with current liquor licenses.
 
 ### Exploring data with DBeaver
 
-The Socrata Discover API in conjunction with Splitgraph's mounting capabilities allows you t explore Socrata data from any SQL client.
+The Socrata Discover API in conjunction with Splitgraph's mounting capabilities allows you to explore Socrata data from any SQL client.
 
 First, mount Socrata open data endpoints for [Chicago, IL](https://data.cityofchicago.org) and [Cambridge, MA](https://data.cambridgema.gov):
 
