@@ -76,7 +76,7 @@ const getHardcodedDepthStyles = (maxHardCodedDepth = 10) => {
     depthStyles.Vertical[`.${ClassNames.Depth(depth)}`] = {
       paddingLeft: `${paddingLeft}rem`,
       marginLeft: `${marginLeft}rem`,
-      paddingRight: depth >= 1 ? "2rem" : `${depth * 2}rem`,
+      paddingRight: depth >= 1 ? "1rem" : `${depth}rem`,
 
       paddingLeft:
         depth >= 1 ? `${marginLeft + paddingLeft}rem !important` : "initial",
