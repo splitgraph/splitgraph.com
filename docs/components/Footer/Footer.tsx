@@ -194,10 +194,7 @@ const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
 
       <Box className="footer-copyright-row">
         <Box className="footer-section">
-          Splitgraph Limited, Registered in England and Wales no.{" "}
-          <a href="https://beta.companieshouse.gov.uk/company/11657324">
-            11657324
-          </a>
+          Splitgraph Limited, Registered in England and Wales no. 11657324
           <br />
           <br />
           <Box sx={{ display: "flex", alignItems: "center" }}>
