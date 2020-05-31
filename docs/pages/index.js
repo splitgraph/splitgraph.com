@@ -532,7 +532,7 @@ const LandingPage = () => {
               while keeping your existing workflows and benefitting from the
               Postgres ecosystem.
             </p>
-            <Link href="/product/splitgraph/motivation">
+            <Link href="/product/splitgraph/integrations">
               See examples of common integrations
             </Link>
           </Box>
