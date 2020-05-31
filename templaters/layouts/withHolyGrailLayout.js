@@ -100,7 +100,7 @@ const withHolyGrailLayout = ({
             }
 
             ${!renderTOC && "nav.toc { display: none; }"}
-        `.replace(/\s/g, ""),
+        `.replace(/\s\s+/g, " ").replace(/\/\*.*\*\//g, ""),
             },
           ]}
         />
