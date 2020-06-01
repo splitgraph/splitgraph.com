@@ -1,0 +1,84 @@
+export const meta = {
+  id: "introduction-to-splitgraph",
+  title: "Welcome to Splitgraph",
+  date: "2020-06-01",
+  authors: ["Miles Richardson", "Artjoms Iškovs"],
+  topics: ["technical", "info"],
+  description:
+    "Announcing Splitgraph, a data versioning and management system" +
+    " that allows you to work with data like you work with code.",
+};
+
+## Introduction
+
+In theory, data science and machine learning is this magical silver bullet that will allow a business to grow its revenue and acquire more customers through vigorous application of Gaussian processes and support vector machines. There are hundreds of frameworks around that will let you build, train and run multi-layer recurrent neural networks on clusters of GPUs or produce beautiful visualizations. Starry-eyed PhDs graduates with top-tier stats knowledge join businesses, eager to add value.
+
+What they find out when their dreams hit reality is that data work is mostly not about that. It's about digging through the company's data warehouse for something they can run research on. It's about transforming it into the correct form. It's about finding public datasets that can augment private data. It's more about mapping columns and figuring out obscure conventions than applying state of the art statistical techniques.
+
+For data engineers, who have to put research into production, a new set of problems shows up. Where did the data come from? What do the researchers want done to it? What transformation batch jobs do we need to write? What monitoring do we have to put in place? What data feeds to we need to buy? What is the process for detecting anomalies and fixing them? Sometimes, research and production models are in different codebases which increases the research-production divide even more.
+
+Preparing, cleaning and productionizing data is not unimportant work. Researchers could always benefit from making their research more rigorous and knowing exactly how each data point influenced the final business decision. However, we believe that tooling that helps these workflows is lacking and there are ideas that can be borrowed from other disciplines that can help data science.
+
+## Useful concepts in software engineering
+
+Software engineering has a lot of concepts that have made software more pleasant to build and maintain.
+
+There are currently tens of thousands of open-source **off-the-shelf services and libraries** available,
+most of them well documented and with clear installation instructions. With Docker, those components can be
+packaged into **self-contained images** that can be dropped into any stack with little extra work required.
+
+Instead of server fleets being configured manually, the rise of infrastructure-as-code has meant that
+whole clusters are now defined in **version-controlled definition files** and can be provisioned, scaled and reconfigured
+automatically.
+
+**Versioning and revision control** is something that every software engineer knows about. Every change
+to code is tracked. Software builds are performed on isolated **CI machines**: there's a clear
+build process that avoids the "works on my machine" class of problems.
+
+Finally, good tools that implement all of this **enhance existing abstractions without breaking them**.
+Any compiler, IDE or editor can benefit from Git, Mercurial or SVN without having to be aware of them.
+Any Unix application can be Dockerized and deployed without being recompiled to use Docker version of system calls.
+
+## Introducing Splitgraph
+
+Splitgraph aims to bring these ideas and concepts into data science.
+
+Splitgraph makes it easy to package datasets into [**self-contained data images**](/docs/concepts/images) that can be combined
+together, queried directly from a PostgreSQL database, extended and shared with other Splitgraph instances.
+
+This is done through [**Splitfiles**](/docs/concepts/splitfiles), a declarative language that is similar to Dockerfiles and allows
+to express data transformations in ordinary SQL that any researcher and business analyst knows.
+Referencing other images or even other databases can be done [directly through a `JOIN`](/docs/splitfiles/splitfile-sql).
+
+Defining datasets through Splitfiles combines the ability to use a familiar query language with
+[**provenance tracking**](/docs/working-with-data/inspecting-provenance): it's possible to find out what sources went into every dataset and know when
+to rebuild it if the sources ever change. Data images can be built **in CI**, further enforcing that
+everything that an image needs is explicitly specified in its Splitfile.
+
+Splitgraph images are also **version-controlled** and can be manipulated with Git-like operations
+through a CLI. Any image can be checked out into a PostgreSQL schema and interacted with by
+any PostgreSQL client. Changes can be captured, **delta compressed** and packaged up into new
+images.
+
+Finally, Splitgraph isn't opinionated and **doesn't break existing abstractions**. To any existing PostgreSQL
+application, Splitgraph images are just another database. We have carefully designed Splitgraph to not break the
+abstraction of a PostgreSQL table and wire protocol, because doing otherwise would mean throwing
+away a vast existing ecosystem of applications, users, libraries and extensions. This means that
+a lot of **tools that work with PostgreSQL work with Splitgraph out of the box**.
+
+We collect examples of the most interesting ones on the [integrations page](/product/splitgraph/integrations).
+
+## Conclusion
+
+When we started building Splitgraph in 2018, there was nothing around that combined all these concepts
+into one product. Things are beginning to change and a lot of interesting tools are getting released to help data work. However,
+we still don't feel like any of them completely satisfy our vision. We list applications and services that
+are most similar to Splitgraph on our [Frequently Asked Questions](/docs/getting-started/frequently-asked-questions#why-not-just-use) page.
+
+Over the next few weeks, we will be publishing a series of posts that dive deeper into our philosophy,
+how Splitgraph works internally and some example use cases for Splitgraph.
+
+In the meantime, Splitgraph is fully functional and ready to be used. Head on to our
+[documentation](/docs/getting-started/introduction) page for installation instructions, check out
+[possible use cases](/product/splitgraph/use-cases) or take a look at our [integrations page](/product/splitgraph/integrations)
+to see how Splitgraph can help you out.
