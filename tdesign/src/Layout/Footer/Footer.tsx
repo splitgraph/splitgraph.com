@@ -14,7 +14,7 @@ import {
 } from "../../Icon";
 
 export interface IFooterProps {
-  Link: React.FC<any>;
+  Link: React.FunctionComponent<any>;
   extraStyle?: SystemStyleObject;
   footerVariant?: "dark";
 }

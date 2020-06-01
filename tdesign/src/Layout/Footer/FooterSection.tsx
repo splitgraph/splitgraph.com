@@ -9,7 +9,7 @@ export interface IFooterSectionProps {
   header: string;
   links: [string, string][];
   extraStyle?: SystemStyleObject;
-  Link: React.FC<any>;
+  Link: React.FunctionComponent<any>;
 }
 
 const FooterSection = ({
