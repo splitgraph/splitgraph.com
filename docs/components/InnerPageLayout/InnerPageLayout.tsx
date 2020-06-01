@@ -3,9 +3,9 @@
 import { jsx, SystemStyleObject } from "theme-ui";
 import * as React from "react";
 
-import { BaseLayout, MainContent } from "@splitgraph/tdesign";
-import { Footer } from "../Footer";
+import { BaseLayout, Footer, MainContent } from "@splitgraph/tdesign";
 import { HeaderRight } from "../HeaderRight";
+import { Link } from "../Link";
 
 export interface IInnerPageLayoutProps {
   children?: React.ReactNode;
@@ -90,7 +90,7 @@ const InnerPageLayout = ({
       }}
     >
       <MainContent>{children}</MainContent>
-      <Footer />
+      <Footer Link={Link} />
     </BaseLayout>
   );
 };

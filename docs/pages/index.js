@@ -9,7 +9,7 @@ import { NextSeo } from "next-seo";
 import withTheme from "../hocs/withTheme";
 import { LandingPageLayout } from "../components/LandingPageLayout";
 import { HeroBox } from "../components/HeroBox";
-import { Footer } from "../components/Footer";
+import { Footer } from "@splitgraph/tdesign";
 
 import { keyframes, css } from "@emotion/core";
 
@@ -1211,7 +1211,7 @@ const LandingPage = () => {
         </Link>
       </section>
 
-      <Footer />
+      <Footer Link={Link} />
     </LandingPageLayout>
   );
 };

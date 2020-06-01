@@ -9,12 +9,14 @@ export interface IFooterSectionProps {
   header: string;
   links: [string, string][];
   extraStyle?: SystemStyleObject;
+  Link: React.FC<any>;
 }
 
 const FooterSection = ({
   header,
   links,
   extraStyle = {},
+  Link,
 }: IFooterSectionProps) => {
   return (
     <Box className="footer-section" sx={extraStyle}>
@@ -22,7 +24,9 @@ const FooterSection = ({
       <ul>
         {links.map(([href, anchor]) => (
           <li>
-            <FooterLink href={href}>{anchor}</FooterLink>
+            <FooterLink Link={Link} href={href}>
+              {anchor}
+            </FooterLink>
           </li>
         ))}
       </ul>

@@ -5,16 +5,16 @@ import * as React from "react";
 
 import FooterSection from "./FooterSection";
 
-import Octicon from "@splitgraph/design/Icon/ThirdParty/GitHub/Octicon";
-
 import {
+  IconLogoGitHub,
   IconLogoTwitter,
   IconLogoLinkedIn,
   IconLogoReddit,
   IconHeart,
-} from "@splitgraph/tdesign";
+} from "../../Icon";
 
 export interface IFooterProps {
+  Link: React.FC<any>;
   extraStyle?: SystemStyleObject;
   footerVariant?: "dark";
 }
@@ -43,12 +43,16 @@ const mixStyles = (
   );
 };
 
-const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
+const Footer = ({
+  Link,
+  footerVariant = "dark",
+  extraStyle = {},
+}: IFooterProps) => {
   // only one footer variant for now
   const baseVariant = footerVariant === "dark" ? darkVariant : darkVariant;
 
   return (
-    <footer
+    <Box
       sx={{
         maxWidth: "100%",
         display: "flex",
@@ -108,6 +112,7 @@ const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
     >
       <Box className="footer-links-row">
         <FooterSection
+          Link={Link}
           header={"Product"}
           links={[
             ["/", "Home"],
@@ -118,6 +123,7 @@ const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
         />
 
         <FooterSection
+          Link={Link}
           header={"Support"}
           links={[
             ["/docs", "Documentation"],
@@ -130,6 +136,7 @@ const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
         />
 
         <FooterSection
+          Link={Link}
           header={"Company"}
           links={[
             ["/blog", "Blog"],
@@ -147,7 +154,10 @@ const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
               title="Splitgraph on GitHub"
               aria-label="Splitgraph on GitHub"
             >
-              <Octicon />
+              <IconLogoGitHub
+                size={"2rem"}
+                extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
+              />
             </a>
             <a
               href="https://www.linkedin.com/company/12620006/"
@@ -183,6 +193,7 @@ const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
         </Box>
 
         <FooterSection
+          Link={Link}
           extraStyle={{ alignSelf: "flex-end" }}
           header={"Legal"}
           links={[
@@ -212,7 +223,7 @@ const Footer = ({ footerVariant = "dark", extraStyle = {} }: IFooterProps) => {
           </Box>
         </Box>
       </Box>
-    </footer>
+    </Box>
   );
 };
 
