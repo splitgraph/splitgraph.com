@@ -266,7 +266,7 @@ const featureSectionStyle = {
     backgroundColor: "#ebebeb",
     flexDirection: ["inherit", "inherit", "row-reverse"],
     ".feature-section-header": {
-      justifyContent: ["center", "center", "flex-end"],
+      // justifyContent: ["center", "center", "flex-end"],
       paddingRight: [
         "inherit",
         "inherit",
@@ -284,7 +284,7 @@ const featureSectionStyle = {
     backgroundColor: "white",
     flexDirection: ["inherit", "inherit", "row"],
     ".feature-section-header": {
-      justifyContent: ["center", "center", "flex-start"],
+      // justifyContent: ["center", "center", "flex-start"],
       paddingLeft: ["inherit", "inherit", "max(3rem, calc((100vw - 120ch)/2))"],
     },
     ul: {
@@ -298,11 +298,22 @@ const featureSectionStyle = {
     width: ["inherit", "inherit", "50%"],
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
     h2: {
       margin: 0,
     },
-    // TODO I added this to get line breaks in feature subheadings but it broke the layout
-    //   (no longer vertically centred)
+    a: {
+      variant: "links.primary",
+      textAlign: "center",
+      maxWidth: "80%",
+      marginTop: "1em",
+      marginLeft: "2ch",
+    },
+    "a:after": {
+      paddingLeft: "1ch",
+      paddingRight: "1ch",
+      content: '"\\27F6"',
+    },
     flexDirection: "column",
   },
   ul: {
@@ -349,8 +360,6 @@ const featureSectionStyle = {
         variant: "links.primary",
         marginTop: "1rem",
         textAlign: "left",
-        // fontWeight: "bold",
-        // textTransform: "uppercase",
         fontSize: "small",
       },
       ".feature-cta:after": {
@@ -641,7 +650,7 @@ const LandingPage = () => {
         <Box className="feature-section-header">
           <h2>Ingestion</h2>
           <Link href="/product/data-lifecycle/ingestion">
-            <p>Go beyond ETL and query other databases directly from Splitgraph.</p>
+            Go beyond ETL and query other databases directly from Splitgraph.
           </Link>
         </Box>
 
@@ -721,7 +730,7 @@ const LandingPage = () => {
         <Box className="feature-section-header">
           <h2>Storage</h2>
           <Link href="/product/data-lifecycle/storage">
-            <p>Save on storage costs with a columnar format and delta compression.</p>
+            Save on storage costs with a columnar format and delta compression.
           </Link>
         </Box>
 
@@ -797,7 +806,7 @@ const LandingPage = () => {
         <Box className="feature-section-header">
           <h2>Research and Reporting</h2>
           <Link href="/product/data-lifecycle/research">
-            <p>Work on data with familiar tools and paradigms.</p>
+            Work on data with familiar tools and paradigms.
           </Link>
         </Box>
 
@@ -888,7 +897,8 @@ const LandingPage = () => {
         <Box className="feature-section-header">
           <h2>Transformations</h2>
           <Link href="/product/data-lifecycle/transformation">
-            Build datasets in a composable and maintainable way, suitable for research or production.
+            Build datasets in a composable and maintainable way, suitable for
+            research or production.
           </Link>
         </Box>
 
@@ -1145,10 +1155,13 @@ const LandingPage = () => {
             />
             <h3>Treat your data like cattle</h3>
             <p>
-              Stop treating your datasets like pets. Use Splitgraph to gain confidence
-              about where data in your warehouse came from and how to rebuild it from scratch.
+              Stop treating your datasets like pets. Use Splitgraph to gain
+              confidence about where data in your warehouse came from and how to
+              rebuild it from scratch.
             </p>
-            <Link href="/product/splitgraph/philosophy#data-as-cattle">Read about our philosophy</Link>
+            <Link href="/product/splitgraph/philosophy#data-as-cattle">
+              Read about our philosophy
+            </Link>
           </Box>
         </Box>
       </section>
