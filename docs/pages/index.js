@@ -266,7 +266,7 @@ const featureSectionStyle = {
     backgroundColor: "#ebebeb",
     flexDirection: ["inherit", "inherit", "row-reverse"],
     ".feature-section-header": {
-      // justifyContent: ["center", "center", "flex-end"],
+      alignItems: ["center", "center", "flex-end"],
       paddingRight: [
         "inherit",
         "inherit",
@@ -283,6 +283,9 @@ const featureSectionStyle = {
         // "max(3rem, calc((100vw - 120ch)/2))", // put this back when the world upgrades firefox
       ],
     },
+    a: {
+      textAlign: ["center", "center", "right"],
+    },
   },
 
   // left header, right list
@@ -290,7 +293,7 @@ const featureSectionStyle = {
     backgroundColor: "white",
     flexDirection: ["inherit", "inherit", "row"],
     ".feature-section-header": {
-      // justifyContent: ["center", "center", "flex-start"],
+      alignItems: ["center", "center", "flex-start"],
       paddingLeft: [
         "inherit",
         "inherit",
@@ -307,23 +310,24 @@ const featureSectionStyle = {
         // "max(3rem, calc((100vw - 120ch)/2))"
       ],
     },
+    a: {
+      textAlign: ["center", "center", "left"],
+    },
   },
   ".feature-section-header": {
     paddingBottom: ["4rem", "4rem", "inherit"],
     color: ["inherit", "inherit", "primary"],
     width: ["inherit", "inherit", "50%"],
     display: "flex",
-    alignItems: "center",
+    // alignItems: "center",
     justifyContent: "center",
     h2: {
       margin: 0,
     },
     a: {
       variant: "links.primary",
-      textAlign: "center",
       maxWidth: "80%",
       marginTop: "1em",
-      marginLeft: "2ch",
     },
     "a:after": {
       paddingLeft: "1ch",
