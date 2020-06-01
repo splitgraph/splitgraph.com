@@ -20,7 +20,9 @@ import {
 } from "@splitgraph/design";
 
 import { BaseLayout } from "@splitgraph/design/Layout";
-import { Footer, Link } from "@splitgraph/docs/components";
+import { Link } from "@splitgraph/docs/components";
+
+import { Footer } from "@splitgraph/tdesign";
 
 import { OnlyTOC } from "./contentWrappers";
 import useActiveNode from "./util/useActiveNode";
@@ -100,7 +102,9 @@ const withHolyGrailLayout = ({
             }
 
             ${!renderTOC && "nav.toc { display: none; }"}
-        `.replace(/\s\s+/g, " ").replace(/\/\*(?!\*\/)*\*\//g, ""),
+        `
+                .replace(/\s\s+/g, " ")
+                .replace(/\/\*(?!\*\/)*\*\//g, ""),
             },
           ]}
         />
@@ -172,7 +176,7 @@ const withHolyGrailLayout = ({
                 ) : null}
               </ContentFooter>
             </MainContent>
-            <Footer />
+            <Footer Link={Link} />
           </Box>
 
           <aside className="right-sidebar">

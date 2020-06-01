@@ -3,14 +3,13 @@
 import { jsx } from "theme-ui";
 import * as React from "react";
 
-import { Link } from "../Link";
-
 export interface IFooterLinkProps {
+  Link: React.FC<any>;
   href: string;
   children: React.ReactNode;
 }
 
-const FooterLink = ({ href, children }: IFooterLinkProps) => {
+const FooterLink = ({ Link, href, children }: IFooterLinkProps) => {
   return <Link href={href}>{children}</Link>;
 };
 

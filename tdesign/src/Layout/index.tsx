@@ -1,5 +1,4 @@
-// export { Footer } from "./Footer";
-export { Header, HeaderLeft, HeaderRight, HeaderCenter } from './Header';
+export { Header, HeaderLeft, HeaderRight, HeaderCenter } from "./Header";
 // export {
 //   MainContent,
 //   ContentBody,
@@ -7,7 +6,7 @@ export { Header, HeaderLeft, HeaderRight, HeaderCenter } from './Header';
 //   ContentHeader
 // } from "./Containers";
 // export { Sidebar } from "./Sidebar";
-export { BaseLayout } from './BaseLayout';
+export { BaseLayout } from "./BaseLayout";
 
 // import * as HolyGrail from "./HolyGrail";
 // export { HolyGrail };
@@ -15,11 +14,12 @@ export {
   TwoColumnLayout,
   TwoColumnLayoutLeft,
   TwoColumnLayoutMain,
-} from './TwoColumnLayout';
-export { MainContent } from './MainContent';
+} from "./TwoColumnLayout";
+export { MainContent } from "./MainContent";
 
-export { LogoImage } from './LogoImage';
-export { LogoText } from './LogoText';
+export { LogoImage } from "./LogoImage";
+export { LogoText } from "./LogoText";
 
-export { ContentHeader } from './ContentHeader';
+export { ContentHeader } from "./ContentHeader";
 
+export { Footer } from "./Footer";

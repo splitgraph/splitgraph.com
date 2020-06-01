@@ -7,11 +7,8 @@ export { Link } from "./Link";
 export { InnerPageLayout } from "./InnerPageLayout";
 
 export * from "./Boxes";
-export { BlogPostItem } from './BlogPostItem';
+export { BlogPostItem } from "./BlogPostItem";
 
-export { BlogPost } from './BlogPost';
+export { BlogPost } from "./BlogPost";
 
-export { Breadcrumbs } from './Breadcrumbs';
-
-export { Footer } from './Footer';
-
+export { Breadcrumbs } from "./Breadcrumbs";

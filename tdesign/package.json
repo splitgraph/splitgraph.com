@@ -26,12 +26,6 @@
       "pre-commit": "tsdx lint"
     }
   },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
   "name": "@splitgraph/tdesign",
   "author": "Splitgraph Limited",
   "module": "dist/tdesign.esm.js",

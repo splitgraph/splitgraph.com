@@ -250,3 +250,7 @@ export { IconLogoHackerNews };
 import IconHeart from './IconHeart';
 export { IconHeart };
 
+
+import IconLogoGitHub from './IconLogoGitHub';
+export { IconLogoGitHub };
+
