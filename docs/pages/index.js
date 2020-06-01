@@ -270,12 +270,18 @@ const featureSectionStyle = {
       paddingRight: [
         "inherit",
         "inherit",
-        "max(3rem, calc((100vw - 120ch)/2))",
+        "calc((100vw - 120ch)/2)",
+        // "max(3rem, calc((100vw - 120ch)/2))", // put this back when the world upgrades firefox
       ],
     },
     ul: {
       paddingRight: ["1rem", "1rem", "inherit"],
-      paddingLeft: ["1rem", "1rem", "max(3rem, calc((100vw - 120ch)/2))"],
+      paddingLeft: [
+        "1rem",
+        "1rem",
+        "calc((100vw - 120ch)/2)",
+        // "max(3rem, calc((100vw - 120ch)/2))", // put this back when the world upgrades firefox
+      ],
     },
   },
 
@@ -285,11 +291,21 @@ const featureSectionStyle = {
     flexDirection: ["inherit", "inherit", "row"],
     ".feature-section-header": {
       // justifyContent: ["center", "center", "flex-start"],
-      paddingLeft: ["inherit", "inherit", "max(3rem, calc((100vw - 120ch)/2))"],
+      paddingLeft: [
+        "inherit",
+        "inherit",
+        "calc((100vw - 120ch)/2)",
+        // "max(3rem, calc((100vw - 120ch)/2))"
+      ],
     },
     ul: {
       paddingLeft: ["1rem", "1rem", "inherit"],
-      paddingRight: ["1rem", "1rem", "max(3rem, calc((100vw - 120ch)/2))"],
+      paddingRight: [
+        "1rem",
+        "1rem",
+        "calc((100vw - 120ch)/2)",
+        // "max(3rem, calc((100vw - 120ch)/2))"
+      ],
     },
   },
   ".feature-section-header": {
@@ -599,8 +615,10 @@ const LandingPage = () => {
           borderBottomColor: "rgba(13,24,33,1)",
           paddingTop: "2rem",
           paddingBottom: "2rem",
-          paddingLeft: "max(3rem, calc((100vw - 120ch)/2))",
-          paddingRight: "max(3rem, calc((100vw - 120ch)/2))",
+          // paddingLeft: "max(3rem, calc((100vw - 120ch)/2))",
+          // paddingRight: "max(3rem, calc((100vw - 120ch)/2))",
+          paddingLeft: "calc((100vw - 120ch)/2)",
+          paddingRight: "calc((100vw - 120ch)/2)",
         }}
       >
         <h2>Explore Public Data</h2>
