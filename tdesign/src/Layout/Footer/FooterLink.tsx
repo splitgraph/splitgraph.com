@@ -4,7 +4,7 @@ import { jsx } from "theme-ui";
 import * as React from "react";
 
 export interface IFooterLinkProps {
-  Link: React.FC<any>;
+  Link: React.FunctionComponent<any>;
   href: string;
   children: React.ReactNode;
 }
