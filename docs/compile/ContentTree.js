@@ -130,8 +130,8 @@ class ContentTree {
         fromSiteRoot: path.join(this.opts.urlPrefix, fromContentRoot),
       };
 
-      // Remove the lexiographical sort 0100, 0200 and the .mdx extension
-      const LEXICAL_JUNK = /\/\d{1,5}\_|\.mdx?$/gm;
+      // Remove the lexicographical sort 0100, 0200 and the .mdx extension
+      const LEXICAL_JUNK = /\/\d{1,8}\_|\.mdx?$/gm;
       const delexify = (s) => s.replace(LEXICAL_JUNK, "/").replace(/\/$/, "");
 
       item.slug = delexify(`/${item.name}`).replace("/", "");

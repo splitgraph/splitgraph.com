@@ -1115,7 +1115,7 @@ const LandingPage = () => {
               ideas from our favorite development tools and applied them to the
               domain of data science.
             </p>
-            <Link href="/blog/20200601-introduction">
+            <Link href="/blog/introduction">
               Read our introductory blog post
             </Link>
           </Box>
