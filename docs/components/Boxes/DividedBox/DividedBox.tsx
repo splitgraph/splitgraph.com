@@ -72,7 +72,7 @@ const DividedBox = ({
       fontSize: [5, 5, 6],
       paddingLeft: ["1rem", "1rem", "4rem"],
       paddingRight: "4rem",
-      marginBottom: "0",
+      marginBottom: "1rem",
       ...(containerStyle.hasOwnProperty(".divided-top")
         ? containerStyle[".divided-top"]
         : ({} as SystemStyleObject)),
