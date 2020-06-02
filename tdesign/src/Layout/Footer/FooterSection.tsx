@@ -23,7 +23,7 @@ const FooterSection = ({
       <h3 className="footer-section-header">{header}</h3>
       <ul>
         {links.map(([href, anchor]) => (
-          <li>
+          <li key={`${anchor}`}>
             <FooterLink Link={Link} href={href}>
               {anchor}
             </FooterLink>
