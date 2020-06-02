@@ -63,6 +63,23 @@ pre::-webkit-scrollbar-track {
   background: #36668d;
 }
 
+/* generic hoverable scrollbar class */
+.white-scrollbar-hover::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+.white-scrollbar-hover::-webkit-scrollbar-thumb {
+  background: #fff;
+}
+
+.white-scrollbar-hover::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+.white-scrollbar-hover:hover::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
 /* Make sure no scrollbars show up in responsive mode sidebar
    (phones don't have scrollbars, but shrinking desktop
    browser window shouldn't have scrollbars either) */
