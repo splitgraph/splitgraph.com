@@ -1,8 +1,8 @@
 // @jsx jsx
 // @ts-ignore
-import { jsx, Box } from 'theme-ui';
-import * as React from 'react';
-import { useState, createContext } from 'react';
+import { jsx, Box } from "theme-ui";
+import * as React from "react";
+import { useState, createContext } from "react";
 
 export interface TwoColumnLayoutProps {
   children?: React.ReactNode;
@@ -24,51 +24,42 @@ export interface ILayoutContext {
 const useResponsiveStyle = (): ILayoutContext => {
   const [expanded, setExpanded] = useState<boolean>(false);
 
-  const gridTemplateColumns = ['1fr', '1fr', expanded ? '1fr 12fr' : '1fr 3fr'];
+  const gridTemplateColumns = ["1fr", "1fr", expanded ? "1fr 12fr" : "1fr 3fr"];
 
-  const gridTemplateRows = [
-    expanded ? '6fr 1fr' : '1fr 6fr',
-    expanded ? '6fr 1fr' : '1fr 6fr',
-    expanded ? '6fr' : '1fr',
-  ];
+  const gridTemplateRows = ["1fr", "1fr", expanded ? "6fr" : "1fr"];
 
-  const leftArea = '1 / 1 / 2 / 2';
-  const rightArea = ['2 / 1 / 3 / 2', '2 / 1 / 3 / 2', '1 / 2 / 2 / 3'];
+  const leftArea = "1 / 1 / 2 / 2";
+  const rightArea = ["2 / 1 / 3 / 2", "2 / 1 / 3 / 2", "1 / 2 / 2 / 3"];
 
   const style = {
-    display: 'grid',
+    display: "grid",
     // minHeight: '95vh',
     gridTemplateColumns,
     gridTemplateRows,
     gridColumnGap: 0,
-    minHeight: 'calc(95vh - 2em)',
-    maxHeight: [
-      expanded ? '100vh' : 'initial',
-      expanded ? '100vh' : 'initial',
-      'initial',
-    ],
+    minHeight: ["inherit", "inherit", "calc(95vh - 2em)"],
     gridRowGap: 0,
-    '.two-col-left': {
+    ".two-col-left": {
       gridArea: leftArea,
-      backgroundColor: 'heavy',
-      color: 'light',
+      backgroundColor: "heavy",
+      color: "light",
       a: {
-        color: 'light',
-        fontWeight: 'bold',
+        color: "light",
+        fontWeight: "bold",
       },
-      borderRightColor: [null, null, 'sgdarkblue'],
-      borderRightStyle: [null, null, 'solid'],
-      borderRightSize: [null, null, '10px'],
-      borderBottomColor: ['sgdarkblue', 'sgdarkblue', null],
-      borderBottomStyle: ['solid', 'solid', null],
-      borderBottomSize: ['10px', '10px', null],
-      filter: 'dropShadow(2px 4px 6px var(--theme-ui-colors-heavy))',
+      borderRightColor: [null, null, "sgdarkblue"],
+      borderRightStyle: [null, null, "solid"],
+      borderRightSize: [null, null, "10px"],
+      borderBottomColor: ["sgdarkblue", "sgdarkblue", null],
+      borderBottomStyle: ["solid", "solid", null],
+      borderBottomSize: ["10px", "10px", null],
+      filter: "dropShadow(2px 4px 6px var(--theme-ui-colors-heavy))",
     },
-    '.two-col-main': {
+    ".two-col-main": {
       gridArea: rightArea,
-      backgroundColor: 'light',
-      maxWidth: ['100vw', '100vw', '75vw'],
-      overflowX: 'hidden',
+      backgroundColor: "light",
+      maxWidth: ["100vw", "100vw", "75vw"],
+      overflowX: "hidden",
     },
   };
 
