@@ -7,15 +7,22 @@ export const meta = {
 
 A Splitgraph installation consists of two components: [the Splitgraph engine](../architecture/splitgraph-engine) and [the Splitgraph client (`sgr`)](../architecture/sgr-client).
 
-The client ships as a self-contained binary but can also be installed with `pip`.
+The client ships as a self-contained binary that works on Linux, Mac and Windows without any prerequisites. If you wish to use 
+Splitgraph as a Python library, it can also be installed through `pip`. 
 
-To run the Splitgraph engine, you will need to be able to run [Docker](https://www.docker.com/get-started).
+To run the Splitgraph engine, you will need to be able to run [Docker](https://www.docker.com/get-started). There are instructions available for installing Docker on [Linux](https://docs.docker.com/engine/install/#server), [Mac](https://docs.docker.com/docker-for-mac/install/) and Windows (use [Docker Desktop](https://docs.docker.com/docker-for-windows/install-windows-home/) for Windows 10 Pro/Enterprise (15063+) / Windows 10 Home (19018+) or [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) for earlier versions of Windows.)
+
+To check that Docker is installed and working, run:
+
+```shell-session
+$ docker run hello-world
+```
 
 ## Installation
 
 ### Single script
 
-For Linux and OSX, there's a single script:
+For Linux and OSX, there's a single script available:
 
 ```bash
 $ bash -c "$(curl -sL https://github.com/splitgraph/splitgraph/releases/latest/download/install.sh)"
@@ -78,6 +85,8 @@ on our GitHub.
 
 ### Engine
 
+#### Docker
+
 You can use Docker directly to pull and start the
 [engine](https://hub.docker.com/r/splitgraph/engine/):
 
@@ -101,7 +110,9 @@ To complete the installation, run:
 $ sgr init
 ```
 
-You can also use [docker-compose](https://docs.docker.com/compose/). A sample
+#### Docker Compose
+
+You can also use  [Docker Compose](https://docs.docker.com/compose/install/). A sample
 Compose configuration for the service is as follows:
 
 ```yaml
