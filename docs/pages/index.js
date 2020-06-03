@@ -407,7 +407,7 @@ const LandingPage = () => {
           <br className="mobile-line-break" />{" "}
           <span sx={{ fontWeight: "200" }}>Powered by Postgres.</span>
           <br className="mobile-line-break" />{" "}
-          <span sx={{ fontWeight: "200" }}>Inspired by Docker and git.</span>
+          <span sx={{ fontWeight: "200" }}>Inspired by Docker and Git.</span>
           <br />
           <br />
         </h2>

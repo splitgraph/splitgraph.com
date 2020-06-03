@@ -1,0 +1,152 @@
+export const meta = {
+  id: "troubleshooting",
+  title: "Troubleshooting",
+};
+
+This section summarizes common problems and potential solutions you might encounter with Splitgraph.
+
+## General advice
+
+### Run Splitgraph with debug logging
+
+For any issues, running `sgr` with `--verbosity DEBUG` will print out extra debug information and full error tracebacks
+which can help you understand what's going on.
+
+For example:
+
+```
+$ sgr --verbosity DEBUG commit demo/dataset
+```
+
+You can also add `SG_LOGLEVEL=DEBUG` to your [configuration file](../configuration/introduction) and inject it into the engine
+by running [`sgr engine configure`](../sgr/engine-management/engine-configure) to make the engine write logging information in debug mode as well.
+
+### Inspect engine logs
+
+If you're running the engine through the `sgr engine` wrapper, you can inspect its logs by running:
+
+```shell-session
+$ sgr engine log
+```
+
+In other cases, you can inspect the logs of the container that's running the engine directly from Docker:
+
+```shell-session
+$ docker logs splitgraph_engine_default   # or other container name
+```
+
+## General issues
+
+### Layered querying and Splitfile execution takes too long or gets stuck running SQL
+
+It's possible that the engine is downloading objects needed to satisfy the query in the background,
+which currently doesn't output the progress. Alternatively, the engine might be having some
+other connection issues.
+
+To check that, inspect the engine logs ([`sgr engine log`](../sgr/engine-management/engine-log)).
+
+### Type "geometry" does not exist
+
+This happens if you're trying to download a PostGIS-enabled data image with an engine that
+doesn't support it. To fix this, upgrade your engine to use PostGIS:
+
+```shell-session
+$ sgr engine upgrade --image splitgraph/engine:stable-postgis
+$ sgr sql "CREATE EXTENSION IF NOT EXISTS postgis"
+```
+
+Then, delete the offending repository, clean up loose objects and download it again:
+
+```shell-session
+$ sgr rm broken/repository
+$ sgr cleanup
+$ sgr clone broken/repository
+```
+
+### Splitgraph Engine data/metadata is taking up too much space
+
+Check the space that's used by the engine's data (actual Splitgraph object files) and
+metadata (PostgreSQL table data) by running `docker system df -v`.
+
+You can also run [`sgr status`](../sgr/image-information/status) to list current repositories and space that they take up.
+
+To free up some space, you can:
+
+  * [Uncheckout](../sgr/image-management-creation/checkout) (`sgr checkout -u`) some repositories: data stored in PostgreSQL tables takes up
+    more space than when stored as Splitgraph objects.
+  * [Delete](../sgr/miscellaneous/rm) (`sgr rm`) unneeded repositories or images.
+  * [Clean up](../sgr/miscellaneous/cleanup) (`sgr cleanup`) Splitgraph objects that are not linked to any images on your engine.
+  * [Vacuum](https://www.postgresql.org/docs/current/sql-vacuum.html) the PostgreSQL instance backing the engine: `sgr sql --no-transaction "VACUUM FULL"`. This will delete dead tuples from tables that were checked out and then deleted.
+
+Objects that were downloaded from a different engine or Splitgraph Cloud are considered to be
+cached locally and can be evicted to save space. The default cache size is 10GB and can be
+changed by changing the `SG_OBJECT_CACHE_SIZE` configuration flag (in MB). Eviction gets run when
+objects are downloaded but you can force it by running:
+
+```python
+$ sgr eval "object_manager.run_eviction([], required_space=\\
+    max(object_manager.get_cache_occupancy() - object_manager.cache_size, 0))"
+```
+
+### Waiting for connection...
+
+`sgr` by default attempts to connect to the engine (and the registry) multiple times to
+work around transient network issues or wait for engine to start up.
+
+First, run `sgr` with `--verbosity DEBUG` to pinpoint what's causing a connection failure. Common
+issues are:
+
+  * Engine isn't started: check with `docker ps` or `sgr engine status`, then start it if needed
+    with Docker or with `sgr engine start`.
+  * Wrong username/password or connection parameters: check them in your `.sgconfig`:
+     * `SG_ENGINE_USER`
+     * `SG_ENGINE_PWD`
+     * `SG_ENGINE_HOST`
+     * `SG_ENGINE_PORT`
+
+You can also check the full configuration parameters currently in use by running `sgr config`.
+
+## Windows issues
+
+### Password input is echoed and not accepted, other output issues
+
+If you're running `sgr` in a MINGW terminal (for example, Git Bash), you have to [prefix its invocations with `winpty`](https://stackoverflow.com/questions/32597209/python-not-working-in-the-command-line-of-git-bash/32599341#32599341) to avoid output errors and make sure password inputs work properly.
+
+The simplest way to do this is by adding `alias sgr='winpty -Xallow-non-tty sgr'` to your `.bashrc`.
+
+The `-Xallow-non-tty` flag avoids the issue where `winpty` fails when piping data (e.g. Splitfiles)
+directly to `sgr` but only works on `winpty` above 0.4.0 (check with `--version`). For older
+versions of `winpty`, you'll have to run `sgr` without it when piping input to it.
+
+### Error: input is not a TTY
+
+This can happen if you're on Windows and are trying to pipe input to `sgr` that's run through
+`winpty`. To solve this, invoke `sgr` without `winpty` or run `winpty` with `-Xallow-non-tty`
+
+## Windows/OSX Docker issues
+
+Windows and OSX run Docker in a virtual machine which can cause various issues when using `sgr`.
+
+Check your Docker daemon is running:
+
+```shell-session
+$ docker info
+$ docker run hello-world
+```
+
+Make sure the Docker VM is started and environment is configured:
+
+```shell-session
+$ docker-machine start
+$ docker-machine env
+$ eval $(docker-machine env)
+```
+
+Sometimes the IP address of the Docker VM can change, also changing the IP address of the Splitgraph
+engine. To fix that, check the IP of the Docker VM:
+
+```shell-session
+$ docker-machine ip
+```
+
+Then, make sure the IP address of the engine is the same (check `SG_ENGINE_HOST` in your `.sgconfig` file).
