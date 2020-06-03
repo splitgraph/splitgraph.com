@@ -55,7 +55,10 @@ $ sgr engine upgrade --image splitgraph/engine:stable-postgis
 $ sgr sql "CREATE EXTENSION IF NOT EXISTS postgis"
 ```
 
-Then, delete the offending repository, clean up loose objects and download it again:
+Then, re-clone the repository.
+
+If there are any consistency issues (e.g. with objects still missing), you can delete the
+offending repository, clean up loose objects and download it again:
 
 ```shell-session
 $ sgr rm broken/repository
