@@ -8,7 +8,9 @@ import { Link, LinkProps } from "@splitgraph/tdesign";
 
 import getLinkType from "@splitgraph/docs/compile/compiledGetLinkType";
 
-interface RoutingProps extends Pick<LinkProps, "href" | "as"> {}
+interface RoutingProps extends Pick<LinkProps, "href" | "as"> {
+  useHtmlLink?: boolean;
+}
 
 interface IGetRoutingPropsArgs {
   href: string;
@@ -52,12 +54,14 @@ const getRoutingProps = ({
     };
   } else if (isExternalLink) {
     return {
+      useHtmlLink: true,
       as: resolvedHref,
       href: resolvedHref,
     };
   } else {
     console.warn("Warning: unknown href");
     return {
+      useHtmlLink: true,
       as: href,
       href: href,
     };
@@ -72,7 +76,7 @@ export default ({ href, ...rest }: LinkProps) => {
     [router]
   );
 
-  const routingProps = React.useMemo(
+  const { useHtmlLink, ...routingProps } = React.useMemo(
     () =>
       rest.hasOwnProperty("as")
         ? { href }
@@ -80,5 +84,9 @@ export default ({ href, ...rest }: LinkProps) => {
     [href, currentURL, rest]
   );
 
-  return <Link {...rest} {...routingProps} />;
+  return useHtmlLink ? (
+    <a {...rest} {...routingProps} />
+  ) : (
+    <Link {...rest} {...routingProps} />
+  );
 };
