@@ -2307,6 +2307,7 @@ __metadata:
     theme-ui: ^0.2.43
   peerDependencies:
     dayjs: "*"
+    next: "*"
     react: ^16.13.0
     react-dom: ^16.13.0
   languageName: unknown

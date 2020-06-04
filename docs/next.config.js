@@ -36,6 +36,12 @@ const nextConfig = {
     // TODO: Before launch, make sure to change to www.splitgraph.com
     SEO_CANONICAL_BASE_URL:
       process.env.SEO_CANONICAL_BASE_URL || `https://web.splitgraph.com`,
+
+    // This is a relative URL but is appended to window origin on load
+    MATOMO_RELATIVE_URL: "/scripts/js",
+    MATOMO_JS_FILE: "",
+    MATOMO_PHP_FILE: "",
+    MATOMO_SITE_ID: "1",
   },
   resolve: {
     alias: aliasConfig,
