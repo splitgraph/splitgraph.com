@@ -5,7 +5,14 @@ const getStyle = (depth) => ({
   paddingLeft: 4,
   paddingRight: 4,
   ...defaultTheme.styles.root,
-  a: defaultTheme.links.primary,
+  a: {
+    ...defaultTheme.links.primary,
+    textDecoration: "underline",
+    ":hover": {
+      borderBottom: "1px solid",
+      borderBottomColor: "primary",
+    },
+  },
   ".link-anchor-text": defaultTheme.links.primary,
 });
 
