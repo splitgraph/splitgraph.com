@@ -32,6 +32,7 @@ const getRoutingProps = ({
 
   if (isAnchorLink) {
     return {
+      useHtmlLink: true,
       href: resolvedHref,
       as: resolvedHref,
     };
@@ -39,16 +40,19 @@ const getRoutingProps = ({
 
   if (isContentLink) {
     return {
+      useHtmlLink: false,
       as: resolvedHref,
       href: `/_content${resolvedHref}`,
     };
   } else if (isWebsiteLink) {
     return {
+      useHtmlLink: false,
       as: resolvedHref,
       href: resolvedHref,
     };
   } else if (isCatalogLink) {
     return {
+      useHtmlLink: false,
       as: resolvedHref,
       href: resolvedHref,
     };
@@ -79,7 +83,7 @@ export default ({ href, ...rest }: LinkProps) => {
   const { useHtmlLink, ...routingProps } = React.useMemo(
     () =>
       rest.hasOwnProperty("as")
-        ? { href }
+        ? { href, useHtmlLink: false }
         : getRoutingProps({ href, currentURL }),
     [href, currentURL, rest]
   );
