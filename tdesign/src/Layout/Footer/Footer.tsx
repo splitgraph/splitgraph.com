@@ -28,6 +28,8 @@ const darkVariant = {
     variant: "links.muted",
   },
   backgroundColor: "primary",
+  borderTop: "0.5ch solid",
+  borderTopColor: "lightaccent",
 };
 
 const mixStyles = (
@@ -53,6 +55,7 @@ const Footer = ({
 
   return (
     <Box
+      className="splitgraph-footer"
       sx={{
         maxWidth: "100%",
         display: "flex",

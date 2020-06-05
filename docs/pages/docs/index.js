@@ -37,7 +37,13 @@ const DocsBox = ({ header, body, anchor, href }) => {
 
 const DocsIndexPage = () => {
   return (
-    <InnerPageLayout>
+    <InnerPageLayout
+      extraStyle={{
+        ".splitgraph-footer": {
+          borderTop: 0,
+        },
+      }}
+    >
       <NextSeo title="Documentation" />
       <header>
         <h1>Documentation</h1>
@@ -116,7 +122,7 @@ const DocsIndexPage = () => {
         sx={{ paddingLeft: "0 !important", paddingRight: "0 !important" }}
       >
         <DividedBox
-          colors={["#dddddf", "#36678d"]}
+          colors={["#fff", "#36678d"]}
           MidComponent={({ children, ...rest }) => (
             <Box {...rest}>{children}</Box>
           )}
