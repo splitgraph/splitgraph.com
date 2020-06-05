@@ -24,22 +24,32 @@ export default ({ children }: ILandingPageLayoutProps) => {
             fontSize: ["1.25rem", "1.25rem", "2rem"],
             marginBottom: "2rem",
           },
+          h1: {
+            fontSize: ["1.75rem", "1.75rem", "2.5rem"],
+          },
+          "pre, code": {
+            textAlign: "initial",
+            // maxWidth: "100%",
+          },
+          ".mobile-line-break": {
+            display: ["block", "block", "none"],
+          },
           ".lp-section": {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             textAlign: "center",
-            h1: {
-              fontSize: ["1.75rem", "1.75rem", "3rem"],
-            },
-            "pre, code": {
-              textAlign: "initial",
-              // maxWidth: "100%",
-            },
-            ".mobile-line-break": {
-              display: ["block", "block", "none"],
-            },
+          },
+          ".button-link": {
+            fontSize: [
+              "1.5rem !important",
+              "1.5rem !important",
+              "2rem !important",
+            ],
+            padding: "1rem",
+            paddingLeft: "2rem",
+            paddingRight: "2rem",
           },
         }}
       >

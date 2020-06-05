@@ -5,6 +5,7 @@ import * as React from "react";
 
 export interface IHeroBoxProps {
   children?: React.ReactNode;
+  extraStyle?: SystemStyleObject;
 }
 
 const containerStyle = {
@@ -13,10 +14,6 @@ const containerStyle = {
   color: "light",
 } as SystemStyleObject;
 
-export default ({ children }: IHeroBoxProps) => {
-  return (
-    <Box className="lp-section" sx={containerStyle}>
-      {children}
-    </Box>
-  );
+export default ({ children, extraStyle = {} }: IHeroBoxProps) => {
+  return <Box sx={{ ...containerStyle, ...extraStyle }}>{children}</Box>;
 };

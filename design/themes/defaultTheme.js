@@ -90,6 +90,7 @@ export const defaultTheme = {
     // primary: "#000",
     secondary: "#363C8D",
     heavy: "#0d1821",
+    lightaccent: "#96ccff",
     muted: "#f6f6f9",
     gray: "#dddddf",
     // gray: "#ecebf5",

@@ -201,13 +201,14 @@ const ctaSectionStyle = {
   },
   ".button-link": {
     marginBottom: "2rem",
-    fontSize: ["1.5rem", "1.5rem", "2rem"],
   },
   ".muted-link": {
     variant: "links.muted",
   },
   ".mobile-shrink": {
     fontSize: ["1.2rem", "1.5rem", "2rem"],
+    paddingLeft: "1rem",
+    paddingRight: "1rem",
   },
 };
 
@@ -329,6 +330,12 @@ const featureSectionStyle = {
       maxWidth: "80%",
       marginTop: "1em",
     },
+    p: {
+      // for when subheading is not a link
+      maxWidth: "80%",
+      marginTop: "1em",
+      textAlign: "center",
+    },
     "a:after": {
       paddingLeft: "1ch",
       paddingRight: "1ch",
@@ -396,17 +403,55 @@ const LandingPage = () => {
     <LandingPageLayout>
       <NextSeo title="Work with data like you work with code" />
 
-      <HeroBox>
-        <h1>Get your data sorted.</h1>
+      <HeroBox
+        extraStyle={{
+          display: "flex",
+          maxWidth: "100%",
+          flexWrap: "wrap",
+          flexDirection: ["column", "column", "row"],
+          justifyContent: "center",
+          alignItems: "center",
+          // paddingTop: ["inherit", "inherit", "2rem"],
+          paddingBottom: "2rem",
+          WebkitBoxPack: "center",
+          // padding: ["inherit", "inherit", "-2rem"],
+          ".hero-subsection": {
+            flexGrow: 0,
+            flexShrink: 1,
+            margin: ["inherit", "inherit", "2rem"],
+          },
+          ".hero-subsection--text": {
+            textAlign: "center",
+            // marginRight: ["inherit", "inherit", "4rem"],
+          },
+          ".hero-subsection--splitfile": {
+            // marginRight: ["inherit", "inherit", "4rem"],
+          },
+          ".button-link": {
+            display: ["none", "none", "initial"],
+          },
+        }}
+      >
+        <Box className="hero-subsection hero-subsection--text">
+          <h1>Get your data sorted.</h1>
 
-        <Typewriter>sgr build votes.splitfile</Typewriter>
+          <Typewriter>sgr build votes.splitfile</Typewriter>
 
-        <h2>
-          Work with data
-          <br className="mobile-line-break" /> like you work with code.
-        </h2>
+          <h2>
+            Work with data
+            <br className="mobile-line-break" /> like you work with code.
+          </h2>
+
+          <Link
+            className="button-link"
+            href="/docs/getting-started/five-minute-demo"
+          >
+            Try it in five minutes
+          </Link>
+        </Box>
 
         <Box
+          className="hero-subsection hero-subsection--splitfile"
           sx={{
             backgroundColor: "sgdarkblue",
             color: "white",
