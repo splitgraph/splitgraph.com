@@ -31,11 +31,9 @@ for (let castKey of Object.keys(castManifest)) {
 const nextConfig = {
   env: {
     // This is a build time config variable, but in practice, since we should
-    // only have one website deployed that is accessible to search engines,
-    // that's okay. For testing purposes, use the staging URL right now.
-    // TODO: Before launch, make sure to change to www.splitgraph.com
+    // only have one website deployed accessible to search engines, that's okay.
     SEO_CANONICAL_BASE_URL:
-      process.env.SEO_CANONICAL_BASE_URL || `https://web.splitgraph.com`,
+      process.env.SEO_CANONICAL_BASE_URL || `https://www.splitgraph.com`,
 
     // This is a relative URL but is appended to window origin on load
     MATOMO_RELATIVE_URL: "/scripts/js",
