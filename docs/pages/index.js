@@ -1233,7 +1233,10 @@ const LandingPage = () => {
         </Box>
       </section>
 
-      <section className="lp-section lp-cta" sx={ctaSectionStyle}>
+      <section
+        className="lp-section lp-cta"
+        sx={{ ...ctaSectionStyle, borderBottom: 0 }}
+      >
         <h2 sx={{ textTransform: "uppercase" }}>
           <span sx={{ fontWeight: 200 }}>Data scientists</span>
           <br />
