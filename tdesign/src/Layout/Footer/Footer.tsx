@@ -6,6 +6,7 @@ import * as React from "react";
 import FooterSection from "./FooterSection";
 
 import {
+  IconLogoDiscord,
   IconLogoGitHub,
   IconLogoTwitter,
   IconLogoLinkedIn,
@@ -103,8 +104,24 @@ const Footer = ({
           a: {
             variant: "links.unstyled",
           },
-          marginBottom: ["2rem", "inherit", "inherit"],
+          // marginBottom: ["2rem", "inherit", "inherit"],
           ...mixStyles(".community-logos", baseVariant, extraStyle),
+        },
+        ".discord-cta-link": {
+          display: "flex",
+          alignItems: "center",
+          padding: "0.5rem",
+          marginTop: ["-0.5rem"],
+          borderRadius: "1rem",
+          border: "1px solid",
+          borderColor: "white",
+          marginBottom: ["2rem", "inherit", "inherit"],
+          ...mixStyles(".discord-cta-link", baseVariant, extraStyle),
+          ":hover": {
+            borderColor: "lightaccent",
+            textDecoration: "none",
+            ...mixStyles(".discord-cta-link:hover", baseVariant, extraStyle),
+          },
         },
         ul: {
           listStyleType: "none",
@@ -193,6 +210,18 @@ const Footer = ({
               />
             </a>
           </Box>
+        </Box>
+
+        <Box className="footer-section">
+          <h3 className="footer-section-header">&nbsp;</h3>
+          <a className="discord-cta-link" href="https://discord.gg/eFEFRKm">
+            {" "}
+            <IconLogoDiscord
+              size={"2rem"}
+              extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
+            />
+            Join us on Discord!
+          </a>
         </Box>
 
         <FooterSection

@@ -254,3 +254,11 @@ export { IconHeart };
 import IconLogoGitHub from './IconLogoGitHub';
 export { IconLogoGitHub };
 
+
+import IconLogoDiscord from './IconLogoDiscord';
+export { IconLogoDiscord };
+
+
+import IconAlertInfoCircle from './IconAlertInfoCircle';
+export { IconAlertInfoCircle };
+
