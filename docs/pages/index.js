@@ -1067,7 +1067,9 @@ const LandingPage = () => {
       <section className="lp-feature-section" sx={featureSectionStyle}>
         <Box className="feature-section-header">
           <h2>Sharing</h2>
-          <p>Go beyond one machine and collaborate on data with others.</p>
+          <Link href="/product/data-lifecycle/sharing">
+            Collaborate on data with others and enrich your research with public datasets.
+          </Link>
         </Box>
 
         <ul>

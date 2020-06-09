@@ -1,0 +1,33 @@
+export const meta = {
+  id: "sharing",
+  title: "Sharing",
+};
+
+### Peer-to-Peer
+
+Any Splitgraph instance can act as a [remote](/docs/architecture/splitgraph-remotes),
+allowing you to share data with other engines in a decentralized fashion. Access
+control works on top of PostgreSQL authentication, so any [PostgreSQL authentication method](https://www.postgresql.org/docs/current/auth-methods.html),
+including PAM, LDAP or RADIUS, will work with Splitgraph.
+
+The [decentralized demo](/docs/getting-started/decentralized-demo) will show you how to run
+two Splitgraph engines using Docker Compose and share data between them.
+
+Splitgraph also supports [pushing data to S3-compatible object storage](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-object-storage),
+allowing you to store Splitgraph data cheaply and still have it available to query on demand.
+
+### Auto-generated REST API
+
+Data images that are pushed out to [Splitgraph Cloud](/docs/splitgraph-cloud/introduction)
+get an OpenAPI-compatible REST endpoint generated for them, provided by [PostgREST](https://postgrest.org/en/latest/).
+OpenAPI is a standard for REST APIs that allows clients to get structured information about methods supported by the API and supports [client code generation for over 30 languages](https://openapi-generator.tech/).
+
+Check out a [sample REST API](https://www.splitgraph.com/splitgraph/congress_tweets/latest/-/api-schema) for the `splitgraph/congress_tweets` dataset on Splitgraph Cloud.
+
+### Access an ever-growing library of data
+
+[Splitgraph Cloud](https://www.splitgraph.com/explore) indexes over 40000 data repositories, either hosted
+by Splitgraph or for which we have written adapters. All of these repositories are ready to be
+cloned to your [Splitgraph engine](/docs/architecture/splitgraph-engine) and queried by
+[any PostgreSQL client](/product/splitgraph/integrations), used in [Splitfiles](/docs/concepts/splitfiles)
+or joined with your own datasets to enrich your research.
