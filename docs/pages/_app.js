@@ -42,7 +42,7 @@ class SplitgraphWebsiteApp extends App {
         description: defaultDescription,
         images: [
           {
-            url: `${SEO_BASE_URL}/static/splitgraph_og_image_1200x630.png`,
+            url: `${SEO_BASE_URL}/static/splitgraph_og_image_dark_1200x630.png`,
             width: 1200,
             height: 630,
             alt: "Splitgraph - Work with data like code",
