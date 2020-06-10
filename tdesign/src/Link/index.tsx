@@ -1,5 +1,5 @@
-import Link, { LinkProps } from './Link';
-import MutedLink from './MutedLink';
-import RouterMock from './RouterMock';
+import Link, { LinkProps, INextDynamicLinkProps } from "./Link";
+import MutedLink from "./MutedLink";
+import RouterMock from "./RouterMock";
 
-export { Link, MutedLink, RouterMock, LinkProps };
+export { Link, MutedLink, RouterMock, LinkProps, INextDynamicLinkProps };
