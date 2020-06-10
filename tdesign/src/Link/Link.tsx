@@ -1,5 +1,5 @@
 // @jsx jsx
-import { Styled, SystemStyleObject } from "theme-ui";
+import { Styled } from "theme-ui";
 import * as React from "react";
 import Link from "next/link";
 
@@ -19,9 +19,10 @@ export interface LinkProps
 
   // note: sx is deprecated, but keep around in case anything (wrongly) using it
   sx?: any;
-  extraStyle?: SystemStyleObject;
+  extraStyle?: any;
   children: React.ReactNode;
   target?: "_blank" | "_self" | "_parent" | "_top" | string;
+  rel?: "nofollow" | string;
 }
 
 export default React.forwardRef(

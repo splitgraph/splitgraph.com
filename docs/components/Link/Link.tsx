@@ -4,7 +4,7 @@ import { jsx } from "theme-ui";
 import * as React from "react";
 
 import { useRouter } from "next/router";
-import { Link, LinkProps } from "@splitgraph/tdesign";
+import { Link, LinkProps, INextDynamicLinkProps } from "@splitgraph/tdesign";
 
 import getLinkType from "@splitgraph/docs/compile/compiledGetLinkType";
 
@@ -13,7 +13,7 @@ interface RoutingProps extends Pick<LinkProps, "href" | "as"> {
 }
 
 interface IGetRoutingPropsArgs {
-  href: string;
+  href: string | INextDynamicLinkProps;
   currentURL?: string;
 }
 
@@ -80,7 +80,7 @@ export default ({ href, ...rest }: LinkProps) => {
     [router]
   );
 
-  const { useHtmlLink, ...routingProps } = React.useMemo(
+  const { useHtmlLink, href: typedHref, ...routingProps } = React.useMemo(
     () =>
       rest.hasOwnProperty("as")
         ? { href, useHtmlLink: false }
@@ -89,8 +89,8 @@ export default ({ href, ...rest }: LinkProps) => {
   );
 
   return useHtmlLink ? (
-    <a {...rest} {...routingProps} />
+    <a href={typedHref as string} {...rest} {...routingProps} />
   ) : (
-    <Link {...rest} {...routingProps} />
+    <Link href={typedHref} {...rest} {...routingProps} />
   );
 };
