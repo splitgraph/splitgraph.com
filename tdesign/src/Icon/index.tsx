@@ -262,3 +262,7 @@ export { IconLogoDiscord };
 import IconAlertInfoCircle from './IconAlertInfoCircle';
 export { IconAlertInfoCircle };
 
+
+import IconSearch from './IconSearch';
+export { IconSearch };
+
