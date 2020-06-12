@@ -102,6 +102,7 @@ export const makeDefaultTheme = () => ({
     darkgray: "#3c",
     sgdarkblue: "#36678d",
     sglightblue: "#d5f6fe",
+    lightbluefaded: "rgba(213, 246, 255, .5)",
     accent: "secondary",
     background: "#0d1821",
   },
@@ -197,7 +198,7 @@ export const makeDefaultTheme = () => ({
       borderWidth: "1px",
       borderStyle: "solid",
       borderColor: "primary",
-      backgroundColor: "rgba(213, 246, 255, .5)",
+      backgroundColor: "lightbluefaded",
       padding: ".5em",
       a: {
         variant: "links.primary",
