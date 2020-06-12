@@ -14,7 +14,7 @@ export default ({ children, extraStyle = {} }: IContentHeaderProps) => {
     color: "primary",
     ...extraStyle,
     ".content-header--banner": {
-      padding: "0.5em",
+      // padding: "0.5em",
       marginBottom: "2rem",
       display: "flex",
       justifyContent: "space-between",
