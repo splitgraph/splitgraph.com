@@ -46,7 +46,7 @@ export default ({
   // https://stackoverflow.com/a/46904983/3793499
   return (
     <Text
-      className={`sg-icon-${iconSlug}`}
+      className={`sg-icon sg-icon-${iconSlug}`}
       sx={{
         ...(color
           ? {
