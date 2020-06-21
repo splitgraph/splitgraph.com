@@ -115,6 +115,8 @@ work against it, getting benefits like version control, packaging and sharing to
 We have an example of running [dbt](../integrating-splitgraph/dbt) in such a way, swapping between different versions of the
 source dataset and looking at their effect on the built dbt model.
 
+In addition, we have written a [Splitgraph dbt adapter](https://github.com/splitgraph/splitgraph/tree/master/examples/dbt_adapter) that allows you to reference Splitgraph images directly from your dbt model.
+
 Splitgraph also offers its own method of building datasets: [Splitfiles](../concepts/splitfiles). Splitfiles offer Dockerfile-like caching, provenance tracking, fast dataset rebuilds, joins between datasets and full SQL support.
 
 We envision Splitfiles as a replacement for ETL pipelines: instead of a series of processes that transform data between tables in a data warehouse,
