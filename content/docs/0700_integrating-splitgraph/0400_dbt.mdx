@@ -20,6 +20,29 @@ Turning the source and the target schemas that dbt uses into Splitgraph reposito
   to directly use data from a wide variety of databases without having to write an extra ETL job to load the data
   into the warehouse.
 
+## Splitgraph dbt adapter
+
+You don't need any extra plugins to use dbt with Splitgraph, since you can use dbt's native
+PostgreSQL support to query the Splitgraph engine. However, if you install the [Splitgraph dbt adapter](https://github.com/splitgraph/splitgraph/tree/master/examples/dbt_adapter), you will
+be able to reference Splitgraph images directly from your dbt code. For example:
+
+```sql
+{{ config(materialized='table') }}
+
+with source_data as (
+
+    select domain, count(domain) as count
+    from "splitgraph/socrata:latest".datasets
+    group by domain
+
+)
+
+select *
+from source_data
+```
+
+See [our GitHub page](https://github.com/splitgraph/splitgraph/tree/master/examples/dbt_adapter) for instructions on how to install and use the Splitgraph dbt adapter as well as a sample dbt project.
+
 ## Example
 
 The [dbt example](https://github.com/splitgraph/splitgraph/tree/master/examples/dbt) showcases
