@@ -7,10 +7,15 @@ To use [`mongo_fdw`](https://github.com/EnterpriseDB/mongo_fdw) and mount Mongo 
 
 ```
 $ sgr mount mongo_fdw example/mongo \\
-    -c username:password@mongo_host:27017\\
-     -o '{"example_table": \\
-        {"db": "example_db", "coll": "example_collection", \\
-        "schema": {"column_1": "text", "column_2": "numeric"}}}'
+    -c username:password@mongo_host:27017 -o @- <<EOF
+{
+    "example_table": {
+        "db": "example_db",
+        "coll": "example_collection",
+        "schema": {"column_1": "text", "column_2": "numeric"}
+    }
+}
+EOF
 ```
 
 This will create a schema called `example/mongo` on your engine, mounting the MongoDB database from `mongo_host:27017`. The schema will contain one foreign table, `example_table`, that will contain documents from the collection `example_collection` in the database `example_db`. The table will have 2 columns, `column_1` and `column_2`, populated from the documents in that collection.
