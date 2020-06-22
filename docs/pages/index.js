@@ -680,8 +680,8 @@ const LandingPage = () => {
             top: 0,
             minWidth: "100%",
             width: "100%",
-            maxHeight: "calc(200px + 1rem)",
-            height: "calc(200px + 1rem)",
+            maxHeight: "calc(300px + 1rem)",
+            height: "calc(300px + 1rem)",
             border: "none",
             background: "none",
             overflowY: "hidden",
@@ -1068,7 +1068,8 @@ const LandingPage = () => {
         <Box className="feature-section-header">
           <h2>Sharing</h2>
           <Link href="/product/data-lifecycle/sharing">
-            Collaborate on data with others and enrich your research with public datasets.
+            Collaborate on data with others and enrich your research with public
+            datasets.
           </Link>
         </Box>
 
