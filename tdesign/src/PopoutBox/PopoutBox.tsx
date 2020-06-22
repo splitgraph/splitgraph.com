@@ -1,7 +1,7 @@
 // @jsx jsx
 // @ts-ignore
-import { jsx, Box, SystemStyleObject } from 'theme-ui';
-import * as React from 'react';
+import { jsx, Box, SystemStyleObject } from "theme-ui";
+import * as React from "react";
 
 export interface IRenderPopoutButtonProps {
   onClick: () => void;
@@ -9,11 +9,11 @@ export interface IRenderPopoutButtonProps {
 }
 
 export type PopoutAnchorPositionString =
-  | 'topLeft'
-  | 'topRight'
-  | 'bottom'
-  | 'bottomRight'
-  | 'bottomLeft';
+  | "topLeft"
+  | "topRight"
+  | "bottom"
+  | "bottomRight"
+  | "bottomLeft";
 
 export type PopoutAnchorPosition =
   | PopoutAnchorPositionString
@@ -28,42 +28,43 @@ export interface IPopoutBoxProps {
   children?: React.ReactNode;
   popoutContainerStyle?: SystemStyleObject;
   anchorPosition?: PopoutAnchorPosition;
+  buttonProps?: any;
 }
 
 const getAnchorPositionStyle = (
   pos?: PopoutAnchorPosition
 ): SystemStyleObject => {
   const posInitial = {
-    top: 'initial',
-    bottom: 'initial',
-    left: 'initial',
-    right: 'initial',
+    top: "initial",
+    bottom: "initial",
+    left: "initial",
+    right: "initial",
   };
 
   const posMap = {
     topLeft: {
       ...posInitial,
-      bottom: '100%',
-      right: '100%',
+      bottom: "100%",
+      right: "100%",
     },
     topRight: {
       ...posInitial,
-      bottom: '100%',
-      left: '100%',
+      bottom: "100%",
+      left: "100%",
     },
     bottom: {
       ...posInitial,
-      top: '100%',
+      top: "100%",
     },
     bottomRight: {
       ...posInitial,
-      top: '100%',
-      left: '100%',
+      top: "100%",
+      left: "100%",
     },
     bottomLeft: {
       ...posInitial,
-      top: '100%',
-      right: '100%',
+      top: "100%",
+      right: "100%",
     },
   };
 
@@ -86,8 +87,8 @@ const getAnchorPositionStyle = (
 };
 
 const containerStyle = {
-  display: 'inline',
-  position: 'relative',
+  display: "inline",
+  position: "relative",
 } as SystemStyleObject;
 
 export default ({
@@ -95,6 +96,7 @@ export default ({
   renderButton,
   popoutContainerStyle = {},
   anchorPosition,
+  buttonProps = {},
 }: IPopoutBoxProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -103,8 +105,8 @@ export default ({
 
   const mergedPopoutContainerStyle = {
     zIndex: 10,
-    position: 'absolute',
-    boxShadow: 'hovering',
+    position: "absolute",
+    boxShadow: "hovering",
     ...anchorPositionStyle,
     ...popoutContainerStyle,
   } as SystemStyleObject;
@@ -136,7 +138,7 @@ export default ({
   };
 
   React.useEffect(() => {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return;
     }
 
@@ -144,12 +146,12 @@ export default ({
       return;
     }
 
-    document.addEventListener('mousedown', handleDocumentClick);
-    document.addEventListener('keydown', handleEscapeKey);
+    document.addEventListener("mousedown", handleDocumentClick);
+    document.addEventListener("keydown", handleEscapeKey);
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
-      document.removeEventListener('mousedown', handleDocumentClick);
+      document.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener("mousedown", handleDocumentClick);
     };
   }, [isOpen, handleDocumentClick]);
 
@@ -158,6 +160,7 @@ export default ({
     onClick: () => {
       setIsOpen(!isOpen);
     },
+    ...buttonProps,
   });
 
   return (
