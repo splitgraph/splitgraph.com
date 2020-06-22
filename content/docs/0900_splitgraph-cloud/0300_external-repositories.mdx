@@ -21,10 +21,13 @@ endpoints with any PostgreSQL client, including DBeaver, Datagrip or Metabase.
 Socrata repositories can be mounted as follows:
 
 ```
-sgr mount socrata chicago_data \\
-    --handler-options '{"domain": "data.cityofchicago.org",
-                        "tables": {"fire_stations": "28km-gtjn"},
-                        "app_token": "YOUR_APP_TOKEN"}'
+sgr mount socrata chicago_data -o @- <<EOF
+{
+    "domain": "data.cityofchicago.org",
+    "tables": {"fire_stations": "28km-gtjn"},
+    "app_token": "YOUR_APP_TOKEN"
+}
+EOF
 ```
 
 Read the [Socrata documentation](../ingesting-data/socrata) for more information.

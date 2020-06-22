@@ -15,10 +15,13 @@ Splitgraph has first-class support for querying Socrata datasets through SQL and
 Each dataset has a unique "four-by-four" (a Socrata dataset ID, for example, `28km-gtjn`) and is hosted on a certain domain, for example, `data.cityofchicago.org`. Use the `sgr` client to mount the dataset:
 
 ```
-sgr mount socrata chicago_data \\
-    --handler-options '{"domain": "data.cityofchicago.org",
-                        "tables": {"fire_stations": "28km-gtjn"},
-                        "app_token": "YOUR_APP_TOKEN"}'
+sgr mount socrata chicago_data -o @- <<EOF
+{
+    "domain": "data.cityofchicago.org",
+    "tables": {"fire_stations": "28km-gtjn"},
+    "app_token": "YOUR_APP_TOKEN"
+}
+EOF
 ```
 
 This will create a table `fire_stations` in `chicago_data` schema on your engine that, when queried,
