@@ -1,0 +1,19 @@
+export const meta = {id: "cloud-metadata", title: "sgr cloud metadata", sidebarTitle: "cloud metadata", description: "Upload a metadata file to a Splitgraph repository."};
+
+```sgr cloud metadata [OPTIONS] REPOSITORY [METADATA_FILE]```
+
+Upload a metadata file to a Splitgraph repository.
+
+    The metadata file should be in YAML format and have two keys: `readme` and `description`.
+
+    For example:
+
+```
+readme: dataset-readme.md
+description: Dataset description (160 characters max).
+```
+    
+
+### Options
+
+  * **`--remote TEXT`**: Name of the remote registry to use.
