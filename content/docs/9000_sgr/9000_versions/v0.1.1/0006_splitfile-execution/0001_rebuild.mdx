@@ -1,0 +1,27 @@
+export const meta = {id: "rebuild", title: "sgr rebuild", sidebarTitle: "rebuild", description: "Rebuild images against different dependencies."};
+
+```sgr rebuild [OPTIONS] IMAGE_SPEC```
+
+Rebuild images against different dependencies.
+
+Examines the provenance of a Splitgraph image created by a Splitfile and reruns it against different images than
+the ones that were imported by the original run.
+
+### Examples
+
+``sgr rebuild my/repo --against noaa/climate:old_data``
+
+Reconstructs the Splitfile used to create ``my/repo:latest``, replaces all imports from ``noaa/climate`` with
+imports from ``noaa/climate:old_data`` and reruns the Splitfile.
+
+``sgr rebuild my/repo:other_tag -u``
+
+Rebuilds ``my_repo:other_tag`` against the latest versions of all of its dependencies.
+
+Image caching still works in this case: if the result of the rebuild already exists, the image will be checked
+out.
+
+### Options
+
+  * **`-u, --update`**: Rederive the image against the latest version of all dependencies.
+  * **`-a, --against IMAGE`**: Images to substitute into the reconstructed Splitfile, of the form [NAMESPACE/]REPOSITORY[:HASH_OR_TAG]. Default tag is 'latest'.
