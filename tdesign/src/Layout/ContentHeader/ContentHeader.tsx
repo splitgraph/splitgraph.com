@@ -19,6 +19,7 @@ export default ({ children, extraStyle = {} }: IContentHeaderProps) => {
       display: "flex",
       justifyContent: "space-between",
       alignContent: "center",
+      alignItems: "flex-end",
       ...(extraStyle.hasOwnProperty(".content-header--banner")
         ? extraStyle[".content-header--banner"]
         : {}),
