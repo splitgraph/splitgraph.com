@@ -3,24 +3,218 @@ export const meta = {
   title: "Splitgraph Team",
 };
 
-## Artjoms Iškovs
+import { Box } from "theme-ui";
+import {
+  IconLogoLinkedIn,
+  IconLogoGitHub,
+  IconLogoTwitter,
+  IconLogoHackerNews,
+} from "@splitgraph/tdesign";
+
+import { GitLabLogoIcon } from "@splitgraph/design";
+
+export const socialContainerStyle = {
+  display: "flex",
+  a: {
+    variant: "links.unstyled",
+    ":hover": {
+      textDecoration: "none",
+      borderBottom: 0,
+    },
+  },
+};
+
+
+<Box sx={{h2: {display: "flex", justifyContent: "space-between"}}}>
+<h2>Artjoms Iškovs <Box sx={{marginLeft: "2rem", fontSize: "small", textTransform: "uppercase", fontWeight:"lighter", display: "inline"}}>AKA Mildbyte</Box></h2>
+</Box>
+
 _Founder_
 
-Started programming in BASIC in 2004 and never stopped (but moved on to different languages). Holds a degree in Computer Science from the University of Cambridge. Before starting Splitgraph, worked at Man AHL, a quant hedge fund. At AHL, participated in multiple parts of the business &mdash; from helping maintain Arctic, an open-source high performance timeseries store, and working on various market data pipelines to doing research on equities and interest rate / energy derivatives. This experience of working close with producers, maintainers and consumers of data has inspired a large amount of Splitgraph's philosophy.
+Started programming in BASIC in 2004 and never stopped (but moved on to different languages). Holds a degree in
+Computer Science from the University of Cambridge. Before starting Splitgraph, worked at Man AHL, a quant hedge fund.
+At AHL, participated in multiple parts of the business &mdash; from helping maintain Arctic, an open-source high
+performance timeseries store, and working on various market data pipelines to doing research on equities and interest
+rate / energy derivatives. This experience of working closely with producers, maintainers and consumers of data
+has inspired a large amount of Splitgraph's philosophy.
 
 In 2018, accidentally [invented a Morrowind speedrun category](https://www.kotaku.com.au/2018/06/solving-the-travelling-murderer-problem-of-morrowinds-leader-of-every-faction-speedrun/).
 
-## Miles Richardson
+<Box sx={socialContainerStyle}>
+  <Box>
+    <a
+      href="https://www.linkedin.com/in/artjoms-i%C5%A1kovs-7252159b/"
+      title="Artjoms on LinkedIn"
+      aria-label="Artjoms on LinkedIn"
+    >
+      <IconLogoLinkedIn
+        size={"2rem"}
+        extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
+      />
+    </a>
+  </Box>
+
+  <Box>
+    <a
+      href="https://www.github.com/mildbyte"
+      title="Artjoms on GitHub"
+      aria-label="Artjoms on GitHub"
+    >
+      <IconLogoGitHub
+        size={"2rem"}
+        extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
+      />
+    </a>
+  </Box>
+
+  <Box>
+    <a
+      href="https://www.gitlab.com/mildbyte"
+      title="Artjoms on GitLab"
+      aria-label="Artjoms on GitLab"
+    >
+      <GitLabLogoIcon />
+    </a>
+  </Box>
+
+  <Box>
+    <a
+      href="https://www.twitter.com/mildbyte"
+      title="Artjoms on Twitter"
+      aria-label="Artjoms on Twitter"
+    >
+      <IconLogoTwitter
+        size={"2rem"}
+        extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
+      />
+    </a>
+  </Box>
+
+  <Box>
+    <a
+      href="https://news.ycombinator.com/user?id=mildbyte"
+      title="Artjoms on HN"
+      aria-label="Artjoms on HN"
+    >
+      <IconLogoHackerNews
+        size={"2rem"}
+        extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
+      />
+    </a>
+  </Box>
+</Box>
+
+
+
+<Box sx={{h2: {display: "flex", justifyContent: "space-between", marginTop: "4rem"}}}>
+<h2>Miles Richardson <Box sx={{marginLeft: "2rem", fontSize: "small", textTransform: "uppercase", fontWeight:"lighter", display: "inline"}}>AKA Chatmasta</Box></h2>
+</Box>
+
 _Founder_
 
-## PHB
+Started programming in PHP in 2004 and definitely stopped. Now prefers TypeScript and
+well-written shell scripts. Graduated from Yale University with a BA in Computer
+Science  (senior thesis: [TorCoin, a proof-of-bandwidth cryptocurrency](https://scholar.google.com/scholar?cluster=5639166646753502991)).
+In college, started a company selling proxy servers. After college, co-founded
+a social app startup. Most recently, was working remotely (before it was cool) as a
+software consultant and saw first-hand the pain of data integrations. Traveled and
+lived all over the world, most recently in Cambridge and NYC.
+
+Can be found complaining about Big Cloud in HN comments, or out for a run.
+
+
+<Box sx={socialContainerStyle}>
+  <Box>
+    <a
+      href="https://www.linkedin.com/in/milesrichardson1/"
+      title="Miles on LinkedIn"
+      aria-label="Miles on LinkedIn"
+    >
+      <IconLogoLinkedIn
+        size={"2rem"}
+        extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
+      />
+    </a>
+  </Box>
+
+  <Box>
+    <a
+      href="https://www.github.com/milesrichardson"
+      title="Miles on GitHub"
+      aria-label="Miles on GitHub"
+    >
+      <IconLogoGitHub
+        size={"2rem"}
+        extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
+      />
+    </a>
+  </Box>
+
+  <Box>
+    <a
+      href="https://www.gitlab.com/milesrichardson"
+      title="Miles on GitLab"
+      aria-label="Miles on GitLab"
+    >
+      <GitLabLogoIcon />
+    </a>
+  </Box>
+
+  <Box>
+    <a
+      href="https://www.twitter.com/milesrichardson"
+      title="Miles on Twitter"
+      aria-label="Miles on Twitter"
+    >
+      <IconLogoTwitter
+        size={"2rem"}
+        extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
+      />
+    </a>
+  </Box>
+
+  <Box>
+    <a
+      href="https://news.ycombinator.com/user?id=chatmasta"
+      title="Miles on HN"
+      aria-label="Miles on HN"
+    >
+      <IconLogoHackerNews
+        size={"2rem"}
+        extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
+      />
+    </a>
+  </Box>
+</Box>
+
+
+<Box sx={{h2: {display: "flex", justifyContent: "space-between", marginTop: "4rem"}}}>
+<h2>PHB <Box sx={{marginLeft: "2rem", fontSize: "small", textTransform: "uppercase", fontWeight:"lighter", display: "inline"}}>AKA "BOSS" or "Sir"</Box></h2>
+</Box>
+
 _VP of Engineering_
 
 `phb` is a chat bot that has two purposes:
 
-  * Sending "standup request messages" at 9AM every morning, giving each team member a configurable
-    amount of time to respond. PHB also keeps track of the streak of standup messages that were
-    sent on time. If the streak is broken, there are precisely no consequences.
-  * Picking a question from the [1-on-1 meeting question bank](https://github.com/VGraupera/1on1-questions) and sending it to the team chat, targeting a specific team member. This happens at random intervals defined by the [exponential distribution](https://en.wikipedia.org/wiki/Exponential_distribution), often at night, and offers a true clueless middle management experience.
+- Sending "standup request messages" at 9AM every morning, giving each team member a configurable
+  amount of time to respond. PHB also keeps track of the streak of standup messages that were
+  sent on time. If the streak is broken, there are precisely no consequences.
+- Picking a question from the [1-on-1 meeting question bank](https://github.com/VGraupera/1on1-questions) and sending it to the team chat, targeting a specific team member. This happens at random intervals defined by the [exponential distribution](https://en.wikipedia.org/wiki/Exponential_distribution), often at night, and offers a true clueless middle management experience.
 
 `phb` refused to provide biographical details when asked.
+
+
+<Box sx={{h2: {display: "flex", justifyContent: "space-between", marginTop: "4rem"}}}>
+<h2>wildbyte <Box sx={{marginLeft: "2rem", fontSize: "small", textTransform: "uppercase", fontWeight:"lighter", display: "inline"}}>AKA BRO</Box></h2>
+</Box>
+
+_Permanent Intern_
+
+`wildbyte` is mildbyte's alter ego and serves multiple purposes:
+
+- Awarding fellow employees for creative memes in chat
+- Sourcing relevant HN comments, but improving them via its markov brain
+- Interjecting into the conversation with Patrick Bateman quotes and advice from wallstreetbets
+- Running interactive games of Zork (1, 2, or 3)
+
+When asked for biographical details, `wildbyte` asked us if we saw the Patty Winters show this morning.
