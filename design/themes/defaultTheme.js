@@ -312,6 +312,7 @@ export const defaultTheme = {
       display: "inline-flex",
       alignContent: "center",
       overflowX: "auto",
+      wordBreak: "break-all",
       // backgroundColor: "primary",
     },
     code: {
