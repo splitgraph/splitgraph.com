@@ -9,8 +9,8 @@ the particulars of a command that's being executed.
 
 ## Preprocessing
 
-There is some quality-of-life preprocessing that gets done to the file before
-it's interpreted:
+Splitgraph does some quality-of-life preprocessing to the file before
+interpreting it, so that:
 
 - Newlines can be escaped to make a command multiline (`"\\n"` gets
   replaced with `""`)
@@ -33,9 +33,9 @@ follow the same caching rules but are currently not supported by provenance trac
 ## Note on Splitfile safety
 
 The Splitfile executor validates SQL in `IMPORT` and `SQL` commands before passing it to PostgreSQL
-for execution. This filters out most PostgreSQL syntax constructs that can't be used in Splitfiles
-or references to system tables, however this shouldn't be relied on for security. In particular,
-Splitfile validation is currently not available on Windows systems.
+for execution. This filters out most PostgreSQL syntax constructs that Splitfiles cannot use or references
+to system tables. However, this shouldn't be relied on for security. In particular, Splitfile validation
+is currently not available on Windows systems.
 
 Always check Splitfiles before running them and check provenance of datasets you pulled from the Internet (with
 [`sgr provenance --full`](../sgr/splitfile-execution/provenance)) before running [`sgr rebuild`](../sgr/splitfile-execution/rebuild), as rebuilding runs SQL from the image's metadata,

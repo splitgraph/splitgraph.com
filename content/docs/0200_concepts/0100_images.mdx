@@ -7,16 +7,12 @@ Splitgraph's main purpose is to build, extend, manipulate and share data images.
 essentially snapshots of a PostgreSQL schema at a given point in time, much like Docker images
 are snapshots of the filesystem.
 
-An image consists of tables. Several images can share the same table in a space-efficient
-way, with the actual table data stored only once.
+An image consists of tables. Tables are composed of [content-addressable objects](objects), so that when multiple images contain the same table (or overlapping subsets of it), Splitgraph only stores one copy of the underlying data.
 
-There are multiple ways to create Splitgraph images. Firstly, the image can be checked out
-into an actual PostgreSQL schema. This enables [change tracking](../working-with-data/tracking-changes)
-and allows any application that can interact with a PostgreSQL database to work with Splitgraph.
-At any point in time, the schema can be committed to create a new image.
+You can create Splitgraph images in multiple ways. You can “check out” any image into a PostgreSQL schema and interact with it using any PostgreSQL client. Splitgraph will [capture your changes](../working-with-data/tracking-changes) to the data, and then you can commit them as delta-compressed changesets that you can package into new images.
 
-Splitgraph images can also be created using a domain-specific language called [Splitfiles](splitfiles) that offer
-a similar experience to Dockerfiles, including caching to not rebuild data where sources haven't changed.
+You can also create Splitgraph images using a declarative [Splitfile language](splitfiles), which offers
+a similar experience to Dockerfiles, including a caching system for efficient rebuilds that execute only when upstream sources change.
 
-Under the hood, Splitgraph image metadata (including their parents and provenance) is stored in
+Under the hood, Splitgraph image metadata (including parents and provenance) is stored in
 `splitgraph_meta.images` table and table metadata is stored in `splitgraph_meta.tables`.

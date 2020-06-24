@@ -53,13 +53,11 @@ SQL {
 They offer multiple advantages over using ad hoc queries or other tools:
 
 - **Dockerfile-like caching**: every Splitfile line defines a layer. If data sources
-  and the actual command haven't changed, the image doesn't need to be rebuilt.
+  and the actual command haven't changed, Splitgraph does not need to rebuild the image.
 - **Referencing other datasets**: Splitfiles can import data from other Splitgraph images
   (using the `FROM ... IMPORT ...` command) or perform joins on other datasets (by referencing
   them in the `SQL` command as schemata).
-- **Provenance tracking**: images built with Splitfiles have all their sources and commands
-  used to build them recorded in their metadata. This lets the user know exactly where
-  their dataset came from and quickly rebuild it if the upstream data has changed.
+- **Provenance tracking**: when you build images with Splitfiles, their metadata includes the sources and commands used to build them. You can inspect images to know exactly where its data came from, and quickly rebuild it when the upstream data changes.
 - **Full SQL support**: Splitgraph only does some minor rewriting and validation on SQL in Splitfiles
   and defers to PostgreSQL for running actual queries, which means that all SQL constructs
   are supported.

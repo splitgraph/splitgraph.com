@@ -6,7 +6,7 @@ export const meta = {
 Splitgraph follows the decentralized Git model where any Splitgraph installation can act as a remote
 for the purposes of pushing and pulling datasets. In essence, the local `sgr` client can communicate
 with the local and the remote Splitgraph engine over the PostgreSQL wire protocol to determine
-what data needs to be pushed and pulled. This works on top of the Postgres authentication where
+what data it needs to push and pull. This works on top of the Postgres authentication where
 the current role name determines which datasets a user can write to.
 
 The [two-engine sync example](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-other-engine)
@@ -16,8 +16,9 @@ showcases setting up data sharing between two Splitgraph engines.
 
 The Splitgraph registry on data.splitgraph.com is a special kind of a Splitgraph remote. Clients
 can communicate with it over the same (very restricted) PostgreSQL protocol to push and pull
-images but can't check them out. In addition, objects are uploaded to an S3-compatible storage
+images but can't check them out. In addition, Splitgraph uploads objects to an S3-compatible storage
 instead of the registry itself.
 
-The registry isn't required to use Splitgraph, but if you're interested in using it to share
-datasets and use public datasets in Splitfiles, you can follow the [Cloud introduction](../splitgraph-cloud/introduction).
+You can use Splitgraph without a registry, but if you're interested in using it to share
+datasets and use public datasets in Splitfiles, you probably want to use the registry
+at Splitgraph Cloud, and should read the [Cloud introduction](../splitgraph-cloud/introduction).

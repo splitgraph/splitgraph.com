@@ -4,21 +4,21 @@ export const meta = {
 };
 
 Some repositories on Splitgraph Cloud are external. This means that they aren't physically present
-on the registry as images and are only indexed by us.
+on the registry as images, and we only index them.
 
-In most cases, we have written adapters for external repositories that make them mountable through
+In most cases, we have written adapters for external repositories to make them mountable through
 the Splitgraph engine by using the `sgr mount` command. This lets you query external repositories
 from your engine with any PostgreSQL client and use them in Splitfiles. They are also accessible
 via the [Splitgraph Cloud REST API](./publish-rest-api).
 
 ## Socrata
 
-We index over 40000 datasets on the [Socrata open government data platform](https://www.tylertech.com/products/socrata). The [Splitgraph adapter for Socrata](../ingesting-data/socrata) is implemented as a foreign data wrapper that transforms queries
-into the [SoQL query language](https://dev.socrata.com/docs/queries/). The actual logic is executed on the Socrata server and only the
-query result is sent back to the client. This means that you can explore large remote Socrata
-endpoints with any PostgreSQL client, including DBeaver, Datagrip or Metabase.
+We index over 40000 datasets on the [Socrata open government data platform](https://www.tylertech.com/products/socrata). The [Splitgraph adapter for Socrata](../ingesting-data/socrata) is a foreign data wrapper that transforms queries
+into the [SoQL query language](https://dev.socrata.com/docs/queries/). Splitgraph forwards the query to
+the Socrata server, which executes the actual logic, and then returns the query result back to the client.
+This means that you can explore large remote Socrata endpoints with any PostgreSQL client, including DBeaver, Datagrip or Metabase.
 
-Socrata repositories can be mounted as follows:
+You can mount Socrata repositories as follows (also see the "Mount Data" button in a Splitgraph cloud repository for templated instructions):
 
 ```
 sgr mount socrata chicago_data -o @- <<EOF
@@ -29,5 +29,7 @@ sgr mount socrata chicago_data -o @- <<EOF
 }
 EOF
 ```
+
+(Note `app_token` is optional, but without it you may be throttled.)
 
 Read the [Socrata documentation](../ingesting-data/socrata) for more information.

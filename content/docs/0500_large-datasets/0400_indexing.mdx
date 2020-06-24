@@ -4,9 +4,9 @@ export const meta = {
 };
 
 Every Splitgraph object has an index in its metadata. This is distinct from Postgres indexes,
-which can be created on checked out Splitgraph tables. Splitgraph indexes are higher-level and are
-used by [layered querying](layered-querying) to determine which objects need to
-be downloaded to satisfy a query.
+which you can create on checked out Splitgraph tables. Splitgraph indexes are higher-level and are
+used by [layered querying](layered-querying) to determine which objects Splitgraph needs to
+download to satisfy a query.
 
 The main idea behind Splitgraph indexes is that they give false positives but don't give false negatives:
 they either say that an object _might_ be pertinent to a query (because it adds, deletes or modifies a row that
@@ -56,10 +56,10 @@ $ sgr commit namespace/repository --index-options \\
 
 ## Reindexing
 
-Existing objects can also be reindexed, adding new indexes to their metadata. Just like with index
-creation, this is done on tables, rather than on objects.
+You can reindex existing objects, adding new indexes to their metadata. Just like with index
+creation, Splitgraph does this on tables, rather than on objects.
 
-Reindexing is currently only supported for objects that haven't been delta compressed (no overlapping objects). Images with overlapping objects should be [rechunked](chunking) first.
+Splitgraph currently only supports reindexing for objects that haven't been delta compressed (no overlapping objects). Images with overlapping objects should be [rechunked](chunking) first.
 
 To reindex objects that a table consists of, use [`sgr reindex`](../sgr/image-management-creation/reindex). For example:
 

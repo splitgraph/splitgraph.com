@@ -13,7 +13,7 @@ Not quite. The [Splitgraph engine](../architecture/splitgraph-engine) ships as a
 
 ### Can I add Splitgraph to my existing PostgreSQL deployment?
 
-Whilst it is possible to add Splitgraph to existing PostgreSQL deployments, there isn't currently
+While it is possible to add Splitgraph to existing PostgreSQL deployments, there isn't currently
 a simple installation method. If you're interested in doing so, you can follow the instructions
 in the [Dockerfile](https://github.com/splitgraph/splitgraph/blob/master/engine/Dockerfile) used
 to build the engine or contact us.
@@ -38,20 +38,17 @@ of extensions and applications. We don't think that features added by Splitgraph
 Yes. Any PostgreSQL client is able to query Splitgraph datasets (directly or through [layered querying](../large-datasets/layered-querying)),
 including [DataGrip](../integrating-splitgraph/datagrip), [pgAdmin](../integrating-splitgraph/pgadmin) or [other clients like pgcli or DBeaver](../integrating-splitgraph/other-clients).
 
-In addition, a lot of existing applications and extensions that work with PostgreSQL can be enhanced
-by Splitgraph. We have examples of using Splitgraph with [Jupyter notebooks](../integrating-splitgraph/jupyter-notebooks),
+In addition, Splitgraph can enhance a lot of existing applications and extensions that work with PostgreSQL. We have examples of using Splitgraph with [Jupyter notebooks](../integrating-splitgraph/jupyter-notebooks),
 [PostGIS](../integrating-splitgraph/postgis), [PostgREST](../integrating-splitgraph/postgrest),
 [dbt](../integrating-splitgraph/dbt) or [Metabase](../integrating-splitgraph/metabase).
 
 Philosophically, we believe that great tools enhance existing abstractions without breaking them:
 
 - Git adds versioning to the filesystem, enhancing it for any tools that use the filesystem. Compilers,
-  IDEs or editors don't need to be aware of Git to reap its benefits.
-- Docker containerizes applications by letting one use the same commands they would use
-  for installing the application on a bare machine. The application itself has no idea it's running
-  inside of a container and doesn't need to be rewritten to run in Docker.
+  IDEs or editors don't need to be aware of Git to reap its benefits. You don’t need to adopt a new filesystem or use a specialized IDE to version your code with Git.
+- Docker allows you to build images without forcing you to change your code to work in Docker or recompiling it to use some special Docker system calls. The application does not need to know it's running inside of a container, and so you don't need to rewrite it to run in Docker.
 
-We were guided by the same principles when building Splitgraph.
+Git and Docker are good tools because they _stay out of the way_ while still adding value. We were guided by the same principles when building Splitgraph.
 
 ### What's the performance like? Do you have any benchmarks?
 
@@ -64,7 +61,7 @@ but have tested the overhead of various Splitgraph workloads over PostgreSQL.
 
 In short:
 
-- Committing and checking out Splitgraph images takes slightly less time than writing the same data to PostgreSQL tables (data is moved directly between PostgreSQL tables without query parsing overhead)
+- Committing and checking out Splitgraph images takes slightly less time than writing the same data to PostgreSQL tables (Splitgraph moves data directly between PostgreSQL tables without query parsing overhead)
 - Writing to PostgreSQL tables that are change-tracked by Splitgraph is almost 2x slower
   than writing to untracked tables (Splitgraph uses audit triggers to record changes rather than
   diffing the table at commit time).
@@ -79,15 +76,15 @@ Yes. Splitgraph has a few optimizations that make it suitable for working with l
 
 - Datasets are partitioned into fragments stored in a [columnar format](../concepts/objects) which is
   superior to row-format storage for OLAP workloads.
-- Splitgraph images can be queried without checking them out or even downloading them completely
-  [(layered querying)](../large-datasets/layered-querying): Splitgraph can lazily download a small fraction of the table needed for the query. This is still completely seamless to the client application.
+- You can query Splitgraph images without checking them out or even downloading them completely. With
+  [layered querying](../large-datasets/layered-querying), Splitgraph can lazily download a small fraction of the table needed for the query. This is still completely seamless to the client application.
 
-Since Splitgraph is built on top of PostgreSQL, same methods that are used for horizontally scaling a
-PostgreSQL deployment can also be used on Splitgraph.
+Since Splitgraph is built on top of PostgreSQL, you can use the same methods for horizontally scaling a
+PostgreSQL deployment to scale a Splitgraph engine.
 
 ### Do I have to register anywhere to use Splitgraph?
 
-No. Splitgraph can be used in a decentralized way, sharing data between two engines like one would
+No. You can use Splitgraph in a decentralized way, sharing data between two engines like you would
 with Git. Here's an [example](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-other-engine) of getting two Splitgraph instances to synchronize with each other.
 
 It is also possible to push data to S3-compatible storage (like [Minio](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-object-storage)).
@@ -109,7 +106,7 @@ We tried to get our [inspiration](/product/splitgraph/motivation) from multiple 
 dbt is a tool for transforming data inside of the data warehouse that allows users to build up
 transformations from reusable and versionable SQL snippets.
 
-dbt is enhanced by Splitgraph: since a Splitgraph engine is also a PostgreSQL instance, dbt can
+Splitgraph enhances dbt: since a Splitgraph engine is also a PostgreSQL instance, dbt can
 work against it, getting benefits like version control, packaging and sharing to datasets that it uses and builds.
 
 We have an example of running [dbt](../integrating-splitgraph/dbt) in such a way, swapping between different versions of the
@@ -120,7 +117,7 @@ In addition, we have written a [Splitgraph dbt adapter](https://github.com/split
 Splitgraph also offers its own method of building datasets: [Splitfiles](../concepts/splitfiles). Splitfiles offer Dockerfile-like caching, provenance tracking, fast dataset rebuilds, joins between datasets and full SQL support.
 
 We envision Splitfiles as a replacement for ETL pipelines: instead of a series of processes that transform data between tables in a data warehouse,
-transformations are treated as pure functions between isolated self-contained datasets, allowing one to replay any part of their pipeline at any point in time.
+Splitgraph treats transformations as pure functions between isolated self-contained datasets, allowing you to replay any part of your pipeline at any point in time.
 
 #### Databricks
 
@@ -128,19 +125,19 @@ Databricks offers a full take-it-or-leave-it platform for doing data science, in
 
 Rather than ad hoc notebooks, Splitgraph encourages users to transform data using reproducible [Splitfiles](../concepts/splitfiles) that allow hermetic dataset builds.
 
-Same Splitgraph workflows can be applied in development as in production, with the user's local engine. This brings iteration times down and lets you maintain a single codebase for your data transformations.
+You can use the same Splitgraph workflows in development, with the user's local engine, and production, with a remote engine. This helps decrease iteration time and lets you maintain a single codebase for your data transformations.
 
 #### Pachyderm
 
 Pachyderm is used mostly for managing and running distributed data pipelines on flat files (images,
-genomics data etc). By specializing in datasets that can be represented as tables in a database,
-Splitgraph gets benefits like delta compression on changed data or faster querying speeds.
+genomics data, etc). In contrast, Splitgraph specializes in datasets represented as tables in a database,
+providing benefits like delta compression on changed data and faster querying speeds.
 
-Similarly to Pachyderm, Splitgraph supports [data lineage (or provenance)](../working-with-data/inspecting-provenance) tracking where the
-commands and source datasets that were used to build a particular dataset are recorded in that
-dataset's metadata, allowing for them to be replayed or inspected.
+Similarly to Pachyderm, Splitgraph supports [data lineage (or provenance)](../working-with-data/inspecting-provenance) tracking where the metadata of a downstream dataset includes a record
+of the upstream commands and sources used to build it. This way, you can inspect the provenance
+of a dataset and rebuild it when its upstream data changes.
 
-Splitgraph can be integrated with Pachyderm using the same methods one would use [for PostgreSQL](https://docs.pachyderm.com/latest/how-tos/splitting-data/splitting/#ingesting-postgressql-data). This can then be used to run a [Splitfile](../concepts/splitfiles) to build a dataset as a
+You can integrate Splitgraph with Pachyderm using the same methods you would use [for PostgreSQL](https://docs.pachyderm.com/latest/how-tos/splitting-data/splitting/#ingesting-postgressql-data). Then you can run a [Splitfile](../concepts/splitfiles) to build a dataset as a
 Pachyderm stage.
 
 #### dvc, DataLad, ...

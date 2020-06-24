@@ -3,17 +3,17 @@ export const meta = {
   title: "Tracking changes",
 };
 
-When a Splitgraph image is checked out into a schema, it has change tracking enabled via PostgreSQL
-audit triggers. Any writes to that schema by any application will be captured, allowing Splitgraph
-to package them into new images. In particular, changes to preexisting tables will be stored as
-delta-compressed patches so that keeping track of table history is space efficient.
+When you check out a Splitgraph image into a schema, Splitgraph enables change tracking via PostgreSQL
+audit triggers. When any application writes to that schema, the audit triggers will capture the changes,
+allowing Splitgraph to package them into new images as a set of delta-compressed patches. This way,
+keeping track of table history is space efficient.
 
-Changes to the current working checkout or between any two images in a repository can be
-viewed with [`sgr diff`](../sgr/image-information/diff).
+You can view changes to the current working checkout or between any two images
+in a repository with the [`sgr diff`](../sgr/image-information/diff) command.
 
-The history of all changes to an image can be viewed with [`sgr log`](../sgr/image-information/log).
-This shows just the history following the parent chain of an image. However, if `-t` is passed,
-this renders the whole repository as a tree.
+You can view the history of all changes to an image with the [`sgr log`](../sgr/image-information/log) command.
+This shows just the history following the parent chain of an image. Passing `-t` will make
+Splitgraph render the history of the whole repository as a tree.
 
 ## Example
 
@@ -25,7 +25,7 @@ $ sgr sql --schema example/repo_2 "SELECT * FROM demo ORDER BY key"
 $ sgr tag example/repo_2 original_data
 ```
 
-The next step can be done from any application that can access the
+You can do the next step using any SQL client that can access the
 PostgreSQL database backing the Splitgraph engine, but `sgr` provides a
 shorthand to alter the generated image:
 
