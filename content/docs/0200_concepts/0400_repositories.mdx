@@ -1,6 +1,6 @@
 export const meta = {
   id: "repositories",
-  title: "Repositories"
+  title: "Repositories",
 };
 
 A repository is a collection of Splitgraph images. The repository's name consists of two parts:
@@ -12,9 +12,13 @@ splitgraph/geonames:0b77a102cbabe2de8597dcab71f1c333f16f9e1963c9c8982988e10e6598
 
 refers to the [Geonames image](/splitgraph/geonames/0b77a102cbabe2de8597dcab71f1c333f16f9e1963c9c8982988e10e65989c62/-/overview) in the namespace `splitgraph`, repository `geonames` with image hash `0b77a102cbabe2de8597dcab71f1c333f16f9e1963c9c8982988e10e65989c62`.
 
-Repositories are checked out into PostgreSQL schemata with the same name. So the aforementioned
-repository would end up in a PostgreSQL schema `"splitgraph/geonames"` on checkout, allowing
-any application to use that schema to modify the repository.
+By default, when you check out an image, Splitgraph loads the data into a PostgreSQL
+schema with the same name as the image's repository. So if you check out the
+image above, Splitgraph loads it into a PostgreSQL schema `"splitgraph/geonames"`.
+Any application can then query that schema to modify the repository, and then you
+can use `sgr commit` to make a new image including your changes.
 
-Access control is based on namespaces. When pushing a dataset to another Splitgraph engine,
-a user is only allowed to push to the same namespace as their `session_user`.
+In terms of access control, Splitgraph instances in "registry mode" (including
+Splitgraph Cloud) use the namespace as an identifier. When you push an image to
+another Splitgraph engine, you can only push it to a namespace that matches your
+`session_user` (in the case of Splitgraph Cloud, this is your username).

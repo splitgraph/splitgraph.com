@@ -4,9 +4,9 @@ export const meta = {
 };
 
 There's one other advantage to using Splitfiles instead of building
-images manually: provenance tracking. An image that is created by a
-Splitfile has the specifics of the actual command that created it stored
-in its metadata.
+images manually: provenance tracking. When you create an image with a
+Splitfile, the metadata of the image includes the specifics of the actual
+command that created it.
 
 This means that we can output a list of images and repositories that
 were used in an image's creation.
@@ -21,14 +21,12 @@ example/repo_2:97900a8279627ec22b355d1211dd824f78f5840b6a0e30e1d285f4e5c6120016
 example/repo_1:103cb2da2da000f3dce9512e3cc67434d7a3c977c0df259411c73a2687244706
 ```
 
-Since the Splitfile in the previous section imported tables from the two
-generated repositories, these repositories are considered to be
-`example/output`'s dependencies (note that the `example/output`
-repository can still be checked out and used without those two
-repositories present).
+Since the [Splitfile in the previous section](using-splitfiles) imported tables from the two
+generated repositories, Splitgraph considers these repositories to be dependencies of
+`example/output`. (Note that you can still check out and use the `example/output`
+repository without those two repositories present).
 
-We can also run the dependency query backwards, querying which images were built from
-a certain image:
+We can also run the dependency query backwards, to find the downstream dependents of a given image:
 
 ```shell-session
 $ sgr dependents example/repo_1:latest
@@ -37,9 +35,8 @@ example/repo_1:103cb2da2da000f3dce9512e3cc67434d7a3c977c0df259411c73a2687244706 
 example/output:4fd86d48715d2a3e250810fbdaa43d21ed0a894cd00de9bc118d9191e6294741
 ```
 
-However, that's not all. We can reconstruct a Splitfile that can be
-used to rebuild the newly created image, without the original Splitfile
-present:
+We can also use this provenance data to reconstruct a Splitfile that will rebuild
+the newly created image, even without access to the original Splitfile itself:
 
 ```shell-session
 $ sgr provenance example/output:latest --full
@@ -55,13 +52,11 @@ SQL {CREATE TABLE result
           INNER JOIN table_2 ON table_1.key = table_2.key}
 ```
 
-Unlike Dockerfiles and building application images, in this case
-everything that is needed to rebuild a certain image (links to source
-images and the actual commands) is encoded in the provenance
-information. In particular, this means that we can rebuild the
-`example/output:latest` image against a different version of any of its
-dependencies by simply substituting a different image hash into this
-regenerated Splitfile:
+Note this is a more powerful feature than what Dockerfiles offer (in Docker, the
+final image is unaware of upstream build contexts). With Splitgraph, the provenance
+information encodes everything necessary to rebuild an image. This means that we can
+rebuild the `example/output:latest` image against a different version of any of its
+dependencies by simply substituting a different image hash into this regenerated Splitfile:
 
 ```shell-session
 $ sgr rebuild example/output:latest --against example/repo_2:new_data
@@ -90,11 +85,11 @@ Storing and indexing the table
  ---> 46b6a361bebd
 ```
 
-Since the same image from `example/repo_1` is used here, the first step
-in the execution results in the same image hash and so the image is
-simply checked out. However, since the image from `example/repo_2` is
-now the altered one that we created in the previous section, the rest of
-the derivation has to be rerun.
+Since this example uses the same image from `example/repo_1`, Splitgraph is able
+to cache the first step of the rebuild. But since we altered the `example/repo_2`
+image (by specifying `--against example/repo_2:new_data`), Splitgraph invalidates
+the subsequent layers and reruns their build steps. You can think of this invalidation
+in the same way as Dockerfile cache invalidation.
 
 Let's examine the new result:
 
@@ -115,8 +110,8 @@ Since the first two rows are now missing from `example/repo_2`, the JOIN
 result doesn't have them either.
 
 The Splitfile executor still caches images in this case, so if we do a `rebuild` against
-the original version of `example/repo_1`, the first version of
-`example/output` will be checked out:
+the original version of `example/repo_1`, Splitgraph will check out the first version of
+`example/output` from the cache:
 
 ```shell-session
 $ sgr rebuild example/output:latest --against example/repo_2:original_data

@@ -16,18 +16,22 @@ If you're interesting in pushing your dataset to the Splitgraph registry, please
 
 ## Merging changes and pull requests
 
-Splitgraph currently doesn't support merging changes and pull requests. Instead, images are assumed to be immutable and on push, all images that don't exist on the remote engine are uploaded, with an option to overwrite image tags that already exist or push/pull a single image.
+Splitgraph does not currently support merging changes and pull requests.
+Instead, it assumes images are immutable and on push, it uploads all images
+that do not exist on the remote engine. You can optionally overwrite image tags
+that already exist, or push/pull only a single image.
 
 We have found that pull requests aren't as useful for continuously changing datasets as they are
-for code. This is because these datasets are often ingested from outside sources (CSV files, scraped
-data, other databases) and so any changes or patches should be applied to the source dataset
-after it's been ingested.
+for code. This is because most workflows involve ingesting data from outside sources (CSV files, scraped
+data, other databases) into the dataset, so it's better to apply any changes or patches to the source or
+intermediate dataset after it's already been ingested.
 
 In this respect, Splitgraph is closer to Docker than to Git. There is no point in submitting a pull
 request to a Docker image, as any results will be overwritten the next time the image is built.
-Changes are instead proposed to the code that builds the image. Similarly, Splitgraph supports
-the workflow in which pull requests are submitted to the Splitfile that builds the dataset,
+Instead, developers propose changes to the code that builds the image. Similarly, Splitgraph supports
+the workflow in which developers submit pull requests to the Splitfile that builds the dataset,
 allowing proposed changes to persist in future datasets.
 
-A workflow similar to pull requests can be approximated by using tags and forwarding a tag to the
-agreed-upon "master" version of the dataset.
+You can approximate a workflow similar to pull requests by using tags and forwarding a tag to the
+agreed-upon "master" version of the dataset. By default, like Docker, Splitgraph includes a `latest` tag
+which is a "floating" tag to the image most recently pushed to its repository.

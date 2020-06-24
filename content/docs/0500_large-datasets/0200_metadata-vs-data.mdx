@@ -3,21 +3,23 @@ export const meta = {
   title: "Metadata vs data",
 };
 
-When an image is cloned or used in the Splitfile executor, only the repository (or single image)'s
-metadata is downloaded. The metadata consists of all Splitgraph state tables in `splitgraph_meta`:
+When you clone an image, or the Splitfile executor encounters one you referenced
+in a Splitfile, Splitgraph only downloads the _metadata_ for the repository (or the
+referenced image within the repository). The metadata consists of all Splitgraph state tables in `splitgraph_meta`:
 `images`, `objects`, `tags` and `tables`. Compared to the actual data, it's very lightweight,
 most of its footprint being taken up by the object index.
 
-Data downloads are forced during a checkout (which downloads all objects required by an image).
-Queries to tables in layered checkouts only download objects that are required to satisfy that
-query, as determined by the object index.
+When you check out an image, Splitgraph downloads the actual data, which is the
+set of objects required by that image. When you query a table from a [layered checkout](layered-querying),
+Splitgraph only downloads objects that are required to satisfy that query, as determined by the object index.
 
-Objects that were downloaded from a remote engine are considered to be "cached" and
-can be evicted if the free cache space is limited. The cache size can be controlled by the
-`SG_OBJECT_CACHE_SIZE` variable in `.sgconfig` and the default value is 10240 (10GB).
+Splitgraph considers objects downloaded from a remote engine to be "cached," and
+can evict them if the free cache space is limited. You can control the cache size by the
+`SG_OBJECT_CACHE_SIZE` variable in `.sgconfig`. The default value is 10240 (10GB).
 
-It is possible to find out how much data a query against a layered checkout will need by running
-`EXPLAIN` on the query. For example, in the [2016 US Presidential Election precinct-level returns](/splitgraph/2016_election/) dataset:
+With layered querying, you can see how much data a query will require before you execute it,
+by running `EXPLAIN` on the query. For example, in
+the [2016 US Presidential Election precinct-level returns](/splitgraph/2016_election/) dataset:
 
 ```shell-session
 $ sgr sql -s splitgraph/2016_election "EXPLAIN SELECT candidate_normalized, SUM(votes) FROM precinct_results WHERE county_fips=11001 GROUP BY candidate_normalized"

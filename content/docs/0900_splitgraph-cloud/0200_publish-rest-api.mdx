@@ -3,7 +3,7 @@ export const meta = {
   title: "Publishing a REST API",
 };
 
-Every public dataset on the Splitgraph registry has a read-only OpenAPI-compatible endpoint that can be used to query it, provided by [PostgREST](https://postgrest.org/en/latest/). It can be accessed by curl:
+Every public dataset on the Splitgraph registry has a read-only OpenAPI-compatible endpoint that you can use to query it, provided by [PostgREST](https://postgrest.org/en/latest/). It can be accessed by curl, and you can query any version of any image in any repository:
 
 ```shell-session
 $ curl https://data.splitgraph.com/YOUR_USERNAME/votes_by_state/latest/-/rest/votes_by_state?state_postal=eq.DC
@@ -29,3 +29,5 @@ $ sgr cloud curl YOUR_USERNAME/votes_by_state "votes_by_state?state_postal=eq.DC
 ```
 
 For more information on writing PostgREST queries, see the [PostgREST docs](https://postgrest.org/en/latest/api.html).
+
+Note that this also works for datasets not hosted by Splitgraph (which are marked as "external", and are not images, but can be "mounted" rather than "cloned").

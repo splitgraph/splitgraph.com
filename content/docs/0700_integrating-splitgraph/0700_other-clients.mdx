@@ -19,6 +19,7 @@ pgcli $(sgr config -n)
 
 will run [pgcli](https://www.pgcli.com/) against the default engine.
 
-Note that since [layered querying](../large-datasets/layered-querying) is implemented through
+Note that since Splitgraph implements [layered querying](../large-datasets/layered-querying) using
 PostgreSQL foreign tables, some tools might not show them in the list of tables or show them
-in a different list of foreign tables.
+in a different list of foreign tables. However, in most cases, you should still be able to
+query them in the same way as normal tables.

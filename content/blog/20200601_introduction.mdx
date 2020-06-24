@@ -11,9 +11,9 @@ export const meta = {
 
 ## Introduction
 
-Splitgraph is a tool that makes working with data as easy as working with code. An oft-repeated trope is that data scientists spend 80% of their time cleaning data. This may not be strictly true, but certainly there is significant overhead for every deliverable. Software engineers have tools like git and docker that allow them to iterate and confidently deploy their code to production. For data scientists, the workflows in the experimentation phase are not nearly as productive. Too much effort is spent sourcing, cleaning and merging data together. And when it’s time to deploy a deliverable, it’s often impossible to keep it up to date without some sort of manual and brittle effort.
+Splitgraph is a tool that makes working with data as easy as working with code. An oft-repeated trope is that data scientists spend 80% of their time cleaning data. This may not be strictly true, but certainly there is significant overhead for every deliverable. Software engineers have tools like Git and Docker that allow them to iterate and confidently deploy their code to production. For data scientists, the workflows in the experimentation phase are not nearly as productive. Too much effort is spent sourcing, cleaning and merging data together. And when it’s time to deploy a deliverable, it’s often impossible to keep it up to date without some sort of manual and brittle effort.
 
-In a lot of ways, the domain of data science resembles system administration prior to the age of dev-ops and containerization. It used to be that every server was its own special snowflake, with brittle scripts holding it together and all sorts of failure modes when deploying new code. But “infrastructure-as-code” and technologies like docker changed that for the better. We think that data science has similar problems. Whether you’re deploying ML models, generating reports, or building dashboards, maintaining them seems to require a lot of effort, and it seems like you’re repeating yourself every time you start a new project.
+In a lot of ways, the domain of data science resembles system administration prior to the age of dev-ops and containerization. It used to be that every server was its own special snowflake, with brittle scripts holding it together and all sorts of failure modes when deploying new code. But “infrastructure-as-code” and technologies like Docker changed that for the better. We think that data science has similar problems. Whether you’re deploying ML models, generating reports, or building dashboards, maintaining them seems to require a lot of effort, and it seems like you’re repeating yourself every time you start a new project.
 
 We’re building Splitgraph to address these problems. It’s inspired by Docker and Git, so its semantics and conventions should feel somewhat familiar. And it’s powered by Postgres, so it will work with nearly all your existing tools.
 
@@ -27,7 +27,7 @@ When starry eyed graduates and machine learning PhDs join the workforce as “da
 
 When they finally manage to create something useful, a whole new set of questions arises:
 
-- Where can I deploy my version of this data? How do I get it into the warehouse?
+- Where can I deploy my version of this data?
 - How can my teammates pull my data and iterate on it?
 - When the upstream data sources change, how do I keep my deliverable up to date?
 
@@ -42,7 +42,7 @@ Software engineering has a lot of concepts that have made software more pleasant
 - Docker helps build your code into **self-contained images** in a common format that you can drop into any stack
 - With “infrastructure as code,” software engineers can control the deployment, provisioning and scaling process with **repeatable, version-controlled definition files**
 
-Finally, good tools that implement all of this **enhance existing abstractions without breaking them**. You don’t need to adopt a new filesystem or use a specialized IDE to version your code with Git. You can build docker images without changing your code to work in docker or recompiling it to use some special Docker system calls. Git and Docker are good tools because they _stay out of the way_ while still adding value.
+Finally, good tools that implement all of this **enhance existing abstractions without breaking them**. You don’t need to adopt a new filesystem or use a specialized IDE to version your code with Git. You can build Docker images without changing your code to work in Docker or recompiling it to use some special Docker system calls. Git and Docker are good tools because they _stay out of the way_ while still adding value.
 
 ## Introducing Splitgraph
 
@@ -51,14 +51,14 @@ Splitgraph aims to bring these ideas and concepts into data science.
 Splitgraph makes it easy to package datasets into [**self-contained data images**](/docs/concepts/images) that you can combine, query, extend and share
 with other Splitgraph instances.
 
-[**Splitfiles**](/docs/concepts/splitfiles) give you a declarative language, inspired by Dockerfiles, for expressing data transformations in ordinary SQL that any researcher and business analyst knows. You can reference other images, or even other databases, [with a simple `JOIN`](/docs/splitfiles/splitfile-sql).
+[**Splitfiles**](/docs/concepts/splitfiles) give you a declarative language, inspired by Dockerfiles, for expressing data transformations in ordinary SQL familiar to any researcher or business analyst. You can reference other images, or even other databases, [with a simple `JOIN`](/docs/splitfiles/splitfile-sql).
 
 When you build data with Splitfiles, you get [**provenance tracking**](/docs/working-with-data/inspecting-provenance) of the resulting data: it's possible to find out what sources went into every dataset and know when
 to rebuild it if the sources ever change. You can easily integrate Splitgraph into your existing CI pipelines, to keep your data up-to-date and stay on top of changes to upstream sources.
 
 Splitgraph images are also **version-controlled**, and you can manipulate them with Git-like operations
 through a CLI. You can “check out” any image into a PostgreSQL schema and interact with it using
-any PostgreSQL client. Splitgraph will capture your changes to the data, and then you can commit them with as **delta compressed changesets** that you can package into new images.
+any PostgreSQL client. Splitgraph will capture your changes to the data, and then you can commit them as **delta-compressed changesets** that you can package into new images.
 
 Finally, Splitgraph isn't opinionated and **doesn't break existing abstractions**. To any existing PostgreSQL
 application, Splitgraph images are just another database. We have carefully designed Splitgraph to not break the

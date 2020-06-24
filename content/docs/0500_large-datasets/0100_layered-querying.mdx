@@ -3,27 +3,27 @@ export const meta = {
   title: "Layered querying",
 };
 
-Splitgraph tries to not redo work that can be done more efficiently by the database. A Splitgraph
-image can be checked out into native PostgreSQL tables, allowing for necessary indexes to be created to
+Splitgraph tries to not redo work that the database can do more efficiently. You can check out
+a Splitgraph image into native PostgreSQL tables, so you can create necessary indexes to
 maximize performance for specific queries.
 
 However, this workflow isn't suitable for exploratory queries on large datasets where checking out an image takes too long. This is why Splitgraph supports querying images directly without materializing
 them into PostgreSQL tables.
 
-This is done by so-called layered querying. Instead of PostgreSQL tables, an image is checked out
-into a schema consisting of foreign tables. They still present themselves as normal tables to
-any application interacting with the engine, but behind the scenes queries to them get interpreted
-by the engine-side Splitgraph library. In particular, this lets Splitgraph inspect object metadata
-and determine which objects need to be downloaded to satisfy the query and do so on the fly.
+This is done by so-called layered querying. Instead of loading an image and its data into PostgreSQL tables,
+Splitgraph "checks out" an image into a schema consisting of foreign tables. They still present themselves
+as normal tables to any application interacting with the engine, but behind the scenes,
+the engine-side of the Splitgraph library interprets them. In particular, this lets Splitgraph inspect object metadata
+and determine which objects it needs to download to satisfy the query on the fly.
 
 Layered querying takes its name from the way Docker works, where an application running inside of a container thinks that it's interacting
 with a root filesystem, but is actually interacting with an OverlayFS mount that directs reads to the relevant layer.
 
 Splitgraph uses [a fork](https://github.com/splitgraph/Multicorn)
-of [Multicorn](https://multicorn.org/), an extension that allows to write foreign data wrappers
-in Python. This fork has been customized so that no data actually passes through the Python runtime.
-Splitgraph downloads required objects and materializes required table regions. Scans are performed
-using native C code, which lets layered querying compete with and sometimes beat PostgreSQL on query performance.
+of [Multicorn](https://multicorn.org/), an extension for writing foreign data wrappers (FDWs) in Python.
+This fork includes changes so that no data actually passes through the Python runtime.
+Splitgraph downloads required objects and materializes required table regions. The FDW performs scans
+using native C code, which means layered querying competes with and sometimes beats PostgreSQL on query performance.
 
 Layered querying is currently read-only. The Splitfile executor uses layered querying to satisfy `IMPORT` and `SQL` commands that read from
 other Splitgraph images.
@@ -37,7 +37,7 @@ $ sgr checkout --layered splitgraph/2016_election:latest
 ```
 
 You do not need to change any application that queries this schema or download any objects:
-Splitgraph will do it lazily when the table is queried.
+Splitgraph will do it lazily when a client queries the table.
 
 ## When to use layered querying
 
@@ -53,19 +53,19 @@ Layered querying (`sgr checkout --layered`) should work better for your use case
   enabled, Splitgraph will only download a few objects to satisfy the query. You can check
   the amount of data that a query will download by running it with `EXPLAIN` first.
 - You have limited disk space. `cstore_fdw` has a massive space advantage over PostgreSQL tables
-  because data is organized in columns which lends itself well to compression. This also means
+  because it organizes data into columns, which lends itself well to compression. This also means
   that full table scans are going to be faster and have a smaller IO load in Splitgraph.
 
 You should instead check an image out into a PostgreSQL schema (`sgr checkout`) if:
 
 - You want to modify it.
-- You want to query images that have had a lot of changes made to them. Instead of forwarding
+- You want to query images that include a lot of upstream changes. Instead of forwarding
   queries to objects directly, layered querying materializes subsets of objects that overlap
   into a temporary table, the overhead of which might be bigger than savings from scanning
   through less data. You can also consider [rechunking](chunking#rechunking-images) the image
   to make it easier to query.
 - You want to extract maximum read performance from the image by using PostgreSQL indexes.
-  After the image is checked out, it becomes a set of normal PostgreSQL tables that you can create
+  After you check out the image, it becomes a set of normal PostgreSQL tables that you can create
   any index on.
 - You are intending to run multiple small queries against the dataset. Splitgraph's query planning
   has a considerable latency overhead over PostgreSQL's and so this kind of workload will be more

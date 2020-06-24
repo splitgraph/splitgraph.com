@@ -5,14 +5,14 @@ export const meta = {
 
 ## Introduction
 
-The [Socrata data platform](https://www.tylertech.com/products/socrata) hosts tens of thousands of government datasets. Governments large and small publish data on crime, permits, finance, healthcare, research, performance, and more for citizens to use.
+The [Socrata data platform](https://www.tylertech.com/products/socrata) hosts tens of thousands of government datasets. Governments large and small publish data on crime, permits, finance, healthcare, research, performance, and more for citizens to use. They publish the data to a white-labeled "data portal" provided by Socrata. There are over 200 of these data portals, and Splitgraph indexes the data from all of them.
 
 Splitgraph has first-class support for querying Socrata datasets through SQL and using them in
-[Splitfiles](../concepts/splitfiles). Support for Socrata is implemented as a [foreign data wrapper](foreign-data-wrappers/introduction). This allows Splitgraph to also be used as a PostgreSQL-to-Socrata connector. Any PostgreSQL application, client or dashboarding tool can query Socrata datasets through Splitgraph and even run joins on datasets from different Socrata endpoints or between Socrata datasets and Splitgraph images.
+[Splitfiles](../concepts/splitfiles). Support for Socrata is implemented as a [foreign data wrapper](foreign-data-wrappers/introduction). This allows you to use Splitgraph as a PostgreSQL-to-Socrata connector. Any PostgreSQL application, client or dashboarding tool can query Socrata datasets through Splitgraph and even run joins on datasets from different Socrata data portals or between Socrata datasets and Splitgraph images.
 
 ## Usage
 
-Each dataset has a unique "four-by-four" (a Socrata dataset ID, for example, `28km-gtjn`) and is hosted on a certain domain, for example, `data.cityofchicago.org`. Use the `sgr` client to mount the dataset:
+Each dataset has a unique "four-by-four" (a Socrata dataset ID, for example, `28km-gtjn`) and is hosted on a certain domain ("data portal"), for example, `data.cityofchicago.org`. Use the `sgr` client to mount the dataset:
 
 ```
 sgr mount socrata chicago_data -o @- <<EOF
@@ -28,9 +28,9 @@ This will create a table `fire_stations` in `chicago_data` schema on your engine
 will rewrite requests into [SoQL queries](https://dev.socrata.com/docs/queries/) and forward them to the Socrata server,
 querying the relevant dataset. In this case, it will query the [Chicago Fire Stations dataset](https://catalog.data.gov/dataset/fire-stations-61d88).
 
-The table schema and other metadata will be discovered automatically from the Socrata API.
+Splitgraph will automatically discover the table schema and other metadata from the Socrata API.
 
-The app token is optional but requests without it are anonymous and can be throttled. See the [Socrata API reference](https://dev.socrata.com/docs/app-tokens.html) on how to get an app token.
+The app token is optional but requests without it are anonymous and Socrata may throttle them. See the [Socrata API reference](https://dev.socrata.com/docs/app-tokens.html) on how to get an app token.
 
 Finally, the `tables` field is optional as well. Without it, Splitgraph will mount all datasets provided
 by that domain as foreign tables, giving the tables human-readable names consisting of the Socrata dataset name and the Socrata dataset ID, for example, `building_violations_22u3_xenr`. This will not download any actual data from Socrata but will let you explore all data on that domain in any PostgreSQL client.
@@ -43,7 +43,7 @@ Note that Splitgraph currently only supports Socrata datasets (not data lenses, 
 
 ### Splitgraph catalog
 
-Splitgraph maintains a metadataset of available Socrata datasets on Splitgraph Cloud at [`splitgraph/socrata`](/splitgraph/socrata). The easiest way to search through this catalog is to clone the data image and query it:
+Splitgraph maintains a metadataset of available Socrata datasets on Splitgraph Cloud at [`splitgraph/socrata`](/splitgraph/socrata). The easiest way to search through this catalog from the command line is to clone the data image and query it:
 
 ```
 $ sgr clone splitgraph/socrata:latest --download-all
@@ -65,12 +65,15 @@ data.cdc.gov          kn79-hsxy  Provisional COVID-19 Death Counts in the United
 
 This is not an exhaustive list: it is populated from the Socrata Discovery API at https://api.us.socrata.com/api/catalog/v1. See the [Socrata Discovery API documentation](https://socratadiscovery.docs.apiary.io/#) for reference.
 
+On the web, you can also use the [dataset search](/search) feature of Splitgraph Cloud, [explore featured data](/explore), or [explore data topics](/explore/topics).
+
 ### Other Socrata domains
 
-Any Socrata dataset can be queried through Splitgraph, not just ones that are indexed in the catalog.
+You can query any Socrata dataset through Splitgraph, not just those that are indexed in the catalog.
 If you have found a dataset you wish to query (on your internal Socrata instance or through a search
 engine such as the [Open Data Network](https://www.opendatanetwork.com/)), just note its domain and
-dataset ID and use the `sgr mount` command as normal.
+dataset ID and use the `sgr mount` command as normal. As long as the domain is a Socrata data portal
+with API access, this will work.
 
 ## Examples
 
@@ -125,8 +128,9 @@ Loaded metadata for 137 Socrata tables
 ```
 
 This doesn't actually load any data and only loads metadata for all available datasets, creating
-PostgreSQL foreign tables for each one of them. Such tables act as lightweight shims that are treated
-like normal tables by most clients.
+PostgreSQL foreign tables for each one of them. Such tables act as lightweight shims and most clients
+will treat them like normal tables (sometimes introspection may be different, or they may show up in a list
+of "foreign tables" rather than "tables").
 
 Open a PostgreSQL client (instructions are available for [DataGrip](../integrating-splitgraph/datagrip), [pgAdmin](../integrating-splitgraph/pgadmin) or [other clients like pgcli or DBeaver](../integrating-splitgraph/other-clients)) and connect to the Splitgraph engine. In these screenshots, [DBeaver](https://dbeaver.io/) is used.
 
@@ -141,19 +145,19 @@ Socrata ID.
 Splitgraph also grabs descriptions for each dataset and every column from Socrata metadata,
 if it exists. These descriptions are added as PostgreSQL `COMMENT` entries on tables and columns.
 
-Data is loaded on demand, similar to [layered querying](../large-datasets/layered-querying). Socrata
-queries are only sent out when a table is opened.
+Splitgraph loads mounted data on demand, similar to [layered querying](../large-datasets/layered-querying). It only sends
+queries to Socrata when the client introspects or queries a table.
 
 ![DBeaver querying overview](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting-data/images/socrata/2_dbeaver_query.png)
 
-In addition, filters, `ORDER`, `LIMIT` and `OFFSET` clauses are also rewritten into [SoQL](https://dev.socrata.com/docs/queries/) queries by Splitgraph and sent to Socrata, so your local Splitgraph instance
+In addition, you can use filters, `ORDER`, `LIMIT` and `OFFSET` clauses in your queries, which Splitgraph will rewrite into [SoQL](https://dev.socrata.com/docs/queries/) queries when sending them to Socrata, so your local Splitgraph instance
 doesn't need to load the whole dataset.
 
 ![DBeaver filtering overview](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting-data/images/socrata/3_dbeaver_filtering.png)
 
-### Joining and plotting data with Metabase
+### Using Metabase to join and plot data from multiple data portals
 
-In this section, we'll use [Metabase](https://www.metabase.com/), a powerful visualization and dashboarding tool, to plot a table that joins data from two distinct Socrata endpoints. Normally, this would involve some ETL jobs and a Jupyter notebook, but with Splitgraph, we'll be able to do this directly in one simple SQL query.
+In this section, we'll use [Metabase](https://www.metabase.com/), a powerful visualization and dashboarding tool, to plot a table that joins data from two distinct Socrata data portals. Normally, this would involve some ETL jobs and a Jupyter notebook, but with Splitgraph, we'll be able to do this directly in one simple SQL query.
 
 Follow the [Metabase integration guide](../integrating-splitgraph/metabase) to set up Metabase with Splitgraph and make sure the Chicago and Cambridge data endpoints are mounted (see previous section).
 
@@ -178,8 +182,9 @@ $ sgr mount socrata -o '{"domain": "data.cityofchicago.org", \\
                          "tables": {"covid_cases": "naz8-j4nc"}}'
 ```
 
-Now, let's compare new daily cases in Chicago and Cambridge. This can be done with a simple
-`JOIN`: we just have to make sure both tables are in terms of the date, rather than the timestamp, so that they can be matched up:
+Now, let's compare new daily cases in Chicago and Cambridge. You can do this with a simple `JOIN`. Of course referential integrity is not guaranteed to exist, but assuming the data is properly cleaned, we just have to make sure both tables are in terms of the date, rather than the timestamp, so that they can be matched up:
+
+(Note: If you do need to clean data, you could always load it into a Splitgraph image, perform the necessary modifications on it, and then use that image as the source instead of the mounted data).
 
 ```sql
 SELECT
@@ -197,9 +202,9 @@ ORDER BY date ASC;
 
 ![Metabase plot of two datasets](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0300_ingesting-data/images/socrata/5_metabase_join.png)
 
-Behind the scenes, this queries the [Chicago COVID-19 Daily Cases and Deaths](https://data.cityofchicago.org/Health-Human-Services/COVID-19-Daily-Cases-and-Deaths/naz8-j4nc) and the [Cambridge COVID-19 Cumulative Cases by Date](https://data.cambridgema.gov/Public-Safety/COVID-19-Cumulative-Cases-by-Date/tdt9-vq5y) Socrata datasets using SoQL and the actual JOIN is performed in PostgreSQL. However, Metabase and any other PostgreSQL client doesn't need to know about that: to them, these look like normal PostgreSQL tables.
+Behind the scenes, this queries the [Chicago COVID-19 Daily Cases and Deaths](https://data.cityofchicago.org/Health-Human-Services/COVID-19-Daily-Cases-and-Deaths/naz8-j4nc) and the [Cambridge COVID-19 Cumulative Cases by Date](https://data.cambridgema.gov/Public-Safety/COVID-19-Cumulative-Cases-by-Date/tdt9-vq5y) Socrata datasets using SoQL and the actual JOIN is performed in PostgreSQL. However, Metabase and any other PostgreSQL client doesn't need to know about that; to them, these look like normal PostgreSQL tables.
 
 ## Licensing and contact
 
-Socrata datasets are not hosted by Splitgraph and the Splitgraph engine queries them through the
+Socrata datasets are not hosted by Splitgraph (although many are _indexed_ by Splitgraph) and the Splitgraph engine queries them through the
 public Socrata API. While most datasets hosted by Socrata are in the public domain, you should always check the dataset's metadata for support, licensing information and contact information.

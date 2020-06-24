@@ -7,13 +7,13 @@ export const meta = {
 
 This demo will show you how to use Splitgraph to:
 
-- query a large remote public data image (dataset) with any of your favourite tools, without having to download it completely
+- query a large remote public data image (dataset) with any of your favorite tools, without having to download it completely
 - write a [Splitfile](../concepts/splitfiles) that can build a derivative image from it
 - publish your derivative image on Splitgraph Cloud.
 
 ## Prerequisites
 
-You need to be registered on [Splitgraph Cloud](../splitgraph-cloud/introduction) to pull and publish data. If you followed the [installation instructions](./installation), this should be already done for you. You can also use [`sgr cloud register`](../sgr/splitgraph-cloud/cloud-register) or [`sgr cloud login`](../sgr/splitgraph-cloud/cloud-login) to register or log in from the `sgr` client.
+You need to register on [Splitgraph Cloud](../splitgraph-cloud/introduction) to pull and publish data. If you followed the [installation instructions](./installation), you already did this. You can also use [`sgr cloud register`](../sgr/splitgraph-cloud/cloud-register) or [`sgr cloud login`](../sgr/splitgraph-cloud/cloud-login) to register or log in from the `sgr` client.
 
 If you do not wish to register on Splitgraph Cloud, you can still use Splitgraph in a decentralized fashion, sharing data with other Splitgraph instances. See the [decentralized demo](./decentralized-demo) for an introduction that showcases importing data from CSV files and tracking changes to images, using Splitgraph's version control functionality.
 
@@ -47,7 +47,7 @@ The [2016 US Presidential Election precinct-level returns](/splitgraph/2016_elec
 Let's inspect this image remotely without cloning it, using [`sgr show`](../sgr/image-information/show).
 The [`sgr` client](../architecture/sgr-client)
 uses the same protocol to communicate with the registry as with the local Splitgraph engine,
-so the same commands can be used for both local and remote operations.
+so you can use the same commands for both local and remote operations.
 
 ```shell-session
 $ sgr show -r data.splitgraph.com splitgraph/2016_election:latest
@@ -62,7 +62,7 @@ Tables:
 ```
 
 Let's also inspect the `precinct_results` [table](../sgr/image-information/table) in this image.
-When stored in Splitgraph, tables are composed of multiple content-addressable, immutable [objects](../concepts/objects).
+Splitgraph stores tables as a composition of multiple [content-addressable, immutable objects](../concepts/objects).
 
 ```shell-session
 $ sgr table -r data.splitgraph.com splitgraph/2016_election:latest precinct_results
@@ -125,7 +125,7 @@ Objects:
 ```
 
 Now let's actually [clone](../sgr/sharing-images/clone) the image. By default, this will only download the image's metadata.
-No actual data is transferred until it's required, unless you explicitly ask for it.
+Splitgraph will not transfer any actual data until it's required, unless you explicitly ask for it.
 
 ```shell-session
 $ sgr clone splitgraph/2016_election
@@ -254,7 +254,7 @@ abraham  NY      0
 adams    MD     44
 ```
 
-Like Dockerfiles, Splitfile outputs are cached: if the source data hasn't changed, the data image isn't rebuilt.
+Splitgraph caches the outputs of Splitfiles, in the same way that Docker caches Dockerfile layers. It does not rebuild the image if the source data has not changed.
 
 ```shell-session
 $ sgr build votes_by_state.splitfile
@@ -269,11 +269,11 @@ No image/object metadata to pull.
 Successfully built votes_by_state:ee8dc4bb7c47.
 ```
 
-Splitfiles also support joins between Splitgraph images. For an example or to learn more about Splitfiles, check out the [Splitfile reference](../splitfiles/splitfile-intro) or some [sample Splitfiles](../working-with-data/using-splitfiles#sample-splitfiles).
+Splitfiles also support joins between Splitgraph images. For an example, or to learn more about Splitfiles, check out the [Splitfile reference](../splitfiles/splitfile-intro) or some [sample Splitfiles](../working-with-data/using-splitfiles#sample-splitfiles).
 
 ## Publishing a dataset on Splitgraph Cloud
 
-Let's push your image to the Splitgraph registry, making it available publicly. By default, the image gets pushed out to a repository with the same name in your own namespace. In the case of this demo user, the freshly built dataset is going to be available as [`splitgraph-demo/votes_by_state`](/splitgraph-demo/votes_by_state).
+Let's push your image to the Splitgraph registry, making it available publicly. By default, `sgr` pushes the image to a repository with the same name in your own namespace. In the case of this demo user, that means `sgr` pushes the freshly built dataset to [`splitgraph-demo/votes_by_state`](/splitgraph-demo/votes_by_state).
 
 ```shell-session
 $ sgr push votes_by_state
@@ -323,9 +323,9 @@ Description updated for repository splitgraph-demo/votes_by_state.
 
 The dataset is now available on `https://www.splitgraph.com/YOUR_USERNAME/votes_by_state.`
 
-The image's [provenance](/splitgraph-demo/votes_by_state/latest/-/provenance) is also uploaded to Splitgraph Cloud, allowing anyone to see how the image was built and sourced. In addition, the new image will now be referenced in the [dependents](/splitgraph/2016_election/latest/-/dependents) page for the 2016 Election dataset.
+Splitgraph also uploads the image's [provenance](/splitgraph-demo/votes_by_state/latest/-/provenance) to Splitgraph Cloud, allowing anyone to see how the image was built and sourced. In addition, the [2016 Election dataset dependents](/splitgraph/2016_election/latest/-/dependents) page will now list the new image as a dependent.
 
-You also have an OpenAPI-compatible [REST API](/splitgraph-demo/votes_by_state/latest/-/api-schema) generated for the dataset, provided by [PostgREST](https://postgrest.org/en/latest/).
+You also have an OpenAPI-compatible [REST API](/splitgraph-demo/votes_by_state/latest/-/api-schema) generated for the dataset, provided by [PostgREST](https://postgrest.org/en/latest/). More perks like this coming soon.
 
 ## Further reading
 

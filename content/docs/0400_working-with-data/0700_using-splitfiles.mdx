@@ -3,13 +3,13 @@ export const meta = {
   title: "Using Splitfiles to build datasets",
 };
 
-Whilst you can create new images using `sgr commit`, there is a better
+Although You can create new images using `sgr commit`, there is a better
 way: Splitfiles. Splitfiles are a declarative way to define new datasets
 inspired by Dockerfiles. The same ideas hold here: every command defines
 a new image with a deterministic hash (a combination of the hash of the
 previous image and the specifics of the command). If the hash that's
-about to be produced by a command already exists, the image is checked
-out instead, avoiding the actual data transformation.
+about to be produced by a command already exists, Splitgraph checks out the
+image instead, avoiding the actual data transformation.
 
 This means that you can not only easily produce derivative datasets, but
 also keep them up to date without extra effort.
@@ -52,9 +52,8 @@ This file consists of three commands:
   didn't specify an explicit image or tag, the latest image in
   `example/repo_1` will be used.
 - Do the same with the `example/repo_2` repository, but this time
-  use a parameter `IMAGE_2` for the image. This parameter will have
-  to be substituted in at Splitfile execution time to define the
-  exact image we will want to use.
+  use a parameter `IMAGE_2` for the image. We will need to substitute this parameter
+  at Splitfile execution time to define the exact image we will want to use.
 - Finally, run an SQL statement against the newly built image with
   the two imported tables. In this case, we will create a new table
   (called `result`) and put the results of the JOIN query in it.
@@ -88,7 +87,7 @@ Storing and indexing the table
  ---> 4fd86d48715d
 ```
 
-If you have seen the output of a Dockerfile being executed, this will
+If you have seen the output of Docker executing a Dockerfile, this will
 also look familiar to you. Let's inspect the repository that we've just
 created:
 
@@ -115,7 +114,7 @@ Tables:
 
 Let's also look at the actual data we produced. Since we ran the
 Splitfile against the original version of the `example/repo_2`
-repository, all keys from 0 to 9 should be present in the join table:
+repository, the join table should include all keys from 0 to 9:
 
 ```shell-session
 $ sgr sql --schema example/output "SELECT * FROM result ORDER BY key"
@@ -184,5 +183,5 @@ Census tracts in that county.
 
 ### Other Splitfiles
 
-There are multiple loose Splitfiles that can be run against various datasets in Splitgraph Cloud on
+There are multiple loose Splitfiles that you can run against various datasets in Splitgraph Cloud on
 [GitHub](https://github.com/splitgraph/splitgraph/tree/master/examples/sample_splitfiles).

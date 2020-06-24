@@ -3,7 +3,7 @@ export const meta = {
   title: "Clone vs checkout",
 };
 
-A Splitgraph repository can be cloned using [`sgr clone`](../sgr/sharing-images/clone):
+You can clone a Splitgraph repository using the [`sgr clone`](../sgr/sharing-images/clone) command:
 
 ```shell-session
 $ sgr clone some_namespace/some_repository
@@ -13,8 +13,8 @@ This will look for this repository in all currently registered remotes in `SG_RE
 clone the repository from the first remote that contains it.
 
 By default, cloning a Splitgraph repository is different than what happens with Git repositories.
-In this case, only the repository's metadata is cloned, which is lightweight compared to the
-actual data but still lets the user to get an overview of the repository.
+In this case, Splitgraph only clones the repository's _metadata_, which is lightweight compared to the
+actual data but still lets the user get an overview of the repository.
 
 For example, consider the [2016 US Presidential Election precinct-level returns](/splitgraph/2016_election/) dataset:
 
@@ -38,12 +38,12 @@ Tables:
 ```
 
 Splitgraph tries to be as lazy as possible and only download the actual data when a query or a
-checkout requires it. This behaviour can be overridden by passing `--download-all` to `sgr clone`.
+checkout requires it. You can override this behavior by passing `--download-all` to `sgr clone`.
 
 ## Checkout
 
-On checkout of an image, all objects that are required by that image are gathered, downloaded and
-assembled into tables in a process called "materialization".
+On checkout of an image, Splitgraph gathers all objects required by that image, downloads them
+and assembles them into tables in a process called "materialization".
 
 ```shell-session
 $ sgr checkout splitgraph/2016_election:latest

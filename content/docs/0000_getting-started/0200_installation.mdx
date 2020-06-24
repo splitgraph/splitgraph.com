@@ -7,8 +7,8 @@ export const meta = {
 
 A Splitgraph installation consists of two components: [the Splitgraph engine](../architecture/splitgraph-engine) and [the Splitgraph client (`sgr`)](../architecture/sgr-client).
 
-The client ships as a self-contained binary that works on Linux, Mac and Windows without any prerequisites. If you wish to use 
-Splitgraph as a Python library, it can also be installed through `pip`. 
+The client ships as a self-contained binary that works on Linux, Mac and Windows without any prerequisites. If you wish to use
+Splitgraph as a Python library, it can also be installed through `pip`.
 
 To run the Splitgraph engine, you will need to be able to run [Docker](https://www.docker.com/get-started). There are instructions available for installing Docker on [Linux](https://docs.docker.com/engine/install/#server), [Mac](https://docs.docker.com/docker-for-mac/install/) and Windows (use [Docker Desktop](https://docs.docker.com/docker-for-windows/install-windows-home/) for Windows 10 Pro/Enterprise (15063+) / Windows 10 Home (19018+) or [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) for earlier versions of Windows.)
 
@@ -52,8 +52,7 @@ This will:
 - Prompt you for a password: this is just the password used to protect your
   local engine and will be stored in the generated configuration file.
 - Pull and start the latest [Splitgraph engine](https://hub.docker.com/r/splitgraph/engine/) image
-- By default, the engine container will be named `splitgraph_engine_default` and two Docker volumes
-  will be created:
+- By default, `sgr` will name the engine container `splitgraph_engine_default` and create two Docker volumes:
   - `splitgraph_engine_default_data` to store the physical data
   - `splitgraph_engine_default_metadata` to store the metadata about composition of Splitgraph images.
 - Initialize the engine
@@ -101,8 +100,8 @@ $ docker run -d \\
 
 By default, `sgr` is configured to speak to the engine running on
 `localhost:5432` with a superuser account called `sgr` and a password
-`supersecure` against a database called `splitgraph`. The credentials used by `sgr`
-can be changed by changing the [configuration file](#configuration-file).
+`supersecure` against a database called `splitgraph`. You can change the credentials used by `sgr`
+by editing the [configuration file](#configuration-file).
 
 To complete the installation, run:
 
@@ -112,7 +111,7 @@ $ sgr init
 
 #### Docker Compose
 
-You can also use  [Docker Compose](https://docs.docker.com/compose/install/). A sample
+You can also use [Docker Compose](https://docs.docker.com/compose/install/). A sample
 Compose configuration for the service is as follows:
 
 ```yaml
@@ -138,12 +137,12 @@ services:
 
 ## Upgrading
 
-Single-binary `sgr` can be upgraded by running [`sgr upgrade`](../sgr/miscellaneous/upgrade) which
+You can upgrade the single-binary `sgr` by running [`sgr upgrade`](../sgr/miscellaneous/upgrade) which
 will download the new binary and upgrade the engine (if the engine is managed by `sgr engine`).
 
 [`sgr engine upgrade`](../sgr/miscellaneous/upgrade) upgrades an engine that's managed by `sgr engine`
 by deleting the current Docker container and starting a new one, keeping all data volumes intact.
-Whilst the versions of `sgr` and of the engine don't need to be the same, it is recommended to match them, as the engine and `sgr` are currently tested and released in lockstep.
+While the versions of `sgr` and of the engine do not need to be the same, we recommend you match them, as we currently test and release the engine and `sgr` in lockstep.
 
 ## Configuration file
 
