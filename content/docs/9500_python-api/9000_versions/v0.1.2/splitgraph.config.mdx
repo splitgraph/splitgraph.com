@@ -1,0 +1,337 @@
+
+import "@splitgraph/design/css/sphinxtheme.css";
+
+export const meta = {
+  title: "splitgraph.config package",
+  id: "splitgraph.config package"
+};
+
+<div className=" rst-content"><nav className="toc"><ol className="toc-level toc-level-1"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#module-contents">Module contents</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#submodules">Submodules</a><ol className="toc-level toc-level-2"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphconfigargument_config-module">splitgraph.config.argument_config module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphconfigconfig-module">splitgraph.config.config module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphconfigconfig_file_config-module">splitgraph.config.config_file_config module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphconfigdefault_config-module">splitgraph.config.default_config module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphconfigenvironment_config-module">splitgraph.config.environment_config module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphconfigkeys-module">splitgraph.config.keys module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphconfigsystem_config-module">splitgraph.config.system_config module</a></li></ol></li></ol></nav><div className="section" id="module-splitgraph.config">
+<span id="module-contents"></span><h2 id="module-contents">Module contents<a className="headerlink" href="#module-splitgraph.config" title="Permalink to this headline">¶</a></h2>
+<p>The CONFIG object is created and exported once __at import <a href="#id1"><span className="problematic" id="id2">time__</span></a>
+Calling CONFIG[“KEY”] directly should be sufficient in most cases,
+except when a config value has changed since importing CONFIG.
+In that case, create_config_dict() can provide an updated config dict</p>
+<p>Priority (highest to lowest):</p>
+<blockquote>
+<div><ol className="arabic simple">
+<li><p>Command line argument values</p></li>
+<li><p>Environment variable values</p></li>
+<li><p>Config file values in [defaults] section</p></li>
+<li><p>DEFAULTS (see keys.py)</p></li>
+</ol>
+</div></blockquote>
+</div><div className="section" id="splitgraph-config-package">
+
+<div className="section" id="submodules">
+<h2 id="submodules">Submodules<a className="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div className="section" id="module-splitgraph.config.argument_config">
+<span id="splitgraph-config-argument-config-module"></span><h2 id="splitgraphconfigargument_config-module">splitgraph.config.argument_config module<a className="headerlink" href="#module-splitgraph.config.argument_config" title="Permalink to this headline">¶</a></h2>
+<dl className="py function">
+<dt id="splitgraph.config.argument_config.get_arg_tuples">
+<code className="sig-prename descclassname">splitgraph.config.argument_config.</code><code className="sig-name descname">get_arg_tuples</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → List<span className="p">[</span>Tuple<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.config.argument_config.get_arg_tuples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the raw (argN, argN+1) tuples from sys.argv</p>
+<p>We could also use click to parse the flags ahead of time, and then pass
+the parsed flag object into SystemConfigGetters. But this way, we avoid
+having to pass down variables from click just to get config values.</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.argument_config.get_argument_config_value">
+<code className="sig-prename descclassname">splitgraph.config.argument_config.</code><code className="sig-name descname">get_argument_config_value</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">key</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">default_return</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → Optional<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.config.argument_config.get_argument_config_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get get the value of an argument, where value is the argument
+immediately following the argument matching a key in ARG_KEYS, e.g.:</p>
+<blockquote>
+<div><p>SYS_ARGS = [“–namespace”, “foo”]
+–> return “foo”</p>
+</div></blockquote>
+<p>Otherwise, return default_return</p>
+</dd></dl>
+
+</div>
+<div className="section" id="module-splitgraph.config.config">
+<span id="splitgraph-config-config-module"></span><h2 id="splitgraphconfigconfig-module">splitgraph.config.config module<a className="headerlink" href="#module-splitgraph.config.config" title="Permalink to this headline">¶</a></h2>
+<dl className="py function">
+<dt id="splitgraph.config.config.chain_getters">
+<code className="sig-prename descclassname">splitgraph.config.config.</code><code className="sig-name descname">chain_getters</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">getters</span><span className="p">:</span> <span className="n">Sequence<span className="p">[</span>Callable<span className="p">[</span><span className="p">[</span>str<span className="p">]</span><span className="p">, </span>Optional<span className="p">[</span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em>, <em className="sig-param"><span className="n">key</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">default_return</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → Optional<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.config.config.chain_getters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.config.create_config_dict">
+<code className="sig-prename descclassname">splitgraph.config.config.</code><code className="sig-name descname">create_config_dict</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.config.config.create_config_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and return a dict of all known config values</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.config.get_all_in_section">
+<code className="sig-prename descclassname">splitgraph.config.config.</code><code className="sig-name descname">get_all_in_section</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">config</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em>, <em className="sig-param"><span className="n">section</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>str<span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.config.config.get_all_in_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all subsections from a config (e.g. config[“mount_handlers”])</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.config.get_all_in_subsection">
+<code className="sig-prename descclassname">splitgraph.config.config.</code><code className="sig-name descname">get_all_in_subsection</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">config</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em>, <em className="sig-param"><span className="n">section</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">subsection</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.config.config.get_all_in_subsection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.config.get_from_section">
+<code className="sig-prename descclassname">splitgraph.config.config.</code><code className="sig-name descname">get_from_section</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">config</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em>, <em className="sig-param"><span className="n">section</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">item</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → str<a className="headerlink" href="#splitgraph.config.config.get_from_section" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.config.get_from_subsection">
+<code className="sig-prename descclassname">splitgraph.config.config.</code><code className="sig-name descname">get_from_subsection</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">config</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em>, <em className="sig-param"><span className="n">section</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">subsection</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">item</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → str<a className="headerlink" href="#splitgraph.config.config.get_from_subsection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a singleton variable from a subsection of the config,
+e.g. config[“remotes”][“data.splitgraph.com”][“SG_ENGINE_HOST”]</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.config.get_singleton">
+<code className="sig-prename descclassname">splitgraph.config.config.</code><code className="sig-name descname">get_singleton</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">config</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em>, <em className="sig-param"><span className="n">item</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → str<a className="headerlink" href="#splitgraph.config.config.get_singleton" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a singleton (not a section) variable from the config.</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.config.lazy_get_config_value">
+<code className="sig-prename descclassname">splitgraph.config.config.</code><code className="sig-name descname">lazy_get_config_value</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">key</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">default_return</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → Optional<span className="p">[</span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.config.config.lazy_get_config_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the config value for a key in the following precedence
+Otherwise return default_return</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.config.patch_config">
+<code className="sig-prename descclassname">splitgraph.config.config.</code><code className="sig-name descname">patch_config</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">config</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em>, <em className="sig-param"><span className="n">patch</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em><span className="sig-paren">)</span> → Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.config.config.patch_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively updates a nested configuration dictionary:</p>
+<dl className="simple">
+<dt>patch_config(</dt><dd><dl className="simple">
+<dt>&#38;lbrace;“key_1”: “value_1”,</dt><dd><p>“dict_1”: &#38;lbrace;“key_1”: “value_1”&#38;rbrace;&#38;rbrace;,</p>
+</dd>
+<dt>&#38;lbrace;“key_1”: “value_2”,</dt><dd><p>“dict_1”: &#38;lbrace;“key_2”: “value_2”&#38;rbrace;&#38;rbrace;) ==         &#38;lbrace;“key_1”: “value_2”,
+“dict_1”: &#38;lbrace;“key_1”: “value_1”, “key_2”: “value_2”&#38;rbrace;&#38;rbrace;</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>config</strong> – Config dictionary</p></li>
+<li><p><strong>patch</strong> – Dictionary with the path</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>New patched dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.config.set_in_subsection">
+<code className="sig-prename descclassname">splitgraph.config.config.</code><code className="sig-name descname">set_in_subsection</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">config</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em>, <em className="sig-param"><span className="n">section</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">subsection</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">item</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">value</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → None<a className="headerlink" href="#splitgraph.config.config.set_in_subsection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a singleton variable in a subsection of the config,
+e.g. config[“remotes”][“data.splitgraph.com”][“SG_ENGINE_HOST”]</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.config.update_config_dict_from_arguments">
+<code className="sig-prename descclassname">splitgraph.config.config.</code><code className="sig-name descname">update_config_dict_from_arguments</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">config_dict</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em><span className="sig-paren">)</span> → Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.config.config.update_config_dict_from_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an existing config_dict, update after reading sys.argv
+and overwriting any keys.</p>
+<p>Return updated copy of config_dict.</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.config.update_config_dict_from_env_vars">
+<code className="sig-prename descclassname">splitgraph.config.config.</code><code className="sig-name descname">update_config_dict_from_env_vars</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">config_dict</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em><span className="sig-paren">)</span> → Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.config.config.update_config_dict_from_env_vars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an existing config_dict, update after reading os.environ
+and overwriting any keys.</p>
+<p>Return updated copy of config_dict.</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.config.update_config_dict_from_file">
+<code className="sig-prename descclassname">splitgraph.config.config.</code><code className="sig-name descname">update_config_dict_from_file</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">config_dict</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span></span></em>, <em className="sig-param"><span className="n">sg_config_file</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.config.config.update_config_dict_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an existing config_dict, update after reading sg_config_file
+and overwriting any keys according to the rules in config_file_config</p>
+<p>Return updated copy of config_dict.</p>
+</dd></dl>
+
+</div>
+<div className="section" id="module-splitgraph.config.config_file_config">
+<span id="splitgraph-config-config-file-config-module"></span><h2 id="splitgraphconfigconfig_file_config-module">splitgraph.config.config_file_config module<a className="headerlink" href="#module-splitgraph.config.config_file_config" title="Permalink to this headline">¶</a></h2>
+<dl className="py function">
+<dt id="splitgraph.config.config_file_config.accumulate_lists">
+<code className="sig-prename descclassname">splitgraph.config.config_file_config.</code><code className="sig-name descname">accumulate_lists</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">config_dict</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>str<span className="p">]</span><span className="p">]</span></span></em><span className="sig-paren">)</span> → Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.config.config_file_config.accumulate_lists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform a <cite>config_dict</cite> to “accumulate” objects “nested” via key name</p>
+<p>Because  ConfigParser does not support nesting, we implement our own
+syntax via the key names of sections. The ‘:’ character can be used in
+section names to specify the left and right key. Example:</p>
+<div className="highlight-default notranslate"><div className="highlight"><pre><span></span><span className="o">.</span><span className="n">ini</span> <span className="n">config</span>             <span className="n">new</span> <span className="n">config_dict</span>
+
+                  <span className="o">-----></span>
+                    <span className="o">|</span>
+<span className="p">[</span><span className="n">remote</span><span className="p">:</span> <span className="n">remote1</span><span className="p">]</span>   <span className="o">|</span>   <span className="p">&#38;lbrace;</span>
+<span className="n">SG_ENV_VAR</span><span className="o">=</span><span className="n">foo</span>      <span className="o">|</span>       <span className="o">**</span><span className="n">rest_of_config_dict</span><span className="p">,</span>
+                    <span className="o">|</span>       <span className="s2">"remotes"</span><span className="p">:</span> <span className="p">&#38;lbrace;</span>
+<span className="p">[</span><span className="n">origin</span><span className="p">:</span> <span className="n">origin1</span><span className="p">]</span>   <span className="o">|</span>           <span className="s2">"remote1"</span><span className="p">:</span> <span className="p">&#38;lbrace;</span>
+<span className="n">SG_ENV_VAR</span><span className="o">=</span><span className="n">bar</span>      <span className="o">|</span>               <span className="s2">"SG_ENV_VAR"</span><span className="p">:</span> <span className="s2">"foo"</span>
+                    <span className="o">|</span>           <span className="p">&#38;rbrace;</span>
+<span className="p">[</span><span className="n">origin</span><span className="p">:</span> <span className="n">origin2</span><span className="p">]</span>   <span className="o">|</span>       <span className="p">&#38;rbrace;,</span>
+<span className="n">SG_ENV_VAR</span><span className="o">=</span><span className="n">bax</span>      <span className="o">|</span>       <span className="s2">"origins"</span><span className="p">:</span> <span className="p">&#38;lbrace;</span>
+                    <span className="o">|</span>           <span className="s2">"origin1"</span><span className="p">:</span> <span className="p">&#38;lbrace;</span>
+                    <span className="o">|</span>               <span className="s2">"SG_ENV_VAR"</span><span className="p">:</span> <span className="s2">"bar"</span>
+                    <span className="o">|</span>           <span className="p">&#38;rbrace;,</span>
+                    <span className="o">|</span>           <span className="s2">"origin2"</span><span className="p">:</span> <span className="p">&#38;lbrace;</span>
+                    <span className="o">|</span>               <span className="s2">"SG_ENV_VAR"</span><span className="p">:</span> <span className="s2">"bax"</span>
+                    <span className="o">|</span>           <span className="p">&#38;rbrace;</span>
+                    <span className="o">|</span>       <span className="p">&#38;rbrace;</span>
+                    <span className="o">|</span>   <span className="p">&#38;rbrace;</span>
+                    <span className="o">|</span>
+                  <span className="o">-----></span>
+</pre></div>
+</div>
+<p>:return a new, updated copy of <cite>config_dict</cite></p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.config_file_config.get_config_dict_from_config_file">
+<code className="sig-prename descclassname">splitgraph.config.config_file_config.</code><code className="sig-name descname">get_config_dict_from_config_file</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">sg_file</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="o">**</span><span className="n">kwargs</span></em><span className="sig-paren">)</span> → Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.config.config_file_config.get_config_dict_from_config_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a dict from ConfigParser, apply transformations to it.</p>
+<p>Return parsed and transformed <cite>config_dict</cite>.</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.config_file_config.get_config_dict_from_file">
+<code className="sig-prename descclassname">splitgraph.config.config_file_config.</code><code className="sig-name descname">get_config_dict_from_file</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">sg_file</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="o">**</span><span className="n">kwargs</span></em><span className="sig-paren">)</span> → Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.config.config_file_config.get_config_dict_from_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.config_file_config.hoist_section">
+<code className="sig-prename descclassname">splitgraph.config.config_file_config.</code><code className="sig-name descname">hoist_section</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">config_dict</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span></span></em>, <em className="sig-param"><span className="n">section</span><span className="p">:</span> <span className="n">str</span> <span className="o">=</span> <span className="default_value">'defaults'</span></em><span className="sig-paren">)</span> → Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>str<span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.config.config_file_config.hoist_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>If a section exists called &lt;hoist_section>, hoist it to the top level
+This is useful for overriding default configs from within a config file</p>
+<p>Transform <cite>config_dict</cite> to “hoist” any config values from a section
+into the top level (thus, overriding environment variables),
+when the name of the section matches <cite>hoist_section</cite>.</p>
+<p>Return a new, updated copy of <cite>config_dict</cite>.</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.config_file_config.transform_config_dict">
+<code className="sig-prename descclassname">splitgraph.config.config_file_config.</code><code className="sig-name descname">transform_config_dict</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">config_dict</span><span className="p">:</span> <span className="n">Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span></span></em>, <em className="sig-param"><span className="o">**</span><span className="n">kwargs</span></em><span className="sig-paren">)</span> → Dict<span className="p">[</span>str<span className="p">, </span>Union<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>Dict<span className="p">[</span>str<span className="p">, </span>str<span className="p">]</span><span className="p">]</span><span className="p">]</span><span className="p">]</span><a className="headerlink" href="#splitgraph.config.config_file_config.transform_config_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply transformations to the raw ConfigParser.config object</p>
+<blockquote>
+<div><ol className="arabic simple">
+<li><p>hoist_section</p></li>
+<li><p>accumulate_lists</p></li>
+</ol>
+</div></blockquote>
+<p>Return the a new, updated copy of <cite>config_dict</cite>.</p>
+</dd></dl>
+
+</div>
+<div className="section" id="module-splitgraph.config.default_config">
+<span id="splitgraph-config-default-config-module"></span><h2 id="splitgraphconfigdefault_config-module">splitgraph.config.default_config module<a className="headerlink" href="#module-splitgraph.config.default_config" title="Permalink to this headline">¶</a></h2>
+<dl className="py function">
+<dt id="splitgraph.config.default_config.get_default_config_value">
+<code className="sig-prename descclassname">splitgraph.config.default_config.</code><code className="sig-name descname">get_default_config_value</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">key</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">default_return</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → Any<a className="headerlink" href="#splitgraph.config.default_config.get_default_config_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the hard-coded default value of a config key.
+Otherwise return default_return.</p>
+</dd></dl>
+
+</div>
+<div className="section" id="module-splitgraph.config.environment_config">
+<span id="splitgraph-config-environment-config-module"></span><h2 id="splitgraphconfigenvironment_config-module">splitgraph.config.environment_config module<a className="headerlink" href="#module-splitgraph.config.environment_config" title="Permalink to this headline">¶</a></h2>
+<dl className="py function">
+<dt id="splitgraph.config.environment_config.get_environment_config_value">
+<code className="sig-prename descclassname">splitgraph.config.environment_config.</code><code className="sig-name descname">get_environment_config_value</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">key</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">default_return</span><span className="p">:</span> <span className="n">Optional<span className="p">[</span>str<span className="p">]</span></span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → Optional<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.config.environment_config.get_environment_config_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the environment variable value of the environment variable matching key.
+Otherwise return default_return.</p>
+</dd></dl>
+
+</div>
+<div className="section" id="module-splitgraph.config.keys">
+<span id="splitgraph-config-keys-module"></span><h2 id="splitgraphconfigkeys-module">splitgraph.config.keys module<a className="headerlink" href="#module-splitgraph.config.keys" title="Permalink to this headline">¶</a></h2>
+<dl className="py data">
+<dt id="splitgraph.config.keys.SENSITIVE_KEY_SUFFIXES">
+<code className="sig-prename descclassname">splitgraph.config.keys.</code><code className="sig-name descname">SENSITIVE_KEY_SUFFIXES</code><em className="property"> = ['_PWD', '_TOKEN']</em><a className="headerlink" href="#splitgraph.config.keys.SENSITIVE_KEY_SUFFIXES" title="Permalink to this definition">¶</a></dt>
+<dd><p>Warning: Every key in DEFAULTS must have a key in ARGUMENT_KEY_MAP
+If you add/remove keys from DEFAULTS, make sure to do so here too.</p>
+</dd></dl>
+
+</div>
+<div className="section" id="module-splitgraph.config.system_config">
+<span id="splitgraph-config-system-config-module"></span><h2 id="splitgraphconfigsystem_config-module">splitgraph.config.system_config module<a className="headerlink" href="#module-splitgraph.config.system_config" title="Permalink to this headline">¶</a></h2>
+<dl className="py function">
+<dt id="splitgraph.config.system_config.file_exists">
+<code className="sig-prename descclassname">splitgraph.config.system_config.</code><code className="sig-name descname">file_exists</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">_dir</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">filename</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → bool<a className="headerlink" href="#splitgraph.config.system_config.file_exists" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.system_config.get_config_file">
+<code className="sig-prename descclassname">splitgraph.config.system_config.</code><code className="sig-name descname">get_config_file</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">default_return</span><span className="p">:</span> <span className="n">None</span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → Optional<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.config.system_config.get_config_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the location of an existing SG_CONFIG_FILE on the system with
+a valid name. Do not attempt to parse the config file, just return
+its location.</p>
+<p>Otherwise, return default_return</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.system_config.get_explicit_config_file_dirs">
+<code className="sig-prename descclassname">splitgraph.config.system_config.</code><code className="sig-name descname">get_explicit_config_file_dirs</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → List<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.config.system_config.get_explicit_config_file_dirs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get any explicitly defined config file directories,
+which are directories where we should search for files from
+VALID_CONFIG_FILE_NAMES.</p>
+<p>This list is defined similar to $PATH, as a colon (:) delimited
+string, either in:</p>
+<blockquote>
+<div><ul className="simple">
+<li><p>argument flag –config-dirs</p></li>
+<li><p>or environment key SG_CONFIG_DIRS</p></li>
+</ul>
+</div></blockquote>
+<p>Or a single directory defined in either</p>
+<blockquote>
+<div><ul className="simple">
+<li><p>argument flag –config-dir</p></li>
+<li><p>environment key SG_CONFIG_DIR</p></li>
+</ul>
+</div></blockquote>
+<p>If both plural and single are defined, join them together.</p>
+<p>Return a list of valid paths that are set, or an empty list.</p>
+<p>Print a warning if any paths to not exist.</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.system_config.get_explicit_config_file_location">
+<code className="sig-prename descclassname">splitgraph.config.system_config.</code><code className="sig-name descname">get_explicit_config_file_location</code><span className="sig-paren">(</span><span className="sig-paren">)</span> → Optional<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.config.system_config.get_explicit_config_file_location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the explicitly defined location of config file, if defined.</p>
+<p>The location will either be defined in:</p>
+<blockquote>
+<div><ul className="simple">
+<li><p>argument flag –config-file</p></li>
+<li><p>or environment key SG_CONFIG_FILE</p></li>
+</ul>
+</div></blockquote>
+<p>In keeping with assumptions about priority, argument flag has
+higher priority than environment value.</p>
+<p>If the location is set, and points to an existing file, return location.</p>
+<p>Otherwise return None</p>
+<p>Print a warning if location is set but points to non-existing file.</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.system_config.get_system_config_value">
+<code className="sig-prename descclassname">splitgraph.config.system_config.</code><code className="sig-name descname">get_system_config_value</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">key</span><span className="p">:</span> <span className="n">str</span></em>, <em className="sig-param"><span className="n">default_return</span><span className="p">:</span> <span className="n">None</span> <span className="o">=</span> <span className="default_value">None</span></em><span className="sig-paren">)</span> → Optional<span className="p">[</span>str<span className="p">]</span><a className="headerlink" href="#splitgraph.config.system_config.get_system_config_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.config.system_config.is_file">
+<code className="sig-prename descclassname">splitgraph.config.system_config.</code><code className="sig-name descname">is_file</code><span className="sig-paren">(</span><em className="sig-param"><span className="n">filename</span><span className="p">:</span> <span className="n">str</span></em><span className="sig-paren">)</span> → bool<a className="headerlink" href="#splitgraph.config.system_config.is_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+</div>
+</div>
