@@ -29,7 +29,7 @@ Here's a play-by-play of us realizing that we didn't need to do anything to get 
 
 This was kind of anticlimactic. Integrating [other clients](/docs/integrating-splitgraph/other-clients) took us about half a day. Building an example of Splitgraph [working with dbt](/docs/integrating-splitgraph/dbt) took one day.
 
-How did we do this and is there anything other tools can learn from it?
+We think that this is due to a big design decision we made in Splitgraph's early days.
 
 ## Isn't it cool to write a database?
 
@@ -63,9 +63,9 @@ From the very beginning, we knew that we didn't have the staff, the time or the 
 
 IDEs, editors, compilers and other applications don't need to be aware of these tools to benefit from them. They **enhance existing abstractions instead of breaking them**.
 
-## Enhancing abstractions without breaking them
+## Enhance abstractions without breaking them
 
-For Splitgraph, we chose PostgreSQL as a foundation to build on. A Splitgraph engine is a PostgreSQL instance with some extra custom extensions. Most of Splitgraph's operations use the SQL standard. After a Splitgraph table is [checked out](/docs/sgr/image-management-creation/checkout), it's just an ordinary table that you can use all features of PostgreSQL on.
+For Splitgraph, we chose PostgreSQL as a foundation to build on. A Splitgraph engine is a PostgreSQL instance with some extra custom extensions. Most of Splitgraph's operations use the SQL standard. After you [check out](/docs/sgr/image-management-creation/checkout) out a Splitgraph image, it's just a set of ordinary tables that you can use all features of PostgreSQL on.
 
 When we realized that there should be a way to avoid the checkout step, we wrote a [layered querying](/docs/large-datasets/layered-querying) plugin. Layered querying is a [foreign data wrapper](/docs/ingesting-data/foreign-data-wrappers/introduction), which is a first-class PostgreSQL feature. The database takes care of all query parsing for us. We only need to figure out how to give Splitgraph tuples to it fast enough. We could now experiment with hotswapping data into Splitgraph on the fly or speeding queries up. And, we would still support any PostgreSQL statement, past, present or future.
 
