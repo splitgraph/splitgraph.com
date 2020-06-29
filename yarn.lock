@@ -12706,10 +12706,26 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"mime-db@npm:~1.25.0":
+  version: 1.25.0
+  resolution: "mime-db@npm:1.25.0"
+  checksum: 3/4b83320e60f57b76c3c4d6f96335a67d10bbfdb164a303b0384a2cbe2642b78ad1926f72a2527f48fa129f310a5321d578c004d93fcb118594398b35234e14be
+  languageName: node
+  linkType: hard
+
 "mime-db@npm:~1.33.0":
   version: 1.33.0
   resolution: "mime-db@npm:1.33.0"
   checksum: 3/f33acedd5b2bfd57fe987aa01c209abd3c6f762c6746c2a1ffefa77f8c10d39a2af9a591bd44f39f8d42a5ee30e43407cfd8535392773f211c2c7d7b6def90d4
+  languageName: node
+  linkType: hard
+
+"mime-types@npm:2.1.13":
+  version: 2.1.13
+  resolution: "mime-types@npm:2.1.13"
+  dependencies:
+    mime-db: ~1.25.0
+  checksum: 3/30ccfa2bc1c44bc569345b4118e250a38786e7fc3ad78f61ca54808daa49b8f9e720e0252c71575949a395832a817345f6827ad5a4fd305ac00a587195c5d8c8
   languageName: node
   linkType: hard
 
@@ -16749,6 +16765,16 @@ resolve@1.12.0:
   languageName: node
   linkType: hard
 
+"rss@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "rss@npm:1.2.2"
+  dependencies:
+    mime-types: 2.1.13
+    xml: 1.0.1
+  checksum: 3/1e4b2216353343869a4983edb485fbafe1e29c58d848f9bd6acbfb9a8736576787fcd68b48c8f7ff09a832005c63c9d0c95075e66a20a542fd4f0c9b40b6837c
+  languageName: node
+  linkType: hard
+
 "rsvp@npm:^4.8.4":
   version: 4.8.5
   resolution: "rsvp@npm:4.8.5"
@@ -17495,6 +17521,7 @@ resolve@1.12.0:
     npm-run-all: ^4.1.5
     react-helmet: ^6.0.0
     remark-sectionize: ^1.1.1
+    rss: ^1.2.2
     tsdx: ^0.12.3
   languageName: unknown
   linkType: soft
@@ -19937,6 +19964,13 @@ resolve@1.12.0:
   version: 3.0.0
   resolution: "xml-name-validator@npm:3.0.0"
   checksum: 3/b96679a42e6be36d2433987fe3cc45e972d20d7c2c2a787a2d6b2da94392bd9f23f671cdba29a91211289a2fa8e6965e466dbc1105d0e5730fc3a43e4f1a0688
+  languageName: node
+  linkType: hard
+
+"xml@npm:1.0.1":
+  version: 1.0.1
+  resolution: "xml@npm:1.0.1"
+  checksum: 3/adde7652a6f6010d28079586e7f608d616138bcb6c44bbc9174292b5cc2fab09b351d6c5f009e9304df2e0030888198225dd2e9ccbf51b776c8928479bfea4cb
   languageName: node
   linkType: hard
 
