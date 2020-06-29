@@ -1,0 +1,115 @@
+export const meta = {
+  id: "treat-data-like-cattle",
+  title: "Treat your datasets like cattle, not pets",
+  date: "2020-06-30",
+  authors: ["Artjoms Iškovs"],
+  topics: ["technical", "philosophy"],
+  description:
+    "We talk about the \"pets versus cattle\" idea in software and discuss " +
+    "how Splitgraph helps to apply it to data science and data engineering.",
+  related: ["introduction-to-splitgraph", "splitgraph-datagrip"],
+};
+
+## Introduction
+
+A lot of advancements in software engineering and operations haven't yet made their way to data science and data engineering.
+
+Data engineers manually craft and manage lots of distinct datasets, each of which needs special attention and care. This is similar to how software worked before we started treating more services like **cattle, not pets**.
+
+In this article, we would like to expand on this analogy and talk about how our tool, [Splitgraph](https://www.splitgraph.com), can help apply it to data workflows.
+
+## Pets and cattle in software
+
+In software, a [**pet server**](http://cloudscaling.com/blog/cloud-computing/the-history-of-pets-vs-cattle/) is indispensable. System administrators build and manage them manually and carefully look after them. If such a server goes down, it's a big issue.
+
+A **cattle server** is disposable. Automated processes provision them from filesystem images in a matter of seconds. If a cattle server fails, cluster management systems remove it and spin up another one.
+
+There's one rule to a cattle server: Is it a big deal if it goes away? Can you rebuild and re-provision it from scratch?
+
+## Data as cattle?
+
+Let's try to apply the same rule to identifying cattle datasets. If it's not a big deal that a dataset gets deleted, it's a cattle dataset. Ultimately, a cattle dataset must be able to be rebuilt from some known state.
+
+We think **more datasets should be like cattle, not pets**. This model, complete with similar battle-tested workflows and tools from software engineering, can help data engineers and data scientists in their work.
+
+So, what does this mean exactly and what are the implications of this idea?
+
+### Declarative definition files
+
+Engineers build and provision services using Dockerfiles, Ansible playbooks or Terraform configuration. These are self-contained and version-controlled **declarative definition files**.
+
+We should have them for data as well. These files would explicitly list every dependency that the dataset needs and declare how to build it.
+
+This lets data scientists and engineers experiment with datasets:
+
+  * Rebuild them against data from a different vendor;
+  * See the impact on the final model of excluding some dataset from a pipeline;
+  * If a source dataset needs offboarding, it's easy to see which data it affected and what needs to be rebuilt.
+
+In Splitgraph, [**Splitfiles**](/docs/concepts/splitfiles) let you build data images using familiar SQL. They provide Dockerfile-like caching and allow referencing other Splitgraph datasets and even other databases directly from the Splitfile.
+
+Every dataset built by a Splitfile has [provenance tracking](/docs/working-with-data/inspecting-provenance). This lets you know exactly where each dataset came from and how to rebuild it.
+
+### Version control and CI
+
+Developers use **version control** for all code and configuration that goes into a service. Data should be version controlled, too. Datasets are not append-only and their history often changes. An engineer or a researcher should be able to ["diff"](/docs/sgr/image-information/diff) two versions of a dataset and see where they changed.
+
+However, collaboration on data at the row level via pull requests is of limited use. Developers don't collaborate on a Docker image or the final binary. They collaborate on the source code. Changes trigger automated **continuous integration** systems that run the actual build and test pipelines.
+
+ETL pipelines should be more like CI pipelines.
+
+We can treat a CI pipeline as a self-contained function that takes in a part of the source tree and outputs an "artifact". This is a useful abstraction for data, too. It lets anyone replay an ETL pipeline at any time. It also enables more robust integration testing. It decreases iteration times and brings development and production closer.
+
+[Splitfiles](/docs/concepts/splitfiles) are self-contained and the Splitfile executor can run them on any machine. It automatically pulls required datasets from the registry. This makes Splitfiles easy to integrate into your data CI pipeline.
+
+### Portability
+
+Software artifacts like filesystem images and statically linked binaries are **portable**.
+
+  * Anybody can pull an image and run it locally for development or debugging;
+  * There are libraries of public images that a developer can integrate in their stack in a matter of minutes;
+  * In production, runtimes like Docker and Nomad can remap ports and filesystem paths. This lets multiple services co-exist on the same server.
+
+Datasets should also be portable, not bound to a specific schema or a specific database. Anyone should be able to pull a dataset and query it or "mount" it to a certain location. This kind of standardization will let libraries of public datasets to grow, ready for researchers to reference and join with private data.
+
+Splitgraph achieves this in several ways.
+
+With [layered querying](/docs/large-datasets/layered-querying), a Splitgraph engine can query a remote dataset with a limited amount of local cache.
+
+[Foreign data wrappers](/docs/ingesting-data/foreign-data-wrappers/introduction) let Splitgraph "mount" a full remote database or a dataset on the engine. This creates a "shim" schema locally that any client can query.
+
+Any Splitgraph engine can act as a [remote](/docs/architecture/splitgraph-remotes). This enables **decentralized data sharing**.
+
+### Not getting in the way
+
+Docker and Git would be of limited use if they required developers to make their software run with a new kernel or a new filesystem. Good tools [**don't get in the way**](/blog/datagrip). Users can adopt them incrementally without forcing huge workflow changes.
+
+Anything that manages data must let existing applications integrate with it without code changes. Doing it otherwise will mean that adoption will be an uphill battle.
+
+Splitgraph is compatible with anything that uses PostgreSQL. It gives superpowers to tools like [DataGrip](/docs/integrating-splitgraph/datagrip), [dbt](/docs/integrating-splitgraph/dbt), [Metabase](/docs/integrating-splitgraph/metabase) or [PostGIS](/docs/integrating-splitgraph/postgis). We collect the most interesting integrations on our [documentation page](/product/splitgraph/integrations).
+
+## Existing tools
+
+There is plenty of excellent tools in the data ecosystem. We have an [FAQ section](/docs/getting-started/frequently-asked-questions#why-not-just-use) that discusses them and why they don't fit this vision completely. In particular:
+
+### dbt
+
+dbt offers an advanced language based on Jinja templates that lets users transform data in their warehouse and avoid SQL boilerplate. dbt models are version-controlled and explicitly define their dependent datasets. Anything can query datasets built by dbt.
+
+We are big fans of dbt and even built [an adapter](/docs/integrating-splitgraph/dbt#splitgraph-dbt-adapter) that lets you reference Splitgraph data images directly from dbt.
+
+However, dbt does not do sharing and versioning of data. In addition, all dbt transformations have to be done in a single data warehouse, using specific source and target schema names.
+
+### Dolt
+
+Dolt can version and share data and supports Git-like operations on it.
+
+However, Dolt doesn't support dataset builds. Dolt's built-in MySQL server doesn't work with a lot of existing clients, limiting its usefulness.
+
+We also think that most datasets in play are derived from other datasets. Versioning these datasets at the row level is like versioning Docker images at the file level or versioning binaries at the byte level. It's only useful if you don't have a higher-level definition language that built these artifacts.
+
+## Conclusion
+
+We should treat more datasets like cattle, not pets. We built Splitgraph in line with this philosophy.
+
+If you're interested in learning more about Splitgraph, you can check our [frequently asked questions](/docs/getting-started/frequently-asked-questions) section, follow our [quick start guide](/docs/getting-started/five-minute-demo) or visit our [website](https://www.splitgraph.com).
