@@ -88,26 +88,6 @@ Anything that manages data must let existing applications integrate with it with
 
 Splitgraph is compatible with anything that uses PostgreSQL. It gives superpowers to tools like [DataGrip](/docs/integrating-splitgraph/datagrip), [dbt](/docs/integrating-splitgraph/dbt), [Metabase](/docs/integrating-splitgraph/metabase) or [PostGIS](/docs/integrating-splitgraph/postgis). We collect the most interesting integrations on our [documentation page](/product/splitgraph/integrations).
 
-## Existing tools
-
-There is plenty of excellent tools in the data ecosystem. We have an [FAQ section](/docs/getting-started/frequently-asked-questions#why-not-just-use) that discusses them and why they don't fit this vision completely. In particular:
-
-### dbt
-
-dbt offers an advanced language based on Jinja templates that lets users transform data in their warehouse and avoid SQL boilerplate. dbt models are version-controlled and explicitly define their dependent datasets. Anything can query datasets built by dbt.
-
-We are big fans of dbt and even built [an adapter](/docs/integrating-splitgraph/dbt#splitgraph-dbt-adapter) that lets you reference Splitgraph data images directly from dbt.
-
-However, dbt does not do sharing and versioning of data. In addition, all dbt transformations have to be done in a single data warehouse, using specific source and target schema names.
-
-### Dolt
-
-Dolt can version and share data and supports Git-like operations on it.
-
-However, Dolt doesn't support dataset builds. Dolt's built-in MySQL server doesn't work with a lot of existing clients, limiting its usefulness.
-
-We also think that most datasets in play are derived from other datasets. Versioning these datasets at the row level is like versioning Docker images at the file level or versioning binaries at the byte level. It's only useful if you don't have a higher-level definition language that built these artifacts.
-
 ## Conclusion
 
 We should treat more datasets like cattle, not pets. We built Splitgraph in line with this philosophy.
