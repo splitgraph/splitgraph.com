@@ -34,6 +34,7 @@
   "dependencies": {
     "next-seo": "^4.4.0",
     "react-helmet": "^6.0.0",
-    "remark-sectionize": "^1.1.1"
+    "remark-sectionize": "^1.1.1",
+    "rss": "^1.2.2"
   }
 }

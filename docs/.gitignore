@@ -4,3 +4,5 @@ proxyDirectories.txt
 pages/_content
 
 .now
+
+public/feed.xml
