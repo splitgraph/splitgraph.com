@@ -8,6 +8,7 @@ import {
   BlogPost,
   Footer,
   InnerPageLayout,
+  RSSMetaTag,
 } from "@splitgraph/docs/components";
 import withTheme from "@splitgraph/docs/hocs/withTheme";
 
@@ -32,6 +33,7 @@ const withBlogLayout = ({ MdxPage, item: { metadata } }) => {
           },
         }}
       >
+        <RSSMetaTag />
         <BlogPost meta={metadata}>
           <MdxPage components={mdxComponents} />
         </BlogPost>

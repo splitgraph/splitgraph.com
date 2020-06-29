@@ -12,3 +12,5 @@ export { BlogPostItem } from "./BlogPostItem";
 export { BlogPost } from "./BlogPost";
 
 export { Breadcrumbs } from "./Breadcrumbs";
+export { RSSMetaTag } from './RSSMetaTag';
+

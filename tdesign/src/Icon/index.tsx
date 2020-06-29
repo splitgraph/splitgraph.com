@@ -266,3 +266,7 @@ export { IconAlertInfoCircle };
 import IconSearch from './IconSearch';
 export { IconSearch };
 
+
+import IconRss from './IconRss';
+export { IconRss };
+
