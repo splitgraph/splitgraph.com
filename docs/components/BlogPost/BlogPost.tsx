@@ -5,12 +5,14 @@ import * as React from "react";
 
 // import { Link } from "../Link"
 import { DividedBox } from "../Boxes/DividedBox";
-import { NextSeo } from "next-seo";
+import { NextSeo, BlogJsonLd } from "next-seo";
 
 import { IBlogPostMetadata, BlogPostItem } from "../BlogPostItem";
 import { BlogPostHeaderMetadata } from "./BlogPostHeaderMetadata";
 import { BlogTopicLink } from "./BlogTopicLink";
 import { Breadcrumbs } from "../Breadcrumbs";
+
+import { IconRss } from "@splitgraph/tdesign";
 
 export interface IBlogPostProps {
   children?: React.ReactNode;
@@ -20,7 +22,14 @@ export interface IBlogPostProps {
 const BlogPost = ({ children, meta }: IBlogPostProps) => {
   return (
     <>
-      <NextSeo title={meta.title} description={meta.description} />
+      <NextSeo
+        title={meta.title}
+        description={meta.description}
+        openGraph={{
+          title: meta.title,
+          description: meta.description,
+        }}
+      />
       <DividedBox
         colors={[
           "rgba(13,24,33,1) 0%,rgba(54,102,141,1) 80%,#000000 20%",
@@ -82,6 +91,21 @@ const BlogPost = ({ children, meta }: IBlogPostProps) => {
             ))}
           </>
         )}
+      </section>
+      <section className="subscribe-opts" sx={{ marginBottom: "2rem" }}>
+        <a
+          href="/feed.xml"
+          title="Splitgraph Blog RSS Feed"
+          aria-label="Splitgraph Blog RSS Feed"
+          sx={{ display: "flex", alignItems: "center" }}
+        >
+          <IconRss
+            size={"2rem"}
+            color={"primary"}
+            extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
+          />
+          Subscribe to RSS
+        </a>
       </section>
     </>
   );

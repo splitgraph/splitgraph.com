@@ -11,6 +11,7 @@ import {
   IconLogoTwitter,
   IconLogoLinkedIn,
   IconLogoReddit,
+  IconRss,
   IconHeart,
 } from "../../Icon";
 
@@ -205,6 +206,16 @@ const Footer = ({
               aria-label="Splitgraph on Reddit (r/splitgraph)"
             >
               <IconLogoReddit
+                size={"2rem"}
+                extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
+              />
+            </a>
+            <a
+              href="/feed.xml"
+              title="Splitgraph Blog RSS Feed"
+              aria-label="Splitgraph Blog RSS Feed"
+            >
+              <IconRss
                 size={"2rem"}
                 extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
               />
