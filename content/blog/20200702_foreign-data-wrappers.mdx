@@ -1,0 +1,175 @@
+export const meta = {
+  id: "foreign-data-wrappers",
+  title: "Foreign data wrappers: PostgreSQL's secret weapon?",
+  date: "2020-07-02",
+  authors: ["Artjoms Iškovs"],
+  topics: ["technical", "philosophy"],
+  description:
+    "We talk about foreign data wrappers, a PostgreSQL feature that lets you query " +
+    "remote databases directly from your PostgreSQL instance. We also demonstrate how " +
+    "to integrate them with Splitgraph.",
+  related: ["introduction-to-splitgraph", "splitgraph-datagrip"],
+};
+
+## Introduction
+
+[Foreign data wrappers](https://www.postgresql.org/docs/12/ddl-foreign-data.html) are an advanced [PostgreSQL](http://postgresql.org/) feature. They allow you to link a remote database to PostgreSQL and represent it as a set of foreign tables that behave like normal ones.
+
+Imagine being able to run SQL on a MongoDB collection or querying MySQL data from your PostgreSQL instance. Or, imagine running a `JOIN` between an SQLite file and an Oracle cluster without having to write and maintain an ETL job.
+
+In this article, we'll discuss PostgreSQL foreign data wrappers and how [Splitgraph](https://www.splitgraph.com/) makes it much easier for anyone to use them.
+
+## Using a custom FDW with Splitgraph
+
+This example ([source code on GitHub](https://github.com/splitgraph/splitgraph/tree/master/examples/custom_fdw)) will show you how to write a custom [foreign data wrapper](https://www.splitgraph.com/docs/ingesting-data/foreign-data-wrappers/introduction) using Multicorn. [Multicorn](https://github.com/Segfault-Inc/Multicorn) is a PostgreSQL extension that makes it possible to write foreign data wrappers in Python.
+
+We will then integrate it with Splitgraph's [`sgr mount`](https://www.splitgraph.com/docs/sgr/data-import-export/mount) command. This will make it queryable from the Splitgraph engine and allow Splitgraph to use it in [Splitfiles](https://www.splitgraph.com/docs/concepts/splitfiles).
+
+In particular, we will be running a foreign data wrapper that queries the [Firebase Hacker News API](https://github.com/HackerNews/API). This will let us run SQL queries on the top, best and new stories from Hacker News, as well as Show HNs and Ask HNs.
+
+This foreign data wrapper returns a list of rows from the remote database without performing any filtering. However, Multicorn also passes qualifiers and sort keys to the Python extension. This allows filtering to happen on the remote database as well, if it supports it.
+
+To run this demo, you will need to have [Docker](https://www.docker.com/get-started) and [Docker Compose](https://docs.docker.com/compose/install/).
+
+### Clone the repository
+
+Clone Splitgraph and go to the [example project](https://github.com/splitgraph/splitgraph/tree/master/examples/custom_fdw):
+
+```shell-session
+$ git clone https://github.com/splitgraph/splitgraph.git
+$ cd splitgraph/examples/custom_fdw
+```
+
+The Compose stack consists of:
+
+  * a custom version of the [Splitgraph engine](https://www.splitgraph.com/docs/architecture/splitgraph-engine) (with the FDW installed);
+  * a small Python container with the [`sgr` client](https://www.splitgraph.com/docs/architecture/sgr-client).
+
+The source code for the foreign data wrapper is in [src/hn_fdw/fdw.py](https://github.com/splitgraph/splitgraph/blob/master/examples/custom_fdw/src/hn_fdw/fdw.py). The mount handler that exposes it to Splitgraph is in [src/hn_fdw/mount.py](https://github.com/splitgraph/splitgraph/blob/master/examples/custom_fdw/src/hn_fdw/mount.py).
+
+### Start up the stack
+
+Start the shell and initialize the engine. This will also build and start the engine container:
+
+```shell-session
+$ docker-compose run --rm sgr
+
+$ sgr init
+Initializing engine PostgresEngine LOCAL (sgr@engine:5432/splitgraph)...
+Database splitgraph already exists, skipping
+Ensuring the metadata schema at splitgraph_meta exists...
+Running splitgraph_meta--0.0.1.sql
+Running splitgraph_meta--0.0.1--0.0.2.sql
+Running splitgraph_meta--0.0.2--0.0.3.sql
+Installing Splitgraph API functions...
+Installing CStore management functions...
+Installing the audit trigger...
+Engine PostgresEngine LOCAL (sgr@engine:5432/splitgraph) initialized.
+```
+
+Check the help for the HN mount handler:
+
+```shell-session
+$ sgr mount hackernews --help
+Usage: sgr mount hackernews [OPTIONS] SCHEMA
+
+      Mount a Hacker News story dataset using the Firebase API.
+
+Options:
+  -c, --connection TEXT       Connection string in the form
+                              username:password@server:port
+
+  -o, --handler-options TEXT  JSON-encoded dictionary of handler options:
+
+                              endpoints: List of Firebase endpoints to mount,
+                              mounted into the same tables as     the endpoint
+                              name. Supported endpoints:
+                              {top,new,best,ask,show,job}stories.
+
+  --help                      Show this message and exit.
+```
+
+### Mount the data and run some queries
+
+Now, actually "mount" the dataset. This will create a series of foreign tables. When a PostgreSQL client queries these tables, the foreign data wrapper will forward the queries to the Firebase API:
+
+```shell-session
+$ sgr mount hackernews hackernews
+Mounting topstories...
+Mounting newstories...
+Mounting beststories...
+Mounting askstories...
+Mounting showstories...
+Mounting jobstories...
+```
+
+You can now run ordinary SQL queries against these tables:
+
+```shell-session
+$ sgr sql -s hackernews "SELECT id, title, url, score FROM topstories LIMIT 10"
+
+23648942  Amazon to pay $1B+ for Zoox                                             https://www.axios.com/report-amazon-to-pay-1-billion-for-self-driving-tech-firm-zoox-719d293b-3799-4315-a573-a226a58bb004.html                              55
+23646158  When you type realty.com into Safari it takes you to realtor.com        https://www.facebook.com/story.php?story_fbid=10157161487396994&id=501751993                                                                               653
+23648864  Turn recipe websites into plain text                                    https://plainoldrecipe.com/                                                                                                                                 30
+23644253  Olympus quits camera business after 84 years                            https://www.bbc.com/news/technology-53165293                                                                                                               548
+23648217  Boston bans use of facial recognition technology                        https://www.wbur.org/news/2020/06/23/boston-facial-recognition-ban                                                                                          51
+23646953  Curl Wttr.in                                                            https://github.com/chubin/wttr.in                                                                                                                          190
+23646164  Quora goes permanently remote-first                                     https://twitter.com/adamdangelo/status/1276210618786168833                                                                                                 267
+23646395  Dwarf Fortress Creator Explains Its Complexity and Origins [video]      https://www.youtube.com/watch?v=VAhHkJQ3KgY                                                                                                                152
+23645305  Blackballed by PayPal, Sci-Hub switches to Bitcoin                      https://www.coindesk.com/blackballed-by-paypal-scientific-paper-pirate-takes-bitcoin-donations                                                             479
+23646028  The Acorn Archimedes was the first desktop to use the ARM architecture  https://spectrum.ieee.org/tech-talk/consumer-electronics/gadgets/why-wait-for-apple-try-out-the-original-arm-desktop-experience-today-with-a-raspberry-pi  111
+
+```
+
+PostgreSQL handles the actual query planning and filtering. The foreign data wrapper's job is to fetch records from the API. This setup supports any SQL syntax:
+
+```shell-session
+$ sgr sql -s hackernews "SELECT id, title, url, score FROM showstories ORDER BY score DESC LIMIT 5"
+23643096  Show HN: Aviary.sh – A tiny Bash alternative to Ansible                           https://github.com/team-video/aviary.sh  235
+23626167  Show HN: HN Deck – An alternative way to browse Hacker News                       https://hndeck.sagunshrestha.com/        110
+23640069  Show HN: Sourceful – Crowdsourcing the best public Google docs                    https://sourceful.co.uk                  102
+23627066  Show HN: Splitgraph - Build and share data with Postgres, inspired by Docker/Git  http://www.splitgraph.com                 79
+23629125  Show HN: Deta – A cloud platform for building and deploying apps                  https://www.deta.sh/                      78
+```
+
+## What are foreign data wrappers?
+
+The easiest way to describe foreign data wrappers is by considering UNIX files. A UNIX file isn't always pointing to a local file on your disk. It could be a file stored on NFS, in a remote S3 bucket or even a shim that lets you manipulate a device on your machine.
+
+In UNIX, a file is a pretty strong abstraction that doesn't get broken. An IDE doesn't need to know that the file it's editing is on a remote filesystem. It can work with it by issuing the same ordinary read and write calls. Someone who writes a new filesystem doesn't need to make sure that it's compatible with all existing tools. Instead, they can write a driver that mounts the filesystem to a mountpoint.
+
+PostgreSQL FDWs resemble mounting in that respect. Foreign tables mostly behave like normal tables and can receive the same `SELECT/INSERT/UPDATE/DELETE` queries. Behind the scenes, the wrapper's only job is to emit tuples.
+
+## Why should I use FDWs?
+
+Foreign data wrappers are a great alternative to ETL. Instead of loading data into your warehouse that you might never use, you can mount the remote database and query it on demand.
+
+Because they integrate with the PostgreSQL query planner, FDWs have a decent performance. The FDW can push down qualifiers and even aggregations to the remote database. FDWs can report the rough costs of starting a scan and fetching a tuple back to the query planner. This lets the query planner choose, for example, whether running multiple small single scans or one big one is a better strategy for satisfying a JOIN.
+
+It's straightforward to write your own FDW and the [PostgreSQL documentation](https://www.postgresql.org/docs/12/fdwhandler.html) covers it extensively. The [hello-world FDW](https://github.com/wikrsh/hello_fdw/) that returns "Hello, World" in a table is only a couple hundred lines of C code. If you prefer to focus on development simplicity, you can use Multicorn instead of raw C.
+
+There are plenty of open-source foreign data wrappers available. They let you query other RDBMSs, NoSQL databases, CSV files or column stores. The [PostgreSQL wiki](https://wiki.postgresql.org/wiki/Foreign_data_wrappers) lists some of them.
+
+Using a foreign data wrapper for your database or data source gives you access to a huge ecosystem of software that works with PostgreSQL. We can almost call this a network effect. A new data source that is accessible via an FDW enhances everything that works with PostgreSQL.
+
+## Why use FDWs with Splitgraph?
+
+[Foreign data wrappers](https://www.splitgraph.com/docs/ingesting-data/foreign-data-wrappers/introduction) are one of the ways that Splitgraph aims to make data engineers' and data scientists' work easier.
+
+Splitgraph's [`sgr mount`](https://www.splitgraph.com/docs/sgr/data-import-export/mount) command handles the boilerplate around FDW initialization. This command creates a schema on your engine with foreign tables. Any tool (like [DataGrip/Metabase/dbt](https://www.splitgraph.com/product/splitgraph/integrations)) can query them. Using [`sgr import`](https://www.splitgraph.com/docs/sgr/image-management-creation/import), you can snapshot them into a Splitgraph image. Finally, you can use a [Splitfile](https://www.splitgraph.com/concepts/splitfiles) to build reproducible datasets that derive from the mounted database.
+
+We ship with a few open-source FDWs as well as a couple of our own ones.
+
+`postgres_fdw`, `mysql_fdw` and `mongo_fdw` let you access remote databases directly from Splitgraph. `cstore_fdw` is a columnar store extension that Splitgraph itself uses to store data.
+
+We also have [a fork](https://github.com/splitgraph/Multicorn) of Multicorn that we modified to speed up [layered querying](https://www.splitgraph.com/docs/large-datasets/layered-querying). This lets you query any remote Splitgraph dataset without checking it out or having to download it completely. Like with any other foreign data wrapper, existing tools have no idea that this is happening.
+
+Recently, we wrote a [foreign data wrapper](https://www.splitgraph.com/docs/ingesting-data/socrata) for the [Socrata open data platform](https://www.tylertech.com/products/socrata). It lets you explore any Socrata domain from your SQL client and even use Socrata datasets in Splitfiles.
+
+We index over 40000 Socrata datasets in [our catalog](https://www.splitgraph.com/splitgraph/socrata). Each one is immediately queryable from the Splitgraph engine.
+
+## Conclusion
+
+Foreign data wrappers are a powerful feature than can provide an alternative to ETL jobs. Splitgraph has first-class support for foreign data wrappers that make them easier for anyone to use.
+
+If you're interested in learning more about Splitgraph, you can check our [frequently asked questions](/docs/getting-started/frequently-asked-questions) section, follow our [quick start guide](/docs/getting-started/five-minute-demo) or visit our [website](https://www.splitgraph.com).
