@@ -1,0 +1,225 @@
+export const meta = {
+  id: "makefile",
+  title: "Using Make to build multiple Docker images efficiently",
+  date: "2020-07-06",
+  authors: ["Artjoms Iškovs"],
+  topics: ["technical", "infrastructure"],
+  description:
+    "We begin our overview of Splitgraph's internal build infrastructure by discussing how we build " +
+    "Docker images in development and CI using Make and Docker BuildKit.",
+  related: ["introduction-to-splitgraph"],
+};
+
+## Introduction
+
+At the time of writing, the [Splitgraph registry](/explore) runs using about 60 Docker containers. About half of them we build ourselves in CI. Our stack has code written in C, Haskell, Lua, Python, SQL and TypeScript.
+
+Despite this complexity, any developer is able to build and spin up the whole stack in a matter of minutes. Our continuous integration system can build, test and deploy a change to any part of the codebase in about half an hour.
+
+In this series of blog posts, we'll discuss Splitgraph's internal continuous integration and test infrastructure. We'll start by talking about how we use Make, Docker Compose and BuildKit to efficiently build Docker images.
+
+## Docker
+
+Every Splitgraph service runs in Docker. We use [GitLab CI](https://docs.gitlab.com/ee/ci/introduction/) to build images and push them to the GitLab registry.
+
+We tag images with `$DOCKER_REPO/$image:$DOCKER_TAG`. In CI, the tag is the current commit hash, for example, `registry.gitlab.com/some_repo/some_image:abcdef12`. This lets us easily deploy any commit to production and roll back to previous versions.
+
+However, there is a lot of nuance around using Docker for this.
+
+### BuildKit
+
+[BuildKit](https://docs.docker.com/develop/develop-images/build_enhancements/) is an advanced Docker image build engine. We use BuildKit globally for all builds. Its advantages over normal Docker builds are:
+
+  * Running multi-stage image builds concurrently
+  * More caching methods. For example, referencing a common `apt` cache without having to delete it from the image in the same build step.
+  * Build cache import/export
+
+To use BuildKit, you need to export a couple of environment variables:
+
+```bash
+# Get docker build to use BuildKit
+export DOCKER_BUILDKIT=1
+
+# Get Compose to use CLI to build images (so that it uses BuildKit too)
+export COMPOSE_DOCKER_CLI_BUILD=1
+```
+
+### Custom build contexts
+
+A common issue with Docker builds is the need to include files from the outside of the directory of the Dockerfile.
+
+For example, we keep our Lua codebase in one part of the source tree. Multiple services depend on it. We do not want to run Docker from the root of the codebase, since then every build will send the whole source tree to the Docker daemon.
+
+One potential solution is using a `.dockerignore` file to specify which directories should be excluded from the build context. However, this is not going to work for services that share only some dependencies. One service's excluded directory might be required by another service.
+
+We solve this by having custom build scripts for some images. These scripts use `tar` to package up a build context that includes all files that the Dockerfile needs. The build script then pipes this context to `docker build`:
+
+```
+#!/bin/bash -ex
+
+SRC_DIR_REL="../../../src"
+
+THIS_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
+
+cd "$THIS_DIR"
+
+# Create a custom build context: besides the Dockerfile and
+# configs from this directory, we also want the Lua modules
+# from src.
+
+tar \
+  -cf - . "$SRC_DIR_REL"/luamods \\
+  | docker build -t "$DOCKER_REPO"/openresty:"$DOCKER_TAG" \\
+    $( [[ -n $CACHE_FROM ]] && echo "--cache-from=$CACHE_FROM" ) \\
+    --build-arg BUILDKIT_INLINE_CACHE=1 \\
+    -f Dockerfile -
+```
+
+This lets the Dockerfile reference any file in the source tree.
+
+### Caching
+
+Public GitLab CI instances run every build in a fresh environment. This means that the Docker daemon state doesn't persist between builds. Luckily, BuildKit allows us to use some advanced caching patterns.
+
+The script above passes `--cache-from=some_repo/image:some_tag` to `docker build`. This tells BuildKit which image it can use as Docker cache. At the beginning of a CI run, we run [`docker manifest inspect`](https://docs.docker.com/engine/reference/commandline/manifest_inspect/) to find a suitable tag from a previous build.
+
+Even better, if the cache image isn't on the local Docker daemon, BuildKit will selectively pull parts of it from the registry to perform the build.
+
+On our developer machines, we have a script that sets `$DOCKER_CACHE_REPO` and `$DOCKER_CACHE_TAG` to the last successful GitLab build. This means that any developer can bring their environment up to date quickly.
+
+Note that this requires you to pass `--build-arg BUILDKIT_INLINE_CACHE=1` to the invocation. This gets BuildKit to put cache metadata inside the image. See the [Docker documentation](https://docs.docker.com/engine/reference/commandline/build/#specifying-external-cache-sources) for more information.
+
+### Docker Compose
+
+Splitgraph's codebase contains a few dozen [Docker Compose](https://docs.docker.com/compose/) files. They define various aspects of building and testing the Splitgraph registry. We even use Docker Compose to run Splitgraph in production.
+
+We do this by relying on Compose's less well-known feature: the ability to [combine multiple Compose files](https://docs.docker.com/compose/extends/). For example:
+
+```
+$ docker-compose -f docker-compose.prod.yml \\
+                 -f docker-compose.service_group_1.yml \\
+                 -f docker-compose.service_group_2.yml \\
+                 up -d
+```
+
+We reuse a lot of the same Compose configuration in development, CI and production. This gives us confidence in our deploys. We will discuss this in a future article.
+
+We also use Compose to build services where we do not need a custom build context. Here is an example Compose snippet that builds our base Python toolchain:
+
+```yaml
+  pybase:
+    image: ${DOCKER_REPO}/pybase:${DOCKER_TAG}
+    build:
+      context: ./src/py/base
+      dockerfile: Dockerfile
+      cache_from: ["${DOCKER_CACHE_REPO}/pybase:${DOCKER_CACHE_TAG}"]
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+```
+
+## Bringing it all together: Make
+
+Until now, we only discussed building one image. How do we manage building and keeping up to date thirty of them, especially if some images depend on others?
+
+The answer is Make. Make is a famous UNIX tool which we can easily adapt to being a generic task execution engine.
+
+Make works using file modification timestamps. Every Make rule describes how to build a file:
+
+```makefile
+output.txt: input_1.txt input_2.txt
+	cat input_1.txt input_2.txt > output.txt
+```
+
+If the output is older than any of the inputs, Make rebuilds it.
+
+But Make targets don't have to be actual executables. In our build system, Make targets build Docker images. Every target produces an empty sentinel file in the `.build` directory. Downstream targets can depend on these files. This lets us define dependency trees between images and factor some common functionality out into base images.
+
+For example, we have a `pybase` image that contains common Python tooling. Python services inherit from it and have two stages:
+
+  * Install required Python packages into a virtual environment
+  * Copy the virtual environment into a lightweight `python:slim` image
+
+Our Make tasks also depend on the files that go into the build context of the image. So, if the build context doesn't change, Make doesn't even need to run Docker.
+
+This synergizes well with Git. Git checkouts only bump timestamps of files that have changed. After a checkout, Make will not rebuild images that didn't change between Git commits.
+
+Finally, we use Make for other development tasks which are out of scope for this article:
+
+  * Running integration tests
+  * Starting up the whole stack, including the registry, the website and our [query REST API](/docs/splitgraph-cloud/publish-rest-api), in development
+  * Running code formatters and other utilities
+
+## Sample Makefile
+
+This is a snippet from the actual (now almost 600 lines long) Makefile that we use to build and deploy the Splitgraph registry. It brings all these ideas together:
+
+```makefile
+# Tag images as $DOCKER_REPO/$image:$DOCKER_TAG
+# We override this in CI to push to the GitLab registry directly.
+export DOCKER_REPO ?= splitgraph
+export DOCKER_TAG ?= development
+
+# Cache from the same image in dev.
+# In CI, we detect a suitable image to use as cache.
+export DOCKER_CACHE_REPO ?= $(DOCKER_REPO)
+export DOCKER_CACHE_TAG ?= $(DOCKER_TAG)
+
+# Force to use buildkit for all images and for docker-compose to invoke
+# Docker via CLI (otherwise buildkit isn't used for those images)
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
+
+# BuildKit uses fancy output by default, making CI logs for multiple jobs
+# unreadable.
+export BUILDKIT_PROGRESS=plain
+
+SHELL=/bin/bash
+
+INTERACTIVE:=$(shell [ -t 0 ] && echo 1)
+ifdef INTERACTIVE
+	# For interactive invocations, interleave everything, since otherwise
+	# shell targets (e.g. local_registry.shell) will hang forever not echoing
+	# output.
+	MAKEFLAGS := -j 4 --no-builtin-rules
+else
+	MAKEFLAGS := -j 4 --no-builtin-rules --output-sync=line
+endif
+
+# find invocation that ignores various files we do not want to include
+# in the build context
+FEXCL := -name __pycache__ -prune -o -not -name __pycache__ \\
+		-a -not -path "*.egg-info*" \\
+		-a -not -path "*htmlcov*" \\
+		-a -not -path "*.mypy_cache*" \\
+		-a -not -path "*.pytest_cache*" \\
+		-a -not -path ".coverage" \\
+		-a -not -path "*/node_modules/*" \\
+		-a -not -path "*/.next/*" \\
+		-a -not -path "*/libmdx/*" \\
+		-print
+
+# --- SAMPLE SERVICE ---
+
+.PHONY: service_group.build
+
+# Sample service that uses Docker Compose to build the image
+.build/service_1: $(shell find src/py/service_1 $(FEXCL))
+	docker-compose -f docker-compose.base.build.yml build service_1
+	mkdir -p .build && touch $@
+
+# Sample service that uses a build script
+.build/service_2: $(shell find src/pgexts $(FEXCL))
+	CACHE_FROM=${DOCKER_CACHE_REPO}/service_2:${DOCKER_CACHE_TAG} components/service_2/build.sh
+	mkdir -p .build && touch $@
+
+# PHONY Makefile task that builds both services.
+service_group.build: .build/service_1 .build/service_2
+```
+
+## Conclusion
+
+In this article, we talked about using Makefiles to manage builds of multiple Docker images. We think this approach strikes a good balance between abstracting away complexity and still being extensible enough to handle a diverse codebase.
+
+In the future articles in this series, we'll discuss other aspects of how we test the Splitgraph registry and run it in production.
+
+If you're interested in learning more about Splitgraph, you can check our [frequently asked questions](/docs/getting-started/frequently-asked-questions) section, follow our [quick start guide](/docs/getting-started/five-minute-demo) or visit our [website](https://www.splitgraph.com).

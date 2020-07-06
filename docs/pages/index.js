@@ -70,7 +70,7 @@ const prismTheme = {
   ".keyword,.key,.property,.namespace,.tag,.selector,.doctype": {
     color: "#00ffff",
   },
-  ".builtin,.char,.constant,.function,.class-name": {
+  ".builtin,.char,.constant,.function,.class-name,.symbol": {
     color: "#ffa07a",
   },
   // Used by shell-session
