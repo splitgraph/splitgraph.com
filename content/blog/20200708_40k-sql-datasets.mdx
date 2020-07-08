@@ -1,0 +1,81 @@
+export const meta = {
+  id: "40k-sql-datasets",
+  title: "Querying 40,000+ datasets with SQL",
+  date: "2020-07-08",
+  authors: ["Miles Richardson"],
+  topics: ["technical", "philosophy", "data"],
+  description: "Learn about how Splitgraph indexes over 40,000 datasets from "
+  + "government and public sources using the Socrata API, Splitgraph mounting, and "
+  + "PostgreSQL foreign data wrappers.",
+  related: ["foreign-data-wrappers", "introduction-to-splitgraph"],
+};
+
+## Introduction
+
+[Splitgraph](https://www.splitgraph.com) is a tool and platform for building, versioning, querying and sharing datasets. Inspired by Docker and Git, it works on top of PostgreSQL and integrates seamlessly with anything that uses PostgreSQL. Our [data catalog](https://www.splitgraph.com/explore) already includes over 40,000 datasets from government open data portals, all queryable via SQL.
+
+The Splitgraph catalog classifies these datasets as [external repositories](/docs/splitgraph-cloud/external-repositories). These are different from the default [Splitgraph repositories](/docs/concepts/repositories), which are collections of [Splitgraph images](/docs/concepts/images). Yet Splitgraph allows you to query them in the same way as you do Splitgraph images. For example, you can use SQL to query any repository or [`JOIN` between them](/docs/ingesting-data/socrata#using-metabase-to-join-and-plot-data-from-multiple-data-portals). And every external repository includes an [auto-generated Postgrest API](/docs/splitgraph-cloud/publish-rest-api).
+
+External repositories allow Splitgraph Cloud to index live data without actually ingesting it. This way, you can use the catalog to discover live data. But you only need to ingest it when you're ready to query it, or snapshot it as part of a Splitgraph image.
+
+## Data should be discoverable and composable
+
+Many services exist for cataloging data and making it discoverable. For example, [Google Dataset Search](https://datasetsearch.research.google.com/) provides a nice interface for searching and discovering datasets (in fact, it even includes Splitgraph repositories). The problem is, the data is fragmented and siloed across different data portals. It's nice to be able to search for data and download a CSV file. But most datasets are uninteresting in isolation. The real power comes from the ability to *combine* datasets and query them together.
+
+Splitgraph does not only provide an index for *discovering* open data. It also provides the tools for composing open datasets together. For example, mounting the data from the [Cambridge](https://data.cambridgema.gov) and [Chicago](https://data.cityofchicago.org) data portals is as simple as running two commands:
+
+```shell-session
+$ sgr mount socrata chicago -o '{"domain": "data.cityofchicago.org"}'
+Connecting to remote server...
+Mounting Socrata domain...
+Getting Socrata metadata
+warning: Requests made without an app_token will be subject to strict throttling limits.
+Loaded metadata for 504 Socrata tables
+
+$ sgr mount socrata cambridge -o '{"domain": "data.cambridgema.gov"}'
+Connecting to remote server...
+Mounting Socrata domain...
+Getting Socrata metadata
+warning: Requests made without an app_token will be subject to strict throttling limits.
+Loaded metadata for 137 Socrata tables
+```
+
+At this point, all the datasets in these two data portals are available for querying. You can query them in isolation, or you can query them together. For example, you can compare daily COVID cases in Chicago and Cambridge with a standard `JOIN` query:
+
+```sql
+SELECT
+    cambridge_cases.date AS date,
+    chicago_cases.cases_total AS chicago_daily_cases,
+    cambridge_cases.new_positive_cases AS cambridge_daily_cases
+FROM
+    chicago.covid19_daily_cases_and_deaths_naz8_j4nc chicago_cases
+FULL OUTER JOIN
+    cambridge.covid19_cumulative_cases_by_date_tdt9_vq5y cambridge_cases
+ON
+    date_trunc('day', chicago_cases.lab_report_date) = cambridge_cases.date
+ORDER BY date ASC;
+```
+
+(For more details and in-depth instructions, see the [Socrata FDW documentation](/docs/ingesting-data/socrata).)
+
+Note that this is not limited to combining multiple public datasets. Often, the work of a data analyst includes combining internal data with public or licensed datasets from external vendors. The same semantics of "mounting" data in Splitgraph apply.
+
+## Mounting vs. Cloning Data
+
+With Splitgraph, there are two primary ways to ingest data: cloning it or mounting it. ["Cloning" (and checking-out)](/docs/working-with-data/clone-vs-checkout) an image means downloading a versioned data image, which is a snapshot of a database comprised of delta-compressed diffs. For example, the result of running a Splitfile is an image. On the other hand, "mounting" means establishing a connection to a live data source. The term comes from the idea of "mounting" a filesystem. A mounted table uses a [foreign data wrapper](/docs/ingesting-data/foreign-data-wrappers/introduction) (FDW), and you don't ingest data from it until you query it. For example, the [Socrata FDW](/docs/ingesting-data/socrata) translates SQL queries to [SoQL queries](https://dev.socrata.com/docs/queries/) and forwards them to the Socrata server.
+
+Mounting is the key abstraction that allows Splitgraph Cloud to index external repositories with features like an auto-generated REST API. On the backend, the "materialization cluster" (a subject for a later post) uses the Splitgraph library and Socrata mount handler to mount repositories on demand. Then it exposes the mounted schemata to a customized version of [Postgrest](http://postgrest.org/) which creates the API. Separately, a periodic Airflow task queries the Socrata metadata API to discover and index over 40,000 repositories. Conveniently, the same Socrata software powers over 200 government open-data portals, so one mount handler provides a large catalog of useful live data.
+
+## Avoiding the pull of Data Gravity
+
+Mounting is a powerful abstraction because it allows you to interact directly with upstream data sources, avoiding the need for ETL. In 2010, GE Engineer Dave McCrory coined the term "[data gravity](https://datagravitas.com/2010/12/07/data-gravity-in-the-clouds/)." In his blog post, he observed that "data if large enough can be virtually impossible to move." Splitgraph, as a data versioning solution, should work with all your data, not just the subsets of it that you can move. This is why mounting data is core capability of Splitgraph. Traditional ETL tools force you to ingest or duplicate your data before you can interact with it. With Splitgraph, you only need to pull upstream data into your images at query time. This abstraction allows incremental adoption and quick experimentation; there is no need to move your data warehouse to start using Splitgraph. Instead, you only need to setup an FDW.
+
+(For more details on mounting data, FDWs and custom mount handlers, read our recent ["foreign data wrappers" blog post](/blog/foreign-data-wrappers).)
+
+Note that the idea of data gravity applies to versioned data images (which you clone) as much as it does to upstream, live data (which you mount). What if you want to import only a subset of data from a large image? This is the use case for [layered querying](/docs/large-datasets/layered-querying), which allows you to "check out" an image without downloading it. Instead, Splitgraph creates an FDW that queries only the "layers" of the image necessary to satisfy the query. You can think of layered querying like a mount handler for Splitgraph images.
+
+## Looking to the future
+
+At the moment, Splitgraph Cloud only uses the [Socrata FDW](/docs/ingesting-data/socrata) as a mount handler for external repositories, since the [Socrata data platform](https://www.tylertech.com/products/socrata) powers most government open-data portals.  In the future, it could use additional mount handlers to provide access to a wider array of upstream sources. To create an external repository, Splitgraph just needs a suitable FDW and a way to index the upstream data. For example, it's easy to imagine indexing Google BigQuery datasets. More interestingly, an on-premise version of Splitgraph could index private databases or data warehouses behind a firewall.
+
+Our goal for Splitgraph is to make tools for data science as easy and pleasurable to use as tools for coding. That's why our main philosophy is to "stay out of the way." Mounting data is a great example of this philosophy in action. Why force your data warehouse to talk to Splitgraph, when Splitgraph can talk to your data warehouse?
