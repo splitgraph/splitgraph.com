@@ -1,0 +1,166 @@
+export const meta = {
+  id: "makefile",
+  title: "Write tests. Not too many. Mostly integration.",
+  date: "2020-07-08",
+  authors: ["Artjoms Iškovs"],
+  topics: ["technical", "infrastructure"],
+  description:
+    "We continue our overview of Splitgraph's internal build infrastructure by talking about " +
+    "how we run end-to-end integration tests. We also discuss using Jinja to generate configuration " +
+    "and inject secrets into our components.",
+  related: ["makefile"],
+};
+
+The [Splitgraph registry](https://www.splitgraph.com/explore) is a complex piece of software that consists of about 60 containers that use a dozen programming languages.
+
+Besides application code, our business logic also lives in multiple configuration files (Varnish, NGINX, HAProxy...) and SQL functions.
+
+We would like to have confidence that we exercise our changes while still maintaining the freedom to make big architectural changes. This is why we have taken a liking to loose end-to-end integration tests.
+
+In this series of articles, we're discussing Splitgraph's internal build, test and deploy infrastructure. Today, we'll be talking about tests.
+
+## GitLab CI
+
+We use GitLab CI for our builds and tests. We talked about builds in the previous article.
+
+[GitLab CI](https://docs.gitlab.com/ee/ci/) allows us to provide a Docker image to run CI in. However, we want to run our integration tests _in_ Docker as well. So, we use a Docker-in-Docker image as the base for our CI image. There aren't many dependencies on top of that:
+
+```dockerfile
+FROM docker:stable-dind
+
+ENV GLIBC_VERSION="2.27-r0"
+
+# use docker-compose that supports Buildkit builds
+ENV DOCKER_COMPOSE_VERSION="1.25.0"
+
+RUN apk add --no-cache \
+    # bash for buildscripts, gettext for envsubst, make to build the thing,
+    # openssh-client to deploy it
+    curl bash gettext make openssh-client git jq \
+    # libc -- required for docker-compose
+    && wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \
+    && wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk \
+    && apk add glibc-${GLIBC_VERSION}.apk \
+    && wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk \
+    && apk add glibc-bin-${GLIBC_VERSION}.apk \
+    # docker-compose itself
+    && wget https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` -O docker-compose \
+    && chmod +x docker-compose \
+    && mv docker-compose /usr/local/bin/docker-compose
+
+RUN wget -q -O mkcert https://github.com/FiloSottile/mkcert/releases/download/v1.4.0/mkcert-v1.4.0-linux-amd64 \
+    && chmod +x mkcert \
+    && mv mkcert /usr/bin/mkcert
+
+RUN apk add libcap
+
+ENV DOCKER_TLS_CERTDIR=
+
+COPY builder-entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["/usr/local/bin/builder-entrypoint.sh"]
+CMD []
+```
+
+The only dependencies for running the full test suite are:
+
+  * Docker and Docker Compose
+  * Make
+  * mkcert to generate self-signed SSL certificates
+
+Everything else in this image (gettext, openssh-client, jq) is used for deployment.
+
+## Overview of tests
+
+With these dependencies, anyone run the full test suite with a single command, `make test`. We also have Make test targets for specific parts of the stack. Each of these targets is self contained:
+
+  * builds the required images
+  * starts them with Docker Compose
+  * runs the test suite in a separate container
+
+Most of our tests are written in Python and use the [Pytest](https://docs.pytest.org/en/latest/) framework. We have some unit tests for our Lua code too where we use [Busted](https://olivinelabs.com/busted/).
+
+### End-to-end tests
+
+A lot of our business logic is spread around multiple configuration files, third-party components or SQL code. We even consider the way we connect components together via Docker Compose an important part of our infrastructure that we want to automatically test.
+
+As an example, we have a [REST API](https://www.splitgraph.com/docs/splitgraph-cloud/publish-rest-api) that we make available for every dataset pushed to Splitgraph. It consists of multiple components:
+
+  * An instance of [Openresty](https://openresty.org/en/) that intercepts HTTP requests and sends a request to a...
+  * ...component that mounts the dataset into a temporary schema using [layered querying](https://www.splitgraph.com/docs/large-datasets/layered-querying)...
+  * Openresty rewrites the HTTP request to be in terms of this temporary schema and forwards it to...
+  * ...custom version of [PostgREST](https://postgrest.org/en/latest/) that can perform introspection and schema discovery on the fly.
+
+The only way to be sure that this kind of setup works correctly is end-to-end tests.
+
+We also have a suite of "acceptance" tests that run the public Splitgraph client against the registry. They exercise the whole Splitgraph Cloud stack like a normal user would:
+
+  * registering on the registry
+  * pulling a data image
+  * making changes to it
+  * pushing it back
+  * querying it via our REST API
+
+### Pytest
+
+We use Pytest to exercise even the components that aren't written in Python. This is because of its versatility and support for [fixtures](https://docs.pytest.org/en/stable/fixture.html).
+
+For example, we have fixtures that set up some users and some repositories. These fixtures run against the dev registry. They're reusable and make it easy for anyone to exercise their new feature.
+
+While we sometimes use mocks, we're not big fans of them. To us, the best way to test something that uses a database connection is to actually spin up a database and run code against it. This is especially true because a lot of our code is inside SQL functions.
+
+### Dev-prod parity
+
+Our integration tests run against a stack that is _very_ similar to what we run in production. We even use the same Docker Compose files and run the same configuration generation.
+
+This eliminates a whole class of problems where production containers have slightly different configuration or are mis-wired.
+
+We try to keep development and production containers the same. In particular, we deliberately build production Python containers to use editable installs for the Python package. In development, we bind mount Python code into the container. This lets us iterate faster while still maintaining dev-prod parity.
+
+## Configuration generation
+
+The kinds of tests we want to run can touch many containers, including HAProxy, our authentication gateway or our registry. Running these tests requires a fundamentally different approach to configuration generation.
+
+### Jinja
+
+We use [Jinja templates](https://jinja.palletsprojects.com/en/2.11.x/) to build configuration files for all services. This includes third-party ones like HAProxy or Varnish.
+
+We made a small change to Jinja's templating to allow for secret generation. Here's an example template for an `.sgconfig` file that we use for Splitgraph instances powering our [REST API](https://www.splitgraph.com/docs/splitgraph-cloud/publish-rest-api):
+
+```ini
+[defaults]
+...
+SG_ENGINE_DB_NAME=splitgraph
+SG_ENGINE_USER=sgr
+SG_ENGINE_PWD={{ password.engine.sgr }}
+SG_ENGINE_ADMIN_USER=sgr
+SG_ENGINE_ADMIN_PWD={{ password.engine.sgr }}
+SG_ENGINE_POSTGRES_DB_NAME=postgres
+SG_META_SCHEMA=splitgraph_meta
+
+[remote: registry]
+SG_ENGINE_HOST=haproxy
+SG_ENGINE_PORT=5431
+SG_IS_REGISTRY=true
+SG_ENGINE_USER=registry_api_user
+SG_ENGINE_PWD={{ password.registry.api_user }}
+```
+
+When Jinja sees a variable like `{{ password.engine.sgr }}`, it first checks a special `config.json` file to see if it exists in there. If not, it generates a random password and writes it to that file. All other configuration files that reference this variable get the same password.
+
+We use this `config.json` file to store other configuration relevant to the deployment. For example, a developer running the registry on their own machine can disable the monitoring stack with a single flag. This removes all monitoring backends from the HAProxy config.
+
+The disadvantage of this approach is that all secrets are in a single file. However, having this kind of setup in place means that it's easy for us to add an extra database role or an extra service. We can rotate credentials easily when needed. We're also free to secure interactions even between internal services.
+
+### CI and production
+
+We use this workflow in CI as well. The configurator generates all configuration files from these templates. We use random passwords and throw them away at the end of the CI run. Because we run end-to-end tests, this can quickly identify issues with misconfigured roles or missing credentials.
+
+In production, we bind mount these configuration files into the containers. This allows us to avoid rebuilds for hotfixes to configuration. For example, if we need to change some HAProxy configuration on the fly, we can do that, then send a `SIGHUP` signal to the container. This will reload the configuration file without downtime.
+
+## Conclusion
+
+In this article, we talked about how we approach testing at Splitgraph. Instead of relying on mocks, we try to test the whole stack as it would run in production, using powerful tools like Docker Compose.
+
+In the next article in this series, we'll talk about how we run the Splitgraph registry in production and how we deploy and monitor it.
+
+If you're interested in learning more about Splitgraph, you can check our [frequently asked questions](/docs/getting-started/frequently-asked-questions) section, follow our [quick start guide](/docs/getting-started/five-minute-demo) or visit our [website](https://www.splitgraph.com).
