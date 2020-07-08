@@ -27,6 +27,17 @@ const withBlogLayout = ({ MdxPage, item: { metadata } }) => {
             a: {
               variant: "links.primary",
             },
+            "section > p a": {
+              variant: "links.primary",
+              textDecoration: "underline",
+              ":hover": {
+                borderBottom: "1px solid",
+                borderBottomColor: "primary",
+              },
+            },
+            img: {
+              maxWidth: "100%",
+            },
           },
           "nav.toc": {
             display: "none",
