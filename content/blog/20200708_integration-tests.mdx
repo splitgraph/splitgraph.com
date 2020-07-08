@@ -15,13 +15,13 @@ The [Splitgraph registry](https://www.splitgraph.com/explore) is a complex piece
 
 Besides application code, our business logic also lives in multiple configuration files (Varnish, NGINX, HAProxy...) and SQL functions.
 
-We would like to have confidence that we exercise our changes while still maintaining the freedom to make big architectural changes. This is why we have taken a liking to loose end-to-end integration tests.
+We would like to have confidence that we exercise our code while still maintaining the freedom to make big architectural changes. This is why we have taken a liking to loose end-to-end integration tests.
 
 In this series of articles, we're discussing Splitgraph's internal build, test and deploy infrastructure. Today, we'll be talking about tests.
 
 ## GitLab CI
 
-We use GitLab CI for our builds and tests. We talked about builds in the previous article.
+We use GitLab CI for our builds and tests. We talked about builds in the [previous article](/blog/makefile).
 
 [GitLab CI](https://docs.gitlab.com/ee/ci/) allows us to provide a Docker image to run CI in. However, we want to run our integration tests _in_ Docker as well. So, we use a Docker-in-Docker image as the base for our CI image. There aren't many dependencies on top of that:
 
