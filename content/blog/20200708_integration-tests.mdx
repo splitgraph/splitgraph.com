@@ -33,23 +33,23 @@ ENV GLIBC_VERSION="2.27-r0"
 # use docker-compose that supports Buildkit builds
 ENV DOCKER_COMPOSE_VERSION="1.25.0"
 
-RUN apk add --no-cache \
+RUN apk add --no-cache \\
     # bash for buildscripts, gettext for envsubst, make to build the thing,
     # openssh-client to deploy it
-    curl bash gettext make openssh-client git jq \
+    curl bash gettext make openssh-client git jq \\
     # libc -- required for docker-compose
-    && wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \
-    && wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk \
-    && apk add glibc-${GLIBC_VERSION}.apk \
-    && wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk \
-    && apk add glibc-bin-${GLIBC_VERSION}.apk \
+    && wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \\
+    && wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk \\
+    && apk add glibc-${GLIBC_VERSION}.apk \\
+    && wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk \\
+    && apk add glibc-bin-${GLIBC_VERSION}.apk \\
     # docker-compose itself
-    && wget https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` -O docker-compose \
-    && chmod +x docker-compose \
+    && wget https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` -O docker-compose \\
+    && chmod +x docker-compose \\
     && mv docker-compose /usr/local/bin/docker-compose
 
-RUN wget -q -O mkcert https://github.com/FiloSottile/mkcert/releases/download/v1.4.0/mkcert-v1.4.0-linux-amd64 \
-    && chmod +x mkcert \
+RUN wget -q -O mkcert https://github.com/FiloSottile/mkcert/releases/download/v1.4.0/mkcert-v1.4.0-linux-amd64 \\
+    && chmod +x mkcert \\
     && mv mkcert /usr/bin/mkcert
 
 RUN apk add libcap
