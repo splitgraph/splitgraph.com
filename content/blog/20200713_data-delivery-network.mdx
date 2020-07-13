@@ -1,12 +1,12 @@
 export const meta = {
   id: "data-delivery-network",
-  title: "Throwing away the backend: Towards a data delivery network",
+  title: "Towards a data delivery network",
   date: "2020-07-13",
   authors: ["Artjoms Iškovs"],
   topics: ["technical", "infrastructure", "philosophy"],
   description:
     "We discuss the trends of serverless and edge computing, talk about why our SQL server is open " +
-    "to the public and propose the idea of a data delivery network",
+    "to the public and propose the idea of a data delivery network.",
   related: ["introduction-to-splitgraph"],
 };
 
@@ -14,17 +14,15 @@ Serverless and edge computing have allowed application developers to bring their
 
 Instead of maintaining a group of servers in a single location, developers can let companies like Cloudflare, Fastly or Akamai handle their content delivery.
 
-With functions as a service, companies pay for what they use. They can avoid having to provision a server that stays idle most of the time.
+With [Function as a service](https://en.wikipedia.org/wiki/Function_as_a_service), companies pay for what they use. They can avoid having to provision a server that stays idle most of the time.
 
 In this article, we want to talk about these trends and how we can apply them to databases. We'll also talk about our decision to make the API for our Splitgraph registry work over a public SQL connection. We'll use this experience to propose the idea of a **data delivery network**.
 
 ## How content delivery networks work
 
-Content delivery networks provide a straightforward way to scale a read-only HTTP layer. They use existing HTTP cache semantics like the Cache-Control header.
+Content delivery networks provide a straightforward way to scale a read-only HTTP layer. They use existing HTTP cache semantics like the Cache-Control header. The developer only needs to point their DNS records to use the CDN's nameservers. The CDN handles everything else for them. It has points of presence around the world and peering agreements with other ISPs. It can selectively cache data, handle DDoS protection and offer extra services on top.
 
-The developer only needs to point their DNS records to use the CDN's nameservers. The CDN handles everything else for them. It has points of presence around the world and peering agreements with other ISPs. It can selectively cache data, handle DDoS protection and offer extra services on top.
-
-The value proposition behind edge computing is straightforward. For a lot of companies, scaling compute is not their core competency. They can spend time and money provisioning servers and configuring something like Varnish. Or, they can use services that will handle scaling and read replication for them.
+The value proposition behind edge computing is straightforward. For a lot of companies, scaling compute is not their core competency. They can spend time and money provisioning servers and configuring something like Varnish. Or, they can use services that will handle scaling and caching for them.
 
 However, applications still need to run SQL queries. A CDN doesn't completely help an application that performs client-side rendering. The database becomes the next performance bottleneck in scaling a service.
 
@@ -68,7 +66,7 @@ For more complex logic, we wrote it in higher-level languages like [PL/Python](h
 
 We solved the problem of **multiplexing and authorization** by adding [PgBouncer](https://www.pgbouncer.org/), a connection pooler, in front of our database. Our fork of PgBouncer injects a signed cookie into every transaction as a local variable. Downstream procedures validate this cookie for authentication and authorization. This lets us decouple PostgreSQL users from application users. Multiple inbound sessions can use the same connection.
 
-Our fork of PgBouncer even inspects queries on the fly and firewalls them. This makes sure that the client can only call Splitgraph SQL API functions.
+Our fork of PgBouncer even inspects queries on the fly and filters them. This makes sure that the client can only call Splitgraph SQL API functions.
 
 For the web frontend at [www.splitgraph.com](https://www.splitgraph.com/), we use Postgraphile. Besides not having to write an extra API server, it lets us generate TypeScript client code.
 
@@ -80,7 +78,7 @@ Here's a quick sketch of what a DDN's administration interface would look like:
 
 ![](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/blog/images/20200713-data-delivery-network/admin-panel.png)
 
-To use a DDN, you would create a read-only account on your database and give the DDN the credentials. It will then make a few services available.
+To use a DDN, a developer would create a read-only account on their database and give the DDN the credentials. It will then make a few services available:
 
 The DDN will create an **SQL endpoint**. Any existing SQL client or application will be able to connect to it and run queries.
 
@@ -90,7 +88,7 @@ The DDN will be able to **cache** read-only SQL transactions with configurable p
 
 The client code doesn't need to be trusted. The DDN can intercept and **firewall** queries or **rate limit** them. To simplify migrations, the DDN can **rewrite** queries on the fly before forwarding them.
 
-The DDN's work doesn't need to stop at handling queries. It can also manage **data imports and exports**. For example, it can make data from other services available to clients. Or, it can export data to Google Sheets or your data warehouse.
+The DDN's work doesn't need to stop at handling queries. It can also manage **data imports and exports**. For example, it can make data from other services available to clients. Or, it can export data to Google Sheets or a data warehouse.
 
 In the case of Splitgraph, we envision you being able to even run a `JOIN` across a public Splitgraph image and your private data.
 
