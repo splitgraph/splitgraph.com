@@ -1,7 +1,7 @@
 export const meta = {
   id: "dbt",
-  title: "Cross-database transforms and other uses for Splitgraph and dbt",
-  date: "2020-07-14",
+  title: "Splitgraph / dbt: versioning, cross-database transforms, and other use cases",
+  date: "2020-07-13",
   authors: ["Artjoms Iškovs"],
   topics: ["technical", "integrations"],
   description:
@@ -25,7 +25,7 @@ In this article, we'll talk about how Splitgraph can enhance dbt by:
 
 To run these examples, you need dbt, Docker and Docker Compose.
 
-You also need to have Splitgraph installed. We offer [installation instructions](/docs/getting-started/installation) for the three major operating systems, using PyPI, Git or as a single self-contained binary.
+You also need to have Splitgraph installed. We offer [installation instructions](/docs/getting-started/installation) for the three major operating systems, using PyPI, Git, or as a single self-contained binary.
 
 If you have a working Python environment, the easiest way to get dbt and Splitgraph is by running
 
@@ -37,28 +37,28 @@ The source code for these examples is located [on our GitHub](https://github.com
 
 ## Versioning dbt models
 
-Splitgraph engine is based on PostgreSQL and its versioning runs on top of the SQL standard, using audit triggers. This means that any PostgreSQL client can interact with it.
+The [Splitgraph engine](/docs/architecture/splitgraph-engine) is based on PostgreSQL. Splitgraph's versioning runs on top of the SQL standard, using audit triggers. This means that any PostgreSQL client can interact with Splitgraph.
 
-This example runs dbt's [Jaffle Shop](https://github.com/fishtown-analytics/jaffle_shop) sample project on top of Splitgraph, switching between different versions of the source datasets and examining their effects on the built dbt model.
+This example runs dbt's [Jaffle Shop](https://github.com/fishtown-analytics/jaffle_shop) sample project on top of Splitgraph, switching between different versions of the source dataset and examining their effects on the built dbt model.
 
 The code for this example is in the [`examples/dbt`](https://github.com/splitgraph/splitgraph/tree/master/examples/dbt) subdirectory. We will be running all commands relative to it.
 
 ### Preparing data for dbt
 
-Start the Compose stack with the Splitgraph engine and initialize the engine:
+Start the Compose stack with the Splitgraph engine and initialize it:
 
 ```shell-session
 $ docker-compose up -d
 $ sgr init
 ```
 
-Clone the project:
+Clone the Jaffle Shop project:
 
 ```shell-session
 $ git clone https://github.com/fishtown-analytics/jaffle_shop.git
 ```
 
-First, ingest the CSV data from the example into Splitgraph:
+Ingest the [CSV data](https://github.com/fishtown-analytics/jaffle_shop/tree/master/data) from the example into Splitgraph:
 
 ```shell-session
 $ sgr init raw_jaffle_shop
@@ -105,7 +105,7 @@ Objects:
   o7e3ffa6e2141edde30498e4c4a6a2b510d8b7e479081aafe154d31ca4436bd
 ```
 
-The status column in the `raw_orders` table in the initial dataset can change through time. Pretend that this has happened and that some jaffles were returned.
+The `status` column in the `raw_orders` table in the initial dataset can change through time. Pretend that this has happened and that some jaffles were returned.
 
 ```shell-session
 $ sgr sql "UPDATE raw_jaffle_shop.orders SET status = 'returned' WHERE status = 'return_pending' OR order_date = '2018-03-26'"
@@ -132,7 +132,7 @@ orders: added 5 rows, removed 5 rows.
 payments: no changes.
 ```
 
-Commit this dataset and check out the original data:
+Commit this dataset and check out the original image:
 
 ```shell-session
 $ sgr commit raw_jaffle_shop
@@ -140,7 +140,7 @@ $ sgr tag raw_jaffle_shop asof_20180410
 $ sgr checkout raw_jaffle_shop:asof_20180409
 ```
 
-We now have two versions of the original Jaffle shop dataset. Now, let's run the example dbt model on both of them.
+We now have two versions of the original Jaffle shop dataset. Let's run the example dbt model on both of them.
 
 ### Running the dbt model
 
@@ -195,7 +195,9 @@ Let's check out the new version of the initial data and run dbt against it as we
 
 ```shell-session
 $ sgr checkout raw_jaffle_shop:asof_20180410
-$ cd jaffle_shop && dbt run --profiles-dir ../.dbt
+$ cd jaffle_shop
+jaffle_shop $ dbt run --profiles-dir ../.dbt
+jaffle_shop $ cd ..
 ```
 
 Snapshot the new output to make another Splitgraph image.
@@ -209,17 +211,17 @@ We now have two versions of the source and the target dataset.
 
 ```shell-session
 $ sgr log -t raw_jaffle_shop
-$ sgr log -t dbt_jaffle
-
 0000000000 2020-06-23 20:53:40
  └ 3acc047a24 [asof_20180409] 2020-06-23 20:53:42
    └ 32c7819c9d [HEAD, asof_20180410, latest] 2020-06-23 20:53:45
+
+$ sgr log -t dbt_jaffle
 0000000000 2020-06-23 20:53:48
  └ 98478a40d1 [asof_20180409] 2020-06-23 20:53:53
    └ dce4e970fa [HEAD, asof_20180410, latest] 2020-06-23 20:53:58
 ```
 
-Using sgr diff, you can inspect the difference between the two datasets that dbt built.
+Using [`sgr diff`](/docs/sgr/image-information/diff), you can inspect the difference between the two datasets that dbt built.
 
 ```shell-session
 $ sgr diff dbt_jaffle asof_20180409 asof_20180410 --verbose
@@ -262,17 +264,21 @@ This example will show you how to run dbt against a Splitgraph engine to join da
 
 The code for this example is in the [`examples/dbt_two_databases`](https://github.com/splitgraph/splitgraph/tree/master/examples/dbt_two_databases) subdirectory.
 
-The Docker Compose stack contains:
+The [Docker Compose stack](https://github.com/splitgraph/splitgraph/blob/master/examples/dbt_two_databases/docker-compose.yml) for this example contains:
 
   * a [Splitgraph engine](/docs/architecture/splitgraph-engine)
   * a PostgreSQL instance with [some sample data](https://github.com/splitgraph/splitgraph/tree/master/examples/dbt_two_databases/splitgraph/postgresql/setup.sql)
   * a MongoDB instance with [more sample data](https://github.com/splitgraph/splitgraph/tree/master/examples/dbt_two_databases/splitgraph/mongodb/setup.js)
 
-We will first "mount" the two databases into the Splitgraph engine and then run a [dbt model](https://github.com/splitgraph/splitgraph/tree/master/examples/dbt_two_databases/models/splitgraph/join_two_dbs.sql). The model will run an SQL JOIN between the data in the two databases.
+Here's an architecture diagram of this setup:
+
+![](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/blog/images/20200713-dbt/join-across-two-databases.png)
+
+We will first "mount" the two databases into the Splitgraph engine and then run a [dbt model](https://github.com/splitgraph/splitgraph/tree/master/examples/dbt_two_databases/models/splitgraph/join_two_dbs.sql). The model will run an SQL `JOIN` between the data in the two databases.
 
 ### Mounting the databases into the Splitgraph engine
 
-First, start the stack and test that Splitgraph and dbt can connect to the Splitgraph engine:
+First, start the stack and test that Splitgraph and dbt can connect to it:
 
 ```shell-session
 $ docker-compose up -d
@@ -333,7 +339,7 @@ $ sgr sql "SELECT * FROM order_data.orders"
 5f0c736093455fe43523115b  Alice  3  True   Will use in salad, great fruit!
 ```
 
-Note that `mongo_fdw` adds the Mongo object ID column as the first column of all tables. This will not be a problem for us.
+Note that `mongo_fdw` adds the Mongo object ID column as the first column of all tables.
 
 ### Running the dbt model
 
@@ -389,7 +395,7 @@ Even without any extra support, you can use Splitgraph images in your dbt models
 
 For example, you can [check out](/docs/sgr/image-management-creation/checkout) a Splitgraph image into a schema and run dbt against that schema. You can even use [layered querying](/docs/large-datasets/layered-querying) to let dbt reference Splitgraph images that are hosted on other Splitgraph registries without having to clone them.
 
-In addition, you can mount [Socrata datasets](/docs/ingesting-data/socrata) on your Splitgraph engine, letting dbt access over 40000 open government datasets. For example:
+In addition, you can mount [Socrata datasets](/docs/ingesting-data/socrata) on your Splitgraph engine. This lets dbt access over 40,000 open government datasets. For example:
 
 ```shell-session
 $ sgr mount socrata chicago_data -o @- <<EOF
@@ -403,13 +409,13 @@ You can now reference the `chicago_data.fire_stations` table from dbt to query t
 
 ### Splitgraph dbt adapter
 
-Splitgraph also offers a [dbt adapter](https://github.com/splitgraph/splitgraph/tree/master/examples/dbt_adapter). It lets you reference Splitgraph images directly from your dbt model. This takes care of downloading the required parts of the Splitgraph image in the background.
+Splitgraph also has a [dbt adapter](https://github.com/splitgraph/splitgraph/tree/master/examples/dbt_adapter). It lets you reference Splitgraph images directly from your dbt model. This takes care of downloading the required parts of the Splitgraph image in the background.
 
 This example will show you how to install the adapter and run a dbt model that uses Splitgraph data.
 
 Unlike the previous examples, you will need to bring your own Splitgraph engine. You can create one with `sgr engine add` or start it with `sgr engine start`. Check the Splitgraph [engine management documentation](/docs/sgr/engine-management/engine-add) for more information.
 
-Install the adapter. From the [`examples/dbt_adapter`](https://github.com/splitgraph/splitgraph/tree/master/examples/dbt_adapter) directory, run:
+Install the adapter by running:
 
 ```shell-session
 $ pip install dbt-splitgraph
@@ -432,7 +438,7 @@ default:
       threads: 4
 ```
 
-Make sure that the engine is initialized and that your `.sgconfig` file is either in `~/.splitgraph/.sgconfig` or pointed to by the `SG_CONFIG_FILE` environment variable. If required, also log into the Splitgraph registry or your custom remote with Splitgraph images using `sgr cloud login` or `sgr cloud login-api`.
+Make sure that you've initialized the engine (`sgr init`). Also make sure that your `.sgconfig` file is either in `~/.splitgraph/.sgconfig` or pointed to by the `SG_CONFIG_FILE` environment variable. If required, also log into the Splitgraph registry or your custom remote with Splitgraph images using `sgr cloud login` or `sgr cloud login-api`.
 
 You can now reference Splitgraph images in your dbt models by schema-qualifying tables with the full Splitgraph image path (you can use hashes or tags).
 
