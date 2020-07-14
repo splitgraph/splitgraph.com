@@ -22,7 +22,7 @@ In this article, we want to talk about these trends and how we can apply them to
 
 Content delivery networks provide a straightforward way to scale a read-only HTTP layer. They use existing HTTP cache semantics like the Cache-Control header. The developer only needs to point their DNS records to use the CDN's nameservers. The CDN handles everything else for them. It has points of presence around the world and peering agreements with other ISPs. It can selectively cache data, handle DDoS protection and offer extra services on top.
 
-The value proposition behind edge computing is straightforward. For a lot of companies, scaling compute is not their core competency. They can spend time and money provisioning servers and configuring something like Varnish. Or, they can use services that will handle scaling and caching for them.
+The value proposition behind edge computing is simple. For a lot of companies, scaling compute is not their core competency. They can spend time and money provisioning servers and configuring something like Varnish. Or, they can use services that will handle scaling and caching for them.
 
 However, applications still need to run SQL queries. A CDN doesn't completely help an application that performs client-side rendering. The database becomes the next performance bottleneck in scaling a service.
 
