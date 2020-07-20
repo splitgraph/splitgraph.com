@@ -1,6 +1,7 @@
 // @jsx jsx
 import { jsx } from "theme-ui";
 import React from "react";
+import { DocSearch } from "@splitgraph/docs/components";
 import withHolyGrailLayout from "./withHolyGrailLayout";
 
 const getDocsSEO = ({ currentURL, meta, SEO_BASE_URL }) => {
@@ -31,4 +32,5 @@ export default withHolyGrailLayout({
   titleTemplate: "%s - Documentation | Splitgraph",
   getSEO: getDocsSEO,
   renderDocsHeaderLink: false,
+  middleHeader: <DocSearch />,
 });

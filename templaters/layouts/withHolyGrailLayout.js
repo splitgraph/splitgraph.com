@@ -20,7 +20,7 @@ import {
 } from "@splitgraph/design";
 
 import { BaseLayout } from "@splitgraph/design/Layout";
-import { Link } from "@splitgraph/docs/components";
+import { Link, DocSearch } from "@splitgraph/docs/components";
 
 import { Footer } from "@splitgraph/tdesign";
 
@@ -33,6 +33,7 @@ const withHolyGrailLayout = ({
   renderTitleHeading = true,
   renderInterPageNav = true,
   renderDocsHeaderLink = true,
+  middleHeader = null,
   getSEO = ({ currentURL, meta, contentTree, SEO_BASE_URL }) => ({}),
 }) => ({ MdxPage, meta = {}, contentTree }) => {
   const HolyGrailSEO = ({ currentURL }) => {
@@ -132,7 +133,8 @@ const withHolyGrailLayout = ({
                 Splitgraph
               </a>
             </Box>
-            <Box sx={{ color: "muted" }}>
+            <Box sx={{ color: "muted", display: "flex", alignItems: "center" }}>
+              {middleHeader}
               <Link href="/explore">Explore Data</Link>
               {renderDocsHeaderLink ? (
                 <>

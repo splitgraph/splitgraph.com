@@ -40,6 +40,16 @@ const nextConfig = {
     MATOMO_JS_FILE: "",
     MATOMO_PHP_FILE: "",
     MATOMO_SITE_ID: "1",
+
+    DOCSEARCH_JS_URL:
+      process.env.DOCSEARCH_JS_URL ||
+      "https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js",
+    DOCSEARCH_CSS_URL:
+      process.env.DOCSEARCH_CSS_URL ||
+      "https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css",
+    DOCSEARCH_PUBLIC_CLIENT_API_KEY:
+      process.env.DOCSEARCH_PUBLIC_CLIENT_API_KEY,
+    DOCSEARCH_INDEX_NAME: process.env.DOCSEARCH_INDEX_NAME || "splitgraph",
   },
   resolve: {
     alias: aliasConfig,
