@@ -22,6 +22,8 @@ jobs:
         env:
           YARN_CACHE_FOLDER: /home/runner/yarn-cache
       - run: ./.ci/build.sh
+        env:
+          DOCSEARCH_PUBLIC_CLIENT_API_KEY: ${{ secrets.DOCSEARCH_PUBLIC_CLIENT_API_KEY }}
       - run: ./.ci/deploy_preview.sh
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
