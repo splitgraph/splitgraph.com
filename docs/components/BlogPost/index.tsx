@@ -7,3 +7,5 @@ import formatDate from "./formatDate";
 export { formatDate };
 export { BlogTopicLink } from './BlogTopicLink';
 
+export { BlogPostMarketingNotice } from './BlogPostMarketingNotice';
+

@@ -16,3 +16,5 @@ export { RSSMetaTag } from './RSSMetaTag';
 
 export { DocSearch } from './DocSearch';
 
+export { MarketingNotice } from './MarketingNotice';
+
