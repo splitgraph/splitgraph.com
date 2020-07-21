@@ -466,6 +466,75 @@ const LandingPage = () => {
       </HeroBox>
 
       <section
+        className="lp-section lp-section--darkgrad"
+        sx={{
+          // background:
+          //   "linear-gradient(180deg, rgba(13,24,33,1) 0%, rgba(54,103,141,1) 50%)",
+          backgroundColor: "primary",
+          color: "light",
+          h2: {
+            color: "light",
+          },
+          borderTop: "0.5ch solid",
+          borderTopColor: "primary",
+          borderBottom: "0.5ch solid",
+          borderBottomColor: "rgba(13,24,33,1)",
+          paddingTop: "2rem",
+          paddingBottom: "2rem",
+          // paddingLeft: "max(3rem, calc((100vw - 120ch)/2))",
+          // paddingRight: "max(3rem, calc((100vw - 120ch)/2))",
+          paddingLeft: "calc((100vw - 120ch)/2)",
+          paddingRight: "calc((100vw - 120ch)/2)",
+          ".muted-link": {
+            variant: "links.muted",
+          },
+        }}
+      >
+        <h2>Explore Public Data</h2>
+
+        <Box>
+          <iframe
+            src="/search?embed=1"
+            allowtransparency="true"
+            style={{
+              left: 0,
+              top: 0,
+              minWidth: "100%",
+              width: "100%",
+              maxHeight: "calc(4rem + 1rem)",
+              height: "calc(4rem + 1rem)",
+              minHeight: "calc(4rem + 1rem)",
+              border: "none",
+              background: "none",
+              overflowY: "hidden",
+            }}
+          />
+        </Box>
+
+        <iframe
+          src="/explore?embed=1"
+          allowtransparency="true"
+          style={{
+            left: 0,
+            top: 0,
+            minWidth: "100%",
+            width: "100%",
+            maxHeight: "calc(300px + 1rem)",
+            height: "calc(300px + 1rem)",
+            minHeight: "calc(300px + 1rem)",
+            border: "none",
+            background: "none",
+            overflowY: "hidden",
+            marginBottom: "1rem",
+          }}
+        />
+
+        <Link className="muted-link" href="/explore">
+          Explore over 40,000 datasets &raquo;
+        </Link>
+      </section>
+
+      <section
         className="lp-section"
         sx={{
           color: "sgdarkblue",
@@ -647,74 +716,6 @@ const LandingPage = () => {
             </Link>
           </Box>
         </Box>
-      </section>
-
-      <section
-        className="lp-section lp-section--darkgrad"
-        sx={{
-          background:
-            "linear-gradient(180deg, rgba(13,24,33,1) 0%, rgba(54,103,141,1) 50%)",
-          color: "light",
-          h2: {
-            color: "light",
-          },
-          borderTop: "0.5ch solid",
-          borderTopColor: "primary",
-          borderBottom: "0.5ch solid",
-          borderBottomColor: "rgba(13,24,33,1)",
-          paddingTop: "2rem",
-          paddingBottom: "2rem",
-          // paddingLeft: "max(3rem, calc((100vw - 120ch)/2))",
-          // paddingRight: "max(3rem, calc((100vw - 120ch)/2))",
-          paddingLeft: "calc((100vw - 120ch)/2)",
-          paddingRight: "calc((100vw - 120ch)/2)",
-          ".muted-link": {
-            variant: "links.muted",
-          },
-        }}
-      >
-        <h2>Explore Public Data</h2>
-
-        <Box>
-          <iframe
-            src="/search?embed=1"
-            allowtransparency="true"
-            style={{
-              left: 0,
-              top: 0,
-              minWidth: "100%",
-              width: "100%",
-              maxHeight: "calc(4rem + 1rem)",
-              height: "calc(4rem + 1rem)",
-              minHeight: "calc(4rem + 1rem)",
-              border: "none",
-              background: "none",
-              overflowY: "hidden",
-            }}
-          />
-        </Box>
-
-        <iframe
-          src="/explore?embed=1"
-          allowtransparency="true"
-          style={{
-            left: 0,
-            top: 0,
-            minWidth: "100%",
-            width: "100%",
-            maxHeight: "calc(300px + 1rem)",
-            height: "calc(300px + 1rem)",
-            minHeight: "calc(300px + 1rem)",
-            border: "none",
-            background: "none",
-            overflowY: "hidden",
-            marginBottom: "1rem"
-          }}
-        />
-
-        <Link className="muted-link" href="/explore">
-          Explore over 40,000 datasets &raquo;
-        </Link>
       </section>
 
       <section
