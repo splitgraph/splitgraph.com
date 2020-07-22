@@ -22,7 +22,8 @@ const MarketingNotice = ({
         borderBottom: "1px solid",
         borderBottomColor: "primary",
         color: "heavy",
-        display: "flex",
+        // display: "flex"
+        display: "block",
         alignItems: "center",
         justifyContent: "center",
         flexDirection: ["column", "row", "row"],
@@ -33,6 +34,7 @@ const MarketingNotice = ({
           marginLeft: "calc(100% - 1ch - 2rem)",
           position: "absolute",
           textAlign: "right",
+          marginTop: "-1.5rem",
           ".close-button--control": {
             ":hover": {
               cursor: "pointer",
