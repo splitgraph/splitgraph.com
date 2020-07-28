@@ -1,0 +1,227 @@
+export const meta = {
+  id: "docker-compose-production",
+  title: "Splitgraph infrastructure, part 3: Using Docker Compose in production",
+  date: "2020-07-28",
+  authors: ["Artjoms Iškovs"],
+  topics: ["technical", "infrastructure"],
+  description:
+    "We finish our overview of Splitgraph's infrastructure " +
+    "by talking about why and how we use Docker Compose to run " +
+    "the Splitgraph registry in production. ",
+  related: ["makefile", "integration-tests"],
+};
+
+At the time of writing, the [Splitgraph registry](/explore) runs on a single 30 EUR/month [Scaleway](https://scaleway.com/) instance. Despite that, we index and let you query [over 40,000 public datasets](/blog/40k-sql-datasets) with simple SQL.
+
+This series of articles discusses our [infrastructure](/blog/topic/infrastructure) and how we stay lean while still providing a lot of value to data scientists and engineers.
+
+To run Splitgraph in production, we use Docker Compose. We found it to be a surprisingly effective solution. This article is a collection of tips and tricks for using Docker Compose that we discovered. We'll talk about:
+
+  * structuring a Compose dev-prod configuration using [override mixins](https://docs.docker.com/compose/extends)
+  * an automated deploy workflow
+  * configuration generation, injection and live reloading
+  * how we monitor our services in production
+
+## Why Compose?
+
+We are eventually interested in moving to Kubernetes or Nomad (we're even writing a script that automatically converts Compose files to Nomad jobs!). But, these solutions felt like overkill for our use case.
+
+Besides, we relied on Docker Compose a lot when building Splitgraph. Currently, we run [integration tests in CI](/blog/integration-tests) using it. We wanted to match the dev, CI and production workflow as closely as possible.
+
+## Compose configs and mixins
+
+Docker Compose allows you to combine multiple Compose configurations into one at runtime. This feature is called ["overrides"](https://docs.docker.com/compose/extends).
+
+Here's a sample Compose definition for a "prod" service:
+
+```yaml
+version: "3.4"
+services:
+  registry-db:
+    image: ${DOCKER_REPO}/registry-db:${DOCKER_TAG}
+    expose:
+      - 5431
+    env_file:
+      - ${CONFIG_HOME}/config/registry-db.env
+    restart: on-failure
+    user: "postgres:pgsockets"
+    volumes:
+      - registry_dbdata:/var/lib/postgresql/data/pgdata
+      - pg_pgb_sockets:/var/pgsockets
+      - ${CONFIG_HOME}/config/registry-db.sgadmin.password:/registry-db.sgadmin.password:cached
+...
+```
+
+Our production configuration normally includes:
+
+  * The actual Docker image
+  * A [policy](https://docs.docker.com/compose/compose-file/#restart) to automatically restart containers that exited with an error
+  * Bind mounts of configuration files
+  * [Environment files](https://docs.docker.com/compose/compose-file/#env_file)
+  * Mounts of data volumes
+  * Docker healthcheck definitions
+
+The development Compose file is a mixin on top of the production configuration. For this service, it's:
+
+```yaml
+version: "3.4"
+services:
+  registry-db:
+    ports:
+      - "0.0.0.0:5430:5431"
+    volumes:
+      - ./src/py/splitgraph/splitgraph:/splitgraph/splitgraph
+      - ./src/luamods/main:/home/postgres/luamods
+      - ./src/py/sgr_admin/sgr_admin/embedded/dbs:/home/postgres/pymods
+      - ./components/registry/registry-db/etc/postgresql:/etc/postgresql
+    environment:
+      - SG_LOGLEVEL=DEBUG
+```
+
+This can include:
+
+  * Bind mounts for source code for scripted languages
+  * Flags for verbose logging
+  * Using a more heavyweight Docker image with dev tooling or hot reloads
+  * Publishing ports on the host to aid debugging
+
+This lets us avoid repetition in our configuration. We also use this idea to split up different aspects of the stack into separate Compose files. We call these "service groups".
+
+We have runscripts that wrap Compose overrides to give the developer a single script. They can use it to run Compose commands on a service group. The script can inject the "dev" configuration if needed:
+
+```
+#!/usr/bin/env bash -e
+
+if [[ "$1" == "--dev" ]] ; then
+  DEV=1
+  shift
+fi
+
+export CONFIG_HOME=${CONFIG_HOME-"$PWD"}
+
+exec docker-compose -f docker-compose.prod.yml \\
+	$( [[ -n $DEV ]] && echo "-f docker-compose.dev.yml" ) \\
+	-f docker-compose.dbs.build.yml \\
+	-f docker-compose.dbs.prod.yml \\
+	$( [[ -n $DEV ]] && echo "-f docker-compose.dbs.dev.yml" ) $@
+```
+
+## Deployment workflow
+
+We deploy Splitgraph using GitLab CI. The deploy process runs in several stages.
+
+### Building the production bundle
+
+First, we use our Makefile (we wrote more about how we use Makefiles in [a previous blog post](/blog/makefile)) to build a "deploy bundle". This bundle is self-contained and includes only the files needed to run Splitgraph in production:
+
+  * Production Docker Compose configs
+  * Runscripts that combine those configs into "service groups"
+  * Other useful scripts for production: installation, backups, configuration management, helper script to load into the admin shell
+  * Configuration templates
+
+We store the actual tag (commit hash) that we're deploying in a `.env` file in the bundle that every script sources.
+
+### Deploy home directory
+
+On the server, we have a "deploy home" directory that contains service configuration files. It also contains a `config.json` file that includes:
+
+  * configuration flags for the current deploy
+  * secrets
+  * third-party API keys
+
+The CI script copies the bundle into this directory and extracts it. We keep copies of previous deploy bundles too, each one in a timestamped directory. This means we can roll back to an earlier version in case of a failed deploy by running that bundle's installation script.
+
+### Pulling and tagging the containers
+
+The installation script first pulls all required containers from the GitLab CI registry. At this point, it uses the deploy's commit hash as the tag.
+
+The script then retags these containers with a `:production` tag. This is to avoid Compose reloading all services on every deploy. If an image's tag (not only the SHA hash) has changed, Compose will treat the service's configuration as changed. Keeping the tag fixed prevents that.
+
+### Configuration generation
+
+The script then runs the "configurator". It's a container with a Python application that uses Jinja. It uses the bundle's config templates and the `config.json` file to regenerate configuration for all services that we run.
+
+We wrote more about the [configurator](/blog/integration-tests) in a previous blog post.
+
+We bind mount configuration into containers. We prefer this to baking it into the image. This lets us make emergency hotfixes without having to go through the CI pipeline.
+
+### Database migrations
+
+Next, the installation script runs schema migrations. We check all our migrations into version control and run integration tests on them in CI.
+
+These migrations form part of the "admin" container. We also use this container to run other Splitgraph instance management tasks.
+
+Finally, we implement a lot of Splitgraph functionality as PostgreSQL functions in languages like `PL/Python` or `PL/Lua`. We package those up as PostgreSQL extensions which we also install at migration time.
+
+### Reloading services
+
+We have several service groups that we deploy one after another. We use `./service-runscript.sh up -d` to upgrade most of them. This means that Docker Compose only recreates containers for services with changed specifications. You can read more about this behavior in the [Compose documentation](https://docs.docker.com/compose/reference/up/).
+
+This is not a zero downtime deploy, but we try to minimize excess container restarts by pinning third-party container hashes. For example, instead of `haproxy:latest`, we use `haproxy@sha256:e6f9faf0c2a0cf2d2d5a53307351fa896d...`.
+
+In some cases, we run many copies of the same service group for high availability. This is the case for our [REST API](/docs/splitgraph-cloud/publish-rest-api). There, the script waits until the replica is healthy before upgrading the next one:
+
+```bash
+#!/bin/bash -e
+
+# Wait for a container to become healthy.
+
+CONTAINER=$1
+
+
+timeout=120
+while true; do
+  status=$(docker inspect -f '{{.State.Health.Status}}' "$CONTAINER")
+  if [ "$status" != "starting" ]; then
+    break
+  fi
+  if (( timeout < 0 )); then
+    echo "Timed out waiting for $CONTAINER to become healthy"
+    exit 1
+  fi
+  sleep 2
+  timeout=$(( timeout - 2))
+  echo "Waiting for $CONTAINER to become healthy, $timeout s.."
+done
+
+if [ "$status" == "unhealthy" ]; then
+  echo "$CONTAINER is unhealthy!"
+  exit 1
+fi
+
+echo "$CONTAINER is healthy."
+```
+
+### Reloading configuration
+
+Most containers don't get recreated or restarted on deploy, which helps us minimize downtime. But what do we do if we need to reload a service's configuration without restarting it?
+
+The answer is simple. Lots of services like HAProxy, Prometheus, PGBouncer or NGINX support configuration reloads via a `SIGHUP` signal. You can send a UNIX signal to a container with Docker:
+
+```shell-session
+$ docker kill --signal SIGHUP container_name
+```
+
+All we need to do to apply new configuration is send `SIGHUP` to relevant containers after a deploy. If the configuration has errors, these services will silently switch back to the old one.
+
+There's a caveat here with bind mounts. You have to make sure you're bind mounting **the directory** with the configuration file rather than the actual file. This is because of how Docker bind mounts interact with Linux inodes. More on [Docker GitHub](https://github.com/moby/moby/issues/15793#issuecomment-135411504).
+
+### Healthchecks and monitoring
+
+As the final step, the deploy runs `docker-compose ps` to make sure all containers that have healthchecks pass them. If there are unhealthy containers, the deploy script raises an alert in our team chat.
+
+We also use [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/) to scrape various container statistics, plot them and alert on them. In particular, we have alerting rules on:
+
+  * HAProxy backend availability
+  * High HTTP response latencies
+  * High node resource usage
+  * High rate of non-2xx responses
+  * Failed Airflow jobs
+
+We check our Prometheus configs into version control. We do the same with Grafana dashboards. We load those from configuration files using Grafana's [provisioning](https://grafana.com/docs/grafana/latest/administration/provisioning/) feature.
+
+## Conclusion
+
+In this article, we discussed how we use Docker Compose to run Splitgraph in production, as well as how to use it for automated deploys.
+
+This is the final article in the series that talks about our [build, test and deploy infrastructure](/blog/topic/infrastructure). If you're interested in learning more about Splitgraph, you can check our [frequently asked questions](/docs/getting-started/frequently-asked-questions) section, follow our [quick start guide](/docs/getting-started/five-minute-demo) or visit our [website](https://www.splitgraph.com).

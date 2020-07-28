@@ -1,6 +1,6 @@
 export const meta = {
   id: "integration-tests",
-  title: "Write tests. Not too many. Mostly integration.",
+  title: "Splitgraph infrastructure, part 2: Integration testing with Docker Compose",
   date: "2020-07-08",
   authors: ["Artjoms Iškovs"],
   topics: ["technical", "infrastructure"],
@@ -8,7 +8,7 @@ export const meta = {
     "We continue our overview of Splitgraph's internal build infrastructure by talking about " +
     "how we run end-to-end integration tests. We also discuss using Jinja to generate configuration " +
     "and inject secrets into our components.",
-  related: ["makefile"],
+  related: ["makefile", "docker-compose-production"],
 };
 
 The [Splitgraph registry](https://www.splitgraph.com/explore) is a complex piece of software that consists of about 60 containers that use a dozen programming languages.
