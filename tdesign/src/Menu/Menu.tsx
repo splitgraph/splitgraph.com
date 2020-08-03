@@ -9,9 +9,10 @@ import { LayoutContext } from "../Layout/TwoColumnLayout";
 
 export interface MenuProps {
   children?: React.ReactNode;
+  style?: SystemStyleObject;
 }
 
-export default ({ children }: MenuProps) => {
+export default ({ children, style = {} }: MenuProps) => {
   const { expanded } = useContext(LayoutContext);
 
   const containerStyle = {
@@ -38,6 +39,7 @@ export default ({ children }: MenuProps) => {
         expanded ? "initial" : "smooth",
         "initial",
       ],
+      ...(style.hasOwnProperty(".menu-list") ? { ...style[".menu-list"] } : {}),
     },
     ".menu-item": {
       marginLeft: [
@@ -58,9 +60,13 @@ export default ({ children }: MenuProps) => {
       ],
       display: ["flex", "flex", "initial"],
       alignItems: ["center", "center", "initial"],
+      ...(style.hasOwnProperty(".menu-item") ? { ...style[".menu-item"] } : {}),
     },
     ".menu-item--heading": {
       backgroundColor: "initial",
+      ...(style.hasOwnProperty(".menu-item")
+        ? { ...style[".menu-item-heading"] }
+        : {}),
     },
     // '.menu-item-label--heading': {
     //   textTransform: 'uppercase',
@@ -74,6 +80,10 @@ export default ({ children }: MenuProps) => {
       borderLeftWidth: "5px",
       borderLeftColor: "primary",
       borderLeftStyle: "solid",
+
+      ...(style.hasOwnProperty(".menu-item--active")
+        ? { ...style[".menu-item--active"] }
+        : {}),
     },
     ".menu-item--inactive": {
       filter: [
@@ -81,6 +91,10 @@ export default ({ children }: MenuProps) => {
         expanded ? "initial" : "opacity(0.5)",
         "initial",
       ],
+
+      ...(style.hasOwnProperty(".menu-item--inactive")
+        ? { ...style[".menu-item--inactive"] }
+        : {}),
     },
     ".menu-item-inner-container": {
       marginLeft: [
@@ -93,6 +107,10 @@ export default ({ children }: MenuProps) => {
         expanded ? "1rem" : "initial",
         "1rem",
       ],
+
+      ...(style.hasOwnProperty(".menu-item-inner-container")
+        ? { ...style[".menu-item-inner-container"] }
+        : {}),
     },
     ".menu-item-link": {
       //   Should match the background ("hide" it without bumpy shift)
@@ -106,6 +124,10 @@ export default ({ children }: MenuProps) => {
       ":hover": {
         borderBottomColor: "light",
       },
+
+      ...(style.hasOwnProperty(".menu-item-link")
+        ? { ...style[".menu-item-link"] }
+        : {}),
     },
     ".menu-item-label": {
       display: ["initial", "initial", expanded ? "none" : "initial"],
@@ -114,6 +136,9 @@ export default ({ children }: MenuProps) => {
         expanded ? "initial" : "nowrap",
         "initial",
       ],
+      ...(style.hasOwnProperty(".menu-item-label")
+        ? { ...style[".menu-item-label"] }
+        : {}),
     },
   } as SystemStyleObject;
 
