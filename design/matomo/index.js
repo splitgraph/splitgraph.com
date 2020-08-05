@@ -7,6 +7,7 @@ export function matomoInit({
   siteId,
   jsTrackerFile = "matomo.js",
   phpTrackerFile = "matomo.php",
+  shouldIgnoreURL = (url) => false,
 }) {
   // Using absolute path makes URL() work when overriding sendBeacon
   const origin = window && window.location ? window.location.origin || "" : "";
@@ -17,6 +18,7 @@ export function matomoInit({
     navigator.sendBeacon = function() {
       if (typeof arguments[0] === "string") {
         var _url = new URL(arguments[0]);
+
         _url.search = `?q=${btoa(_url.search)}`;
         arguments[0] = _url.toString();
       }
@@ -32,12 +34,20 @@ export function matomoInit({
   }
   let previousPath = "";
 
+  const maybePush = (matomoArgs) => {
+    if (!window || shouldIgnoreURL(window.location)) {
+      return;
+    }
+
+    return matomoPush(matomoArgs);
+  };
+
   // order is important
-  matomoPush(["alwaysUseSendBeacon", true]);
-  matomoPush(["trackPageView"]);
-  matomoPush(["enableLinkTracking"]);
-  matomoPush(["setTrackerUrl", `${url}/${phpTrackerFile}`]);
-  matomoPush(["setSiteId", siteId]);
+  maybePush(["alwaysUseSendBeacon", true]);
+  maybePush(["trackPageView"]);
+  maybePush(["enableLinkTracking"]);
+  maybePush(["setTrackerUrl", `${url}/${phpTrackerFile}`]);
+  maybePush(["setSiteId", siteId]);
 
   // Use location.pathname on initial load, then Router.pathname on subsequent CSR requests
   const scriptElement = document.createElement("script");
@@ -54,14 +64,14 @@ export function matomoInit({
 
     setTimeout(() => {
       if (previousPath) {
-        matomoPush(["setReferrerUrl", `${previousPath}`]);
+        maybePush(["setReferrerUrl", `${previousPath}`]);
       }
-      matomoPush(["setCustomUrl", pathname]);
-      matomoPush(["setDocumentTitle", document.title]);
-      matomoPush(["deleteCustomVariables", "page"]);
-      matomoPush(["setGenerationTimeMs", 0]);
-      matomoPush(["trackPageView"]);
-      matomoPush(["enableLinkTracking"]);
+      maybePush(["setCustomUrl", pathname]);
+      maybePush(["setDocumentTitle", document.title]);
+      maybePush(["deleteCustomVariables", "page"]);
+      maybePush(["setGenerationTimeMs", 0]);
+      maybePush(["trackPageView"]);
+      maybePush(["enableLinkTracking"]);
       previousPath = pathname;
     }, 0);
   });
