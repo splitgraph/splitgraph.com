@@ -1,0 +1,146 @@
+export const meta = {
+  id: "sql-endpoint",
+  title: "Splitgraph SQL endpoint",
+};
+
+**Note that this feature is currently in a closed beta. E-mail us at support@splitgraph.com with your username if you would like to gain access.**
+
+Splitgraph SQL endpoint, or Splitgraph Data Delivery Network (DDN) is a feature of Splitgraph Cloud. It's a PostgreSQL-compatible SQL endpoint hosted at `postgres://data.splitgraph.com:5432/ddn` that lets you query any dataset hosted on or indexed by Splitgraph.
+
+In an SQL query, you can reference Splitgraph images as PostgreSQL schemas and even run JOINs across multiple images or data sources. For example:
+
+```sql
+SELECT
+    cambridge_cases.date AS date,
+    chicago_cases.cases_total AS chicago_daily_cases,
+    cambridge_cases.new_positive_cases AS cambridge_daily_cases
+FROM
+    "cityofchicago/covid19-daily-cases-and-deaths-naz8-j4nc".covid19_daily_cases_and_deaths chicago_cases
+FULL OUTER JOIN
+    "cambridgema-gov/covid19-cumulative-cases-by-date-tdt9-vq5y".covid19_cumulative_cases_by_date cambridge_cases
+ON
+    date_trunc('day', chicago_cases.lab_report_date) = cambridge_cases.date
+ORDER BY date ASC;
+```
+
+![Splitgraph SQL endpoint JOIN query example](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0900_splitgraph-cloud/images/sql-endpoint/2-dbeaver-join.png)
+
+We support most SQL clients and have explicitly tested DBeaver, pgcli, psql and VSCode.
+
+We also support [PostGIS](../integrating-splitgraph/postgis), so querying PostGIS-enabled datasets will pass geographical data back to the client. In the case of DBeaver or pgAdmin, the client can even render the data on a map. For example:
+
+```sql
+SELECT name, gss_code, ST_Transform(ST_SetSRID(geom, 27700), 4326)
+	FROM "splitgraph/london_wards".city_merged_2018
+```
+
+![PostGIS data on Splitgraph SQL endpoint](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0900_splitgraph-cloud/images/sql-endpoint/3-dbeaver-geodata.png)
+
+### Workspaces
+
+Splitgraph's endpoint intercepts the client's introspection queries. When you log into the SQL endpoint with a client, its introspection will show you repositories that you own, as well as the repositories that are featured on Splitgraph. We call this feature a "workspace".
+
+The workspace currently only shows a small subset of datasets available on Splitgraph: you can query any dataset on Splitgraph using SQL, not just the ones in the workspace.
+
+![Splitgraph workspace example](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0900_splitgraph-cloud/images/sql-endpoint/1-dbeaver-introspection.png)
+
+## Connecting to the endpoint
+
+The endpoint is located at data.splitgraph.com. The connection parameters are:
+
+  * **Username**: Splitgraph API key
+  * **Password**: Splitgraph API secret
+  * **Host**: data.splitgraph.com
+  * **Port**: 5432
+  * **Database**: ddn
+
+### With Splitgraph installed
+
+If you have Splitgraph [installed locally](../getting-started/installation), the easiest way to query the endpoint is by running `sgr cloud sql [query]`.
+
+`sgr cloud sql` without arguments returns a libpq-compatible connection string. You can use it to connect to the endpoint with a client like `pgcli` or `psql`:
+
+```bash
+pgcli $(sgr cloud sql)
+psql $(sgr cloud sql)
+```
+
+You need to have logged in to Splitgraph cloud. See the [Splitgraph Cloud introduction](../introduction) for more information.
+
+You can find your Splitgraph API key and secret in your `.sgconfig` file, under the `data.splitgraph.com` section:
+
+```ini
+[data.splitgraph.com]
+...
+SG_ENGINE_USER=[API key]
+SG_ENGINE_PWD=[API secret]
+```
+
+See the [configuration reference](../configuration/introduction) for more information.
+
+### Without Splitgraph installed
+
+You don't need to install anything to use the endpoint. If you go to your Splitgraph [account settings](https://www.splitgraph.com/settings), you can generate a pair of credentials that you can immediately plug into any SQL client.
+
+### SSL encryption and server certificate
+
+We use mandatory SSL encryption on our endpoint (this is called `sslmode=require` in libpq terminology). Note that this protects you against eavesdropping, but not against MITM attacks, since PostgreSQL clients by default don't verify the server certificate (`verify-ca` or `verify-full`).
+
+To enable full verification, you'll need access to data.splitgraph.com's root certificate. You can verify the certificate by running:
+
+```bash
+echo | openssl s_client -starttls postgres -connect data.splitgraph.com:5432 -showcerts
+```
+
+You can get the root certificate by running:
+
+```bash
+echo | openssl s_client -starttls postgres -connect data.splitgraph.com:5432  2>/dev/null | openssl x509 > ~/.splitgraph/data.splitgraph.com.crt
+```
+
+On pre-1.1.1 versions of `s_client` that don't support PostgreSQL, you can get data.splitgraph.com's certificate from HTTPS, since it presents the same certificate there:
+
+```bash
+echo | openssl s_client -connect data.splitgraph.com:443  2>/dev/null | openssl x509
+```
+
+You can then write the output into a file and give that file to clients like Google Data Studio that require SSL certificates.
+
+## Client support and notes
+
+### DBeaver, pgcli, psql, VSCode
+
+We support introspection hooking and querying for these tools and have explicitly tested them.
+
+### Google Data Studio
+
+You will need the server's root certificate to set up the connection. You will also need a client certificate pair: this can be self-signed.
+
+```bash
+openssl req -newkey rsa:2048 -nodes -keyout client.key -x509 -days 365 -out client.crt
+```
+
+Note that there's a bug in the Data Studio which means that you have to **upload your key to the client certificate field and the certificate to the key field**.
+
+Data discovery doesn't completely work on Google Data Studio, as it treats all tables as being in the public schema and doesn't schema-qualify them when making queries from the table picker. You can still use a custom query to import data into Google Data Studio.
+
+### Metabase
+
+Data discovery (introspection query interception) doesn't work with Metabase, as our `information_schema` implementation returns slashes in schema names. See the [GitHub issue](https://github.com/metabase/metabase/issues/12450) for details.
+
+SQL queries work, allowing you to use Splitgraph data in your Metabase dashboards.
+
+### DataGrip
+
+Introspection query interception doesn't work on DataGrip (you will see an empty tree in the sidebar) but you can still run all SQL queries.
+
+## Roadmap
+
+We aim to make the SQL endpoint the core of Splitgraph's offering, moving us to being a "data delivery network": a single endpoint giving you access to all your data with extra services like caching, granular access control, auditing, query firewalling or performance optimization.
+
+The rough list of planned features for Splitgraph's SQL endpoint is currently:
+
+  * Ability to add backend data sources to Splitgraph as ["external repositories"](external-repositories) on public Splitgraph or when deploying Splitgraph on-premises
+  * Custom workspaces (for example, connecting to `postgresql://user:pass@data.splitgraph.com:5432/workspace-1`), letting you bookmark datasets to show up in your client
+  * Scheduled snapshots of queries as Splitgraph images
+  * Access control on inbound queries at the row/column level, PII masking
