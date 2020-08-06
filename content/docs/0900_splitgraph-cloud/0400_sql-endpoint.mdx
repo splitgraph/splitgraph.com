@@ -7,7 +7,17 @@ export const meta = {
 
 Splitgraph SQL endpoint, or Splitgraph Data Delivery Network (DDN) is a feature of Splitgraph Cloud. It's a PostgreSQL-compatible SQL endpoint hosted at `postgresql://data.splitgraph.com:5432/ddn` that lets you query any dataset hosted on or indexed by Splitgraph.
 
-In an SQL query, you can reference Splitgraph images as PostgreSQL schemas and even run JOINs across multiple images or data sources. For example:
+In an SQL query, you can reference Splitgraph images as PostgreSQL schemas using the form `namespace/repository:image_hash_or_tag`. If the hash or tag is missing, Splitgraph will assume the `:latest` tag.
+
+This means that these are equivalent:
+
+```sql
+SELECT * FROM "splitgraph/london_wards".city_merged_2018;
+SELECT * FROM "splitgraph/london_wards:latest".city_merged_2018;
+SELECT * FROM "splitgraph/london_wards:34802db1d71f69973d5e5845ab358b3e339077ed4f3f3fc790d2f89e87b4f433".city_merged_2018;
+```
+
+You can also run JOINs across multiple images or data sources. For example:
 
 ```sql
 SELECT
@@ -105,6 +115,12 @@ echo | openssl s_client -connect data.splitgraph.com:443  2>/dev/null | openssl 
 ```
 
 You can then write the output into a file and give that file to clients like Google Data Studio that require SSL certificates.
+
+## Restrictions
+
+We currently explicitly limit all queries to 10,000 rows and 30 seconds of execution. We might review these restrictions in the future.
+
+We filter queries and only allow you to run `SELECT` and `EXPLAIN` statements, as well as some utility statements like `SHOW` and `SET` used by some SQL clients.
 
 ## Client support and notes
 
