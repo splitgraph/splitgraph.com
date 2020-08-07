@@ -19,7 +19,12 @@ const SuccessResetLink = ({ text, href }) => (
   </MutedLink>
 );
 
-export default ({ message, dismissLinkText, dismissLinkHref }) => {
+export default ({
+  message,
+  dismissLinkText,
+  dismissLinkHref,
+  onClickDismiss,
+}) => {
   return (
     <Flex
       flexDirection={"row"}
@@ -30,7 +35,7 @@ export default ({ message, dismissLinkText, dismissLinkHref }) => {
         minWidth: "30vw",
         backgroundColor: "successBackground",
         backgroundOpacity: 0.2,
-        border: "1px solid success"
+        border: "1px solid success",
       }}
     >
       <Flex width={dismissLinkText && dismissLinkHref ? 7 / 10 : 10 / 10}>
@@ -38,9 +43,25 @@ export default ({ message, dismissLinkText, dismissLinkHref }) => {
         <SuccessMessage message={message} />
       </Flex>
 
-      {dismissLinkText && dismissLinkHref && (
+      {dismissLinkText && (dismissLinkHref || onClickDismiss) && (
         <Flex width={3 / 10} justifyContent="flex-end">
-          <SuccessResetLink text={dismissLinkText} href={dismissLinkHref} />
+          {dismissLinkHref ? (
+            <SuccessResetLink
+              text={dismissLinkText}
+              href={dismissLinkHref || "#"}
+              onClick={onClickDismiss}
+            />
+          ) : (
+            <Text
+              sx={{
+                color: "muted",
+                ":hover": { cursor: "pointer", textDecoration: "underline" },
+              }}
+              onClick={onClickDismiss}
+            >
+              {dismissLinkText}
+            </Text>
+          )}
         </Flex>
       )}
     </Flex>
