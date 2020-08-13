@@ -1,0 +1,49 @@
+```splitfile
+# Calculate the number of Census tracts in each county and fraction of QOZ-eligible tracts.
+
+SQL {
+    CREATE TABLE qoz_tract_fraction AS
+        WITH county_tracts AS (SELECT
+                COUNT(*) AS total_tract_count,
+                substring(lpad("TractId"::text, 11, '0') from 0 for 6) AS county_id
+            FROM "splitgraph/census:latest".acs2017_census_tract_data
+            GROUP BY county_id
+        ), qoz_tracts AS (SELECT
+                COUNT(*) AS qoz_tract_count,
+                substring(lpad("Census Tract Number"::text, 11, '0') from 0 for 6) AS county_id
+            FROM "splitgraph/qoz:latest".qoz
+            GROUP BY county_id
+        )
+    SELECT
+        c.county_id AS county_id,
+        COALESCE(q.qoz_tract_count::numeric, 0.0) / total_tract_count AS qoz_tract_fraction
+    FROM qoz_tracts q JOIN county_tracts c
+        ON q.county_id = c.county_id
+}
+
+# Summarize the Trump/Clinton vote fraction in each county.
+
+FROM splitgraph/2016_election IMPORT {
+    SELECT lpad(county_fips::TEXT, 5, '0') AS county_id,
+        SUM(CASE WHEN candidate_normalized = 'trump' THEN votes ELSE 0 END) / SUM(votes)
+            AS trump_vote_fraction,
+        SUM(CASE WHEN candidate_normalized = 'clinton' THEN votes ELSE 0 END) / SUM(votes)
+            AS clinton_vote_fraction,
+    SUM(votes) AS total_votes
+    FROM precinct_results
+    GROUP BY county_id
+} AS vote_fraction
+
+# Create the final table: join the fraction of QOZ-eligible tracts in every county
+# with the vote fraction for each candidate.
+
+SQL { CREATE TABLE qoz_vote_fraction AS
+    SELECT
+        v.county_id, COALESCE(qoz_tract_fraction, 0) AS qoz_tract_fraction,
+        trump_vote_fraction, clinton_vote_fraction, total_votes
+    FROM vote_fraction v
+    LEFT JOIN qoz_tract_fraction q ON q.county_id = v.county_id
+    WHERE v.county_id IS NOT NULL;
+    ALTER TABLE qoz_vote_fraction ADD PRIMARY KEY (county_id);
+}
+```
