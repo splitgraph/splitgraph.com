@@ -1,0 +1,33 @@
+// @jsx jsx
+// @ts-ignore
+import { jsx } from "theme-ui";
+import * as React from "react";
+
+export interface IOAuthButtonProps {
+  button: React.ReactNode;
+  identityProvider: string;
+  formAction?: string;
+  goal?: "login" | "link";
+  redirectURL?: string;
+}
+
+const FORM_ACTION = "/api/forms/submit/auth/oauth/init";
+
+const OAuthButton = ({
+  button,
+  identityProvider,
+  formAction = FORM_ACTION,
+  goal = "login",
+  redirectURL = "/",
+}: IOAuthButtonProps) => {
+  return (
+    <form action={formAction} method="POST">
+      <input type="hidden" name="goal" value={goal} />
+      <input type="hidden" name="redirectURL" value={redirectURL} />
+      <input type="hidden" name="identityProvider" value={identityProvider} />
+      {button}
+    </form>
+  );
+};
+
+export default OAuthButton;

@@ -30,7 +30,6 @@ const prismTheme = {
 
 export const asciinemaEmbedStyles = {
   "div.asciinema-embed-container": {
-    backgroundColor: "red",
     marginLeft: -4,
     marginRight: -4,
     // paddingTop: "80vh !important"
@@ -82,7 +81,8 @@ export const makeDefaultTheme = () => ({
     primary: "#36678d",
     primaryHalfOpacity: "rgba(54, 103, 141, .5)",
     // primary: "#000",
-    secondary: "#363C8D",
+    // secondary: "#363C8D",
+    secondary: "#89368d",
     heavy: "#0d1821",
     lightaccent: "#96ccff",
     lessHeavy: "#2a2a2a",
@@ -147,6 +147,7 @@ export const makeDefaultTheme = () => ({
     hovering: "0 0 1rem rgba(0, 0, 0, .5)",
     cardHover: "0 0 4px rgba(0, 0, 0, .5)",
     leftHighlightPrimary: "-5px 0 #36678d",
+    leftHighlightSecondary: "-5px 0 #89368d",
   },
   // rebass variants
   text: {
@@ -274,6 +275,9 @@ export const makeDefaultTheme = () => ({
       borderStyle: "solid",
       borderRadius: 40,
       boxShadow: "card",
+      ":hover": {
+        cursor: "pointer",
+      },
     },
   },
   links: {
@@ -291,6 +295,7 @@ export const makeDefaultTheme = () => ({
     button: {
       variant: "links.unstyled",
       backgroundColor: "primary",
+      // backgroundColor: "secondary",
       color: "muted",
       padding: "0.5rem",
       fontWeight: "bold",
@@ -306,6 +311,13 @@ export const makeDefaultTheme = () => ({
         backgroundRepeat: "no-repeat",
         backgroundSize: "200% 100%",
         transition: "background-size 1s, background-color 1s",
+      },
+    },
+    buttonSecondary: {
+      variant: "links.button",
+      backgroundColor: "secondary",
+      ":hover": {
+        backgroundColor: "##c287c5",
       },
     },
     primary: {

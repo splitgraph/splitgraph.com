@@ -34,3 +34,7 @@ export { Card } from "./Card";
 export { PopoutBox, IRenderPopoutButtonProps } from "./PopoutBox";
 
 export { StatusChip } from "./StatusChip";
+
+export { PreWithCopy, IPreWithCopyProps } from "./PreWithCopy";
+
+export * from "./OAuthButton";
