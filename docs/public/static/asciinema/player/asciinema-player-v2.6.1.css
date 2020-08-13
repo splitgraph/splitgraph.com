@@ -27,7 +27,7 @@ body {
   position: relative;
   text-align: center;
   outline: none;
-  background-color: white;
+  background-color: transparent;
 }
 .asciinema-player-wrapper .title-bar {
   display: none;
