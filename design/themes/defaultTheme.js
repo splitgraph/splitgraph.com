@@ -7,9 +7,19 @@
 
 // import prismTheme from "@theme-ui/prism/presets/shades-of-purple.json";
 
+/*
+  TODO / temp:
+
+    Pasting the marketing theme in here because hot reload is broken
+    for top level files like defaultTheme.js. Need to move it somewhere else.
+
+  (This whole file is too big and needs to be refactored)
+*/
+
 const prismTheme = {
   color: "#e0ffff",
-  backgroundColor: "#36678d",
+  // backgroundColor: "#36678d",
+  backgroundColor: "red",
   ".changed,.operator": { color: "#ffd700" },
   ".deleted": { color: "#ffa07a77" },
   ".inserted": { color: "#66cc99" },
@@ -35,25 +45,45 @@ const prismTheme = {
   },
 };
 
-export const asciinemaEmbedStyles = {
-  "div.asciinema-embed-container": {
-    backgroundColor: "primary",
-    marginLeft: -4,
-    marginRight: -4,
-    // paddingTop: "80vh !important"
-    // height: "400px !important"
-    // paddingTop: "200px !important",
-    // height:
-  },
-  "iframe.asciinema-embed": {
-    "@media (max-width: 768px)": {
-      minHeight: "100% !important",
-      maxHeight: "100% !important",
-      minWidth: "100%",
-      // minWidth: "initial !important"
-      // minWidth: "100vw !important"
+export const marketingTheme = {
+  styles: {
+    pre: {
+      ...prismTheme,
+      padding: "1ch",
+      "@media (max-width: 768px)": {},
+      fontSize: "0.8rem",
+      overflowX: "auto",
+      MsOverflowStyle: "none",
+      backgroundColor: "primary",
+      ".mdx-marker": {
+        display: "block",
+        borderLeft: `.25em solid ${prismTheme[".punctuation"].color}`,
+      },
     },
-    // border: "none"
+    inlineCode: {
+      ...prismTheme,
+      "@media (min-width: 749px)": {
+        minWidth: "initial",
+      },
+      paddingTop: 0,
+      paddingBottom: 0,
+      minHeight: "1rem",
+      display: "inline-flex",
+      alignContent: "center",
+      overflowX: "auto",
+      backgroundColor: "primary",
+    },
+    code: {
+      backgroundColor: "primary",
+      fontFamily: "monospace",
+      fontSize: "inherit",
+      span: {
+        color: "red",
+      },
+      ".comment": {
+        color: "#f4c1c0",
+      },
+    },
   },
 };
 
@@ -88,7 +118,8 @@ export const defaultTheme = {
     // primary: "#07c",
     primary: "#36678d",
     // primary: "#000",
-    secondary: "#363C8D",
+    secondary: "#89368d",
+    // secondary: "#363C8D",
     heavy: "#0d1821",
     lightaccent: "#96ccff",
     muted: "#f6f6f9",
@@ -266,7 +297,7 @@ export const defaultTheme = {
       //   maxWidth: "80ch"
       // },
       ...tocStyles,
-      ...asciinemaEmbedStyles,
+      // ...asciinemaEmbedStyles,
     },
     pre: {
       ...prismTheme,

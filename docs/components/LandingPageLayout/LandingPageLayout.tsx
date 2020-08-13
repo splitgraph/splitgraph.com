@@ -5,11 +5,23 @@ import * as React from "react";
 
 import { BaseLayout, MainContent } from "@splitgraph/tdesign";
 import { BlogPostMarketingNotice } from "../BlogPost/BlogPostMarketingNotice";
-import { HeaderRight } from "../HeaderRight";
+import { Link } from "../Link";
 
 export interface ILandingPageLayoutProps {
   children?: React.ReactNode;
 }
+
+const HeaderRight = () => (
+  <>
+    <Link href="/blog" className="desktop-only no-underline">
+      Blog
+    </Link>
+    <Link href="/docs">Docs</Link>
+    <Link className="button-link" href="/explore">
+      Explore
+    </Link>
+  </>
+);
 
 export default ({ children }: ILandingPageLayoutProps) => {
   return (
@@ -44,7 +56,7 @@ export default ({ children }: ILandingPageLayoutProps) => {
               justifyContent: "center",
               textAlign: "center",
             },
-            ".button-link": {
+            ".button-link, .button-link-secondary": {
               fontSize: [
                 "1.5rem !important",
                 "1.5rem !important",
