@@ -18,3 +18,7 @@ export { DocSearch } from './DocSearch';
 
 export { MarketingNotice } from './MarketingNotice';
 
+export { HeroSampleQuery } from './HeroSampleQuery';
+
+export { HeroSampleSplitfile } from './HeroSampleSplitfile';
+
