@@ -1,0 +1,14 @@
+export const meta = {
+  id: "mounting",
+  title: "Mounting",
+};
+
+Mounting is the ability to add datasets and remote databases to a Splitgraph engine without having to actually download or clone them. You can then query these datasets with any PostgreSQL client, with the Splitgraph engine transparently rewriting and forwarding queries to the upstream data source.
+
+For [external repositories](../splitgraph-cloud/external-repositories) that are indexed but not hosted by Splitgraph, mounting is the only way to query them. You can do so through the [Splitgraph DDN](../splitgraph-cloud/data-delivery-network) or by [mounting them manually](../ingesting-data/foreign-data-wrappers/socrata) on a local engine.
+
+Besides querying these "live" sources directly, you can also reference them in [Splitfiles](../splitfiles/splitfile-from) or snapshot them with [`sgr import`](../sgr/image-management-creation/import), creating a new Splitgraph image.
+
+Mounting is powered by PostgreSQL [foreign data wrappers](../ingesting-data/foreign-data-wrappers/introduction) and we added some scaffolding to them to make it easy to create foreign tables from the `sgr` client. Splitgraph also ships with a few open-source foreign data wrappers, letting you query other PostgreSQL/MySQL databases, MongoDB collections or even [government open data](../ingesting-data/foreign-data-wrappers/socrata) directly through Splitgraph.
+
+Finally, it's straightforward to [write your own foreign data wrapper](https://www.splitgraph.com/blog/foreign-data-wrappers) with Multicorn or integrate [existing ones](https://wiki.postgresql.org/wiki/Foreign_data_wrappers) with Splitgraph.
