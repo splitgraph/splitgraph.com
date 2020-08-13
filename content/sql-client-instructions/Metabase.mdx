@@ -1,0 +1,5 @@
+# Metabase
+
+Data discovery (introspection query interception) doesn't work with Metabase, as our `information_schema` implementation returns slashes in schema names. See the [GitHub issue](https://github.com/metabase/metabase/issues/12450) for details.
+
+SQL queries work, allowing you to use Splitgraph data in your Metabase dashboards.

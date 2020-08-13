@@ -1,0 +1,11 @@
+# Google Data Studio
+
+You will need the server's root certificate to set up the connection. You will also need a client certificate pair: this can be self-signed.
+
+```bash
+openssl req -newkey rsa:2048 -nodes -keyout client.key -x509 -days 365 -out client.crt
+```
+
+Note that there's a bug in the Data Studio which means that you have to **upload your key to the client certificate field and the certificate to the key field**.
+
+Data discovery doesn't completely work on Google Data Studio, as it treats all tables as being in the public schema and doesn't schema-qualify them when making queries from the table picker. You can still use a custom query to import data into Google Data Studio.
