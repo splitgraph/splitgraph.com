@@ -1,11 +1,9 @@
 export const meta = {
-  id: "sql-endpoint",
-  title: "Splitgraph SQL endpoint",
+  id: "data-delivery-network",
+  title: "Data Delivery Network",
 };
 
-**Note that this feature is currently in a closed beta. E-mail us at support@splitgraph.com with your username if you would like to gain access.**
-
-Splitgraph SQL endpoint, or Splitgraph Data Delivery Network (DDN) is a feature of Splitgraph Cloud. It's a PostgreSQL-compatible SQL endpoint hosted at `postgresql://data.splitgraph.com:5432/ddn` that lets you query any dataset hosted on or indexed by Splitgraph.
+Splitgraph Data Delivery Network (DDN) is a PostgreSQL-compatible SQL endpoint hosted at `postgresql://data.splitgraph.com:5432/ddn` that lets you query any dataset hosted on or indexed by Splitgraph with any PostgreSQL client.
 
 In an SQL query, you can reference Splitgraph images as PostgreSQL schemas using the form `namespace/repository:image_hash_or_tag`. If the hash or tag is missing, Splitgraph will assume the `:latest` tag.
 
@@ -54,7 +52,7 @@ The workspace currently only shows a small subset of datasets available on Split
 
 ![Splitgraph workspace example](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/docs/0900_splitgraph-cloud/images/sql-endpoint/1-dbeaver-introspection.png)
 
-## Connecting to the endpoint
+## Connecting to the DDN
 
 The endpoint is located at data.splitgraph.com. The connection parameters are:
 

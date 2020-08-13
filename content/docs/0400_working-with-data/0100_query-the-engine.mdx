@@ -27,6 +27,16 @@ string is:
 pgcli postgresql://sgr:password@localhost:5432/splitgraph
 ```
 
+## Data Delivery Network
+
+If you're registered on [Splitgraph Cloud](../splitgraph-cloud/introduction), you can also run SQL queries against the Splitgraph [Data Delivery Network](../splitgraph-cloud/data-delivery-network) directly without having to operate your own Splitgraph engine. For example:
+
+```bash
+sgr cloud sql 'SELECT COUNT(1) FROM "splitgraph/socrata:latest".datasets'
+```
+
+See the documentation for [`sgr cloud sql`](../sgr/splitgraph-cloud/cloud-sql) and the [Data Delivery Network](../splitgraph-cloud/data-delivery-network) for more details, including how to configure other SQL clients to access the DDN.
+
 ## Example
 
 In these subsections, we'll create a couple of example repositories and

@@ -7,6 +7,19 @@ export const meta = {
 
 Splitgraph is a tool for building, versioning, querying and sharing datasets that works on top of [PostgreSQL](https://www.postgresql.org/) and integrates seamlessly with anything that uses PostgreSQL.
 
+### What's the difference between Splitgraph and Splitgraph Cloud?
+
+When we say Splitgraph, in this documentation we mostly refer to [Splitgraph Core](https://github.com/splitgraph/splitgraph). You can use it in a stand-alone way to augment your data workflows or share data with any other Splitgraph instances in a peer-to-peer fashion.
+
+[**Splitgraph.com**, or **Splitgraph Cloud**](../splitgraph-cloud/introduction), is a public Splitgraph instance where you can share and discover data. It's a Splitgraph peer powered by the **Splitgraph Core** code, adding proprietary features like:
+
+   * [data catalog](https://www.splitgraph.com/explore) to discover and organize data
+   * multitenancy
+   * [caching SQL proxy](../splitgraph-cloud/data-delivery-network) that lets you query Splitgraph datasets and other databases with any PostgreSQL client
+   * OpenAPI-compatible [REST endpoint](../splitgraph-cloud/publish-rest-api) for any version of any Splitgraph dataset
+
+We have a [dedicated section](../splitgraph-cloud/introduction) for Splitgraph Cloud.
+
 ### Is Splitgraph a PostgreSQL extension?
 
 Not quite. The [Splitgraph engine](../architecture/splitgraph-engine) ships as a Docker image and is a customized version of PostgreSQL that is fully compatible with existing clients. In the future, we might repackage Splitgraph as a PostgreSQL extension.
@@ -23,8 +36,7 @@ which will let you ingest data from existing databases without installing Splitg
 
 ### Does my data have to be in PostgreSQL to use Splitgraph?
 
-With [foreign data wrappers](../ingesting-data/foreign-data-wrappers/introduction), you can query
-data in other databases (including MongoDB, MySQL or PostgreSQL) directly through Spligraph with
+With [mounting](../concepts/mounting), you can query data in other databases (including MongoDB, MySQL or PostgreSQL) directly through Spligraph with
 [any PostgreSQL client](../integrating-splitgraph/other-clients). You do not need to copy your data into PostgreSQL to use Splitgraph.
 
 ### Why PostgreSQL? Why not write your own database?
@@ -90,7 +102,7 @@ with Git. Here's an [example](https://github.com/splitgraph/splitgraph/tree/mast
 It is also possible to push data to S3-compatible storage (like [Minio](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-object-storage)).
 
 You can use [Splitgraph Cloud](../splitgraph-cloud/introduction) if you wish to
-get or share public data or have a [REST API](../splitgraph-cloud/publish-rest-api) generated for your dataset.
+get or share public data, query your datasets through the [Data Delivery Network](../splitgraph-cloud/data-delivery-network) or have a [REST API](../splitgraph-cloud/publish-rest-api) generated for your dataset.
 
 ### What are the general ideas behind Splitgraph?
 

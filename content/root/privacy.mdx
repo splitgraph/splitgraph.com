@@ -36,20 +36,21 @@ The information we collect about all visitors to our website includes the visito
 
 ### Information from the `sgr` client
 
-When you use the `sgr` client to publish Splitgraph datasets to the Splitgraph Registry,
+When you use the `sgr` client to publish Splitgraph datasets to the Splitgraph Registry or when you
+query data on the Splitgraph Data Delivery Network,
 you are communicating with the Splitgraph Registry over the Splitgraph SQL API. We collect
 Technical Information about the API calls that are made by the client, including your API token,
 time of the call and the identifier of the repository that was accessed. This information is used
 to analyze and improve our SQL API.
 
-We do not collect any telemetry or other information when you're using the `sgr` client without
-interacting with the Splitgraph Registry.
+The `sgr` client performs an at most daily update check when you start it. We use these to collect active user statistics. You can check the [configuration reference](/docs/configuration/config-flag-reference) for the `SG_UPDATE_FREQUENCY` and `SG_UPDATE_ANONYMOUS` flags for information on how to disable it.
 
 ## Third-party data processors
 
 We share some data with the following services:
 
 - Sendgrid (email services)
+- Algolia (search)
 
 ## Changes to our Privacy Policy
 

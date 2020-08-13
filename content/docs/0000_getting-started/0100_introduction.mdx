@@ -3,10 +3,19 @@ export const meta = {
   title: "Welcome to Splitgraph",
 };
 
-Splitgraph is a data management, building and sharing tool inspired by Docker and Git that works on top of PostgreSQL and integrates seamlessly with anything that uses PostgreSQL.
+Splitgraph consists of two sets of tools.
 
-Splitgraph allows the user to manipulate [data images](../concepts/images) (snapshots of SQL tables at a given point in time) as if they
-were code repositories by versioning, pushing and pulling them. It brings the best parts of Git and Docker, tools well-known and loved by developers, to data science and data engineering, and allows users to build and manipulate datasets directly on their database using familiar commands and paradigms.
+  * **Splitgraph, or Splitgraph Core**: a tool for building, versioning and querying reproducible datasets. It's inspired by Docker and Git, built with PostgreSQL and integrates with anything that uses PostgreSQL.
+  * **Splitgraph Cloud, or Splitgraph.com**: an SQL proxy, data catalog and Splitgraph peer. It hosts Splitgraph images as well as proxies queries to upstream data vendors, letting you query over 40,000 datasets with any SQL client.
+
+Splitgraph and Splitgraph Cloud can be used independently of each other. For example, you can use [`sgr`](../architecture/sgr-client) to manage data images without using Splitgraph Cloud, or you can query data on the Splitgraph [Data Delivery Network](../splitgraph-cloud/data-delivery-network) without installing Splitgraph locally. You can also use them both at the same time, for example, by pulling data from Splitgraph Cloud to use in [Splitfiles](../concepts/splitfiles).
+
+This documentation is mostly for Splitgraph Core, so we refer to it thoughout as Splitgraph. Splitgraph Cloud has its own [dedicated section](../splitgraph-cloud/introduction).
+
+## Splitgraph
+
+**Splitgraph** allows the user to manipulate [data images](../concepts/images) (snapshots of SQL tables at a given point in time) as if they
+were code repositories by versioning, pushing and pulling them.
 
 It works on top of PostgreSQL and uses SQL for all versioning and internal operations. You can "check out" data into actual PostgreSQL tables, offering read/write performance and feature parity with PostgreSQL and allowing you to query it with any SQL client. The client application has no idea that it's talking to a Splitgraph table and you don't need to rewrite any of your tools to use Splitgraph. Anything that works with PostgreSQL will work with Splitgraph.
 
@@ -18,4 +27,14 @@ Splitgraph does not limit your data sources to Postgres databases. It includes f
 [MySQL](../ingesting-data/foreign-data-wrappers/load-mysql-tables),
 [CSV files](../ingesting-data/load-csv-files) or [other Postgres databases](../ingesting-data/foreign-data-wrappers/load-postgres-tables) using the same interface.
 
-Splitgraph is peer-to-peer, and you can share images with other Splitgraph installations. [Splitgraph Cloud](../splitgraph-cloud/introduction) acts as a remote Splitgraph peer, and also provides a lot of scalability and bonus features. When you push a dataset to Splitgraph Cloud, it gets extra perks like an OpenAPI-compatible [REST endpoint](../splitgraph-cloud/publish-rest-api) (more perks coming soon!). Splitgraph Cloud also acts as a catalog for external data, indexing over 40000 open government datasets on the [Socrata platform](https://www.tylertech.com/products/socrata). Analyze [coronavirus data](https://www.splitgraph.com/cdc-gov/provisional-covid19-death-counts-by-sex-age-and-9bhg-hcku) with Jupyter and scikit-learn, plot nearby [marijuana dispensaries](https://www.splitgraph.com/colorado-gov/licensed-marijuana-businesses-in-colorado-sqs8-2un5) with Metabase and PostGIS or just explore [Chicago open data ](https://www.splitgraph.com/docs/ingesting-data/socrata) with DBeaver and do so from the comfort of a battle-tested RDBMS with a mature feature set and a rich ecosystem of integrations.
+Finally, Splitgraph is peer-to-peer. You can push and pull data images between other Splitgraph installations and use it as a standalone tool to supercharge your data workflows.
+
+## Splitgraph Cloud
+
+[**Splitgraph.com**, or **Splitgraph Cloud**](../splitgraph-cloud/introduction) is a public Splitgraph instance where you can share and discover data. It's a Splitgraph peer that extends on the open **Splitgraph Core** with extra proprietary features.
+
+Splitgraph Cloud acts as a [catalog](https://www.splitgraph.com/explore) for external data, indexing over 40,000 open government datasets on the [Socrata platform](https://www.tylertech.com/products/socrata). Analyze [coronavirus data](https://www.splitgraph.com/cdc-gov/provisional-covid19-death-counts-by-sex-age-and-9bhg-hcku) with Jupyter and scikit-learn, plot nearby [marijuana dispensaries](https://www.splitgraph.com/colorado-gov/licensed-marijuana-businesses-in-colorado-sqs8-2un5) with Metabase and PostGIS or just explore [Chicago open data ](https://www.splitgraph.com/docs/ingesting-data/socrata) with DBeaver and do so from the comfort of a battle-tested RDBMS with a mature feature set and a rich ecosystem of integrations.
+
+Splitgraph Cloud also gives you more ways to consume data. Every dataset pushed to Splitgraph Cloud gets a [REST endpoint](../splitgraph-cloud/publish-rest-api) provided for it by PostgREST. Also, every dataset on Splitgraph Cloud can be queried through our [Data Delivery Network](../splitgraph-cloud/data-delivery-network), allowing you to access data directly from your SQL client, application or BI dashboard without having to install anything else.
+
+Read the [Splitgraph Cloud guide](../splitgraph-cloud/introduction) for more information.
