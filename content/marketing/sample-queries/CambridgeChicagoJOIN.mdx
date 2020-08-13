@@ -1,0 +1,13 @@
+```sql
+SELECT
+    cambridge_cases.date AS date,
+    chicago_cases.cases_total AS chicago_daily_cases,
+    cambridge_cases.new_positive_cases AS cambridge_daily_cases
+FROM
+    "cityofchicago/covid19-daily-cases-and-deaths-naz8-j4nc".covid19_daily_cases_and_deaths chicago_cases
+FULL OUTER JOIN
+    "cambridgema-gov/covid19-cumulative-cases-by-date-tdt9-vq5y".covid19_cumulative_cases_by_date cambridge_cases
+ON
+    date_trunc('day', chicago_cases.lab_report_date) = cambridge_cases.date
+ORDER BY date ASC;
+```

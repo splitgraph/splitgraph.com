@@ -1,0 +1,14 @@
+```sql
+SELECT
+    new.domain AS domain,
+    new.id AS id,
+    new.name AS name
+FROM
+    "splitgraph/socrata:20200809".datasets old
+RIGHT OUTER JOIN
+    "splitgraph/socrata:20200810".datasets new
+ON
+    old.id = new.id
+WHERE
+    old.id IS NOT DISTINCT FROM NULL AND new.domain = 'data.texas.gov'
+```
