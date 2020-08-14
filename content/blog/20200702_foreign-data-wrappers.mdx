@@ -156,7 +156,7 @@ Using a foreign data wrapper for your database or data source gives you access t
 
 [Foreign data wrappers](https://www.splitgraph.com/docs/ingesting-data/foreign-data-wrappers/introduction) are one of the ways that Splitgraph aims to make data engineers' and data scientists' work easier.
 
-Splitgraph's [`sgr mount`](https://www.splitgraph.com/docs/sgr/data-import-export/mount) command handles the boilerplate around FDW initialization. This command creates a schema on your engine with foreign tables. Any tool (like [DataGrip/Metabase/dbt](https://www.splitgraph.com/product/splitgraph/integrations)) can query them. Using [`sgr import`](https://www.splitgraph.com/docs/sgr/image-management-creation/import), you can snapshot them into a Splitgraph image. Finally, you can use a [Splitfile](https://www.splitgraph.com/concepts/splitfiles) to build reproducible datasets that derive from the mounted database.
+Splitgraph's [`sgr mount`](https://www.splitgraph.com/docs/sgr/data-import-export/mount) command handles the boilerplate around FDW initialization. This command creates a schema on your engine with foreign tables. Any tool (like [DataGrip/Metabase/dbt](https://www.splitgraph.com/product/splitgraph/integrations)) can query them. Using [`sgr import`](https://www.splitgraph.com/docs/sgr/image-management-creation/import), you can snapshot them into a Splitgraph image. Finally, you can use a [Splitfile](https://www.splitgraph.com/docs/concepts/splitfiles) to build reproducible datasets that derive from the mounted database.
 
 We ship with a few open-source FDWs as well as a couple of our own ones.
 
