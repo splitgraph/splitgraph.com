@@ -11,14 +11,49 @@ Splitgraph is a tool for building, versioning, querying and sharing datasets tha
 
 When we say Splitgraph, in this documentation we mostly refer to [Splitgraph Core](https://github.com/splitgraph/splitgraph). You can use it in a stand-alone way to augment your data workflows or share data with any other Splitgraph instances in a peer-to-peer fashion.
 
-[**Splitgraph.com**, or **Splitgraph Cloud**](../splitgraph-cloud/introduction), is a public Splitgraph instance where you can share and discover data. It's a Splitgraph peer powered by the **Splitgraph Core** code, adding proprietary features like:
+[**Splitgraph.com**, or **Splitgraph Cloud**](../splitgraph-cloud/introduction), is a public Splitgraph instance where you can share and discover data. We sometimes also call it the Splitgraph registry, analogous to the Docker registry.
+
+It's a Splitgraph peer powered by the **Splitgraph Core** code, adding proprietary features like:
 
    * [data catalog](https://www.splitgraph.com/explore) to discover and organize data
    * multitenancy
    * [caching SQL proxy](../splitgraph-cloud/data-delivery-network) that lets you query Splitgraph datasets and other databases with any PostgreSQL client
    * OpenAPI-compatible [REST endpoint](../splitgraph-cloud/publish-rest-api) for any version of any Splitgraph dataset
 
-We have a [dedicated section](../splitgraph-cloud/introduction) for Splitgraph Cloud.
+We have a [dedicated documentation section](../splitgraph-cloud/introduction) for Splitgraph Cloud.
+
+### Do I have to use Splitgraph Cloud to use Splitgraph?
+
+No. While we use the Splitgraph code to power Splitgraph Cloud, Splitgraph is a self-contained stand-alone tool. You can use it in a decentralized way, sharing data between two [Splitgraph engines](../architecture/splitgraph-engine) like you would with Git.
+
+Here's an [example](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-other-engine) of getting two Splitgraph instances to synchronize with each other. It is also possible to push data to S3-compatible storage (like [Minio](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-object-storage)).
+
+You can use [Splitgraph Cloud](../splitgraph-cloud/introduction) if you wish to
+get or share public data, query data through the [Data Delivery Network](../splitgraph-cloud/data-delivery-network) or have a [REST API](../splitgraph-cloud/publish-rest-api) generated for your dataset.
+
+Most Splitgraph Cloud functionality is a polished and scalable multi-tenant version of what you can build with Splitgraph.
+
+For example, you can use Splitgraph's [mounting](../concepts/mounting) capability to run federated queries across multiple databases. We use mounting to power our [Data Delivery Network](../splitgraph-cloud/data-delivery-network), giving users the experience of a public PostgreSQL database with tens of thousands of datasets at their fingertips, queryable with any SQL client.
+
+You can also set up [PostgREST](../integrating-splitgraph/postgrest) with Splitgraph to generate a REST API for your datasets. We use a fork of PostgREST in Splitgraph Cloud to power our [REST API](../splitgraph-cloud/publish-rest-api).
+
+### Do I have to download Splitgraph to use Splitgraph Cloud?
+
+No. While Splitgraph Cloud is a Splitgraph [remote](../architecture/splitgraph-remotes), letting you push and pull data between it and your local Splitgraph instance, a lot of its functionality doesn't require you to download Splitgraph.
+
+In particular, you can connect to Splitgraph's [Data Delivery Network](../splitgraph-cloud/data-delivery-network) at `postgresql://data.splitgraph.com:5432/ddn` with any PostgreSQL client without having to install anything else. You can get credentials in less than 30 seconds on your [account settings](https://www.splitgraph.com/settings/sql-credentials) page.
+
+You can also query Splitgraph's [REST API](../splitgraph-cloud/publish-rest-api) at `https://data.splitgraph.com/[namespace]/[repository]/latest/-/rest` that we provide for any dataset on Splitgraph.
+
+### What is the Splitgraph Data Delivery Network?
+
+The [Splitgraph Data Delivery Network](../splitgraph-cloud/data-delivery-network) is a Splitgraph Cloud feature that lets you connect to Splitgraph with any PostgreSQL client without downloading anything else. It allows you to query any of the over 40,000 datasets hosted on or proxied by Splitgraph with plain SQL. You can even run `JOIN` queries between distinct datasets.
+
+On a technical level, you can think of the Splitgraph DDN as a PostgreSQL wire-level proxy and firewall. We use open-source technology like [PostgreSQL foreign data wrappers](https://www.splitgraph.com/blog/foreign-data-wrappers) and [pgBouncer](https://www.pgbouncer.org/) as well as Splitgraph Core's features like [mounting](../concepts/mounting) and [layered querying](../large-datasets/layered-querying) to route and execute federated queries across databases, third-party data providers, and Splitgraph images.
+
+We even implement the [ANSI information schema](https://en.wikipedia.org/wiki/Information_schema) standard: when your client connects to the Splitgraph Data Delivery Network, it will show you a list of featured repositories as well as data that you previously uploaded to Splitgraph.
+
+All of this gives you a seamless experience of a single public database with thousands of datasets at your fingertips, compatible with most existing clients and BI tools.
 
 ### Is Splitgraph a PostgreSQL extension?
 
@@ -49,6 +84,8 @@ of extensions and applications. We don't think that features added by Splitgraph
 
 Yes. Any PostgreSQL client is able to query Splitgraph datasets (directly or through [layered querying](../large-datasets/layered-querying)),
 including [DataGrip](../integrating-splitgraph/datagrip), [pgAdmin](../integrating-splitgraph/pgadmin) or [other clients like pgcli or DBeaver](../integrating-splitgraph/other-clients).
+
+If you're a user of [Splitgraph Cloud](../splitgraph-cloud/introduction), you can use most of your SQL clients to query data from the Splitgraph [Data Delivery Network](../splitgraph-cloud/data-delivery-network) without downloading Splitgraph.
 
 In addition, Splitgraph can enhance a lot of existing applications and extensions that work with PostgreSQL. We have examples of using Splitgraph with [Jupyter notebooks](../integrating-splitgraph/jupyter-notebooks),
 [PostGIS](../integrating-splitgraph/postgis), [PostgREST](../integrating-splitgraph/postgrest),
@@ -93,16 +130,6 @@ Yes. Splitgraph has a few optimizations that make it suitable for working with l
 
 Since Splitgraph is built on top of PostgreSQL, you can use the same methods for horizontally scaling a
 PostgreSQL deployment to scale a Splitgraph engine.
-
-### Do I have to register anywhere to use Splitgraph?
-
-No. You can use Splitgraph in a decentralized way, sharing data between two engines like you would
-with Git. Here's an [example](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-other-engine) of getting two Splitgraph instances to synchronize with each other.
-
-It is also possible to push data to S3-compatible storage (like [Minio](https://github.com/splitgraph/splitgraph/tree/master/examples/push-to-object-storage)).
-
-You can use [Splitgraph Cloud](../splitgraph-cloud/introduction) if you wish to
-get or share public data, query your datasets through the [Data Delivery Network](../splitgraph-cloud/data-delivery-network) or have a [REST API](../splitgraph-cloud/publish-rest-api) generated for your dataset.
 
 ### What are the general ideas behind Splitgraph?
 
