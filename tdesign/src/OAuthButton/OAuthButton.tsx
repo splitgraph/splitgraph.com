@@ -3,13 +3,16 @@
 import { jsx } from "theme-ui";
 import * as React from "react";
 
-export interface IOAuthButtonProps {
+export interface IGenericOAuthButtonProps {
   button: React.ReactNode;
   identityProvider: string;
   formAction?: string;
   goal?: "login" | "link";
   redirectURL?: string;
 }
+
+export interface IOAuthButtonProps
+  extends Omit<IGenericOAuthButtonProps, "button" | "identityProvider"> {}
 
 const FORM_ACTION = "/api/forms/submit/auth/oauth/init";
 
@@ -19,7 +22,7 @@ const OAuthButton = ({
   formAction = FORM_ACTION,
   goal = "login",
   redirectURL = "/",
-}: IOAuthButtonProps) => {
+}: IGenericOAuthButtonProps) => {
   return (
     <form action={formAction} method="POST">
       <input type="hidden" name="goal" value={goal} />
