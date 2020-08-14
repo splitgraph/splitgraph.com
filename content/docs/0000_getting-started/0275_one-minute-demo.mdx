@@ -1,0 +1,64 @@
+export const meta = {
+  id: "one-minute-demo",
+  title: "One minute demo",
+};
+
+Assuming you have a PostgreSQL client installed (like `psql`, `pgcli`, pgAdmin or DBeaver), you can start querying Splitgraph data in less than a minute.
+
+## Connecting to the Splitgraph DDN
+
+First, [register](https://www.splitgraph.com/auth/sign_up) on Splitgraph. We support OAuth through Google, GitHub or GitLab, as well as username/password.
+
+Then, go to your [account settings page](https://www.splitgraph.com/settings/sql-credentials). There, you can get a username and password to connect to the [Splitgraph Data Delivery Network](../splitgraph-cloud/data-delivery-network). If you're using `psql` or `pgcli`, you can paste the connection string directly:
+
+```shell-session
+$ psql postgresql://[API_KEY]:[API_SECRET]@data.splitgraph.com:5432/ddn
+```
+
+You're now ready to run queries against Splitgraph data.
+
+## Querying open government data
+
+This sample query that we used in our [Metabase demo](../ingesting-data/socrata#using-metabase-to-join-and-plot-data-from-multiple-data-portals) runs a JOIN between two datasets:
+
+```sql
+SELECT
+    cambridge_cases.date AS date,
+    chicago_cases.cases_total AS chicago_daily_cases,
+    cambridge_cases.new_positive_cases AS cambridge_daily_cases
+FROM
+    "cityofchicago/covid19-daily-cases-and-deaths-naz8-j4nc".covid19_daily_cases_and_deaths chicago_cases
+FULL OUTER JOIN
+    "cambridgema-gov/covid19-cumulative-cases-by-date-tdt9-vq5y".covid19_cumulative_cases_by_date cambridge_cases
+ON
+    date_trunc('day', chicago_cases.lab_report_date) = cambridge_cases.date
+ORDER BY date ASC;
+```
+
+This will join the data between two distinct [Socrata](https://www.tylertech.com/products/socrata) open government data portals ([Chicago, IL](https://data.cityofchicago.org/Health-Human-Services/COVID-19-Daily-Cases-and-Deaths/naz8-j4nc) and [Cambridge, MA](https://data.cambridgema.gov/Public-Safety/COVID-19-Cumulative-Cases-by-Date/tdt9-vq5y)).
+
+## Querying geospatial data and Splitgraph images
+
+You can also run queries against hosted Splitgraph images. If your client supports [PostGIS](https://postgis.net/) (like [DBeaver](https://dbeaver.io/) or pgAdmin), it will even plot geospatial data.
+
+For example, you can query the [London ward boundary data](https://www.splitgraph.com/splitgraph/london_wards/) image as follows:
+
+```sql
+SELECT name, gss_code, ST_Transform(ST_SetSRID(geom, 27700), 4326)
+FROM "splitgraph/london_wards".city_merged_2018
+```
+
+## Next steps
+
+Splitgraph Cloud hosts or proxies queries to [over 40,000 datasets](/explore), letting you query them directly from your SQL client.
+
+At the core of Splitgraph Cloud is [Splitgraph](https://github.com/splitgraph/splitgraph) itself: a self-contained tool for building, sharing and querying data images, inspired by Docker and Git. You can [install Splitgraph](./installation) locally and go through the [five minute demo](./five-minute-demo). This will show you how to use Splitgraph to build your own data image from public data, upload it to Splitgraph Cloud and query it through the Splitgraph DDN or a REST API.
+
+You can also use Splitgraph in a stand-alone, decentralized way without using Splitgraph Cloud. The [decentralized demo](./decentralized-demo) will show you how to spin up multiple Splitgraph instances and share data between them.
+
+## Further reading
+
+- [Five minute demo](./five-minute-demo)
+- [Decentralized demo](./decentralized-demo)
+- [Splitgraph Cloud reference](../splitgraph-cloud/introduction)
+- [Splitgraph Data Delivery Network](../splitgraph-cloud/data-delivery-network)

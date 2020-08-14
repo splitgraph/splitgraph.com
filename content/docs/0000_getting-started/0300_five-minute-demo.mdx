@@ -325,7 +325,21 @@ The dataset is now available on `https://www.splitgraph.com/YOUR_USERNAME/votes_
 
 Splitgraph also uploads the image's [provenance](/splitgraph-demo/votes_by_state/latest/-/provenance) to Splitgraph Cloud, allowing anyone to see how the image was built and sourced. In addition, the [2016 Election dataset dependents](/splitgraph/2016_election/latest/-/dependents) page will now list the new image as a dependent.
 
-You also have an OpenAPI-compatible [REST API](/splitgraph-demo/votes_by_state/latest/-/api-schema) generated for the dataset, provided by [PostgREST](https://postgrest.org/en/latest/). More perks like this coming soon.
+You also have an OpenAPI-compatible [REST API](/splitgraph-demo/votes_by_state/latest/-/api-schema) generated for the dataset, provided by [PostgREST](https://postgrest.org/en/latest/).
+
+## Querying the dataset through the Splitgraph Data Delivery Network
+
+[Splitgraph Data Delivery Network](../splitgraph-cloud/data-delivery-network) is a public SQL endpoint that lets any client query any dataset that is hosted on or proxied by Splitgraph. You can run SQL against your data immediately with [`sgr cloud sql`](../sgr/splitgraph-cloud/cloud-sql):
+
+```shell-session
+$ sgr cloud sql 'SELECT * FROM "YOUR_USERNAME/votes_by_state".votes_by_state'
+```
+
+You can also run `sgr cloud sql` with no parameters to get a libpq connection string that you can pass to other PostgreSQL clients. For example:
+
+```shell-session
+$ pgcli $(sgr cloud sql)
+```
 
 ## Further reading
 
@@ -333,3 +347,4 @@ You also have an OpenAPI-compatible [REST API](/splitgraph-demo/votes_by_state/l
 - [Splitfile reference](../splitfiles/splitfile-intro)
 - [Sample Splitfiles](https://github.com/splitgraph/splitgraph/tree/master/examples/sample_splitfiles)
 - [Splitgraph Cloud reference](../splitgraph-cloud/introduction)
+- [Splitgraph Data Delivery Network](../splitgraph-cloud/data-delivery-network)

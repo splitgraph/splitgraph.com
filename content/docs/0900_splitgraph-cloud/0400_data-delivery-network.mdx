@@ -66,14 +66,14 @@ The endpoint is located at data.splitgraph.com. The connection parameters are:
 
 If you have Splitgraph [installed locally](../getting-started/installation), the easiest way to query the endpoint is by running `sgr cloud sql [query]`.
 
-`sgr cloud sql` without arguments returns a libpq-compatible connection string. You can use it to connect to the endpoint with a client like `pgcli` or `psql`:
+[`sgr cloud sql`](../sgr/splitgraph-cloud/cloud-sql) without arguments returns a libpq-compatible connection string. You can use it to connect to the endpoint with a client like `pgcli` or `psql`:
 
 ```bash
 pgcli $(sgr cloud sql)
 psql $(sgr cloud sql)
 ```
 
-You need to have logged in to Splitgraph cloud. See the [Splitgraph Cloud introduction](../introduction) for more information.
+You need to be logged in to Splitgraph Cloud. See the [Splitgraph Cloud introduction](../introduction) for more information.
 
 You can find your Splitgraph API key and secret in your `.sgconfig` file, under the `data.splitgraph.com` section:
 

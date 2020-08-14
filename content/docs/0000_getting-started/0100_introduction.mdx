@@ -10,7 +10,7 @@ Splitgraph consists of two sets of tools.
 
 Splitgraph and Splitgraph Cloud can be used independently of each other. For example, you can use [`sgr`](../architecture/sgr-client) to manage data images without using Splitgraph Cloud, or you can query data on the Splitgraph [Data Delivery Network](../splitgraph-cloud/data-delivery-network) without installing Splitgraph locally. You can also use them both at the same time, for example, by pulling data from Splitgraph Cloud to use in [Splitfiles](../concepts/splitfiles).
 
-This documentation is mostly for Splitgraph Core, so we refer to it thoughout as Splitgraph. Splitgraph Cloud has its own [dedicated section](../splitgraph-cloud/introduction).
+This documentation is mostly for Splitgraph Core, so we refer to it throughout as Splitgraph. Splitgraph Cloud has its own [dedicated section](../splitgraph-cloud/introduction).
 
 ## Splitgraph
 
@@ -31,10 +31,10 @@ Finally, Splitgraph is peer-to-peer. You can push and pull data images between o
 
 ## Splitgraph Cloud
 
-[**Splitgraph.com**, or **Splitgraph Cloud**](../splitgraph-cloud/introduction) is a public Splitgraph instance where you can share and discover data. It's a Splitgraph peer that extends on the open **Splitgraph Core** with extra proprietary features.
+[**Splitgraph.com**, or **Splitgraph Cloud**](../splitgraph-cloud/introduction) is a public Splitgraph instance where you can share and discover data. It's a Splitgraph peer that extends on the Splitgraph Core with extra proprietary features.
 
 Splitgraph Cloud acts as a [catalog](https://www.splitgraph.com/explore) for external data, indexing over 40,000 open government datasets on the [Socrata platform](https://www.tylertech.com/products/socrata). Analyze [coronavirus data](https://www.splitgraph.com/cdc-gov/provisional-covid19-death-counts-by-sex-age-and-9bhg-hcku) with Jupyter and scikit-learn, plot nearby [marijuana dispensaries](https://www.splitgraph.com/colorado-gov/licensed-marijuana-businesses-in-colorado-sqs8-2un5) with Metabase and PostGIS or just explore [Chicago open data ](https://www.splitgraph.com/docs/ingesting-data/socrata) with DBeaver and do so from the comfort of a battle-tested RDBMS with a mature feature set and a rich ecosystem of integrations.
 
-Splitgraph Cloud also gives you more ways to consume data. Every dataset pushed to Splitgraph Cloud gets a [REST endpoint](../splitgraph-cloud/publish-rest-api) provided for it by PostgREST. Also, every dataset on Splitgraph Cloud can be queried through our [Data Delivery Network](../splitgraph-cloud/data-delivery-network), allowing you to access data directly from your SQL client, application or BI dashboard without having to install anything else.
+Splitgraph Cloud also gives you more ways to consume data. Every dataset pushed to Splitgraph Cloud gets a [REST endpoint](../splitgraph-cloud/publish-rest-api) provided for it by [PostgREST](https://postgrest.org/en/latest/). Also, you can query any dataset on Splitgraph Cloud through our [Data Delivery Network](../splitgraph-cloud/data-delivery-network), allowing you to access data directly from your SQL client, application or BI dashboard without having to install anything else.
 
-Read the [Splitgraph Cloud guide](../splitgraph-cloud/introduction) for more information.
+Read the [Splitgraph Cloud guide](../splitgraph-cloud/introduction) for more information or try our [one minute demo](one-minute-demo) for a showcase of the Splitgraph Data Delivery Network.
