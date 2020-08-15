@@ -32,14 +32,15 @@ const HeroSampleQuery = ({ queries }: IHeroSampleQueryProps) => {
         justifyContent: "space-between",
         // width: ["100ch", "100ch", "90ch"],
         // maxWidth: "90vw",
-        width: ["100%", "100%", "50vw"],
+        // width: ["100%", "100%", "40ch"],
+        // maxWidth: "100%",
         pre: {
           marginTop: 0,
           marginBottom: 0,
           // flexGrow: 1,
           height: "20rem",
           code: {
-            // width: "90ch",
+            maxWidth: "100%",
           },
         },
       }}
@@ -47,6 +48,7 @@ const HeroSampleQuery = ({ queries }: IHeroSampleQueryProps) => {
       {snippet}
       <Box
         sx={{
+          width: "100%",
           backgroundColor: "heavy",
           color: "light",
           display: "flex",

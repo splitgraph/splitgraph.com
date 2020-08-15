@@ -312,7 +312,7 @@ export const defaultTheme = {
         borderBottom: "4px solid #efefef",
       },
       "@media (min-width: 769px)": {
-        minWidth: "80ch",
+        minWidth: "min(80ch, 100%)",
       },
       fontSize: "0.8rem",
       padding: 10,

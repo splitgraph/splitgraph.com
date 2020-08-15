@@ -8,6 +8,8 @@ import NewSocrataDatasets from "@splitgraph/content/marketing/sample-queries/New
 
 import { mdxComponents } from "@splitgraph/design";
 
+import HelpSectionList from "./HelpSectionList";
+
 const useConnectPageData = ({ helpSectionComponents, onboardingState }) => {
   const isAuthenticated = ["post-auth", "post-auth-welcome"].includes(
     onboardingState
@@ -22,19 +24,26 @@ const useConnectPageData = ({ helpSectionComponents, onboardingState }) => {
 
   // The relative path is fragile, but it's the best solution I've found in dev so far
   // Also note that this does not support SSR
-  const HelpsSections = (helpSectionComponents || []).map(({ ComponentName }) =>
+  const HelpSections = (helpSectionComponents || []).map(({ ComponentName }) =>
     dynamic(() =>
       import(`../../../content/sql-client-instructions/${ComponentName}.mdx`)
     )
   );
 
   const helpSection = (
-    <>
-      {HelpsSections.map((HelpsSectionMarkdownComponent, index) => (
-        <HelpsSectionMarkdownComponent key={index} components={mdxComponents} />
-      ))}
-    </>
+    <HelpSectionList
+      HelpSections={HelpSections}
+      mdxComponents={mdxComponents}
+    />
   );
+
+  // const helpSection = (
+  //   <>
+  //     {HelpSections.map((HelpsSectionMarkdownComponent, index) => (
+  //       <HelpsSectionMarkdownComponent key={index} components={mdxComponents} />
+  //     ))}
+  //   </>
+  // );
 
   const sampleQueries = [
     {
