@@ -9,6 +9,7 @@ import { Link } from "../Link";
 
 export interface ILandingPageLayoutProps {
   children?: React.ReactNode;
+  showMarketingNotice?: boolean | React.ReactNode;
 }
 
 const HeaderRight = () => (
@@ -23,10 +24,20 @@ const HeaderRight = () => (
   </>
 );
 
-export default ({ children }: ILandingPageLayoutProps) => {
+export default ({
+  children,
+  showMarketingNotice = true,
+}: ILandingPageLayoutProps) => {
+  const marketingNotice =
+    showMarketingNotice && typeof showMarketingNotice === "boolean" ? (
+      <BlogPostMarketingNotice />
+    ) : (
+      showMarketingNotice
+    );
+
   return (
     <>
-      <BlogPostMarketingNotice />
+      {marketingNotice}
       <BaseLayout
         extraHeaderStyle={{
           borderWidth: "0 !important",

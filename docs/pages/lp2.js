@@ -11,6 +11,7 @@ import { LandingPageLayout } from "../components/LandingPageLayout";
 import { HeroBox } from "../components/HeroBox";
 import { HeroSampleQuery } from "../components/HeroSampleQuery";
 import { HeroSampleSplitfile } from "../components/HeroSampleSplitfile";
+import { HeroConnectionParams } from "../components/HeroConnectionParams";
 import {
   Footer,
   PreWithCopy,
@@ -345,7 +346,7 @@ const featureSectionStyle = {
 
 const LandingPage = () => {
   return (
-    <LandingPageLayout>
+    <LandingPageLayout showMarketingNotice={false}>
       <NextSeo title="Work with data like you work with code" />
 
       <HeroBox
@@ -455,96 +456,7 @@ const LandingPage = () => {
           </Link> */}
         </Box>
 
-        <Box
-          className="hero-subsection hero-subsection--splitfile"
-          sx={{
-            backgroundColor: "white",
-            color: "primary",
-            maxWidth: "90vw",
-            boxShadow: "card",
-            // minWidth: ["calc(100vw - 4rem)", "400px", "400px"],
-            // minHeight: "600px",
-            padding: ["1rem", "2rem", "2rem"],
-          }}
-        >
-          <Box
-            sx={{
-              width: "100%",
-              h2: {
-                color: "heavy",
-              },
-            }}
-          >
-            <Box className="value-area">
-              <PreWithCopy title={"Host"} extraStyle={{ marginBottom: "1rem" }}>
-                {"data.splitgraph.com"}
-              </PreWithCopy>
-            </Box>
-
-            <Box className="value-area">
-              <PreWithCopy title={"Port"} extraStyle={{ marginBottom: "1rem" }}>
-                {"5432"}
-              </PreWithCopy>
-            </Box>
-
-            <Box className="value-area">
-              <PreWithCopy
-                title={"Database Name"}
-                extraStyle={{ marginBottom: "1rem" }}
-              >
-                {"ddn"}
-              </PreWithCopy>
-            </Box>
-
-            <Box className="value-area">
-              <PreWithCopy
-                title={"Connection URI"}
-                extraStyle={{ marginBottom: "1rem" }}
-              >
-                {"postgresql://data.splitgraph.com/ddn"}
-              </PreWithCopy>
-            </Box>
-
-            <Box>
-              <Text
-                sx={{ color: "heavy", fontWeight: "bold", display: "block" }}
-              >
-                Username / Password
-              </Text>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  form: {
-                    marginBottom: "1rem",
-                    marginTop: "1rem",
-                    marginLeft: ["0.5rem", "1rem", "1rem"],
-                    marginRight: ["0.5rem", "1rem", "1rem"],
-                  },
-                  // padding: "1rem",
-                  borderWidth: "1px",
-                  borderStyle: "solid",
-                  borderColor: "gray",
-                  a: {
-                    variant: "links.primary",
-                    textDecoration: "underline",
-                    marginBottom: "1rem",
-                  },
-                }}
-              >
-                <GitHubOAuthButton />
-                <GitLabOAuthButton />
-                <GoogleOAuthButton />
-                <Link href="/auth/sign_up">
-                  Or, Signup with Email & Password
-                </Link>
-              </Box>
-            </Box>
-          </Box>
-          {/* <CambridgeChicagoJOIN components={mdxComponents} /> */}
-        </Box>
+        <HeroConnectionParams />
 
         <br />
       </HeroBox>
@@ -628,8 +540,8 @@ const LandingPage = () => {
               Connect to the Data Delivery Network (DDN) to query the catalog
               like it's a Postgres database. The DDN is a distributed SQL
               caching proxy built on the PostgreSQL wire protocol. It can route
-              queries to live upstream databases or to versioned data snapshots
-              known as "data images."
+              queries to any data in the catalog, whether that's a live database
+              or a specific version of a data image.
             </p>
             <Link href="/connect">Connect Now</Link>
           </Box>
@@ -718,8 +630,7 @@ const LandingPage = () => {
         <h2 sx={{ fontWeight: 200 }}>
           Splitgraph.com is a hosted service built around Splitgraph Core.
           <br />
-          It adds features like a public SQL proxy and data catalog
-          <br />
+          It adds features like a public SQL proxy and data catalog.
         </h2>
       </section>
 

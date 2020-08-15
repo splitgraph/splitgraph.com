@@ -26,6 +26,7 @@ import dynamic from "next/dynamic";
 
 const ConnectionInstructions = ({ BASE_DIR, components }) => {
   // The relative path is fragile, but it's the best solution I've found in dev so far
+  // Also note that this does not support SSR
   const Articles = components.map(({ ComponentName }) =>
     dynamic(() =>
       import(`../../../content/sql-client-instructions/${ComponentName}.mdx`)
