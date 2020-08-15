@@ -6,7 +6,7 @@ import * as React from "react";
 import { IconClipboard } from "../Icon";
 
 export interface IPreWithCopyProps {
-  title?: string;
+  title?: string | React.ReactNode;
   children?: React.ReactNode;
   extraStyle?: SystemStyleObject;
   onCopy?: (message?: string) => void;
@@ -76,7 +76,11 @@ const PreWithCopy = ({
 
   return (
     <Box sx={preContainerStyle}>
-      {title && <Text className="pre-title">{title}</Text>}
+      {title && typeof title === "string" ? (
+        <Text className="pre-title">{title}</Text>
+      ) : title ? (
+        title
+      ) : null}
       <Box className="pre-row">
         <pre>
           <code ref={codeRef}>{children}</code>
