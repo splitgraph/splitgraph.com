@@ -1,4 +1,4 @@
-import { Flex, Text } from "rebass";
+import { Box, Flex, Text } from "rebass";
 import MutedLink from "../Link/MutedLink";
 
 const Checkmark = () => {
@@ -24,6 +24,7 @@ export default ({
   dismissLinkText,
   dismissLinkHref,
   onClickDismiss,
+  dismissLinkOwnRow = false,
 }) => {
   return (
     <Flex
@@ -36,6 +37,11 @@ export default ({
         backgroundColor: "successBackground",
         backgroundOpacity: 0.2,
         border: "1px solid success",
+        ...(dismissLinkOwnRow
+          ? {
+              flexWrap: "wrap",
+            }
+          : {}),
       }}
     >
       <Flex width={dismissLinkText && dismissLinkHref ? 7 / 10 : 10 / 10}>
@@ -44,7 +50,13 @@ export default ({
       </Flex>
 
       {dismissLinkText && (dismissLinkHref || onClickDismiss) && (
-        <Flex width={3 / 10} justifyContent="flex-end">
+        <Flex
+          width={3 / 10}
+          sx={{
+            flexGrow: "1",
+            justifyContent: dismissLinkOwnRow ? "flex-start" : "flex-end",
+          }}
+        >
           {dismissLinkHref ? (
             <SuccessResetLink
               text={dismissLinkText}
