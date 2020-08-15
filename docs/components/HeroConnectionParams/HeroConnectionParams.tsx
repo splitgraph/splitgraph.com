@@ -127,7 +127,7 @@ const HeroConnectionParams = ({
                   redirectURL
                 )}`}
               >
-                Or, Signup with Email & Password
+                Or, Sign Up with Email & Password
               </a>
             </Box>
           </Box>

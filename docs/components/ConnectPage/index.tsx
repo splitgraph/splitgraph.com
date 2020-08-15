@@ -9,3 +9,10 @@ export { getStaticPropsForConnectPage };
 import ConnectPageMarketingNotice from './ConnectPageMarketingNotice';
 export { ConnectPageMarketingNotice };
 
+
+import HelpSectionList from './HelpSectionList';
+export { HelpSectionList };
+
+import HelpSectionItemWrapper from './HelpSectionItemWrapper';
+export { HelpSectionItemWrapper };
+

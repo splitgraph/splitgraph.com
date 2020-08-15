@@ -39,6 +39,7 @@ const ConnectPage = ({
             flexGrow: "1",
             backgroundColor: "primary",
             padding: 0,
+            paddingBottom: "4rem",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -53,6 +54,8 @@ const ConnectPage = ({
             flexGrow: "1",
             backgroundColor: "#fff",
             width: ["100%", "100%", "60%"],
+            paddingLeft: ["1rem", "1rem", "calc((100% - 90%) / 2)"],
+            paddingRight: ["1rem", "1rem", "calc((100% - 90%) / 2)"],
             ".right-top,.right-bot": {
               padding: ["2rem", "2rem", "4rem"],
             },
@@ -66,7 +69,7 @@ const ConnectPage = ({
             },
             ".right-bot": {
               paddingTop: "2rem",
-              backgroundColor: "#ebebeb",
+              // backgroundColor: "#ebebeb",
             },
           },
         } as StyleSystemObject
