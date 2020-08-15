@@ -2329,6 +2329,7 @@ __metadata:
     dayjs: ^1.8.27
     directory-tree: ^2.2.4
     express: ^4.17.1
+    iframe-resizer-react: ^1.0.4
     mdx: ^0.3.1
     mdx-prism: ^0.3.1
     next: ^9.3.0
@@ -10233,6 +10234,27 @@ fsevents@~2.1.2:
   version: 0.1.5
   resolution: "iferr@npm:0.1.5"
   checksum: 3/9d366dcc6356bfc0156ba7b86c7ef1a8ede7533fc7b100b4700de618774f1b48aa60185a2193f8260870b9168daa38aee5b11d38c92f5100af8ccdf22b5c2717
+  languageName: node
+  linkType: hard
+
+"iframe-resizer-react@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "iframe-resizer-react@npm:1.0.4"
+  dependencies:
+    iframe-resizer: ^4.2.10
+    warning: ^4.0.3
+  peerDependencies:
+    prop-types: ^15.7.2
+    react: ^16.13.1
+    react-dom: ^16.13.1
+  checksum: 3/c4e9d383164d0dbcab825022497c14be32b986cfbffd0a5f98d03da74a3a70df82a363cb68335587ddaa0673d5be37ef3deabb12a49419d1d74fdd7541269abb
+  languageName: node
+  linkType: hard
+
+"iframe-resizer@npm:^4.2.10":
+  version: 4.2.11
+  resolution: "iframe-resizer@npm:4.2.11"
+  checksum: 3/02d07d22a9f0dac4ba5c8ba15d718735ab46549c2bb16c6c518eaaca0a2bbdb68e838fec5f45e406f294dab320eba7018f37350abf4d655f74ab29fefab8dc04
   languageName: node
   linkType: hard
 
