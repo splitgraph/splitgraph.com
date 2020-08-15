@@ -12,13 +12,20 @@ export { BlogPostItem } from "./BlogPostItem";
 export { BlogPost } from "./BlogPost";
 
 export { Breadcrumbs } from "./Breadcrumbs";
-export { RSSMetaTag } from './RSSMetaTag';
+export { RSSMetaTag } from "./RSSMetaTag";
 
-export { DocSearch } from './DocSearch';
+export { DocSearch } from "./DocSearch";
 
-export { MarketingNotice } from './MarketingNotice';
+export { MarketingNotice } from "./MarketingNotice";
 
-export { HeroSampleQuery } from './HeroSampleQuery';
+export * from "./HeroSampleQuery";
 
-export { HeroSampleSplitfile } from './HeroSampleSplitfile';
+export { HeroSampleSplitfile } from "./HeroSampleSplitfile";
 
+export { HeroConnectionParams } from "./HeroConnectionParams";
+
+export {
+  ConnectPage,
+  useConnectPageData,
+  getStaticPropsForConnectPage,
+} from "./ConnectPage";
