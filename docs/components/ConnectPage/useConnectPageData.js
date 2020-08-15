@@ -9,7 +9,9 @@ import NewSocrataDatasets from "@splitgraph/content/marketing/sample-queries/New
 import { mdxComponents } from "@splitgraph/design";
 
 const useConnectPageData = ({ helpSectionComponents, onboardingState }) => {
-  const isAuthenticated = onboardingState === "post-auth";
+  const isAuthenticated = ["post-auth", "post-auth-welcome"].includes(
+    onboardingState
+  );
   const showWelcomeMessage = onboardingState === "post-auth-welcome";
 
   const showMarketingNotice = showWelcomeMessage ? (

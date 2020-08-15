@@ -2,6 +2,7 @@
 // @ts-ignore
 import { jsx, Box, Text } from "theme-ui";
 import * as React from "react";
+import IframeResizer from "iframe-resizer-react";
 
 import {
   PreWithCopy,
@@ -12,10 +13,12 @@ import {
 
 export interface IHeroConnectionParamsProps {
   redirectURL?: string;
+  isAuthenticated?: boolean;
 }
 
 const HeroConnectionParams = ({
-  redirectURL = "/connect?auth=1&welcome=1",
+  redirectURL = "/connect/post-auth-welcome",
+  isAuthenticated = false,
 }: IHeroConnectionParamsProps) => {
   return (
     <Box
@@ -23,11 +26,20 @@ const HeroConnectionParams = ({
       sx={{
         backgroundColor: "white",
         color: "primary",
-        maxWidth: "90vw",
+        // maxWidth: "90vw",
         boxShadow: "card",
         // minWidth: ["calc(100vw - 4rem)", "400px", "400px"],
         // minHeight: "600px",
+        maxWidth: [
+          "calc(300px + 2rem)",
+          "calc(300px + 4rem)",
+          "calc(300px + 4rem)",
+        ],
         padding: ["1rem", "2rem", "2rem"],
+        alignItems: "center",
+        ".value-area": {
+          maxWidth: "300px",
+        },
       }}
     >
       <Box
@@ -68,43 +80,58 @@ const HeroConnectionParams = ({
           </PreWithCopy>
         </Box>
 
-        <Box>
-          <Text sx={{ color: "heavy", fontWeight: "bold", display: "block" }}>
-            Username / Password
-          </Text>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              form: {
-                marginBottom: "1rem",
-                marginTop: "1rem",
-                marginLeft: ["0.5rem", "1rem", "1rem"],
-                marginRight: ["0.5rem", "1rem", "1rem"],
-              },
-              // padding: "1rem",
-              borderWidth: "1px",
-              borderStyle: "solid",
-              borderColor: "gray",
-              a: {
-                variant: "links.primary",
-                textDecoration: "underline",
-                marginBottom: "1rem",
-              },
+        {isAuthenticated ? (
+          <IframeResizer
+            src="/settings/embedded/sql-credentials"
+            log
+            style={{
+              width: "1px",
+              minWidth: "100%",
+              border: "none",
+              background: "none",
             }}
-          >
-            <GitHubOAuthButton redirectURL={redirectURL} />
-            <GitLabOAuthButton redirectURL={redirectURL} />
-            <GoogleOAuthButton redirectURL={redirectURL} />
-            <a
-              href={`/auth/sign_up?redirect=${encodeURIComponent(redirectURL)}`}
+          />
+        ) : (
+          <Box>
+            <Text sx={{ color: "heavy", fontWeight: "bold", display: "block" }}>
+              Username / Password
+            </Text>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                form: {
+                  marginBottom: "1rem",
+                  marginTop: "1rem",
+                  marginLeft: ["0.5rem", "1rem", "1rem"],
+                  marginRight: ["0.5rem", "1rem", "1rem"],
+                },
+                // padding: "1rem",
+                borderWidth: "1px",
+                borderStyle: "solid",
+                borderColor: "gray",
+                a: {
+                  variant: "links.primary",
+                  textDecoration: "underline",
+                  marginBottom: "1rem",
+                },
+              }}
             >
-              Or, Signup with Email & Password
-            </a>
+              <GitHubOAuthButton redirectURL={redirectURL} />
+              <GitLabOAuthButton redirectURL={redirectURL} />
+              <GoogleOAuthButton redirectURL={redirectURL} />
+              <a
+                href={`/auth/sign_up?redirect=${encodeURIComponent(
+                  redirectURL
+                )}`}
+              >
+                Or, Signup with Email & Password
+              </a>
+            </Box>
           </Box>
-        </Box>
+        )}
       </Box>
       {/* <CambridgeChicagoJOIN components={mdxComponents} /> */}
     </Box>

@@ -37,17 +37,17 @@ export { mdxComponents } from "./themes/mdxComponents";
 
 export { matomoInit, matomoPush } from "./matomo";
 
-const mdxComponents = {
-  pre: ({ children, ...rest }) => (
-    <pre sx={marketingTheme.styles.pre} {...rest}>
-      {children}
-    </pre>
-  ),
-  code: ({ children, ...rest }) => (
-    <code sx={marketingTheme.styles.code} {...rest}>
-      {children}
-    </code>
-  ),
-};
+// const mdxComponents = {
+//   pre: ({ children, ...rest }) => (
+//     <pre sx={marketingTheme.styles.pre} {...rest}>
+//       {children}
+//     </pre>
+//   ),
+//   code: ({ children, ...rest }) => (
+//     <code sx={marketingTheme.styles.code} {...rest}>
+//       {children}
+//     </code>
+//   ),
+// };
 
-export { mdxComponents };
+// export { mdxComponents };

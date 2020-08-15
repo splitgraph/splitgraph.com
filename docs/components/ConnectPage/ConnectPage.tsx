@@ -38,8 +38,12 @@ const ConnectPage = ({
           ".left-col": {
             flexGrow: "1",
             backgroundColor: "primary",
-            paddingTop: "0 !important",
-            padding: ["2rem", "2rem", "4rem"],
+            padding: 0,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            // paddingTop: "0 !important",
+            // padding: ["2rem", "2rem", "4rem"],
             width: ["100%", "100%", "40%"],
             h1: {
               color: "white",
@@ -70,7 +74,7 @@ const ConnectPage = ({
     >
       <Box className="left-col">
         <h1>Connect Now</h1>
-        <HeroConnectionParams />
+        <HeroConnectionParams isAuthenticated={isAuthenticated} />
       </Box>
       <Box className="right-col">
         <Box className="right-top">
