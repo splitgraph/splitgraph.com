@@ -31,14 +31,14 @@ const HeroConnectionParams = ({
         // minWidth: ["calc(100vw - 4rem)", "400px", "400px"],
         // minHeight: "600px",
         maxWidth: [
-          "calc(300px + 2rem)",
-          "calc(300px + 4rem)",
-          "calc(300px + 4rem)",
+          "min(100%, calc(300px + 2rem))",
+          "min(100%, calc(300px + 4rem))",
+          "min(100%, calc(300px + 4rem))",
         ],
         padding: ["1rem", "2rem", "2rem"],
         alignItems: "center",
         ".value-area": {
-          maxWidth: "300px",
+          maxWidth: ["calc(100vw - 4rem)", "300px", "300px"],
         },
       }}
     >
