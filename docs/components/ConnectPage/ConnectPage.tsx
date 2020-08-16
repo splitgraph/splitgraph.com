@@ -31,7 +31,7 @@ const ConnectPage = ({
           flexWrap: "wrap",
           flexGrow: "1",
           width: "100%",
-          maxWidth: "98vw",
+          maxWidth: "100vw",
           h1: {
             textAlign: "center",
           },
@@ -60,6 +60,9 @@ const ConnectPage = ({
               padding: ["2rem", "2rem", "4rem"],
             },
             ".right-top": {
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               paddingTop: "0",
               backgroundColor: "white",
               h1: {

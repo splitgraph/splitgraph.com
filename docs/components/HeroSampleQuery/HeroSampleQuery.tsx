@@ -12,9 +12,13 @@ export interface IHeroSampleQueryItem {
 
 export interface IHeroSampleQueryProps {
   queries: IHeroSampleQueryItem[];
+  fixedWidth?: number | string;
 }
 
-const HeroSampleQuery = ({ queries }: IHeroSampleQueryProps) => {
+const HeroSampleQuery = ({
+  queries,
+  fixedWidth = "min(80ch, 100%)",
+}: IHeroSampleQueryProps) => {
   const [idx, setIdx] = React.useState(0);
   const onClickNext = () => setIdx(idx + 1 > queries.length - 1 ? 0 : idx + 1);
   const onClickPrev = () => setIdx(idx - 1 < 0 ? queries.length - 1 : idx - 1);
@@ -30,6 +34,8 @@ const HeroSampleQuery = ({ queries }: IHeroSampleQueryProps) => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
+        minWidth: fixedWidth,
+        maxWidth: fixedWidth,
         // width: ["100ch", "100ch", "90ch"],
         // maxWidth: "90vw",
         // width: ["100%", "100%", "40ch"],
@@ -37,6 +43,8 @@ const HeroSampleQuery = ({ queries }: IHeroSampleQueryProps) => {
         pre: {
           marginTop: 0,
           marginBottom: 0,
+          marginRight: "0 !important",
+          marginLeft: "0 !important",
           // flexGrow: 1,
           height: "20rem",
           code: {
@@ -48,6 +56,8 @@ const HeroSampleQuery = ({ queries }: IHeroSampleQueryProps) => {
       {snippet}
       <Box
         sx={{
+          // minWidth: "min(80ch, 100%)",
+          // width: "min(80ch, 100%)",
           width: "100%",
           backgroundColor: "heavy",
           color: "light",
