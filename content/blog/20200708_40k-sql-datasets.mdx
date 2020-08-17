@@ -52,7 +52,7 @@ SELECT
     chicago_cases.cases_total AS chicago_daily_cases,
     cambridge_cases.new_positive_cases AS cambridge_daily_cases
 FROM
-    chicago.covid19_daily_cases_and_deaths_naz8_j4nc chicago_cases
+    chicago.covid19_daily_cases_deaths_and_hospitalizations_naz8_j4nc chicago_cases
 FULL OUTER JOIN
     cambridge.covid19_cumulative_cases_by_date_tdt9_vq5y cambridge_cases
 ON
