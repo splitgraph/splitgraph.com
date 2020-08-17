@@ -27,6 +27,7 @@ import { keyframes, css } from "@emotion/core";
 
 import CambridgeChicagoJOIN from "@splitgraph/content/marketing/sample-queries/CambridgeChicagoJOIN.mdx";
 import NewSocrataDatasets from "@splitgraph/content/marketing/sample-queries/NewSocrataDatasets.mdx";
+import QOZTractBigQuery from "@splitgraph/content/marketing/sample-queries/QOZTractBigQuery.mdx";
 
 import MongoImport from "@splitgraph/content/marketing/sample-splitfiles/MongoImport.mdx";
 import QOZVoteFraction from "@splitgraph/content/marketing/sample-splitfiles/QOZVoteFraction.mdx";
@@ -374,6 +375,7 @@ const LandingPage = () => {
             justifyContent: "space-between",
             alignItems: "center",
             maxWidth: ["90vw", "50vw", "50vw"],
+            minWidth: ["90vw", "50vw", "50vw"],
             // marginRight: ["inherit", "inherit", "4rem"],
           },
           ".hero-subsection--splitfile": {
@@ -384,7 +386,10 @@ const LandingPage = () => {
           },
         }}
       >
-        <Box className="hero-subsection hero-subsection--text">
+        <Box
+          className="hero-subsection hero-subsection--text"
+          sx={{ maxWidth: "50%" }}
+        >
           <h1 sx={{ fontWeight: 100, color: "gray" }}>
             Port 5432 is open...
             <br />
@@ -394,15 +399,19 @@ const LandingPage = () => {
           </h1>
 
           <Box
-            className="hero-subsection"
             sx={{
               backgroundColor: "sgdarkblue",
               color: "white",
-              maxWidth: ["90vw", "90vw", "50vw"],
+              minWidth: ["90vw", "60ch", "min(80ch, 100%)"],
+              maxWidth: ["90vw", "60ch", "min(80ch, 100%)"],
+              // maxWidth: ["90vw", "60ch", "min(80ch, 90%)"],
+              // minWidth: ["90vw", "60ch", "min(80ch, 90%)"],
+              // minWidth: ["90vw", "60ch", "min(80ch, 100%)"],
               boxShadow: "card",
             }}
           >
             <HeroSampleQuery
+              fixedWidth={"100%"}
               queries={[
                 {
                   snippet: (
@@ -422,6 +431,15 @@ const LandingPage = () => {
                   ),
                   description:
                     "Travel back in time and query multiple versions at once",
+                },
+                {
+                  snippet: (
+                    <QOZTractBigQuery
+                      components={mdxComponents}
+                      key={"qoz_tract_big_query"}
+                    />
+                  ),
+                  description: "All the features of SQL are available to you ",
                 },
               ]}
             />

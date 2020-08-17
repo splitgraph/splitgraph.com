@@ -1,3 +1,21 @@
-# Most Clients (DBeaver, pgcli, psql, VSCode, etc.)
+# Most SQL Clients
 
-We support introspection hooking and querying for these tools and have explicitly tested them.
+The Splitgraph "Data Delivery Network" (DDN) is based on the PostgreSQL wire
+protocol. Most SQL clients should be able to connect to it and query it.
+
+**Don't have a SQL client?** We recommend [DBeaver](https://dbeaver.io/). Or, if you have VSCode,
+the [SQLTools Extension](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)
+along with its [SQLTools PostgreSQL/Redshift Driver](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-pg), is a convenient way to get started.
+
+**Introspection:** Some clients send "introspection queries" so they know which tables and schemas
+to show you in the workspace. In most cases, these introspection queries are
+compatible with Splitgraph, which will return a list of tables in your "workspace"
+(currently, any repositories you own, along with a handful of Splitgraph-featured repositories).
+
+**Troubleshooting Introspection**: In some cases, clients may send introspection
+queries that Splitgraph does not know how to answer. In this case you should
+[file an issue](https://github.com/splitgraph/splitgraph/issues/new) with details
+of your client.
+
+Other exceptions and quirks of various clients are listed below. This is not
+an exhaustive list.

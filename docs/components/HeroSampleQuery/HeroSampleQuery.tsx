@@ -56,9 +56,11 @@ const HeroSampleQuery = ({
       {snippet}
       <Box
         sx={{
-          // minWidth: "min(80ch, 100%)",
+          // minWidth: fixedWidth,
+          // maxWidth: fixedWidth,
+          width: fixedWidth,
           // width: "min(80ch, 100%)",
-          width: "100%",
+          // width: "80ch",
           backgroundColor: "heavy",
           color: "light",
           display: "flex",

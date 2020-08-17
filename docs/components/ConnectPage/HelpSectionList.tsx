@@ -21,6 +21,7 @@ const HelpSectionList = ({
           HelpSectionMarkdownComponent={HelpSectionMarkdownComponent}
           key={index}
           mdxComponents={mdxComponents}
+          defaultCollapsed={index !== 0}
         />
       ))}
     </>

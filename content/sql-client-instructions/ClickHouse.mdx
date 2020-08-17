@@ -1,0 +1,121 @@
+# ClickHouse via ODBC
+
+You can access the data delivery network from ClickHouse over an ODBC connection. We have an [example](https://github.com/splitgraph/splitgraph/blob/master/examples/clickhouse/clickhouse/Dockerfile) of setting up a Docker container with ClickHouse, unixODBC and a local Splitgraph engine which you can use as a starting point: with the DDN, you don't need to have a Splitgraph engine in the stack.
+
+The ODBC configuration files are as follows:
+
+odbc.ini:
+
+```
+[DEFAULT]
+Driver = splitgraph
+
+[splitgraph]
+Description         = PostgreSQL connection
+Driver              = PostgreSQL Unicode
+Database            = ddn
+Servername          = data.splitgraph.com
+UserName            = [API_KEY]
+Password            = [API_SECRET]
+ConnSettings        = SET application_name = 'odbc-clickhouse';
+Port                = 5432
+Protocol            = 12.3
+SSLmode             = require
+ReadOnly            = Yes
+RowVersioning       = No
+ShowSystemTables    = No
+UseServerSidePrepare=0
+```
+
+In this, the important configuration parameters are `UseServerSidePrepare=0` (disables ODBC sending prepared statements to the DDN) and `SSLmode = require`.
+
+odbcinst.ini:
+
+```
+[PostgreSQL ANSI]
+Description=PostgreSQL ODBC driver (ANSI version)
+Driver=/usr/lib/x86_64-linux-gnu/odbc/psqlodbca.so
+Setup=/usr/lib/x86_64-linux-gnu/odbc/libodbcpsqlS.so
+Debug=0
+CommLog=1
+UsageCount=1
+
+[PostgreSQL Unicode]
+Description=PostgreSQL ODBC driver (Unicode version)
+Driver=/usr/lib/x86_64-linux-gnu/odbc/psqlodbcw.so
+Setup=/usr/lib/x86_64-linux-gnu/odbc/libodbcpsqlS.so
+Debug=0
+CommLog=1
+UsageCount=1
+```
+
+You can now use the DDN over ClickHouse's [ODBC engine](https://clickhouse.tech/docs/en/engines/table-engines/integrations/odbc/). The easiest way is querying Splitgraph data inline, using
+`odbc('DSN=splitgraph', 'namespace/repository[:hash or tag, default latest]', 'table_name')`. For example:
+
+```sql
+SELECT name, alternatenames, country_code, population
+FROM odbc('DSN=splitgraph', 'splitgraph/geonames', 'all_countries')
+WHERE asciiname = 'Cambridge' AND feature_code = 'PPL' ORDER BY population DESC;
+```
+
+You can also create a table that proxies to Splitgraph and is backed by the ODBC engine. This is useful if you want to remap column types, only download some columns to speed the query up, or load the data into a ClickHouse table:
+
+```sql
+CREATE TABLE sg_2016_election (
+	state_postal String,
+	state_fips String,
+	county_name String,
+	county_fips String,
+	candidate_normalized String,
+	mode String,
+	votes Int32
+)
+ENGINE = ODBC('DSN=splitgraph', 'splitgraph/2016_election', 'precinct_results');
+
+CREATE TABLE ch_2016_election AS sg_2016_election ENGINE MergeTree ORDER BY county_fips;
+INSERT INTO ch_2016_election SELECT * FROM sg_2016_election WHERE state_postal = 'CA';
+```
+
+Finally, you can run JOIN queries across multiple Splitgraph datasets:
+
+```sql
+CREATE TABLE chicago_cases (
+        lab_report_date String,
+        cases_total Int32
+)
+ENGINE = ODBC(
+	'DSN=splitgraph',
+	'cityofchicago/covid19-daily-cases-deaths-and-hospitalizations-naz8-j4nc',
+	'covid19_daily_cases_deaths_and_hospitalizations'
+);
+
+CREATE TABLE cambridge_cases (
+        date String,
+        new_positive_cases Int32
+)
+ENGINE = ODBC(
+	'DSN=splitgraph',
+	'cambridgema-gov/covid19-cumulative-cases-by-date-tdt9-vq5y',
+	'covid19_cumulative_cases_by_date'
+);
+
+SELECT
+    parseDateTimeBestEffortOrNull(cambridge_cases.date) AS date,
+    chicago_cases.cases_total AS chicago_daily_cases,
+    cambridge_cases.new_positive_cases AS cambridge_daily_cases
+FROM chicago_cases
+FULL OUTER JOIN cambridge_cases
+ON parseDateTimeBestEffortOrNull(chicago_cases.lab_report_date) = parseDateTimeBestEffortOrNull(cambridge_cases.date)
+ORDER BY date DESC
+LIMIT 10;
+```
+
+A current known issue is that the DDN terminates idle connections which can cause a "connection lost" error on the client side:
+
+```
+SQLSTATE = 08S01
+Native Error Code = 35
+SQLExecute unable due to the connection lost
+```
+
+Usually restarting the query forces a reconnect and fixes this.
