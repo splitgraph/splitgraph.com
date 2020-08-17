@@ -6,13 +6,15 @@ import * as React from "react";
 export interface IHelpSectionItemWrapperProps {
   HelpSectionMarkdownComponent: any;
   mdxComponents?: any;
+  defaultCollapsed?: boolean;
 }
 
 const HelpSectionItemWrapper = ({
   mdxComponents,
   HelpSectionMarkdownComponent,
+  defaultCollapsed = true,
 }: IHelpSectionItemWrapperProps) => {
-  const [collapsed, setCollapsed] = React.useState(true);
+  const [collapsed, setCollapsed] = React.useState(defaultCollapsed);
 
   const H1Component = React.useMemo(
     () => ({ children, ...rest }) => (
@@ -55,6 +57,10 @@ const HelpSectionItemWrapper = ({
         },
         "section > :not(.header-control)": {
           display: collapsed ? "none" : "inherit",
+        },
+        a: {
+          variant: "links.primary",
+          textDecoration: "underline",
         },
       }}
     >
