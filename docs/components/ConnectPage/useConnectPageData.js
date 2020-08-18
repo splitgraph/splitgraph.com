@@ -10,11 +10,41 @@ import NewSocrataDatasets from "@splitgraph/content/marketing/sample-queries/New
 import { mdxComponents } from "@splitgraph/design";
 
 import HelpSectionList from "./HelpSectionList";
+import useHasSessionCookie from "./useHasSessionCookie";
 
 const useConnectPageData = ({ helpSectionComponents, onboardingState }) => {
   const isAuthenticated = ["post-auth", "post-auth-welcome"].includes(
     onboardingState
   );
+
+  const router = useRouter();
+  const {
+    query: { namespace, repository, imageHash, tableName },
+  } = router;
+
+  const { hasSessionCookie } = useHasSessionCookie();
+
+  const redirect =
+    isAuthenticated && hasSessionCookie === false
+      ? {
+          pathname: "/connect",
+          query: router.query,
+          asPath: "/connect",
+        }
+      : !isAuthenticated && hasSessionCookie === true
+      ? {
+          pathname: "/connect/post-auth",
+          query: router.query,
+          asPath: "/connect/[state]",
+        }
+      : null;
+
+  React.useEffect(() => {
+    if (redirect) {
+      router.push(redirect);
+    }
+  }, [hasSessionCookie, isAuthenticated, redirect]);
+
   const showWelcomeMessage = onboardingState === "post-auth-welcome";
 
   const showMarketingNotice = showWelcomeMessage ? (
@@ -37,10 +67,6 @@ const useConnectPageData = ({ helpSectionComponents, onboardingState }) => {
       mdxComponents={mdxComponents}
     />
   );
-
-  const {
-    query: { namespace, repository, imageHash, tableName },
-  } = useRouter();
 
   const queryPreviewURL =
     namespace && repository && imageHash && tableName
