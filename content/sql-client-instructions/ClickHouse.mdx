@@ -50,7 +50,12 @@ UsageCount=1
 ```
 
 You can now use the DDN over ClickHouse's [ODBC engine](https://clickhouse.tech/docs/en/engines/table-engines/integrations/odbc/). The easiest way is querying Splitgraph data inline, using
-`odbc('DSN=splitgraph', 'namespace/repository[:hash or tag, default latest]', 'table_name')`. For example:
+
+```sql
+odbc('DSN=splitgraph', 'namespace/repository[:hash or tag, default latest]', 'table_name')
+```
+
+For example:
 
 ```sql
 SELECT name, alternatenames, country_code, population

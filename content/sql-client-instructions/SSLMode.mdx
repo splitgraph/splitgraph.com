@@ -8,7 +8,7 @@ a self signed cert for yourself. More details are available at the [DDN docs](ht
 
 You can download the Root CA (we use LetsEncrypt) here: [https://www.identrust.com/dst-root-ca-x3](https://www.identrust.com/dst-root-ca-x3).
 
-If you're using `psql`, you can download this file into ~/.postgresql/root.crt` and specify `sslmode=verify-ca` in the connection URI, e.g.:
+If you're using `psql`, you can download this file into `~/.postgresql/root.crt` and specify `sslmode=verify-ca` in the connection URI, e.g.:
 
 ```bash
 psql "postgres://$USERNAME:$PASSWORD@data.splitgraph.com:5432/ddn?sslmode=verify-ca"
