@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 
 import ConnectPageMarketingNotice from "./ConnectPageMarketingNotice";
 
@@ -37,15 +38,45 @@ const useConnectPageData = ({ helpSectionComponents, onboardingState }) => {
     />
   );
 
-  // const helpSection = (
-  //   <>
-  //     {HelpSections.map((HelpsSectionMarkdownComponent, index) => (
-  //       <HelpsSectionMarkdownComponent key={index} components={mdxComponents} />
-  //     ))}
-  //   </>
-  // );
+  const {
+    query: { namespace, repository, imageHash, tableName },
+  } = useRouter();
+
+  const queryPreviewURL =
+    namespace && repository && imageHash && tableName
+      ? `/${namespace}/${repository}/${imageHash}/-/embedded-query-preview/${tableName}`
+      : null;
+
+  const identifier =
+    namespace && repository && imageHash
+      ? `${namespace}/${repository}:${imageHash}`
+      : null;
 
   const sampleQueries = [
+    ...(queryPreviewURL && identifier && tableName
+      ? [
+          {
+            snippet: (
+              <iframe
+                key={"table-preview-iframe"}
+                src={queryPreviewURL}
+                allowtransparency="true"
+                style={{
+                  left: 0,
+                  top: 0,
+                  minWidth: "100%",
+                  width: "100%",
+                  border: "none",
+                  background: "#36678d",
+                  overflowY: "hidden",
+                  minHeight: "20rem",
+                }}
+              />
+            ),
+            description: `Query records in ${tableName}`,
+          },
+        ]
+      : []),
     {
       snippet: (
         <CambridgeChicagoJOIN
@@ -67,6 +98,11 @@ const useConnectPageData = ({ helpSectionComponents, onboardingState }) => {
   ];
 
   return {
+    namespace,
+    repository,
+    imageHash,
+    tableName,
+    queryPreviewURL,
     isAuthenticated,
     showMarketingNotice,
     showWelcomeMessage,

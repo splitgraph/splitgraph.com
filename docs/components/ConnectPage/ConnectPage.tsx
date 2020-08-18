@@ -7,21 +7,30 @@ import {
   HeroConnectionParams,
   HeroSampleQuery,
   IHeroSampleQueryItem,
+  MarketingNotice,
 } from "@splitgraph/docs/components";
 
 export interface IConnectPageProps {
   isAuthenticated?: boolean;
-  showWelcomeMessage?: boolean;
   helpSection?: React.ReactNode;
   sampleQueries?: IHeroSampleQueryItem[];
+  repository?: string;
+  namespace?: string;
+  tableName?: string;
 }
 
 const ConnectPage = ({
   isAuthenticated = false,
-  showWelcomeMessage = false,
   helpSection,
   sampleQueries,
+  namespace,
+  repository,
+  tableName,
 }: IConnectPageProps) => {
+  const cameFromRepo = !!namespace && !!repository;
+
+  const originRepoLink = cameFromRepo ? `/${namespace}/${repository}` : null;
+
   return (
     <Box
       sx={
@@ -85,9 +94,31 @@ const ConnectPage = ({
       <Box className="right-col">
         <Box className="right-top">
           <h1>Send a Query in 60 Seconds</h1>
-          {isAuthenticated && <Box>You are authenticated</Box>}
-          {showWelcomeMessage && <Box>Welcome to Splitgraph</Box>}
           <HeroSampleQuery queries={sampleQueries} />
+          {cameFromRepo && (
+            <Box
+              sx={{
+                // backgroundColor: "sglightblue",
+                paddingTop: "1rem",
+                // border: "1px solid",
+                // borderColor: "primary",
+                color: "heavy",
+                width: "100%",
+                a: {
+                  variant: "links.primary",
+                  // textDecoration: "underline",
+                },
+                ":before": {
+                  content: '"\\27F5"',
+                  paddingRight: "1ch",
+                },
+              }}
+            >
+              <a href={originRepoLink}>
+                Back to {`${namespace}/${repository}`}
+              </a>
+            </Box>
+          )}
         </Box>
         <Box className="right-bot">{helpSection}</Box>
       </Box>

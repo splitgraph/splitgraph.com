@@ -17,19 +17,26 @@ const OnboardingConnectPage = ({ onboardingState, helpSectionComponents }) => {
   const {
     isAuthenticated,
     showMarketingNotice,
-    showWelcomeMessage,
     helpSection,
     sampleQueries,
+    namespace,
+    repository,
+    tableName,
   } = useConnectPageData({ onboardingState, helpSectionComponents });
 
   return (
-    <LandingPageLayout showMarketingNotice={showMarketingNotice}>
+    <LandingPageLayout
+      showMarketingNotice={showMarketingNotice}
+      includeDashboardHeaderLink={isAuthenticated}
+    >
       <NextSeo title="Connect to the DDN" />
       <ConnectPage
         isAuthenticated={isAuthenticated}
-        showWelcomeMessage={showWelcomeMessage}
         helpSection={helpSection}
         sampleQueries={sampleQueries}
+        namespace={namespace}
+        repository={repository}
+        tableName={tableName}
       />
       <Footer Link={Link} />
     </LandingPageLayout>

@@ -1,6 +1,6 @@
 // @jsx jsx
 // @ts-ignore
-import { jsx } from "theme-ui";
+import { jsx, Box } from "theme-ui";
 import * as React from "react";
 
 import { MarketingNotice } from "../MarketingNotice";
@@ -14,8 +14,21 @@ const ConnectPageMarketingNotice = ({
 }: IConnectPageMarketingNoticeProps) => {
   return (
     <MarketingNotice>
-      Welcome to Splitgraph{" "}
-      <pre>{JSON.stringify(onboardingState, null, 2)}</pre>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+        }}
+      >
+        {onboardingState === "post-auth-welcome" ? (
+          <>
+            <strong>Welcome to Splitgraph</strong>. Get credentials to connect
+            to the DDN.
+          </>
+        ) : null}
+      </Box>
     </MarketingNotice>
   );
 };

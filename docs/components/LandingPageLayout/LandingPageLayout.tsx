@@ -10,14 +10,22 @@ import { Link } from "../Link";
 export interface ILandingPageLayoutProps {
   children?: React.ReactNode;
   showMarketingNotice?: boolean | React.ReactNode;
+  includeDashboardHeaderLink?: boolean;
 }
 
-const HeaderRight = () => (
+const HeaderRight = ({
+  includeDashboardHeaderLink = false,
+}: Pick<ILandingPageLayoutProps, "includeDashboardHeaderLink">) => (
   <>
     <Link href="/blog" className="desktop-only no-underline">
       Blog
     </Link>
     <Link href="/docs">Docs</Link>
+    {includeDashboardHeaderLink && (
+      <a className="button-link--outline" href="/">
+        Dashboard
+      </a>
+    )}
     <Link className="button-link" href="/explore">
       Explore
     </Link>
@@ -27,6 +35,7 @@ const HeaderRight = () => (
 export default ({
   children,
   showMarketingNotice = true,
+  includeDashboardHeaderLink = false,
 }: ILandingPageLayoutProps) => {
   const marketingNotice =
     showMarketingNotice && typeof showMarketingNotice === "boolean" ? (
@@ -42,7 +51,11 @@ export default ({
         extraHeaderStyle={{
           borderWidth: "0 !important",
         }}
-        renderHeaderRight={() => <HeaderRight />}
+        renderHeaderRight={() => (
+          <HeaderRight
+            includeDashboardHeaderLink={includeDashboardHeaderLink}
+          />
+        )}
       >
         <MainContent
           extraStyle={{

@@ -62,6 +62,9 @@ const HelpSectionItemWrapper = ({
           variant: "links.primary",
           textDecoration: "underline",
         },
+        img: {
+          maxWidth: "100%",
+        },
       }}
     >
       <HelpSectionMarkdownComponent

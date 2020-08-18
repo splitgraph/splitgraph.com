@@ -16,9 +16,11 @@ import withTheme from "../../hocs/withTheme";
 const OuterConnectPage = ({ helpSectionComponents }) => {
   const {
     isAuthenticated,
-    showWelcomeMessage,
     helpSection,
     sampleQueries,
+    namespace,
+    repository,
+    tableName,
   } = useConnectPageData({ helpSectionComponents });
 
   return (
@@ -26,9 +28,11 @@ const OuterConnectPage = ({ helpSectionComponents }) => {
       <NextSeo title="Connect to the DDN" />
       <ConnectPage
         isAuthenticated={isAuthenticated}
-        showWelcomeMessage={showWelcomeMessage}
         helpSection={helpSection}
         sampleQueries={sampleQueries}
+        namespace={namespace}
+        repository={repository}
+        tableName={tableName}
       />
       <Footer Link={Link} />
     </LandingPageLayout>
