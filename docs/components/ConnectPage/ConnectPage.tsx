@@ -44,6 +44,11 @@ const ConnectPage = ({
           h1: {
             textAlign: "center",
           },
+          h2: {
+            textAlign: "center",
+            fontWeight: 200,
+            marginTop: 0,
+          },
           ".left-col": {
             flexGrow: "1",
             backgroundColor: "primary",
@@ -55,7 +60,7 @@ const ConnectPage = ({
             // paddingTop: "0 !important",
             // padding: ["2rem", "2rem", "4rem"],
             width: ["100%", "100%", "40%"],
-            h1: {
+            "h1, h2": {
               color: "white",
             },
           },
@@ -74,7 +79,7 @@ const ConnectPage = ({
               alignItems: "center",
               paddingTop: "0",
               backgroundColor: "white",
-              h1: {
+              "h1, h2": {
                 color: "primary",
               },
               // minHeight: "50%",
@@ -89,11 +94,13 @@ const ConnectPage = ({
     >
       <Box className="left-col">
         <h1>Connect Now</h1>
+        <h2>Compatible with most SQL clients</h2>
         <HeroConnectionParams isAuthenticated={isAuthenticated} />
       </Box>
       <Box className="right-col">
         <Box className="right-top">
           <h1>Send a Query in 60 Seconds</h1>
+          <h2>Query 40k+ datasets with standard SQL</h2>
           <HeroSampleQuery queries={sampleQueries} />
           {cameFromRepo && (
             <Box
