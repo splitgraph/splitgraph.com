@@ -1,4 +1,7 @@
 ```sql
+-- The two tables here are proxied by Splitgraph to upstream open data providers.
+-- Splitgraph will rewrite the queries into the providers' query language, get the data
+-- and run the JOIN, returning the results over the PostgreSQL protocol.
 SELECT
     cambridge_cases.date AS date,
     chicago_cases.cases_total AS chicago_daily_cases,

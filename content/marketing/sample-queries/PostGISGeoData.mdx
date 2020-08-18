@@ -1,4 +1,8 @@
 ```sql
+-- Splitgraph's data format supports the PostGIS geometry type. This query
+-- returns the shapes of all electoral wards in London in the EPSG 4326 projection
+-- (immediately plottable by clients like pgAdmin and DBeaver) as well as their area,
+-- calculated by PostGIS.
 SELECT
     name,
     gss_code,
