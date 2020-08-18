@@ -9,4 +9,6 @@ openssl req -newkey rsa:2048 -nodes -keyout client.key -x509 -days 365 -out clie
 Note that, due to a bug in Data Studio, you must **upload your key to the "certificate"
 field, and your certificate to the "key" field**.
 
+![Splitgraph Data Delivery Network in Google Data Studio](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/sql-client-instructions/images/google-data-studio-01.png)
+
 Data discovery doesn't completely work on Google Data Studio, as it treats all tables as being in the public schema and doesn't schema-qualify them when making queries from the table picker. You can still use a custom query to import data into Google Data Studio.

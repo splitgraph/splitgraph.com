@@ -1,0 +1,27 @@
+# Python with psycopg2
+
+You can use the [psycopg2](https://www.psycopg.org/) library to connect to the Data Delivery Network from your Python interpreter or a Jupyter notebook:
+
+```python
+import psycopg2
+
+# Your Splitgraph DDN username/password
+API_KEY = "API_KEY"
+API_SECRET = "API_SECRET"
+
+QUERY = """SELECT candidate_normalized, SUM(votes)::integer AS total_votes
+	FROM "splitgraph/2016_election:latest".precinct_results
+	WHERE state_postal = 'CA'
+	GROUP BY candidate_normalized
+	ORDER BY total_votes DESC
+	LIMIT 5
+"""
+
+with psycopg2.connect(
+    dsn=f"postgresql://{API_KEY}:{API_SECRET}@data.splitgraph.com:5432/ddn?application_name=psycopg2"
+) as conn:
+    with conn.cursor() as cur:
+        cur.execute(QUERY)
+        result = cur.fetchall()
+        print(result)
+```

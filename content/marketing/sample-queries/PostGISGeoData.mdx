@@ -1,0 +1,12 @@
+```sql
+SELECT
+    name,
+    gss_code,
+    -- Transform to https://epsg.io/4326 to plot on the map
+    ST_Transform(ST_SetSRID(geom, 27700), 4326),
+    -- Transform to https://epsg.io/3035 for metric units (for area)
+    ST_Area(ST_Transform(ST_SetSRID(geom, 27700), 3035)) / 1000000 AS area_sqkm
+FROM
+    "splitgraph/london_wards".city_merged_2018
+ORDER BY gss_code ASC;
+```
