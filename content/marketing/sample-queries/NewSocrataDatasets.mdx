@@ -1,4 +1,6 @@
 ```sql
+-- This query compares two snapshots of a catalog of all datasets on government open data portals
+-- that Splitgraph indexes daily. It runs a JOIN to find new datasets on the data.texas.gov portal.
 SELECT
     new.domain AS domain,
     new.id AS id,
