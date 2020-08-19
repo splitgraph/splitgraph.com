@@ -7,9 +7,11 @@ Assuming you have a PostgreSQL client installed (like `psql`, `pgcli`, pgAdmin o
 
 ## Connecting to the Splitgraph DDN
 
-First, [register](https://www.splitgraph.com/auth/sign_up) on Splitgraph. We support OAuth through Google, GitHub or GitLab, as well as username/password.
+Go to [splitgraph.com/connect](/connect) to get your DDN credentials. You can signup via OAuth
+using your GitHub/GitLab/Google account, or via email/password. Then you'll need to click
+a button to get your credential, with a SQL username and password.
 
-Then, go to your [account settings page](https://www.splitgraph.com/settings/sql-credentials). There, you can get a username and password to connect to the [Splitgraph Data Delivery Network](../splitgraph-cloud/data-delivery-network). If you're using `psql` or `pgcli`, you can paste the connection string directly:
+If you're using `psql` or `pgcli`, you can paste the connection string directly:
 
 ```shell-session
 $ psql postgresql://[API_KEY]:[API_SECRET]@data.splitgraph.com:5432/ddn
