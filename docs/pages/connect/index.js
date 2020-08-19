@@ -24,7 +24,10 @@ const OuterConnectPage = ({ helpSectionComponents }) => {
   } = useConnectPageData({ helpSectionComponents });
 
   return (
-    <LandingPageLayout showMarketingNotice={false}>
+    <LandingPageLayout
+      showMarketingNotice={false}
+      includeConnectHeaderLink={false}
+    >
       <NextSeo title="Connect to the DDN" />
       <ConnectPage
         isAuthenticated={isAuthenticated}

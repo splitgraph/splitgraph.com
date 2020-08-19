@@ -11,24 +11,34 @@ export interface ILandingPageLayoutProps {
   children?: React.ReactNode;
   showMarketingNotice?: boolean | React.ReactNode;
   includeDashboardHeaderLink?: boolean;
+  includeConnectHeaderLink?: boolean;
 }
 
 const HeaderRight = ({
   includeDashboardHeaderLink = false,
-}: Pick<ILandingPageLayoutProps, "includeDashboardHeaderLink">) => (
+  includeConnectHeaderLink = true,
+}: Pick<
+  ILandingPageLayoutProps,
+  "includeDashboardHeaderLink" | "includeConnectHeaderLink"
+>) => (
   <>
-    <Link href="/blog" className="desktop-only no-underline">
+    <Link href="/blog" className="desktop-only">
       Blog
     </Link>
     <Link href="/docs">Docs</Link>
+    {includeConnectHeaderLink && (
+      <Link className="button-link--outline desktop-only" href="/connect">
+        Connect
+      </Link>
+    )}
     {includeDashboardHeaderLink && (
       <a className="button-link--outline" href="/">
         Dashboard
       </a>
     )}
-    <Link className="button-link" href="/explore">
-      Explore
-    </Link>
+    <a className="button-link" href="/explore">
+      Data
+    </a>
   </>
 );
 

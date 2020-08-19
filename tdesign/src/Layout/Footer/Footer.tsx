@@ -138,8 +138,9 @@ const Footer = ({
           links={[
             ["/", "Home"],
             ["/explore", "Explore Data"],
-            ["/product/splitgraph/use-cases", "Use Cases"],
-            ["/product/splitgraph/integrations", "Integrations"],
+            ["/connect", "Connect to DDN"],
+            ["/auth/sign_in", "Sign In"],
+            ["/auth/sign_up", "Sign Up"],
           ]}
         />
 
@@ -153,6 +154,8 @@ const Footer = ({
               "https://github.com/splitgraph/splitgraph/tree/master/examples",
               "Examples",
             ],
+            ["/product/splitgraph/integrations", "Integrations"],
+            ["/product/splitgraph/use-cases", "Use Cases"],
           ]}
         />
 
@@ -161,6 +164,7 @@ const Footer = ({
           header={"Company"}
           links={[
             ["/blog", "Blog"],
+            ["/about/company/private-cloud-beta", "Private Cloud Beta"],
             ["/about/company/team", "Team"],
             ["/about/company/contact", "Contact"],
           ]}

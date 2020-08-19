@@ -6,6 +6,8 @@ import ConnectPageMarketingNotice from "./ConnectPageMarketingNotice";
 // Note this needs to be a JS file so it can import mdx files
 import CambridgeChicagoJOIN from "@splitgraph/content/marketing/sample-queries/CambridgeChicagoJOIN.mdx";
 import NewSocrataDatasets from "@splitgraph/content/marketing/sample-queries/NewSocrataDatasets.mdx";
+import QOZTractBigQuery from "@splitgraph/content/marketing/sample-queries/QOZTractBigQuery.mdx";
+import PostGISGeoData from "@splitgraph/content/marketing/sample-queries/PostGISGeoData.mdx";
 
 import { mdxComponents } from "@splitgraph/design";
 
@@ -120,6 +122,21 @@ const useConnectPageData = ({ helpSectionComponents, onboardingState }) => {
         />
       ),
       description: "Travel back in time and query multiple versions at once",
+    },
+    {
+      snippet: (
+        <QOZTractBigQuery
+          components={mdxComponents}
+          key={"qoz_tract_big_query"}
+        />
+      ),
+      description: "All the features of SQL are available to you ",
+    },
+    {
+      snippet: (
+        <PostGISGeoData components={mdxComponents} key={"postgis_geodata"} />
+      ),
+      description: "Support for PostGIS and geospatial queries",
     },
   ];
 

@@ -10,12 +10,13 @@ export interface IHeaderRightProps {}
 export default ({}: IHeaderRightProps) => {
   return (
     <>
-      <Link href="/explore" className="desktop-only no-underline">
-        Explore Data
-      </Link>
+      <Link href="/blog">Blog</Link>
       <Link href="/docs">Docs</Link>
-      <Link className="button-link" href="/auth/sign_up">
-        Sign Up
+      <Link className="button-link--outline desktop-only" href="/connect">
+        Connect
+      </Link>
+      <Link className="button-link" href="/explore">
+        Data
       </Link>
     </>
   );

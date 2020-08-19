@@ -135,15 +135,18 @@ const withHolyGrailLayout = ({
             </Box>
             <Box sx={{ color: "muted", display: "flex", alignItems: "center" }}>
               {middleHeader}
-              <Link href="/explore">Explore Data</Link>
-              {renderDocsHeaderLink ? (
-                <>
-                  <>&bull;&nbsp;&nbsp;</>
-                  <Link href="/docs">Docs</Link>
-                </>
-              ) : null}
-              <Link className="button-link" href="/auth/sign_up">
-                Sign Up
+              <Link href="/blog">Blog</Link>
+              <Link
+                href="/docs"
+                className={renderDocsHeaderLink ? "" : "desktop-only"}
+              >
+                Docs
+              </Link>
+              <Link className="button-link desktop-only" href="/connect">
+                Connect
+              </Link>
+              <Link className="button-link" href="/explore">
+                Data
               </Link>
             </Box>
           </Header>

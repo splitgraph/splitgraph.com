@@ -1,0 +1,50 @@
+export const meta = {
+  id: "private-cloud-beta",
+  title: "Private Cloud Beta Program",
+};
+
+## What we're building
+
+We are developing a "Splitgraph Private Cloud" product, where you can setup your
+own private Splitgraph cluster, managed by us and deployed to the cloud region of
+your choice.
+
+You can think of the public Splitgraph.com as a demo of this product. Except,
+instead of proxying to public datasets, the private cloud can proxy to your
+own internal data sources. We can write plugins for warehouses (Snowflake, BigQuery, Redshift...),
+databases (Postgres, Mongo, MySQL...), and SaaS services (Snowflake, Stripe, Segment ...).
+
+Each upstream plugin will implement introspection (for the catalog)
+and query forwarding (for the SQL endpoint). Ultimately, we're building a
+no-code solution where users can connect an upstream data source to Splitgraph and add
+services on top of it.
+
+The software will automatically introspect the data source and make
+it discoverable in the catalog. And users can query the new
+upstream along with all their other data, at the single SQL endpoint.
+
+In the future, we envision this endpoint becoming a universal SQL
+firewall/proxy/cache. For each upstream, users will be able to configure services
+like caching, SQL firewalling, access control, query rewriting, data masking, versioned
+snapshotting, etc.
+
+Ultimately we hope Splitgraph can benefit a number of use cases:
+
+- **Data consumers** will be able to seamlessly run queries across different data silos and enrich private data with public.
+- **Vendors** will be able to deliver datasets by making them available over the Splitgraph DDN instead of maintaining pages of instructions on ingesting their data dumps.
+- **Data engineers** will be able to simplify their ETL pipelines by working against a single protocol.
+- **Administrators** will be able to enforce granular access policies, for example, firewalling queries on columns that a user isn't authorized to see, even if the upstream data warehouse doesn't support that.
+
+
+![Preview of what we're building](/static/ddn-mockup-slide-0819.png)
+
+
+## How to get access
+
+We're seeking a small group of early customers to join the beta program of
+"Splitgraph Private Cloud." As part of the program, you will have a chance to give your
+input on prioritization of upstream plugins and give feedback on early iterations.
+
+If you think Splitgraph can help your business, please get in touch.
+
+Email us at `support@splitgraph.com` with "Private Cloud" in the subject line.

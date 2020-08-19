@@ -6,6 +6,7 @@ import * as React from "react";
 export interface IConnectDDNButtonProps {
   connectParams?: string;
   children?: React.ReactNode;
+  connectURL?: string;
 }
 
 const ConnectDDNButton = ({
