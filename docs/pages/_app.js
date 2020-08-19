@@ -25,7 +25,8 @@ class SplitgraphWebsiteApp extends App {
   render() {
     const { Component, pageProps } = this.props;
 
-    ("Data-Ops Reimagined: One PostgreSQL endpoint, 40k+ datasets. Build, version, query and share reproducible data images.");
+    const defaultDescription =
+      "Data-Ops Reimagined: One PostgreSQL endpoint, 40k+ datasets. Build, version, query and share reproducible data images.";
 
     const DEFAULT_SEO = {
       title: "Splitgraph",
