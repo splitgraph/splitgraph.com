@@ -46,6 +46,7 @@ export default ({
   children,
   showMarketingNotice = true,
   includeDashboardHeaderLink = false,
+  includeConnectHeaderLink = false,
 }: ILandingPageLayoutProps) => {
   const marketingNotice =
     showMarketingNotice && typeof showMarketingNotice === "boolean" ? (
@@ -64,6 +65,7 @@ export default ({
         renderHeaderRight={() => (
           <HeaderRight
             includeDashboardHeaderLink={includeDashboardHeaderLink}
+            includeConnectHeaderLink={includeConnectHeaderLink}
           />
         )}
       >

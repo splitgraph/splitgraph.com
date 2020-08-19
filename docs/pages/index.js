@@ -853,6 +853,8 @@ const LandingPage = () => {
             flexDirection: "row",
             alignItems: "baseline",
             marginTop: "1rem",
+            flexWrap: "wrap",
+            justifyContent: "center",
           }}
         >
           <Text sx={{ fontWeight: "800", marginRight: "1rem" }}>EXAMPLE</Text>
@@ -882,8 +884,9 @@ const LandingPage = () => {
         <h2>Push Data to Splitgraph</h2>
 
         <h2 sx={{ marginTop: "2rem !important", fontWeight: "200" }}>
-          Push images to Splitgraph Cloud using an
-          <br /> immutable and content-addressable storage format.
+          Push images to Splitgraph using an
+          <br /> immutable and content-addressable{" "}
+          <br className="mobile-line-break" /> storage format.
         </h2>
       </section>
 
@@ -1134,7 +1137,10 @@ const LandingPage = () => {
       >
         <h1>Want Splitgraph for your business?</h1>
 
-        <Link className="button-link-secondary" href="/about/company/contact">
+        <Link
+          className="button-link-secondary"
+          href="/about/company/private-cloud-beta"
+        >
           Contact Us
         </Link>
 
@@ -1167,7 +1173,8 @@ const LandingPage = () => {
         <h2>Run Splitgraph Locally</h2>
 
         <h2 sx={{ marginTop: "2rem !important", fontWeight: "200" }}>
-          Run a local Splitgraph Engine on top of Postgres
+          Run a local Splitgraph Engine <br className="mobile-line-break" />
+          on top of Postgres
           <br />
           to mount or clone data into tables.
         </h2>
