@@ -83,7 +83,6 @@ const HeroConnectionParams = ({
         {isAuthenticated ? (
           <IframeResizer
             src="/settings/embedded/sql-credentials"
-            log
             style={{
               width: "1px",
               minWidth: "100%",

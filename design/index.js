@@ -35,19 +35,4 @@ export { defaultTheme, marketingTheme, tocStyles } from "./themes/defaultTheme";
 
 export { mdxComponents } from "./themes/mdxComponents";
 
-export { matomoInit, matomoPush } from "./matomo";
-
-// const mdxComponents = {
-//   pre: ({ children, ...rest }) => (
-//     <pre sx={marketingTheme.styles.pre} {...rest}>
-//       {children}
-//     </pre>
-//   ),
-//   code: ({ children, ...rest }) => (
-//     <code sx={marketingTheme.styles.code} {...rest}>
-//       {children}
-//     </code>
-//   ),
-// };
-
-// export { mdxComponents };
+export { matomoInit, matomoPush, matomoTrack } from "./matomo";
