@@ -4,6 +4,7 @@ import { Box, SystemStyleObject, jsx } from "theme-ui";
 import * as React from "react";
 
 import FooterSection from "./FooterSection";
+import NewsletterSignup from "./NewsletterSignup";
 
 import {
   IconLogoDiscord,
@@ -249,6 +250,8 @@ const Footer = ({
           ]}
         />
       </Box>
+
+      <NewsletterSignup />
 
       <Box className="footer-copyright-row">
         <Box className="footer-section">
