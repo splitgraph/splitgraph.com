@@ -52,8 +52,8 @@ jobs:
           path: website
       - name: List artifact
         run: ls -R website
-      - name: Remove preview artifacts (robots.txt)
-        run: rm website/robots.txt
+      # - name: Remove preview artifacts (robots.txt)
+      #   run: rm website/robots.txt || true
       - name: Create release tarball
         run: tar -cz -f /home/runner/release.tar.gz -C /home/runner/work/splitgraph.com/splitgraph.com/website .
       - name: Get current date
