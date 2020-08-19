@@ -28,6 +28,7 @@ const OnboardingConnectPage = ({ onboardingState, helpSectionComponents }) => {
     <LandingPageLayout
       showMarketingNotice={showMarketingNotice}
       includeDashboardHeaderLink={isAuthenticated}
+      includeConnectHeaderLink={false}
     >
       <NextSeo title="Connect to the DDN" />
       <ConnectPage

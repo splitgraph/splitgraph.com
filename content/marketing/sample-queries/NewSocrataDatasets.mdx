@@ -1,6 +1,7 @@
 ```sql
--- This query compares two snapshots of a catalog of all datasets on government open data portals
--- that Splitgraph indexes daily. It runs a JOIN to find new datasets on the data.texas.gov portal.
+-- Run a JOIN on two daily snapshots of the same dataset to see daily changes.
+-- splitgraph/socrata is a collection of government datasets that we index daily.
+-- This query finds new datasets on the data.texas.gov data portal.
 SELECT
     new.domain AS domain,
     new.id AS id,
