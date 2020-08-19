@@ -584,6 +584,12 @@ const LandingPage = () => {
           <br />
           It adds features like a public SQL proxy and data catalog.
         </h2>
+
+        <Box>
+          <Link href="/blog/data-delivery-network-launch">
+            Read the DDN launch blog post &raquo;
+          </Link>
+        </Box>
       </section>
 
       <section
