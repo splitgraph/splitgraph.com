@@ -16,7 +16,7 @@ psql "postgres://$USERNAME:$PASSWORD@data.splitgraph.com:5432/ddn?sslmode=verify
 
 Alternatively, you can specify a folder where to download the root cert, and
 include that location in the connection URI, e.g.: download it to
-`~/.splitgraph/data.splitgraph` and then connect via:
+`~/.splitgraph/data.splitgraph.com.crt` and then connect via:
 
 ```bash
 psql "postgres://$USERNAME:$PASSWORD@data.splitgraph.com:5432/ddn?sslmode=verify-ca&sslrootcert=$HOME/.splitgraph/data.splitgraph.com.crt"
