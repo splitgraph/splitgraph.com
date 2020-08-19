@@ -8,7 +8,7 @@ const generateRSS = (posts) => {
 
   const feed = new RSS({
     title: "Splitgraph Blog",
-    description: "Splitgraph Blog - Work with data like code",
+    description: "Splitgraph Blog - Data-Ops Reimagined",
     site_url: `${siteURL}/blog`,
     feed_url: `${siteURL}/feed.xml`,
     generator: "Splitgraph",

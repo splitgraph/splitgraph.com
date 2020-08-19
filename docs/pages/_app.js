@@ -25,9 +25,7 @@ class SplitgraphWebsiteApp extends App {
   render() {
     const { Component, pageProps } = this.props;
 
-    const defaultDescription =
-      "Work with data like you work with code. Create, share and extend" +
-      " reproducible data. Inspired by Docker and Git, built for PostgreSQL.";
+    ("Data-Ops Reimagined: One PostgreSQL endpoint, 40k+ datasets. Build, version, query and share reproducible data images.");
 
     const DEFAULT_SEO = {
       title: "Splitgraph",
@@ -42,10 +40,10 @@ class SplitgraphWebsiteApp extends App {
         description: defaultDescription,
         images: [
           {
-            url: `${SEO_BASE_URL}/static/splitgraph_og_image_dark_1200x630.png`,
+            url: `${SEO_BASE_URL}/static/og-image-ddn.png`,
             width: 1200,
             height: 630,
-            alt: "Splitgraph - Work with data like code",
+            alt: "Splitgraph - DataOps Reimagined",
           },
         ],
       },
