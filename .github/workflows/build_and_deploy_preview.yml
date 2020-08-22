@@ -24,21 +24,21 @@ jobs:
       - run: ./.ci/build.sh
         env:
           DOCSEARCH_PUBLIC_CLIENT_API_KEY: ${{ secrets.DOCSEARCH_PUBLIC_CLIENT_API_KEY }}
-      # - run: ./.ci/deploy_preview.sh
-      #   env:
-      #     NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
-      #     NOW_PROJECT_ID: ${{ secrets.NOW_PROJECT_ID }}
-      #     NOW_ORG_ID: ${{ secrets.NOW_ORG_ID }}
+      - run: ./.ci/deploy_preview.sh
+        env:
+          NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
+          NOW_PROJECT_ID: ${{ secrets.NOW_PROJECT_ID }}
+          NOW_ORG_ID: ${{ secrets.NOW_ORG_ID }}
       - uses: actions/upload-artifact@v2
         with:
           name: website
           path: ./docs/out
-      # - run: ./.ci/get_preview_url.sh preview_url.txt
-      # - run: cat preview_url.txt
-      # - uses: actions/upload-artifact@v2
-      #   with:
-      #     name: preview_url.txt
-      #     path: preview_url.txt
+      - run: ./.ci/get_preview_url.sh preview_url.txt
+      - run: cat preview_url.txt
+      - uses: actions/upload-artifact@v2
+        with:
+          name: preview_url.txt
+          path: preview_url.txt
 
   release_master:
     runs-on: ubuntu-latest
@@ -52,8 +52,8 @@ jobs:
           path: website
       - name: List artifact
         run: ls -R website
-      # - name: Remove preview artifacts (robots.txt)
-      #   run: rm website/robots.txt || true
+      - name: Remove preview artifacts (robots.txt)
+        run: rm website/robots.txt || true
       - name: Create release tarball
         run: tar -cz -f /home/runner/release.tar.gz -C /home/runner/work/splitgraph.com/splitgraph.com/website .
       - name: Get current date
