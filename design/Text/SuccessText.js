@@ -4,8 +4,9 @@ export default ({ children, sx = {}, ...rest }) => (
   <Text
     sx={{
       color: "success",
-      ...sx
+      ...sx,
     }}
+    className="success-text"
     {...rest}
   >
     {children}

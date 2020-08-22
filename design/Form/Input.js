@@ -26,12 +26,19 @@ export default React.forwardRef(
         sx={{
           width: 200,
           borderColor: error ? "danger" : "initial",
-          ...sx
+          ...sx,
         }}
         {...rest}
       />
 
-      <Box mt={2}>
+      <Box
+        mt={2}
+        sx={{
+          ".danger-text,.warning-text,.success-text": {
+            maxWidth: "fit-content",
+          },
+        }}
+      >
         {validating ? (
           <MutedText>&#9850; {validatingText} ...</MutedText>
         ) : error ? (
