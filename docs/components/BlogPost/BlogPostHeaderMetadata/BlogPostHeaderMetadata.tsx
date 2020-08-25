@@ -3,6 +3,7 @@
 import { jsx, Box, SystemStyleObject } from "theme-ui";
 import * as React from "react";
 
+import { Link } from "../../Link";
 import { IBlogPostMetadata } from "../../BlogPostItem";
 
 import formatDate from "../formatDate";
@@ -23,7 +24,6 @@ const containerStyle = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    opacity: "0.5",
   },
   ".metadata-container": {
     display: "flex",
@@ -32,6 +32,10 @@ const containerStyle = {
   ".metadata-label": {
     textTransform: "uppercase",
     fontSize: "small",
+    opacity: "0.5",
+  },
+  ".date-value": {
+    opacity: "0.5",
   },
 } as SystemStyleObject;
 
@@ -54,7 +58,9 @@ const BlogPostHeaderMetadata = ({
       <Box className="bot-row">
         <Box className="metadata-container authors-container">
           <span className="metadata-label authors-label">{authorsLabel}</span>
-          <span className="authors-value">{authorsValue}</span>
+          <Link className="authors-value" href="/about/company/team">
+            {authorsValue}
+          </Link>
         </Box>
         <Box
           className="metadata-container date-container"
