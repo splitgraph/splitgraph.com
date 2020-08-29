@@ -30,6 +30,11 @@ body {
   border-radius: 10px;
 }
 
+.ace_scrollbar::-webkit-scrollbar-track {
+  background: #36668d !important;
+  border-radius: 10px;
+}
+
 .main-content::-webkit-scrollbar-track {
   background: #fff;
 }
