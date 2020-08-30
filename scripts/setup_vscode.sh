@@ -9,7 +9,7 @@
 # ./scripts/setup_vscode.sh
 
 SCRIPTS_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
-SPLITGRAPH_DIR="${SCRIPTS_DIR}/.."
+SPLITGRAPH_DIR=${1-"${SCRIPTS_DIR}/.."}
 
 WHOAMI=${SUDO_USER:-${USER}}
 
