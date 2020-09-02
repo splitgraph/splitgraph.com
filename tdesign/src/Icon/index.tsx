@@ -270,3 +270,19 @@ export { IconSearch };
 import IconRss from './IconRss';
 export { IconRss };
 
+
+import IconHorizontalPaneSplit from './IconHorizontalPaneSplit';
+export { IconHorizontalPaneSplit };
+
+
+import IconVerticalPaneSplit from './IconVerticalPaneSplit';
+export { IconVerticalPaneSplit };
+
+
+import IconDataTable from './IconDataTable';
+export { IconDataTable };
+
+
+import IconSQLConsole from './IconSQLConsole';
+export { IconSQLConsole };
+
