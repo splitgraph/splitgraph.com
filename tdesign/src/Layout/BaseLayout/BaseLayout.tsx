@@ -13,6 +13,7 @@ export interface BaseLayoutProps {
   renderHeaderCenter?: () => React.ReactNode;
   extraHeaderStyle?: SystemStyleObject;
   extraStyle?: SystemStyleObject;
+  showHeader?: boolean;
 }
 
 export default ({
@@ -21,6 +22,7 @@ export default ({
   renderHeaderRight,
   extraHeaderStyle = {},
   extraStyle = {},
+  showHeader = true,
 }: BaseLayoutProps) => {
   const containerStyle = {
     // maxWidth: '100vw',
@@ -53,16 +55,24 @@ export default ({
 
   return (
     <Box sx={containerStyle}>
-      <Header>
-        <HeaderLeft>
-          <a className="logo-link logo-link-flex" aria-label="home" href={"/"}>
-            <LogoImage logoURL={"/static/splitgraph_logo_light_nocircle.svg"} />
-            <LogoText />
-          </a>
-        </HeaderLeft>
-        <HeaderCenter>{headerCenter}</HeaderCenter>
-        <HeaderRight>{headerRight}</HeaderRight>
-      </Header>
+      {showHeader && (
+        <Header>
+          <HeaderLeft>
+            <a
+              className="logo-link logo-link-flex"
+              aria-label="home"
+              href={"/"}
+            >
+              <LogoImage
+                logoURL={"/static/splitgraph_logo_light_nocircle.svg"}
+              />
+              <LogoText />
+            </a>
+          </HeaderLeft>
+          <HeaderCenter>{headerCenter}</HeaderCenter>
+          <HeaderRight>{headerRight}</HeaderRight>
+        </Header>
+      )}
       {children}
     </Box>
   );
