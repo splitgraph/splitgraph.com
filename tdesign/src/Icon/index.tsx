@@ -286,3 +286,15 @@ export { IconDataTable };
 import IconSQLConsole from './IconSQLConsole';
 export { IconSQLConsole };
 
+
+import IconThreeDotsVertical from './IconThreeDotsVertical';
+export { IconThreeDotsVertical };
+
+
+import IconThreeDotsHorizontal from './IconThreeDotsHorizontal';
+export { IconThreeDotsHorizontal };
+
+
+import IconHamburger from './IconHamburger';
+export { IconHamburger };
+

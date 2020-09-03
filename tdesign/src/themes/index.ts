@@ -79,6 +79,7 @@ export const makeDefaultTheme = () => ({
     white: "#fff",
     // primary: "#07c",
     primary: "#36678d",
+    primaryMonochromatic: "#4482B2",
     primaryHalfOpacity: "rgba(54, 103, 141, .5)",
     // primary: "#000",
     // secondary: "#363C8D",
