@@ -28,14 +28,19 @@ const PreWithCopy = ({
       width: "100%",
       overflowX: "hidden",
       margin: 0,
+      ...(extraStyle.hasOwnProperty(".pre") ? extraStyle[".pre"] : {}),
     },
     code: {
       maxWidth: "100%",
       wordBreak: "break-all",
+      ...(extraStyle.hasOwnProperty("code") ? extraStyle["code"] : {}),
     },
     ".pre-title": {
       fontWeight: "bold",
       color: "heavy",
+      ...(extraStyle.hasOwnProperty(".pre-title")
+        ? extraStyle[".pre-title"]
+        : {}),
     },
     ".pre-row": {
       display: "flex",
@@ -51,6 +56,9 @@ const PreWithCopy = ({
       ":hover": {
         cursor: "pointer",
       },
+      ...(extraStyle.hasOwnProperty(".copy-icon-container")
+        ? extraStyle[".copy-icon-container"]
+        : {}),
     },
   } as SystemStyleObject;
 
