@@ -1,0 +1,31 @@
+export const meta = {
+  id: "load-elasticsearch-index",
+  title: "Loading Elasticsearch indexes",
+};
+
+To mount a remote Elasticsearch index into the Splitgraph engine using Splitgraph's fork of [`pg_es_fdw`](https://github.com/splitgraph/postgres-elasticsearch-fdw), run:
+
+```
+$ sgr mount elasticsearch -c elasticsearch:9200 -o@- <<EOF
+    {
+      "table_spec": {
+        "table_1": {
+          "schema": {
+            "id": "text",
+            "@timestamp": "timestamp",
+            "query": "text",
+            "col_1": "text",
+            "col_2": "boolean",
+          },
+          "index": "index-pattern*",
+          "rowid_column": "id",
+          "query_column": "query",
+        }
+      }
+    }
+EOF
+```
+
+The FDW translates local queries into the [Elasticsearch Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html). You can also pass Lucene query strings as `query_column` equality clauses. For example, if `query_column` is set to `query`, you can use `WHERE query='text_body:chess'`).
+
+To snapshot the table, making it part of an actual Splitgraph image, use the [`sgr import`](../../sgr/image-management-creation/import) command.

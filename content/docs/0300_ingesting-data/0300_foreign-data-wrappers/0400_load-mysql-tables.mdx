@@ -6,12 +6,31 @@ export const meta = {
 To mount a MySQL database into the Splitgraph engine using [`mysql_fdw`](https://github.com/EnterpriseDB/mysql_fdw), run:
 
 ```
-$ sgr mount mysql_fdw -c username:password@host:port \\
-    -o '{"remote_schema": "remote_schema"}' schema_name
+$ sgr mount mysql_fdw local_schema -c username:password@host:port -o@- <<EOF
+{
+    "remote_schema": "remote_schema",
+    "tables": ["table_1"],
+}
+
 ```
 
 This will mount a MySQL schema `remote_schema` into a local schema `schema_name` on the
 Splitgraph engine. Note that if your MySQL server is running on localhost and you wish to
 access it over a TCP connection, you should use `127.0.0.1` instead of `localhost` as the `host`.
+
+`"tables"` can be omitted (in which case all tables in `remote_schema` will be mounted into `local_schema`).
+
+You can also pass a dictionary of tables and their schema as `tables`. This will override the schema that's inferred by `IMPORT FOREIGN SCHEMA`. For example:
+
+```json
+{
+    "tables": {
+        "table_1": {
+            "col_1": "integer",
+            "col_2": "text"
+        }
+    }
+}
+```
 
 To snapshot the table, making it part of an actual Splitgraph image, use the [`sgr import`](../../sgr/image-management-creation/import) command.

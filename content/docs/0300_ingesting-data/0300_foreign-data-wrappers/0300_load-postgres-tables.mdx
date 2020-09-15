@@ -6,13 +6,29 @@ export const meta = {
 To use [`postgres_fdw`](https://www.postgresql.org/docs/12/postgres-fdw.html) and mount remote PostgreSQL databases, run:
 
 ```
-$ sgr mount postgres_fdw \\
-    -c username:password@server:port \\
-    -o '{"dbname": remote_db_name, "remote_schema": remote_schema_name, \\
-        "tables_to_mount": ["table_1", "table_2"]}' \\
-    local_schema
+$ sgr mount postgres_fdw local_schema -c username:password@server:port -o@- <<EOF
+{
+    "dbname": remote_db_name,
+    "remote_schema": remote_schema_name,
+    "tables": ["table_1", "table_2"],
+    "extra_server_args": [optional, e.g. {"use_remote_estimate": "true"}]
+}
+EOF
 ```
 
-`"tables_to_mount"` can be omitted (in which case all tables in `remote_schema` will be mounted into `local_schema`).
+`"tables"` can be omitted (in which case all tables in `remote_schema` will be mounted into `local_schema`).
+
+You can also pass a dictionary of tables and their schema as `tables`. This will override the schema that's inferred by `IMPORT FOREIGN SCHEMA`. For example:
+
+```json
+{
+    "tables": {
+        "table_1": {
+            "col_1": "integer",
+            "col_2": "text"
+        }
+    }
+}
+```
 
 To snapshot the data, making it part of an actual Splitgraph image, use the [`sgr import`](../../sgr/image-management-creation/import) command.
