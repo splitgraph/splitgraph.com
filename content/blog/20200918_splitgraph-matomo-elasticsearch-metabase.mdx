@@ -1,0 +1,290 @@
+export const meta = {
+  id: "splitgraph-matomo-elasticsearch-metabase",
+  title: "Dogfooding Splitgraph at Splitgraph for cross-database analytics",
+  date: "2020-09-18",
+  authors: ["Artjoms Iškovs"],
+  topics: ["technical", "analytics"],
+  description:
+    "We talk about how we use Metabase, Splitgraph and PostgreSQL foreign data wrappers to build BI " +
+    "dashboards that are backed by federated queries across our Matomo and Elasticsearch instances.",
+  related: ["introduction-to-splitgraph", "data-delivery-network", "data-delivery-network-launch", "dbt"],
+};
+
+[Splitgraph](https://www.splitgraph.com) is powered by data. We use [Metabase](https://www.metabase.com/) to build BI dashboards that can answer questions about how people interact with us. These dashboards reference our Web analytics data, user data and all events happening across the estate. We can find out how many people queried the Splitgraph [Data Delivery Network](https://www.splitgraph.com/connect) on a given week, how they found Splitgraph, or if they ever pulled a data image.
+
+This works without any ETL pipelines or a data warehouse. How do we do it?
+
+Well, we use Splitgraph.
+
+In this post, we'll talk about our analytics stack. We'll discuss how we use Splitgraph's [`sgr mount`](https://www.splitgraph.com/docs/ingesting-data/foreign-data-wrappers/introduction) command to proxy to data from Matomo, Elasticsearch and PostgreSQL. We'll show a sample SQL query that runs a federated JOIN between these three databases. Finally, we'll talk about how we use Metabase to get a clear view of the business.
+
+## Our analytics stack
+
+We hate third-party trackers. At the same time, we would like to know what's happening on the website and across the company in general. In the age of CDNs, a visit to a website might never reach the origin server. HTTP server logs won't show the full story about website visitors.
+
+To solve that, we started using **[Matomo](https://matomo.org/)**. Matomo is an open-source web analytics platform. It offers a similar interface and feature set to Google Analytics. However, unlike GA, it stores all data locally in a MySQL database.
+
+Besides visiting the website, there's a lot of other ways users can interact with Splitgraph. For example:
+
+  * Starring Splitgraph on GitHub or downloading a release
+  * Querying the Splitgraph [Data Delivery Network](https://www.splitgraph.com/connect) from an SQL client
+  * Pushing and pulling [data images](https://splitgraph.com/docs/concepts/images) to/from Splitgraph
+  * Using the [REST API](https://www.splitgraph.com/docs/splitgraph-cloud/publish-rest-api)
+  * Checking for updates: we use this to estimate the number of active `sgr` users
+
+We use **Elasticsearch** to log these and other interesting events.
+
+Finally, we have a **PostgreSQL** database that stores actual user data. Some of it could be useful to know in an analytics context. For example: a user's primary e-mail address or their GitHub ID.
+
+## How to bring the data together?
+
+The idea for this setup came to us when we were trying to get some data from the Matomo Web UI. While it is pretty powerful, it's limited in the kinds of reports it can produce. Also, data we'd see in Matomo didn't include anything we store in Elasticsearch.
+
+We wondered if we could query the data from Matomo's MySQL database directly. The [schema](https://developer.matomo.org/guides/database-schema), albeit complex, is well documented on their website.
+
+We could ingest data into Elasticsearch. However, we were already using Kibana to visualize Elasticsearch data and its visualizations were sometimes frustrating to use. Basic functionality like plotting sums is only available through scripted Elasticsearch fields.
+
+![](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/blog/images/20200918-splitgraph-matomo-elasticsearch-metabase/01-kibana.png)
+_Pictured: five different visualization engines that Kibana lets you use_
+
+But then we thought about it some more. Splitgraph itself is built on top of PostgreSQL. One of its features is making PostgreSQL [foreign data wrappers](https://www.splitgraph.com/blog/foreign-data-wrappers) more user-friendly. Splitgraph's `sgr mount` lets you instantiate an FDW with a single command. You can then query the data directly or snapshot it.
+
+Could we use a Splitgraph instance and add a MySQL FDW to it to query Matomo data?
+
+And if we did, could we use an Elasticsearch FDW to proxy to our events data?
+
+And if we did that, could we use something like [Metabase](https://www.metabase.com/) and point it at Splitgraph, letting it query data across all our data silos?
+
+Turns out, we could. Here's an abridged version of how we mount Matomo data on a Splitgraph instance. We have a full set of commands on [our GitHub](https://github.com/splitgraph/splitgraph/tree/master/examples/cross-db-analytics).
+
+```
+sgr mount mysql_fdw matomo_raw -c matomo:$PASSWORD@matomo-db -o@- <<EOF
+{
+  "remote_schema": "matomo",
+  "tables": {
+    "matomo_log_action": {
+      "hash": "bigint",
+      "idaction": "integer",
+      "name": "character varying(4096)",
+      "type": "smallint",
+      "url_prefix": "smallint"
+    },
+    "matomo_log_visit": {
+      "idvisit": "bigint",
+      "idvisitor": "bytea",
+      "user_id": "character varying(200)",
+      "location_ip": "bytea",
+      "referer_url": "text",
+      "visit_entry_idaction_name": "integer",
+      "visit_entry_idaction_url": "integer",
+      "visit_exit_idaction_name": "integer",
+      "visit_exit_idaction_url": "integer",
+      "visit_first_action_time": "timestamp without time zone",
+      "visit_last_action_time": "timestamp without time zone",
+      "visit_total_actions": "integer",
+      "visitor_count_visits": "integer",
+      "visitor_days_since_first": "smallint",
+      "visitor_days_since_last": "smallint",
+      "visitor_returning": "smallint"
+    }
+  }
+}
+EOF
+```
+
+In this, we just pull out interesting tables and columns from Matomo. The full Matomo schema spec for Splitgraph is available [here](https://github.com/splitgraph/splitgraph/blob/master/examples/cross-db-analytics/mounting/matomo.json).
+
+To query Elasticsearch, we used a [fork](https://github.com/splitgraph/postgres-elasticsearch-fdw) of `postgres-elasticsearch-fdw` with the ability to push down qualifiers. We made it available as an `sgr mount` subcommand. Here's an example:
+
+```
+sgr mount elasticsearch -c elasticsearch:9200 -o@- <<EOF
+{
+  "table_spec": {
+    "github_scraper_data": {
+      "schema": {
+        "id": "text",
+        "@timestamp": "timestamp",
+        "sg.github.stars": "integer",
+        "sg.github.issues": "integer",
+        "sg.github.downloads_installer": "integer",
+        "sg.github.downloads_osx": "integer",
+        "sg.github.downloads_linux": "integer",
+        "sg.github.downloads_windows": "integer"
+      },
+      "index": "sg-misc*",
+      "rowid_column": "id"
+    }
+  }
+}
+EOF
+```
+
+This creates a table that proxies to the data dumped by our GitHub star scraper.
+
+Adding our PostgreSQL database was easy. We made an analytics user and gave it access a limited amount of useful tables (we wrote about our [configuration and credential generation](https://www.splitgraph.com/blog/integration-tests) before):
+
+```
+sgr mount postgres_fdw sgr_auth -c [connstr] -o@- <<EOF
+{
+  "dbname": "auth",
+  "remote_schema": "sgr_auth",
+  "tables": [
+    "user_emails",
+    "profiles"
+  ],
+  "extra_server_args": {
+    "use_remote_estimate": "true",
+    "fetch_size": "10000"
+  }
+}
+EOF
+```
+
+## Sample queries
+
+Let's now query Elasticsearch from Splitgraph and find out how many GitHub stars Splitgraph has:
+
+```sql
+SELECT "sg.github.stars"
+FROM elasticsearch_raw.github_scraper_data
+ORDER BY "@timestamp" DESC
+LIMIT 1;
+
+ sg.github.stars
+-----------------
+             149
+(1 row)
+```
+
+Only 149?! Make sure to [star Splitgraph on GitHub](https://github.com/splitgraph/splitgraph) if you're reading this!
+
+### Federated JOIN
+
+As a real-world example, let's say we wanted to:
+
+  * Find users that visited our website in the last week
+  * Also find out how many queries to our Data Delivery Network they made
+  * Find out their e-mail addresses
+
+This data lives across three different databases, as discussed. With this setup, we can bring these three silos together with one simple SQL query:
+
+```sql
+SELECT
+	v.user_id,
+	email,
+	last_visit,
+	COALESCE(total_ddn_queries, 0) AS total_ddn_queries
+FROM sgr_auth.user_emails ue
+LEFT OUTER JOIN (
+	-- Get user IDs and how many DDN queries they made
+	SELECT "sg.api.user_id" AS user_id, COUNT(1) AS total_ddn_queries
+	FROM elasticsearch_raw.sql_api_queries
+	WHERE "sg.sql.used_images" IS NOT NULL
+	GROUP BY user_id
+) d
+ON ue.user_id::text = d.user_id
+JOIN (
+	-- Get last visit timestamp for users who visited the website
+	-- in the last week
+	SELECT user_id, MAX(visit_last_action_time) AS last_visit
+	FROM matomo_raw.matomo_log_visit v
+	WHERE user_id IS NOT NULL
+	AND AGE(visit_last_action_time) < '1 week'
+	GROUP BY user_id
+) v
+ON ue.user_id::text = v.user_id
+WHERE ue.is_primary IS TRUE
+ORDER BY last_visit DESC;
+```
+
+Here's the query plan for it:
+
+```
+ Sort
+   Sort Key: (max(v.visit_last_action_time)) DESC
+   ->  Hash Left Join
+         Hash Cond: ((ue.user_id)::text = d.user_id)
+         ->  Hash Join
+               Hash Cond: ((ue.user_id)::text = (v.user_id)::text)
+               ->  Foreign Scan on user_emails ue
+                     Filter: (is_primary IS TRUE)
+               ->  Hash
+                     ->  HashAggregate
+                           Group Key: v.user_id
+                           ->  Foreign Scan on matomo_log_visit v
+                                 Filter: (age((CURRENT_DATE)::timestamp without time zone, visit_last_action_time) < '7 days'::interval)
+         ->  Hash
+               ->  Subquery Scan on d
+                     ->  GroupAggregate
+                           Group Key: sql_api_queries."sg.api.user_id"
+                           ->  Sort
+                                 Sort Key: sql_api_queries."sg.api.user_id"
+                                 ->  Foreign Scan on sql_api_queries
+                                       Filter: ("sg.sql.used_images" IS NOT NULL)
+                                       Multicorn: Elasticsearch query to <Elasticsearch([{'host': 'elasticsearch', 'port': 9200}])>
+                                       Multicorn: Query: {"query": {"bool": {"must": [{"exists": {"field": "sg.sql.used_images"}}]}}}
+```
+
+As you can see, this resolves into a Hash Join across three foreign tables. It also pushes down most of the clauses to the three origin databases:
+
+```
+[PostgreSQL]
+Foreign Scan on user_emails ue
+  Filter: (is_primary IS TRUE)
+
+[MySQL]
+Foreign Scan on matomo_log_visit v
+  Filter: (age((CURRENT_DATE)::timestamp without time zone, visit_last_action_time) < '7 days'::interval)
+
+[Elasticsearch]
+->  Foreign Scan on sql_api_queries
+  Filter: ("sg.sql.used_images" IS NOT NULL)
+  Multicorn: Query: {"query": {"bool": {"must": [{"exists": {"field": "sg.sql.used_images"}}]}}}
+```
+
+Normally, this would require a data warehouse and a few separate ingestion pipelines. With Splitgraph and PostgreSQL, we can query the data at source. This idea is called "data virtualization" or a "data fabric". We call it a "database proxy".
+
+Is data virtualization always the right solution? No, but it should be a starting point. If performance becomes a concern, we'll be able to snapshot these tables as Splitgraph images. Splitgraph stores data in a columnar format (using
+[`cstore_fdw`](https://www.splitgraph.com/docs/concepts/objects)), so we'll be able to query it much faster.
+
+## Data modelling
+
+We wrote a few views on these source foreign tables that wrangle the data and clean it up. For example ([SQL on GitHub](https://github.com/splitgraph/splitgraph/blob/master/examples/cross-db-analytics/mounting/matomo.sql)), we join the Matomo `log_action` and `log_visit` tables to get the URLs of entry and exit pages. The view also formats the IP addresses as strings rather than `bytea` values.
+
+Finally, we wrote a view that joins across multiple tables to give us information on each user and their activity on Splitgraph. This includes their website visits and their activity on the DDN and the Splitgraph registry.
+
+Querying these views still queries live data, but they're much more user friendly to query than the original data sources. One exception is Elasticsearch: there, we materialize some views for performance.
+
+Currently, we build and organize these views ourselves. But there's nothing preventing us from running [dbt](https://www.getdbt.com/) to manage this process better. We wrote a [blog post](https://www.splitgraph.com/blog/dbt) earlier on how to use dbt with Splitgraph.
+
+## Metabase
+
+### Setting up
+
+By far the most difficult thing about setting up Metabase with Splitgraph was getting it served on a non-root path behind a reverse proxy. To save you an hour of perusing GitHub issues, the settings are:
+
+  * Make sure your reverse proxy **strips the path prefix**. For example, a request to `https://www.company.com/metabase/admin/datamodel` should be forwarded to `/admin/datamodel`.
+  * Make sure your routing doesn't result in paths prefixed with double slashes!
+  * Set the `MB_SITE_URL` environment variable to the full base URL, for example, `https://www.company.com/metabase/`. In this case, it must have a **trailing slash**!
+
+### Insights
+
+Besides that, Metabase worked surprisingly well on Splitgraph. We had to add a User ID primary key (on the [Data Model](https://www.metabase.com/docs/latest/administration-guide/03-metadata-editing.html) page) on our main user. After also adding the user ID as a foreign key in a few other views, we got amazing drill down capabilities.
+
+For example, we could plot a graph of daily website visits (picture from the day our [DDN launch blog post](https://news.ycombinator.com/item?id=24233948) was #1 on Hacker News!):
+
+![](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/blog/images/20200918-splitgraph-matomo-elasticsearch-metabase/02-visits.png)
+
+We could then take a look at visits from that day and see if any of them were already Splitgraph users. Finally, we could click on that user ID and automatically get information on all other activity tables involving that user:
+
+![](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/blog/images/20200918-splitgraph-matomo-elasticsearch-metabase/03-drilldown.png)
+
+Metabase didn't care that these tables were actually views on other views on foreign tables. Behind the scenes, this would magically forward data to either Elasticsearch, Matomo or PostgreSQL, depending on what was being queried.
+
+## Conclusion
+
+In this post, we talked about our analytics setup that involves Metabase, Splitgraph itself and multiple backend data sources that we query through PostgreSQL foreign data wrappers. We discussed how it can provide business insights without adding extra complexity.
+
+On [our GitHub](https://github.com/splitgraph/splitgraph/tree/master/examples/cross-db-analytics), you'll find a sample setup that will let you query Matomo data from PostgreSQL.
+
+If you're interested in learning more about Splitgraph, feel free to check our our [website](https://www.splitgraph.com/)!
