@@ -1,6 +1,6 @@
 export const meta = {
   id: "splitgraph-matomo-elasticsearch-metabase",
-  title: "Dogfooding Splitgraph at Splitgraph for cross-database analytics",
+  title: "Dogfooding Splitgraph for cross-database analytics in Metabase",
   date: "2020-09-18",
   authors: ["Artjoms Iškovs"],
   topics: ["technical", "analytics"],
@@ -17,6 +17,9 @@ This works without any ETL pipelines or a data warehouse. How do we do it?
 Well, we use Splitgraph.
 
 In this post, we'll talk about our analytics stack. We'll discuss how we use Splitgraph's [`sgr mount`](https://www.splitgraph.com/docs/ingesting-data/foreign-data-wrappers/introduction) command to proxy to data from Matomo, Elasticsearch and PostgreSQL. We'll show a sample SQL query that runs a federated JOIN between these three databases. Finally, we'll talk about how we use Metabase to get a clear view of the business.
+
+![](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/blog/images/20200918-splitgraph-matomo-elasticsearch-metabase/00-diagram.png)
+_Architecture diagram of our analytics setup._
 
 ## Our analytics stack
 
