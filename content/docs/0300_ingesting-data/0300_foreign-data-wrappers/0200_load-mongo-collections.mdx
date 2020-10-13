@@ -10,9 +10,8 @@ $ sgr mount mongo_fdw example/mongo \\
     -c username:password@mongo_host:27017 -o @- <<EOF
 {
     "example_table": {
-        "db": "example_db",
-        "coll": "example_collection",
-        "schema": {"column_1": "text", "column_2": "numeric"}
+        "schema": {"column_1": "text", "column_2": "numeric"},
+        "options": {"db": "example_db", "coll": "example_collection"}
     }
 }
 EOF

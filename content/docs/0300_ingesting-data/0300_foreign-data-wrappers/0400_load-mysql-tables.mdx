@@ -9,9 +9,8 @@ To mount a MySQL database into the Splitgraph engine using [`mysql_fdw`](https:/
 $ sgr mount mysql_fdw local_schema -c username:password@host:port -o@- <<EOF
 {
     "remote_schema": "remote_schema",
-    "tables": ["table_1"],
+    "tables": ["table_1"]
 }
-
 ```
 
 This will mount a MySQL schema `remote_schema` into a local schema `schema_name` on the
@@ -26,8 +25,10 @@ You can also pass a dictionary of tables and their schema as `tables`. This will
 {
     "tables": {
         "table_1": {
-            "col_1": "integer",
-            "col_2": "text"
+            "schema": {
+                "col_1": "integer",
+                "col_2": "text"
+            }
         }
     }
 }
