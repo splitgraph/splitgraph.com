@@ -2382,6 +2382,7 @@ __metadata:
     babel-loader: ^8.0.6
     emotion-theming: ^10.0.27
     husky: ^4.2.3
+    iframe-resizer-react: ^1.0.4
     react: ^16.13.0
     react-dom: ^16.13.0
     rebass: ^4.0.7

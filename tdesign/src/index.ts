@@ -40,3 +40,5 @@ export { PreWithCopy, IPreWithCopyProps } from "./PreWithCopy";
 export * from "./OAuthButton";
 
 export { ConnectDDNButton } from "./ConnectDDNButton";
+
+export { HeroConnectionParams } from "./HeroConnectionParams";
