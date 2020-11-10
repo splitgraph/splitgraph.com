@@ -21,7 +21,7 @@ const useConnectPageData = ({ helpSectionComponents, onboardingState }) => {
 
   const router = useRouter();
   const {
-    query: { namespace, repository, imageHash, tableName },
+    query: { namespace, repository, imageHash, tableName, embed },
   } = router;
 
   const { hasSessionCookie } = useHasSessionCookie();
@@ -141,6 +141,7 @@ const useConnectPageData = ({ helpSectionComponents, onboardingState }) => {
   ];
 
   return {
+    embed: !!embed,
     namespace,
     repository,
     imageHash,

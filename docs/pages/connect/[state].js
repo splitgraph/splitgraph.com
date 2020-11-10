@@ -22,6 +22,7 @@ const OnboardingConnectPage = ({ onboardingState, helpSectionComponents }) => {
     namespace,
     repository,
     tableName,
+    embed,
   } = useConnectPageData({ onboardingState, helpSectionComponents });
 
   return (
@@ -29,6 +30,7 @@ const OnboardingConnectPage = ({ onboardingState, helpSectionComponents }) => {
       showMarketingNotice={showMarketingNotice}
       includeDashboardHeaderLink={isAuthenticated}
       includeConnectHeaderLink={false}
+      showHeader={!embed}
     >
       <NextSeo title="Connect to the DDN" />
       <ConnectPage
@@ -38,8 +40,9 @@ const OnboardingConnectPage = ({ onboardingState, helpSectionComponents }) => {
         namespace={namespace}
         repository={repository}
         tableName={tableName}
+        embed={embed}
       />
-      <Footer Link={Link} />
+      {!embed && <Footer Link={Link} />}
     </LandingPageLayout>
   );
 };

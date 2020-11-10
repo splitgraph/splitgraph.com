@@ -21,12 +21,14 @@ const OuterConnectPage = ({ helpSectionComponents }) => {
     namespace,
     repository,
     tableName,
+    embed,
   } = useConnectPageData({ helpSectionComponents });
 
   return (
     <LandingPageLayout
       showMarketingNotice={false}
       includeConnectHeaderLink={false}
+      showHeader={!embed}
     >
       <NextSeo title="Connect to the DDN" />
       <ConnectPage
@@ -36,8 +38,9 @@ const OuterConnectPage = ({ helpSectionComponents }) => {
         namespace={namespace}
         repository={repository}
         tableName={tableName}
+        embed={embed}
       />
-      <Footer Link={Link} />
+      {!embed && <Footer Link={Link} />}
     </LandingPageLayout>
   );
 };

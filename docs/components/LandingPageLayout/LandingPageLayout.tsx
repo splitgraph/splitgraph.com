@@ -12,6 +12,7 @@ export interface ILandingPageLayoutProps {
   showMarketingNotice?: boolean | React.ReactNode;
   includeDashboardHeaderLink?: boolean;
   includeConnectHeaderLink?: boolean;
+  showHeader?: boolean;
 }
 
 const HeaderRight = ({
@@ -44,6 +45,7 @@ const HeaderRight = ({
 
 export default ({
   children,
+  showHeader = true,
   showMarketingNotice = true,
   includeDashboardHeaderLink = false,
   includeConnectHeaderLink = false,
@@ -59,6 +61,7 @@ export default ({
     <>
       {marketingNotice}
       <BaseLayout
+        showHeader={showHeader}
         extraHeaderStyle={{
           borderWidth: "0 !important",
         }}
