@@ -17,6 +17,7 @@ export interface IConnectPageProps {
   repository?: string;
   namespace?: string;
   tableName?: string;
+  embed?: boolean;
 }
 
 const ConnectPage = ({
@@ -26,6 +27,7 @@ const ConnectPage = ({
   namespace,
   repository,
   tableName,
+  embed = false,
 }: IConnectPageProps) => {
   const cameFromRepo = !!namespace && !!repository;
 
