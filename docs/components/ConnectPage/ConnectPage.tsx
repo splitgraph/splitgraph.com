@@ -97,7 +97,7 @@ const ConnectPage = ({
       <Box className="left-col">
         <h1>Connect Now</h1>
         <h2>Compatible with most SQL clients</h2>
-        <HeroConnectionParams isAuthenticated={isAuthenticated} />
+        <HeroConnectionParams isAuthenticated={isAuthenticated} embed={embed} />
       </Box>
       <Box className="right-col">
         <Box className="right-top">

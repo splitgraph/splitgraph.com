@@ -14,12 +14,19 @@ import {
 export interface IHeroConnectionParamsProps {
   redirectURL?: string;
   isAuthenticated?: boolean;
+  embed?: boolean;
 }
 
 const HeroConnectionParams = ({
   redirectURL = "/connect/post-auth-welcome",
   isAuthenticated = false,
+  embed = false,
 }: IHeroConnectionParamsProps) => {
+  if (embed) {
+    // TODO: Use proper URL building (will break if query params in original URL)
+    redirectURL = `${redirectURL}?embed=1`;
+  }
+
   return (
     <Box
       className="hero-subsection hero-subsection--splitfile hero--connection-params"
