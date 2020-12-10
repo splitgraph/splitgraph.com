@@ -14,6 +14,7 @@ export interface BaseLayoutProps {
   extraHeaderStyle?: SystemStyleObject;
   extraStyle?: SystemStyleObject;
   showHeader?: boolean;
+  logoText?: string;
 }
 
 export default ({
@@ -23,6 +24,7 @@ export default ({
   extraHeaderStyle = {},
   extraStyle = {},
   showHeader = true,
+  logoText = "Splitgraph",
 }: BaseLayoutProps) => {
   const containerStyle = {
     // maxWidth: '100vw',
@@ -66,7 +68,7 @@ export default ({
               <LogoImage
                 logoURL={"/static/splitgraph_logo_light_nocircle.svg"}
               />
-              <LogoText />
+              <LogoText text={logoText} />
             </a>
           </HeaderLeft>
           <HeaderCenter>{headerCenter}</HeaderCenter>
