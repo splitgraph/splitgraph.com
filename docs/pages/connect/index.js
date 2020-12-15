@@ -22,6 +22,9 @@ const OuterConnectPage = ({ helpSectionComponents }) => {
     repository,
     tableName,
     embed,
+    whitelabeled,
+    brand,
+    host,
   } = useConnectPageData({ helpSectionComponents });
 
   return (
@@ -29,6 +32,9 @@ const OuterConnectPage = ({ helpSectionComponents }) => {
       showMarketingNotice={false}
       includeConnectHeaderLink={false}
       showHeader={!embed}
+      whitelabeled={whitelabeled === "1"}
+      brand={brand}
+      showFooter={whitelabeled ? false : true}
     >
       <NextSeo title="Connect to the DDN" />
       <ConnectPage
@@ -39,8 +45,10 @@ const OuterConnectPage = ({ helpSectionComponents }) => {
         repository={repository}
         tableName={tableName}
         embed={embed}
+        whitelabeled={whitelabeled === "1"}
+        host={host}
       />
-      {!embed && <Footer Link={Link} />}
+      {!embed && !whitelabeled && <Footer Link={Link} />}
     </LandingPageLayout>
   );
 };

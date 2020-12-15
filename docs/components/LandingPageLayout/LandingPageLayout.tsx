@@ -13,19 +13,24 @@ export interface ILandingPageLayoutProps {
   includeDashboardHeaderLink?: boolean;
   includeConnectHeaderLink?: boolean;
   showHeader?: boolean;
+  whitelabeled?: boolean;
+  brand?: string;
 }
 
 const HeaderRight = ({
   includeDashboardHeaderLink = false,
   includeConnectHeaderLink = true,
+  whitelabeled = false,
 }: Pick<
   ILandingPageLayoutProps,
-  "includeDashboardHeaderLink" | "includeConnectHeaderLink"
+  "includeDashboardHeaderLink" | "includeConnectHeaderLink" | "whitelabeled"
 >) => (
   <>
-    <Link href="/blog" className="desktop-only">
-      Blog
-    </Link>
+    {!whitelabeled && (
+      <Link href="/blog" className="desktop-only">
+        Blog
+      </Link>
+    )}
     <Link href="/docs">Docs</Link>
     {includeConnectHeaderLink && (
       <Link className="button-link--outline desktop-only" href="/connect">
@@ -49,6 +54,8 @@ export default ({
   showMarketingNotice = true,
   includeDashboardHeaderLink = false,
   includeConnectHeaderLink = false,
+  whitelabeled = false,
+  brand,
 }: ILandingPageLayoutProps) => {
   const marketingNotice =
     showMarketingNotice && typeof showMarketingNotice === "boolean" ? (
@@ -65,10 +72,12 @@ export default ({
         extraHeaderStyle={{
           borderWidth: "0 !important",
         }}
+        logoText={brand || undefined}
         renderHeaderRight={() => (
           <HeaderRight
             includeDashboardHeaderLink={includeDashboardHeaderLink}
             includeConnectHeaderLink={includeConnectHeaderLink}
+            whitelabeled={whitelabeled}
           />
         )}
       >

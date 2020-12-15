@@ -15,12 +15,14 @@ export interface IHeroConnectionParamsProps {
   redirectURL?: string;
   isAuthenticated?: boolean;
   embed?: boolean;
+  host?: string;
 }
 
 const HeroConnectionParams = ({
   redirectURL = "/connect/post-auth-welcome",
   isAuthenticated = false,
   embed = false,
+  host = "data.splitgraph.com",
 }: IHeroConnectionParamsProps) => {
   if (embed) {
     // TODO: Use proper URL building (will break if query params in original URL)
@@ -59,7 +61,7 @@ const HeroConnectionParams = ({
       >
         <Box className="value-area">
           <PreWithCopy title={"Host"} extraStyle={{ marginBottom: "1rem" }}>
-            {"data.splitgraph.com"}
+            {host}
           </PreWithCopy>
         </Box>
 
@@ -83,7 +85,7 @@ const HeroConnectionParams = ({
             title={"Connection URI"}
             extraStyle={{ marginBottom: "1rem" }}
           >
-            {"postgresql://data.splitgraph.com/ddn"}
+            {`postgresql://${host}/ddn`}
           </PreWithCopy>
         </Box>
 

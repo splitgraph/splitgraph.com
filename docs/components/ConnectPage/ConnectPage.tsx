@@ -18,6 +18,8 @@ export interface IConnectPageProps {
   namespace?: string;
   tableName?: string;
   embed?: boolean;
+  whitelabeled?: boolean;
+  host?: string;
 }
 
 const ConnectPage = ({
@@ -28,6 +30,8 @@ const ConnectPage = ({
   repository,
   tableName,
   embed = false,
+  whitelabeled = false,
+  host,
 }: IConnectPageProps) => {
   const cameFromRepo = !!namespace && !!repository;
 
@@ -97,12 +101,20 @@ const ConnectPage = ({
       <Box className="left-col">
         <h1>Connect Now</h1>
         <h2>Compatible with most SQL clients</h2>
-        <HeroConnectionParams isAuthenticated={isAuthenticated} embed={embed} />
+        <HeroConnectionParams
+          host={host}
+          isAuthenticated={isAuthenticated}
+          embed={embed}
+        />
       </Box>
       <Box className="right-col">
         <Box className="right-top">
           <h1>Send a Query in 60 Seconds</h1>
-          <h2>Query 40k+ datasets with standard SQL</h2>
+          {whitelabeled ? (
+            <h2>Query data with standard SQL</h2>
+          ) : (
+            <h2>Query 40k+ datasets with standard SQL</h2>
+          )}
           <HeroSampleQuery queries={sampleQueries} />
           {cameFromRepo && (
             <Box
