@@ -23,6 +23,9 @@ const OnboardingConnectPage = ({ onboardingState, helpSectionComponents }) => {
     repository,
     tableName,
     embed,
+    whitelabeled,
+    brand,
+    host,
   } = useConnectPageData({ onboardingState, helpSectionComponents });
 
   return (
@@ -31,6 +34,9 @@ const OnboardingConnectPage = ({ onboardingState, helpSectionComponents }) => {
       includeDashboardHeaderLink={isAuthenticated}
       includeConnectHeaderLink={false}
       showHeader={!embed}
+      whitelabeled={whitelabeled === "1"}
+      brand={brand}
+      showFooter={whitelabeled ? false : true}
     >
       <NextSeo title="Connect to the DDN" />
       <ConnectPage
@@ -41,8 +47,10 @@ const OnboardingConnectPage = ({ onboardingState, helpSectionComponents }) => {
         repository={repository}
         tableName={tableName}
         embed={embed}
+        whitelabeled={whitelabeled === "1"}
+        host={host}
       />
-      {!embed && <Footer Link={Link} />}
+      {!embed && !whitelabeled && <Footer Link={Link} />}
     </LandingPageLayout>
   );
 };
