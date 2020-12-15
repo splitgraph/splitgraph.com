@@ -54,9 +54,9 @@ SELECT
 FROM
     chicago.covid19_daily_cases_deaths_and_hospitalizations_naz8_j4nc chicago_cases
 FULL OUTER JOIN
-    cambridge.covid19_cumulative_cases_by_date_tdt9_vq5y cambridge_cases
+    cambridge.covid19_case_count_by_date_axxk_jvk8 cambridge_cases
 ON
-    date_trunc('day', chicago_cases.lab_report_date) = cambridge_cases.date
+    date_trunc('day', chicago_cases.lab_report_date) = cambridge_cases.date::timestamp
 ORDER BY date ASC;
 ```
 

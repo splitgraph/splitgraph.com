@@ -31,9 +31,9 @@ SELECT
 FROM
     "cityofchicago/covid19-daily-cases-deaths-and-hospitalizations-naz8-j4nc".covid19_daily_cases_deaths_and_hospitalizations chicago_cases
 FULL OUTER JOIN
-    "cambridgema-gov/covid19-cumulative-cases-by-date-tdt9-vq5y".covid19_cumulative_cases_by_date cambridge_cases
+    "cambridgema-gov/covid19-case-count-by-date-axxk-jvk8".covid19_case_count_by_date cambridge_cases
 ON
-    date_trunc('day', chicago_cases.lab_report_date) = cambridge_cases.date
+    date_trunc('day', chicago_cases.lab_report_date) = cambridge_cases.date::timestamp
 ORDER BY date ASC;
 ```
 
