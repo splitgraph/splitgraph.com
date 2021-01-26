@@ -1,0 +1,55 @@
+# ODBC (unixODBC, isql)
+
+Since the DDN is powered by PostgreSQL, you can access it over an ODBC connection using any PostgreSQL ODBC driver, for example, [psqlodbc](https://odbc.postgresql.org/).
+
+Two important ODBC configuration parameters are  `UseServerSidePrepare=0` (disables ODBC sending prepared statements to the DDN) and `SSLmode = require`. Here's a sample configuration for unixODBC:
+
+odbc.ini:
+
+```
+[DEFAULT]
+Driver = splitgraph
+
+[splitgraph]
+Description         = PostgreSQL connection
+Driver              = PostgreSQL Unicode
+Database            = ddn
+Servername          = data.splitgraph.com
+UserName            = [API_KEY]
+Password            = [API_SECRET]
+Port                = 5432
+Protocol            = 12.3
+SSLmode             = require
+ReadOnly            = Yes
+RowVersioning       = No
+ShowSystemTables    = No
+UseServerSidePrepare=0
+```
+
+odbcinst.ini:
+
+```
+[PostgreSQL ANSI]
+Description=PostgreSQL ODBC driver (ANSI version)
+Driver=/usr/local/lib/psqlodbca.so
+Setup=/usr/local/lib/odbcpsqlS.so
+Debug=0
+CommLog=1
+UsageCount=1
+
+[PostgreSQL Unicode]
+Description=PostgreSQL ODBC driver (Unicode version)
+Driver=/usr/local/lib/psqlodbca.so
+Setup=/usr/local/lib/odbcpsqlS.so
+Debug=0
+CommLog=1
+UsageCount=1
+```
+
+Instead of setting up a DSN in odbc.ini, you can use `isql` to connect to the DDN and test your ODBC setup:
+
+```bash
+isql -v -k "Driver={PostgreSQL Unicode};DATABASE=ddn;SERVER=data.splitgraph.com;PORT=5432;
+UID=[API_KEY];PWD=[API_SECRET];SSLmode=require;
+ReadOnly=1;UseServerSidePrepare=0" -n
+```
