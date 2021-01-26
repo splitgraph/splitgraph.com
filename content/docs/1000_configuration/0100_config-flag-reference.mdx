@@ -147,3 +147,19 @@ Name of the class used by the layered querying foreign data wrapper on the engin
 Set to `true` to disable Unicode output in sgr. Note that `sgr sql` will still output Unicode data.  
 **Default**: `false`
 
+### `SG_UPDATE_REMOTE`
+Name of the Splitgraph registry to check for sgr updates.  
+**Default**: `data.splitgraph.com`
+
+### `SG_UPDATE_FREQUENCY`
+How often to check for updates when sgr is run, in seconds. Set to 0 to disable.  
+**Default**: `86400`
+
+### `SG_UPDATE_LAST`
+Last timestamp an update check was performed. Internal.  
+**Default**: `0`
+
+### `SG_UPDATE_ANONYMOUS`
+Set to `true` to disable sending the user's ID to the update checker.  
+**Default**: `false`
+
