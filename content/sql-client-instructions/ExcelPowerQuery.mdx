@@ -1,0 +1,66 @@
+# Excel and Power Query via ODBC
+
+You can get DDN data in Excel via Power Query (Get & Transform) using the official PostgreSQL ODBC
+driver.
+
+Note that in Office 2016 Professional, 2019 Professional and Microsoft 365 Apps for Enterprise, you
+have access to a direct PostgreSQL import functionality. These instructions use ODBC and are
+compatible with more Office versions (including Home/Business Standard and 365 Home/Personal/Business).
+
+See the [compatibility page](https://support.microsoft.com/en-us/office/where-is-get-transform-power-query-e9332067-8e49-46fc-97ff-f2e1bfa0cb16?ui=en-us&rs=en-us&ad=us) for more details.
+
+These instructions have only been tested on Windows.
+
+### Install psqlODBC
+
+Install the PostgreSQL ODBC driver from https://www.postgresql.org/ftp/odbc/versions/msi/. Use the latest
+available version for your architecture ([`psqlodbc_13_00_0000-x64.zip`](https://ftp.postgresql.org/pub/odbc/versions/msi/psqlodbc_13_00_0000-x64.zip) at the time of writing).
+
+### Configure the DDN data source in ODBC
+
+Start &#x2192 Programs &#x2192 Windows Administrative Tools &#x2192 ODBC Data Sources (64-bit)
+or run `%windir%\\system32\\odbcad32.exe`.
+
+Click "Create New Data Source" and select "PostgreSQL Unicode (x64)".
+
+![Creating PostgreSQL ODBC data source for Excel and Power Query](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/sql-client-instructions/images/excel-odbc-windows-01.png)
+
+Set up the data source as follows:
+
+![Creating PostgreSQL ODBC data source for Excel and Power Query](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/sql-client-instructions/images/excel-odbc-windows-02.png)
+
+  * **Data Source**: ddn (or any preferred name)
+  * **Database**: ddn
+  * **Server**: data.splitgraph.com
+  * **Port**: 5432
+  * **User name**: Splitgraph API key
+  * **Password**: Splitgraph API secret
+  * **SSL Mode**: require
+
+Also make sure to disable "Server side prepare" (Datasource &#x2192 Page 2) since the DDN currently doesn't support prepared statements.
+
+![Disable "server side prepare" in PostgreSQL ODBC](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/sql-client-instructions/images/excel-odbc-windows-03.png)
+
+### Import data in Excel
+
+Start Excel, then, in "Data", select "Get Data" &#x2192 "From Other Sources" &#x2192 "From ODBC".
+
+![Setting up ODBC data source in Excel](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/sql-client-instructions/images/excel-odbc-windows-04.png)
+
+Select the data source name you set up previously. At this stage, you can enter a query that will
+immediately load into your spreadsheet.
+
+![Select DDN ODBC data source in Excel and enter a query](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/sql-client-instructions/images/excel-odbc-windows-05.png)
+
+![Query results loaded into Excel](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/sql-client-instructions/images/excel-odbc-windows-06.png)
+
+### Use Power Query to browse the DDN and select a dataset
+
+Alternatively, you can omit entering a custom query, which will take you to the Navigator window. This
+will contain a limited sample of Splitgraph datasets that are featured on the DDN or owned by you.
+
+![Datasets from Splitgraph DDN explored in Power Query Navigator](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/sql-client-instructions/images/excel-odbc-windows-07.png)
+
+Once you've selected a dataset, you can use normal Power Query tools to prepare it for import.
+
+![Datasets from Splitgraph DDN loaded in Power Query for transforms](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/sql-client-instructions/images/excel-odbc-windows-08.png)
