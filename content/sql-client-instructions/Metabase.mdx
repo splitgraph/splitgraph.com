@@ -1,5 +1,10 @@
 # Metabase
 
-Data discovery (introspection query interception) doesn't work with Metabase, as our `information_schema` implementation returns slashes in schema names. See the [GitHub issue](https://github.com/metabase/metabase/issues/12450) for details.
+You can set up the Splitgraph DDN in Metabase like any other PostgreSQL connection. Make sure to use SSL and disable prepared statements in the Metabase JDBC parameters (`prepareThreshold=0`).
 
-SQL queries work, allowing you to use Splitgraph data in your Metabase dashboards.
+![Metabase settings for setting up the Splitgraph DDN](https://raw.githubusercontent.com/splitgraph/splitgraph.com/master/content/sql-client-instructions/images/metabase-01.png)
+
+Data discovery (introspection query interception) only works in Metabase version v0.36.8 or above. Earler versions have an [issue](https://github.com/metabase/metabase/issues/12450) with slashes in schema names
+that Splitgraph DDN uses to denote repositories.
+
+Note that there are still some outstanding issues with Metabase X-Rays and automatically generated questions on the DDN. You can still use direct SQL queries, allowing you to reference Splitgraph data in your Metabase dashboards.
