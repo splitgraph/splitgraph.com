@@ -52,7 +52,12 @@ class ContentTree {
   build() {
     const contentTree = dirTree(
       this.rootPath,
-      { extensions: /\.(md|mdx|json)$/ },
+      {
+        extensions: /\.(md|mdx|json)$/,
+
+        // TEMPORARY HACK to eliminate memory error in builds
+        exclude: /v0\.1\.0|v0\.1\.1|v0\.1\.2|v0\.1\.3|v0\.2\.0|v0\.2\.1|v0\.2\.2|v0\.2\.3|v0\.2\.4/,
+      },
       (item) => {
         if (
           path.basename(item.path).endsWith(".meta.json") ||
