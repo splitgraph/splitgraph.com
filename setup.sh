@@ -101,8 +101,15 @@ dir_has_yarn_release() {
     local prefixDir="$1"
     shift
 
+    # Clean up old files that are deprecated and shouldn't be checked in anymore if they exist
     if test -f "$prefixDir"/.yarn/releases/yarn-rc.js ; then
         rm "$prefixDir"/.yarn/releases/yarn-rc.js
+    fi
+    if test -f "$prefixDir"/.yarn/releases/yarn-berry.cjs ; then
+        rm "$prefixDir"/.yarn/releases/yarn-berry.cjs
+    fi
+    if test -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-tools.cjs ; then
+        rm "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-tools.cjs
     fi
 
     if has_broken_yarn "$prefixDir" ; then
