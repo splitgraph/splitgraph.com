@@ -103,7 +103,7 @@ List of overrides for remote engines for some repositories. For example, `overri
 
 ### `SG_S3_HOST`
 Hostname used by the remote engine for object storage. Note that the S3 settings are only used by the remote engine when constructing the URL to give to the client wishing to download/upload objects to S3, not by `sgr` itself.  
-**Default**: `//localhost`
+**Default**: `localhost`
 
 ### `SG_S3_PORT`
 Port used by the remote engine for object storage.  
@@ -162,4 +162,7 @@ Last timestamp an update check was performed. Internal.
 ### `SG_UPDATE_ANONYMOUS`
 Set to `true` to disable sending the user's ID to the update checker.  
 **Default**: `false`
+
+### `SG_PLUGIN_DIR`
+Extra directory to look for plugins in. Each subdirectory must have a plugin.py file with a top-level __plugin__ variable pointing at the plugin class
 
