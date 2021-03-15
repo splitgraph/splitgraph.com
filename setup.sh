@@ -4,6 +4,8 @@
 # in order to setup and configure yarn correctly before using it.
 # Note this is an alternative to checking in the yarn release itself.
 
+# NOTE: This script also runs as the entrypoint of every JS container
+
 # Simply run:
 # ./setup.sh
 
@@ -23,19 +25,33 @@ ensure_yarn() {
         echo "Install yarn berry"
         pushd "$SPLITGRAPH_DIR" && yarn set version berry && popd
 
-        # For some reason, some splitgraph devs get a file called yarn-rc.js
-        # we want to make sure it's called yarn-berry.js for consistency.
+        # Yarn berry changes the name of the yarn executable in some releases,
+        # but we want to make sure it's called yarn-berry.js for consistency,
+        # and for referencing it in dockerfiles, etc.
+        # So, account for their various historical name changes.
+
+        # when a new dev joins with a fresh install of yarn, they may have
+        # changed the naming again, so look here for a fix.
+
+        # Account for releases with naming scheme yarn-rc.js
         if test -f "$SPLITGRAPH_DIR"/.yarn/releases/yarn-rc.js ; then
             mv "$SPLITGRAPH_DIR"/.yarn/releases/yarn-rc.js \
                 "$SPLITGRAPH_DIR"/.yarn/releases/yarn-berry.js \
             && sed -i 's/yarn-rc/yarn-berry/' "$SPLITGRAPH_DIR"/.yarnrc.yml
         fi
 
+        # Account for releases with naming scheme yarn-2*.(js|cjs)
+        if test ls "$SPLITGRAPH_DIR"/.yarn/releases/yarn-2.6* 2>/dev/null ; then
+            mv "$SPLITGRAPH_DIR"/.yarn/releases/yarn-2* \
+                "$SPLITGRAPH_DIR"/.yarn/releases/yarn-berry.js \
+                && sed -Ei 's/yarn-[0-9+\.]+\.(cjs|js)/yarn-berry.js/' "$SPLITGRAPH_DIR"/.yarnrc.yml
+        fi
     fi
 
     if ! dir_has_yarn_plugins "$SPLITGRAPH_DIR" ; then
         echo "Install yarn plugins"
-        pushd "$SPLITGRAPH_DIR" && yarn plugin import plugin-workspace-tools && popd
+
+        install_plugins "$SPLITGRAPH_DIR"
     fi
     set +e
 
@@ -45,6 +61,41 @@ ensure_yarn() {
 
     return 0
 }
+
+install_plugins() {
+    local prefixDir="$1"
+
+    pushd "$prefixDir" && yarn plugin import plugin-workspace-tools && popd
+
+    # Yarn sometimes releases workspace tools with .js and .cjs (tbh, maybe all .cjs now)
+    # AFAICT it costs nothing to rename this to .js to standardize our checked in versions
+    if test -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-tools.cjs ; then
+            mv "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-tools.cjs \
+               "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-tools.js
+    fi
+
+    fix_yarnrc() {
+        local yarnrcFile="$1"
+        shift
+
+        grep 'plugin-workspace-tools' "$yarnrcFile" \
+            && sed -i 's/plugin-workspace-tools\.cjs/plugin-workspace-tools\.js/' "$yarnrcFile" \
+            && return 0
+
+        return 1
+    }
+
+    # todo: Is it actually possible to have a .yarnrc named either of these things? Maybe was
+    # earlier code covering a corner case that no longer exists? But is harmless to check both.
+    if test -f "$prefixDir"/.yarnrc ; then
+        fix_yarnrc "$prefixDir"/.yarnrc
+    elif test -f "$prefixDir"/.yarnrc.yml ; then
+        fix_yarnrc "$prefixDir"/.yarnrc.yml
+    fi
+
+    return 0
+}
+
 
 dir_has_yarn_release() {
     local prefixDir="$1"
