@@ -2305,7 +2305,7 @@ __metadata:
     "@rebass/preset": ^4.0.5
     "@theme-ui/prism": ^0.2.46
     rebass: ^4.0.5
-    theme-ui: ^0.2.43
+    theme-ui: ^0.3.1
   peerDependencies:
     dayjs: "*"
     next: "*"
@@ -2925,7 +2925,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@styled-system/css@npm:^5.0.0, @styled-system/css@npm:^5.0.16, @styled-system/css@npm:^5.1.5":
+"@styled-system/css@npm:^5.0.0, @styled-system/css@npm:^5.1.5":
   version: 5.1.5
   resolution: "@styled-system/css@npm:5.1.5"
   checksum: 3b3322754e87992b1ce8dba0e58241c6a07858e45373179920dd273ca378e4f5f8abff1dcf2672e708ae980ae5ebaffcd13a0ab5d3918a1b79b1292324e35ab2
@@ -7333,7 +7333,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"deepmerge@npm:^4.0.0, deepmerge@npm:^4.2.2":
+"deepmerge@npm:^4.2.2":
   version: 4.2.2
   resolution: "deepmerge@npm:4.2.2"
   checksum: 85abf8e0045ee280996e7d2396979c877ef0741e413b716e42441110e0a83ac08098b2a49cea035510060bf667c0eae3189b2a52349f5fa4b000c211041637b1
@@ -18345,21 +18345,6 @@ resolve@1.12.0:
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
   checksum: 373904ce70524ba11ec7e1905c44fb92671132d5e0b0aba2fb48057161f8bf9cbf7f6178f0adf31810150cf44fb52c7b912dc722bff3fddf9688378596dbeb56
-  languageName: node
-  linkType: hard
-
-"theme-ui@npm:^0.2.43":
-  version: 0.2.52
-  resolution: "theme-ui@npm:0.2.52"
-  dependencies:
-    "@emotion/is-prop-valid": ^0.8.1
-    "@styled-system/css": ^5.0.16
-    deepmerge: ^4.0.0
-  peerDependencies:
-    "@emotion/core": ^10.0.0
-    "@mdx-js/react": ^1.0.0
-    react: ^16.8.0
-  checksum: 0fbab18446af48f17c7af61864a70afe86d112a5f6f00bac40576ec3b31944ec7d7e00e727d2950d8e0390980f264c1d900898626d06df974717adfa4c47ed8a
   languageName: node
   linkType: hard
 
