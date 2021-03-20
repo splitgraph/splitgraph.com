@@ -7,7 +7,6 @@ import {
   HeroConnectionParams,
   HeroSampleQuery,
   IHeroSampleQueryItem,
-  MarketingNotice,
 } from "@splitgraph/docs/components";
 
 export interface IConnectPageProps {
@@ -115,7 +114,7 @@ const ConnectPage = ({
           ) : (
             <h2>Query 40k+ datasets with standard SQL</h2>
           )}
-          <HeroSampleQuery queries={sampleQueries} />
+          {sampleQueries && <HeroSampleQuery queries={sampleQueries} />}
           {cameFromRepo && (
             <Box
               sx={{
@@ -135,9 +134,11 @@ const ConnectPage = ({
                 },
               }}
             >
-              <a href={originRepoLink}>
-                Back to {`${namespace}/${repository}`}
-              </a>
+              {originRepoLink && (
+                <a href={originRepoLink}>
+                  Back to {`${namespace}/${repository}`}
+                </a>
+              )}
             </Box>
           )}
         </Box>

@@ -31,7 +31,12 @@ const mountBodyScript = ({ onLoad }) => {
   bodyScriptElement.type = "text/javascript";
   bodyScriptElement.async = true;
   bodyScriptElement.defer = true;
-  bodyScriptElement.src = srcURL;
+
+  if (srcURL) {
+    bodyScriptElement.src = srcURL;
+  } else {
+    console.warn("No srcURL for docsearch provided");
+  }
 
   // Once the script is ready, call the onLoad() closure to setState in the component
   bodyScriptElement.onload = () => onLoad();
@@ -54,6 +59,7 @@ const DocSearch = ({}: IDocSearchProps) => {
 
     if (
       (window as IWindowWithDocSearch & typeof globalThis).docsearch ||
+      // @ts-ignore
       windowReady
     ) {
       console.log("✔︎ docsearch already loaded");
@@ -78,6 +84,11 @@ const DocSearch = ({}: IDocSearchProps) => {
 
     if (!docsearch) {
       console.warn("window.docsearch does not exist");
+      return;
+    }
+
+    if (!DOCSEARCH_PUBLIC_CLIENT_API_KEY || !DOCSEARCH_INDEX_NAME) {
+      console.warn("Missing DocSearch configuration");
       return;
     }
 
