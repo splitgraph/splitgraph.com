@@ -1,3 +1,2 @@
-import BoxOne from './BoxOne';
+import BoxOne from "./BoxOne";
 export { BoxOne };
-

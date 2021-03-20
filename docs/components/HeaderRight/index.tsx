@@ -1,3 +1,2 @@
-import HeaderRight from './HeaderRight';
+import HeaderRight from "./HeaderRight";
 export { HeaderRight };
-

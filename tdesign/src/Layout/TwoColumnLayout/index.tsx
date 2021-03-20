@@ -1,9 +1,11 @@
 import TwoColumnLayout, {
-  ILayoutContext,
   LayoutContext,
 } from './TwoColumnLayout';
 
-export { TwoColumnLayout, ILayoutContext, LayoutContext };
+import type {  ILayoutContext } from './TwoColumnLayout';
+export type { ILayoutContext }
+
+export { TwoColumnLayout, LayoutContext };
 
 import TwoColumnLayoutLeft from './TwoColumnLayoutLeft';
 export { TwoColumnLayoutLeft };

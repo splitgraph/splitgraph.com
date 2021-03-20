@@ -5,7 +5,6 @@ export { BoxOne } from "./BoxOne";
 export { BoxTwo } from "./BoxTwo";
 
 export { BoxThree } from "./BoxThree";
-export { GenericBox } from './GenericBox';
+export { GenericBox } from "./GenericBox";
 
-export { DividedBox } from './DividedBox';
-
+export { DividedBox } from "./DividedBox";

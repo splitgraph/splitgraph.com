@@ -31,11 +31,13 @@ export * from "./Icon";
 
 export { Card } from "./Card";
 
-export { PopoutBox, IRenderPopoutButtonProps } from "./PopoutBox";
+export { PopoutBox } from "./PopoutBox";
+export type { IRenderPopoutButtonProps } from "./PopoutBox";
 
 export { StatusChip } from "./StatusChip";
 
-export { PreWithCopy, IPreWithCopyProps } from "./PreWithCopy";
+export { PreWithCopy } from "./PreWithCopy";
+export type { IPreWithCopyProps } from "./PreWithCopy";
 
 export * from "./OAuthButton";
 

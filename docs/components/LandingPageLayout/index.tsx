@@ -1,3 +1,2 @@
-import LandingPageLayout from './LandingPageLayout';
+import LandingPageLayout from "./LandingPageLayout";
 export { LandingPageLayout };
-

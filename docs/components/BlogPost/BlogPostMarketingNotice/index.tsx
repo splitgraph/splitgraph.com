@@ -1,3 +1,2 @@
-import BlogPostMarketingNotice from './BlogPostMarketingNotice';
+import BlogPostMarketingNotice from "./BlogPostMarketingNotice";
 export { BlogPostMarketingNotice };
-

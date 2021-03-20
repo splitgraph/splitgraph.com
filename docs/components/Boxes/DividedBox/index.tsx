@@ -1,3 +1,2 @@
-import DividedBox from './DividedBox';
+import DividedBox from "./DividedBox";
 export { DividedBox };
-

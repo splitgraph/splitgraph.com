@@ -1,3 +1,2 @@
-import BlogTopicLink from './BlogTopicLink';
+import BlogTopicLink from "./BlogTopicLink";
 export { BlogTopicLink };
-

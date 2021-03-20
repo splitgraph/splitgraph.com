@@ -1,3 +1,2 @@
-import RSSMetaTag from './RSSMetaTag';
+import RSSMetaTag from "./RSSMetaTag";
 export { RSSMetaTag };
-

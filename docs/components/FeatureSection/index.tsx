@@ -1,3 +1,2 @@
-import FeatureSection from './FeatureSection';
+import FeatureSection from "./FeatureSection";
 export { FeatureSection };
-

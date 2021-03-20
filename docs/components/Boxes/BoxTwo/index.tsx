@@ -1,3 +1,2 @@
-import BoxTwo from './BoxTwo';
+import BoxTwo from "./BoxTwo";
 export { BoxTwo };
-

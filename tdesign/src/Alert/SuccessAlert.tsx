@@ -1,8 +1,9 @@
 // @jsx jsx
-import * as React from 'react';
+import { jsx } from "theme-ui";
+import * as React from "react";
 
-import { Flex, Text } from 'rebass';
-import MutedLink from '../Link/MutedLink';
+import { Flex, Text } from "rebass";
+import MutedLink from "../Link/MutedLink";
 
 const Checkmark = () => {
   return (
@@ -26,7 +27,7 @@ interface SuccessResetLinkProps {
 }
 
 const SuccessResetLink = ({ text, href }: SuccessResetLinkProps) => (
-  <MutedLink sx={{ color: '#fff' }} href={href || '#'}>
+  <MutedLink sx={{ color: "#fff" }} href={href || "#"}>
     {text}
   </MutedLink>
 );
@@ -44,15 +45,15 @@ export default ({
 }: ErrorAlertProps) => {
   return (
     <Flex
-      flexDirection={'row'}
-      justifyContent={'space-between'}
+      flexDirection={"row"}
+      justifyContent={"space-between"}
       p={2}
       mb={4}
       sx={{
-        minWidth: '30vw',
-        backgroundColor: 'successBackground',
+        minWidth: "30vw",
+        backgroundColor: "successBackground",
         backgroundOpacity: 0.2,
-        border: '1px solid success',
+        border: "1px solid success",
       }}
     >
       <Flex width={dismissLinkText && dismissLinkHref ? 7 / 10 : 10 / 10}>
