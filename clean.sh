@@ -12,10 +12,7 @@
 
 WHOAMI=${SUDO_USER:-${USER}}
 
-echo "Cleaning cache, node_modules, and any created packages (dist)..."
-echo "Clean cache..." \
-    && rm -r .yarn/cache \
-    && mkdir -p .yarn/cache \
+echo "Cleaning node_modules, and any created packages (dist)..." \
     && echo "Clean node_modules directories..." \
     && find . -maxdepth 2 -name node_modules -print -exec rm -r {} \; \
     && echo "Run sub clean.sh scripts..." \
