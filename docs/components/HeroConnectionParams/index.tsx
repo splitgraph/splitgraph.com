@@ -1,3 +1,2 @@
-import HeroConnectionParams from './HeroConnectionParams';
+import HeroConnectionParams from "./HeroConnectionParams";
 export { HeroConnectionParams };
-

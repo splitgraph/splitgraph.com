@@ -1,3 +1,2 @@
-import InnerPageLayout from './InnerPageLayout';
+import InnerPageLayout from "./InnerPageLayout";
 export { InnerPageLayout };
-

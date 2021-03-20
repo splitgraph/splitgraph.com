@@ -6,13 +6,11 @@ export { useConnectPageData };
 
 import getStaticPropsForConnectPage from "./getStaticPropsForConnectPage";
 export { getStaticPropsForConnectPage };
-import ConnectPageMarketingNotice from './ConnectPageMarketingNotice';
+import ConnectPageMarketingNotice from "./ConnectPageMarketingNotice";
 export { ConnectPageMarketingNotice };
 
-
-import HelpSectionList from './HelpSectionList';
+import HelpSectionList from "./HelpSectionList";
 export { HelpSectionList };
 
-import HelpSectionItemWrapper from './HelpSectionItemWrapper';
+import HelpSectionItemWrapper from "./HelpSectionItemWrapper";
 export { HelpSectionItemWrapper };
-

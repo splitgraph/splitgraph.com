@@ -1,3 +1,2 @@
-import BoxThree from './BoxThree';
+import BoxThree from "./BoxThree";
 export { BoxThree };
-

@@ -1,8 +1,9 @@
 // @jsx jsx
-import * as React from 'react';
+import { jsx } from "theme-ui";
+import * as React from "react";
 
-import { Flex, Text } from 'rebass';
-import MutedLink from '../Link/MutedLink';
+import { Flex, Text } from "rebass";
+import MutedLink from "../Link/MutedLink";
 
 const ErrorHeading = () => {
   return (
@@ -26,7 +27,7 @@ interface ErrorResetLinkProps {
 }
 
 const ErrorResetLink = ({ text }: ErrorResetLinkProps) => (
-  <MutedLink href={'#'}>{text}</MutedLink>
+  <MutedLink href={"#"}>{text}</MutedLink>
 );
 
 export interface ErrorAlertProps {
@@ -40,19 +41,19 @@ export default ({
   dismissLinkText,
   dismissLinkHref,
 }: ErrorAlertProps) => {
-  const trimmedMessage = message ? message.replace(/Error\:?\s*/, '') : '';
+  const trimmedMessage = message ? message.replace(/Error\:?\s*/, "") : "";
 
   return (
     <Flex
-      flexDirection={'row'}
-      justifyContent={'space-between'}
+      flexDirection={"row"}
+      justifyContent={"space-between"}
       p={2}
       mb={4}
       sx={{
-        minWidth: '30vw',
-        backgroundColor: 'white',
+        minWidth: "30vw",
+        backgroundColor: "white",
         backgroundOpacity: 0.2,
-        border: '1px solid red',
+        border: "1px solid red",
         padding: 8,
       }}
     >

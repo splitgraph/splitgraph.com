@@ -1,3 +1,2 @@
-import HeroSampleSplitfile from './HeroSampleSplitfile';
+import HeroSampleSplitfile from "./HeroSampleSplitfile";
 export { HeroSampleSplitfile };
-

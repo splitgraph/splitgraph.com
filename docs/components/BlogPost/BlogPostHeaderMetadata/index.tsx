@@ -1,3 +1,2 @@
-import BlogPostHeaderMetadata from './BlogPostHeaderMetadata';
+import BlogPostHeaderMetadata from "./BlogPostHeaderMetadata";
 export { BlogPostHeaderMetadata };
-

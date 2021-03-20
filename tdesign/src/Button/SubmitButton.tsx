@@ -1,7 +1,8 @@
 // @jsx jsx
-import * as React from 'react';
+import { jsx } from "theme-ui";
+import * as React from "react";
 
-import { Button } from 'rebass';
+import { Button } from "rebass";
 
 export interface SubmitButtonProps {
   disabled?: boolean;
@@ -15,7 +16,7 @@ export default ({
   disabled = false,
   hasErrors = false,
   sx = {},
-  variant = 'primary',
+  variant = "primary",
   children,
   ...rest
 }: SubmitButtonProps) => (
@@ -23,10 +24,10 @@ export default ({
     type="submit"
     variant={variant}
     sx={{
-      backgroundColor: 'red',
-      opacity: disabled ? '0.5' : 'initial',
-      ':hover': {
-        cursor: disabled ? 'initial' : 'pointer',
+      backgroundColor: "red",
+      opacity: disabled ? "0.5" : "initial",
+      ":hover": {
+        cursor: disabled ? "initial" : "pointer",
       },
       ...sx,
     }}

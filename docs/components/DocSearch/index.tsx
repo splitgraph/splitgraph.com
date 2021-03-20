@@ -1,3 +1,2 @@
-import DocSearch from './DocSearch';
+import DocSearch from "./DocSearch";
 export { DocSearch };
-

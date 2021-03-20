@@ -1,3 +1,2 @@
-import HeroBox from './HeroBox';
+import HeroBox from "./HeroBox";
 export { HeroBox };
-

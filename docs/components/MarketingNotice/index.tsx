@@ -1,3 +1,2 @@
-import MarketingNotice from './MarketingNotice';
+import MarketingNotice from "./MarketingNotice";
 export { MarketingNotice };
-
