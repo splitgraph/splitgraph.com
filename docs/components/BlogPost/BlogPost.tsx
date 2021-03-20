@@ -1,11 +1,12 @@
 // @jsx jsx
 // @ts-ignore
 import { jsx } from "theme-ui";
+
 import * as React from "react";
 
 // import { Link } from "../Link"
 import { DividedBox } from "../Boxes/DividedBox";
-import { NextSeo, BlogJsonLd } from "next-seo";
+import { NextSeo } from "next-seo";
 
 import { IBlogPostMetadata, BlogPostItem } from "../BlogPostItem";
 import { BlogPostHeaderMetadata } from "./BlogPostHeaderMetadata";

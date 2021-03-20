@@ -1,7 +1,7 @@
-import {
-  IconChevronLeftPrimaryColor,
-  IconChevronRightPrimaryColor,
-} from "@splitgraph/tdesign";
+// import {
+//   IconChevronLeftPrimaryColor,
+//   IconChevronRightPrimaryColor,
+// } from "@splitgraph/tdesign";
 
 import { Box, Flex } from "../../index";
 
@@ -58,7 +58,7 @@ const NavLink = ({ node, Link, children, justifyContent = "flex-start" }) => {
 const LeftNav = ({ node, Link, ...rest }) => {
   return node && node.url ? (
     <NavLink node={node} Link={Link} {...rest}>
-      <IconChevronLeftPrimaryColor size="3rem" />
+      {/* <IconChevronLeftPrimaryColor size="3rem" /> */}
       <Box className="link-text-container link-text-container--left">
         <span className="link-anchor-text" title={node.title}>
           {node.title}
@@ -78,7 +78,7 @@ const RightNav = ({ node, Link, ...rest }) => {
         </span>
         <span className="link-meta">Next</span>
       </Box>
-      <IconChevronRightPrimaryColor size="3rem" />
+      {/* <IconChevronRightPrimaryColor size="3rem" /> */}
     </NavLink>
   ) : null;
 };
