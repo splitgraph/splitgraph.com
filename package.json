@@ -24,7 +24,8 @@
     "dev:@splitgraph/docs": "yarn workspace @splitgraph/docs run dev"
   },
   "devDependencies": {
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
     "next-seo": "^4.4.0",
