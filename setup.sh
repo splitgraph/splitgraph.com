@@ -71,8 +71,10 @@ ensure_yarn() {
 
 install_plugins() {
     local prefixDir="$1"
+    shift
 
     pushd "$prefixDir" && yarn plugin import plugin-workspace-tools && popd
+    pushd "$prefixDir" && yarn plugin import plugin-interactive-tools && popd
 
     # Yarn sometimes releases workspace tools with .js and .cjs (tbh, maybe all .cjs now)
     # AFAICT it costs nothing to rename this to .js to standardize our checked in versions
@@ -81,12 +83,18 @@ install_plugins() {
                "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-tools.js
     fi
 
+    if test -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-interactive-tools.cjs ; then
+            mv "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-interactive-tools.cjs \
+               "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-interactive-tools.js
+    fi
+
     fix_yarnrc() {
         local yarnrcFile="$1"
         shift
 
         grep 'plugin-workspace-tools' "$yarnrcFile" \
             && sed -i 's/plugin-workspace-tools\.cjs/plugin-workspace-tools\.js/' "$yarnrcFile" \
+            && sed -i 's/plugin-interactive-tools\.cjs/plugin-interactive-tools\.js/' "$yarnrcFile" \
             && return 0
 
         return 1
@@ -118,6 +126,9 @@ dir_has_yarn_release() {
     if test -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-tools.cjs ; then
         rm "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-tools.cjs
     fi
+    if test -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-interactive-tools.cjs ; then
+        rm "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-interactive-tools.cjs
+    fi
 
     if has_broken_yarn "$prefixDir" ; then
         echo "yarn seems broken in $prefixDir, remove .yarnrc.yml"
@@ -138,9 +149,11 @@ dir_has_yarn_plugins() {
 
     if test -f "$prefixDir"/.yarnrc ; then
         grep 'plugin-workspace-tools' "$prefixDir"/.yarnrc \
+            && grep 'plugin-interactive-tools' "$prefixDir"/.yarnrc \
             && return 0
     elif test -f "$prefixDir"/.yarnrc.yml ; then
         grep 'plugin-workspace-tools' "$prefixDir"/.yarnrc.yml \
+            && grep 'plugin-interactive-tools' "$prefixDir"/.yarnrc.yml \
             && return 0
     fi
 
@@ -186,7 +199,7 @@ has_correct_config() {
     return 1
 }
 
-prep_env >/dev/null || { \
+prep_env || { \
     echo "Fatal error in setup.sh. (note: message may have been sent to /dev/null)"; \
     exit 1 ;\
 }
