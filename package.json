@@ -14,8 +14,7 @@
     "content",
     "content-scripts",
     "templaters",
-    "lib",
-    "tlib"
+    "lib"
   ],
   "scripts": {
     "build": "yarn workspace @splitgraph/docs build",
