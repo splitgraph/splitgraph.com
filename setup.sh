@@ -199,7 +199,7 @@ has_correct_config() {
     return 1
 }
 
-prep_env || { \
+prep_env >/dev/null || { \
     echo "Fatal error in setup.sh. (note: message may have been sent to /dev/null)"; \
     exit 1 ;\
 }
