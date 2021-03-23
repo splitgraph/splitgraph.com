@@ -41,7 +41,7 @@ ensure_yarn() {
         fi
 
         # Account for releases with naming scheme yarn-2*.(js|cjs)
-        if test ls "$SPLITGRAPH_DIR"/.yarn/releases/yarn-2* 2>/dev/null ; then
+        if ls "$SPLITGRAPH_DIR"/.yarn/releases/yarn-2* 2>/dev/null ; then
             mv "$SPLITGRAPH_DIR"/.yarn/releases/yarn-2* \
                 "$SPLITGRAPH_DIR"/.yarn/releases/yarn-berry.js \
                 && sed -Ei 's/yarn-[0-9+\.]+\.(cjs|js)/yarn-berry.js/' "$SPLITGRAPH_DIR"/.yarnrc.yml
