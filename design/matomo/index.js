@@ -100,7 +100,6 @@ export function matomoInit({
       maybePush(["setCustomUrl", pathname]);
       maybePush(["setDocumentTitle", document.title]);
       maybePush(["deleteCustomVariables", "page"]);
-      maybePush(["setGenerationTimeMs", 0]);
       maybePush(["trackPageView"]);
       maybePush(["enableLinkTracking"]);
       previousPath = pathname;
