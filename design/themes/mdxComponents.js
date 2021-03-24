@@ -1,7 +1,9 @@
 // @jsx jsx
 import { jsx } from "theme-ui";
 
-import defaultTheme from "./defaultTheme";
+// import defaultTheme from "./defaultTheme";
+import { makeDefaultTheme } from "@splitgraph/tdesign";
+const defaultTheme = makeDefaultTheme();
 
 export const mdxComponents = {
   pre: ({ children, ...rest }) => (

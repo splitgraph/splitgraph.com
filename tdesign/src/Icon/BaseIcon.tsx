@@ -47,28 +47,30 @@ export default ({
   return (
     <Text
       className={`sg-icon sg-icon-${iconSlug}`}
-      sx={{
-        ...(color
-          ? {
-              backgroundColor: color,
-              ...maskStyle,
-            }
-          : { backgroundImage: svgDataURI }),
-        ...(hoverColor
-          ? {
-              ":hover": {
-                backgroundColor: hoverColor,
+      sx={
+        {
+          ...(color
+            ? {
+                backgroundColor: color,
                 ...maskStyle,
-              },
-            }
-          : {}),
-        backgroundRepeat: "no-repeat",
-        backgroundSize: size,
-        minWidth: size,
-        minHeight: size,
-        ...sx,
-        ...extraStyle,
-      }}
+              }
+            : { backgroundImage: svgDataURI }),
+          ...(hoverColor
+            ? {
+                ":hover": {
+                  backgroundColor: hoverColor,
+                  ...maskStyle,
+                },
+              }
+            : {}),
+          backgroundRepeat: "no-repeat",
+          backgroundSize: size,
+          minWidth: size,
+          minHeight: size,
+          ...sx,
+          ...extraStyle,
+        } as SystemStyleObject
+      }
     >
       &nbsp;
     </Text>

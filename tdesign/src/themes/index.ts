@@ -7,26 +7,99 @@
 
 // import prismTheme from "@theme-ui/prism/presets/shades-of-purple.json";
 
+// const prismTheme = {
+//   color: "#9EFEFF",
+//   backgroundColor: "#2D2A55",
+//   ".changed": { color: "rgb(255, 238, 128)" },
+//   ".deleted": { color: "rgba(239, 83, 80, 0.56)" },
+//   ".inserted": { color: "rgb(173, 219, 103)" },
+//   ".comment": { color: "rgb(179, 98, 255)", fontStyle: "italic" },
+//   ".punctuation": { color: "rgb(255, 255, 255)" },
+//   ".constant": { color: "rgb(255, 98, 140)" },
+//   ".string,.url": { color: "rgb(165, 255, 144)" },
+//   ".variable": { color: "rgb(255, 238, 128)" },
+//   ".number,.boolean": { color: "rgb(255, 98, 140)" },
+//   ".attr-name": { color: "rgb(255, 180, 84)" },
+//   ".keyword,.operator,.property,.namespace,.tag,.selector,.doctype": {
+//     color: "rgb(255, 157, 0)",
+//   },
+//   ".builtin,.char,.constant,.function,.class-name": {
+//     color: "rgb(250, 208, 0)",
+//   },
+// };
+
+
 const prismTheme = {
-  color: "#9EFEFF",
-  backgroundColor: "#2D2A55",
-  ".changed": { color: "rgb(255, 238, 128)" },
-  ".deleted": { color: "rgba(239, 83, 80, 0.56)" },
-  ".inserted": { color: "rgb(173, 219, 103)" },
-  ".comment": { color: "rgb(179, 98, 255)", fontStyle: "italic" },
-  ".punctuation": { color: "rgb(255, 255, 255)" },
-  ".constant": { color: "rgb(255, 98, 140)" },
-  ".string,.url": { color: "rgb(165, 255, 144)" },
-  ".variable": { color: "rgb(255, 238, 128)" },
-  ".number,.boolean": { color: "rgb(255, 98, 140)" },
-  ".attr-name": { color: "rgb(255, 180, 84)" },
-  ".keyword,.operator,.property,.namespace,.tag,.selector,.doctype": {
-    color: "rgb(255, 157, 0)",
+  color: "#e0ffff",
+  // backgroundColor: "#36678d",
+  backgroundColor: "red",
+  ".changed,.operator": { color: "#ffd700" },
+  ".deleted": { color: "#ffa07a77" },
+  ".inserted": { color: "#66cc99" },
+  ".comment": { color: "#81cfe0", fontStyle: "italic" },
+  ".punctuation": { color: "#e0ffff" },
+  ".constant": { color: "#dcc6e0" },
+  ".string,.url": { color: "#00ff7f" },
+  ".variable": { color: "#36d7b7" },
+  ".number,.boolean,.attr-value": { color: "#ffecdb" },
+  ".attr-name": { color: "#ffb454" },
+  ".keyword,.key,.property,.namespace,.tag,.selector,.doctype": {
+    color: "#00ffff",
   },
-  ".builtin,.char,.constant,.function,.class-name": {
-    color: "rgb(250, 208, 0)",
+  ".builtin,.char,.constant,.function,.class-name,.symbol": {
+    color: "#ffa07a",
+  },
+  // Used by shell-session
+  ".output": {
+    color: "#e0ffff",
+  },
+  ".important,.language-bash": {
+    color: "#ffa07a",
   },
 };
+
+export const marketingTheme = {
+  styles: {
+    pre: {
+      ...prismTheme,
+      padding: "1ch",
+      "@media (max-width: 768px)": {},
+      fontSize: "0.8rem",
+      overflowX: "auto",
+      MsOverflowStyle: "none",
+      backgroundColor: "primary",
+      ".mdx-marker": {
+        display: "block",
+        borderLeft: `.25em solid ${prismTheme[".punctuation"].color}`,
+      },
+    },
+    inlineCode: {
+      ...prismTheme,
+      "@media (min-width: 749px)": {
+        minWidth: "initial",
+      },
+      paddingTop: 0,
+      paddingBottom: 0,
+      minHeight: "1rem",
+      display: "inline-flex",
+      alignContent: "center",
+      overflowX: "auto",
+      backgroundColor: "primary",
+    },
+    code: {
+      backgroundColor: "primary",
+      fontFamily: "monospace",
+      fontSize: "inherit",
+      span: {
+        color: "red",
+      },
+      ".comment": {
+        color: "#f4c1c0",
+      },
+    },
+  },
+};
+
 
 export const asciinemaEmbedStyles = {
   "div.asciinema-embed-container": {
@@ -105,7 +178,8 @@ export const makeDefaultTheme = () => ({
     sglightblue: "#d5f6fe",
     lightbluefaded: "rgba(213, 246, 255, .5)",
     accent: "secondary",
-    background: "#0d1821",
+    // background: "#0d1821",
+    background: "#fff",
   },
   backgrounds: {
     divided: {
@@ -121,7 +195,8 @@ export const makeDefaultTheme = () => ({
     },
   },
   fonts: {
-    body: "system-ui, sans-serif",
+    body:
+      "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji",
     heading: "inherit",
     monospace: "Menlo, monospace",
   },
@@ -236,7 +311,7 @@ export const makeDefaultTheme = () => ({
     primary: {
       fontSize: 2,
       fontWeight: "bold",
-      color: "white",
+      color: "background",
       bg: "primary",
       borderRadius: "default",
       ":hover": {
@@ -263,7 +338,7 @@ export const makeDefaultTheme = () => ({
     },
     secondary: {
       variant: "buttons.primary",
-      color: "white",
+      color: "background",
       bg: "secondary",
     },
     pill: {
@@ -369,7 +444,7 @@ export const makeDefaultTheme = () => ({
         borderBottom: "4px solid #efefef",
       },
       "@media (min-width: 769px)": {
-        minWidth: "80ch",
+        minWidth: "min(80ch, 100%)",
       },
       fontSize: "0.8rem",
       padding: 10,
@@ -398,7 +473,10 @@ export const makeDefaultTheme = () => ({
       display: "inline-flex",
       alignContent: "center",
       overflowX: "auto",
-      backgroundColor: "primary",
+      // backgroundColor: "primary",
+      wordBreak: "break-all",
+      color: prismTheme.backgroundColor,
+      backgroundColor: prismTheme.color
     },
     code: {
       backgroundColor: "primary",
@@ -412,7 +490,7 @@ export const makeDefaultTheme = () => ({
       },
     },
     p: {
-      color: "text",
+      color: "red",
       fontFamily: "body",
       fontWeight: "body",
       lineHeight: "body",

@@ -1,5 +1,7 @@
 import { Box } from "../../index";
-import { defaultTheme } from "@splitgraph/design";
+import { makeDefaultTheme } from "@splitgraph/tdesign";
+
+const defaultTheme = makeDefaultTheme();
 
 const getStyle = (depth) => ({
   paddingLeft: 4,
