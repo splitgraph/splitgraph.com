@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@splitgraph/design";
-import { tocStyles } from "@splitgraph/design";
+import { tocStyles } from "@splitgraph/tdesign";
 
 const TocStyle = {
   ...tocStyles,
