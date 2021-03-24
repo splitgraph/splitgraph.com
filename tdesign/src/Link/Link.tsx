@@ -1,6 +1,5 @@
 // @jsx jsx
-import { jsx } from "theme-ui";
-import { Styled } from "theme-ui";
+import { jsx, SxStyleProp } from "theme-ui";
 import * as React from "react";
 import Link from "next/link";
 
@@ -41,9 +40,13 @@ export default React.forwardRef(
     ref: any
   ) => (
     <Link href={href} as={as} passHref>
-      <Styled.a sx={{ variant, ...sx, ...extraStyle }} ref={ref} {...rest}>
+      <a
+        sx={{ variant, ...sx, ...extraStyle } as SxStyleProp}
+        ref={ref}
+        {...rest}
+      >
         {children}
-      </Styled.a>
+      </a>
     </Link>
   )
 );

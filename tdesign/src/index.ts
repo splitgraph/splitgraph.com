@@ -21,7 +21,7 @@ export {
 
 export { Menu, MenuItem, MenuItemHeading } from "./Menu";
 
-export { makeDefaultTheme, marketingTheme } from "./themes/index";
+export { makeDefaultTheme, marketingTheme, tocStyles } from "./themes/index";
 
 export { ThemeProvider } from "theme-ui";
 

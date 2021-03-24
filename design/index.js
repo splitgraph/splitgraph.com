@@ -31,8 +31,6 @@ export { LogoImage } from "./Logo";
 
 export { InterPageNav } from "./Nav";
 
-export { defaultTheme, marketingTheme, tocStyles } from "./themes/defaultTheme";
-
 export { mdxComponents } from "./themes/mdxComponents";
 
 export { matomoInit, matomoPush, matomoTrack } from "./matomo";
