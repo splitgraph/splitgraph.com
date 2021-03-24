@@ -12,7 +12,7 @@ import { HeroBox } from "../components/HeroBox";
 import { HeroSampleQuery } from "../components/HeroSampleQuery";
 import { HeroSampleSplitfile } from "../components/HeroSampleSplitfile";
 import { HeroConnectionParams } from "../components/HeroConnectionParams";
-import { Footer, IconLogoDiscord } from "@splitgraph/tdesign";
+import { Footer, IconLogoDiscord, marketingTheme } from "@splitgraph/tdesign";
 
 import Octicon from "@splitgraph/design/Icon/ThirdParty/GitHub/Octicon";
 
@@ -50,8 +50,6 @@ import {
 } from "@splitgraph/tdesign";
 
 import { Link } from "@splitgraph/docs/components";
-
-import { marketingTheme } from "@splitgraph/design/themes/defaultTheme";
 
 const mdxComponents = {
   pre: ({ children, ...rest }) => (

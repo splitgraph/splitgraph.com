@@ -1,12 +1,12 @@
 // @jsx jsx
 // @ts-ignore
-import { jsx, Box, Text } from 'theme-ui';
-import * as React from 'react';
-import { useContext, useEffect, useRef } from 'react';
+import { jsx, Box, Text, SystemStyleObject } from "theme-ui";
+import * as React from "react";
+import { useContext, useEffect, useRef } from "react";
 
-import { IIconProps } from '../Icon/BaseIcon';
-import { Link } from '../Link';
-import { LayoutContext } from '../Layout/TwoColumnLayout';
+import { IIconProps } from "../Icon/BaseIcon";
+import { Link } from "../Link";
+import { LayoutContext } from "../Layout/TwoColumnLayout";
 
 export interface MenuItemProps {
   // TODO: Figure out generics, should be something like React.FC<IIconProps>
@@ -38,13 +38,13 @@ export default ({
     itemRef &&
     itemRef.current &&
     itemRef.current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'start',
+      behavior: "smooth",
+      block: "nearest",
+      inline: "start",
     });
 
   useEffect(() => {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return;
     }
 
@@ -55,37 +55,37 @@ export default ({
 
   const containerStyle = {
     display: [
-      expanded ? 'flex' : 'inline-flex',
-      expanded ? 'flex' : 'inline-flex',
-      'flex',
+      expanded ? "flex" : "inline-flex",
+      expanded ? "flex" : "inline-flex",
+      "flex",
     ],
-    justifyContent: 'space-between',
-    '.menu-item-label--heading': {
-      color: 'muted',
-      fontSize: 'small',
-      textTransform: 'uppercase',
+    justifyContent: "space-between",
+    ".menu-item-label--heading": {
+      color: "muted",
+      fontSize: "small",
+      textTransform: "uppercase",
     },
-    ':hover': {
-      cursor: !href ? 'initial' : 'pointer',
+    ":hover": {
+      cursor: !href ? "initial" : "pointer",
     },
   };
 
   const linkStyle = {
-    ':hover': {
-      textDecoration: 'underline',
+    ":hover": {
+      textDecoration: "underline",
     },
   };
 
   const textStyle = {};
 
   const iconStyle = {
-    filter: 'invert(1)',
-    marginRight: '0.5em',
+    filter: "invert(1)",
+    marginRight: "0.5em",
     ...iconSx,
-  };
+  } as SystemStyleObject;
 
-  const activeClassName = isActive ? 'active' : 'inactive';
-  const headingClassName = isHeading ? 'heading' : 'text';
+  const activeClassName = isActive ? "active" : "inactive";
+  const headingClassName = isHeading ? "heading" : "text";
 
   const listItemClassName = `menu-item menu-item--${activeClassName} menu-item--${headingClassName}`;
   const innerContainerClassName = `menu-item-inner-container menu-item-inner-container--${activeClassName} menu-item-inner-container--${headingClassName}`;
@@ -95,9 +95,14 @@ export default ({
   return (
     <li className={listItemClassName} ref={itemRef}>
       <Box sx={containerStyle} className={innerContainerClassName}>
-        {Icon && <Icon sx={iconStyle} />}{' '}
+        {Icon && <Icon extraStyle={iconStyle} />}{" "}
         {href ? (
-          <Link sx={linkStyle} href={href} as={as} className={linkClassName}>
+          <Link
+            extraStyle={linkStyle}
+            href={href}
+            as={as}
+            className={linkClassName}
+          >
             {text}
           </Link>
         ) : (
