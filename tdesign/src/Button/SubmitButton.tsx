@@ -2,7 +2,8 @@
 import { jsx } from "theme-ui";
 import * as React from "react";
 
-import { Button } from "rebass";
+/** @jsxImportSource theme-ui */
+import { Button } from "theme-ui";
 
 export interface SubmitButtonProps {
   disabled?: boolean;

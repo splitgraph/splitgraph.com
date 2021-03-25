@@ -1,4 +1,5 @@
-import { Box, Flex, Text } from "rebass";
+/** @jsxImportSource theme-ui */
+import { Box, Flex, Text } from "theme-ui";
 import MutedLink from "../Link/MutedLink";
 
 const Checkmark = () => {
@@ -19,15 +20,13 @@ const SuccessResetLink = ({ text, href }) => (
   </MutedLink>
 );
 
-const SuccessAlert = (
-  {
-    message,
-    dismissLinkText,
-    dismissLinkHref,
-    onClickDismiss,
-    dismissLinkOwnRow = false,
-  }
-) => {
+const SuccessAlert = ({
+  message,
+  dismissLinkText,
+  dismissLinkHref,
+  onClickDismiss,
+  dismissLinkOwnRow = false,
+}) => {
   return (
     <Flex
       flexDirection={"row"}

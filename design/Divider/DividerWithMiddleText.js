@@ -1,16 +1,17 @@
-import { Flex, Box } from "rebass";
+/** @jsxImportSource theme-ui */
+import { Flex, Box } from "theme-ui";
 
 const lineStyle = {
   marginBottom: 2,
   height: "1px",
-  backgroundColor: "lightgray"
+  backgroundColor: "lightgray",
 };
 
 const middleStyle = {
   marginBottom: 2,
   height: "2rem",
   color: "lightgray",
-  display: "inline-flex"
+  display: "inline-flex",
 };
 
 const DividerLine = ({ sx = {} }) => (
@@ -18,7 +19,7 @@ const DividerLine = ({ sx = {} }) => (
     width={2 / 5}
     sx={{
       ...lineStyle,
-      ...sx
+      ...sx,
     }}
   >
     &nbsp;
@@ -32,24 +33,26 @@ const MiddleSegment = ({ children, sx = {} }) => (
     width={1 / 5}
     sx={{
       ...middleStyle,
-      ...sx
+      ...sx,
     }}
   >
     {children}
   </Flex>
 );
 
-const DividerWithMiddleText = ({ width = 9 / 10, sx = {}, children }) => <Flex
-  justifyContent="center"
-  alignItems="center"
-  width={width}
-  minHeight={"1rem"}
->
-  <DividerLine sx={sx} />
+const DividerWithMiddleText = ({ width = 9 / 10, sx = {}, children }) => (
+  <Flex
+    justifyContent="center"
+    alignItems="center"
+    width={width}
+    minHeight={"1rem"}
+  >
+    <DividerLine sx={sx} />
 
-  <MiddleSegment>{children}</MiddleSegment>
+    <MiddleSegment>{children}</MiddleSegment>
 
-  <DividerLine sx={sx} />
-</Flex>;
+    <DividerLine sx={sx} />
+  </Flex>
+);
 
 export default DividerWithMiddleText;

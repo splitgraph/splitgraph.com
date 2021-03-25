@@ -8,17 +8,13 @@
   "private": true,
   "peerDependencies": {
     "@csstools/normalize.css": "*",
-    "@emotion/core": "*",
     "@mdx-js/react": "*",
-    "@rebass/forms": "*",
-    "@rebass/preset": "*",
     "@splitgraph/tdesign": "*",
     "@theme-ui/prism": "*",
     "dayjs": "*",
     "next": "*",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
-    "rebass": "*",
     "theme-ui": "*"
   }
 }

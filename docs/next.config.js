@@ -88,7 +88,7 @@ const _configs = {
 };
 
 const _plugins = {
-  css: require("@zeit/next-css"),
+  // css: require("@zeit/next-css"),
   bundleAnalyzer: require("@next/bundle-analyzer"),
   // withIgnoreFs,
   mdx: require("@zeit/next-mdx")(_configs.mdx), // note slightly different call format

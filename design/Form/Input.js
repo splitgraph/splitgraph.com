@@ -1,8 +1,6 @@
 /** @jsxImportSource theme-ui */
 import { forwardRef } from "react";
-
-import { Box } from "rebass";
-import { Input } from "@rebass/forms";
+import { Box, Input } from "theme-ui";
 
 import DangerText from "../Text/DangerText";
 import MutedText from "../Text/MutedText";

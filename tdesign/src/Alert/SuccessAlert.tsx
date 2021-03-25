@@ -1,7 +1,8 @@
 /** @jsxImportSource theme-ui */
 import { jsx } from "theme-ui";
 
-import { Flex, Text } from "rebass";
+/** @jsxImportSource theme-ui */
+import { Flex, Text } from "theme-ui";
 import MutedLink from "../Link/MutedLink";
 
 const Checkmark = () => {

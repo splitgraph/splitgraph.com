@@ -4,10 +4,7 @@
   "main": "src/index.ts",
   "peerDependencies": {
     "@csstools/normalize.css": "*",
-    "@emotion/core": "*",
     "@mdx-js/react": "*",
-    "@rebass/forms": "*",
-    "@rebass/preset": "*",
     "@theme-ui/prism": "*",
     "dayjs": "*",
     "emotion-theming": "*",
@@ -15,7 +12,6 @@
     "next": "*",
     "react": "*",
     "react-dom": "*",
-    "rebass": "*",
     "theme-ui": "*"
   },
   "name": "@splitgraph/tdesign",

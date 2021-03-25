@@ -3,7 +3,8 @@
 import { jsx } from "theme-ui";
 import * as React from "react";
 
-import { Box } from "rebass";
+/** @jsxImportSource theme-ui */
+import { Box } from "theme-ui";
 
 export interface HeaderProps {
   children?: React.ReactNode;

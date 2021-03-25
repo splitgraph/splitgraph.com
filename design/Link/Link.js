@@ -3,7 +3,8 @@ import { jsx } from "theme-ui";
 
 import NextLink from "next/link";
 
-import { Text } from "rebass";
+/** @jsxImportSource theme-ui */
+import { Text } from "theme-ui";
 
 const Link = ({
   href,

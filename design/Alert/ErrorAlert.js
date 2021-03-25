@@ -1,4 +1,4 @@
-import { Flex, Text } from "rebass";
+import { Flex, Text } from "theme-ui";
 import MutedLink from "../Link/MutedLink";
 
 const ErrorHeading = () => {
@@ -32,7 +32,7 @@ const ErrorAlert = ({ message, dismissLinkText, dismissLinkHref }) => {
         minWidth: "30vw",
         backgroundColor: "errorBackground",
         backgroundOpacity: 0.2,
-        border: "1px solid red"
+        border: "1px solid red",
       }}
     >
       <Flex width={7 / 10}>
