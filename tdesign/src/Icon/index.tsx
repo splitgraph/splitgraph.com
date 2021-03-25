@@ -298,3 +298,6 @@ export { IconThreeDotsHorizontal };
 import IconHamburger from './IconHamburger';
 export { IconHamburger };
 
+
+import IconClose from './IconClose';
+export { IconClose };
