@@ -9,7 +9,11 @@ import { InnerPageLayout } from "@splitgraph/docs/components/InnerPageLayout";
 import { BlogPostItem, Breadcrumbs } from "@splitgraph/docs/components";
 import allBlogPosts from "@splitgraph/docs/compile/compiledBlogPosts";
 
-const BlogTopicPage = ({ topic, blogPosts }) => {
+if (!allBlogPosts) {
+  allBlogPosts = {};
+}
+
+const BlogTopicPage = ({ topic = null, blogPosts = [] }) => {
   return (
     <InnerPageLayout>
       <NextSeo title="Blog" />
@@ -22,7 +26,7 @@ const BlogTopicPage = ({ topic, blogPosts }) => {
           crumbs={[
             { href: "/blog", anchor: "Blog" },
             { href: null, anchor: "Topics" },
-            { href: null, anchor: topic },
+            ...(topic ? [{ href: null, anchor: topic }] : []),
           ]}
         />
       </section>
@@ -57,7 +61,7 @@ export async function getStaticProps({ params: { topic } }) {
 
   return {
     props: {
-      topic,
+      topic: topic || null,
       blogPosts: blogPostsByTopic || [],
     },
   };
