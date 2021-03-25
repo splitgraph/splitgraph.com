@@ -57,13 +57,15 @@ const OnboardingConnectPage = ({ onboardingState, helpSectionComponents }) => {
 export async function getStaticProps({ params: { state } }) {
   const existing = await getStaticPropsForConnectPage();
 
-  return {
-    ...existing,
-    props: {
-      onboardingState: state,
-      ...existing.props,
-    },
-  };
+  return JSON.parse(
+    JSON.stringify({
+      ...existing,
+      props: {
+        onboardingState: state,
+        ...existing.props,
+      },
+    })
+  );
 }
 
 export async function getStaticPaths() {

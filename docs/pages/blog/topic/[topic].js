@@ -54,16 +54,22 @@ const getBlogPostsByTopic = ({ blogPosts, topic }) => {
 };
 
 export async function getStaticProps({ params: { topic } }) {
-  const blogPostsByTopic = getBlogPostsByTopic({
-    blogPosts: allBlogPosts.children || [],
-    topic,
-  });
+  const blogPostsByTopic =
+    getBlogPostsByTopic({
+      blogPosts: allBlogPosts.children || [],
+      topic,
+    }) || [];
 
+  const props = {
+    topic: topic || null,
+    blogPosts: blogPostsByTopic || null,
+  };
+
+  // Don't blame me for this grossness. If blog post has children = undefined,
+  // then it will trigger error .blogPosts[0].children
+  // https://github.com/vercel/next.js/discussions/11209#discussioncomment-35915
   return {
-    props: {
-      topic: topic || null,
-      blogPosts: blogPostsByTopic || [],
-    },
+    props: JSON.parse(JSON.stringify(props)),
   };
 }
 
