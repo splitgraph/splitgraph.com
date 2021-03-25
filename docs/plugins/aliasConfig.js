@@ -5,7 +5,8 @@
 // by enumerating here)
 
 const ES6DependencyAliases = {
-  rehype: require.resolve("mdx-prism")
+  rehype: require.resolve("mdx-prism"),
+  "@splitgraph": "/src/js/splitgraph.com",
 };
 
 module.exports = ES6DependencyAliases;

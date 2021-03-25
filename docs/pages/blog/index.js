@@ -10,7 +10,9 @@ import withTheme from "@splitgraph/docs/hocs/withTheme";
 import { InnerPageLayout } from "@splitgraph/docs/components/InnerPageLayout";
 import { BlogPostItem, RSSMetaTag } from "@splitgraph/docs/components";
 
-import blogPosts from "../../compile/compiledBlogPosts";
+// import blogPosts from "../../compile/compiledBlogPosts";
+
+const blogPosts = { children: [] };
 
 const BlogIndexPage = () => {
   return (

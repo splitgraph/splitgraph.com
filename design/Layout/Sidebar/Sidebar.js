@@ -1,5 +1,8 @@
+import React from "react";
+
 // @jsx jsx
 import { jsx } from "theme-ui";
+
 import { useMemo } from "react";
 
 import { Box } from "@splitgraph/design";

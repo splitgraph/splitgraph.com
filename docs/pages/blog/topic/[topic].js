@@ -9,7 +9,8 @@ import { NextSeo } from "next-seo";
 import withTheme from "@splitgraph/docs/hocs/withTheme";
 import { InnerPageLayout } from "@splitgraph/docs/components/InnerPageLayout";
 import { BlogPostItem, Breadcrumbs } from "@splitgraph/docs/components";
-import allBlogPosts from "@splitgraph/docs/compile/compiledBlogPosts";
+// import allBlogPosts from "@splitgraph/docs/compile/compiledBlogPosts";
+const allBlogPosts = {}
 
 const BlogTopicPage = ({ topic, blogPosts }) => {
   return (

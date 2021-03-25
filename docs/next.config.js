@@ -18,15 +18,15 @@ const splitgraphRehypePrism = require("./plugins/rehype-plugins/splitgraphRehype
 
 const fs = require("fs").promises;
 
-makePages();
+// makePages();
 
-const { castManifest } = makeCasts();
+// const { castManifest } = makeCasts();
 
-console.log("Casts:");
+// console.log("Casts:");
 
-for (let castKey of Object.keys(castManifest)) {
-  console.log("    ", castKey);
-}
+// for (let castKey of Object.keys(castManifest)) {
+//   console.log("    ", castKey);
+// }
 
 const nextConfig = {
   env: {
@@ -54,10 +54,10 @@ const nextConfig = {
   resolve: {
     alias: aliasConfig,
   },
-  exportPathMap: async () => {
-    const jsonMap = await fs.readFile(EXPORT_PATH_MAP);
-    return JSON.parse(jsonMap);
-  },
+  // exportPathMap: async () => {
+  //   const jsonMap = await fs.readFile(EXPORT_PATH_MAP);
+  //   return JSON.parse(jsonMap);
+  // },
 };
 
 const _configs = {
@@ -71,7 +71,7 @@ const _configs = {
       ],
       hastPlugins: [
         splitgraphRehypePrism,
-        [injectAsciicasts, { castManifest }],
+        // [injectAsciicasts, { castManifest }],
         require("rehype-slug"),
         [
           require("rehype-toc"),
@@ -92,11 +92,85 @@ const _plugins = {
   bundleAnalyzer: require("@next/bundle-analyzer"),
   withIgnoreFs,
   mdx: require("@zeit/next-mdx")(_configs.mdx), // note slightly different call format
-  transpileModules: require("next-transpile-modules"),
+  transpileModules: require("next-transpile-modules")([
+    transpileModulesConfig.transpileModules,
+  ]),
 };
 
+const createWebpackMatcher = (
+  modulesToTranspile,
+  logger = createLogger(false)
+) => {
+  return (filePath) => {
+    const isNestedNodeModules =
+      (filePath.match(/node_modules/g) || []).length > 1;
+
+    if (isNestedNodeModules) {
+      if (filePath.includes("/splitgraph.com/")) {
+        logger(`NESTED: ${filePath}`);
+      }
+      // console.log("nestedNodeModules:", filePath);
+      return false;
+    }
+
+    return modulesToTranspile.some((modulePath) => {
+      const transpiled = filePath.startsWith(modulePath);
+      if (transpiled) {
+        // logger(`transpiled: ${filePath}`);
+      } else if (filePath.includes("/splitgraph.com/")) {
+        logger(`not transpiled: ${filePath} does not match ${modulePath}`);
+      }
+      return transpiled;
+    });
+  };
+};
+
+const modulePaths = [
+  "/src/js/splitgraph.com/design",
+  "/src/js/splitgraph.com/tdesign",
+  "/src/js/splitgraph.com/lib",
+  "/src/js/splitgraph.com/content",
+  // "@splitgraph/design",
+  // "@splitgraph/tdesign",
+  // "@splitgraph/lib",
+  // "@splitgraph/content",
+];
+
+const withTM = require("next-transpile-modules")(
+  [
+    // ...modulePaths,
+    // "../content",
+    // "../content-scripts",
+    // "../lib",
+    // "../templaters",
+    "@splitgraph/design",
+    "../design",
+    "@splitgraph/tdesign",
+    "../tdesign",
+    "@splitgraph/lib",
+    "../lib",
+    "@splitgraph/content",
+    "../content",
+    // "@splitgraph",
+    // "@splitgraph/content",
+    // "@splitgraph/content-scripts",
+    // "@splitgraph/lib",
+    // "@splitgraph/tdesign",
+    // "../tdesign",
+    // "./hocs",
+    // "@splitgraph/templaters",
+  ],
+  {
+    // debug: true,
+    // resolveSymlinks: true,
+    // __unstable_matcher: createWebpackMatcher(modulePaths, (message) =>
+    //   console.info(message)
+    // ),
+  }
+);
+
 const plugins = [
-  [_plugins.transpileModules, _configs.transpileModules],
+  withTM,
   [_plugins.mdx],
   [_plugins.withIgnoreFs, {}],
   [_plugins.css, _configs.css],

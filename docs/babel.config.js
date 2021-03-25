@@ -1,6 +1,6 @@
 module.exports = {
   presets: ["next/babel"],
-  plugins: ["preval", "macros"]
+  plugins: ["preval", "macros"],
 };
 
 // module.exports = {
