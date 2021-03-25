@@ -6,7 +6,7 @@ import { Link } from "../Link";
 
 export interface IHeaderRightProps {}
 
-export default ({}: IHeaderRightProps) => {
+const HeaderRight = ({}: IHeaderRightProps) => {
   return (
     <>
       <Link href="/blog">Blog</Link>
@@ -20,3 +20,5 @@ export default ({}: IHeaderRightProps) => {
     </>
   );
 };
+
+export default HeaderRight;

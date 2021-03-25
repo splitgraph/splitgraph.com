@@ -7,11 +7,11 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-// const { prepPages } = require("./compile/makePages");
+const { prepPages } = require("./compile/makePages");
 
-// const { exportMap } = prepPages();
+const { exportMap } = prepPages();
 
-const exportMap = {};
+// const exportMap = {};
 
 app.prepare().then(() => {
   const server = express();

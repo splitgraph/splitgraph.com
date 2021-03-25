@@ -7,6 +7,8 @@ export interface IFeatureSectionProps {
   children?: React.ReactNode;
 }
 
-export default ({}: IFeatureSectionProps) => {
+const FeatureSection = ({}: IFeatureSectionProps) => {
   return <></>;
 };
+
+export default FeatureSection;

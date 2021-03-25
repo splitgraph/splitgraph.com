@@ -72,7 +72,7 @@ const getRoutingProps = ({
   }
 };
 
-export default ({ href, ...rest }: LinkProps) => {
+const SplitgraphLink = ({ href, ...rest }: LinkProps) => {
   const router = useRouter();
 
   const currentURL = useMemo(
@@ -94,3 +94,5 @@ export default ({ href, ...rest }: LinkProps) => {
     <Link href={typedHref} {...rest} {...routingProps} />
   );
 };
+
+export default SplitgraphLink;

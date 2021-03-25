@@ -31,8 +31,8 @@
 
 const prismTheme = {
   color: "#e0ffff",
-  // backgroundColor: "#36678d",
-  backgroundColor: "red",
+  backgroundColor: "primary",
+  // backgroundColor: "red",
   ".changed,.operator": { color: "#ffd700" },
   ".deleted": { color: "#ffa07a77" },
   ".inserted": { color: "#66cc99" },
@@ -84,7 +84,8 @@ export const marketingTheme = {
       display: "inline-flex",
       alignContent: "center",
       overflowX: "auto",
-      backgroundColor: "primary",
+      backgroundColor: prismTheme.color,
+      color: "red"
     },
     code: {
       backgroundColor: "primary",
@@ -475,8 +476,8 @@ export const makeDefaultTheme = () => ({
       overflowX: "auto",
       // backgroundColor: "primary",
       wordBreak: "break-all",
-      color: prismTheme.backgroundColor,
-      backgroundColor: prismTheme.color
+      backgroundColor: prismTheme.color,
+      color: "red"
     },
     code: {
       backgroundColor: "primary",
@@ -490,7 +491,6 @@ export const makeDefaultTheme = () => ({
       },
     },
     p: {
-      color: "red",
       fontFamily: "body",
       fontWeight: "body",
       lineHeight: "body",

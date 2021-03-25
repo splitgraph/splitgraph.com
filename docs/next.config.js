@@ -65,11 +65,11 @@ const _configs = {
   css: {},
   mdx: {
     options: {
-      mdPlugins: [
+      remarkPlugins: [
         [require("remark-disable-tokenizers"), { block: ["indentedCode"] }],
         require("remark-sectionize"),
       ],
-      hastPlugins: [
+      rehypePlugins: [
         splitgraphRehypePrism,
         [injectAsciicasts, { castManifest }],
         require("rehype-slug"),

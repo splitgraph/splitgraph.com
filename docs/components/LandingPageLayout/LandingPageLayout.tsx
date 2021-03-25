@@ -48,7 +48,7 @@ const HeaderRight = ({
   </>
 );
 
-export default ({
+const LandingPageLayout = ({
   children,
   showHeader = true,
   showMarketingNotice = true,
@@ -122,3 +122,5 @@ export default ({
     </>
   );
 };
+
+export default LandingPageLayout;
