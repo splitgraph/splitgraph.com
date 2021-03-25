@@ -6,7 +6,7 @@ import * as React from 'react';
 import { featureLayeredQueryingIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconFeatureLayeredQuerying = (props: IIconProps) => {
   return (
     <BaseIcon
       iconSlug={'featureLayeredQuerying'}
@@ -15,3 +15,5 @@ export default (props: IIconProps) => {
     />
   );
 };
+
+export default IconFeatureLayeredQuerying;

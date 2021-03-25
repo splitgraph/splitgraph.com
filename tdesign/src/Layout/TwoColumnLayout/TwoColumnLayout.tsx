@@ -70,7 +70,7 @@ export const LayoutContext = createContext<ILayoutContext>({
   expanded: false,
 });
 
-export default ({ children }: TwoColumnLayoutProps) => {
+const TwoColumnLayout = ({ children }: TwoColumnLayoutProps) => {
   const { style, expanded, setExpanded } = useResponsiveStyle();
 
   return (
@@ -81,3 +81,5 @@ export default ({ children }: TwoColumnLayoutProps) => {
     </Box>
   );
 };
+
+export default TwoColumnLayout;

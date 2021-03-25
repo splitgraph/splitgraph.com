@@ -6,7 +6,9 @@ import * as React from 'react';
 import { activityIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconActivity = (props: IIconProps) => {
   return <BaseIcon iconSlug={'activity'} svgURI={activityIconURI} {...props} />;
 };
+
+export default IconActivity;
 

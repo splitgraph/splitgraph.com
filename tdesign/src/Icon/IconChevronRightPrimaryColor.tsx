@@ -6,7 +6,9 @@ import * as React from 'react';
 import { chevronRightPrimaryColorIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconChevronRightPrimaryColor = (props: IIconProps) => {
   return <BaseIcon iconSlug={'chevronRightPrimaryColor'} svgURI={chevronRightPrimaryColorIconURI} {...props} />;
 };
+
+export default IconChevronRightPrimaryColor;
 

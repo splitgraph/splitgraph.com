@@ -68,8 +68,8 @@ const headerSx: any = {
   },
 };
 
-export default ({ children }: HeaderProps) => (
-  <Box className="header--container" sx={headerSx}>
-    {children}
-  </Box>
-);
+const Header = ({ children }: HeaderProps) => <Box className="header--container" sx={headerSx}>
+  {children}
+</Box>;
+
+export default Header;

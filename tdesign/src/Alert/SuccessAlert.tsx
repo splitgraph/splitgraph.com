@@ -38,11 +38,13 @@ export interface ErrorAlertProps {
   dismissLinkHref?: string;
 }
 
-export default ({
-  message,
-  dismissLinkText,
-  dismissLinkHref,
-}: ErrorAlertProps) => {
+const SuccessAlert = (
+  {
+    message,
+    dismissLinkText,
+    dismissLinkHref,
+  }: ErrorAlertProps
+) => {
   return (
     <Flex
       flexDirection={"row"}
@@ -69,3 +71,5 @@ export default ({
     </Flex>
   );
 };
+
+export default SuccessAlert;

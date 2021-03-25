@@ -6,7 +6,9 @@ import * as React from 'react';
 import { dataTableIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconDataTable = (props: IIconProps) => {
   return <BaseIcon iconSlug={'dataTable'} svgURI={dataTableIconURI} {...props} />;
 };
+
+export default IconDataTable;
 

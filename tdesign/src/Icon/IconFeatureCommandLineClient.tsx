@@ -6,7 +6,7 @@ import * as React from 'react';
 import { featureCommandLineClientIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconFeatureCommandLineClient = (props: IIconProps) => {
   return (
     <BaseIcon
       iconSlug={'featureCommandLineClient'}
@@ -15,3 +15,5 @@ export default (props: IIconProps) => {
     />
   );
 };
+
+export default IconFeatureCommandLineClient;

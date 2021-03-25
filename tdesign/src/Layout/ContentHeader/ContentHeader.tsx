@@ -8,7 +8,7 @@ export interface IContentHeaderProps {
   extraStyle?: SystemStyleObject;
 }
 
-export default ({ children, extraStyle = {} }: IContentHeaderProps) => {
+const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
   const headerContainerStyle = {
     marginBottom: "2rem",
     color: "primary",
@@ -36,3 +36,5 @@ export default ({ children, extraStyle = {} }: IContentHeaderProps) => {
     </Box>
   );
 };
+
+export default ContentHeader;

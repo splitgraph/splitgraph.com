@@ -10,10 +10,12 @@ export interface ICardProps {
   children?: React.ReactNode;
 }
 
-export default ({ children, sx }: ICardProps) => {
+const Card = ({ children, sx }: ICardProps) => {
   const cardSx = {
     ...sx,
   };
 
   return <Box sx={cardSx}>{children}</Box>;
 };
+
+export default Card;

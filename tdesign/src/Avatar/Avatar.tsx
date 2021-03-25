@@ -25,7 +25,7 @@ const avatarContainerStyle = {
   },
 } as SystemStyleObject;
 
-export default ({ avatarURL, initials }: IAvatarProps) => {
+const Avatar = ({ avatarURL, initials }: IAvatarProps) => {
   return (
     <Box sx={avatarContainerStyle}>
       {!avatarURL && initials && (
@@ -35,3 +35,5 @@ export default ({ avatarURL, initials }: IAvatarProps) => {
     </Box>
   );
 };
+
+export default Avatar;

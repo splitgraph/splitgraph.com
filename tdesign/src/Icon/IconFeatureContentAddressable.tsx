@@ -6,7 +6,7 @@ import * as React from 'react';
 import { featureContentAddressableIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconFeatureContentAddressable = (props: IIconProps) => {
   return (
     <BaseIcon
       iconSlug={'featureContentAddressable'}
@@ -15,3 +15,5 @@ export default (props: IIconProps) => {
     />
   );
 };
+
+export default IconFeatureContentAddressable;

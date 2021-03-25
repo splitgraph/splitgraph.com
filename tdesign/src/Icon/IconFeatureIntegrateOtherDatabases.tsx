@@ -6,7 +6,7 @@ import * as React from 'react';
 import { featureIntegrateOtherDatabasesIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconFeatureIntegrateOtherDatabases = (props: IIconProps) => {
   return (
     <BaseIcon
       iconSlug={'featureIntegrateOtherDatabases'}
@@ -15,3 +15,5 @@ export default (props: IIconProps) => {
     />
   );
 };
+
+export default IconFeatureIntegrateOtherDatabases;

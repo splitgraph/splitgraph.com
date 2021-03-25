@@ -1,7 +1,7 @@
 import Link from "./Link";
 
-export default ({ children, ...rest }) => (
-  <Link variant="links.muted" {...rest}>
-    {children}
-  </Link>
-);
+const MutedLink = ({ children, ...rest }) => <Link variant="links.muted" {...rest}>
+  {children}
+</Link>;
+
+export default MutedLink;

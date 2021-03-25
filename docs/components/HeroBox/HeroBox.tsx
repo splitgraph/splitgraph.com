@@ -14,6 +14,8 @@ const containerStyle = {
   color: "light",
 } as SystemStyleObject;
 
-export default ({ children, extraStyle = {} }: IHeroBoxProps) => {
+const HeroBox = ({ children, extraStyle = {} }: IHeroBoxProps) => {
   return <Box sx={{ ...containerStyle, ...extraStyle }}>{children}</Box>;
 };
+
+export default HeroBox;

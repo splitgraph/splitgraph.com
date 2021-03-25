@@ -19,13 +19,15 @@ const SuccessResetLink = ({ text, href }) => (
   </MutedLink>
 );
 
-export default ({
-  message,
-  dismissLinkText,
-  dismissLinkHref,
-  onClickDismiss,
-  dismissLinkOwnRow = false,
-}) => {
+const SuccessAlert = (
+  {
+    message,
+    dismissLinkText,
+    dismissLinkHref,
+    onClickDismiss,
+    dismissLinkOwnRow = false,
+  }
+) => {
   return (
     <Flex
       flexDirection={"row"}
@@ -79,3 +81,5 @@ export default ({
     </Flex>
   );
 };
+
+export default SuccessAlert;

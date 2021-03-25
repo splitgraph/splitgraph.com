@@ -23,7 +23,6 @@ export type PopoutAnchorPosition =
       PopoutAnchorPositionString
     ];
 
-
 export interface IPopoutBoxRef {
   toggleOpen: () => void;
 }
@@ -96,22 +95,21 @@ const containerStyle = {
   position: "relative",
 } as SystemStyleObject;
 
-
 const PopoutBox = ({
   children,
   renderButton,
   popoutContainerStyle = {},
   anchorPosition,
   buttonProps = {},
-  popoutBoxRef
+  popoutBoxRef,
 }: IPopoutBoxProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const containerRef = React.useRef<IPopoutBoxRef & HTMLDivElement>(null);
 
   React.useImperativeHandle(popoutBoxRef, () => ({
     toggleOpen: () => {
-      setIsOpen(!isOpen)
-    }
+      setIsOpen(!isOpen);
+    },
   }));
 
   const anchorPositionStyle = getAnchorPositionStyle(anchorPosition);

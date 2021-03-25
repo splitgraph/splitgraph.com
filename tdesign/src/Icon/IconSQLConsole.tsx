@@ -6,7 +6,9 @@ import * as React from 'react';
 import { sqlConsoleIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconSQLConsole = (props: IIconProps) => {
   return <BaseIcon iconSlug={'sqlConsole'} svgURI={sqlConsoleIconURI} {...props} />;
 };
+
+export default IconSQLConsole;
 

@@ -1,13 +1,13 @@
 import { Text } from "rebass";
 
-export default ({ children, sx = {}, ...rest }) => (
-  <Text
-    sx={{
-      color: "muted",
-      ...sx
-    }}
-    {...rest}
-  >
-    {children}
-  </Text>
-);
+const MutedText = ({ children, sx = {}, ...rest }) => <Text
+  sx={{
+    color: "muted",
+    ...sx
+  }}
+  {...rest}
+>
+  {children}
+</Text>;
+
+export default MutedText;

@@ -6,7 +6,9 @@ import * as React from 'react';
 import { terminalIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconTerminal = (props: IIconProps) => {
   return <BaseIcon iconSlug={'terminal'} svgURI={terminalIconURI} {...props} />;
 };
+
+export default IconTerminal;
 

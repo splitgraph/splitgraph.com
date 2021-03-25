@@ -1,7 +1,7 @@
 // @jsx jsx
 import { jsx } from "theme-ui";
 
-export default ({ sx = {}, children, ...rest }) => {
+const Heading = ({ sx = {}, children, ...rest }) => {
   return (
     <h1
       sx={{
@@ -14,3 +14,5 @@ export default ({ sx = {}, children, ...rest }) => {
     </h1>
   );
 };
+
+export default Heading;

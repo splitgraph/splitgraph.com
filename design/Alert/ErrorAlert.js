@@ -19,7 +19,7 @@ const ErrorResetLink = ({ text, href }) => (
   </MutedLink>
 );
 
-export default ({ message, dismissLinkText, dismissLinkHref }) => {
+const ErrorAlert = ({ message, dismissLinkText, dismissLinkHref }) => {
   const trimmedMessage = message.replace(/Error\:?\s*/, "");
 
   return (
@@ -48,3 +48,5 @@ export default ({ message, dismissLinkText, dismissLinkHref }) => {
     </Flex>
   );
 };
+
+export default ErrorAlert;

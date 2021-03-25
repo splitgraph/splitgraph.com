@@ -6,7 +6,9 @@ import * as React from 'react';
 import { conceptMoneyDatabaseIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconConceptMoneyDatabase = (props: IIconProps) => {
   return <BaseIcon iconSlug={'conceptMoneyDatabase'} svgURI={conceptMoneyDatabaseIconURI} {...props} />;
 };
+
+export default IconConceptMoneyDatabase;
 

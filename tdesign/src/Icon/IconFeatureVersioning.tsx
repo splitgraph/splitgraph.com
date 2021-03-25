@@ -6,7 +6,7 @@ import * as React from 'react';
 import { featureVersioningIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconFeatureVersioning = (props: IIconProps) => {
   return (
     <BaseIcon
       iconSlug={'featureVersioning'}
@@ -15,3 +15,5 @@ export default (props: IIconProps) => {
     />
   );
 };
+
+export default IconFeatureVersioning;

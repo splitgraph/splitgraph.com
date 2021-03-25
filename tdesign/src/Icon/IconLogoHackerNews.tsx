@@ -6,7 +6,9 @@ import * as React from 'react';
 import { logoHackerNewsIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconLogoHackerNews = (props: IIconProps) => {
   return <BaseIcon iconSlug={'logoHackerNews'} svgURI={logoHackerNewsIconURI} {...props} />;
 };
+
+export default IconLogoHackerNews;
 

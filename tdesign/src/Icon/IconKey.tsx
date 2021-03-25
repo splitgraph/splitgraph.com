@@ -6,6 +6,8 @@ import * as React from 'react';
 import { keyIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconKey = (props: IIconProps) => {
   return <BaseIcon iconSlug={'key'} svgURI={keyIconURI} {...props} />;
 };
+
+export default IconKey;

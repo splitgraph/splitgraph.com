@@ -7,6 +7,8 @@ export interface ILogoTextProps {
   text?: string;
 }
 
-export default ({ text = "Splitgraph" }: ILogoTextProps) => {
+const LogoText = ({ text = "Splitgraph" }: ILogoTextProps) => {
   return <span className="logo-text">{text}</span>;
 };
+
+export default LogoText;

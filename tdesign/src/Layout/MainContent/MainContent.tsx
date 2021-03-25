@@ -10,7 +10,7 @@ export interface IMainContentProps {
 
 const mainContentStyle = {} as SystemStyleObject;
 
-export default ({ children, extraStyle = {} }: IMainContentProps) => {
+const MainContent = ({ children, extraStyle = {} }: IMainContentProps) => {
   const outerContainerStyle = {
     backgroundColor: "white",
     minHeight: "100vh",
@@ -25,3 +25,5 @@ export default ({ children, extraStyle = {} }: IMainContentProps) => {
     </Box>
   );
 };
+
+export default MainContent;

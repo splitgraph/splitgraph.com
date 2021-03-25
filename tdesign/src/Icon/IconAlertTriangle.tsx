@@ -6,7 +6,9 @@ import * as React from 'react';
 import { alertTriangleIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconAlertTriangle = (props: IIconProps) => {
   return <BaseIcon iconSlug={'alertTriangle'} svgURI={alertTriangleIconURI} {...props} />;
 };
+
+export default IconAlertTriangle;
 

@@ -6,7 +6,9 @@ import * as React from 'react';
 import { gitMergeIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconGitMerge = (props: IIconProps) => {
   return <BaseIcon iconSlug={'gitMerge'} svgURI={gitMergeIconURI} {...props} />;
 };
+
+export default IconGitMerge;
 

@@ -6,7 +6,9 @@ import * as React from 'react';
 import { postgresLogoIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconPostgresLogo = (props: IIconProps) => {
   return <BaseIcon iconSlug={'postgresLogo'} svgURI={postgresLogoIconURI} {...props} />;
 };
+
+export default IconPostgresLogo;
 

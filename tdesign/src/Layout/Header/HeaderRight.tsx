@@ -7,6 +7,8 @@ export interface IHeaderRightProps {
   children?: React.ReactNode;
 }
 
-export default ({ children }: IHeaderRightProps) => {
+const HeaderRight = ({ children }: IHeaderRightProps) => {
   return <Box className="header--right">{children}</Box>;
 };
+
+export default HeaderRight;

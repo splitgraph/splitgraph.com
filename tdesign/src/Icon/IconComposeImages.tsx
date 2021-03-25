@@ -6,7 +6,9 @@ import * as React from 'react';
 import { composeImagesIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconComposeImages = (props: IIconProps) => {
   return <BaseIcon iconSlug={'composeImages'} svgURI={composeImagesIconURI} {...props} />;
 };
+
+export default IconComposeImages;
 

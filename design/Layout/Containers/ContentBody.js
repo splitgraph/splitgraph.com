@@ -18,6 +18,8 @@ const getStyle = (depth) => ({
   ".link-anchor-text": defaultTheme.links.primary,
 });
 
-export default ({ children, depth }) => {
+const ContentBody = ({ children, depth }) => {
   return <Box sx={getStyle(depth)}>{children}</Box>;
 };
+
+export default ContentBody;

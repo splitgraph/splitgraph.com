@@ -36,11 +36,13 @@ export interface ErrorAlertProps {
   dismissLinkHref?: string;
 }
 
-export default ({
-  message,
-  dismissLinkText,
-  dismissLinkHref,
-}: ErrorAlertProps) => {
+const ErrorAlert = (
+  {
+    message,
+    dismissLinkText,
+    dismissLinkHref,
+  }: ErrorAlertProps
+) => {
   const trimmedMessage = message ? message.replace(/Error\:?\s*/, "") : "";
 
   return (
@@ -70,3 +72,5 @@ export default ({
     </Flex>
   );
 };
+
+export default ErrorAlert;

@@ -21,16 +21,18 @@ export interface MenuItemProps {
   isHeading?: boolean;
 }
 
-export default ({
-  Icon,
-  href,
-  as,
-  text,
-  iconSx = {},
-  isActive = false,
-  scrollIntoViewIfNeeded = true,
-  isHeading = false,
-}: MenuItemProps) => {
+const MenuItem = (
+  {
+    Icon,
+    href,
+    as,
+    text,
+    iconSx = {},
+    isActive = false,
+    scrollIntoViewIfNeeded = true,
+    isHeading = false,
+  }: MenuItemProps
+) => {
   const { expanded } = useContext(LayoutContext);
 
   const itemRef = useRef<HTMLLIElement>(null);
@@ -114,3 +116,5 @@ export default ({
     </li>
   );
 };
+
+export default MenuItem;

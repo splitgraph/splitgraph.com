@@ -1,7 +1,7 @@
 // @jsx jsx
 import { jsx } from "theme-ui";
 
-export default ({ sx = {}, children, ...rest }) => {
+const SubHeading = ({ sx = {}, children, ...rest }) => {
   return (
     <h2
       sx={{
@@ -14,3 +14,5 @@ export default ({ sx = {}, children, ...rest }) => {
     </h2>
   );
 };
+
+export default SubHeading;

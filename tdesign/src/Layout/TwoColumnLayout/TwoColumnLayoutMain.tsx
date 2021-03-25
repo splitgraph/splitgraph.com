@@ -6,6 +6,8 @@ export interface TwoColumnLayoutMainProps {
   children?: React.ReactNode;
 }
 
-export default ({ children }: TwoColumnLayoutMainProps) => {
+const TwoColumnLayoutMain = ({ children }: TwoColumnLayoutMainProps) => {
   return <div className="two-col-main">{children}</div>;
 };
+
+export default TwoColumnLayoutMain;

@@ -6,7 +6,9 @@ import * as React from 'react';
 import { conceptWorkflowGantChartIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconConceptWorkflowGantChart = (props: IIconProps) => {
   return <BaseIcon iconSlug={'conceptWorkflowGantChart'} svgURI={conceptWorkflowGantChartIconURI} {...props} />;
 };
+
+export default IconConceptWorkflowGantChart;
 

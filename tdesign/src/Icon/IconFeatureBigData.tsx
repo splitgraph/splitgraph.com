@@ -6,7 +6,7 @@ import * as React from 'react';
 import { featureBigDataIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconFeatureBigData = (props: IIconProps) => {
   return (
     <BaseIcon
       iconSlug={'featureBigData'}
@@ -15,3 +15,5 @@ export default (props: IIconProps) => {
     />
   );
 };
+
+export default IconFeatureBigData;

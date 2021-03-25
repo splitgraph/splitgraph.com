@@ -6,7 +6,7 @@ import * as React from 'react';
 import { featureDeltaCompressionIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconFeatureDeltaCompression = (props: IIconProps) => {
   return (
     <BaseIcon
       iconSlug={'featureDeltaCompression'}
@@ -15,3 +15,5 @@ export default (props: IIconProps) => {
     />
   );
 };
+
+export default IconFeatureDeltaCompression;

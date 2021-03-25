@@ -6,7 +6,9 @@ import * as React from 'react';
 import { uploadDatabaseIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconUploadDatabase = (props: IIconProps) => {
   return <BaseIcon iconSlug={'uploadDatabase'} svgURI={uploadDatabaseIconURI} {...props} />;
 };
+
+export default IconUploadDatabase;
 

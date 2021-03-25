@@ -17,15 +17,17 @@ export interface BaseLayoutProps {
   logoText?: string;
 }
 
-export default ({
-  children,
-  renderHeaderCenter,
-  renderHeaderRight,
-  extraHeaderStyle = {},
-  extraStyle = {},
-  showHeader = true,
-  logoText = "Splitgraph",
-}: BaseLayoutProps) => {
+const BaseLayout = (
+  {
+    children,
+    renderHeaderCenter,
+    renderHeaderRight,
+    extraHeaderStyle = {},
+    extraStyle = {},
+    showHeader = true,
+    logoText = "Splitgraph",
+  }: BaseLayoutProps
+) => {
   const containerStyle = {
     // maxWidth: '100vw',
     minWidth: "-webkit-fit-content",
@@ -79,3 +81,5 @@ export default ({
     </Box>
   );
 };
+
+export default BaseLayout;

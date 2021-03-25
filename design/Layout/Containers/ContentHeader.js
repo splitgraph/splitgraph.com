@@ -18,6 +18,8 @@ const getStyle = depth => ({
   }
 });
 
-export default ({ children, depth }) => {
+const ContentHeader = ({ children, depth }) => {
   return <Box sx={getStyle(depth)}>{children}</Box>;
 };
+
+export default ContentHeader;

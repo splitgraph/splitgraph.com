@@ -6,7 +6,9 @@ import * as React from 'react';
 import { hamburgerIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconHamburger = (props: IIconProps) => {
   return <BaseIcon iconSlug={'hamburger'} svgURI={hamburgerIconURI} {...props} />;
 };
+
+export default IconHamburger;
 

@@ -6,7 +6,7 @@ import * as React from 'react';
 import { featureSplitfilesIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconFeatureSplitfiles = (props: IIconProps) => {
   return (
     <BaseIcon
       iconSlug={'featureSplitfiles'}
@@ -15,3 +15,5 @@ export default (props: IIconProps) => {
     />
   );
 };
+
+export default IconFeatureSplitfiles;

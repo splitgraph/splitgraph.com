@@ -12,7 +12,7 @@ export interface MenuProps {
   style?: SystemStyleObject;
 }
 
-export default ({ children, style = {} }: MenuProps) => {
+const Menu = ({ children, style = {} }: MenuProps) => {
   const { expanded } = useContext(LayoutContext);
 
   const containerStyle = {
@@ -148,3 +148,5 @@ export default ({ children, style = {} }: MenuProps) => {
     </Box>
   );
 };
+
+export default Menu;

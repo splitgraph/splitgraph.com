@@ -23,15 +23,17 @@ export interface IBaseIconProps {
   extraStyle?: SystemStyleObject;
 }
 
-export default ({
-  size = "24px",
-  iconSlug,
-  svgURI,
-  sx,
-  extraStyle = {},
-  color,
-  hoverColor,
-}: IBaseIconProps) => {
+const BaseIcon = (
+  {
+    size = "24px",
+    iconSlug,
+    svgURI,
+    sx,
+    extraStyle = {},
+    color,
+    hoverColor,
+  }: IBaseIconProps
+) => {
   const svgDataURI = `url("${svgURI}")`;
 
   const maskStyle = {
@@ -76,3 +78,5 @@ export default ({
     </Text>
   );
 };
+
+export default BaseIcon;

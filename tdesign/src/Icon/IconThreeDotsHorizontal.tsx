@@ -6,7 +6,9 @@ import * as React from 'react';
 import { threeDotsHorizontalIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconThreeDotsHorizontal = (props: IIconProps) => {
   return <BaseIcon iconSlug={'threeDotsHorizontal'} svgURI={threeDotsHorizontalIconURI} {...props} />;
 };
+
+export default IconThreeDotsHorizontal;
 

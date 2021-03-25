@@ -53,7 +53,7 @@ const ExpandColumnPushDown = ({ expanded, setExpanded }: ILayoutContext) => {
   );
 };
 
-export default ({ children }: TwoColumnLayoutLeftProps) => {
+const TwoColumnLayoutLeft = ({ children }: TwoColumnLayoutLeftProps) => {
   const layoutContext = useContext(LayoutContext);
 
   const containerStyle = {
@@ -75,3 +75,5 @@ export default ({ children }: TwoColumnLayoutLeftProps) => {
     </Box>
   );
 };
+
+export default TwoColumnLayoutLeft;

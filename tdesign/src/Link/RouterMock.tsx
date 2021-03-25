@@ -13,7 +13,7 @@ export interface IRouterMockProps {
   children: React.ReactNode;
 }
 
-export default ({ children }: IRouterMockProps) => {
+const RouterMock = ({ children }: IRouterMockProps) => {
   const [pathname, setPathname] = useState('/');
 
   const mockRouter = {
@@ -38,3 +38,5 @@ export default ({ children }: IRouterMockProps) => {
     </RouterContext.Provider>
   );
 };
+
+export default RouterMock;

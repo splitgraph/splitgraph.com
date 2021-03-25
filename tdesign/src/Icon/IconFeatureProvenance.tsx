@@ -6,7 +6,7 @@ import * as React from 'react';
 import { featureProvenanceIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconFeatureProvenance = (props: IIconProps) => {
   return (
     <BaseIcon
       iconSlug={'featureProvenance'}
@@ -15,3 +15,5 @@ export default (props: IIconProps) => {
     />
   );
 };
+
+export default IconFeatureProvenance;

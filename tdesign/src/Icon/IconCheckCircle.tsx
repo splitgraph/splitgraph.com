@@ -6,7 +6,9 @@ import * as React from 'react';
 import { checkCircleIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconCheckCircle = (props: IIconProps) => {
   return <BaseIcon iconSlug={'checkCircle'} svgURI={checkCircleIconURI} {...props} />;
 };
+
+export default IconCheckCircle;
 

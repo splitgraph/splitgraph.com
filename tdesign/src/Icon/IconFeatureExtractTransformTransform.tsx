@@ -6,7 +6,7 @@ import * as React from 'react';
 import { featureExtractTransformTransformIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconFeatureExtractTransformTransform = (props: IIconProps) => {
   return (
     <BaseIcon
       iconSlug={'featureExtractTransformTransform'}
@@ -15,3 +15,5 @@ export default (props: IIconProps) => {
     />
   );
 };
+
+export default IconFeatureExtractTransformTransform;

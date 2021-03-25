@@ -6,7 +6,9 @@ import * as React from 'react';
 import { lockIconURI } from './cssSvgStrings';
 import BaseIcon, { IIconProps } from './BaseIcon';
 
-export default (props: IIconProps) => {
+const IconLock = (props: IIconProps) => {
   return <BaseIcon iconSlug={'lock'} svgURI={lockIconURI} {...props} />;
 };
+
+export default IconLock;
 

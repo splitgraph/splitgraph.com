@@ -39,17 +39,17 @@ const MiddleSegment = ({ children, sx = {} }) => (
   </Flex>
 );
 
-export default ({ width = 9 / 10, sx = {}, children }) => (
-  <Flex
-    justifyContent="center"
-    alignItems="center"
-    width={width}
-    minHeight={"1rem"}
-  >
-    <DividerLine sx={sx} />
+const DividerWithMiddleText = ({ width = 9 / 10, sx = {}, children }) => <Flex
+  justifyContent="center"
+  alignItems="center"
+  width={width}
+  minHeight={"1rem"}
+>
+  <DividerLine sx={sx} />
 
-    <MiddleSegment>{children}</MiddleSegment>
+  <MiddleSegment>{children}</MiddleSegment>
 
-    <DividerLine sx={sx} />
-  </Flex>
-);
+  <DividerLine sx={sx} />
+</Flex>;
+
+export default DividerWithMiddleText;
