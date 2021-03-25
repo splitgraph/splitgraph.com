@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "yarn run clean && node server.js",
-    "build": "next build && next export",
+    "build": "NODE_OPTIONS='--max_old_space_size=4096' next build && next export",
     "deploy": "cp now.json out/ && yarn run now",
     "start": "serve out",
     "clean": "./clean.sh"
