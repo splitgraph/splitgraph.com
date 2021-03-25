@@ -1,4 +1,5 @@
-/** @jsxImportSource @emotion/react */
+/** @jsxRuntime classic */
+/** @jsx jsx */
 import React from "react";
 
 import { Box } from "rebass";

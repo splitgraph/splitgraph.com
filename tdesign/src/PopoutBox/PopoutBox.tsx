@@ -1,4 +1,5 @@
-/** @jsxImportSource @emotion/react */
+/** @jsxRuntime classic */
+/** @jsx jsx */
 // @ts-ignore
 import { jsx, Box, SystemStyleObject } from "theme-ui";
 import * as React from "react";
