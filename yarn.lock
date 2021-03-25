@@ -1512,7 +1512,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:^11.1.1":
+"@emotion/react@npm:^11.1.1, @emotion/react@npm:^11.1.5":
   version: 11.1.5
   resolution: "@emotion/react@npm:11.1.5"
   dependencies:
@@ -1603,7 +1603,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/styled@npm:^11.0.0":
+"@emotion/styled@npm:^11.0.0, @emotion/styled@npm:^11.1.5":
   version: 11.1.5
   resolution: "@emotion/styled@npm:11.1.5"
   dependencies:
@@ -2042,6 +2042,8 @@ __metadata:
     "@emotion/babel-plugin": ^11.2.0
     "@emotion/babel-preset-css-prop": ^11.2.0
     "@emotion/core": 10.0.28
+    "@emotion/react": ^11.1.5
+    "@emotion/styled": ^11.1.5
     "@mdx-js/react": ^1.4.5
     "@next/bundle-analyzer": ^9.1.1
     "@rebass/forms": ^4.0.5

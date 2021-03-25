@@ -1,5 +1,4 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
+/** @jsxImportSource theme-ui */
 // @ts-ignore
 import { jsx, Text, SystemStyleObject } from "theme-ui";
 

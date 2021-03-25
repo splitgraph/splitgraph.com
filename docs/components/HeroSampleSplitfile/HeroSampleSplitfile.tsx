@@ -1,5 +1,4 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
+/** @jsxImportSource theme-ui */
 // @ts-ignore
 import { jsx, Box, Button } from "theme-ui";
 import * as React from "react";

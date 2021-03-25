@@ -1,5 +1,4 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
+/** @jsxImportSource theme-ui */
 import { jsx, SxStyleProp } from "theme-ui";
 import * as React from "react";
 import Link from "next/link";
