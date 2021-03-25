@@ -2,7 +2,6 @@
 /** @jsx jsx */
 // @ts-ignore
 import { jsx, Box, Text } from "theme-ui";
-import * as React from "react";
 import IframeResizer from "iframe-resizer-react";
 
 import { PreWithCopy } from "../PreWithCopy";

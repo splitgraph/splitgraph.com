@@ -2,7 +2,7 @@
 /** @jsx jsx */
 // @ts-ignore
 import { jsx } from "theme-ui";
-import * as React from "react";
+import { useMemo } from "react";
 
 import { useRouter } from "next/router";
 import { Link, LinkProps, INextDynamicLinkProps } from "@splitgraph/tdesign";
@@ -76,12 +76,12 @@ const getRoutingProps = ({
 export default ({ href, ...rest }: LinkProps) => {
   const router = useRouter();
 
-  const currentURL = React.useMemo(
+  const currentURL = useMemo(
     () => (router ? router.pathname.replace(/^\/\_content/gm, "") : ""),
     [router]
   );
 
-  const { useHtmlLink, href: typedHref, ...routingProps } = React.useMemo(
+  const { useHtmlLink, href: typedHref, ...routingProps } = useMemo(
     () =>
       rest.hasOwnProperty("as")
         ? { href, useHtmlLink: false }

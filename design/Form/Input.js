@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React from "react";
+import { forwardRef } from "react";
 
 import { Box } from "rebass";
 import { Input } from "@rebass/forms";
@@ -10,7 +10,7 @@ import MutedText from "../Text/MutedText";
 import SuccessText from "../Text/SuccessText";
 import WarningText from "../Text/WarningText";
 
-export default React.forwardRef(
+export default forwardRef(
   (
     {
       sx = {},

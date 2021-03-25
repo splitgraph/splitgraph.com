@@ -1,7 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import React from "react";
 import { NextSeo } from "next-seo";
 import { Helmet } from "react-helmet";
 

@@ -3,8 +3,6 @@
 // @ts-ignore
 import { jsx, Box, Text } from "theme-ui";
 
-import React from "react";
-
 import { NextSeo } from "next-seo";
 
 import withTheme from "../hocs/withTheme";

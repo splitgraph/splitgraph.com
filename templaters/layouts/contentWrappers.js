@@ -1,4 +1,4 @@
-import React from "react";
+import { Children, cloneElement } from "react";
 import { Box } from "@splitgraph/design";
 import { tocStyles } from "@splitgraph/tdesign";
 
@@ -30,7 +30,7 @@ const findMatchingElement = (children = [], matchFunc) => {
     let maybeMatch =
       !!child.props && child.props.children
         ? findMatchingElement(
-            React.Children.toArray(child.props.children),
+            Children.toArray(child.props.children),
             matchFunc
           )
         : null;
@@ -45,14 +45,14 @@ const findMatchingElement = (children = [], matchFunc) => {
 
 export const OnlyTOC = ({ children, ...rest }) => {
   const originalToc = findMatchingElement(
-    React.Children.toArray(children),
+    Children.toArray(children),
     (el) =>
       el.props &&
       (el.props.name === "nav" ||
         (el.type === "nav" && el.props.className === "toc"))
   );
 
-  const extractedToc = originalToc ? React.cloneElement(originalToc) : null;
+  const extractedToc = originalToc ? cloneElement(originalToc) : null;
 
   return <Box sx={TocStyle}>{extractedToc}</Box>;
 };

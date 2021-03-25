@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ThemeProvider } from 'theme-ui';
 
 import { ErrorAlert, SuccessAlert, makeDefaultTheme } from '@';

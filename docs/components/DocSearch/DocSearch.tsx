@@ -2,7 +2,7 @@
 /** @jsx jsx */
 // @ts-ignore
 import { jsx, Box } from "theme-ui";
-import * as React from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 
 import { searchIconURI } from "@splitgraph/tdesign";
@@ -48,11 +48,11 @@ const mountBodyScript = ({ onLoad }) => {
 };
 
 const DocSearch = ({}: IDocSearchProps) => {
-  const [enabled, setEnabled] = React.useState(true);
+  const [enabled, setEnabled] = useState(true);
 
-  const [windowReady, setWindowReady] = React.useState(false);
+  const [windowReady, setWindowReady] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (typeof window === "undefined") {
       setWindowReady(false);
       return;
@@ -75,7 +75,7 @@ const DocSearch = ({}: IDocSearchProps) => {
     });
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!windowReady) {
       return;
     }

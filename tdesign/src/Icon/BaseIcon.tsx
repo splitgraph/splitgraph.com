@@ -2,7 +2,6 @@
 /** @jsx jsx */
 // @ts-ignore
 import { jsx, Text, SystemStyleObject } from "theme-ui";
-import * as React from "react";
 
 export interface IIconProps {
   size?: string;

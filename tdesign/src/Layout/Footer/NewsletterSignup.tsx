@@ -2,12 +2,12 @@
 /** @jsx jsx */
 // @ts-ignore
 import { jsx, Box } from "theme-ui";
-import * as React from "react";
+import { useState } from "react";
 
 export interface INewsletterSignupProps {}
 
 const NewsletterSignup = ({}: INewsletterSignupProps) => {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   return (
     <Box

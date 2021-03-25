@@ -2,7 +2,6 @@
 /** @jsx jsx */
 // @ts-ignore
 import { jsx } from "theme-ui";
-import * as React from "react";
 import { Helmet } from "react-helmet";
 
 const RSSMetaTag = () => {

@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import { defaultTheme, mdxComponents } from "@splitgraph/design";
 

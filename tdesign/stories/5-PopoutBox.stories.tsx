@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { withKnobs, select } from '@storybook/addon-knobs';
 
 import { ThemeProvider, Box } from 'theme-ui';

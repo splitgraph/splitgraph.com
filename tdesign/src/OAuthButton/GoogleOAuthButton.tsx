@@ -2,7 +2,6 @@
 /** @jsx jsx */
 // @ts-ignore
 import { jsx, Button } from "theme-ui";
-import * as React from "react";
 
 import OAuthButton, { IOAuthButtonProps } from "./OAuthButton";
 

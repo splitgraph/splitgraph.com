@@ -2,7 +2,7 @@
 /** @jsx jsx */
 // @ts-ignore
 import { jsx, Box, SystemStyleObject } from "theme-ui";
-import * as React from "react";
+import { useState, useMemo } from "react";
 
 export interface IHelpSectionItemWrapperProps {
   HelpSectionMarkdownComponent: any;
@@ -15,9 +15,9 @@ const HelpSectionItemWrapper = ({
   HelpSectionMarkdownComponent,
   defaultCollapsed = true,
 }: IHelpSectionItemWrapperProps) => {
-  const [collapsed, setCollapsed] = React.useState(defaultCollapsed);
+  const [collapsed, setCollapsed] = useState(defaultCollapsed);
 
-  const H1Component = React.useMemo(
+  const H1Component = useMemo(
     () => ({ children, ...rest }) => (
       <h1
         className="header-control"

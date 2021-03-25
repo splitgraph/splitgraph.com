@@ -1,7 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import * as React from "react";
 
 import Link, { LinkProps } from "./Link";
 
