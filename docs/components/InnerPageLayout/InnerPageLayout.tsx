@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, SystemStyleObject } from "theme-ui";
+import { jsx, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 
 import { BaseLayout, Footer, MainContent } from "@splitgraph/tdesign";
@@ -9,7 +9,7 @@ import { Link } from "../Link";
 
 export interface IInnerPageLayoutProps {
   children?: React.ReactNode;
-  extraStyle?: SystemStyleObject;
+  extraStyle?: ThemeUIStyleObject;
   charWidth?: number;
 }
 

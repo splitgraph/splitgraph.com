@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
+import { jsx, Box, ThemeUIStyleObject } from "theme-ui";
 
 import { Link } from "../Link";
 
@@ -63,7 +63,7 @@ const itemBoxStyle = {
   ".blog-description": {
     color: "heavy",
   },
-} as SystemStyleObject;
+} as ThemeUIStyleObject;
 
 const BlogPostItem = ({ url, metadata }: IBlogPostItemProps) => {
   const formattedDate = formatDate(metadata.date);

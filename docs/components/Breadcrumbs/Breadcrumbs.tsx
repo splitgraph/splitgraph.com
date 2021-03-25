@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, SystemStyleObject } from "theme-ui";
+import { jsx, ThemeUIStyleObject } from "theme-ui";
 
 import { Link } from "../Link";
 
@@ -27,7 +27,7 @@ const breadcrumbsListStyle = {
   a: {
     variant: "links.primary",
   },
-} as SystemStyleObject;
+} as ThemeUIStyleObject;
 
 const Breadcrumbs = ({ crumbs }: IBreadcrumbsProps) => {
   return (

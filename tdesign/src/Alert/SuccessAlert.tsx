@@ -1,16 +1,10 @@
 /** @jsxImportSource theme-ui */
-import { jsx } from "theme-ui";
 
-/** @jsxImportSource theme-ui */
 import { Flex, Text } from "theme-ui";
 import MutedLink from "../Link/MutedLink";
 
 const Checkmark = () => {
-  return (
-    <Text mr={2} fontWeight="bold">
-      &#10003;
-    </Text>
-  );
+  return <Text sx={{ marginRight: 2, fontWeight: "Bold" }}>&#10003;</Text>;
 };
 
 interface SuccessMessageProps {
@@ -45,24 +39,26 @@ const SuccessAlert = ({
 }: ErrorAlertProps) => {
   return (
     <Flex
-      flexDirection={"row"}
-      justifyContent={"space-between"}
-      p={2}
-      mb={4}
       sx={{
+        marginBottom: 4,
+        padding: 2,
+        justifyContent: "space-between",
+        flexDirection: "row",
         minWidth: "30vw",
         backgroundColor: "successBackground",
         backgroundOpacity: 0.2,
         border: "1px solid success",
       }}
     >
-      <Flex width={dismissLinkText && dismissLinkHref ? 7 / 10 : 10 / 10}>
+      <Flex
+        sx={{ width: dismissLinkText && dismissLinkHref ? 7 / 10 : 10 / 10 }}
+      >
         <Checkmark />
         <SuccessMessage message={message} />
       </Flex>
 
       {dismissLinkText && dismissLinkHref && (
-        <Flex width={3 / 10} justifyContent="flex-end">
+        <Flex sx={{ width: 3 / 10, justifyContent: "flex-end" }}>
           <SuccessResetLink text={dismissLinkText} href={dismissLinkHref} />
         </Flex>
       )}

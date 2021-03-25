@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
+import { jsx, Box, ThemeUIStyleObject } from "theme-ui";
 
 import { Link } from "../../Link";
 import { IBlogPostMetadata } from "../../BlogPostItem";
@@ -36,7 +36,7 @@ const containerStyle = {
   ".date-value": {
     opacity: "0.5",
   },
-} as SystemStyleObject;
+} as ThemeUIStyleObject;
 
 const BlogPostHeaderMetadata = ({
   date,

@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
+import { jsx, Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 
 export interface IBoxSetProps {
@@ -14,7 +14,7 @@ const BoxSet = ({ children }: IBoxSetProps) => {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-  } as SystemStyleObject;
+  } as ThemeUIStyleObject;
 
   const boxSetStyle = {
     ...containerStyle,
@@ -45,7 +45,7 @@ const BoxSet = ({ children }: IBoxSetProps) => {
       borderRadius: 8,
       height: ["initial", "initial", "calc((100vw - (100vw - 120ch)) / 3)"],
     },
-  } as SystemStyleObject;
+  } as ThemeUIStyleObject;
 
   return (
     <Box sx={boxSetStyle} className="box-set">

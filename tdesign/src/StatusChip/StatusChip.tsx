@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
+import { jsx, Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 
 export interface IStatusChipProps {
@@ -8,7 +8,7 @@ export interface IStatusChipProps {
   icon: React.ReactNode;
   text?: string;
   responsiveText?: boolean;
-  extraStyle: SystemStyleObject;
+  extraStyle: ThemeUIStyleObject;
 }
 
 const StatusChip = ({
@@ -51,7 +51,7 @@ const StatusChip = ({
         ? extraStyle[".status-chip--text"]
         : {}),
     },
-  } as SystemStyleObject;
+  } as ThemeUIStyleObject;
 
   return (
     <Box sx={containerStyle}>

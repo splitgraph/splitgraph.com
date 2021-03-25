@@ -1,14 +1,14 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
+import { jsx, Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 
 export interface IMainContentProps {
   children: React.ReactNode;
-  extraStyle?: SystemStyleObject;
+  extraStyle?: ThemeUIStyleObject;
 }
 
-const mainContentStyle = {} as SystemStyleObject;
+const mainContentStyle = {} as ThemeUIStyleObject;
 
 const MainContent = ({ children, extraStyle = {} }: IMainContentProps) => {
   const outerContainerStyle = {
@@ -17,7 +17,7 @@ const MainContent = ({ children, extraStyle = {} }: IMainContentProps) => {
     fontFamily:
       "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji",
     ...extraStyle,
-  } as SystemStyleObject;
+  } as ThemeUIStyleObject;
 
   return (
     <Box className="main-content" sx={outerContainerStyle}>

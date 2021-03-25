@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, Box, Text, SystemStyleObject } from "theme-ui";
+import { jsx, Box, Text, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 import { useContext, useEffect, useRef } from "react";
 
@@ -68,7 +68,7 @@ const MenuItem = ({
     ":hover": {
       cursor: !href ? "initial" : "pointer",
     },
-  };
+  } as ThemeUIStyleObject;
 
   const linkStyle = {
     ":hover": {
@@ -82,7 +82,7 @@ const MenuItem = ({
     filter: "invert(1)",
     marginRight: "0.5em",
     ...iconSx,
-  } as SystemStyleObject;
+  } as ThemeUIStyleObject;
 
   const activeClassName = isActive ? "active" : "inactive";
   const headingClassName = isHeading ? "heading" : "text";

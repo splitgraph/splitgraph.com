@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
+import { jsx, Box, ThemeUIStyleObject } from "theme-ui";
 import { useState, useMemo } from "react";
 
 export interface IHelpSectionItemWrapperProps {
@@ -39,7 +39,7 @@ const HelpSectionItemWrapper = ({
               paddingRight: "1ch",
               content: '"\\27F6"',
             },
-          } as SystemStyleObject
+          } as ThemeUIStyleObject
         }
         {...rest}
       >

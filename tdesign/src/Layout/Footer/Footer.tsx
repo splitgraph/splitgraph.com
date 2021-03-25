@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { Box, SystemStyleObject, jsx } from "theme-ui";
+import { Box, ThemeUIStyleObject, jsx } from "theme-ui";
 import * as React from "react";
 
 import FooterSection from "./FooterSection";
@@ -18,7 +18,7 @@ import {
 
 export interface IFooterProps {
   Link?: React.FunctionComponent<any>;
-  extraStyle?: SystemStyleObject;
+  extraStyle?: ThemeUIStyleObject;
   footerVariant?: "dark";
 }
 
@@ -37,8 +37,8 @@ const darkVariant = {
 
 const mixStyles = (
   property: string,
-  ...styles: SystemStyleObject[]
-): SystemStyleObject => {
+  ...styles: ThemeUIStyleObject[]
+): ThemeUIStyleObject => {
   return styles.reduce(
     (mix, style) => ({
       ...mix,

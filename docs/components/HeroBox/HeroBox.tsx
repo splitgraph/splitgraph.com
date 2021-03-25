@@ -1,18 +1,18 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
+import { jsx, Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 
 export interface IHeroBoxProps {
   children?: React.ReactNode;
-  extraStyle?: SystemStyleObject;
+  extraStyle?: ThemeUIStyleObject;
 }
 
 const containerStyle = {
   variant: "backgrounds.dark2light",
   minHeight: "50vh",
   color: "light",
-} as SystemStyleObject;
+} as ThemeUIStyleObject;
 
 const HeroBox = ({ children, extraStyle = {} }: IHeroBoxProps) => {
   return <Box sx={{ ...containerStyle, ...extraStyle }}>{children}</Box>;

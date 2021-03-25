@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
+import { jsx, Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 
 import { Header, HeaderLeft, HeaderCenter, HeaderRight } from "../Header";
@@ -11,8 +11,8 @@ export interface BaseLayoutProps {
   children?: React.ReactNode;
   renderHeaderRight?: () => React.ReactNode;
   renderHeaderCenter?: () => React.ReactNode;
-  extraHeaderStyle?: SystemStyleObject;
-  extraStyle?: SystemStyleObject;
+  extraHeaderStyle?: ThemeUIStyleObject;
+  extraStyle?: ThemeUIStyleObject;
   showHeader?: boolean;
   logoText?: string;
 }
@@ -50,7 +50,7 @@ const BaseLayout = ({
       ...extraHeaderStyle,
     },
     ...extraStyle,
-  } as SystemStyleObject;
+  } as ThemeUIStyleObject;
 
   const headerCenter = !!renderHeaderCenter ? renderHeaderCenter() : null;
   const headerRight = !!renderHeaderRight ? renderHeaderRight() : null;

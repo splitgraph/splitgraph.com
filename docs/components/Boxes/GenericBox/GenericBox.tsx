@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
-// @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
+import { Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 
 export interface IGenericBoxProps {
@@ -8,11 +7,11 @@ export interface IGenericBoxProps {
   renderHeading: () => React.ReactNode;
   renderBody: () => React.ReactNode;
   renderFooter: () => React.ReactNode;
-  containerStyle?: SystemStyleObject;
-  headingStyle?: SystemStyleObject;
-  bodyStyle?: SystemStyleObject;
-  contentContainerStyle?: SystemStyleObject;
-  footerStyle?: SystemStyleObject;
+  containerStyle?: ThemeUIStyleObject;
+  headingStyle?: ThemeUIStyleObject;
+  bodyStyle?: ThemeUIStyleObject;
+  contentContainerStyle?: ThemeUIStyleObject;
+  footerStyle?: ThemeUIStyleObject;
 }
 
 // export type { IGenericBoxProps }
@@ -62,14 +61,14 @@ const GenericBox = ({
           marginRight: "1rem",
           borderRadius: "32px",
           overflow: "hidden",
-          flexGrow: "1",
-          flexShrink: "1",
+          flexGrow: 1,
+          flexShrink: 1,
           flexBasis: "0%",
           ...contentContainerStyle,
           p: {
             overflow: "hidden",
-            flexGrow: "1",
-            flexShrink: "1",
+            flexGrow: 1,
+            flexShrink: 1,
             flexBasis: "0%",
             display: "flex",
             alignItems: "center",
@@ -90,7 +89,7 @@ const GenericBox = ({
             padding: "1rem",
             ...(footerStyle.hasOwnProperty("a")
               ? footerStyle["a"]
-              : ({} as SystemStyleObject)),
+              : ({} as ThemeUIStyleObject)),
           },
         },
         ...containerStyle,

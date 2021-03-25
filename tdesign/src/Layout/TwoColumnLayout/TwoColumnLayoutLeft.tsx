@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
+import { jsx, Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 import { useContext } from "react";
 import { ILayoutContext, LayoutContext } from "./TwoColumnLayout";
@@ -66,7 +66,7 @@ const TwoColumnLayoutLeft = ({ children }: TwoColumnLayoutLeftProps) => {
     ".expand-col-pushdown": {
       minHeight: "5vh",
     },
-  } as SystemStyleObject;
+  } as ThemeUIStyleObject;
 
   return (
     <Box sx={containerStyle} className="two-col-left">

@@ -1,11 +1,11 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, Text, SystemStyleObject } from "theme-ui";
+import { jsx, Text, ThemeUIStyleObject } from "theme-ui";
 
 export interface IIconProps {
   size?: string;
   sx?: any;
-  extraStyle?: SystemStyleObject;
+  extraStyle?: ThemeUIStyleObject;
   color?: string;
   hoverColor?: string;
 }
@@ -19,7 +19,7 @@ export interface IBaseIconProps {
 
   // TODO: sx is deprecated here, but leave it around in case somewhere is using it
   sx?: any;
-  extraStyle?: SystemStyleObject;
+  extraStyle?: ThemeUIStyleObject;
 }
 
 const BaseIcon = ({
@@ -68,7 +68,7 @@ const BaseIcon = ({
           minHeight: size,
           ...sx,
           ...extraStyle,
-        } as SystemStyleObject
+        } as ThemeUIStyleObject
       }
     >
       &nbsp;

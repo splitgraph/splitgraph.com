@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, Box, Text, SystemStyleObject } from "theme-ui";
+import { jsx, Box, Text, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 
 import { IconClipboard } from "../Icon";
@@ -8,7 +8,7 @@ import { IconClipboard } from "../Icon";
 export interface IPreWithCopyProps {
   title?: string | React.ReactNode;
   children?: React.ReactNode;
-  extraStyle?: SystemStyleObject;
+  extraStyle?: ThemeUIStyleObject;
   onCopy?: (message?: string) => void;
 }
 
@@ -60,7 +60,7 @@ const PreWithCopy = ({
         ? extraStyle[".copy-icon-container"]
         : {}),
     },
-  } as SystemStyleObject;
+  } as ThemeUIStyleObject;
 
   const codeRef = React.useRef<HTMLElement>(null);
 

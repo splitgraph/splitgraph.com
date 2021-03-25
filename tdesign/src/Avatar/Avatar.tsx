@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
+import { jsx, Box, ThemeUIStyleObject } from "theme-ui";
 
 export interface IAvatarProps {
   avatarURL?: string;
@@ -22,7 +22,7 @@ const avatarContainerStyle = {
   ".avatar-initials": {
     textTransform: "uppercase",
   },
-} as SystemStyleObject;
+} as ThemeUIStyleObject;
 
 const Avatar = ({ avatarURL, initials }: IAvatarProps) => {
   return (

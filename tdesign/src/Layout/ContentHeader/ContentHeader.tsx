@@ -1,11 +1,11 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
+import { jsx, Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 
 export interface IContentHeaderProps {
   children?: React.ReactNode;
-  extraStyle?: SystemStyleObject;
+  extraStyle?: ThemeUIStyleObject;
 }
 
 const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
@@ -28,7 +28,7 @@ const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
         margin: 0,
       },
     },
-  } as SystemStyleObject;
+  } as ThemeUIStyleObject;
 
   return (
     <Box sx={headerContainerStyle}>

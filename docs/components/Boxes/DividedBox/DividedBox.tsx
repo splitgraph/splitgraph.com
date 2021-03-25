@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
+import { jsx, Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 
 interface IRenderMidArgs {
@@ -18,9 +18,9 @@ export interface IDividedBoxProps {
   renderMid?: (IRenderMidArgs) => React.ReactNode;
   background?: string;
   colors?: [string, string];
-  containerStyle?: SystemStyleObject;
-  midStyle?: SystemStyleObject;
-  topStyle?: SystemStyleObject;
+  containerStyle?: ThemeUIStyleObject;
+  midStyle?: ThemeUIStyleObject;
+  topStyle?: ThemeUIStyleObject;
   direction?: "vertical" | "horizontal";
   angle?: number;
   ContainerComponent?: React.FunctionComponent<ChildProps>;
@@ -75,7 +75,7 @@ const DividedBox = ({
       marginBottom: "1rem",
       ...(containerStyle.hasOwnProperty(".divided-top")
         ? containerStyle[".divided-top"]
-        : ({} as SystemStyleObject)),
+        : ({} as ThemeUIStyleObject)),
       ...topStyle,
     },
     ".divided-mid": {
@@ -92,10 +92,10 @@ const DividedBox = ({
       boxShadow: "0 0 1rem rgba(0, 0, 0, .25)",
       ...(containerStyle.hasOwnProperty(".divided-mid")
         ? containerStyle[".divided-mid"]
-        : ({} as SystemStyleObject)),
+        : ({} as ThemeUIStyleObject)),
       ...midStyle,
     },
-  } as SystemStyleObject;
+  } as ThemeUIStyleObject;
 
   return (
     <ContainerComponent sx={containerStyle} className={containerClassName}>

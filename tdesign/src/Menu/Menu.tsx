@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
+import { jsx, Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 import { useContext } from "react";
 
@@ -9,7 +9,7 @@ import { LayoutContext } from "../Layout/TwoColumnLayout";
 
 export interface MenuProps {
   children?: React.ReactNode;
-  style?: SystemStyleObject;
+  style?: ThemeUIStyleObject;
 }
 
 const Menu = ({ children, style = {} }: MenuProps) => {
@@ -140,7 +140,7 @@ const Menu = ({ children, style = {} }: MenuProps) => {
         ? { ...style[".menu-item-label"] }
         : {}),
     },
-  } as SystemStyleObject;
+  } as ThemeUIStyleObject;
 
   return (
     <Box sx={containerStyle}>

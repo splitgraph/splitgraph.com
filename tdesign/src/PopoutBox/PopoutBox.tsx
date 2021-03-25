@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
+import { jsx, Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 
 export interface IRenderPopoutButtonProps {
@@ -29,7 +29,7 @@ export interface IPopoutBoxRef {
 export interface IPopoutBoxProps {
   renderButton: (opts: IRenderPopoutButtonProps) => React.ReactNode;
   children?: React.ReactNode;
-  popoutContainerStyle?: SystemStyleObject;
+  popoutContainerStyle?: ThemeUIStyleObject;
   anchorPosition?: PopoutAnchorPosition;
   buttonProps?: any;
   popoutBoxRef?: React.RefObject<IPopoutBoxRef>;
@@ -37,7 +37,7 @@ export interface IPopoutBoxProps {
 
 const getAnchorPositionStyle = (
   pos?: PopoutAnchorPosition
-): SystemStyleObject => {
+): ThemeUIStyleObject => {
   const posInitial = {
     top: "initial",
     bottom: "initial",
@@ -82,18 +82,18 @@ const getAnchorPositionStyle = (
       ],
       left: [posMap[pos[0]].left, posMap[pos[1]].left, posMap[pos[2]].left],
       right: [posMap[pos[0]].right, posMap[pos[1]].right, posMap[pos[2]].right],
-    } as SystemStyleObject;
+    } as ThemeUIStyleObject;
   } else if (pos) {
-    return posMap[pos] as SystemStyleObject;
+    return posMap[pos] as ThemeUIStyleObject;
   }
 
-  return posInitial as SystemStyleObject;
+  return posInitial as ThemeUIStyleObject;
 };
 
 const containerStyle = {
   display: "inline",
   position: "relative",
-} as SystemStyleObject;
+} as ThemeUIStyleObject;
 
 const PopoutBox = ({
   children,
@@ -120,7 +120,7 @@ const PopoutBox = ({
     boxShadow: "hovering",
     ...anchorPositionStyle,
     ...popoutContainerStyle,
-  } as SystemStyleObject;
+  } as ThemeUIStyleObject;
 
   // When user clicks outside of container, close the popout
   const handleDocumentClick = (e: any) => {
