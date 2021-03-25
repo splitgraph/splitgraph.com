@@ -1,4 +1,4 @@
-import { getDisplayName } from "next/dist/next-server/lib/utils";
+// import { getDisplayName } from "next/dist/next-server/lib/utils";
 
 // This is kinda hacky atm, and should be a more unified export from tcomponents
 // import { ThemeProvider as OurThemeProvider } from "theme-ui";
@@ -21,7 +21,7 @@ const withTheme = (Page) => {
     WithTheme.getInitialProps = Page.getInitialProps.bind(Page);
   }
 
-  WithTheme.displayName = `WithTheme(${getDisplayName(Page)})`;
+  WithTheme.displayName = `WithTheme(Page)`;
   return WithTheme;
 };
 

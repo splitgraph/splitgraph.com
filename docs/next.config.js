@@ -18,15 +18,15 @@ const splitgraphRehypePrism = require("./plugins/rehype-plugins/splitgraphRehype
 
 const fs = require("fs").promises;
 
-// makePages();
+makePages();
 
-// const { castManifest } = makeCasts();
+const { castManifest } = makeCasts();
 
 // console.log("Casts:");
 
-// for (let castKey of Object.keys(castManifest)) {
-//   console.log("    ", castKey);
-// }
+for (let castKey of Object.keys(castManifest)) {
+  console.log("    ", castKey);
+}
 
 const nextConfig = {
   env: {
@@ -71,7 +71,7 @@ const _configs = {
       ],
       hastPlugins: [
         splitgraphRehypePrism,
-        // [injectAsciicasts, { castManifest }],
+        [injectAsciicasts, { castManifest }],
         require("rehype-slug"),
         [
           require("rehype-toc"),
@@ -151,6 +151,9 @@ const withTM = require("next-transpile-modules")(
     "../lib",
     "@splitgraph/content",
     "../content",
+    "@splitgraph/templaters",
+    "../templaters",
+    "@splitgraph/docs",
     // "@splitgraph",
     // "@splitgraph/content",
     // "@splitgraph/content-scripts",

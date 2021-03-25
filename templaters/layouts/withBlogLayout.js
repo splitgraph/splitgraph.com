@@ -13,7 +13,6 @@ import {
 import withTheme from "../../docs/hocs/withTheme";
 
 // import blogPosts from "@splitgraph/docs/compile/compiledBlogPosts";
-// const blogPosts = []
 
 const withBlogLayout = ({ MdxPage, item: { metadata } }) => {
   mdxComponents.a = Link;
