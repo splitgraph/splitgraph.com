@@ -1,7 +1,7 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 // @ts-ignore
-import { jsx, Box } from 'theme-ui';
-import * as React from 'react';
+import { jsx, Box } from "theme-ui";
+import * as React from "react";
 
 // TODO Mostly a placeholder component atm
 

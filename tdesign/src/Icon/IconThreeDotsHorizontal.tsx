@@ -1,14 +1,19 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 // @ts-ignore
-import { jsx } from 'theme-ui';
-import * as React from 'react';
+import { jsx } from "theme-ui";
+import * as React from "react";
 
-import { threeDotsHorizontalIconURI } from './cssSvgStrings';
-import BaseIcon, { IIconProps } from './BaseIcon';
+import { threeDotsHorizontalIconURI } from "./cssSvgStrings";
+import BaseIcon, { IIconProps } from "./BaseIcon";
 
 const IconThreeDotsHorizontal = (props: IIconProps) => {
-  return <BaseIcon iconSlug={'threeDotsHorizontal'} svgURI={threeDotsHorizontalIconURI} {...props} />;
+  return (
+    <BaseIcon
+      iconSlug={"threeDotsHorizontal"}
+      svgURI={threeDotsHorizontalIconURI}
+      {...props}
+    />
+  );
 };
 
 export default IconThreeDotsHorizontal;
-

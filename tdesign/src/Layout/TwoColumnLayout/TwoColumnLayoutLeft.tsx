@@ -1,16 +1,16 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 // @ts-ignore
-import { jsx, Box, SystemStyleObject } from 'theme-ui';
-import * as React from 'react';
-import { useContext } from 'react';
-import { ILayoutContext, LayoutContext } from './TwoColumnLayout';
+import { jsx, Box, SystemStyleObject } from "theme-ui";
+import * as React from "react";
+import { useContext } from "react";
+import { ILayoutContext, LayoutContext } from "./TwoColumnLayout";
 
 import {
   chevronsLeftIconURI,
   chevronsRightIconURI,
   chevronsDownIconURI,
   chevronsUpIconURI,
-} from '../../Icon';
+} from "../../Icon";
 
 export interface TwoColumnLayoutLeftProps {
   children?: React.ReactNode;
@@ -18,12 +18,12 @@ export interface TwoColumnLayoutLeftProps {
 
 const ExpandColumnPushDown = ({ expanded, setExpanded }: ILayoutContext) => {
   const pushdownStyle = {
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'contain',
-    filter: 'invert(1) opacity(0.5)',
-    borderTopWidth: '0px',
-    borderTopStyle: 'solid',
-    borderTopColor: 'heavy',
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "contain",
+    filter: "invert(1) opacity(0.5)",
+    borderTopWidth: "0px",
+    borderTopStyle: "solid",
+    borderTopColor: "heavy",
     backgroundImage: [
       expanded
         ? `url("${chevronsUpIconURI}")`
@@ -35,9 +35,9 @@ const ExpandColumnPushDown = ({ expanded, setExpanded }: ILayoutContext) => {
         ? `url("${chevronsRightIconURI}")`
         : `url("${chevronsLeftIconURI}")`,
     ],
-    backgroundPosition: ['center', 'center', expanded ? 'center' : 'right'],
-    ':hover': {
-      cursor: 'pointer',
+    backgroundPosition: ["center", "center", expanded ? "center" : "right"],
+    ":hover": {
+      cursor: "pointer",
     },
   };
 
@@ -57,14 +57,14 @@ const TwoColumnLayoutLeft = ({ children }: TwoColumnLayoutLeftProps) => {
   const layoutContext = useContext(LayoutContext);
 
   const containerStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    '.two-col-left-inner': {
-      minHeight: '10vh',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    ".two-col-left-inner": {
+      minHeight: "10vh",
     },
-    '.expand-col-pushdown': {
-      minHeight: '5vh',
+    ".expand-col-pushdown": {
+      minHeight: "5vh",
     },
   } as SystemStyleObject;
 

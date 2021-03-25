@@ -1,4 +1,4 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 import { jsx } from "theme-ui";
 
 const Heading = ({ sx = {}, children, ...rest }) => {
@@ -6,7 +6,7 @@ const Heading = ({ sx = {}, children, ...rest }) => {
     <h1
       sx={{
         fontSize: 5,
-        ...sx
+        ...sx,
       }}
       {...rest}
     >

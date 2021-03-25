@@ -1,4 +1,4 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 import { jsx } from "theme-ui";
 import React from "react";
 import { DocSearch } from "@splitgraph/docs/components";

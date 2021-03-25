@@ -1,4 +1,4 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 // @ts-ignore
 import { jsx, Box, SystemStyleObject } from "theme-ui";
 import * as React from "react";
@@ -50,7 +50,7 @@ const itemBoxStyle = {
     fontWeight: "bold",
     color: "primary",
     fontSize: "1.5rem",
-    paddingRight: "1rem"
+    paddingRight: "1rem",
   },
   ".blog-byline": {
     color: "heavy",
@@ -59,7 +59,7 @@ const itemBoxStyle = {
     textTransform: "uppercase",
     fontSize: "small",
     minWidth: "15ch",
-    textAlign: "right"
+    textAlign: "right",
   },
   ".blog-description": {
     color: "heavy",

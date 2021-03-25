@@ -1,4 +1,4 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 import { jsx } from "theme-ui";
 import * as React from "react";
 
@@ -38,13 +38,11 @@ export interface ErrorAlertProps {
   dismissLinkHref?: string;
 }
 
-const SuccessAlert = (
-  {
-    message,
-    dismissLinkText,
-    dismissLinkHref,
-  }: ErrorAlertProps
-) => {
+const SuccessAlert = ({
+  message,
+  dismissLinkText,
+  dismissLinkHref,
+}: ErrorAlertProps) => {
   return (
     <Flex
       flexDirection={"row"}

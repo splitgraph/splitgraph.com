@@ -1,4 +1,4 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 // @ts-ignore
 import { jsx } from "theme-ui";
 import * as React from "react";
@@ -68,8 +68,10 @@ const headerSx: any = {
   },
 };
 
-const Header = ({ children }: HeaderProps) => <Box className="header--container" sx={headerSx}>
-  {children}
-</Box>;
+const Header = ({ children }: HeaderProps) => (
+  <Box className="header--container" sx={headerSx}>
+    {children}
+  </Box>
+);
 
 export default Header;

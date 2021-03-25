@@ -1,15 +1,15 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 // @ts-ignore
-import { jsx } from 'theme-ui';
-import * as React from 'react';
+import { jsx } from "theme-ui";
+import * as React from "react";
 
-import { featureDeltaCompressionIconURI } from './cssSvgStrings';
-import BaseIcon, { IIconProps } from './BaseIcon';
+import { featureDeltaCompressionIconURI } from "./cssSvgStrings";
+import BaseIcon, { IIconProps } from "./BaseIcon";
 
 const IconFeatureDeltaCompression = (props: IIconProps) => {
   return (
     <BaseIcon
-      iconSlug={'featureDeltaCompression'}
+      iconSlug={"featureDeltaCompression"}
       svgURI={featureDeltaCompressionIconURI}
       {...props}
     />

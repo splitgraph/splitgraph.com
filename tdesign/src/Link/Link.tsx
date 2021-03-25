@@ -1,4 +1,4 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 import { jsx, SxStyleProp } from "theme-ui";
 import * as React from "react";
 import Link from "next/link";

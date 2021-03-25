@@ -1,15 +1,15 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 // @ts-ignore
-import { jsx } from 'theme-ui';
-import * as React from 'react';
+import { jsx } from "theme-ui";
+import * as React from "react";
 
-import { featureProvenanceIconURI } from './cssSvgStrings';
-import BaseIcon, { IIconProps } from './BaseIcon';
+import { featureProvenanceIconURI } from "./cssSvgStrings";
+import BaseIcon, { IIconProps } from "./BaseIcon";
 
 const IconFeatureProvenance = (props: IIconProps) => {
   return (
     <BaseIcon
-      iconSlug={'featureProvenance'}
+      iconSlug={"featureProvenance"}
       svgURI={featureProvenanceIconURI}
       {...props}
     />

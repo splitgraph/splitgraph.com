@@ -1,4 +1,4 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 import { jsx } from "theme-ui";
 
 const SubHeading = ({ sx = {}, children, ...rest }) => {
@@ -6,7 +6,7 @@ const SubHeading = ({ sx = {}, children, ...rest }) => {
     <h2
       sx={{
         color: "lightgray",
-        ...sx
+        ...sx,
       }}
       {...rest}
     >

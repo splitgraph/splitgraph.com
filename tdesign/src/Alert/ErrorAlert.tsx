@@ -1,4 +1,4 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 import { jsx } from "theme-ui";
 import * as React from "react";
 
@@ -36,13 +36,11 @@ export interface ErrorAlertProps {
   dismissLinkHref?: string;
 }
 
-const ErrorAlert = (
-  {
-    message,
-    dismissLinkText,
-    dismissLinkHref,
-  }: ErrorAlertProps
-) => {
+const ErrorAlert = ({
+  message,
+  dismissLinkText,
+  dismissLinkHref,
+}: ErrorAlertProps) => {
   const trimmedMessage = message ? message.replace(/Error\:?\s*/, "") : "";
 
   return (

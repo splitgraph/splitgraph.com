@@ -1,4 +1,4 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 // @ts-ignore
 import { jsx, Box, Text, SystemStyleObject } from "theme-ui";
 import * as React from "react";
@@ -21,18 +21,16 @@ export interface MenuItemProps {
   isHeading?: boolean;
 }
 
-const MenuItem = (
-  {
-    Icon,
-    href,
-    as,
-    text,
-    iconSx = {},
-    isActive = false,
-    scrollIntoViewIfNeeded = true,
-    isHeading = false,
-  }: MenuItemProps
-) => {
+const MenuItem = ({
+  Icon,
+  href,
+  as,
+  text,
+  iconSx = {},
+  isActive = false,
+  scrollIntoViewIfNeeded = true,
+  isHeading = false,
+}: MenuItemProps) => {
   const { expanded } = useContext(LayoutContext);
 
   const itemRef = useRef<HTMLLIElement>(null);

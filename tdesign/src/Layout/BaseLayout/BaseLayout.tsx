@@ -1,4 +1,4 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 // @ts-ignore
 import { jsx, Box, SystemStyleObject } from "theme-ui";
 import * as React from "react";
@@ -17,17 +17,15 @@ export interface BaseLayoutProps {
   logoText?: string;
 }
 
-const BaseLayout = (
-  {
-    children,
-    renderHeaderCenter,
-    renderHeaderRight,
-    extraHeaderStyle = {},
-    extraStyle = {},
-    showHeader = true,
-    logoText = "Splitgraph",
-  }: BaseLayoutProps
-) => {
+const BaseLayout = ({
+  children,
+  renderHeaderCenter,
+  renderHeaderRight,
+  extraHeaderStyle = {},
+  extraStyle = {},
+  showHeader = true,
+  logoText = "Splitgraph",
+}: BaseLayoutProps) => {
   const containerStyle = {
     // maxWidth: '100vw',
     minWidth: "-webkit-fit-content",

@@ -1,4 +1,4 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 // @ts-ignore
 import { jsx } from "theme-ui";
 import React from "react";

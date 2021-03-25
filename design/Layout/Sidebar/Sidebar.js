@@ -1,6 +1,4 @@
-import React from "react";
-
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 import { jsx } from "theme-ui";
 
 import { useMemo } from "react";

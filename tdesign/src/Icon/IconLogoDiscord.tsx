@@ -1,14 +1,15 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 // @ts-ignore
-import { jsx } from 'theme-ui';
-import * as React from 'react';
+import { jsx } from "theme-ui";
+import * as React from "react";
 
-import { logoDiscordIconURI } from './cssSvgStrings';
-import BaseIcon, { IIconProps } from './BaseIcon';
+import { logoDiscordIconURI } from "./cssSvgStrings";
+import BaseIcon, { IIconProps } from "./BaseIcon";
 
 const IconLogoDiscord = (props: IIconProps) => {
-  return <BaseIcon iconSlug={'logoDiscord'} svgURI={logoDiscordIconURI} {...props} />;
+  return (
+    <BaseIcon iconSlug={"logoDiscord"} svgURI={logoDiscordIconURI} {...props} />
+  );
 };
 
 export default IconLogoDiscord;
-

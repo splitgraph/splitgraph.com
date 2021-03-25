@@ -1,4 +1,4 @@
-// @jsx jsx
+/** @jsxImportSource @emotion/react */
 // @ts-ignore
 import { jsx, Text, SystemStyleObject } from "theme-ui";
 import * as React from "react";
@@ -23,17 +23,15 @@ export interface IBaseIconProps {
   extraStyle?: SystemStyleObject;
 }
 
-const BaseIcon = (
-  {
-    size = "24px",
-    iconSlug,
-    svgURI,
-    sx,
-    extraStyle = {},
-    color,
-    hoverColor,
-  }: IBaseIconProps
-) => {
+const BaseIcon = ({
+  size = "24px",
+  iconSlug,
+  svgURI,
+  sx,
+  extraStyle = {},
+  color,
+  hoverColor,
+}: IBaseIconProps) => {
   const svgDataURI = `url("${svgURI}")`;
 
   const maskStyle = {
