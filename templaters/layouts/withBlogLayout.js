@@ -11,7 +11,8 @@ import {
 } from "../../docs/components";
 import withTheme from "../../docs/hocs/withTheme";
 
-// import blogPosts from "@splitgraph/docs/compile/compiledBlogPosts";
+// Unused import but might actually be necessary to trigger something in the build process?
+import blogPosts from "@splitgraph/docs/compile/compiledBlogPosts";
 
 const withBlogLayout = ({ MdxPage, item: { metadata } }) => {
   mdxComponents.a = Link;

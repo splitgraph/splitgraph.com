@@ -51,14 +51,14 @@ const getBlogPostsByTopic = ({ blogPosts, topic }) => {
 
 export async function getStaticProps({ params: { topic } }) {
   const blogPostsByTopic = getBlogPostsByTopic({
-    blogPosts: allBlogPosts.children,
+    blogPosts: allBlogPosts.children || [],
     topic,
   });
 
   return {
     props: {
       topic,
-      blogPosts: blogPostsByTopic,
+      blogPosts: blogPostsByTopic || [],
     },
   };
 }

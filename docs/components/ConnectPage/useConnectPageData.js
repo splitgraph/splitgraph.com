@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 import ConnectPageMarketingNotice from "./ConnectPageMarketingNotice";
 
@@ -50,7 +51,7 @@ const useConnectPageData = ({ helpSectionComponents, onboardingState }) => {
         }
       : null;
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (redirect) {
       router.push(redirect);
     }
