@@ -90,7 +90,7 @@ const _configs = {
 const _plugins = {
   css: require("@zeit/next-css"),
   bundleAnalyzer: require("@next/bundle-analyzer"),
-  withIgnoreFs,
+  // withIgnoreFs,
   mdx: require("@zeit/next-mdx")(_configs.mdx), // note slightly different call format
   transpileModules: require("next-transpile-modules")([
     transpileModulesConfig.transpileModules,
@@ -125,24 +125,8 @@ const createWebpackMatcher = (
   };
 };
 
-const modulePaths = [
-  "/src/js/splitgraph.com/design",
-  "/src/js/splitgraph.com/tdesign",
-  "/src/js/splitgraph.com/lib",
-  "/src/js/splitgraph.com/content",
-  // "@splitgraph/design",
-  // "@splitgraph/tdesign",
-  // "@splitgraph/lib",
-  // "@splitgraph/content",
-];
-
 const withTM = require("next-transpile-modules")(
   [
-    // ...modulePaths,
-    // "../content",
-    // "../content-scripts",
-    // "../lib",
-    // "../templaters",
     "@splitgraph/design",
     "../design",
     "@splitgraph/tdesign",
@@ -154,14 +138,6 @@ const withTM = require("next-transpile-modules")(
     "@splitgraph/templaters",
     "../templaters",
     "@splitgraph/docs",
-    // "@splitgraph",
-    // "@splitgraph/content",
-    // "@splitgraph/content-scripts",
-    // "@splitgraph/lib",
-    // "@splitgraph/tdesign",
-    // "../tdesign",
-    // "./hocs",
-    // "@splitgraph/templaters",
   ],
   {
     // debug: true,
@@ -175,8 +151,8 @@ const withTM = require("next-transpile-modules")(
 const plugins = [
   withTM,
   [_plugins.mdx],
-  [_plugins.withIgnoreFs, {}],
-  [_plugins.css, _configs.css],
+  // [_plugins.withIgnoreFs, {}],
+  // [_plugins.css, _configs.css],
   [_plugins.bundleAnalyzer(_configs.bundleAnalyzer)],
 ];
 
