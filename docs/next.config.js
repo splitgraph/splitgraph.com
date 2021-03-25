@@ -54,10 +54,10 @@ const nextConfig = {
   resolve: {
     alias: aliasConfig,
   },
-  // exportPathMap: async () => {
-  //   const jsonMap = await fs.readFile(EXPORT_PATH_MAP);
-  //   return JSON.parse(jsonMap);
-  // },
+  exportPathMap: async () => {
+    const jsonMap = await fs.readFile(EXPORT_PATH_MAP);
+    return JSON.parse(jsonMap);
+  },
 };
 
 const _configs = {
