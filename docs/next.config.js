@@ -29,6 +29,9 @@ for (let castKey of Object.keys(castManifest)) {
 }
 
 const nextConfig = {
+  experimental: {
+    externalDir: true,
+  },
   env: {
     // This is a build time config variable, but in practice, since we should
     // only have one website deployed accessible to search engines, that's okay.
@@ -51,13 +54,13 @@ const nextConfig = {
       process.env.DOCSEARCH_PUBLIC_CLIENT_API_KEY,
     DOCSEARCH_INDEX_NAME: process.env.DOCSEARCH_INDEX_NAME || "splitgraph",
   },
-  resolve: {
-    alias: aliasConfig,
-  },
-  exportPathMap: async () => {
-    const jsonMap = await fs.readFile(EXPORT_PATH_MAP);
-    return JSON.parse(jsonMap);
-  },
+  // resolve: {
+  //   alias: aliasConfig,
+  // },
+  // exportPathMap: async () => {
+  //   const jsonMap = await fs.readFile(EXPORT_PATH_MAP);
+  //   return JSON.parse(jsonMap);
+  // },
 };
 
 const _configs = {
@@ -88,72 +91,17 @@ const _configs = {
 };
 
 const _plugins = {
-  // css: require("@zeit/next-css"),
   bundleAnalyzer: require("@next/bundle-analyzer"),
-  // withIgnoreFs,
-  mdx: require("@zeit/next-mdx")(_configs.mdx), // note slightly different call format
-  transpileModules: require("next-transpile-modules")([
-    transpileModulesConfig.transpileModules,
-  ]),
+  mdx: require("@next/mdx")(_configs.mdx), // note slightly different call format
 };
-
-const createWebpackMatcher = (
-  modulesToTranspile,
-  logger = createLogger(false)
-) => {
-  return (filePath) => {
-    const isNestedNodeModules =
-      (filePath.match(/node_modules/g) || []).length > 1;
-
-    if (isNestedNodeModules) {
-      if (filePath.includes("/splitgraph.com/")) {
-        logger(`NESTED: ${filePath}`);
-      }
-      // console.log("nestedNodeModules:", filePath);
-      return false;
-    }
-
-    return modulesToTranspile.some((modulePath) => {
-      const transpiled = filePath.startsWith(modulePath);
-      if (transpiled) {
-        // logger(`transpiled: ${filePath}`);
-      } else if (filePath.includes("/splitgraph.com/")) {
-        logger(`not transpiled: ${filePath} does not match ${modulePath}`);
-      }
-      return transpiled;
-    });
-  };
-};
-
-const withTM = require("next-transpile-modules")(
-  [
-    "@splitgraph/design",
-    "../design",
-    "@splitgraph/tdesign",
-    "../tdesign",
-    "@splitgraph/lib",
-    "../lib",
-    "@splitgraph/content",
-    "../content",
-    "@splitgraph/templaters",
-    "../templaters",
-    "@splitgraph/docs",
-  ],
-  {
-    // debug: true,
-    // resolveSymlinks: true,
-    // __unstable_matcher: createWebpackMatcher(modulePaths, (message) =>
-    //   console.info(message)
-    // ),
-  }
-);
 
 const plugins = [
-  withTM,
   [_plugins.mdx],
   // [_plugins.withIgnoreFs, {}],
   // [_plugins.css, _configs.css],
-  [_plugins.bundleAnalyzer(_configs.bundleAnalyzer)],
+  // [_plugins.bundleAnalyzer(_configs.bundleAnalyzer)],
 ];
+
+// module.exports = nextConfig;
 
 module.exports = withPlugins(plugins, nextConfig);
