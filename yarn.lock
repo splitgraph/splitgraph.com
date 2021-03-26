@@ -1879,13 +1879,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@splitgraph/content@*, @splitgraph/content@workspace:content":
+"@splitgraph/content@workspace:*, @splitgraph/content@workspace:content":
   version: 0.0.0-use.local
   resolution: "@splitgraph/content@workspace:content"
   languageName: unknown
   linkType: soft
 
-"@splitgraph/design@*, @splitgraph/design@workspace:design":
+"@splitgraph/design@workspace:*, @splitgraph/design@workspace:design":
   version: 0.0.0-use.local
   resolution: "@splitgraph/design@workspace:design"
   peerDependencies:
@@ -1918,11 +1918,11 @@ __metadata:
     "@mdx-js/react": ^1.4.5
     "@next/bundle-analyzer": ^9.1.1
     "@next/mdx": ^10.0.9
-    "@splitgraph/content": "*"
-    "@splitgraph/design": "*"
-    "@splitgraph/lib": "*"
-    "@splitgraph/tdesign": "*"
-    "@splitgraph/templaters": "*"
+    "@splitgraph/content": "workspace:*"
+    "@splitgraph/design": "workspace:*"
+    "@splitgraph/lib": "workspace:*"
+    "@splitgraph/tdesign": "workspace:*"
+    "@splitgraph/templaters": "workspace:*"
     "@theme-ui/prism": 0.3.5
     "@types/react": ^17.0.3
     "@types/react-dom": ^17.0.3
@@ -1959,13 +1959,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@splitgraph/lib@*, @splitgraph/lib@workspace:lib":
+"@splitgraph/lib@workspace:*, @splitgraph/lib@workspace:lib":
   version: 0.0.0-use.local
   resolution: "@splitgraph/lib@workspace:lib"
   languageName: unknown
   linkType: soft
 
-"@splitgraph/tdesign@*, @splitgraph/tdesign@workspace:tdesign":
+"@splitgraph/tdesign@workspace:*, @splitgraph/tdesign@workspace:tdesign":
   version: 0.0.0-use.local
   resolution: "@splitgraph/tdesign@workspace:tdesign"
   peerDependencies:
@@ -1982,7 +1982,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@splitgraph/templaters@*, @splitgraph/templaters@workspace:templaters":
+"@splitgraph/templaters@workspace:*, @splitgraph/templaters@workspace:templaters":
   version: 0.0.0-use.local
   resolution: "@splitgraph/templaters@workspace:templaters"
   peerDependencies:
