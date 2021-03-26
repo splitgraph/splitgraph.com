@@ -32,7 +32,7 @@ export * from "./Icon";
 export { Card } from "./Card";
 
 export { PopoutBox } from "./PopoutBox";
-export type { IRenderPopoutButtonProps } from "./PopoutBox";
+export type { IRenderPopoutButtonProps, IPopoutBoxRef } from "./PopoutBox";
 
 export { StatusChip } from "./StatusChip";
 
