@@ -29,6 +29,7 @@ export interface IPopoutBoxProps {
   popoutContainerStyle?: SystemStyleObject;
   anchorPosition?: PopoutAnchorPosition;
   buttonProps?: any;
+  ref?: React.RefObject<HTMLDivElement>
 }
 
 const getAnchorPositionStyle = (
@@ -97,9 +98,10 @@ export default ({
   popoutContainerStyle = {},
   anchorPosition,
   buttonProps = {},
+  ref
 }: IPopoutBoxProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const containerRef = React.useRef<HTMLDivElement>(null);
+  const containerRef = ref || React.useRef<HTMLDivElement>(null);
 
   const anchorPositionStyle = getAnchorPositionStyle(anchorPosition);
 
