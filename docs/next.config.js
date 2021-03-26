@@ -57,10 +57,15 @@ const nextConfig = {
   // resolve: {
   //   alias: aliasConfig,
   // },
-  // exportPathMap: async () => {
-  //   const jsonMap = await fs.readFile(EXPORT_PATH_MAP);
-  //   return JSON.parse(jsonMap);
-  // },
+  exportPathMap: async () => {
+    try {
+      const jsonMap = await fs.readFile(EXPORT_PATH_MAP);
+      return JSON.parse(jsonMap);
+    } catch (_) {
+      console.warn("No exportPathMap found");
+      return {};
+    }
+  },
 };
 
 const _configs = {
