@@ -39,6 +39,7 @@
     "mdx-prism": "^0.3.1",
     "next": "canary",
     "next-compose-plugins": "^2.2.1",
+    "next-mdx-remote": "^2.1.3",
     "next-transpile-modules": "^6.3.0",
     "pirates": "^4.0.1",
     "react": "^17.0.2",
