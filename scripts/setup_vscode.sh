@@ -34,7 +34,7 @@ pushd "$SPLITGRAPH_DIR" \
               -print \
               -exec chown -R "$WHOAMI":"$WHOAMI" {} \; \
     && echo "Using yarn: $(which yarn)" \
-    && yarn install \
+    && yarn install --immutable \
     && exit 0
 
 exit 1
