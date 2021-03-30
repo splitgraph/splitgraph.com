@@ -15,7 +15,7 @@ export function matomoInit({
 
   if (navigator.sendBeacon) {
     var origSendBeacon = navigator.sendBeacon;
-    navigator.sendBeacon = function() {
+    navigator.sendBeacon = function () {
       const cleanSearchParams = (origSearch) => {
         // We need to remove the leading `?` from the original search params,
         // since lua will insert it at the other end, and a double ?? makes Big Sad

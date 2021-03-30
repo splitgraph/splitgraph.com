@@ -16,7 +16,7 @@ const moveModuleContentsToTopOfBody = () => (tree, file) => {
   // Looking for <div.section> that is a direct parent of <span#module-contents>
   const moduleContents = find(
     tree,
-    node =>
+    (node) =>
       node.type === "element" &&
       node.tagName === "div" &&
       node.properties &&
@@ -25,7 +25,7 @@ const moveModuleContentsToTopOfBody = () => (tree, file) => {
       node.children &&
       node.children.length > 0 &&
       node.children.find(
-        c =>
+        (c) =>
           c.type === "element" &&
           c.tagName === "span" &&
           c.properties &&
@@ -37,9 +37,9 @@ const moveModuleContentsToTopOfBody = () => (tree, file) => {
     return tree;
   }
 
-  const withoutModuleContents = remove(tree, node => node === moduleContents);
+  const withoutModuleContents = remove(tree, (node) => node === moduleContents);
 
-  visit(withoutModuleContents, node => {
+  visit(withoutModuleContents, (node) => {
     if (node.tagName !== "body") {
       return;
     }

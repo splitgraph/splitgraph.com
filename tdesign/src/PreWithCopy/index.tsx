@@ -1,5 +1,5 @@
-import PreWithCopy from './PreWithCopy';
+import PreWithCopy from "./PreWithCopy";
 export { PreWithCopy };
 
-import type { IPreWithCopyProps } from "./PreWithCopy"
-export type { IPreWithCopyProps }
+import type { IPreWithCopyProps } from "./PreWithCopy";
+export type { IPreWithCopyProps };

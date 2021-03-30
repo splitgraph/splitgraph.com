@@ -3,7 +3,7 @@ module.exports = (nextConfig, {}) => {
     webpack(config, options) {
       config.node = {
         fs: "empty",
-        module: "empty"
+        module: "empty",
       };
 
       if (options.isServer && !options.dev) {
@@ -23,6 +23,6 @@ module.exports = (nextConfig, {}) => {
       }
 
       return config;
-    }
+    },
   });
 };

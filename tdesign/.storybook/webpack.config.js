@@ -1,14 +1,14 @@
-const path = require('path');
-const process = require('process');
+const path = require("path");
+const process = require("process");
 
 module.exports = ({ config }) => {
   config.module.rules.push({
     test: /\.tsx?$/,
     use: [
       {
-        loader: require.resolve('ts-loader'),
+        loader: require.resolve("ts-loader"),
         options: {
-          reportFiles: ['stories/**/*.{ts|tsx}'],
+          reportFiles: ["stories/**/*.{ts|tsx}"],
         },
       },
     ],
@@ -17,8 +17,8 @@ module.exports = ({ config }) => {
   // Set WEBPACK_HMR_CLIENT_PATH in order for HMR to work behind reverse proxy with subpath
   // e.g. '/__/storybook/__webpack_hmr'
   if (process.env.WEBPACK_HMR_CLIENT_PATH) {
-    config.entry = config.entry.map(x =>
-      x.includes('webpack-hot-middleware/client.js')
+    config.entry = config.entry.map((x) =>
+      x.includes("webpack-hot-middleware/client.js")
         ? `${x}&path=${process.env.WEBPACK_HMR_CLIENT_PATH}`
         : x
     );
@@ -40,9 +40,9 @@ module.exports = ({ config }) => {
     );
   }
 
-  config.resolve.extensions.push('.ts', '.tsx');
+  config.resolve.extensions.push(".ts", ".tsx");
   config.resolve.alias = Object.assign(config.resolve.alias, {
-    '@': path.resolve(__dirname, '..'),
+    "@": path.resolve(__dirname, ".."),
   });
   return config;
 };

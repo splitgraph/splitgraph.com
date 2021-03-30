@@ -14,7 +14,7 @@ const getMetaForSphinxFile = require("./getMetaForSphinxFile");
 const makeMdxFilesFromSphinxJson = ({ inputDir, outputDir }) => {
   const files = globby.sync(path.join(inputDir, "*.fjson"));
 
-  const readJson = file => JSON.parse(fs.readFileSync(file));
+  const readJson = (file) => JSON.parse(fs.readFileSync(file));
 
   for (let file of files) {
     let nameWithoutExtension = path.basename(file).replace(".fjson", "");

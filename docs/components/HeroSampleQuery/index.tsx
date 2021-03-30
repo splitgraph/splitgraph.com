@@ -1,4 +1,4 @@
-import HeroSampleQuery from './HeroSampleQuery';
+import HeroSampleQuery from "./HeroSampleQuery";
 export { HeroSampleQuery };
 
 import type { IHeroSampleQueryItem } from "./HeroSampleQuery";

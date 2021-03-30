@@ -9,7 +9,7 @@ const visit = require("unist-util-visit");
 */
 
 const escapeJSXConflicts = () => (tree, file) => {
-  visit(tree, "text", node => {
+  visit(tree, "text", (node) => {
     node.value = node.value
       .replace(/{/gm, "&lbrace;")
       .replace(/}/gm, "&rbrace;");

@@ -1,7 +1,12 @@
 /** @jsxImportSource theme-ui */
 import * as React from "react";
 import { forwardRef } from "react";
-import { Box, InputProps, ThemeUIStyleObject, Input as ThemeUIInput } from "theme-ui";
+import {
+  Box,
+  InputProps,
+  ThemeUIStyleObject,
+  Input as ThemeUIInput,
+} from "theme-ui";
 
 import DangerText from "../Text/DangerText";
 import MutedText from "../Text/MutedText";
@@ -66,7 +71,9 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
         ) : error ? (
           <DangerText>
             <b style={{ marginRight: "5px" }}>&#88;</b>
-            {(typeof error !== "string" && error.message) || error.toString() || "Invalid"}
+            {(typeof error !== "string" && error.message) ||
+              error.toString() ||
+              "Invalid"}
           </DangerText>
         ) : warningText && touched ? (
           <WarningText>

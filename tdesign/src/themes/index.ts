@@ -28,7 +28,6 @@
 //   },
 // };
 
-
 const prismTheme = {
   color: "#e0ffff",
   backgroundColor: "primary",
@@ -85,7 +84,7 @@ export const marketingTheme = {
       alignContent: "center",
       overflowX: "auto",
       backgroundColor: prismTheme.color,
-      color: "red"
+      color: "red",
     },
     code: {
       backgroundColor: "primary",
@@ -100,7 +99,6 @@ export const marketingTheme = {
     },
   },
 };
-
 
 export const asciinemaEmbedStyles = {
   "div.asciinema-embed-container": {
@@ -477,7 +475,7 @@ export const makeDefaultTheme = () => ({
       // backgroundColor: "primary",
       wordBreak: "break-all",
       backgroundColor: prismTheme.color,
-      color: "red"
+      color: "red",
     },
     code: {
       backgroundColor: "primary",

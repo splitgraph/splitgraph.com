@@ -5,6 +5,5 @@ import FooterSection from "./FooterSection";
 export { FooterSection };
 import FooterLink from "./FooterLink";
 export { FooterLink };
-import NewsletterSignup from './NewsletterSignup';
+import NewsletterSignup from "./NewsletterSignup";
 export { NewsletterSignup };
-

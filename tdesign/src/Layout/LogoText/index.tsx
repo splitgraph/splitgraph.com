@@ -1,3 +1,2 @@
-import LogoText from './LogoText';
+import LogoText from "./LogoText";
 export { LogoText };
-

@@ -7,14 +7,14 @@ Convert sphinx .fjson files (created by running "make json"
 in the splitgraph repository) to mdx files formatted for documentation.
 Directories must be absolute paths.
   `,
-  yargs => {
+  (yargs) => {
     yargs
       .positional("inputDir", {
-        describe: "Input directory, immediate parent of .fjson files"
+        describe: "Input directory, immediate parent of .fjson files",
       })
       .positional("outputDir", {
         describe:
-          "Output directory, destination of .mdx files. Overwrite existing files."
+          "Output directory, destination of .mdx files. Overwrite existing files.",
       });
   }
 );
@@ -28,6 +28,6 @@ console.log("   inputDir:", argv.inputDir);
 console.log("   outputDir:", argv.inputDir);
 makeMdxFilesFromSphinxJson({
   inputDir: argv.inputDir,
-  outputDir: argv.outputDir
+  outputDir: argv.outputDir,
 });
 console.log("Done making splitgraph documentation.");

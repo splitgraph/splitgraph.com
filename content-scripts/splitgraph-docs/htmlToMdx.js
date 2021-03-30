@@ -16,7 +16,7 @@ const stripFirstHeading = require("./rehype-plugins/stripFirstHeading");
 const stripParagraphCharacters = require("./rehype-plugins/stripParagraphCharacters");
 
 // TODO: Figure out what's going on here
-const preprocessHtml = html => {
+const preprocessHtml = (html) => {
   return html.replace(/\sclass=\"/gm, ' className="');
 
   // .replace(/“/gm, '"')
@@ -26,11 +26,11 @@ const preprocessHtml = html => {
   // .replace(/}/gm, "}'}")
 };
 
-const postprocessHtml = html => {
+const postprocessHtml = (html) => {
   return html.replace(/\sclass=\"/gm, ' className="');
 };
 
-const htmlToMdx = html => {
+const htmlToMdx = (html) => {
   const processor = unified()
     .use(parse)
     .use(stripFirstHeading)

@@ -1,10 +1,10 @@
 import { Box } from "../../index";
 
-const getStyle = depth => ({
+const getStyle = (depth) => ({
   paddingLeft: 4,
   paddingRight: 4,
   "@media (min-width: 769px)": {
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   "@media (max-width: 768px)": {
     backgroundColor: "primary",
@@ -14,8 +14,8 @@ const getStyle = depth => ({
     display: "flex",
     alignItems: "flex-end",
     justifyContent: "center",
-    boxShadow: "0 0 4px rgba(0, 0, 0, .125)"
-  }
+    boxShadow: "0 0 4px rgba(0, 0, 0, .125)",
+  },
 });
 
 const ContentHeader = ({ children, depth }) => {

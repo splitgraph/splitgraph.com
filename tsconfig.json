@@ -1,5 +1,12 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["content", "content-scripts", "design", "docs", "tdesign", "templaters"],
+  "include": [
+    "content",
+    "content-scripts",
+    "design",
+    "docs",
+    "tdesign",
+    "templaters"
+  ],
   "exclude": ["node_modules"]
 }

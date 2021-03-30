@@ -13,13 +13,13 @@ const remove = require("unist-util-remove");
   Note this is before we've stripped the ¶ characters
 */
 
-const customizeTOC = tocTree => {
+const customizeTOC = (tocTree) => {
   const submodulesItem = find(
     tocTree,
-    node =>
+    (node) =>
       node.type === "element" &&
       node.tagName === "li" &&
-      find(node, c => c.value && c.value === "Submodules¶")
+      find(node, (c) => c.value && c.value === "Submodules¶")
   );
 
   if (!submodulesItem) {
@@ -28,16 +28,16 @@ const customizeTOC = tocTree => {
 
   const rootList = find(
     tocTree,
-    node => node.type === "element" && node.tagName === "ol"
+    (node) => node.type === "element" && node.tagName === "ol"
   );
 
   const itemsToMove = findAllAfter(
     rootList,
     submodulesItem,
-    node => node.type === "element" && node.tagName === "li"
+    (node) => node.type === "element" && node.tagName === "li"
   );
 
-  const nextTree = remove(tocTree, node => itemsToMove.includes(node));
+  const nextTree = remove(tocTree, (node) => itemsToMove.includes(node));
 
   submodulesItem.children = [
     ...submodulesItem.children,
@@ -45,10 +45,10 @@ const customizeTOC = tocTree => {
       type: "element",
       tagName: "ol",
       properties: {
-        className: "toc-level toc-level-2"
+        className: "toc-level toc-level-2",
       },
-      children: itemsToMove
-    }
+      children: itemsToMove,
+    },
   ];
 
   return nextTree;

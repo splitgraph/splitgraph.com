@@ -1,3 +1,2 @@
-import LogoImage from './LogoImage';
+import LogoImage from "./LogoImage";
 export { LogoImage };
-

@@ -1,7 +1,6 @@
-import Card from './Card';
+import Card from "./Card";
 
-import type { ICardProps } from "./Card"
-export type { ICardProps }
+import type { ICardProps } from "./Card";
+export type { ICardProps };
 
-export { Card};
-
+export { Card };

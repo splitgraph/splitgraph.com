@@ -4,7 +4,7 @@ export {
   MainContent,
   ContentBody,
   ContentFooter,
-  ContentHeader
+  ContentHeader,
 } from "./Containers";
 export { Sidebar } from "./Sidebar";
 export { BaseLayout } from "./BaseLayout";

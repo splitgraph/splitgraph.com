@@ -29,10 +29,7 @@ const findMatchingElement = (children = [], matchFunc) => {
   for (let child of children) {
     let maybeMatch =
       !!child.props && child.props.children
-        ? findMatchingElement(
-            Children.toArray(child.props.children),
-            matchFunc
-          )
+        ? findMatchingElement(Children.toArray(child.props.children), matchFunc)
         : null;
 
     if (maybeMatch) {

@@ -1,4 +1,3 @@
-import GenericBox, { IGenericBoxProps } from './GenericBox';
+import GenericBox, { IGenericBoxProps } from "./GenericBox";
 export { GenericBox };
-export type { IGenericBoxProps }
-
+export type { IGenericBoxProps };
