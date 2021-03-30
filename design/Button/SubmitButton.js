@@ -2,8 +2,8 @@
 import { Button } from "theme-ui";
 
 const SubmitButton = ({
-  disabled,
-  hasErrors,
+  disabled = false,
+  hasErrors = false,
   children,
   variant = "primary",
   sx = {},

@@ -1,13 +1,26 @@
 /** @jsxImportSource theme-ui */
+import * as React from "react";
 import { forwardRef } from "react";
-import { Box, Input } from "theme-ui";
+import { Box, InputProps, ThemeUIStyleObject, Input as ThemeUIInput } from "theme-ui";
 
 import DangerText from "../Text/DangerText";
 import MutedText from "../Text/MutedText";
 import SuccessText from "../Text/SuccessText";
 import WarningText from "../Text/WarningText";
 
-export default forwardRef(
+export interface IInputProps extends InputProps {
+  sx?: ThemeUIStyleObject;
+
+  // TODO: Just converted this thing to typescript
+  error?: any;
+  okText?: string | null;
+  warningText?: string | null;
+  validating?: boolean;
+  touched?: boolean;
+  validatingText?: string | null;
+}
+
+const Input = forwardRef<HTMLInputElement, IInputProps>(
   (
     {
       sx = {},
@@ -17,18 +30,26 @@ export default forwardRef(
       validating = false,
       validatingText = null,
       touched = true,
+
+      // TODO: Convert this file to TS. Until then, be explicit about id and name
+      //       (as opposed to including them in ...rest), so other files don't
+      //       get in trouble for using id={} and name={} props.
+      id,
+      name,
       ...rest
-    } = {},
+    },
     ref
   ) => (
     <>
-      <Input
+      <ThemeUIInput
         ref={ref}
         sx={{
           width: 200,
           borderColor: error ? "danger" : "initial",
           ...sx,
         }}
+        id={id}
+        name={name}
         {...rest}
       />
 
@@ -45,7 +66,7 @@ export default forwardRef(
         ) : error ? (
           <DangerText>
             <b style={{ marginRight: "5px" }}>&#88;</b>
-            {error.message || error.toString() || "Invalid"}
+            {(typeof error !== "string" && error.message) || error.toString() || "Invalid"}
           </DangerText>
         ) : warningText && touched ? (
           <WarningText>
@@ -62,3 +83,5 @@ export default forwardRef(
     </>
   )
 );
+
+export default Input;

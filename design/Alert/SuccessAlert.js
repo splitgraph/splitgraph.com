@@ -23,8 +23,8 @@ const SuccessResetLink = ({ text, href }) => (
 const SuccessAlert = ({
   message,
   dismissLinkText,
-  dismissLinkHref,
-  onClickDismiss,
+  dismissLinkHref = null,
+  onClickDismiss = null,
   dismissLinkOwnRow = false,
 }) => {
   return (

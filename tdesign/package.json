@@ -4,6 +4,7 @@
   "main": "src/index.ts",
   "peerDependencies": {
     "@csstools/normalize.css": "*",
+    "@emotion/react": "*",
     "@mdx-js/react": "*",
     "@theme-ui/prism": "*",
     "dayjs": "*",
