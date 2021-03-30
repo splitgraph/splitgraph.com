@@ -2,7 +2,6 @@
 import { jsx } from "theme-ui";
 import { NextSeo } from "next-seo";
 import { Helmet } from "react-helmet";
-import { useRouter } from "next/router";
 
 import {
   Box,
@@ -35,12 +34,7 @@ const withHolyGrailLayout = ({
   renderDocsHeaderLink = true,
   middleHeader = null,
   getSEO = ({ currentURL, meta, contentTree, SEO_BASE_URL }) => ({}),
-}) => ({ MdxPage, meta = {}, contentTree, children }) => {
-  // <div>{children}</div>;
-
-  console.log(`meta = ${JSON.stringify(meta)}`);
-  // console.log(`children =`, children.renderToString());
-
+}) => ({ MdxPage, meta = {}, contentTree }) => {
   const HolyGrailSEO = ({ currentURL }) => {
     const SEO_BASE_URL = process.env.SEO_CANONICAL_BASE_URL;
 
@@ -64,20 +58,13 @@ const withHolyGrailLayout = ({
 
   mdxComponents.a = Link;
 
-  // if (!MdxPage && children) {
-  //   MdxPage = children;
-  // }
-
   // Grab the TOC out of the tree from MdxPage so we can render it separately
   // This is easier than writing a webpack loader. Tried portals, bad with SSR.
   const TocMdx = () => {
-    return null;
-    // return <MdxPage components={{ wrapper: OnlyTOC, a: Link }} />;
+    return <MdxPage components={{ wrapper: OnlyTOC, a: Link }} />;
   };
 
-  const WithHolyGrailLayout = ({}) => {
-    const router = useRouter();
-
+  const WithHolyGrailLayout = ({ router }) => {
     const {
       currentURL,
       activeNode,
