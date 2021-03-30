@@ -75,6 +75,8 @@ install_plugins() {
 
     pushd "$prefixDir" && yarn plugin import plugin-workspace-tools && popd
     pushd "$prefixDir" && yarn plugin import plugin-interactive-tools && popd
+    pushd "$prefixDir" && yarn plugin import https://raw.githubusercontent.com/milesforks/yarn-plugin-workspace-lockfile/main/packages/plugin/bundles/%40yarnpkg/plugin-workspace-lockfile.js \
+        && popd
 
     # Yarn sometimes releases workspace tools with .js and .cjs (tbh, maybe all .cjs now)
     # AFAICT it costs nothing to rename this to .js to standardize our checked in versions
@@ -88,16 +90,26 @@ install_plugins() {
                "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-interactive-tools.js
     fi
 
+    if test -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-lockfile.cjs ; then
+            mv "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-lockfile.cjs \
+               "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-lockfile.js
+    fi
+
     fix_yarnrc() {
         local yarnrcFile="$1"
         shift
 
         grep 'plugin-workspace-tools' "$yarnrcFile" \
-            && sed -i 's/plugin-workspace-tools\.cjs/plugin-workspace-tools\.js/' "$yarnrcFile" \
-            && sed -i 's/plugin-interactive-tools\.cjs/plugin-interactive-tools\.js/' "$yarnrcFile" \
-            && return 0
+            && sed -i 's/plugin-workspace-tools\.cjs/plugin-workspace-tools\.js/' "$yarnrcFile"
 
-        return 1
+        grep 'plugin-interactive-tools' "$yarnrcFile" \
+            && sed -i 's/plugin-interactive-tools\.cjs/plugin-interactive-tools\.js/' "$yarnrcFile"
+
+        grep 'plugin-workspace-lockfile' "$yarnrcFile" \
+            && sed -i 's/plugin-workspace-lockfile\.cjs/plugin-workspace-lockfile\.js/' "$yarnrcFile"
+
+
+        return 0
     }
 
     # todo: Is it actually possible to have a .yarnrc named either of these things? Maybe was
@@ -129,6 +141,9 @@ dir_has_yarn_release() {
     if test -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-interactive-tools.cjs ; then
         rm "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-interactive-tools.cjs
     fi
+    if test -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-lockfile.cjs ; then
+        rm "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-lockfile.cjs
+    fi
 
     if has_broken_yarn "$prefixDir" ; then
         echo "yarn seems broken in $prefixDir, remove .yarnrc.yml"
@@ -150,10 +165,12 @@ dir_has_yarn_plugins() {
     if test -f "$prefixDir"/.yarnrc ; then
         grep 'plugin-workspace-tools' "$prefixDir"/.yarnrc \
             && grep 'plugin-interactive-tools' "$prefixDir"/.yarnrc \
+            && grep 'plugin-workspace-lockfile' "$prefixDir"/.yarnrc \
             && return 0
     elif test -f "$prefixDir"/.yarnrc.yml ; then
         grep 'plugin-workspace-tools' "$prefixDir"/.yarnrc.yml \
             && grep 'plugin-interactive-tools' "$prefixDir"/.yarnrc.yml \
+            && grep 'plugin-workspace-lockfile' "$prefixDir"/.yarnrc.yml \
             && return 0
     fi
 
