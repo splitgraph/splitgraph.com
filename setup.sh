@@ -163,14 +163,14 @@ dir_has_yarn_plugins() {
     shift
 
     if test -f "$prefixDir"/.yarnrc ; then
-        grep 'plugin-workspace-tools' "$prefixDir"/.yarnrc \
-            && grep 'plugin-interactive-tools' "$prefixDir"/.yarnrc \
-            && grep 'plugin-workspace-lockfile' "$prefixDir"/.yarnrc \
+        grep 'plugin-workspace-tools.js' "$prefixDir"/.yarnrc \
+            && grep 'plugin-interactive-tools.js' "$prefixDir"/.yarnrc \
+            && grep 'plugin-workspace-lockfile.js' "$prefixDir"/.yarnrc \
             && return 0
     elif test -f "$prefixDir"/.yarnrc.yml ; then
-        grep 'plugin-workspace-tools' "$prefixDir"/.yarnrc.yml \
-            && grep 'plugin-interactive-tools' "$prefixDir"/.yarnrc.yml \
-            && grep 'plugin-workspace-lockfile' "$prefixDir"/.yarnrc.yml \
+        grep 'plugin-workspace-tools.js' "$prefixDir"/.yarnrc.yml \
+            && grep 'plugin-interactive-tools.js' "$prefixDir"/.yarnrc.yml \
+            && grep 'plugin-workspace-lockfile.js' "$prefixDir"/.yarnrc.yml \
             && return 0
     fi
 
