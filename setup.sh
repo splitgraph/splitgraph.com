@@ -193,12 +193,27 @@ has_broken_yarn() {
 }
 
 setup_yarn() {
+    if test ! -z "$WORKSPACE_LOCKFILE" ; then
+        echo "set the lockfile to $WORKSPACE_LOCKFILE"
+        # We need to remove any existing directive, because otherwise yarn config set
+        # will not override the setting if yarnrc.yml says it's yarn.lock
+        sed -i '/lockfileFilename:/d' "$(yarn config get rcFilename)"
+        yarn config set lockfileFilename "$WORKSPACE_LOCKFILE"
+    fi
+
     yarn config set nodeLinker node-modules \
         && return 0
     return 1
 }
 
 has_correct_config() {
+
+    # If user has specified a custom lockfile name, make sure it's set correctly
+    if test ! -z "$WORKSPACE_LOCKFILE" \
+        && test "$(yarn config get lockfileFilename)" != "$WORKSPACE_LOCKFILE" ; then
+        echo "lockfile is wrong, need to set it"
+        return 1
+    fi
 
     # (hacky, but efficient)
     # We want to be as fast as possible. So to avoid calling `yarn config` twice,

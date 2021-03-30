@@ -14,8 +14,10 @@ if test ! -z "$YARN_CACHE_FOLDER" ; then
     echo "Yarn cache ($YARN_CACHE_FOLDER): $(ls -l "$YARN_CACHE_FOLDER" | wc -l)"
 fi
 
+# We need to set the special lockfile name here, because if we use yarn.lock,
+# then when running in the parent monorepo, yarn will think its in its own root
 pushd "$SPLITGRAPH_DIR" \
-    && ./setup.sh \
+    && WORKSPACE_LOCKFILE=yarn-public-workspace.lock ./setup.sh \
     && yarn install --immutable \
     && echo "Installed successfully" \
     && (
