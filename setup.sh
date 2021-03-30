@@ -130,24 +130,24 @@ dir_has_yarn_release() {
 
     # Clean up old files that are deprecated and shouldn't be checked in anymore if they exist
     if test -f "$prefixDir"/.yarn/releases/yarn-rc.js ; then
-        rm "$prefixDir"/.yarn/releases/yarn-rc.js
+        rm -f "$prefixDir"/.yarn/releases/yarn-rc.js
     fi
     if test -f "$prefixDir"/.yarn/releases/yarn-berry.cjs ; then
-        rm "$prefixDir"/.yarn/releases/yarn-berry.cjs
+        rm -f "$prefixDir"/.yarn/releases/yarn-berry.cjs
     fi
     if test -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-tools.cjs ; then
-        rm "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-tools.cjs
+        rm -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-tools.cjs
     fi
     if test -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-interactive-tools.cjs ; then
-        rm "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-interactive-tools.cjs
+        rm -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-interactive-tools.cjs
     fi
     if test -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-lockfile.cjs ; then
-        rm "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-lockfile.cjs
+        rm -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-lockfile.cjs
     fi
 
     if has_broken_yarn "$prefixDir" ; then
         echo "yarn seems broken in $prefixDir, remove .yarnrc.yml"
-        rm "$prefixDir"/.yarnrc.yml
+        rm -f "$prefixDir"/.yarnrc.yml
         return 1
     fi
 
