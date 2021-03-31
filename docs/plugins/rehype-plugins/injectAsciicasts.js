@@ -36,7 +36,7 @@ const makeCastNode = ({ castManifest, inputNode }) => {
   const toolbarHeightPx = 47; // 32 height, 15 padding
   const iframePxHeight = fontSize * lineHeight * intHeight + toolbarHeightPx;
 
-  const containerPaddingTop = `height: ${400}`;
+  const containerPaddingTop = `height: 400px`;
 
   // Render a background ahead of time, so there is less of a white flash
   // Use linear-gradient trick to render background to expected height exactly
