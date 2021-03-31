@@ -2,9 +2,9 @@
 import { Box } from "theme-ui";
 import { useState } from "react";
 
-export interface INewsletterSignupProps {}
+export interface INewsletterSignupProps { }
 
-const NewsletterSignup = ({}: INewsletterSignupProps) => {
+const NewsletterSignup = ({ }: INewsletterSignupProps) => {
   const [expanded, setExpanded] = useState(false);
 
   return (

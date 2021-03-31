@@ -49,17 +49,17 @@ const BaseIcon = ({
         {
           ...(color
             ? {
-                backgroundColor: color,
-                ...maskStyle,
-              }
+              backgroundColor: color,
+              ...maskStyle,
+            }
             : { backgroundImage: svgDataURI }),
           ...(hoverColor
             ? {
-                ":hover": {
-                  backgroundColor: hoverColor,
-                  ...maskStyle,
-                },
-              }
+              ":hover": {
+                backgroundColor: hoverColor,
+                ...maskStyle,
+              },
+            }
             : {}),
           backgroundRepeat: "no-repeat",
           backgroundSize: size,

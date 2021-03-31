@@ -15,7 +15,7 @@ const PreWithCopy = ({
   children,
   title,
   extraStyle = {},
-  onCopy = () => {},
+  onCopy = () => { },
 }: IPreWithCopyProps) => {
   const preContainerStyle = {
     display: "flex",
