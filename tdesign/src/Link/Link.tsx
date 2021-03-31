@@ -1,5 +1,5 @@
 /** @jsxImportSource theme-ui */
-import { jsx, ThemeUIStyleObject } from "theme-ui";
+import { ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ export interface INextDynamicLinkProps {
 
 export interface LinkProps
   extends React.HTMLAttributes<
-    HTMLAnchorElement | HTMLButtonElement | HTMLElement
+  HTMLAnchorElement | HTMLButtonElement | HTMLElement
   > {
   href: string | INextDynamicLinkProps;
   as?: string | INextDynamicLinkProps;

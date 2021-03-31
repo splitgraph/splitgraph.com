@@ -1,5 +1,4 @@
 /** @jsxImportSource theme-ui */
-import * as React from "react";
 import { forwardRef } from "react";
 import {
   Box,
