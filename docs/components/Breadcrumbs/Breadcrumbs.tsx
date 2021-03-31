@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
-// @ts-ignore
-import { jsx, ThemeUIStyleObject } from "theme-ui";
+import { ThemeUIStyleObject } from "theme-ui";
 
 import { Link } from "../Link";
 

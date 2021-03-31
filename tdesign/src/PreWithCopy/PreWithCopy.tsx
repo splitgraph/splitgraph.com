@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
-// @ts-ignore
-import { jsx, Box, Text, ThemeUIStyleObject } from "theme-ui";
+import { Box, Text, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 
 import { IconClipboard } from "../Icon";
@@ -16,7 +15,7 @@ const PreWithCopy = ({
   children,
   title,
   extraStyle = {},
-  onCopy = () => {},
+  onCopy = () => { },
 }: IPreWithCopyProps) => {
   const preContainerStyle = {
     display: "flex",

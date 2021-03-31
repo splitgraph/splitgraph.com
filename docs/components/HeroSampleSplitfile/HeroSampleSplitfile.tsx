@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
-// @ts-ignore
-import { jsx, Box, Button } from "theme-ui";
+import { Box, Button } from "theme-ui";
 import * as React from "react";
 
 import { IconChevronRight, IconChevronLeft } from "@splitgraph/tdesign";

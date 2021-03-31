@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
-// @ts-ignore
-import { jsx, Box } from "theme-ui";
+import { Box } from "theme-ui";
 import * as React from "react";
 
 // TODO Mostly a placeholder component atm

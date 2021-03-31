@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
-// @ts-ignore
-import { jsx, Box, StyleSystemObject } from "theme-ui";
+import { Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 
 import {
@@ -93,7 +92,7 @@ const ConnectPage = ({
               // backgroundColor: "#ebebeb",
             },
           },
-        } as StyleSystemObject
+        } as ThemeUIStyleObject
       }
     >
       <Box className="left-col">

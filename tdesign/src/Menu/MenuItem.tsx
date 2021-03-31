@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
-// @ts-ignore
-import { jsx, Box, Text, ThemeUIStyleObject } from "theme-ui";
+import { Box, Text, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 import { useContext, useEffect, useRef } from "react";
 

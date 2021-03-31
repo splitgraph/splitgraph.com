@@ -1,7 +1,4 @@
 /** @jsxImportSource theme-ui */
-// @ts-ignore
-import { jsx, Text } from "theme-ui";
-
 import HelpSectionItemWrapper from "./HelpSectionItemWrapper";
 
 export interface IHelpSectionListProps {

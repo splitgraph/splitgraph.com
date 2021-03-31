@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
-// @ts-ignore
-import { jsx, Button } from "theme-ui";
+import { Button } from "theme-ui";
 
 import OAuthButton, { IOAuthButtonProps } from "./OAuthButton";
 
