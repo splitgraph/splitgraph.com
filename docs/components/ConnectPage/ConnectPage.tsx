@@ -27,7 +27,6 @@ const ConnectPage = ({
   sampleQueries,
   namespace,
   repository,
-  tableName,
   embed = false,
   whitelabeled = false,
   host,
