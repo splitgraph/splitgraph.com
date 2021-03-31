@@ -17,10 +17,10 @@ export type PopoutAnchorPositionString =
 export type PopoutAnchorPosition =
   | PopoutAnchorPositionString
   | [
-    PopoutAnchorPositionString,
-    PopoutAnchorPositionString,
-    PopoutAnchorPositionString
-  ];
+      PopoutAnchorPositionString,
+      PopoutAnchorPositionString,
+      PopoutAnchorPositionString
+    ];
 
 export interface IPopoutBoxRef {
   toggleOpen: () => void;
