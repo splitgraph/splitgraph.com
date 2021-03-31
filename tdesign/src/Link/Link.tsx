@@ -10,7 +10,7 @@ export interface INextDynamicLinkProps {
 
 export interface LinkProps
   extends React.HTMLAttributes<
-  HTMLAnchorElement | HTMLButtonElement | HTMLElement
+    HTMLAnchorElement | HTMLButtonElement | HTMLElement
   > {
   href: string | INextDynamicLinkProps;
   as?: string | INextDynamicLinkProps;

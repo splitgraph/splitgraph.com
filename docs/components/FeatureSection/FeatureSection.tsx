@@ -5,7 +5,7 @@ export interface IFeatureSectionProps {
   children?: React.ReactNode;
 }
 
-const FeatureSection = ({ }: IFeatureSectionProps) => {
+const FeatureSection = ({}: IFeatureSectionProps) => {
   return <></>;
 };
 

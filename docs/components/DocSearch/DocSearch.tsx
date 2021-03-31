@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 
 import { searchIconURI } from "@splitgraph/tdesign";
 
-export interface IDocSearchProps { }
+export interface IDocSearchProps {}
 
 const DOCSEARCH_JS_URL = process.env.DOCSEARCH_JS_URL;
 const DOCSEARCH_CSS_URL = process.env.DOCSEARCH_CSS_URL;
@@ -45,7 +45,7 @@ const mountBodyScript = ({ onLoad }) => {
   bodyRefElement.appendChild(bodyScriptElement);
 };
 
-const DocSearch = ({ }: IDocSearchProps) => {
+const DocSearch = ({}: IDocSearchProps) => {
   const [enabled, setEnabled] = useState(true);
 
   const [windowReady, setWindowReady] = useState(false);

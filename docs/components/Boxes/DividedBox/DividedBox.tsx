@@ -49,11 +49,12 @@ const DividedBox = ({
   background = !!background
     ? background
     : !!colors
-      ? `linear-gradient(${!!angle
-        ? `${angle}deg`
-        : `to ${direction === "vertical" ? "bottom" : "right"}`
+    ? `linear-gradient(${
+        !!angle
+          ? `${angle}deg`
+          : `to ${direction === "vertical" ? "bottom" : "right"}`
       }, ${colors[0]} 50%, ${colors[1]} 50%)`
-      : undefined;
+    : undefined;
 
   containerStyle = {
     display: "flex",
