@@ -1,6 +1,4 @@
 /** @jsxImportSource theme-ui */
-// @ts-ignore
-import { jsx, Text } from "theme-ui";
 
 import { keyIconURI } from "./cssSvgStrings";
 import BaseIcon, { IIconProps } from "./BaseIcon";

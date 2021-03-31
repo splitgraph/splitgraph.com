@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
-// @ts-ignore
-import { jsx, Box, ThemeUIStyleObject } from "theme-ui";
+import { Box, ThemeUIStyleObject } from "theme-ui";
 
 import { NextSeo } from "next-seo";
 

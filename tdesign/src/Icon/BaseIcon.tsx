@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
-// @ts-ignore
-import { jsx, Text, ThemeUIStyleObject } from "theme-ui";
+import { Text, ThemeUIStyleObject } from "theme-ui";
 
 export interface IIconProps {
   size?: string;
@@ -50,17 +49,17 @@ const BaseIcon = ({
         {
           ...(color
             ? {
-                backgroundColor: color,
-                ...maskStyle,
-              }
+              backgroundColor: color,
+              ...maskStyle,
+            }
             : { backgroundImage: svgDataURI }),
           ...(hoverColor
             ? {
-                ":hover": {
-                  backgroundColor: hoverColor,
-                  ...maskStyle,
-                },
-              }
+              ":hover": {
+                backgroundColor: hoverColor,
+                ...maskStyle,
+              },
+            }
             : {}),
           backgroundRepeat: "no-repeat",
           backgroundSize: size,

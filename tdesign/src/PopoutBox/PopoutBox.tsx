@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
-// @ts-ignore
-import { jsx, Box, ThemeUIStyleObject } from "theme-ui";
+import { Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 
 export interface IRenderPopoutButtonProps {
@@ -18,10 +17,10 @@ export type PopoutAnchorPositionString =
 export type PopoutAnchorPosition =
   | PopoutAnchorPositionString
   | [
-      PopoutAnchorPositionString,
-      PopoutAnchorPositionString,
-      PopoutAnchorPositionString
-    ];
+    PopoutAnchorPositionString,
+    PopoutAnchorPositionString,
+    PopoutAnchorPositionString
+  ];
 
 export interface IPopoutBoxRef {
   toggleOpen: () => void;

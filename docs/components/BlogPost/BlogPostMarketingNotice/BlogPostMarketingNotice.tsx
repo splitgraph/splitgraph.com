@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
-// @ts-ignore
-import { jsx, Box } from "theme-ui";
+import { Box } from "theme-ui";
 
 import { Link } from "../../Link";
 import { MarketingNotice } from "../../MarketingNotice";
@@ -8,9 +7,9 @@ import formatDate from "../formatDate";
 
 import compiledBlogPosts from "@splitgraph/docs/compile/compiledBlogPosts";
 
-export interface IBlogPostMarketingNoticeProps {}
+export interface IBlogPostMarketingNoticeProps { }
 
-const BlogPostMarketingNotice = ({}: IBlogPostMarketingNoticeProps) => {
+const BlogPostMarketingNotice = ({ }: IBlogPostMarketingNoticeProps) => {
   const latestBlogPost = {
     title: compiledBlogPosts.children[0].metadata.title,
     date: formatDate(compiledBlogPosts.children[0].metadata.date),
