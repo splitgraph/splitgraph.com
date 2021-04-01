@@ -1,8 +1,8 @@
 /** @jsxImportSource theme-ui */
-import { Flex, Box } from "theme-ui";
+import { Box } from "theme-ui";
 
 const HorizontalDivider = ({ width = 9 / 10, sx = {}, children, ...rest }) => (
-  <Flex justifyContent="center">
+  <Box sx={{ display: "flex", justifyContent: "center" }}>
     <Box
       width={width}
       sx={{
@@ -14,7 +14,7 @@ const HorizontalDivider = ({ width = 9 / 10, sx = {}, children, ...rest }) => (
     >
       {children}
     </Box>
-  </Flex>
+  </Box>
 );
 
 export default HorizontalDivider;

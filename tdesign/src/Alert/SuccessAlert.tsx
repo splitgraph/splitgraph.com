@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 
-import { Flex, Text } from "theme-ui";
+import { Box, Text } from "theme-ui";
 import MutedLink from "../Link/MutedLink";
 
 const Checkmark = () => {
@@ -38,8 +38,9 @@ const SuccessAlert = ({
   dismissLinkHref,
 }: ErrorAlertProps) => {
   return (
-    <Flex
+    <Box
       sx={{
+        display: "flex",
         marginBottom: 4,
         padding: 2,
         justifyContent: "space-between",
@@ -50,19 +51,24 @@ const SuccessAlert = ({
         border: "1px solid success",
       }}
     >
-      <Flex
-        sx={{ width: dismissLinkText && dismissLinkHref ? 7 / 10 : 10 / 10 }}
+      <Box
+        sx={{
+          display: "flex",
+          width: dismissLinkText && dismissLinkHref ? 7 / 10 : 10 / 10,
+        }}
       >
         <Checkmark />
         <SuccessMessage message={message} />
-      </Flex>
+      </Box>
 
       {dismissLinkText && dismissLinkHref && (
-        <Flex sx={{ width: 3 / 10, justifyContent: "flex-end" }}>
+        <Box
+          sx={{ display: "flex", width: 3 / 10, justifyContent: "flex-end" }}
+        >
           <SuccessResetLink text={dismissLinkText} href={dismissLinkHref} />
-        </Flex>
+        </Box>
       )}
-    </Flex>
+    </Box>
   );
 };
 

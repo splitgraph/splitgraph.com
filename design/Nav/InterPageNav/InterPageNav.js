@@ -1,9 +1,11 @@
+/** @jsxImportSource theme-ui */
+
 // import {
 //   IconChevronLeftPrimaryColor,
 //   IconChevronRightPrimaryColor,
 // } from "@splitgraph/tdesign";
 
-import { Box, Flex } from "../../index";
+import { Box } from "theme-ui";
 
 const linkBoxStyle = {
   padding: "1rem",
@@ -85,6 +87,7 @@ const RightNav = ({ node, Link, ...rest }) => {
 
 const InterPageNav = ({ Link, up, right, left }) => {
   const style = {
+    display: "flex",
     paddingTop: ["initial", "initial", "8rem"],
     paddingBottom: ["initial", "initial", "8rem"],
     borderTopColor: "#efefef",
@@ -97,7 +100,7 @@ const InterPageNav = ({ Link, up, right, left }) => {
   };
 
   return (
-    <Flex sx={style}>
+    <Box sx={style}>
       <Box
         sx={{
           minWidth: "100%",
@@ -113,7 +116,7 @@ const InterPageNav = ({ Link, up, right, left }) => {
         <RightNav node={right} Link={Link} />
         <LeftNav node={left} Link={Link} />
       </Box>
-    </Flex>
+    </Box>
   );
 };
 
