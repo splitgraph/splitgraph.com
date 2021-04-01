@@ -1,5 +1,4 @@
 /** @jsxImportSource theme-ui */
-import { jsx } from "theme-ui";
 
 import { mdxComponents } from "@splitgraph/design";
 import {

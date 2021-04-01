@@ -1,5 +1,4 @@
 /** @jsxImportSource theme-ui */
-import { jsx } from "theme-ui";
 
 // import defaultTheme from "./defaultTheme";
 import { makeDefaultTheme } from "@splitgraph/tdesign";

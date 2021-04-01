@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx } from "theme-ui";
 
 export interface ILogoTextProps {
   text?: string;
