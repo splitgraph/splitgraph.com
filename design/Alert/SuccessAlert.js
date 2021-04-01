@@ -1,13 +1,9 @@
 /** @jsxImportSource theme-ui */
-import { Box, Flex, Text } from "theme-ui";
+import { Box, Text } from "theme-ui";
 import MutedLink from "../Link/MutedLink";
 
 const Checkmark = () => {
-  return (
-    <Text mr={2} fontWeight="bold">
-      &#10003;
-    </Text>
-  );
+  return <Text sx={{ marginRight: 2, fontWeight: "bold" }}>&#10003;</Text>;
 };
 
 const SuccessMessage = ({ message }) => {
@@ -28,12 +24,13 @@ const SuccessAlert = ({
   dismissLinkOwnRow = false,
 }) => {
   return (
-    <Flex
-      flexDirection={"row"}
-      justifyContent={"space-between"}
-      p={2}
-      mb={4}
+    <Box
       sx={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        padding: 2,
+        marginBottom: 4,
         minWidth: "30vw",
         backgroundColor: "successBackground",
         backgroundOpacity: 0.2,
@@ -45,15 +42,21 @@ const SuccessAlert = ({
           : {}),
       }}
     >
-      <Flex width={dismissLinkText && dismissLinkHref ? 7 / 10 : 10 / 10}>
+      <Box
+        sx={{
+          display: "flex",
+          // width: dismissLinkText && dismissLinkHref ? 7 / 10 : 10 / 10,
+        }}
+      >
         <Checkmark />
         <SuccessMessage message={message} />
-      </Flex>
+      </Box>
 
       {dismissLinkText && (dismissLinkHref || onClickDismiss) && (
-        <Flex
-          width={3 / 10}
+        <Box
           sx={{
+            display: "flex",
+            width: 3 / 10,
             flexGrow: "1",
             justifyContent: dismissLinkOwnRow ? "flex-start" : "flex-end",
           }}
@@ -75,9 +78,9 @@ const SuccessAlert = ({
               {dismissLinkText}
             </Text>
           )}
-        </Flex>
+        </Box>
       )}
-    </Flex>
+    </Box>
   );
 };
 

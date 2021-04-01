@@ -1,4 +1,5 @@
-import { Flex, Text } from "theme-ui";
+/** @jsxImportSource theme-ui */
+import { Box, Text } from "theme-ui";
 import MutedLink from "../Link/MutedLink";
 
 const ErrorHeading = () => {
@@ -23,29 +24,32 @@ const ErrorAlert = ({ message, dismissLinkText, dismissLinkHref }) => {
   const trimmedMessage = message.replace(/Error\:?\s*/, "");
 
   return (
-    <Flex
-      flexDirection={"row"}
-      justifyContent={"space-between"}
-      p={2}
-      mb={4}
+    <Box
       sx={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        padding: 2,
+        marginBottom: 4,
         minWidth: "30vw",
         backgroundColor: "errorBackground",
         backgroundOpacity: 0.2,
         border: "1px solid red",
       }}
     >
-      <Flex width={7 / 10}>
+      <Box sx={{ display: "flex" }}>
         <ErrorHeading />
         <ErrorMessage message={trimmedMessage} />
-      </Flex>
+      </Box>
 
       {dismissLinkText && dismissLinkHref && (
-        <Flex width={3 / 10} justifyContent="flex-end">
+        <Box
+          sx={{ display: "flex", width: 3 / 10, justifyContent: "flex-end" }}
+        >
           <ErrorResetLink text={dismissLinkText} href={dismissLinkHref} />
-        </Flex>
+        </Box>
       )}
-    </Flex>
+    </Box>
   );
 };
 

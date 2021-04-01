@@ -1,5 +1,5 @@
 /** @jsxImportSource theme-ui */
-import { Flex, Box } from "theme-ui";
+import { Box } from "theme-ui";
 
 const lineStyle = {
   marginBottom: 2,
@@ -14,45 +14,61 @@ const middleStyle = {
   display: "inline-flex",
 };
 
-const DividerLine = ({ sx = {} }) => (
+const DividerLine = ({}) => (
   <Box
     width={2 / 5}
     sx={{
+      width: 2 / 5,
       ...lineStyle,
-      ...sx,
     }}
   >
     &nbsp;
   </Box>
 );
 
-const MiddleSegment = ({ children, sx = {} }) => (
-  <Flex
-    alignItems="center"
-    justifyContent="center"
-    width={1 / 5}
+const MiddleSegment = ({ children }) => (
+  <Box
     sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      widdth: 1 / 5,
       ...middleStyle,
-      ...sx,
     }}
   >
     {children}
-  </Flex>
+  </Box>
 );
 
-const DividerWithMiddleText = ({ width = 9 / 10, sx = {}, children }) => (
-  <Flex
-    justifyContent="center"
-    alignItems="center"
-    width={width}
-    minHeight={"1rem"}
+const DividerWithMiddleText = ({ width = 9 / 10, children }) => (
+  <Box
+    sx={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      width: width,
+      minHeight: "1rem",
+    }}
   >
-    <DividerLine sx={sx} />
+    <div
+      sx={{
+        width: "100%",
+        // height: "1px",
+        border: "1px solid lightgray",
+        marginRight: "1em",
+      }}
+    />
 
     <MiddleSegment>{children}</MiddleSegment>
 
-    <DividerLine sx={sx} />
-  </Flex>
+    <div
+      sx={{
+        width: "100%",
+        border: "1px solid lightgray",
+        marginLeft: "1em",
+      }}
+    />
+  </Box>
 );
 
 export default DividerWithMiddleText;
