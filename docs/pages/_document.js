@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 // Adopted from the react-helmet example in next.js repository:
 // https://github.com/zeit/next.js/blob/canary/examples/with-react-helmet/pages/_document.js
 
-export default class extends Document {
+class TheDocument extends Document {
   static async getInitialProps(...args) {
     const documentProps = await super.getInitialProps(...args);
     // see https://github.com/nfl/react-helmet#server-usage for more information
@@ -73,3 +73,4 @@ export default class extends Document {
     );
   }
 }
+export default TheDocument;
