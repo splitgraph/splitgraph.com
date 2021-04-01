@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx } from "theme-ui";
 
 import { searchIconURI } from "./cssSvgStrings";
 import BaseIcon, { IIconProps } from "./BaseIcon";

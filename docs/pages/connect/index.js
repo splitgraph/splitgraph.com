@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx } from "theme-ui";
 import { NextSeo } from "next-seo";
 import { Footer } from "@splitgraph/tdesign";
 import {

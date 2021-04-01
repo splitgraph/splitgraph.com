@@ -1,5 +1,4 @@
 /** @jsxImportSource theme-ui */
-import { jsx } from "theme-ui";
 import withHolyGrailLayout from "./withHolyGrailLayout";
 
 export default withHolyGrailLayout({

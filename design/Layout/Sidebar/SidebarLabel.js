@@ -1,5 +1,4 @@
 /** @jsxImportSource theme-ui */
-import { jsx } from "theme-ui";
 import { useRef } from "react";
 
 import { useLayoutEffect } from "react";

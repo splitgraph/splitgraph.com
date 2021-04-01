@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
 // @ts-ignore
-import { jsx } from "theme-ui";
 import * as React from "react";
 
 import { RouterContext } from "next/dist/next-server/lib/router-context";
