@@ -1,3 +1,23 @@
+import { createMuiTheme } from "@material-ui/core/styles";
+
+// WIP, idea is to somehow combine/merge prismTheme & MUI Theme
+export const muiTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#36678d",
+    },
+    secondary: {
+      main: "#89368d",
+    },
+    error: {
+      main: "#8D363C0",
+    },
+    background: {
+      default: "#e0ffff",
+    },
+  },
+});
+
 /*
   Use the @rebass/preset theme as a starting point.
 

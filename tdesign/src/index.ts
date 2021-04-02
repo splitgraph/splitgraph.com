@@ -22,7 +22,12 @@ export {
 
 export { Menu, MenuItem, MenuItemHeading } from "./Menu";
 
-export { makeDefaultTheme, marketingTheme, tocStyles } from "./themes/index";
+export {
+  makeDefaultTheme,
+  marketingTheme,
+  tocStyles,
+  muiTheme,
+} from "./themes/index";
 
 export { ThemeProvider } from "theme-ui";
 
@@ -45,3 +50,5 @@ export * from "./OAuthButton";
 export { ConnectDDNButton } from "./ConnectDDNButton";
 
 export { HeroConnectionParams } from "./HeroConnectionParams";
+
+export { LogoImage, LogoText } from "./Layout/";

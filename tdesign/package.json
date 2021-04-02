@@ -5,6 +5,8 @@
   "peerDependencies": {
     "@csstools/normalize.css": "*",
     "@emotion/react": "*",
+    "@material-ui/core": "*",
+    "@material-ui/icons": "*",
     "@mdx-js/react": "*",
     "@theme-ui/prism": "*",
     "dayjs": "*",
