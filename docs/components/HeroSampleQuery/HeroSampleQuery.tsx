@@ -71,6 +71,7 @@ const HeroSampleQuery = ({
         <Button
           sx={{
             backgroundColor: "transparent",
+            display: "flex",
           }}
           onClick={onClickPrev}
         >
@@ -80,6 +81,7 @@ const HeroSampleQuery = ({
         <Button
           sx={{
             backgroundColor: "transparent",
+            display: "flex",
           }}
           onClick={onClickNext}
         >

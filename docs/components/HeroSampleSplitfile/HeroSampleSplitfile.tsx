@@ -60,6 +60,7 @@ const HeroSampleSplitfile = ({ splitfiles }: IHeroSampleSplitfileProps) => {
         <Button
           sx={{
             backgroundColor: "transparent",
+            display: "flex",
           }}
           onClick={onClickPrev}
         >
@@ -69,6 +70,7 @@ const HeroSampleSplitfile = ({ splitfiles }: IHeroSampleSplitfileProps) => {
         <Button
           sx={{
             backgroundColor: "transparent",
+            display: "flex",
           }}
           onClick={onClickNext}
         >
