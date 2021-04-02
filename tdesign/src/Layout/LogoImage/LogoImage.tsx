@@ -3,6 +3,7 @@
 
 export interface ILogoImageProps {
   logoURL?: string;
+  rest?: any;
 }
 
 const logoImageStyle = {
@@ -14,8 +15,10 @@ const logoImageStyle = {
 
 const defaultLogoURL = "/static/splitgraph_logo.svg";
 
-const LogoImage = ({ logoURL = defaultLogoURL }: ILogoImageProps) => {
-  return <img src={logoURL} style={logoImageStyle} alt="splitgraph logo" />;
+const LogoImage = ({ logoURL = defaultLogoURL, rest }: ILogoImageProps) => {
+  return (
+    <img src={logoURL} style={logoImageStyle} alt="splitgraph logo" {...rest} />
+  );
 };
 
 export default LogoImage;
