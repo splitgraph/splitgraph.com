@@ -75,6 +75,7 @@ install_plugins() {
 
     pushd "$prefixDir" && yarn plugin import plugin-workspace-tools && popd
     pushd "$prefixDir" && yarn plugin import plugin-interactive-tools && popd
+    pushd "$prefixDir" && yarn plugin import plugin-constraints && popd
     pushd "$prefixDir" && yarn plugin import https://raw.githubusercontent.com/milesforks/yarn-plugin-workspace-lockfile/main/packages/plugin/bundles/%40yarnpkg/plugin-workspace-lockfile.js \
         && popd
 
@@ -95,6 +96,11 @@ install_plugins() {
                "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-lockfile.js
     fi
 
+    if test -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-constraints.cjs ; then
+            mv "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-constraints.cjs \
+               "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-constraints.js
+    fi
+
     fix_yarnrc() {
         local yarnrcFile="$1"
         shift
@@ -107,6 +113,9 @@ install_plugins() {
 
         grep 'plugin-workspace-lockfile' "$yarnrcFile" \
             && sed -i 's/plugin-workspace-lockfile\.cjs/plugin-workspace-lockfile\.js/' "$yarnrcFile"
+
+        grep 'plugin-constraints' "$yarnrcFile" \
+            && sed -i 's/plugin-constraints\.cjs/plugin-constraints\.js/' "$yarnrcFile"
 
 
         return 0
@@ -144,6 +153,9 @@ dir_has_yarn_release() {
     if test -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-lockfile.cjs ; then
         rm -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-workspace-lockfile.cjs
     fi
+    if test -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-constraints.cjs ; then
+        rm -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-constraints.cjs
+    fi
 
     if has_broken_yarn "$prefixDir" ; then
         echo "yarn seems broken in $prefixDir, remove .yarnrc.yml"
@@ -166,11 +178,13 @@ dir_has_yarn_plugins() {
         grep 'plugin-workspace-tools.js' "$prefixDir"/.yarnrc \
             && grep 'plugin-interactive-tools.js' "$prefixDir"/.yarnrc \
             && grep 'plugin-workspace-lockfile.js' "$prefixDir"/.yarnrc \
+            && grep 'plugin-constraints.js' "$prefixDir"/.yarnrc \
             && return 0
     elif test -f "$prefixDir"/.yarnrc.yml ; then
         grep 'plugin-workspace-tools.js' "$prefixDir"/.yarnrc.yml \
             && grep 'plugin-interactive-tools.js' "$prefixDir"/.yarnrc.yml \
             && grep 'plugin-workspace-lockfile.js' "$prefixDir"/.yarnrc.yml \
+            && grep 'plugin-constraints.js' "$prefixDir"/.yarnrc.yml \
             && return 0
     fi
 
