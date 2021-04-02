@@ -302,6 +302,7 @@ export const makeDefaultTheme = () => ({
   },
   buttons: {
     icon: {
+      display: "flex",
       bg: "transparent",
       ":hover": {
         cursor: "pointer",
