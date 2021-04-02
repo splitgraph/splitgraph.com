@@ -1,3 +1,5 @@
+/** @jsxImportSource theme-ui */
+
 import { Box } from "../../index";
 import { makeDefaultTheme } from "@splitgraph/tdesign";
 
