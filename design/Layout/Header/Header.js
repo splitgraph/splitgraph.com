@@ -1,3 +1,4 @@
+/** @jsxImportSource theme-ui */
 import { Box } from "../../index";
 
 const Header = ({ children, gridArea = "header" }) => (

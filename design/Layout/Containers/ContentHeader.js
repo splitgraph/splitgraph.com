@@ -1,3 +1,4 @@
+/** @jsxImportSource theme-ui */
 import { Box } from "../../index";
 
 const getStyle = (depth) => ({
