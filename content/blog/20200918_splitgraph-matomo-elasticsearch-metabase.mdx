@@ -63,7 +63,7 @@ Turns out, we could. Here's an abridged version of how we mount Matomo data on a
 ```
 sgr mount mysql_fdw matomo_raw -c matomo:$PASSWORD@matomo-db -o@- <<EOF
 {
-  "remote_schema": "matomo",
+  "dbname": "matomo",
   "tables": {
     "matomo_log_action": {
       "hash": "bigint",
