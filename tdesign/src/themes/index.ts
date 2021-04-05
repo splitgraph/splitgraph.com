@@ -3,6 +3,7 @@ import { createMuiTheme } from "@material-ui/core/styles";
 // WIP, idea is to somehow combine/merge prismTheme & MUI Theme
 export const muiTheme = createMuiTheme({
   palette: {
+    // mode: "dark",
     primary: {
       main: "#36678d",
     },
@@ -10,7 +11,7 @@ export const muiTheme = createMuiTheme({
       main: "#89368d",
     },
     error: {
-      main: "#8D363C0",
+      main: "#8D363C",
     },
     background: {
       default: "#e0ffff",

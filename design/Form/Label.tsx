@@ -1,5 +1,5 @@
 /** @jsxImportSource theme-ui */
-import { Label } from "theme-ui";
+import { InputLabel as Label } from "@material-ui/core";
 
 const LabelComponent = ({ sx = {}, children, ...rest }) => (
   <Label
