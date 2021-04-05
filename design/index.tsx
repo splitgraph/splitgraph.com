@@ -4,7 +4,7 @@ export { Box, Flex, Image, Button, Text } from "theme-ui";
 export { ErrorAlert, SuccessAlert } from "./Alert";
 export { SubmitButton } from "./Button";
 export { DividerWithMiddleText, HorizontalDivider } from "./Divider";
-export { Input, Label } from "./Form";
+export { Input } from "./Form";
 export { Octicon, GitLabLogoIcon, GoogleLogoIcon } from "./Icon";
 export { Link, MutedLink } from "./Link";
 export {
