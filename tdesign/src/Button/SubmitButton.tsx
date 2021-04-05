@@ -1,8 +1,6 @@
 /** @jsxImportSource theme-ui */
 import * as React from "react";
-
-/** @jsxImportSource theme-ui */
-import { Button } from "theme-ui";
+import { Button } from "@material-ui/core";
 
 export interface SubmitButtonProps {
   disabled?: boolean;
@@ -22,9 +20,8 @@ const SubmitButton = ({
 }: SubmitButtonProps) => (
   <Button
     type="submit"
-    variant={variant}
+    // variant={variant}
     sx={{
-      backgroundColor: "red",
       opacity: disabled ? "0.5" : "initial",
       ":hover": {
         cursor: disabled ? "initial" : "pointer",
@@ -34,7 +31,7 @@ const SubmitButton = ({
     disabled={hasErrors || disabled}
     {...rest}
   >
-    Does it still work uhhh
+    {children}
   </Button>
 );
 
