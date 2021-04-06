@@ -57,3 +57,5 @@ export { Input, Label } from "./Form";
 export * from "./Text";
 
 export { DividerWithMiddleText, HorizontalDivider } from "./Divider";
+
+export { matomoInit, matomoPush, matomoTrack } from "./matomo";

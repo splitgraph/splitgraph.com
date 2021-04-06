@@ -7,7 +7,7 @@ export function matomoInit({
   siteId,
   jsTrackerFile = "matomo.js",
   phpTrackerFile = "matomo.php",
-  shouldIgnoreURL = (url) => false,
+  shouldIgnoreURL = (_url: Location) => false,
 }) {
   // Using absolute path makes URL() work when overriding sendBeacon
   const origin = window && window.location ? window.location.origin || "" : "";
@@ -31,7 +31,7 @@ export function matomoInit({
       return origSendBeacon.apply(this, arguments);
     };
   }
-
+  // @ts-ignore next
   window._paq = window._paq || [];
   if (!url) {
     console.warn("Matomo disabled, please provide matomo url");
@@ -140,3 +140,8 @@ export function matomoPush(args) {
 
   window._paq.push(args);
 }
+
+interface MWindow extends Window {
+  _paq: any;
+}
+declare let window: MWindow;

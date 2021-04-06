@@ -32,4 +32,4 @@ export { InterPageNav } from "./Nav";
 
 export { mdxComponents } from "./themes/mdxComponents";
 
-export { matomoInit, matomoPush, matomoTrack } from "./matomo";
+export { matomoInit, matomoPush, matomoTrack } from "../tdesign/src/matomo";
