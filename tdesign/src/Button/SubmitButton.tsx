@@ -21,6 +21,8 @@ const SubmitButton = ({
   <Button
     type="submit"
     // variant={variant}
+    disableRipple
+    variant="contained"
     sx={{
       opacity: disabled ? "0.5" : "initial",
       ":hover": {

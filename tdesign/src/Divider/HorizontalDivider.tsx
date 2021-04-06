@@ -1,18 +1,15 @@
 /** @jsxImportSource theme-ui */
-import { Box } from "theme-ui";
+import { Box } from "@material-ui/core";
 
-/* NOTE 20210406: this file appears to not be used? */
-
-const HorizontalDivider = ({ width = 9 / 10, sx = {}, children, ...rest }) => (
+const HorizontalDivider = ({ children, ...rest }) => (
   <Box sx={{ display: "flex", justifyContent: "center" }}>
     <Box
-      width={width}
       sx={{
         marginBottom: 2,
         minHeight: "2px",
         backgroundColor: "muted",
-        ...sx,
       }}
+      {...rest}
     >
       {children}
     </Box>
