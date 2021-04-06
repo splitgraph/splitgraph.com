@@ -1,10 +1,11 @@
 /** @jsxImportSource theme-ui */
-
-import { Box, Text } from "theme-ui";
+import { Box, Typography } from "@material-ui/core";
 import MutedLink from "../Link/MutedLink";
 
 const ErrorHeading = () => {
-  return <Text sx={{ marginRight: 2, fontWeight: "bold" }}>Error:</Text>;
+  return (
+    <Typography sx={{ marginRight: 2, fontWeight: "bold" }}>Error:</Typography>
+  );
 };
 
 interface ErrorMessageProps {

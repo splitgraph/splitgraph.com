@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 import { Children, cloneElement } from "react";
-import { Box } from "@splitgraph/design";
+import { Box } from "@material-ui/core";
 import { tocStyles } from "@splitgraph/tdesign";
 
 const TocStyle = {

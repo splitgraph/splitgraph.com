@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 
-import { Box } from "@splitgraph/design";
+import { Box } from "@material-ui/core";
 
 import useSidebar from "./useSidebar";
 
