@@ -11,13 +11,12 @@ import {
   ContentBody,
   MainContent,
   Sidebar,
-  Heading,
   HolyGrail,
   LogoImage,
   mdxComponents,
 } from "@splitgraph/design";
 
-import { InterPageNav } from "@splitgraph/tdesign";
+import { InterPageNav, Heading } from "@splitgraph/tdesign";
 
 import { BaseLayout } from "@splitgraph/design/Layout";
 import { Link, DocSearch } from "@splitgraph/docs/components";
