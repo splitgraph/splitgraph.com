@@ -34,7 +34,7 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
     ref
   ) => {
     const theme = useTheme();
-    console.log("theme", theme);
+    console.log("theme", theme.palette.mode);
 
     return (
       <>

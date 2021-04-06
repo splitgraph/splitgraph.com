@@ -1,30 +1,12 @@
 /** @jsxImportSource theme-ui */
 import { Box } from "theme-ui";
 
-const lineStyle = {
-  marginBottom: 2,
-  height: "1px",
-  backgroundColor: "lightgray",
-};
-
 const middleStyle = {
   marginBottom: 2,
   height: "2rem",
   color: "lightgray",
   display: "inline-flex",
 };
-
-const DividerLine = ({}) => (
-  <Box
-    width={2 / 5}
-    sx={{
-      width: 2 / 5,
-      ...lineStyle,
-    }}
-  >
-    &nbsp;
-  </Box>
-);
 
 const MiddleSegment = ({ children }) => (
   <Box

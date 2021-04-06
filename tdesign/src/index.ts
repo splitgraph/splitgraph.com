@@ -55,3 +55,5 @@ export { LogoImage, LogoText } from "./Layout/";
 
 export { Input, Label } from "./Form";
 export * from "./Text";
+
+export { DividerWithMiddleText, HorizontalDivider } from "./Divider";
