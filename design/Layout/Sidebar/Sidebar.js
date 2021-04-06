@@ -346,7 +346,6 @@ const SidebarRoot = ({
         ".li-selector": SidebarStyle.Item,
         "span,a": SidebarStyle.Label,
       }}
-      fontSize={2}
     >
       {children}
       <Sidebar
