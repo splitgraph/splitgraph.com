@@ -5,6 +5,7 @@ import Link from "next/link";
 
 export interface INextDynamicLinkProps {
   pathname: string;
+  query?: { [key: string]: string };
 }
 
 export interface LinkProps

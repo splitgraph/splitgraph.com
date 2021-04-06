@@ -85,7 +85,7 @@ const RightNav = ({ node, Link, ...rest }) => {
   ) : null;
 };
 
-const InterPageNav = ({ Link, up, right, left }) => {
+const InterPageNav = ({ Link, right, left }) => {
   const style = {
     display: "flex",
     paddingTop: ["initial", "initial", "8rem"],

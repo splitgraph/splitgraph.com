@@ -63,3 +63,12 @@ export { matomoInit, matomoPush, matomoTrack } from "./matomo";
 export { InterPageNav } from "./Nav";
 
 export { Octicon, GitLabLogoIcon, GoogleLogoIcon } from "./Icon";
+
+export {
+  DangerText,
+  Heading,
+  MutedText,
+  SubHeading,
+  SuccessText,
+  WarningText,
+} from "./Text";
