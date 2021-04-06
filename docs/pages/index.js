@@ -11,7 +11,7 @@ import { HeroSampleSplitfile } from "../components/HeroSampleSplitfile";
 import { HeroConnectionParams } from "../components/HeroConnectionParams";
 import { Footer, IconLogoDiscord, marketingTheme } from "@splitgraph/tdesign";
 
-import { Octicon } from "@splitgraph/tdesign/Octicon";
+import { Octicon } from "@splitgraph/tdesign";
 
 import CambridgeChicagoJOIN from "@splitgraph/content/marketing/sample-queries/CambridgeChicagoJOIN.mdx";
 import NewSocrataDatasets from "@splitgraph/content/marketing/sample-queries/NewSocrataDatasets.mdx";
