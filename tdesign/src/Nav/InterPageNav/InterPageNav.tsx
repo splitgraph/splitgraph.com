@@ -5,7 +5,7 @@
 //   IconChevronRightPrimaryColor,
 // } from "@splitgraph/tdesign";
 
-import { Box } from "theme-ui";
+import { Box } from "@material-ui/core";
 
 const linkBoxStyle = {
   padding: "1rem",

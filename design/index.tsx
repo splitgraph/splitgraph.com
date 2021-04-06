@@ -1,9 +1,7 @@
 /** @jsxImportSource theme-ui */
 export { Box, Flex, Image, Button, Text } from "theme-ui";
 
-export { ErrorAlert, SuccessAlert } from "./Alert";
 export { SubmitButton } from "./Button";
-export { Octicon, GitLabLogoIcon, GoogleLogoIcon } from "./Icon";
 export { Link, MutedLink } from "./Link";
 export {
   DangerText,
@@ -28,8 +26,4 @@ export {
 
 export { LogoImage } from "./Logo";
 
-export { InterPageNav } from "./Nav";
-
 export { mdxComponents } from "./themes/mdxComponents";
-
-export { matomoInit, matomoPush, matomoTrack } from "../tdesign/src/matomo";

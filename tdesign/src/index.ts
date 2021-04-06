@@ -59,3 +59,7 @@ export * from "./Text";
 export { DividerWithMiddleText, HorizontalDivider } from "./Divider";
 
 export { matomoInit, matomoPush, matomoTrack } from "./matomo";
+
+export { InterPageNav } from "./Nav";
+
+export { Octicon, GitLabLogoIcon, GoogleLogoIcon } from "./Icon";
