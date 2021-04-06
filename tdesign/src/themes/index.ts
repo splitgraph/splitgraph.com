@@ -25,30 +25,30 @@ export const muiTheme = createMuiTheme({
           fontWeight: "bold",
         },
       },
-      //     variants: [
-      //       {
-      //         props: { variant: "dashed" },
-      //         style: {
-      //           textTransform: "none",
-      //           border: `2px dashed grey`,
-      //         },
-      //       },
-      //       {
-      //         props: { variant: "dashed", color: "secondary" },
-      //         style: {
-      //           border: `4px dashed red`,
-      //         },
-      //       },
-      //     ],
+      variants: [
+        {
+          props: { variant: "dashed" },
+          style: {
+            textTransform: "none",
+            border: `2px dashed grey`,
+          },
+        },
+        {
+          props: { variant: "dashed", color: "secondary" },
+          style: {
+            border: `4px dashed red`,
+          },
+        },
+      ],
     },
   },
 });
 
-// declare module "@material-ui/core/Button" {
-//   interface ButtonPropsVariantOverrides {
-//     dashed: true;
-//   }
-// }
+declare module "@material-ui/core/Button" {
+  interface ButtonPropsVariantOverrides {
+    dashed: true;
+  }
+}
 
 /*
   Use the @rebass/preset theme as a starting point.

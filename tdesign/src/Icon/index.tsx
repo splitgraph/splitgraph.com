@@ -233,3 +233,10 @@ export { IconHamburger };
 
 import IconClose from "./IconClose";
 export { IconClose };
+
+// Third party icons
+import Octicon from "./ThirdParty/GitHub/Octicon";
+import GitLabLogoIcon from "./ThirdParty/GitLab/GitLabLogoIcon";
+import GoogleLogoIcon from "./ThirdParty/Google/GoogleLogoIcon";
+
+export { Octicon, GitLabLogoIcon, GoogleLogoIcon };

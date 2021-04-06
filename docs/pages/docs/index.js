@@ -13,7 +13,7 @@ import {
   BoxThree,
 } from "@splitgraph/docs/components";
 
-import Octicon from "@splitgraph/design/Icon/ThirdParty/GitHub/Octicon";
+import { Octicon } from "@splitgraph/tdesign";
 
 const DocsBox = ({ header, body, anchor, href }) => {
   return (

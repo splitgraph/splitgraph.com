@@ -14,9 +14,10 @@ import {
   Heading,
   HolyGrail,
   LogoImage,
-  InterPageNav,
   mdxComponents,
 } from "@splitgraph/design";
+
+import { InterPageNav } from "@splitgraph/tdesign";
 
 import { BaseLayout } from "@splitgraph/design/Layout";
 import { Link, DocSearch } from "@splitgraph/docs/components";
