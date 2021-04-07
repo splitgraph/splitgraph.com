@@ -1,5 +1,10 @@
 {
   "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@material-ui/*": ["docs/node_modules/material-ui/*"]
+    }
+  },
   "include": [
     "content",
     "content-scripts",
@@ -8,5 +13,6 @@
     "tdesign",
     "templaters"
   ],
+
   "exclude": ["node_modules"]
 }

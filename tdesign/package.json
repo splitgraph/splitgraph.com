@@ -18,5 +18,8 @@
     "theme-ui": "*"
   },
   "name": "@splitgraph/tdesign",
-  "author": "Splitgraph Limited"
+  "author": "Splitgraph Limited",
+  "devDependencies": {
+    "@material-ui/core": "next"
+  }
 }
