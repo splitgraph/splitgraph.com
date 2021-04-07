@@ -1,5 +1,5 @@
 /** @jsxImportSource theme-ui */
-import { Box } from "../../index";
+import { Box } from "theme-ui";
 
 const Header = ({ children, gridArea = "header" }) => (
   <Box
@@ -8,8 +8,7 @@ const Header = ({ children, gridArea = "header" }) => (
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      paddingRight: "4px",
-      paddingLeft: "4px",
+      padding: "4px",
       a: {
         variant: "links.muted",
         // textDecoration: "underline",

@@ -1,7 +1,6 @@
 /** @jsxImportSource theme-ui */
 import { forwardRef } from "react";
 import { Box, Input as MuiInput, InputProps } from "@material-ui/core/";
-import { useTheme } from "@material-ui/core/styles";
 import { DangerText, MutedText, SuccessText, WarningText } from "../Text";
 
 export interface IInputProps extends InputProps {
@@ -33,9 +32,6 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
     },
     ref
   ) => {
-    const theme = useTheme();
-    console.log("theme", theme.palette.mode);
-
     return (
       <>
         <MuiInput
