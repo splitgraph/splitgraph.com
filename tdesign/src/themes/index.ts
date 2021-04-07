@@ -1,5 +1,7 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
+const defaultTheme = createMuiTheme(); // lets us reference MUI default style values below
+
 // WIP, idea is to somehow combine/merge prismTheme & MUI Theme
 export const muiTheme = createMuiTheme({
   palette: {
@@ -27,16 +29,30 @@ export const muiTheme = createMuiTheme({
       },
       variants: [
         {
-          props: { variant: "dashed" },
+          props: { variant: "pill" },
           style: {
-            textTransform: "none",
-            border: `2px dashed grey`,
-          },
-        },
-        {
-          props: { variant: "dashed", color: "secondary" },
-          style: {
-            border: `4px dashed red`,
+            root: { textTransform: "inherit" },
+            padding: "6px 16px",
+            border: "3px solid #ccc",
+            backgroundColor: defaultTheme.palette.common.white,
+            borderRadius:
+              Number.parseInt(`${defaultTheme.shape.borderRadius}`, 10) * 50,
+            transition: defaultTheme.transitions.create(
+              ["background-color", "box-shadow", "border-color", "color"],
+              {
+                duration: defaultTheme.transitions.duration.short,
+              }
+            ),
+            boxShadow: defaultTheme.shadows[2],
+            "&:hover": {
+              backgroundColor: defaultTheme.palette.common.white,
+              boxShadow: defaultTheme.shadows[4],
+            },
+            // Reset on touch devices, it doesn't add specificity
+            "@media (hover: none)": {
+              boxShadow: defaultTheme.shadows[2],
+              backgroundColor: defaultTheme.palette.grey[300],
+            },
           },
         },
       ],
@@ -46,7 +62,7 @@ export const muiTheme = createMuiTheme({
 
 declare module "@material-ui/core/Button" {
   interface ButtonPropsVariantOverrides {
-    dashed: true;
+    pill: true;
   }
 }
 

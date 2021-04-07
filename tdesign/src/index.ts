@@ -1,5 +1,4 @@
 /** @jsxImportSource theme-ui */
-export { Box, Flex, Image, Button, Text } from "theme-ui";
 
 export { ErrorAlert, SuccessAlert } from "./Alert/index";
 

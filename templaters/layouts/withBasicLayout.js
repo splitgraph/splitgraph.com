@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 import { useMemo } from "react";
 
-import { defaultTheme, mdxComponents } from "@splitgraph/design";
+import { mdxComponents } from "@splitgraph/design";
 
 import { Link } from "@splitgraph/docs/components";
 import { InnerPageLayout } from "@splitgraph/docs/components/InnerPageLayout";

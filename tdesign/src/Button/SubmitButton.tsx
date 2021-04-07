@@ -6,7 +6,7 @@ export interface SubmitButtonProps {
   disabled?: boolean;
   hasErrors?: boolean;
   sx?: {};
-  variant?: string;
+  variant?: "text" | "outlined" | "contained" | "pill";
   children?: React.ReactNode;
 }
 
@@ -14,27 +14,28 @@ const SubmitButton = ({
   disabled = false,
   hasErrors = false,
   sx = {},
-  variant = "primary",
+  variant = "contained",
   children,
   ...rest
-}: SubmitButtonProps) => (
-  <Button
-    type="submit"
-    // variant={variant}
-    disableRipple
-    variant="contained"
-    sx={{
-      opacity: disabled ? "0.5" : "initial",
-      ":hover": {
-        cursor: disabled ? "initial" : "pointer",
-      },
-      ...sx,
-    }}
-    disabled={hasErrors || disabled}
-    {...rest}
-  >
-    {children}
-  </Button>
-);
+}: SubmitButtonProps) => {
+  return (
+    <Button
+      type="submit"
+      variant={variant}
+      disableRipple
+      sx={{
+        opacity: disabled ? "0.5" : "initial",
+        ":hover": {
+          cursor: disabled ? "initial" : "pointer",
+        },
+        ...sx,
+      }}
+      disabled={hasErrors || disabled}
+      {...rest}
+    >
+      {children}
+    </Button>
+  );
+};
 
 export default SubmitButton;

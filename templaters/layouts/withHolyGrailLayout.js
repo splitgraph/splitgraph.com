@@ -12,11 +12,10 @@ import {
   MainContent,
   Sidebar,
   HolyGrail,
-  LogoImage,
   mdxComponents,
 } from "@splitgraph/design";
 
-import { InterPageNav, Heading } from "@splitgraph/tdesign";
+import { InterPageNav, Heading, LogoImage } from "@splitgraph/tdesign";
 
 import { BaseLayout } from "@splitgraph/design/Layout";
 import { Link, DocSearch } from "@splitgraph/docs/components";
@@ -122,7 +121,10 @@ const withHolyGrailLayout = ({
                 },
               }}
             >
-              <LogoImage logoURL="/static/splitgraph_logo.svg" />
+              <LogoImage
+                logoURL="/static/splitgraph_logo.svg"
+                sx={{ marginRight: "1ch", padding: 0.5 }}
+              />
               <a
                 href="/"
                 aria-label="homepage"
