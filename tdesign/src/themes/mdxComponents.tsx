@@ -1,12 +1,13 @@
 /** @jsxImportSource theme-ui */
 
-// import defaultTheme from "./defaultTheme";
-import { makeDefaultTheme } from "@splitgraph/tdesign";
+import { makeDefaultTheme } from "./defaultTheme";
+import { ThemeUIStyleObject } from "theme-ui";
+
 const defaultTheme = makeDefaultTheme();
 
 export const mdxComponents = {
   pre: ({ children, ...rest }) => (
-    <pre sx={defaultTheme.styles.pre} {...rest}>
+    <pre sx={defaultTheme.styles.pre as ThemeUIStyleObject} {...rest}>
       {children}
     </pre>
   ),
@@ -16,7 +17,7 @@ export const mdxComponents = {
     </code>
   ),
   inlineCode: ({ children, ...rest }) => (
-    <code sx={defaultTheme.styles.inlineCode} {...rest}>
+    <code sx={defaultTheme.styles.inlineCode as ThemeUIStyleObject} {...rest}>
       {children}
     </code>
   ),

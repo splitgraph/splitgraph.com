@@ -1,11 +1,11 @@
-/** @jsxImportSource theme-ui */
-
-// import {
-//   IconChevronLeftPrimaryColor,
-//   IconChevronRightPrimaryColor,
-// } from "@splitgraph/tdesign";
-
 import { Box } from "@material-ui/core";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { SxProps } from "@material-ui/system";
+
+import {
+  IconChevronLeftPrimaryColor,
+  IconChevronRightPrimaryColor,
+} from "../../Icon";
 
 const linkBoxStyle = {
   padding: "1rem",
@@ -60,7 +60,7 @@ const NavLink = ({ node, Link, children, justifyContent = "flex-start" }) => {
 const LeftNav = ({ node, Link, ...rest }) => {
   return node && node.url ? (
     <NavLink node={node} Link={Link} {...rest}>
-      {/* <IconChevronLeftPrimaryColor size="3rem" /> */}
+      <IconChevronLeftPrimaryColor size="3rem" />
       <Box className="link-text-container link-text-container--left">
         <span className="link-anchor-text" title={node.title}>
           {node.title}
@@ -80,13 +80,13 @@ const RightNav = ({ node, Link, ...rest }) => {
         </span>
         <span className="link-meta">Next</span>
       </Box>
-      {/* <IconChevronRightPrimaryColor size="3rem" /> */}
+      <IconChevronRightPrimaryColor size="3rem" />
     </NavLink>
   ) : null;
 };
 
 const InterPageNav = ({ Link, right, left }) => {
-  const style = {
+  const style: SxProps<Theme> = {
     display: "flex",
     paddingTop: ["initial", "initial", "8rem"],
     paddingBottom: ["initial", "initial", "8rem"],

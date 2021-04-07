@@ -26,6 +26,7 @@ export {
   marketingTheme,
   tocStyles,
   muiTheme,
+  mdxComponents,
 } from "./themes/index";
 
 export { ThemeProvider } from "theme-ui";

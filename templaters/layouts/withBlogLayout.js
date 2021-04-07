@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 
-import { mdxComponents } from "@splitgraph/design";
+import { mdxComponents } from "@splitgraph/tdesign";
 import {
   Link,
   BlogPost,
