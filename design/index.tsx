@@ -12,5 +12,3 @@ export {
   Sidebar,
   HolyGrail,
 } from "./Layout";
-
-export { mdxComponents } from "./themes/mdxComponents";
