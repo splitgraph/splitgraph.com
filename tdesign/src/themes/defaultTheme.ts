@@ -18,6 +18,15 @@ export const muiTheme = createMuiTheme({
     background: {
       default: "#e0ffff",
     },
+    errorBackground: {
+      main: "rgba(193, 18, 18, 0.5)",
+    },
+    successBackground: {
+      main: "rgba(59, 141, 54, 0.5)",
+    },
+    success: {
+      main: "#3B8D36",
+    },
   },
   components: {
     MuiButton: {
@@ -63,6 +72,17 @@ export const muiTheme = createMuiTheme({
 declare module "@material-ui/core/Button" {
   interface ButtonPropsVariantOverrides {
     pill: true;
+  }
+}
+
+declare module "@material-ui/core/styles/createPalette" {
+  interface Palette {
+    errorBackground?: Palette["primary"];
+    successBackground?: Palette["primary"];
+  }
+  interface PaletteOptions {
+    errorBackground?: PaletteOptions["primary"];
+    successBackground?: PaletteOptions["primary"];
   }
 }
 
