@@ -1,18 +1,12 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
     "paths": {
       "@material-ui/*": ["docs/node_modules/material-ui/*"]
     }
   },
-  "include": [
-    "content",
-    "content-scripts",
-    "design",
-    "docs",
-    "tdesign",
-    "templaters"
-  ],
-
   "exclude": ["node_modules"]
+  // "references": [{ "path": "tdesign" }, { "path": "docs" }]
 }

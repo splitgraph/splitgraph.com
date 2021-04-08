@@ -32,3 +32,5 @@ libmdx
 # (although setup.sh can still be useful to run locally)
 # !.yarn/releases/yarn-berry.js
 # !.yarn/plugins/*
+
+dist
