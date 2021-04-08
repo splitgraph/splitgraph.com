@@ -1,20 +1,21 @@
 {
   "extends": "../tsconfig.json",
-  "compilerOptions": {
-    "tsBuildInfoFile": "./dist/tdesign-tsconfig.tsbuildinfo"
-    // "paths": {
-    //   "@material-ui/core/styles": [
-    //     "@cloud/catalog/node_modules/@material-ui/core/styles"
-    //   ]
-    // }
-  },
+  // "compilerOptions": {
+  // "tsBuildInfoFile": "./dist/tdesign-tsconfig.tsbuildinfo",
+  // "outDir": "dist"
+  // "paths": {
+  //   "@material-ui/core/styles": [
+  //     "@cloud/catalog/node_modules/@material-ui/core/styles"
+  //   ]
+  // }
+  // },
   "exclude": ["node_modules"],
   "include": [
-    "next-env.d.ts",
+    // "next-env.d.ts",
     "**/*.js",
     "**/*.ts",
-    "**/*.tsx",
-    "../**/*.ts",
-    "../**/*.tsx"
+    "**/*.tsx"
+    // "../**/*.ts",
+    // "../**/*.tsx"
   ]
 }

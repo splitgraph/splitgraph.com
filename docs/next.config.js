@@ -28,7 +28,16 @@ for (let castKey of Object.keys(castManifest)) {
   console.log("    ", castKey);
 }
 
+const IGNORE_BUILD_ERRORS = process.env.IGNORE_BUILD_ERRORS === "true";
+
+if (IGNORE_BUILD_ERRORS) {
+  console.warn("Suppressing next.js typecheck...");
+}
+
 const nextConfig = {
+  typescript: {
+    ignoreBuildErrors: IGNORE_BUILD_ERRORS,
+  },
   experimental: {
     externalDir: true,
   },

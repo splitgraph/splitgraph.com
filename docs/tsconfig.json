@@ -1,8 +1,15 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "noEmit": true
+    "jsxImportSource": "@emotion/react",
+    "noEmit": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "pages/_content"]
+  "references": [
+    { "path": "../design" },
+    { "path": "../tdesign" },
+    { "path": "../lib" },
+    { "path": "../templaters" }
+  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.jsx", "**/*.js"],
+  "exclude": ["node_modules", "pages/_content", ".next"]
 }
