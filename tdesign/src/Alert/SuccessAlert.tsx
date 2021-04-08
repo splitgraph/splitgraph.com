@@ -1,5 +1,7 @@
 /** @jsxImportSource theme-ui */
-import { Box, Text } from "theme-ui";
+import { Box } from "@material-ui/core";
+import { Text } from "theme-ui";
+import { useTheme } from "@material-ui/core/styles";
 import MutedLink from "../Link/MutedLink";
 
 const Checkmark = () => {
@@ -41,18 +43,19 @@ const SuccessAlert = ({
   onClickDismiss,
   dismissLinkOwnRow = false,
 }: ISuccessAlertProps) => {
+  const theme = useTheme();
   return (
     <Box
       sx={{
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
-        padding: 2,
+        padding: "8px",
         marginBottom: 4,
         minWidth: "30vw",
-        backgroundColor: "successBackground",
+        backgroundColor: theme.palette.successBackground.main,
         backgroundOpacity: 0.2,
-        border: "1px solid success",
+        border: `1px solid ${theme.palette.success.main}`,
         ...(dismissLinkOwnRow
           ? {
               flexWrap: "wrap",
@@ -63,7 +66,7 @@ const SuccessAlert = ({
       <Box
         sx={{
           display: "flex",
-          // width: dismissLinkText && dismissLinkHref ? 7 / 10 : 10 / 10,
+          width: dismissLinkText && dismissLinkHref && "70%",
         }}
       >
         <Checkmark />
@@ -74,8 +77,8 @@ const SuccessAlert = ({
         <Box
           sx={{
             display: "flex",
-            width: 3 / 10,
-            flexGrow: 1,
+            // width: "30%",
+            // flexGrow: 1,
             justifyContent: dismissLinkOwnRow ? "flex-start" : "flex-end",
           }}
         >

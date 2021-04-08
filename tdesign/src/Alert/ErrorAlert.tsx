@@ -1,5 +1,6 @@
 /** @jsxImportSource theme-ui */
 import { Box, Typography } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
 import MutedLink from "../Link/MutedLink";
 
 const ErrorHeading = () => {
@@ -37,6 +38,7 @@ const ErrorAlert = ({
   dismissLinkHref,
 }: ErrorAlertProps) => {
   const trimmedMessage = message ? message.replace(/Error\:?\s*/, "") : "";
+  const theme = useTheme();
 
   return (
     <Box
@@ -46,21 +48,19 @@ const ErrorAlert = ({
         justifyContent: "space-between",
         flexDirection: "row",
         minWidth: "30vw",
-        backgroundColor: "white",
+        backgroundColor: theme.palette.errorBackground.main,
         backgroundOpacity: 0.2,
         border: "1px solid red",
-        padding: 8,
+        padding: "8px",
       }}
     >
-      <Box sx={{ display: "flex", width: 7 / 10 }}>
+      <Box sx={{ display: "flex" }}>
         <ErrorHeading />
         <ErrorMessage message={trimmedMessage} />
       </Box>
 
       {dismissLinkText && dismissLinkHref && (
-        <Box
-          sx={{ display: "flex", width: 3 / 10, justifyContent: "flex-end" }}
-        >
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           <ErrorResetLink text={dismissLinkText} href={dismissLinkHref} />
         </Box>
       )}
