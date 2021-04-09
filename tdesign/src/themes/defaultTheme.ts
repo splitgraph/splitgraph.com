@@ -16,7 +16,7 @@ export const muiTheme = createMuiTheme({
       main: "#8D363C",
     },
     background: {
-      default: "#e0ffff",
+      // default: "#e0ffff",
     },
     errorBackground: {
       main: "rgba(193, 18, 18, 0.5)",
