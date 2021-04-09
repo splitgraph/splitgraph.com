@@ -2,8 +2,7 @@
 // @ts-ignore
 import * as React from "react";
 
-/** @jsxImportSource theme-ui */
-import { Box } from "theme-ui";
+import { Box } from "@material-ui/core";
 
 export interface HeaderProps {
   children?: React.ReactNode;
@@ -12,9 +11,9 @@ export interface HeaderProps {
 
 const headerSx: any = {
   backgroundColor: "heavy",
-  // borderBottomColor: 'primary',
-  // borderBottomStyle: 'solid',
-  // borderBottomWidth: '1px',
+  // borderBottomColor: "primary",
+  // borderBottomStyle: "solid",
+  // borderBottomWidth: "1px",
   display: "grid",
   gridTemplateColumns: "1fr 1fr 2fr",
   gridTemplateRows: "1fr",
