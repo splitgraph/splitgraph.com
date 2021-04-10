@@ -1,5 +1,3 @@
-/** @jsxImportSource theme-ui */
-
 export { ErrorAlert, SuccessAlert } from "./Alert/index";
 
 export { Avatar } from "./Avatar";

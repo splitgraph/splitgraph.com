@@ -1,4 +1,4 @@
-/** @jsxImportSource theme-ui */
+// @ts-nocheck
 import { Box, Typography } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import MutedLink from "../Link/MutedLink";
