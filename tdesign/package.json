@@ -1,25 +1,25 @@
 {
   "version": "0.1.0",
-  "license": "MIT",
+  "description": "Primitive design components for splitgraph, shared by public repositories.",
+  "private": true,
   "main": "src/index.ts",
   "peerDependencies": {
     "@csstools/normalize.css": "*",
-    "@emotion/react": "*",
-    "@material-ui/core": "*",
-    "@material-ui/icons": "*",
     "@mdx-js/react": "*",
     "@theme-ui/prism": "*",
     "dayjs": "*",
-    "emotion-theming": "*",
     "iframe-resizer-react": "*",
     "next": "*",
     "react": "*",
-    "react-dom": "*",
-    "theme-ui": "*"
+    "react-dom": "*"
   },
   "name": "@splitgraph/tdesign",
   "author": "Splitgraph Limited",
-  "devDependencies": {
-    "@material-ui/core": "next"
+  "dependencies": {
+    "@emotion/react": "11.1.5",
+    "@emotion/styled": "11.1.5",
+    "@material-ui/core": "5.0.0-alpha.29",
+    "@material-ui/icons": "5.0.0-alpha.28",
+    "theme-ui": "^0.6.2"
   }
 }

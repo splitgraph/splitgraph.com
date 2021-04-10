@@ -4,6 +4,7 @@
     "**/*.js",
     "**/*.ts",
     "**/*.tsx",
+    "../docs/compile/*.js",
     "../docs/components/*.tsx",
     "../docs/hocs/*.tsx",
     "../docs/components/*.ts",

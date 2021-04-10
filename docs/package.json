@@ -5,20 +5,19 @@
   "license": "MIT",
   "scripts": {
     "dev": "yarn run clean && node server.js",
-    "build": "NODE_OPTIONS='--max_old_space_size=4096' next build && next export",
+    "tsc": "yarn workspace js tsc --build --verbose splitgraph.com/docs",
+    "build": "yarn tsc && next build && next export",
+    "build-only": "NODE_ENV=production NEXT_WEBPACK_LOGGING=infrastructure IGNORE_BUILD_ERRORS=true NODE_OPTIONS='--max_old_space_size=4096' yarn next build && yarn next export",
     "deploy": "cp now.json out/ && yarn run now",
     "start": "serve out",
-    "clean": "./clean.sh"
+    "clean": "./clean.sh",
+    "hello": "echo Hello from $(pwd)"
   },
   "dependencies": {
     "@babel/plugin-transform-react-jsx": "^7.13.12",
     "@babel/preset-env": "^7.13.12",
     "@babel/preset-react": "^7.12.13",
     "@csstools/normalize.css": "^10.1.0",
-    "@emotion/react": "^11.1.5",
-    "@emotion/styled": "^11.1.5",
-    "@material-ui/core": "next",
-    "@material-ui/icons": "next",
     "@mdx-js/loader": "^1.6.22",
     "@mdx-js/react": "^1.4.5",
     "@next/bundle-analyzer": "^10.0.9",
@@ -28,7 +27,7 @@
     "@splitgraph/lib": "workspace:*",
     "@splitgraph/tdesign": "workspace:*",
     "@splitgraph/templaters": "workspace:*",
-    "@theme-ui/prism": "0.3.5",
+    "@theme-ui/prism": "0.6.2",
     "@zeit/next-mdx": "^1.2.0",
     "babel-plugin-add-module-exports": "^1.0.2",
     "babel-plugin-macros": "^2.6.1",
@@ -53,7 +52,6 @@
     "remark-disable-tokenizers": "^1.0.23",
     "rimraf": "^3.0.0",
     "serve": "^11.2.0",
-    "theme-ui": "0.6.0",
     "unist-util-find": "^1.0.1"
   },
   "devDependencies": {
@@ -67,5 +65,12 @@
     "@types/styled-system": "^5.1.9",
     "now": "^18.0.0",
     "webpack": "^5.28.0"
+  },
+  "peerDependencies": {
+    "@emotion/react": "*",
+    "@emotion/styled": "*",
+    "@material-ui/core": "*",
+    "@material-ui/icons": "*",
+    "theme-ui": "*"
   }
 }

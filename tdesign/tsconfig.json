@@ -1,6 +1,13 @@
 {
   "extends": "../tsconfig.json",
   // "compilerOptions": {
+  //   "outFile": "index.d.ts",
+  //   "outDir": "../dist/tdesign",
+  //   "module": "None",
+  //   "isolatedModules": false,
+  //   "resolveJsonModule": false
+  // },
+  // "compilerOptions": {
   // "tsBuildInfoFile": "./dist/tdesign-tsconfig.tsbuildinfo",
   // "outDir": "dist"
   // "paths": {
@@ -8,6 +15,11 @@
   //     "@cloud/catalog/node_modules/@material-ui/core/styles"
   //   ]
   // }
+  // },
+  // "compilerOptions": {
+  //   "paths": {
+  //     "@material-ui/*": ["@splitgraph/docs/node_modules/@material-ui/*"]
+  //   }
   // },
   "exclude": ["node_modules"],
   "include": [
