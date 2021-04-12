@@ -3,6 +3,9 @@ export * from "./cssSvgStrings";
 import BaseIcon from "./BaseIcon";
 export { BaseIcon };
 
+import IconAll from "./IconAll";
+export { IconAll };
+
 import IconEmail from "./IconEmail";
 export { IconEmail };
 
@@ -203,6 +206,15 @@ export { IconLogoDiscord };
 
 import IconAlertInfoCircle from "./IconAlertInfoCircle";
 export { IconAlertInfoCircle };
+
+import IconRepositories from "./IconRepositories";
+export { IconRepositories };
+
+import IconNamespaces from "./IconNamespaces";
+export { IconNamespaces };
+
+import IconTopics from "./IconTopics";
+export { IconTopics };
 
 import IconSearch from "./IconSearch";
 export { IconSearch };
