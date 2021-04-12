@@ -1,33 +1,8 @@
 {
   "extends": "../tsconfig.json",
-  // "compilerOptions": {
-  //   "outFile": "index.d.ts",
-  //   "outDir": "../dist/tdesign",
-  //   "module": "None",
-  //   "isolatedModules": false,
-  //   "resolveJsonModule": false
-  // },
-  // "compilerOptions": {
-  // "tsBuildInfoFile": "./dist/tdesign-tsconfig.tsbuildinfo",
-  // "outDir": "dist"
-  // "paths": {
-  //   "@material-ui/core/styles": [
-  //     "@cloud/catalog/node_modules/@material-ui/core/styles"
-  //   ]
-  // }
-  // },
-  // "compilerOptions": {
-  //   "paths": {
-  //     "@material-ui/*": ["@splitgraph/docs/node_modules/@material-ui/*"]
-  //   }
-  // },
+  "compilerOptions": {
+    "jsxImportSource": "@emotion/react"
+  },
   "exclude": ["node_modules"],
-  "include": [
-    // "next-env.d.ts",
-    "**/*.js",
-    "**/*.ts",
-    "**/*.tsx"
-    // "../**/*.ts",
-    // "../**/*.tsx"
-  ]
+  "include": ["**/*.js", "**/*.ts", "**/*.tsx"]
 }
