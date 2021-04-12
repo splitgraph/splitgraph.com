@@ -3,6 +3,7 @@
   "description": "Primitive design components for splitgraph, shared by public repositories.",
   "private": true,
   "main": "src/index.ts",
+  "sideEffects": false,
   "peerDependencies": {
     "@csstools/normalize.css": "*",
     "@mdx-js/react": "*",

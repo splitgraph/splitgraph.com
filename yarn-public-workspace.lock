@@ -1853,12 +1853,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:^10.0.9":
-  version: 10.0.9
-  resolution: "@next/bundle-analyzer@npm:10.0.9"
+"@next/bundle-analyzer@npm:^10.1.3":
+  version: 10.1.3
+  resolution: "@next/bundle-analyzer@npm:10.1.3"
   dependencies:
     webpack-bundle-analyzer: 4.3.0
-  checksum: 4a7b3898af09f5c5ad9b67939d1970f6d0d3176c40cef0eae57d3effdedd430a1ecfd197aaaea3be47c43df774bde54d5296663428a6404cffc8503979694e3b
+  checksum: fd4032b4af8f6751560b80736b047586631d37caccdbb422fe3944977a2c4be582875fb8f395297007367217bd73fdeff8f3fbee92b1fb35bc5c45480dee9f23
   languageName: node
   linkType: hard
 
@@ -2194,7 +2194,7 @@ __metadata:
     "@emotion/babel-preset-css-prop": ^11.2.0
     "@mdx-js/loader": ^1.6.22
     "@mdx-js/react": ^1.4.5
-    "@next/bundle-analyzer": ^10.0.9
+    "@next/bundle-analyzer": ^10.1.3
     "@next/mdx": ^10.0.9
     "@splitgraph/content": "workspace:*"
     "@splitgraph/design": "workspace:*"
