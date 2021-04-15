@@ -49,7 +49,7 @@ const BaseLayout = ({
       ...extraHeaderStyle,
     },
     ".logo-text": {
-      fontSize: "26pt",
+      fontSize: "22pt",
       color: "initial",
     },
     ".logo-text:hover": {
