@@ -36,29 +36,20 @@ const Header = ({ children }: HeaderProps) => {
         },
         ".header--center": {
           gridArea: "1 / 2 / 2 / 3",
-          // backgroundColor: 'red',
           display: "flex",
           alignItems: "center",
           justifyContent: "flex-start",
-          // color: "light",
         },
         ".header--right": {
           gridArea: "1 / 3 / 2 / 4",
-          // backgroundColor: 'purple',
           display: "flex",
           alignItems: "center",
           justifyContent: "flex-end",
         },
         ".logo-text": {
-          // color: "sglightblue",
-          // fontSize: '1.5rem',
-          paddingLeft: "1ch",
-          ":hover": {
-            color: "white",
-          },
+          paddingLeft: ".5ch",
         },
         a: {
-          // color: "light",
           fontWeight: "bold",
           textDecoration: "underline",
           marginRight: "1ch",
