@@ -48,6 +48,13 @@ const BaseLayout = ({
     ".header--container": {
       ...extraHeaderStyle,
     },
+    ".logo-text": {
+      fontSize: "26pt",
+      color: "initial",
+    },
+    ".logo-text:hover": {
+      color: "initial",
+    },
     ...extraStyle,
   } as ThemeUIStyleObject;
 
@@ -64,9 +71,7 @@ const BaseLayout = ({
               aria-label="home"
               href={"/"}
             >
-              <LogoImage
-                logoURL={"/static/splitgraph_logo_light_nocircle.svg"}
-              />
+              <LogoImage logoURL={"/static/brandmark.svg"} />
               <LogoText text={logoText} />
             </a>
           </HeaderLeft>
