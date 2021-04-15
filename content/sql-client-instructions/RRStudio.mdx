@@ -1,0 +1,19 @@
+# R, RStudio
+
+The `RPostgres` driver does not support connecting to clients which have disabled prepared statements (see the [GitHub issue](https://github.com/r-dbi/RPostgres/issues/185) for details) so it is recommended that you use the `RPostgreSQL` driver instead.
+
+For example:
+
+```r
+library(DBI)
+library(RPostgreSQL)
+library(dbplyr)
+
+connection <- dbConnect(
+  dbDriver("PostgreSQL"),
+  host = "data.splitgraph.com",
+  dbname = "ddn",
+  user = "...",
+  password = "..."
+)
+```

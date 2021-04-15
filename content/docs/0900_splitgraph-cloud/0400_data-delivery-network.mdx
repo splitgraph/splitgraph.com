@@ -154,6 +154,22 @@ Introspection query interception doesn't work on DataGrip (you will see an empty
 
 The `RPostgres` driver does not support connecting to clients which have disabled prepared statements (see the [GitHub issue](https://github.com/r-dbi/RPostgres/issues/185) for details) so it is recommended that you use the `RPostgreSQL` driver instead.
 
+For example:
+
+```r
+library(DBI)
+library(RPostgreSQL)
+library(dbplyr)
+
+connection <- dbConnect(
+  dbDriver("PostgreSQL"),
+  host = "data.splitgraph.com",
+  dbname = "ddn",
+  user = "...",
+  password = "..."
+)
+```
+
 ## Roadmap
 
 We aim to make the SQL endpoint the core of Splitgraph's offering, moving us to being a "data delivery network": a single endpoint giving you access to all your data with extra services like caching, granular access control, auditing, query firewalling or performance optimization.
