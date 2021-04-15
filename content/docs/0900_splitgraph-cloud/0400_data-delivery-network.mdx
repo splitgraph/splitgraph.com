@@ -150,6 +150,10 @@ SQL queries work, allowing you to use Splitgraph data in your Metabase dashboard
 
 Introspection query interception doesn't work on DataGrip (you will see an empty tree in the sidebar) but you can still run all SQL queries.
 
+### R, RStudio
+
+The `RPostgres` driver does not support connecting to clients which have disabled prepared statements (see the [GitHub issue](https://github.com/r-dbi/RPostgres/issues/185) for details) so it is recommended that you use the `RPostgreSQL` driver instead.
+
 ## Roadmap
 
 We aim to make the SQL endpoint the core of Splitgraph's offering, moving us to being a "data delivery network": a single endpoint giving you access to all your data with extra services like caching, granular access control, auditing, query firewalling or performance optimization.
