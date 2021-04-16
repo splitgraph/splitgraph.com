@@ -17,7 +17,7 @@ const Header = ({ children }: HeaderProps) => {
       className="header--container"
       sx={{
         display: "grid",
-        gridTemplateColumns: "1fr 1fr 2fr",
+        gridTemplateColumns: "1fr 2fr 1fr",
         gridTemplateRows: "1fr",
         gridColumnGap: "0px",
         gridRowGap: "0px",
