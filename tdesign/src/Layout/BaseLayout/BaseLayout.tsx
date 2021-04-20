@@ -23,7 +23,7 @@ const BaseLayout = ({
   extraHeaderStyle = {},
   extraStyle = {},
   showHeader = true,
-  logoText = "Splitgraph",
+  logoText,
 }: BaseLayoutProps) => {
   const containerStyle = {
     // maxWidth: '100vw',
