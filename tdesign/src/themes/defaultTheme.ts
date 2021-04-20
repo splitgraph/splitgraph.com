@@ -27,6 +27,15 @@ export const muiTheme = createMuiTheme({
     success: {
       main: "#3B8D36",
     },
+    red: {
+      main: "#F94569",
+    },
+    linkGreen: {
+      main: "rgb(83,183,166)",
+    },
+    h7small: {
+      main: "rgb(85, 86, 86)",
+    },
   },
   components: {
     MuiButtonBase: {
@@ -84,10 +93,16 @@ declare module "@material-ui/core/styles/createPalette" {
   interface Palette {
     errorBackground?: Palette["primary"];
     successBackground?: Palette["primary"];
+    red?: Palette["primary"];
+    linkGreen?: Palette["primary"];
+    h7small?: Palette["primary"];
   }
   interface PaletteOptions {
     errorBackground?: PaletteOptions["primary"];
     successBackground?: PaletteOptions["primary"];
+    red?: PaletteOptions["primary"];
+    linkGreen?: PaletteOptions["primary"];
+    h7small?: PaletteOptions["primary"];
   }
 }
 
