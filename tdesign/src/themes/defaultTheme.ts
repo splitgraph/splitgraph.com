@@ -6,18 +6,18 @@ const defaultTheme = createMuiTheme(); // lets us reference MUI default style va
 export const muiTheme = createMuiTheme({
   palette: {
     // mode: "dark",
-    primary: {
-      main: "#36678d",
-    },
-    secondary: {
-      main: "#89368d",
-    },
-    error: {
-      main: "#8D363C",
-    },
-    background: {
-      // default: "#e0ffff",
-    },
+    // primary: {
+    //   main: "#36678d",
+    // },
+    // secondary: {
+    //   main: "#89368d",
+    // },
+    // error: {
+    //   main: "#8D363C",
+    // },
+    // background: {
+    //   default: "#e0ffff",
+    // },
     errorBackground: {
       main: "rgba(193, 18, 18, 0.5)",
     },
@@ -27,14 +27,97 @@ export const muiTheme = createMuiTheme({
     success: {
       main: "#3B8D36",
     },
-    red: {
+    flambeeBlue: {
+      main: "#2A81F6",
+      light: "#73B0FF",
+      dark: "#0056C2",
+    },
+    flambeeRed: {
       main: "#F94569",
+      light: "#FF7C97",
+      dark: "#C0003F",
     },
-    linkGreen: {
-      main: "rgb(83,183,166)",
+    flambeeGreen: {
+      main: "#53B7A6",
+      light: "#87EAD7",
+      dark: "#558777",
     },
-    h7small: {
-      main: "rgb(85, 86, 86)",
+    flambeeBlack: {
+      main: "#2C2D2D",
+      light: "#555656",
+      dark: "#000202",
+    },
+    flambeeWhite: {
+      main: "#F3F6FF",
+      light: "#FFFFFF",
+      dark: "#C0C3CC",
+    },
+  },
+  typography: {
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+    title1: {
+      fontFamily: "serif",
+      fontWeight: 600,
+      fontSize: "1.5rem",
+      lineHeight: 32,
+    },
+    title2: {
+      fontFamily: "serif",
+      fontWeight: 600,
+      fontSize: "1.25rem",
+      lineHeight: 1,
+    },
+    subtitle1: {
+      fontFamily: "sans-serif",
+      fontWeight: 600,
+      fontSize: "1rem",
+      lineHeight: 1.375,
+    },
+    subtitle2: {
+      fontFamily: "sans-serif",
+      fontSize: "1rem",
+      lineHeight: 1.5,
+    },
+    body: {
+      fontFamily: "sans-serif",
+      fontSize: ".875rem",
+      lineHeight: 1.71,
+      // color: defaultTheme.palette.flambeeBlack.dark,
+    },
+    bodyHighlighted: {
+      fontFamily: "sans-serif",
+      fontWeight: 600,
+      fontSize: ".875rem",
+      lineHeight: 1.71,
+    },
+    small: {
+      fontFamily: "sans-serif",
+      fontSize: ".75rem",
+      color: "rgb(85, 86, 86)",
+      lineHeight: 1.67,
+    },
+    smallHighlightedSB: {
+      fontFamily: "sans-serif",
+      fontSize: ".75rem",
+      fontWeight: 600,
+      lineHeight: 1.67,
+    },
+    smallHighlightedB: {
+      fontFamily: "sans-serif",
+      fontSize: ".75rem",
+      fontWeight: 600,
+      lineHeight: 1.67,
     },
   },
   components: {
@@ -82,7 +165,7 @@ export const muiTheme = createMuiTheme({
     },
   },
 });
-
+console.log("muiTheme", muiTheme);
 declare module "@material-ui/core/Button" {
   interface ButtonPropsVariantOverrides {
     pill: true;
@@ -91,18 +174,58 @@ declare module "@material-ui/core/Button" {
 
 declare module "@material-ui/core/styles/createPalette" {
   interface Palette {
+    flambeeBlack?: Palette["primary"];
+    flambeeWhite?: Palette["primary"];
+    flambeeBlue?: Palette["primary"];
+    flambeeRed?: Palette["primary"];
+    flambeeGreen?: Palette["primary"];
     errorBackground?: Palette["primary"];
     successBackground?: Palette["primary"];
-    red?: Palette["primary"];
-    linkGreen?: Palette["primary"];
-    h7small?: Palette["primary"];
   }
   interface PaletteOptions {
+    flambeeBlack?: PaletteOptions["primary"];
+    flambeeWhite?: PaletteOptions["primary"];
+    flambeeBlue?: PaletteOptions["primary"];
+    flambeeRed?: PaletteOptions["primary"];
+    flambeeGreen?: PaletteOptions["primary"];
     errorBackground?: PaletteOptions["primary"];
     successBackground?: PaletteOptions["primary"];
-    red?: PaletteOptions["primary"];
-    linkGreen?: PaletteOptions["primary"];
-    h7small?: PaletteOptions["primary"];
+  }
+}
+
+declare module "@material-ui/core/styles" {
+  interface TypographyVariants {
+    title1: React.CSSProperties;
+    title2: React.CSSProperties;
+    body: React.CSSProperties;
+    bodyHighlighted: React.CSSProperties;
+    small: React.CSSProperties;
+    smallHighlightedSB: React.CSSProperties;
+    smallHighlightedB: React.CSSProperties;
+  }
+
+  // allow configuration using `createMuiTheme`
+  interface TypographyVariantsOptions {
+    title1?: React.CSSProperties;
+    title2?: React.CSSProperties;
+    body?: React.CSSProperties;
+    bodyHighlighted?: React.CSSProperties;
+    small?: React.CSSProperties;
+    smallHighlightedSB?: React.CSSProperties;
+    smallHighlightedB?: React.CSSProperties;
+  }
+}
+
+// Update the Typography's variant prop options
+declare module "@material-ui/core/Typography" {
+  interface TypographyPropsVariantOverrides {
+    title1: true;
+    title2: true;
+    body: true;
+    bodyHighlighted: true;
+    small: true;
+    smallHighlightedSB: true;
+    smallHighlightedB: true;
   }
 }
 
