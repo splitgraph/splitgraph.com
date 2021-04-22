@@ -25,7 +25,7 @@ export interface LinkProps
   rel?: "nofollow" | string;
 }
 
-export default React.forwardRef(
+const SplitgraphLink = React.forwardRef(
   (
     {
       href,
@@ -50,3 +50,4 @@ export default React.forwardRef(
     </Link>
   )
 );
+export default SplitgraphLink;
