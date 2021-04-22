@@ -1,6 +1,5 @@
-/** @jsxImportSource @emotion/react */
-import { Box } from "@material-ui/core";
 import * as React from "react";
+import { Box } from "@material-ui/core";
 
 export interface IHeaderLeftProps {
   children?: React.ReactNode;

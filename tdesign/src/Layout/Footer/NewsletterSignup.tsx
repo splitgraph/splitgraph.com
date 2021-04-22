@@ -1,11 +1,10 @@
-/** @jsxImportSource theme-ui */
-import { Box } from "theme-ui";
-import { useState } from "react";
+import * as React from "react";
+import { Box } from "@material-ui/core";
 
 export interface INewsletterSignupProps {}
 
 const NewsletterSignup = ({}: INewsletterSignupProps) => {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = React.useState(false);
 
   return (
     <Box

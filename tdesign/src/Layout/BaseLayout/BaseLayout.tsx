@@ -1,6 +1,5 @@
-/** @jsxImportSource theme-ui */
-import { Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
+import { Box } from "@material-ui/core";
 
 import { Header, HeaderLeft, HeaderCenter, HeaderRight } from "../Header";
 import { LogoImage } from "../LogoImage";
@@ -10,8 +9,8 @@ export interface BaseLayoutProps {
   children?: React.ReactNode;
   renderHeaderRight?: () => React.ReactNode;
   renderHeaderCenter?: () => React.ReactNode;
-  extraHeaderStyle?: ThemeUIStyleObject;
-  extraStyle?: ThemeUIStyleObject;
+  extraHeaderStyle?: object;
+  extraStyle?: object;
   showHeader?: boolean;
   logoText?: string;
 }
@@ -56,7 +55,7 @@ const BaseLayout = ({
       color: "initial",
     },
     ...extraStyle,
-  } as ThemeUIStyleObject;
+  };
 
   const headerCenter = !!renderHeaderCenter ? renderHeaderCenter() : null;
   const headerRight = !!renderHeaderRight ? renderHeaderRight() : null;

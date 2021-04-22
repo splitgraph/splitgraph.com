@@ -1,7 +1,5 @@
-/** @jsxImportSource theme-ui */
-// @ts-ignore
-import { Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
+import { Box } from "@material-ui/core";
 
 import FooterSection from "./FooterSection";
 import NewsletterSignup from "./NewsletterSignup";
@@ -18,7 +16,7 @@ import {
 
 export interface IFooterProps {
   Link?: React.FunctionComponent<any>;
-  extraStyle?: ThemeUIStyleObject;
+  extraStyle?: object;
   footerVariant?: "dark";
 }
 
@@ -35,10 +33,7 @@ const darkVariant = {
   borderTopColor: "lightaccent",
 };
 
-const mixStyles = (
-  property: string,
-  ...styles: ThemeUIStyleObject[]
-): ThemeUIStyleObject => {
+const mixStyles = (property: string, ...styles: object[]) => {
   return styles.reduce(
     (mix, style) => ({
       ...mix,
