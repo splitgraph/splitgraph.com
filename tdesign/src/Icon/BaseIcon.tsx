@@ -1,10 +1,12 @@
-/** @jsxImportSource theme-ui */
-import { Text, ThemeUIStyleObject } from "theme-ui";
+// import { Text } from "theme-ui";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 export interface IIconProps {
   size?: string;
   sx?: any;
-  extraStyle?: ThemeUIStyleObject;
+  extraStyle?: SxProps<Theme>;
   color?: string;
   hoverColor?: string;
 }
@@ -18,7 +20,7 @@ export interface IBaseIconProps {
 
   // TODO: sx is deprecated here, but leave it around in case somewhere is using it
   sx?: any;
-  extraStyle?: ThemeUIStyleObject;
+  extraStyle?: SxProps<Theme>;
 }
 
 const BaseIcon = ({
@@ -43,35 +45,33 @@ const BaseIcon = ({
   // we must use a "mask" to change the color dynamically
   // https://stackoverflow.com/a/46904983/3793499
   return (
-    <Text
+    <Box
       className={`sg-icon sg-icon-${iconSlug}`}
-      sx={
-        {
-          ...(color
-            ? {
-                backgroundColor: color,
+      sx={{
+        ...(color
+          ? {
+              backgroundColor: color,
+              ...maskStyle,
+            }
+          : { backgroundImage: svgDataURI }),
+        ...(hoverColor
+          ? {
+              ":hover": {
+                backgroundColor: hoverColor,
                 ...maskStyle,
-              }
-            : { backgroundImage: svgDataURI }),
-          ...(hoverColor
-            ? {
-                ":hover": {
-                  backgroundColor: hoverColor,
-                  ...maskStyle,
-                },
-              }
-            : {}),
-          backgroundRepeat: "no-repeat",
-          backgroundSize: size,
-          minWidth: size,
-          minHeight: size,
-          ...sx,
-          ...extraStyle,
-        } as ThemeUIStyleObject
-      }
+              },
+            }
+          : {}),
+        backgroundRepeat: "no-repeat",
+        backgroundSize: size,
+        minWidth: size,
+        minHeight: size,
+        ...sx,
+        ...extraStyle,
+      }}
     >
       &nbsp;
-    </Text>
+    </Box>
   );
 };
 
