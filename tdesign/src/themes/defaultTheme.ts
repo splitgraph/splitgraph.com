@@ -6,9 +6,10 @@ const defaultTheme = createMuiTheme(); // lets us reference MUI default style va
 export const muiTheme = createMuiTheme({
   palette: {
     // mode: "dark",
-    // primary: {
-    //   main: "#36678d",
-    // },
+    primary: {
+      // TODO: this affects <MuiLink>, consider what else?
+      main: "#36678d",
+    },
     // secondary: {
     //   main: "#89368d",
     // },
@@ -165,7 +166,7 @@ export const muiTheme = createMuiTheme({
     },
   },
 });
-console.log("muiTheme", muiTheme);
+
 declare module "@material-ui/core/Button" {
   interface ButtonPropsVariantOverrides {
     pill: true;
