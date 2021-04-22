@@ -252,3 +252,6 @@ import GitLabLogoIcon from "./ThirdParty/GitLab/GitLabLogoIcon";
 import GoogleLogoIcon from "./ThirdParty/Google/GoogleLogoIcon";
 
 export { Octicon, GitLabLogoIcon, GoogleLogoIcon };
+
+import IconArrowRight from "./IconArrowRight";
+export { IconArrowRight };
