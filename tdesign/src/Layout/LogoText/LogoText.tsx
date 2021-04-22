@@ -1,6 +1,3 @@
-/** @jsxImportSource theme-ui */
-// @ts-ignore
-
 export interface ILogoTextProps {
   text?: string;
 }

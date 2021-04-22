@@ -1,13 +1,12 @@
-/** @jsxImportSource theme-ui */
-import { Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
+import { Box } from "@material-ui/core";
 
 import FooterLink from "./FooterLink";
 
 export interface IFooterSectionProps {
   header: string;
   links: [string, string][];
-  extraStyle?: ThemeUIStyleObject;
+  extraStyle?: object;
   Link?: React.FunctionComponent<any>;
 }
 
