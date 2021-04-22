@@ -1,14 +1,16 @@
-/** @jsxImportSource theme-ui */
-import { Box, ThemeUIStyleObject } from "theme-ui";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
+// import { ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 
 export interface IContentHeaderProps {
   children?: React.ReactNode;
-  extraStyle?: ThemeUIStyleObject;
+  extraStyle?: object;
 }
 
 const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
-  const headerContainerStyle = {
+  const headerContainerStyle: SxProps<Theme> = {
     marginBottom: "2rem",
     color: "primary",
     ...extraStyle,
@@ -27,7 +29,7 @@ const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
         margin: 0,
       },
     },
-  } as ThemeUIStyleObject;
+  };
 
   return (
     <Box sx={headerContainerStyle}>
