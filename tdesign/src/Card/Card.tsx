@@ -1,15 +1,6 @@
-/** @jsxImportSource theme-ui */
-import { Box } from "theme-ui";
-import * as React from "react";
+import { Box } from "@material-ui/core";
 
-// TODO Mostly a placeholder component atm
-
-export interface ICardProps {
-  sx?: any;
-  children?: React.ReactNode;
-}
-
-const Card = ({ children, sx }: ICardProps) => {
+const Card = ({ children, sx }) => {
   const cardSx = {
     ...sx,
   };

@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import { forwardRef } from "react";
 import { Box, Input as MuiInput, InputProps } from "@material-ui/core/";
 import { DangerText, MutedText, SuccessText, WarningText } from "../Text";

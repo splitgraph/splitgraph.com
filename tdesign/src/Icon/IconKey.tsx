@@ -1,5 +1,3 @@
-/** @jsxImportSource theme-ui */
-
 import { keyIconURI } from "./cssSvgStrings";
 import BaseIcon, { IIconProps } from "./BaseIcon";
 

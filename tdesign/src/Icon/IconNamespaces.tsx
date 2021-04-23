@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-
 import { namespaceIconURI } from "./cssSvgStrings";
 import BaseIcon, { IIconProps } from "./BaseIcon";
 
