@@ -62,3 +62,5 @@ export { InterPageNav } from "./Nav";
 export { Octicon, GitLabLogoIcon, GoogleLogoIcon } from "./Icon";
 
 export { SplitgraphTopBar } from "./SplitgraphTopBar";
+
+export { Box } from "./Box";
