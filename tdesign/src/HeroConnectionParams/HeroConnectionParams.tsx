@@ -1,5 +1,4 @@
-/** @jsxImportSource theme-ui */
-import { Box, Text } from "theme-ui";
+import { Box } from "@material-ui/core";
 import IframeResizer from "iframe-resizer-react";
 
 import { PreWithCopy } from "../PreWithCopy";
@@ -91,9 +90,9 @@ const HeroConnectionParams = ({
           />
         ) : (
           <Box>
-            <Text sx={{ color: "heavy", fontWeight: "bold", display: "block" }}>
+            <Box sx={{ color: "heavy", fontWeight: "bold", display: "block" }}>
               Username / Password
-            </Text>
+            </Box>
             <Box
               sx={{
                 display: "flex",
@@ -111,7 +110,7 @@ const HeroConnectionParams = ({
                 borderStyle: "solid",
                 borderColor: "gray",
                 a: {
-                  variant: "links.primary",
+                  // variant: "links.primary", //TODO use MUI theme singleton
                   textDecoration: "underline",
                   marginBottom: "1rem",
                 },

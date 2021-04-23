@@ -1,6 +1,3 @@
-/** @jsxImportSource theme-ui */
-// @ts-ignore
-
 import { featureProvenanceIconURI } from "./cssSvgStrings";
 import BaseIcon, { IIconProps } from "./BaseIcon";
 

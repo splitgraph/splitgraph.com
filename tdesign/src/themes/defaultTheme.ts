@@ -53,6 +53,13 @@ export const muiTheme = createMuiTheme({
       light: "#FFFFFF",
       dark: "#C0C3CC",
     },
+    dark2light: {
+      main:
+        "linear-gradient(180deg, rgba(13,24,33,1) 0%, rgba(54,102,141,1) 100%)",
+    },
+    lightaccent: {
+      main: "#96ccff",
+    },
   },
   typography: {
     fontFamily: [
@@ -182,6 +189,8 @@ declare module "@material-ui/core/styles/createPalette" {
     flambeeGreen?: Palette["primary"];
     errorBackground?: Palette["primary"];
     successBackground?: Palette["primary"];
+    dark2light?: Palette["primary"];
+    lightaccent?: Palette["primary"];
   }
   interface PaletteOptions {
     flambeeBlack?: PaletteOptions["primary"];
@@ -191,6 +200,8 @@ declare module "@material-ui/core/styles/createPalette" {
     flambeeGreen?: PaletteOptions["primary"];
     errorBackground?: PaletteOptions["primary"];
     successBackground?: PaletteOptions["primary"];
+    dark2light?: PaletteOptions["primary"];
+    lightaccent?: PaletteOptions["primary"];
   }
 }
 

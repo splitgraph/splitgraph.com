@@ -1,6 +1,3 @@
-/** @jsxImportSource theme-ui */
-// @ts-ignore
-
 import { chevronDownIconURI } from "./cssSvgStrings";
 import BaseIcon, { IIconProps } from "./BaseIcon";
 

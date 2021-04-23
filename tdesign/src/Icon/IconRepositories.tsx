@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-
 import { repositoryIconURI } from "./cssSvgStrings";
 import BaseIcon, { IIconProps } from "./BaseIcon";
 
