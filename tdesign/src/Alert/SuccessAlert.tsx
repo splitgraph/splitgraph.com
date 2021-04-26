@@ -1,11 +1,15 @@
-/** @jsxImportSource theme-ui */
-import { Box } from "@material-ui/core";
-import { Text } from "theme-ui";
-import { useTheme } from "@material-ui/core/styles";
-import MutedLink from "../Link/MutedLink";
+/** @jsxImportSource @emotion/react */
+import { Box, Typography } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import MuiLink from "../Link/MuiLink";
 
 const Checkmark = () => {
-  return <Text sx={{ marginRight: 2, fontWeight: "bold" }}>&#10003;</Text>;
+  return (
+    <Typography sx={{ marginRight: 2, fontWeight: "bold" }}>
+      &#10003;
+    </Typography>
+  );
 };
 
 interface SuccessMessageProps {
@@ -23,9 +27,9 @@ interface ISuccessResetLinkProps {
 }
 
 const SuccessResetLink = ({ text, href }: ISuccessResetLinkProps) => (
-  <MutedLink sx={{ color: "#fff" }} href={href || "#"}>
+  <MuiLink sx={{ color: "#fff" }} href={href || "#"}>
     {text}
-  </MutedLink>
+  </MuiLink>
 );
 
 interface ISuccessAlertProps {
@@ -36,6 +40,23 @@ interface ISuccessAlertProps {
   dismissLinkOwnRow?: boolean;
 }
 
+const styles = {
+  display: "flex",
+  // flexDirection: "row",
+  // justifyContent: "space-between",
+  // padding: "8px",
+  // marginBottom: "4px",
+  // minWidth: "30vw",
+  // backgroundColor: (theme) => theme.palette.successBackground.main,
+  // backgroundOpacity: "20%",
+  // border: (theme) => `1px solid ${theme.palette.success.main}`,
+  // ...(dismissLinkOwnRow
+  //   ? {
+  //       flexWrap: "wrap",
+  //     }
+  //   : {}),
+};
+
 const SuccessAlert = ({
   message,
   dismissLinkText,
@@ -43,26 +64,8 @@ const SuccessAlert = ({
   onClickDismiss,
   dismissLinkOwnRow = false,
 }: ISuccessAlertProps) => {
-  const theme = useTheme();
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        padding: "8px",
-        marginBottom: 4,
-        minWidth: "30vw",
-        backgroundColor: theme.palette.successBackground.main,
-        backgroundOpacity: 0.2,
-        border: `1px solid ${theme.palette.success.main}`,
-        ...(dismissLinkOwnRow
-          ? {
-              flexWrap: "wrap",
-            }
-          : {}),
-      }}
-    >
+    <Box sx={styles}>
       <Box
         sx={{
           display: "flex",
@@ -89,7 +92,7 @@ const SuccessAlert = ({
               onClick={onClickDismiss}
             />
           ) : (
-            <Text
+            <Typography
               sx={{
                 color: "muted",
                 ":hover": { cursor: "pointer", textDecoration: "underline" },
@@ -97,7 +100,7 @@ const SuccessAlert = ({
               onClick={onClickDismiss}
             >
               {dismissLinkText}
-            </Text>
+            </Typography>
           )}
         </Box>
       )}

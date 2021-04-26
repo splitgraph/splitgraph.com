@@ -1,10 +1,9 @@
-/** @jsxImportSource theme-ui */
 import { Typography } from "@material-ui/core";
 
 const MutedText = ({ children, sx = {}, ...rest }) => (
   <Typography
     sx={{
-      color: "muted",
+      color: "#f6f6f9", //TODO use MUI theme
       ...sx,
     }}
     {...rest}

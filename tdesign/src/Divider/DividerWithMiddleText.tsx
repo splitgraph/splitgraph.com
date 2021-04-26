@@ -1,28 +1,22 @@
-/** @jsxImportSource theme-ui */
-import { Box } from "theme-ui";
-
-const middleStyle = {
-  marginBottom: 2,
-  height: "2rem",
-  color: "lightgray",
-  display: "inline-flex",
-};
+import { Box } from "@material-ui/core";
 
 const MiddleSegment = ({ children }) => (
   <Box
     sx={{
-      display: "flex",
+      display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
-      widdth: 1 / 5,
-      ...middleStyle,
+      width: "20%",
+      marginBottom: 2,
+      height: "2rem",
+      color: "lightgray",
     }}
   >
     {children}
   </Box>
 );
 
-const DividerWithMiddleText = ({ width = 9 / 10, children }) => (
+const DividerWithMiddleText = ({ width = "90%", children }) => (
   <Box
     sx={{
       display: "flex",
@@ -32,7 +26,7 @@ const DividerWithMiddleText = ({ width = 9 / 10, children }) => (
       minHeight: "1rem",
     }}
   >
-    <div
+    <Box
       sx={{
         width: "100%",
         // height: "1px",
@@ -43,7 +37,7 @@ const DividerWithMiddleText = ({ width = 9 / 10, children }) => (
 
     <MiddleSegment>{children}</MiddleSegment>
 
-    <div
+    <Box
       sx={{
         width: "100%",
         border: "1px solid lightgray",

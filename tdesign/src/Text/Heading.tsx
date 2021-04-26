@@ -1,16 +1,16 @@
-/** @jsxImportSource theme-ui */
-
+import { Box } from "@material-ui/core";
 const Heading = ({ sx = {}, children, ...rest }) => {
   return (
-    <h1
+    <Box
+      component="h1"
       sx={{
-        fontSize: 5,
+        fontSize: "32px",
         ...sx,
       }}
       {...rest}
     >
       {children}
-    </h1>
+    </Box>
   );
 };
 

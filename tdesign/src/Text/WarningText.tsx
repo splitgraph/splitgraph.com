@@ -1,10 +1,9 @@
-/** @jsxImportSource theme-ui */
 import { Typography } from "@material-ui/core";
 
 const WarningText = ({ children, sx = {}, ...rest }) => (
   <Typography
     sx={{
-      color: "warning",
+      color: "orange", //TODO use MUI theme
       ...sx,
     }}
     {...rest}

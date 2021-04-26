@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { Box, Typography } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
-import MutedLink from "../Link/MutedLink";
+import MuiLink from "../Link/MuiLink";
 
 const ErrorHeading = () => {
   return (
@@ -23,7 +22,7 @@ interface ErrorResetLinkProps {
 }
 
 const ErrorResetLink = ({ text }: ErrorResetLinkProps) => (
-  <MutedLink href={"#"}>{text}</MutedLink>
+  <MuiLink href={"#"}>{text}</MuiLink>
 );
 
 export interface ErrorAlertProps {
@@ -38,7 +37,6 @@ const ErrorAlert = ({
   dismissLinkHref,
 }: ErrorAlertProps) => {
   const trimmedMessage = message ? message.replace(/Error\:?\s*/, "") : "";
-  const theme = useTheme();
 
   return (
     <Box
@@ -48,7 +46,7 @@ const ErrorAlert = ({
         justifyContent: "space-between",
         flexDirection: "row",
         minWidth: "30vw",
-        backgroundColor: theme.palette.errorBackground.main,
+        backgroundColor: (theme) => theme.palette.errorBackground.main,
         backgroundOpacity: 0.2,
         border: "1px solid red",
         padding: "8px",

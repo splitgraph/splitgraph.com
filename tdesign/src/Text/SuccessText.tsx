@@ -1,10 +1,9 @@
-/** @jsxImportSource theme-ui */
 import { Typography } from "@material-ui/core";
 
 const SuccessText = ({ children, sx = {}, ...rest }) => (
   <Typography
     sx={{
-      color: "success",
+      color: "#3B8D36", //TODO use MUI theme
       ...sx,
     }}
     className="success-text"
