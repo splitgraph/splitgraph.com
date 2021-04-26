@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { Box, Typography } from "@material-ui/core";
 import { SxProps } from "@material-ui/system";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
@@ -40,23 +39,6 @@ interface ISuccessAlertProps {
   dismissLinkOwnRow?: boolean;
 }
 
-const styles = {
-  display: "flex",
-  // flexDirection: "row",
-  // justifyContent: "space-between",
-  // padding: "8px",
-  // marginBottom: "4px",
-  // minWidth: "30vw",
-  // backgroundColor: (theme) => theme.palette.successBackground.main,
-  // backgroundOpacity: "20%",
-  // border: (theme) => `1px solid ${theme.palette.success.main}`,
-  // ...(dismissLinkOwnRow
-  //   ? {
-  //       flexWrap: "wrap",
-  //     }
-  //   : {}),
-};
-
 const SuccessAlert = ({
   message,
   dismissLinkText,
@@ -64,6 +46,21 @@ const SuccessAlert = ({
   onClickDismiss,
   dismissLinkOwnRow = false,
 }: ISuccessAlertProps) => {
+  const styles: SxProps<Theme> = {
+    display: "flex",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    padding: "8px",
+    marginBottom: "4px",
+    minWidth: "30vw",
+    backgroundColor: (theme) => theme.palette.successBackground.main,
+    border: (theme) => `1px solid ${theme.palette.success.main}`,
+    ...(dismissLinkOwnRow
+      ? {
+          flexWrap: "wrap",
+        }
+      : {}),
+  };
   return (
     <Box sx={styles}>
       <Box
