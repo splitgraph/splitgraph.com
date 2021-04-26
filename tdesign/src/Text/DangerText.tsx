@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import { Typography } from "@material-ui/core";
 
 const DangerText = ({ children, sx = {}, ...rest }) => (
