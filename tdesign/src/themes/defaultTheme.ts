@@ -1,4 +1,6 @@
 import { createMuiTheme } from "@material-ui/core/styles";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 const defaultTheme = createMuiTheme(); // lets us reference MUI default style values below
 
@@ -13,9 +15,9 @@ export const muiTheme = createMuiTheme({
     // secondary: {
     //   main: "#89368d",
     // },
-    // error: {
-    //   main: "#8D363C",
-    // },
+    danger: {
+      main: "#8D363C",
+    },
     // background: {
     //   default: "#e0ffff",
     // },
@@ -60,69 +62,65 @@ export const muiTheme = createMuiTheme({
     lightaccent: {
       main: "#96ccff",
     },
+    gray: {
+      main: "#dddddf",
+    },
+    sglightblue: {
+      main: "#d5f6fe",
+    },
+    sgdarkblue: {
+      main: "#36678d",
+    },
   },
   typography: {
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(","),
+    fontFamily:
+      "-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;",
+    // Default to sans-serif, b/c of all the text styles 2 are serif and the rest sans. List from systemfontstack.com -> sans-serif
     title1: {
-      fontFamily: "serif",
+      fontFamily:
+        "Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol",
+      // via https://systemfontstack.com/
       fontWeight: 600,
       fontSize: "1.5rem",
-      lineHeight: 32,
+      lineHeight: 1.33,
     },
     title2: {
-      fontFamily: "serif",
+      fontFamily:
+        "Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol",
       fontWeight: 600,
       fontSize: "1.25rem",
       lineHeight: 1,
     },
     subtitle1: {
-      fontFamily: "sans-serif",
       fontWeight: 600,
       fontSize: "1rem",
       lineHeight: 1.375,
     },
     subtitle2: {
-      fontFamily: "sans-serif",
       fontSize: "1rem",
       lineHeight: 1.5,
     },
     body: {
-      fontFamily: "sans-serif",
       fontSize: ".875rem",
       lineHeight: 1.71,
       // color: defaultTheme.palette.flambeeBlack.dark,
     },
     bodyHighlighted: {
-      fontFamily: "sans-serif",
       fontWeight: 600,
       fontSize: ".875rem",
-      lineHeight: 1.71,
+      lineHeight: 1.429,
     },
     small: {
-      fontFamily: "sans-serif",
       fontSize: ".75rem",
       color: "rgb(85, 86, 86)",
       lineHeight: 1.67,
     },
     smallHighlightedSB: {
-      fontFamily: "sans-serif",
       fontSize: ".75rem",
       fontWeight: 600,
       lineHeight: 1.67,
     },
     smallHighlightedB: {
-      fontFamily: "sans-serif",
       fontSize: ".75rem",
       fontWeight: 600,
       lineHeight: 1.67,
@@ -189,8 +187,12 @@ declare module "@material-ui/core/styles/createPalette" {
     flambeeGreen?: Palette["primary"];
     errorBackground?: Palette["primary"];
     successBackground?: Palette["primary"];
+    danger?: Palette["primary"];
     dark2light?: Palette["primary"];
     lightaccent?: Palette["primary"];
+    gray?: Palette["primary"];
+    sglightblue?: Palette["primary"];
+    sgdarkblue?: Palette["primary"];
   }
   interface PaletteOptions {
     flambeeBlack?: PaletteOptions["primary"];
@@ -200,8 +202,12 @@ declare module "@material-ui/core/styles/createPalette" {
     flambeeGreen?: PaletteOptions["primary"];
     errorBackground?: PaletteOptions["primary"];
     successBackground?: PaletteOptions["primary"];
+    danger?: PaletteOptions["primary"];
     dark2light?: PaletteOptions["primary"];
     lightaccent?: PaletteOptions["primary"];
+    gray?: PaletteOptions["primary"];
+    sglightblue?: PaletteOptions["primary"];
+    sgdarkblue?: PaletteOptions["primary"];
   }
 }
 
@@ -305,7 +311,7 @@ export const marketingTheme = {
     pre: {
       ...prismTheme,
       padding: "1ch",
-      "@media (max-width: 768px)": {},
+      [defaultTheme.breakpoints.down("sm")]: {},
       fontSize: "0.8rem",
       overflowX: "auto",
       MsOverflowStyle: "none",
@@ -317,7 +323,7 @@ export const marketingTheme = {
     },
     inlineCode: {
       ...prismTheme,
-      "@media (min-width: 749px)": {
+      [defaultTheme.breakpoints.up("sm")]: {
         minWidth: "initial",
       },
       paddingTop: 0,
@@ -330,7 +336,7 @@ export const marketingTheme = {
       color: "red",
     },
     code: {
-      backgroundColor: "primary",
+      backgroundColor: "primary.main",
       fontFamily: "monospace",
       fontSize: "inherit",
       span: {
@@ -461,11 +467,10 @@ export const makeDefaultTheme = () => ({
     circle: 99999,
   },
   shadows: {
-    card: "0 0 4px rgba(0, 0, 0, .125)",
-    hovering: "0 0 1rem rgba(0, 0, 0, .5)",
-    cardHover: "0 0 4px rgba(0, 0, 0, .5)",
-    leftHighlightPrimary: "-5px 0 #36678d",
-    leftHighlightSecondary: "-5px 0 #89368d",
+    card: "0 0 4px rgba(0, 0, 0, .125)", // 4/28/2021: no longer used
+    cardHover: "0 0 4px rgba(0, 0, 0, .5)", // 4/28/2021: no longer used
+    leftHighlightPrimary: "-5px 0 #36678d", // 4/28/2021: no longer used
+    leftHighlightSecondary: "-5px 0 #89368d", // 4/28/2021: wasn't being used anyway, apparently
   },
   // rebass variants
   text: {
@@ -498,7 +503,7 @@ export const makeDefaultTheme = () => ({
     card: {
       p: 2,
       bg: "background",
-      boxShadow: "card",
+      boxShadow: "0 0 4px rgba(0, 0, 0, .125)", //formerly card
     },
     basicWhite: {
       borderWidth: "1px",
@@ -593,7 +598,7 @@ export const makeDefaultTheme = () => ({
       borderWidth: 3,
       borderStyle: "solid",
       borderRadius: 40,
-      boxShadow: "card",
+      boxShadow: "0 0 4px rgba(0, 0, 0, .125)", //formerly "card"
       ":hover": {
         cursor: "pointer",
       },
@@ -676,9 +681,9 @@ export const makeDefaultTheme = () => ({
     },
     pre: {
       ...prismTheme,
-      "@media (max-width: 768px)": {
-        marginLeft: -4,
-        marginRight: -4,
+      [defaultTheme.breakpoints.down("sm")]: {
+        marginLeft: "-4px",
+        marginRight: "-4px",
         paddingLeft: "1ch",
         paddingRight: "1ch",
         paddingTop: "1rem",
@@ -686,11 +691,11 @@ export const makeDefaultTheme = () => ({
         borderTop: "4px solid #efefef",
         borderBottom: "4px solid #efefef",
       },
-      "@media (min-width: 769px)": {
+      [defaultTheme.breakpoints.up("sm")]: {
         minWidth: "min(80ch, 100%)",
       },
       fontSize: "0.8rem",
-      padding: 10,
+      padding: "10px",
       overflowX: "auto",
       backgroundColor: "primary",
       ".mdx-marker": {
@@ -702,16 +707,16 @@ export const makeDefaultTheme = () => ({
         paddingLeft: "1em",
         borderLeft: `.25em solid ${prismTheme[".punctuation"].color}`,
       },
-    },
+    } as SxProps<Theme>,
     inlineCode: {
       ...prismTheme,
-      "@media (min-width: 749px)": {
+      [defaultTheme.breakpoints.up("sm")]: {
         minWidth: "initial",
       },
       paddingLeft: "0.5ch",
       paddingRight: "0.5ch",
-      paddingTop: 0,
-      paddingBottom: 0,
+      paddingTop: "0",
+      paddingBottom: "0",
       minHeight: "1rem",
       display: "inline-flex",
       alignContent: "center",
@@ -720,7 +725,7 @@ export const makeDefaultTheme = () => ({
       wordBreak: "break-all",
       backgroundColor: prismTheme.color,
       color: "red",
-    },
+    } as SxProps<Theme>,
     code: {
       backgroundColor: "primary",
       fontFamily: "monospace",

@@ -2,8 +2,7 @@ export interface ILogoTextProps {
   text?: string;
 }
 const logoImageStyle = {
-  height: "2rem",
-  marginLeft: 4,
+  height: "1.5rem",
 };
 
 const path = "/static/logo-text.svg";

@@ -25,7 +25,7 @@ const HeroConnectionParams = ({
         backgroundColor: "white",
         color: "primary",
         // maxWidth: "90vw",
-        boxShadow: "card",
+        boxShadow: "0 0 4px rgba(0, 0, 0, .125)",
         // minWidth: ["calc(100vw - 4rem)", "400px", "400px"],
         // minHeight: "600px",
         maxWidth: [

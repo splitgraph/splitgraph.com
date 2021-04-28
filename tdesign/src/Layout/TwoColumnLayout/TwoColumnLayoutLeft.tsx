@@ -1,6 +1,6 @@
-/** @jsxImportSource theme-ui */
-import { Box, ThemeUIStyleObject } from "theme-ui";
-import * as React from "react";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import { useContext } from "react";
 import { ILayoutContext, LayoutContext } from "./TwoColumnLayout";
 
@@ -16,7 +16,7 @@ export interface TwoColumnLayoutLeftProps {
 }
 
 const ExpandColumnPushDown = ({ expanded, setExpanded }: ILayoutContext) => {
-  const pushdownStyle = {
+  const pushdownStyle: SxProps<Theme> = {
     backgroundRepeat: "no-repeat",
     backgroundSize: "contain",
     filter: "invert(1) opacity(0.5)",
@@ -55,7 +55,7 @@ const ExpandColumnPushDown = ({ expanded, setExpanded }: ILayoutContext) => {
 const TwoColumnLayoutLeft = ({ children }: TwoColumnLayoutLeftProps) => {
   const layoutContext = useContext(LayoutContext);
 
-  const containerStyle = {
+  const containerStyle: SxProps<Theme> = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
@@ -65,7 +65,7 @@ const TwoColumnLayoutLeft = ({ children }: TwoColumnLayoutLeftProps) => {
     ".expand-col-pushdown": {
       minHeight: "5vh",
     },
-  } as ThemeUIStyleObject;
+  };
 
   return (
     <Box sx={containerStyle} className="two-col-left">

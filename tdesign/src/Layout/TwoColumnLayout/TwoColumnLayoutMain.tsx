@@ -1,6 +1,3 @@
-/** @jsxImportSource theme-ui */
-import * as React from "react";
-
 export interface TwoColumnLayoutMainProps {
   children?: React.ReactNode;
 }

@@ -1,6 +1,4 @@
-/** @jsxImportSource theme-ui */
-import { Box } from "theme-ui";
-import * as React from "react";
+import { Box } from "@material-ui/core";
 import { useState, createContext } from "react";
 
 export interface TwoColumnLayoutProps {

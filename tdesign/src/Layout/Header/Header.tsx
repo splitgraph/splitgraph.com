@@ -22,9 +22,8 @@ const Header = ({ children }: HeaderProps) => {
           gridColumnGap: "0px",
           gridRowGap: "0px",
           minHeight: "5vh",
-          // display: { xs: "none", md: "flex" },
-          // padding: { xs: ".3em", md: "1em" },
-          padding: theme.spacing(1),
+          background:
+            "linear-gradient(0deg, rgba(42, 129, 246, 0.02), rgba(42, 129, 246, 0.02)), #FFFFFF",
           [theme.breakpoints.down("md")]: {
             padding: theme.spacing(0.3),
           },
@@ -33,6 +32,7 @@ const Header = ({ children }: HeaderProps) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-start",
+            paddingLeft: "20px",
           },
           ".header--center": {
             gridArea: "1 / 2 / 2 / 3",
@@ -46,19 +46,12 @@ const Header = ({ children }: HeaderProps) => {
             alignItems: "center",
             justifyContent: "flex-end",
           },
-          ".logo-text": {
-            paddingLeft: ".5ch",
-          },
+
           a: {
             fontWeight: "bold",
-            textDecoration: "underline",
             marginRight: "1ch",
           },
-          "a:hover": {
-            borderBottomStyle: "solid",
-            borderBottomWidth: "1px",
-            borderBottomColor: "light",
-          },
+
           ".button-link": {
             variant: "links.button",
           },

@@ -6,7 +6,7 @@ const logoImageStyle = {
   minHeight: "2rem",
   height: "2rem",
   maxHeight: "2rem",
-  marginLeft: 4,
+  marginRight: "11.67px",
 };
 
 const defaultLogoURL = "/static/splitgraph_logo.svg";
