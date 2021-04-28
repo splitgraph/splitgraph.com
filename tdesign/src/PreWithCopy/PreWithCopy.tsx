@@ -1,13 +1,14 @@
-/** @jsxImportSource theme-ui */
-import { Box, Text, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
+import { Box, Typography } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 import { IconClipboard } from "../Icon";
 
 export interface IPreWithCopyProps {
   title?: string | React.ReactNode;
   children?: React.ReactNode;
-  extraStyle?: ThemeUIStyleObject;
+  extraStyle?: object;
   onCopy?: (message?: string) => void;
 }
 
@@ -17,7 +18,7 @@ const PreWithCopy = ({
   extraStyle = {},
   onCopy = () => {},
 }: IPreWithCopyProps) => {
-  const preContainerStyle = {
+  const preContainerStyle: SxProps<Theme> = {
     display: "flex",
     flexDirection: "column",
     ...extraStyle,
@@ -59,7 +60,7 @@ const PreWithCopy = ({
         ? extraStyle[".copy-icon-container"]
         : {}),
     },
-  } as ThemeUIStyleObject;
+  };
 
   const codeRef = React.useRef<HTMLElement>(null);
 
@@ -84,7 +85,7 @@ const PreWithCopy = ({
   return (
     <Box sx={preContainerStyle}>
       {title && typeof title === "string" ? (
-        <Text className="pre-title">{title}</Text>
+        <Typography className="pre-title">{title}</Typography>
       ) : title ? (
         title
       ) : null}

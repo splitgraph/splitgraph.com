@@ -1,20 +1,21 @@
-/** @jsxImportSource theme-ui */
-import { Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 import { useContext } from "react";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 // ILayoutContext,
 import { LayoutContext } from "../Layout/TwoColumnLayout";
 
 export interface MenuProps {
   children?: React.ReactNode;
-  style?: ThemeUIStyleObject;
+  style?: SxProps<Theme>;
 }
 
 const Menu = ({ children, style = {} }: MenuProps) => {
   const { expanded } = useContext(LayoutContext);
 
-  const containerStyle = {
+  const containerStyle: SxProps<Theme> = {
     ".menu-list": {
       paddingLeft: "1em",
       paddingTop: "1em",
@@ -139,7 +140,7 @@ const Menu = ({ children, style = {} }: MenuProps) => {
         ? { ...style[".menu-item-label"] }
         : {}),
     },
-  } as ThemeUIStyleObject;
+  };
 
   return (
     <Box sx={containerStyle}>
