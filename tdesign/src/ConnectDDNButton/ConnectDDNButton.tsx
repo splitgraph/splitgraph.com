@@ -1,6 +1,6 @@
-/** @jsxImportSource theme-ui */
-import { Box } from "theme-ui";
-import * as React from "react";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 export interface IConnectDDNButtonProps {
   connectParams?: string;
@@ -15,18 +15,20 @@ const ConnectDDNButton = ({
 }: IConnectDDNButtonProps) => {
   return (
     <Box
-      sx={{
-        a: {
-          display: "block",
-          variant: "buttons.secondary",
-          padding: "0.5rem",
-          textDecoration: "none",
-          ":hover": {
-            color: "sglightblue",
-            cursor: "pointer",
+      sx={
+        {
+          a: {
+            display: "block",
+            // variant: "buttons.secondary",
+            padding: "0.5rem",
+            textDecoration: "none",
+            ":hover": {
+              color: "sglightblue.main",
+              cursor: "pointer",
+            },
           },
-        },
-      }}
+        } as SxProps<Theme>
+      }
     >
       <a
         href={

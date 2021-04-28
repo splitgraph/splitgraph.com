@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Box } from "@material-ui/core";
 
 import FooterSection from "./FooterSection";

@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useContext } from "react";
 import { Box } from "@material-ui/core";
 import { SxProps } from "@material-ui/system";
@@ -78,7 +77,7 @@ const Menu = ({ children, style = {} }: MenuProps) => {
     // },
     ".menu-item--active": {
       borderLeftWidth: "5px",
-      borderLeftColor: "primary",
+      borderLeftColor: "primary.main",
       borderLeftStyle: "solid",
 
       ...(style.hasOwnProperty(".menu-item--active")

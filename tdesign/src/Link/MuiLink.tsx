@@ -3,11 +3,15 @@ import clsx from "clsx";
 import { useRouter } from "next/router";
 import NextLink, { LinkProps as NextLinkProps } from "next/link";
 import MuiLink, { LinkProps as MuiLinkProps } from "@material-ui/core/Link";
+
+import type { UrlObject } from "url";
+
+type NextHref = string | UrlObject;
 interface NextLinkComposedProps
   extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href">,
     Omit<NextLinkProps, "href"> {
-  to: NextLinkProps["href"];
-  href?: NextLinkProps["href"];
+  to: NextHref;
+  href?: NextHref;
 }
 
 export const NextLinkComposed = forwardRef<
@@ -43,10 +47,9 @@ export const NextLinkComposed = forwardRef<
 
 export type LinkProps = {
   activeClassName?: string;
-  href: NextLinkProps["href"];
+  href: NextHref;
   noLinkStyle?: boolean;
-} & Omit<NextLinkComposedProps, "to" | "href"> &
-  Omit<MuiLinkProps, "href">;
+} & Omit<MuiLinkProps, "href">;
 
 // A styled version of the Next.js Link component:
 // https://nextjs.org/docs/#with-link
@@ -84,7 +87,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
         />
       );
     }
-
+    console.log("MuiLink props", props);
     return (
       <MuiLink
         className={className}

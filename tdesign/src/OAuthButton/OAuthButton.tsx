@@ -1,5 +1,3 @@
-import * as React from "react";
-
 export interface IGenericOAuthButtonProps {
   button: React.ReactNode;
   identityProvider: string;

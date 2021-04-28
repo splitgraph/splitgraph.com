@@ -1,10 +1,10 @@
-/** @jsxImportSource theme-ui */
-import { Box, Text, ThemeUIStyleObject } from "theme-ui";
-import * as React from "react";
 import { useContext, useEffect, useRef } from "react";
+import { Box, Typography } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 import { IIconProps } from "../Icon/BaseIcon";
-import { Link } from "../Link";
+import { MuiLink as Link } from "../Link";
 import { LayoutContext } from "../Layout/TwoColumnLayout";
 
 export interface MenuItemProps {
@@ -23,7 +23,7 @@ export interface MenuItemProps {
 const MenuItem = ({
   Icon,
   href,
-  as,
+  // as,
   text,
   iconSx = {},
   isActive = false,
@@ -52,7 +52,7 @@ const MenuItem = ({
     }
   }, [isActive, expanded]);
 
-  const containerStyle = {
+  const containerStyle: SxProps<Theme> = {
     display: [
       expanded ? "flex" : "inline-flex",
       expanded ? "flex" : "inline-flex",
@@ -67,21 +67,21 @@ const MenuItem = ({
     ":hover": {
       cursor: !href ? "initial" : "pointer",
     },
-  } as ThemeUIStyleObject;
-
-  const linkStyle = {
-    ":hover": {
-      textDecoration: "underline",
-    },
   };
+
+  // const linkStyle: SxProps<Theme> = {
+  //   ":hover": {
+  //     textDecoration: "underline",
+  //   },
+  // };
 
   const textStyle = {};
 
-  const iconStyle = {
+  const iconStyle: SxProps<Theme> = {
     filter: "invert(1)",
     marginRight: "0.5em",
     ...iconSx,
-  } as ThemeUIStyleObject;
+  };
 
   const activeClassName = isActive ? "active" : "inactive";
   const headingClassName = isHeading ? "heading" : "text";
@@ -90,24 +90,22 @@ const MenuItem = ({
   const innerContainerClassName = `menu-item-inner-container menu-item-inner-container--${activeClassName} menu-item-inner-container--${headingClassName}`;
   const linkClassName = `menu-item-label menu-item-link menu-item-label--${activeClassName} menu-item-label--${headingClassName}`;
   const textClassName = `menu-item-label menu-item-text menu-item-label--${activeClassName} menu-item-label--${headingClassName}`;
-
   return (
     <li className={listItemClassName} ref={itemRef}>
       <Box sx={containerStyle} className={innerContainerClassName}>
         {Icon && <Icon extraStyle={iconStyle} />}{" "}
         {href ? (
           <Link
-            extraStyle={linkStyle}
+            // extraStyle={linkStyle} // TODO consider if still needed?
             href={href}
-            as={as}
             className={linkClassName}
           >
             {text}
           </Link>
         ) : (
-          <Text className={textClassName} sx={textStyle}>
+          <Typography className={textClassName} sx={textStyle}>
             {text}
-          </Text>
+          </Typography>
         )}
       </Box>
     </li>

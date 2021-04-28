@@ -1,6 +1,7 @@
-/** @jsxImportSource theme-ui */
-import { Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 export interface IRenderPopoutButtonProps {
   onClick: () => void;
@@ -28,15 +29,13 @@ export interface IPopoutBoxRef {
 export interface IPopoutBoxProps {
   renderButton: (opts: IRenderPopoutButtonProps) => React.ReactNode;
   children?: React.ReactNode;
-  popoutContainerStyle?: ThemeUIStyleObject;
+  popoutContainerStyle?: SxProps<Theme>;
   anchorPosition?: PopoutAnchorPosition;
   buttonProps?: any;
   popoutBoxRef?: React.RefObject<IPopoutBoxRef>;
 }
 
-const getAnchorPositionStyle = (
-  pos?: PopoutAnchorPosition
-): ThemeUIStyleObject => {
+const getAnchorPositionStyle = (pos?: PopoutAnchorPosition): object => {
   const posInitial = {
     top: "initial",
     bottom: "initial",
@@ -81,18 +80,18 @@ const getAnchorPositionStyle = (
       ],
       left: [posMap[pos[0]].left, posMap[pos[1]].left, posMap[pos[2]].left],
       right: [posMap[pos[0]].right, posMap[pos[1]].right, posMap[pos[2]].right],
-    } as ThemeUIStyleObject;
+    };
   } else if (pos) {
-    return posMap[pos] as ThemeUIStyleObject;
+    return posMap[pos];
   }
 
-  return posInitial as ThemeUIStyleObject;
+  return posInitial;
 };
 
-const containerStyle = {
+const containerStyle: SxProps<Theme> = {
   display: "inline",
   position: "relative",
-} as ThemeUIStyleObject;
+};
 
 const PopoutBox = ({
   children,
@@ -113,13 +112,13 @@ const PopoutBox = ({
 
   const anchorPositionStyle = getAnchorPositionStyle(anchorPosition);
 
-  const mergedPopoutContainerStyle = {
+  const mergedPopoutContainerStyle: SxProps<Theme> = {
     zIndex: 10,
     position: "absolute",
-    boxShadow: "hovering",
+    boxShadow: "0 0 1rem rgba(0, 0, 0, .5)",
     ...anchorPositionStyle,
     ...popoutContainerStyle,
-  } as ThemeUIStyleObject;
+  };
 
   // When user clicks outside of container, close the popout
   const handleDocumentClick = (e: any) => {
