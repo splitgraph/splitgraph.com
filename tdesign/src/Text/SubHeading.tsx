@@ -1,8 +1,9 @@
-/** @jsxImportSource theme-ui */
+import { Box } from "@material-ui/core";
 
 const SubHeading = ({ sx = {}, children, ...rest }) => {
   return (
-    <h2
+    <Box
+      component="h2"
       sx={{
         color: "lightgray",
         ...sx,
@@ -10,7 +11,7 @@ const SubHeading = ({ sx = {}, children, ...rest }) => {
       {...rest}
     >
       {children}
-    </h2>
+    </Box>
   );
 };
 

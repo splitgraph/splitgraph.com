@@ -1,5 +1,4 @@
-/** @jsxImportSource theme-ui */
-import { Button } from "theme-ui";
+import { Button } from "@material-ui/core";
 
 import OAuthButton, { IOAuthButtonProps } from "./OAuthButton";
 

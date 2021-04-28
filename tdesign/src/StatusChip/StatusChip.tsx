@@ -1,13 +1,14 @@
-/** @jsxImportSource theme-ui */
-import { Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 export interface IStatusChipProps {
   color: string;
   icon: React.ReactNode;
   text?: string;
   responsiveText?: boolean;
-  extraStyle: ThemeUIStyleObject;
+  extraStyle: SxProps<Theme>;
 }
 
 const StatusChip = ({
@@ -50,7 +51,7 @@ const StatusChip = ({
         ? extraStyle[".status-chip--text"]
         : {}),
     },
-  } as ThemeUIStyleObject;
+  } as SxProps<Theme>;
 
   return (
     <Box sx={containerStyle}>
