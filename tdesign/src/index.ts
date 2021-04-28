@@ -2,7 +2,7 @@ export { ErrorAlert, SuccessAlert } from "./Alert/index";
 
 export { Avatar } from "./Avatar";
 
-export { SubmitButton } from "./Button/index";
+export { SubmitButton, LoadMoreButton } from "./Button/index";
 export {
   BaseLayout,
   ContentHeader,
