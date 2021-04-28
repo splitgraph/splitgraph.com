@@ -255,3 +255,6 @@ export { Octicon, GitLabLogoIcon, GoogleLogoIcon };
 
 import IconArrowRight from "./IconArrowRight";
 export { IconArrowRight };
+
+import IconArrowDown from "./IconArrowDown";
+export { IconArrowDown };
