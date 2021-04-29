@@ -1,5 +1,5 @@
 /** @jsxImportSource theme-ui */
-import { Box } from "@theme-ui";
+import { Box } from "theme-ui";
 
 const getStyle = (depth) => ({
   paddingLeft: 4,
