@@ -17,6 +17,8 @@ export const muiTheme = createMuiTheme({
     // },
     danger: {
       main: "#8D363C",
+      contrastText: defaultTheme.palette.getContrastText("#8D363C"),
+      // TODO look into more idiomatic MUI way - want hover states also
     },
     // background: {
     //   default: "#e0ffff",
@@ -180,7 +182,6 @@ export const muiTheme = createMuiTheme({
     },
   },
 });
-
 declare module "@material-ui/core/Button" {
   interface ButtonPropsVariantOverrides {
     pill: true;
