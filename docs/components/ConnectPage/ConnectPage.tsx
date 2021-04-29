@@ -2,11 +2,8 @@
 import { Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 
-import {
-  HeroConnectionParams,
-  HeroSampleQuery,
-  IHeroSampleQueryItem,
-} from "../../../docs/components";
+import { HeroConnectionParams } from "../HeroConnectionParams";
+import { HeroSampleQuery, IHeroSampleQueryItem } from "../HeroSampleQuery";
 
 export interface IConnectPageProps {
   isAuthenticated?: boolean;
