@@ -71,6 +71,9 @@ export const muiTheme = createMuiTheme({
     sgdarkblue: {
       main: "#36678d",
     },
+    heavy: {
+      main: "#0d1821",
+    },
   },
   typography: {
     fontFamily:
@@ -193,6 +196,7 @@ declare module "@material-ui/core/styles/createPalette" {
     gray?: Palette["primary"];
     sglightblue?: Palette["primary"];
     sgdarkblue?: Palette["primary"];
+    heavy?: Palette["primary"];
   }
   interface PaletteOptions {
     flambeeBlack?: PaletteOptions["primary"];
@@ -208,6 +212,7 @@ declare module "@material-ui/core/styles/createPalette" {
     gray?: PaletteOptions["primary"];
     sglightblue?: PaletteOptions["primary"];
     sgdarkblue?: PaletteOptions["primary"];
+    heavy?: PaletteOptions["primary"];
   }
 }
 
