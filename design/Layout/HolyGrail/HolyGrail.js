@@ -1,5 +1,5 @@
 /** @jsxImportSource theme-ui */
-import { Box } from "../../index";
+import { Box } from "theme-ui";
 
 export const GridArea = {
   Header: "header",
