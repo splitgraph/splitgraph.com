@@ -6,7 +6,7 @@ import {
   HeroConnectionParams,
   HeroSampleQuery,
   IHeroSampleQueryItem,
-} from "@splitgraph/docs/components";
+} from "../../../docs/components";
 
 export interface IConnectPageProps {
   isAuthenticated?: boolean;
