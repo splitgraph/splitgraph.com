@@ -1,6 +1,3 @@
-/** @jsxImportSource theme-ui */
-// @ts-ignore
-
 import MenuItem, { MenuItemProps } from "./MenuItem";
 
 export interface IMenuItemHeadingProps extends MenuItemProps {}

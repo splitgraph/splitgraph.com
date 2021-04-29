@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Box, Typography } from "@material-ui/core";
 import MuiLink from "../Link/MuiLink";
 
@@ -46,8 +45,7 @@ const ErrorAlert = ({
         justifyContent: "space-between",
         flexDirection: "row",
         minWidth: "30vw",
-        backgroundColor: (theme) => theme.palette.errorBackground.main,
-        backgroundOpacity: 0.2,
+        backgroundColor: "errorBackground.main",
         border: "1px solid red",
         padding: "8px",
       }}

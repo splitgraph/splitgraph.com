@@ -1,5 +1,6 @@
-/** @jsxImportSource theme-ui */
-import { Box, ThemeUIStyleObject } from "theme-ui";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 export interface IAvatarProps {
   avatarURL?: string;
@@ -9,7 +10,7 @@ export interface IAvatarProps {
 const avatarContainerStyle = {
   borderRadius: "50%",
   backgroundColor: "text",
-  color: "sglightblue",
+  color: "sglightblue.main",
   minHeight: "4vh",
   minWidth: "4vh",
   display: "inline-flex",
@@ -17,11 +18,11 @@ const avatarContainerStyle = {
   justifyContent: "center",
   borderWidth: "1px",
   borderStyle: "solid",
-  borderColor: "sglightblue",
+  borderColor: "sglightblue.main",
   ".avatar-initials": {
     textTransform: "uppercase",
   },
-} as ThemeUIStyleObject;
+};
 
 const Avatar = ({ avatarURL, initials }: IAvatarProps) => {
   return (
