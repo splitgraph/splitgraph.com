@@ -1,5 +1,5 @@
 import { Button, Typography } from "@material-ui/core";
-import { IconArrowDown } from "@splitgraph/tdesign";
+import { IconArrowDown } from "../Icon";
 
 export interface LoadMoreButtonProps {}
 
