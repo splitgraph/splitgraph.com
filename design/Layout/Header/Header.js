@@ -17,7 +17,7 @@ const Header = ({ children, gridArea = "header" }) => (
       },
       ".button-link": {
         border: "1px solid",
-        borderColor: "light",
+        borderColor: "light.main",
         padding: "0.5ch",
         borderRadius: "0.5ch",
       },

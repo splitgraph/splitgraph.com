@@ -108,7 +108,7 @@ const HeroConnectionParams = ({
                 // padding: "1rem",
                 borderWidth: "1px",
                 borderStyle: "solid",
-                borderColor: "gray",
+                borderColor: "gray.main",
                 a: {
                   // variant: "links.primary", //TODO use MUI theme singleton
                   textDecoration: "underline",

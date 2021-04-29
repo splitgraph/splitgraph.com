@@ -74,6 +74,12 @@ export const muiTheme = createMuiTheme({
     heavy: {
       main: "#0d1821",
     },
+    muted: {
+      main: "#f6f6f9",
+    },
+    light: {
+      main: "#ebebeb",
+    },
   },
   typography: {
     fontFamily:
@@ -197,6 +203,8 @@ declare module "@material-ui/core/styles/createPalette" {
     sglightblue?: Palette["primary"];
     sgdarkblue?: Palette["primary"];
     heavy?: Palette["primary"];
+    muted?: Palette["primary"];
+    light?: Palette["primary"];
   }
   interface PaletteOptions {
     flambeeBlack?: PaletteOptions["primary"];
@@ -213,6 +221,8 @@ declare module "@material-ui/core/styles/createPalette" {
     sglightblue?: PaletteOptions["primary"];
     sgdarkblue?: PaletteOptions["primary"];
     heavy?: PaletteOptions["primary"];
+    muted?: PaletteOptions["primary"];
+    light?: PaletteOptions["primary"];
   }
 }
 
@@ -580,6 +590,7 @@ export const makeDefaultTheme = () => ({
       backgroundColor: "primaryHalfOpacity",
     },
     outline: {
+      //4/29/2021: this appears to no longer be used
       variant: "buttons.primary",
       color: "primary",
       bg: "transparent",
