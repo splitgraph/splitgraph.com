@@ -3,7 +3,7 @@ import { Box, ThemeUIStyleObject } from "theme-ui";
 
 import { Link } from "../Link";
 
-import { formatDate } from "../BlogPost";
+import formatDate from "../BlogPost/formatDate";
 
 interface IBlogPostMetadata {
   id: string;
