@@ -47,12 +47,12 @@ export const muiTheme = createMuiTheme({
       light: "#87EAD7",
       dark: "#558777",
     },
-    flambeeBlack: {
+    flambeeDarkGray: {
       main: "#2C2D2D",
       light: "#555656",
       dark: "#000202",
     },
-    flambeeWhite: {
+    flambeeLightGray: {
       main: "#F3F6FF",
       light: "#FFFFFF",
       dark: "#C0C3CC",
@@ -114,7 +114,7 @@ export const muiTheme = createMuiTheme({
     body: {
       fontSize: ".875rem",
       lineHeight: 1.71,
-      // color: defaultTheme.palette.flambeeBlack.dark,
+      // color: defaultTheme.palette.flambeeDarkGray.dark,
     },
     bodyHighlighted: {
       fontWeight: 600,
@@ -190,8 +190,8 @@ declare module "@material-ui/core/Button" {
 
 declare module "@material-ui/core/styles/createPalette" {
   interface Palette {
-    flambeeBlack?: Palette["primary"];
-    flambeeWhite?: Palette["primary"];
+    flambeeDarkGray?: Palette["primary"];
+    flambeeLightGray?: Palette["primary"];
     flambeeBlue?: Palette["primary"];
     flambeeRed?: Palette["primary"];
     flambeeGreen?: Palette["primary"];
@@ -208,8 +208,8 @@ declare module "@material-ui/core/styles/createPalette" {
     light?: Palette["primary"];
   }
   interface PaletteOptions {
-    flambeeBlack?: PaletteOptions["primary"];
-    flambeeWhite?: PaletteOptions["primary"];
+    flambeeDarkGray?: PaletteOptions["primary"];
+    flambeeLightGray?: PaletteOptions["primary"];
     flambeeBlue?: PaletteOptions["primary"];
     flambeeRed?: PaletteOptions["primary"];
     flambeeGreen?: PaletteOptions["primary"];
