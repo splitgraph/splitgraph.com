@@ -3,8 +3,14 @@ export * from "./cssSvgStrings";
 import BaseIcon from "./BaseIcon";
 export { BaseIcon };
 
+import IconAccount from "./IconAccount";
+export { IconAccount };
+
 import IconAll from "./IconAll";
 export { IconAll };
+
+import IconAPI from "./IconAPI";
+export { IconAPI };
 
 import IconEmail from "./IconEmail";
 export { IconEmail };
@@ -18,6 +24,9 @@ export { IconCheck };
 import IconCheckCircle from "./IconCheckCircle";
 export { IconCheckCircle };
 
+import IconCheckCircle2 from "./IconCheckCircle2";
+export { IconCheckCircle2 };
+
 import IconChevronsLeft from "./IconChevronsLeft";
 export { IconChevronsLeft };
 
@@ -29,6 +38,12 @@ export { IconChevronsDown };
 
 import IconChevronsUp from "./IconChevronsUp";
 export { IconChevronsUp };
+
+import IconDelete from "./IconDelete";
+export { IconDelete };
+
+import IconDocumentation from "./IconDocumentation";
+export { IconDocumentation };
 
 import IconUsers from "./IconUsers";
 export { IconUsers };
@@ -60,8 +75,8 @@ export { IconChevronLeft };
 import IconChevronRight from "./IconChevronRight";
 export { IconChevronRight };
 
-import IconChevronup from "./IconChevronup";
-export { IconChevronup };
+import IconChevronUp from "./IconChevronUp";
+export { IconChevronUp };
 
 import IconActivity from "./IconActivity";
 export { IconActivity };
@@ -234,17 +249,35 @@ export { IconDataTable };
 import IconSQLConsole from "./IconSQLConsole";
 export { IconSQLConsole };
 
+import IconSQLCred from "./IconSQLCred";
+export { IconSQLCred };
+
 import IconThreeDotsVertical from "./IconThreeDotsVertical";
 export { IconThreeDotsVertical };
 
 import IconThreeDotsHorizontal from "./IconThreeDotsHorizontal";
 export { IconThreeDotsHorizontal };
 
+import IconThirdParty from "./IconThirdParty";
+export { IconThirdParty };
+
 import IconHamburger from "./IconHamburger";
 export { IconHamburger };
 
 import IconClose from "./IconClose";
 export { IconClose };
+
+import IconPasswordHide from "./IconPasswordHide";
+export { IconPasswordHide };
+
+import IconPasswordSee from "./IconPasswordSee";
+export { IconPasswordSee };
+
+import IconSettings from "./IconSettings";
+export { IconSettings };
+
+import IconErase from "./IconErase";
+export { IconErase };
 
 // Third party icons
 import Octicon from "./ThirdParty/GitHub/Octicon";
