@@ -82,6 +82,11 @@ export const muiTheme = createMuiTheme({
     light: {
       main: "#ebebeb",
     },
+    link: {
+      main: "#2a81f6",
+      light: "#73b0ff",
+      dark: "#0056c2",
+    },
   },
   typography: {
     fontFamily:
@@ -182,6 +187,7 @@ export const muiTheme = createMuiTheme({
     },
   },
 });
+console.log(muiTheme);
 declare module "@material-ui/core/Button" {
   interface ButtonPropsVariantOverrides {
     pill: true;
@@ -206,6 +212,7 @@ declare module "@material-ui/core/styles/createPalette" {
     heavy?: Palette["primary"];
     muted?: Palette["primary"];
     light?: Palette["primary"];
+    links: Palette["primary"];
   }
   interface PaletteOptions {
     flambeeDarkGray?: PaletteOptions["primary"];
@@ -224,6 +231,7 @@ declare module "@material-ui/core/styles/createPalette" {
     heavy?: PaletteOptions["primary"];
     muted?: PaletteOptions["primary"];
     light?: PaletteOptions["primary"];
+    link?: PaletteOptions["primary"];
   }
 }
 
