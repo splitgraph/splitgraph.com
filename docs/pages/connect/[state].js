@@ -1,15 +1,12 @@
-/** @jsxImportSource theme-ui */
-// @ts-ignore
 import { NextSeo } from "next-seo";
-import { Footer } from "@splitgraph/tdesign";
+import { Footer, MuiLink as Link } from "@splitgraph/tdesign";
 import {
-  Link,
   LandingPageLayout,
   ConnectPage,
   useConnectPageData,
   getStaticPropsForConnectPage,
 } from "@splitgraph/docs/components";
-import withTheme from "../../hocs/withTheme";
+import { withMUITheme } from "@splitgraph/tdesign";
 
 const OnboardingConnectPage = ({ onboardingState, helpSectionComponents }) => {
   const {
@@ -76,4 +73,4 @@ export async function getStaticPaths() {
   };
 }
 
-export default withTheme(OnboardingConnectPage);
+export default withMUITheme(OnboardingConnectPage);

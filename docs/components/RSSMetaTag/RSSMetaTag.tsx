@@ -1,5 +1,3 @@
-/** @jsxImportSource theme-ui */
-// @ts-ignore
 import { Helmet } from "react-helmet";
 
 const RSSMetaTag = () => {

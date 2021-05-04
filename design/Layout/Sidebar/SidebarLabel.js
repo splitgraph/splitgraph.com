@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Box } from "@material-ui/core";
 
 import { useLayoutEffect } from "react";
 
@@ -99,7 +100,7 @@ const getHardcodedDepthStyles = (maxHardCodedDepth = 10) => {
       borderBottomStyle: "solid",
       borderBottomWidth: "2px",
       borderBottomColor: "lightgray",
-      borderLeftColor: "primary",
+      borderLeftColor: "primary.main",
       borderRightStyle: "solid",
     };
   }
@@ -148,8 +149,8 @@ const styles = {
       paddingLeft: 3,
       paddingRight: 3,
       borderBottom: "1px",
-      borderBottomColor: "primary",
-      color: "primary",
+      borderBottomColor: "primary.main",
+      color: "primary.main",
       scrollSnapAlign: "center",
     },
 
@@ -161,7 +162,7 @@ const styles = {
       // color: "purple",
       borderLeftWidth: "2px",
       borderLeftStyle: "solid",
-      borderLeftColor: "primary",
+      borderLeftColor: "primary.main",
     },
 
     [`${Selectors.MutedNode}`]: {
@@ -175,7 +176,7 @@ const styles = {
   },
   Vertical: {
     [`${Selectors.Base}`]: {
-      color: "primary",
+      color: "primary.main",
       display: "flex",
       alignItems: "center",
       height: "2rem",
@@ -224,12 +225,12 @@ const styles = {
     [`${Selectors.ChildOfActiveParent}`]: {
       borderLeftWidth: "4px",
       ":hover": {
-        borderLeftColor: "primary",
+        borderLeftColor: "primary.main",
       },
     },
 
     [`${Selectors.ActiveParentNode} ul`]: {
-      backgroundColor: "primary !important",
+      backgroundColor: "primary.main !important",
     },
 
     // 2. Parent Node, may also be child node or root node.
@@ -237,7 +238,7 @@ const styles = {
       // backgroundColor: "initial",
       borderLeftWidth: "4px",
       borderLeftStyle: "solid",
-      borderLeftColor: "primary",
+      borderLeftColor: "primary.main",
       alignItems: "center",
       fontWeight: "bold",
       fontVariant: "small-caps",
@@ -250,7 +251,7 @@ const styles = {
       // Root doesn't have its box shadow dynamically set
       boxShadow: `0 0.2rem 4px rgba(0, 0, 0, .25)`,
       ":hover": {
-        borderLeftColor: "primary",
+        borderLeftColor: "primary.main",
         borderLeftStyle: "solid",
         borderLeftWidth: "4px",
       },
@@ -266,7 +267,7 @@ const styles = {
       borderLeftStyle: "none",
       backgroundColor: "#efefef",
       borderTopStyle: "none",
-      borderTopColor: "primary",
+      borderTopColor: "primary.main",
       borderTopWidth: "4px",
       ":hover": {
         borderLeftWidth: "0px",
@@ -290,7 +291,7 @@ const styles = {
       backgroundColor: "#fff",
       borderRightStyle: "none",
       borderLeftStyle: "solid",
-      borderLeftColor: "primary",
+      borderLeftColor: "primary.main",
       borderLeftWidth: "4px",
       borderTopStyle: "solid",
       borderBottomStyle: "solid",
@@ -300,7 +301,7 @@ const styles = {
       borderBottomWidth: "1px",
       ":hover": {
         // unfortunately need to set again or will use other :hover
-        borderLeftColor: "primary",
+        borderLeftColor: "primary.main",
         borderLeftStyle: "solid",
         borderLeftWidth: "4px",
         borderLeftWidth: "4px",
@@ -506,7 +507,13 @@ const SidebarLabel = ({
   const _title = sidebarTitle || title;
 
   return node && url ? (
-    <span sx={Style} onClick={onClick} id={labelContainerId} ref={containerEl}>
+    <Box
+      component="span"
+      sx={Style}
+      onClick={onClick}
+      id={labelContainerId}
+      ref={containerEl}
+    >
       <Link
         href={url}
         className={labelClassNames}
@@ -515,18 +522,19 @@ const SidebarLabel = ({
       >
         {_title}
       </Link>
-    </span>
+    </Box>
   ) : depth >= minLabelDepth ? (
-    <span sx={Style} id={labelContainerId} ref={containerEl}>
-      <span
+    <Box component="span" sx={Style} id={labelContainerId} ref={containerEl}>
+      <Box
+        component="span"
         title={_title}
         onClick={onClick}
         // onMouseOver={onClick}
         className={labelClassNames}
       >
         {_title}
-      </span>
-    </span>
+      </Box>
+    </Box>
   ) : null;
 };
 

@@ -1,10 +1,7 @@
-/** @jsxImportSource theme-ui */
-// @ts-ignore
 import * as React from "react";
 
-import { BaseLayout, MainContent } from "@splitgraph/tdesign";
+import { BaseLayout, MainContent, MuiLink as Link } from "@splitgraph/tdesign";
 import { BlogPostMarketingNotice } from "../BlogPost/BlogPostMarketingNotice";
-import { Link } from "../Link";
 
 export interface ILandingPageLayoutProps {
   children?: React.ReactNode;

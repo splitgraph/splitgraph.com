@@ -1,6 +1,6 @@
-/** @jsxImportSource theme-ui */
-import { Box, ThemeUIStyleObject } from "theme-ui";
-import * as React from "react";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 export interface IBoxSetProps {
   children?: React.ReactNode;
@@ -13,7 +13,7 @@ const BoxSet = ({ children }: IBoxSetProps) => {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-  } as ThemeUIStyleObject;
+  };
 
   const boxSetStyle = {
     ...containerStyle,
@@ -44,10 +44,10 @@ const BoxSet = ({ children }: IBoxSetProps) => {
       borderRadius: 8,
       height: ["initial", "initial", "calc((100vw - (100vw - 120ch)) / 3)"],
     },
-  } as ThemeUIStyleObject;
+  };
 
   return (
-    <Box sx={boxSetStyle} className="box-set">
+    <Box sx={boxSetStyle as SxProps<Theme>} className="box-set">
       {children}
     </Box>
   );

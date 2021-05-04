@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import HelpSectionItemWrapper from "./HelpSectionItemWrapper";
 
 export interface IHelpSectionListProps {

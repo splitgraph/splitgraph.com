@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import { DocSearch } from "@splitgraph/docs/components";
 import withHolyGrailLayout from "./withHolyGrailLayout";
 

@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Box } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import { SxProps } from "@material-ui/system";

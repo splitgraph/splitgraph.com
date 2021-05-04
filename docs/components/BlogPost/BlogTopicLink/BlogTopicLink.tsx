@@ -1,7 +1,6 @@
-/** @jsxImportSource theme-ui */
-import { Box } from "theme-ui";
+import { Box } from "@material-ui/core";
 
-import { Link } from "../../Link";
+import { MuiLink as Link } from "@splitgraph/tdesign";
 
 export interface IBlogTopicLinkProps {
   topic: string;
@@ -19,9 +18,7 @@ const BlogTopicLink = ({ topic }: IBlogTopicLinkProps) => {
         marginBottom: "1em",
       }}
     >
-      <Link href="/blog/topic/[topic]" as={`/blog/topic/${topic}`}>
-        {topic}
-      </Link>
+      <Link href="/blog/topic/[topic]">{topic}</Link>
     </Box>
   );
 };

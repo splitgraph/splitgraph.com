@@ -1,8 +1,5 @@
-/** @jsxImportSource theme-ui */
-import { Box, ThemeUIStyleObject } from "theme-ui";
-
-import { Link } from "../Link";
-
+import { Box } from "@material-ui/core";
+import { MuiLink as Link } from "@splitgraph/tdesign";
 import formatDate from "../BlogPost/formatDate";
 
 interface IBlogPostMetadata {
@@ -26,7 +23,7 @@ export interface IBlogPostItemProps {
 }
 
 const itemBoxStyle = {
-  variant: "links.unstyled",
+  // variant: "links.unstyled",
   backgroundColor: "white !important",
   padding: "1rem",
   boxShadow: "card",
@@ -51,7 +48,7 @@ const itemBoxStyle = {
     paddingRight: "1rem",
   },
   ".blog-byline": {
-    color: "heavy",
+    color: "heavy.main",
     opacity: "0.5",
     fontStyle: "italic",
     textTransform: "uppercase",
@@ -60,9 +57,9 @@ const itemBoxStyle = {
     textAlign: "right",
   },
   ".blog-description": {
-    color: "heavy",
+    color: "heavy.main",
   },
-} as ThemeUIStyleObject;
+};
 
 const BlogPostItem = ({ url, metadata }: IBlogPostItemProps) => {
   const formattedDate = formatDate(metadata.date);

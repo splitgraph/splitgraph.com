@@ -1,7 +1,4 @@
-/** @jsxImportSource theme-ui */
-// @ts-ignore
-
-import { Link } from "../Link";
+import { MuiLink as Link } from "@splitgraph/tdesign";
 
 export interface IHeaderRightProps {}
 

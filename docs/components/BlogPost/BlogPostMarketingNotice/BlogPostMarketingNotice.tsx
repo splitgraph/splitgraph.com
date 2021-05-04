@@ -1,7 +1,6 @@
-/** @jsxImportSource theme-ui */
-import { Box } from "theme-ui";
+import { Box } from "@material-ui/core";
 
-import { Link } from "../../Link";
+import { MuiLink as Link } from "@splitgraph/tdesign";
 import { MarketingNotice } from "../../MarketingNotice";
 import formatDate from "../formatDate";
 

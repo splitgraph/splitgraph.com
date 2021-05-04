@@ -1,17 +1,15 @@
-/** @jsxImportSource theme-ui */
-import { Box, ThemeUIStyleObject } from "theme-ui";
-import * as React from "react";
+import { Box } from "@material-ui/core";
 
 export interface IGenericBoxProps {
   classNames: string;
   renderHeading: () => React.ReactNode;
   renderBody: () => React.ReactNode;
   renderFooter: () => React.ReactNode;
-  containerStyle?: ThemeUIStyleObject;
-  headingStyle?: ThemeUIStyleObject;
-  bodyStyle?: ThemeUIStyleObject;
-  contentContainerStyle?: ThemeUIStyleObject;
-  footerStyle?: ThemeUIStyleObject;
+  containerStyle?: object;
+  headingStyle?: object;
+  bodyStyle?: object;
+  contentContainerStyle?: object;
+  footerStyle?: object;
 }
 
 // export type { IGenericBoxProps }
@@ -84,12 +82,13 @@ const GenericBox = ({
           alignItems: "center",
           ...footerStyle,
           a: {
-            variant: "links.button",
+            // variant: "links.button",  // TODO map to MUI
+            color: "white",
             alignSelf: "bottom",
             padding: "1rem",
             ...(footerStyle.hasOwnProperty("a")
               ? footerStyle["a"]
-              : ({} as ThemeUIStyleObject)),
+              : ({} as object)),
           },
         },
         ...containerStyle,

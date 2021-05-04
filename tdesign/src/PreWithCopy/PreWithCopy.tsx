@@ -24,7 +24,7 @@ const PreWithCopy = ({
     ...extraStyle,
     pre: {
       padding: "1rem",
-      backgroundColor: "lightbluefaded",
+      backgroundColor: "sglightblue.light",
       width: "100%",
       overflowX: "hidden",
       margin: 0,
@@ -45,7 +45,7 @@ const PreWithCopy = ({
     ".pre-row": {
       display: "flex",
       justifyContent: "space-between",
-      backgroundColor: "lightbluefaded",
+      backgroundColor: "sglightblue.light",
       ...(extraStyle.hasOwnProperty(".pre-row") ? extraStyle[".pre-row"] : {}),
     },
     ".copy-icon-container": {

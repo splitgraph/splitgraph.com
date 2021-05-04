@@ -1,5 +1,3 @@
-/** @jsxImportSource theme-ui */
-// @ts-ignore
 import { useMemo } from "react";
 
 import { useRouter } from "next/router";

@@ -1,6 +1,3 @@
-/** @jsxImportSource theme-ui */
-import * as React from "react";
-
 export interface IFeatureSectionProps {
   children?: React.ReactNode;
 }

@@ -1,25 +1,23 @@
-/** @jsxImportSource theme-ui */
-
+import { Box } from "@material-ui/core";
 import { makeDefaultTheme } from "./defaultTheme";
-import { ThemeUIStyleObject } from "theme-ui";
 
 const defaultTheme = makeDefaultTheme();
 
 export const mdxComponents = {
   pre: ({ children, ...rest }) => (
-    <pre sx={defaultTheme.styles.pre as ThemeUIStyleObject} {...rest}>
+    <Box component="pre" sx={defaultTheme.styles.pre} {...rest}>
       {children}
-    </pre>
+    </Box>
   ),
   code: ({ children, ...rest }) => (
-    <code sx={defaultTheme.styles.code} {...rest}>
+    <Box component="code" sx={defaultTheme.styles.code} {...rest}>
       {children}
-    </code>
+    </Box>
   ),
   inlineCode: ({ children, ...rest }) => (
-    <code sx={defaultTheme.styles.inlineCode as ThemeUIStyleObject} {...rest}>
+    <Box component="code" sx={defaultTheme.styles.inlineCode} {...rest}>
       {children}
-    </code>
+    </Box>
   ),
 };
 export default mdxComponents;

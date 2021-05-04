@@ -1,5 +1,4 @@
-/** @jsxImportSource theme-ui */
-import { Box } from "theme-ui";
+import { Box } from "@material-ui/core";
 
 export const GridArea = {
   Header: "header",
@@ -24,9 +23,6 @@ const HolyGrail = ({ children }) => (
       gridGap: 0,
       maxHeight: "100vh",
       ".right-sidebar": {
-        a: {
-          variant: "links.primary",
-        },
         // display: ["none", "none", "initial"],
         "@media (min-width: 769px)": {
           position: "absolute",
@@ -47,7 +43,7 @@ const HolyGrail = ({ children }) => (
         gridArea: GridArea.Content,
       },
       ".main-content": {
-        backgroundColor: "background",
+        // backgroundColor: "#e0ffff",
         minHeight: "calc(100vh - 3rem)",
         img: {
           maxWidth: "100%",
@@ -64,9 +60,6 @@ const HolyGrail = ({ children }) => (
         paddingBottom: "8rem",
         // backgroundColor: "#efefef",
         width: "100%",
-        a: {
-          variant: "links.primary",
-        },
       },
       "@media (max-width: 768px)": {
         gridTemplateAreas: `

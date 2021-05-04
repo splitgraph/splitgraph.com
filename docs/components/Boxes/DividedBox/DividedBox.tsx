@@ -1,6 +1,7 @@
-/** @jsxImportSource theme-ui */
-import { Box, ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 interface IRenderMidArgs {
   children?: React.ReactNode;
@@ -9,6 +10,7 @@ interface IRenderMidArgs {
 interface ChildProps {
   children?: React.ReactNode;
   className?: string;
+  sx?: SxProps<Theme>;
 }
 
 export interface IDividedBoxProps {
@@ -17,9 +19,9 @@ export interface IDividedBoxProps {
   renderMid?: (IRenderMidArgs) => React.ReactNode;
   background?: string;
   colors?: [string, string];
-  containerStyle?: ThemeUIStyleObject;
-  midStyle?: ThemeUIStyleObject;
-  topStyle?: ThemeUIStyleObject;
+  containerStyle?: object;
+  midStyle?: object;
+  topStyle?: object;
   direction?: "vertical" | "horizontal";
   angle?: number;
   ContainerComponent?: React.FunctionComponent<ChildProps>;
@@ -74,7 +76,7 @@ const DividedBox = ({
       marginBottom: "1rem",
       ...(containerStyle.hasOwnProperty(".divided-top")
         ? containerStyle[".divided-top"]
-        : ({} as ThemeUIStyleObject)),
+        : ({} as object)),
       ...topStyle,
     },
     ".divided-mid": {
@@ -87,14 +89,13 @@ const DividedBox = ({
       paddingRight: "1rem",
       width: ["calc(100% - 1rem)", "calc(100% - 1rem)", "calc(100% - 4rem)"],
       borderRadius: 8,
-      border: "1px solid heavy",
       boxShadow: "0 0 1rem rgba(0, 0, 0, .25)",
       ...(containerStyle.hasOwnProperty(".divided-mid")
         ? containerStyle[".divided-mid"]
-        : ({} as ThemeUIStyleObject)),
+        : ({} as object)),
       ...midStyle,
     },
-  } as ThemeUIStyleObject;
+  };
 
   return (
     <ContainerComponent sx={containerStyle} className={containerClassName}>

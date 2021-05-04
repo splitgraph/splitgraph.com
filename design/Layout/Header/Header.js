@@ -1,5 +1,4 @@
-/** @jsxImportSource theme-ui */
-import { Box } from "theme-ui";
+import { Box } from "@material-ui/core";
 
 const Header = ({ children, gridArea = "header" }) => (
   <Box
@@ -10,7 +9,7 @@ const Header = ({ children, gridArea = "header" }) => (
       justifyContent: "space-between",
       padding: "4px",
       a: {
-        variant: "links.muted",
+        variant: "muted.main",
         // textDecoration: "underline",
         fontWeight: "bold",
         marginRight: "1ch",
@@ -21,8 +20,8 @@ const Header = ({ children, gridArea = "header" }) => (
         padding: "0.5ch",
         borderRadius: "0.5ch",
       },
+      backgroundColor: "primary.main",
     }}
-    backgroundColor="primary"
   >
     {children}
   </Box>

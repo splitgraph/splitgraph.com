@@ -69,6 +69,7 @@ export const muiTheme = createMuiTheme({
     },
     sglightblue: {
       main: "#d5f6fe",
+      light: "rgba(213, 246, 255, .5)",
     },
     sgdarkblue: {
       main: "#36678d",
@@ -357,14 +358,14 @@ export const marketingTheme = {
       alignContent: "center",
       overflowX: "auto",
       backgroundColor: prismTheme.color,
-      color: "red",
+      // color: "red",
     },
     code: {
       backgroundColor: "primary.main",
       fontFamily: "monospace",
       fontSize: "inherit",
       span: {
-        color: "red",
+        // color: "red",
       },
       ".comment": {
         color: "#f4c1c0",
@@ -752,12 +753,9 @@ export const makeDefaultTheme = () => ({
       color: "red",
     } as SxProps<Theme>,
     code: {
-      backgroundColor: "primary",
+      backgroundColor: "primary.main",
       fontFamily: "monospace",
       fontSize: "inherit",
-      span: {
-        color: "red",
-      },
       ".comment": {
         color: "#f4c1c0",
       },
@@ -767,7 +765,7 @@ export const makeDefaultTheme = () => ({
       fontWeight: "body",
       lineHeight: "body",
       code: {
-        backgroundColor: "primary",
+        backgroundColor: "primary.main",
         bg: prismTheme.backgroundColor,
         color: prismTheme.color,
         padding: 1,

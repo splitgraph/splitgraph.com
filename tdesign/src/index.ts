@@ -25,6 +25,7 @@ export {
   tocStyles,
   muiTheme,
   mdxComponents,
+  withMUITheme,
 } from "./themes/index";
 
 export { ThemeProvider } from "theme-ui";
