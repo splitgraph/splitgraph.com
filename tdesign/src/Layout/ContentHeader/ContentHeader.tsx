@@ -11,7 +11,7 @@ export interface IContentHeaderProps {
 const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
   const headerContainerStyle: SxProps<Theme> = {
     marginBottom: "2rem",
-    color: "primary",
+    color: "primary.main",
     ...extraStyle,
     ".content-header--banner": {
       // padding: "0.5em",

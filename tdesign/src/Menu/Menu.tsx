@@ -114,8 +114,8 @@ const Menu = ({ children, style = {} }: MenuProps) => {
     ".menu-item-link": {
       //   Should match the background ("hide" it without bumpy shift)
       borderBottomColor: [
-        expanded ? "heavy" : "secondary",
-        expanded ? "heavy" : "secondary",
+        expanded ? "heavy" : "legacySecondary.main",
+        expanded ? "heavy" : "legacySecondary.main",
         "heavy",
       ],
       borderBottomStyle: "solid",

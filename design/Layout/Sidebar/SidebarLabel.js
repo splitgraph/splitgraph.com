@@ -167,7 +167,7 @@ const styles = {
 
     [`${Selectors.MutedNode}`]: {
       opacity: 0.5,
-      backgroundColor: "gray",
+      backgroundColor: "gray.main",
     },
 
     [`${Selectors.ActiveNode},${Selectors.InActivePath}`]: {

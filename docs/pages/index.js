@@ -70,9 +70,9 @@ const ctaSectionStyle = {
   paddingLeft: ["1rem", "1rem", "3rem"],
   paddingRight: ["1rem", "1rem", "3rem"],
   borderTop: "0.5ch solid",
-  borderTopColor: "primary",
+  borderTopColor: "primary.main",
   borderBottom: "0.5ch solid",
-  borderBottomColor: "primary",
+  borderBottomColor: "primary.main",
   h2: {
     color: "white",
   },
@@ -92,7 +92,7 @@ const ctaSectionStyle = {
 // todo: rename to benefitPanelStyle, and .feature -> .benefit
 const featurePanelStyle = {
   display: "flex",
-  color: "primary",
+  color: "primary.main",
   flexWrap: "wrap",
   justifyContent: "center",
   maxWidth: "90vw",
@@ -109,11 +109,11 @@ const featurePanelStyle = {
     minHeight: "200px",
     h3: {
       marginTop: "2rem",
-      color: "primary",
+      color: "primary.main",
     },
     p: {
       textAlign: "justify",
-      color: "primary",
+      color: "primary.main",
     },
     a: {
       variant: "links.primary",
@@ -130,7 +130,7 @@ const featurePanelStyle = {
 };
 
 const featureSectionStyle = {
-  color: "primary",
+  color: "primary.main",
   display: ["inherit", "inherit", "flex"],
   paddingTop: "4rem",
   paddingBottom: "4rem",
@@ -194,7 +194,7 @@ const featureSectionStyle = {
   },
   ".feature-section-header": {
     paddingBottom: ["4rem", "4rem", "inherit"],
-    color: ["inherit", "inherit", "primary"],
+    color: ["inherit", "inherit", "primary.main"],
     width: ["inherit", "inherit", "50%"],
     display: "flex",
     // alignItems: "center",
@@ -296,11 +296,11 @@ const communityLinksStyle = {
     padding: "1rem",
     margin: "1rem",
     border: "1px solid",
-    borderColor: "gray",
+    borderColor: "gray.main",
     display: "inline-flex",
     alignItems: "center",
     ":hover": {
-      borderColor: "secondary",
+      borderColor: "legacySecondary.main",
     },
   },
 };
@@ -350,7 +350,7 @@ const LandingPage = () => {
           className="hero-subsection hero-subsection--text"
           sx={{ maxWidth: "50%" }}
         >
-          <h1 sx={{ fontWeight: 100, color: "gray" }}>
+          <h1 sx={{ fontWeight: 100, color: "gray.main" }}>
             Port 5432 is open...
             <br />
             <span sx={{ fontWeight: 400, color: "light" }}>
@@ -414,7 +414,7 @@ const LandingPage = () => {
             />
           </Box>
 
-          <h1 sx={{ fontWeight: 100, color: "gray" }}>
+          <h1 sx={{ fontWeight: 100, color: "gray.main" }}>
             Connect to the
             <br className="mobile-line-break" />{" "}
             <span sx={{ fontWeight: 400, color: "light" }}>
@@ -435,13 +435,13 @@ const LandingPage = () => {
         sx={{
           // background:
           //   "linear-gradient(180deg, rgba(13,24,33,1) 0%, rgba(54,103,141,1) 50%)",
-          backgroundColor: "primary",
+          backgroundColor: "primary.main",
           color: "light",
           h2: {
             color: "light",
           },
           borderTop: "0.5ch solid",
-          borderTopColor: "primary",
+          borderTopColor: "primary.main",
           borderBottom: "0.5ch solid",
           borderBottomColor: "rgba(13,24,33,1)",
           paddingTop: "2rem",
@@ -544,7 +544,7 @@ const LandingPage = () => {
           paddingRight: ["1rem", "1rem", "3rem"],
           paddingBottom: "4rem",
           a: {
-            color: "primary",
+            color: "primary.main",
           },
           ...communityLinksStyle,
         }}
@@ -595,7 +595,7 @@ const LandingPage = () => {
           paddingRight: ["1rem", "1rem", "3rem"],
           paddingBottom: "4rem",
           a: {
-            color: "primary",
+            color: "primary.main",
           },
         }}
       >
@@ -661,7 +661,7 @@ const LandingPage = () => {
       <section
         className="lp-section"
         sx={{
-          color: "primary",
+          color: "primary.main",
           // backgroundColor: "rgba(221,221,223,1)",
           backgroundColor: "white",
           textAlign: "center",
@@ -835,7 +835,7 @@ const LandingPage = () => {
           paddingRight: ["1rem", "1rem", "3rem"],
           paddingBottom: "4rem",
           a: {
-            color: "primary",
+            color: "primary.main",
           },
           ".asciinema-embed-container": {
             width: "90vw",
@@ -870,7 +870,7 @@ const LandingPage = () => {
       <section
         className="lp-section"
         sx={{
-          color: "primary",
+          color: "primary.main",
           // backgroundColor: "rgba(221,221,223,1)",
           backgroundColor: "white",
           textAlign: "center",
@@ -984,7 +984,7 @@ const LandingPage = () => {
           paddingRight: ["1rem", "1rem", "3rem"],
           paddingBottom: "4rem",
           a: {
-            color: "primary",
+            color: "primary.main",
           },
         }}
       >
@@ -1162,7 +1162,7 @@ const LandingPage = () => {
       <section
         className="lp-section"
         sx={{
-          color: "primary",
+          color: "primary.main",
           // backgroundColor: "rgba(221,221,223,1)",
           backgroundColor: "white",
           textAlign: "center",
@@ -1290,7 +1290,7 @@ const LandingPage = () => {
           ".community-link": {
             ...communityLinksStyle[".community-link"],
             backgroundColor: "white",
-            color: "primary",
+            color: "primary.main",
             ":hover": {
               textDecoration: "none !important",
               backgroundColor: "sglightblue",

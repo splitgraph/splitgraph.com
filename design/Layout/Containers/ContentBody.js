@@ -12,7 +12,7 @@ const getStyle = (depth) => ({
     textDecoration: "underline",
     ":hover": {
       borderBottom: "1px solid",
-      borderBottomColor: "primary",
+      borderBottomColor: "primary.main",
     },
   },
   ".link-anchor-text": defaultTheme.links.primary,

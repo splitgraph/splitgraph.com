@@ -6,7 +6,7 @@ const LabelComponent = ({ sx = {}, children, ...rest }) => (
       fontSize: "14px",
       fontWeight: "heading",
       paddingBottom: 2,
-      // color: "gray",
+      // color: "gray.main",
       ...sx,
     }}
     {...rest}

@@ -39,7 +39,7 @@ const DocsIndexPage = () => {
           },
           h2: {
             backgroundColor: "white",
-            color: "primary",
+            color: "primary.main",
             paddingTop: "4rem",
             paddingBottom: "4rem",
             marginLeft: ["0.5rem", "0.5rem", "2rem"],

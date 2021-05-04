@@ -13,8 +13,8 @@ const NewsletterSignup = ({}: INewsletterSignupProps) => {
         ".cta-newsletter-signup": {
           display: "table",
           border: "1px solid",
-          borderColor: expanded ? "gray" : "white",
-          color: expanded ? "gray" : "white",
+          borderColor: expanded ? "gray.main" : "white",
+          color: expanded ? "gray.main" : "white",
           opacity: expanded ? "0.75" : "inherit",
           paddingLeft: "1rem",
           paddingRight: "1rem",
