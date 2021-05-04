@@ -17,9 +17,9 @@ const withBasicLayout = ({ MdxPage, meta = {}, contentTree }) => {
         extraStyle={{
           ".main-content": {
             backgroundColor: "white",
-            a: {
-              variant: "links.primary",
-            },
+            // a: {
+            //   variant: "links.primary",
+            // },
           },
           "header, article": {
             paddingLeft: "calc((100vw - 100ch)/2)",

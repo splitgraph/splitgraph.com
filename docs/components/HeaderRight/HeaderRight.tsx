@@ -11,7 +11,7 @@ const HeaderRight = ({}: IHeaderRightProps) => {
         Connect
       </Link>
       <Link className="button-link" href="/explore">
-        Data
+        Data2
       </Link>
     </>
   );

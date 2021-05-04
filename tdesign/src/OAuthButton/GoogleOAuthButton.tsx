@@ -37,7 +37,7 @@ const button = (
   <Button
     variant="pill"
     sx={{
-      fontSize: 2,
+      fontSize: "16px",
       display: "flex",
       alignItems: "center",
       backgroundColor: "white",

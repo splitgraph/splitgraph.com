@@ -6,7 +6,8 @@ export interface IHeroBoxProps {
 }
 
 const containerStyle = {
-  backgroundColor: "dark2light.main",
+  background:
+    "linear-gradient(180deg, rgba(13,24,33,1) 0%, rgba(54,102,141,1) 100%)", // TODO should come from MUI theme, consider why dark2light.main doesn't work here?
   minHeight: "50vh",
   color: "light",
 };
