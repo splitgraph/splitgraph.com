@@ -33,8 +33,8 @@ const errorNoticeStyle = {
   a: {
     variant: "links.primary",
   },
-  backgroundColor: (theme) => theme.palette.errorBackground.main,
-  borderColor: (theme) => theme.palette.danger.main,
+  backgroundColor: "errorBackground.main",
+  borderColor: "danger.main",
 };
 const errorTextStyle = {
   color: (theme) => theme.palette.danger.main,

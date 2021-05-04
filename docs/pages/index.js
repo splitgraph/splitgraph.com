@@ -49,14 +49,14 @@ import { Link } from "@splitgraph/docs/components";
 
 const mdxComponents = {
   pre: ({ children, ...rest }) => (
-    <pre sx={marketingTheme.styles.pre} {...rest}>
+    <Box component="pre" sx={marketingTheme.styles.pre} {...rest}>
       {children}
-    </pre>
+    </Box>
   ),
   code: ({ children, ...rest }) => (
-    <code sx={marketingTheme.styles.code} {...rest}>
+    <Box component="code" sx={marketingTheme.styles.code} {...rest}>
       {children}
-    </code>
+    </Box>
   ),
 };
 
