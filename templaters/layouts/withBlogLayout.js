@@ -1,5 +1,3 @@
-/** @jsxImportSource theme-ui */
-
 import { mdxComponents } from "@splitgraph/tdesign";
 import {
   Link,
@@ -8,7 +6,7 @@ import {
   InnerPageLayout,
   RSSMetaTag,
 } from "../../docs/components";
-import withTheme from "../../docs/hocs/withTheme";
+import { withMUITheme } from "@splitgraph/tdesign";
 
 // Unused import but might actually be necessary to trigger something in the build process?
 import blogPosts from "@splitgraph/docs/compile/compiledBlogPosts";
@@ -53,7 +51,7 @@ const withBlogLayout = ({ MdxPage, item: { metadata } }) => {
 
   WithBlogLayout.displayName = `WithBlogLayout`;
 
-  return withTheme(WithBlogLayout);
+  return withMUITheme(WithBlogLayout);
 };
 
 export default withBlogLayout;

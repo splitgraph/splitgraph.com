@@ -1,7 +1,7 @@
 import { Box } from "@material-ui/core";
 import { NextSeo } from "next-seo";
 
-import withMUITheme from "@splitgraph/tdesign";
+import { withMUITheme } from "@splitgraph/tdesign";
 import { InnerPageLayout } from "@splitgraph/docs/components/InnerPageLayout";
 import { BlogPostItem, Breadcrumbs } from "@splitgraph/docs/components";
 import allBlogPosts from "@splitgraph/docs/compile/compiledBlogPosts";
@@ -79,4 +79,4 @@ export async function getStaticPaths() {
   };
 }
 
-export default withTheme(BlogTopicPage);
+export default withMUITheme(BlogTopicPage);

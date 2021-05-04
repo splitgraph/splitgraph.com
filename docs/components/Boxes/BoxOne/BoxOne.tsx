@@ -1,6 +1,3 @@
-/** @jsxImportSource theme-ui */
-// @ts-ignore
-
 import { GenericBox, IGenericBoxProps } from "../GenericBox";
 
 export type IBoxOneProps = Omit<IGenericBoxProps, "classNames">;
