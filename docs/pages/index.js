@@ -1,16 +1,18 @@
 import { Box, Typography } from "@material-ui/core";
-
 import { NextSeo } from "next-seo";
 
-import { withMUITheme } from "@splitgraph/tdesign";
 import { LandingPageLayout } from "../components/LandingPageLayout";
 import { HeroBox } from "../components/HeroBox";
 import { HeroSampleQuery } from "../components/HeroSampleQuery";
 import { HeroSampleSplitfile } from "../components/HeroSampleSplitfile";
 import { HeroConnectionParams } from "../components/HeroConnectionParams";
-import { Footer, IconLogoDiscord, marketingTheme } from "@splitgraph/tdesign";
-
-import { Octicon } from "@splitgraph/tdesign";
+import {
+  Footer,
+  IconLogoDiscord,
+  marketingTheme,
+  Octicon,
+  withMUITheme,
+} from "@splitgraph/tdesign";
 
 import CambridgeChicagoJOIN from "@splitgraph/content/marketing/sample-queries/CambridgeChicagoJOIN.mdx";
 import NewSocrataDatasets from "@splitgraph/content/marketing/sample-queries/NewSocrataDatasets.mdx";
@@ -65,7 +67,7 @@ const ctaSectionStyle = {
   minWidth: "100%",
   maxWidth: "100%",
   width: "100%",
-  backgroundColor: "heavy",
+  backgroundColor: "heavy.main",
   paddingTop: "3rem",
   paddingBottom: "3rem",
   paddingLeft: ["1rem", "1rem", "3rem"],
@@ -78,10 +80,18 @@ const ctaSectionStyle = {
     color: "white",
   },
   ".button-link-secondary": {
+    backgroundColor: "legacySecondary.main",
+    borderRadius: "0.5em",
     marginBottom: "2rem",
+    color: "common.white",
+    fontWeight: "bold",
   },
   ".muted-link": {
-    variant: "links.muted",
+    color: "muted.main",
+    "&:active, &:hover": {
+      color: "muted.main",
+      textDecoration: "underline",
+    },
   },
   ".mobile-shrink": {
     fontSize: ["1.2rem", "1.5rem", "2rem"],
@@ -108,18 +118,18 @@ const featurePanelStyle = {
     flexGrow: 0,
     flexShrink: 1,
     minHeight: "200px",
+    textAlign: "center",
     h3: {
       marginTop: "2rem",
       color: "primary.main",
     },
     p: {
-      textAlign: "justify",
-      color: "primary.main",
+      // textAlign: "justify",
+      color: (theme) => theme.palette.primary.main,
     },
     a: {
-      variant: "links.primary",
       textDecoration: "underline",
-      color: "sgdarkblue",
+      color: "sgdarkblue.main",
       alignSelf: "flex-end",
       ":hover": {
         borderBottom: "2px solid",
@@ -127,6 +137,9 @@ const featurePanelStyle = {
         borderBottom: "3px solid",
       },
     },
+  },
+  ".justified": {
+    textAlign: "justify",
   },
 };
 
@@ -361,14 +374,14 @@ const LandingPage = () => {
 
           <Box
             sx={{
-              backgroundColor: "sgdarkblue",
+              backgroundColor: "sgdarkblue.main",
               color: "white",
               minWidth: ["90vw", "60ch", "min(80ch, 100%)"],
               maxWidth: ["90vw", "60ch", "min(80ch, 100%)"],
               // maxWidth: ["90vw", "60ch", "min(80ch, 90%)"],
               // minWidth: ["90vw", "60ch", "min(80ch, 90%)"],
               // minWidth: ["90vw", "60ch", "min(80ch, 100%)"],
-              boxShadow: "card",
+              boxShadow: "0 0 4px rgba(0, 0, 0, .125)",
             }}
           >
             <HeroSampleQuery
@@ -415,15 +428,17 @@ const LandingPage = () => {
             />
           </Box>
 
-          <h1 sx={{ fontWeight: 100, color: "gray.main" }}>
+          <Box component="h1" sx={{ fontWeight: 100, color: "gray.main" }}>
             Connect to the
             <br className="mobile-line-break" />{" "}
-            <span sx={{ fontWeight: 400, color: "light" }}>
+            <Box component="span" sx={{ fontWeight: 400, color: "light" }}>
               Data Delivery Network
-            </span>
+            </Box>
             <br />
-            <span sx={{ fontWeight: 100 }}>with any PostgreSQL client.</span>
-          </h1>
+            <Box component="span" sx={{ fontWeight: 100 }}>
+              with any PostgreSQL client.
+            </Box>
+          </Box>
         </Box>
 
         <HeroConnectionParams />
@@ -431,18 +446,19 @@ const LandingPage = () => {
         <br />
       </HeroBox>
 
-      <section
+      <Box
+        component="section"
         className="lp-section lp-section--darkgrad"
         sx={{
           // background:
           //   "linear-gradient(180deg, rgba(13,24,33,1) 0%, rgba(54,103,141,1) 50%)",
           backgroundColor: "primary.main",
-          color: "light",
+          color: "light.main",
           h2: {
-            color: "light",
+            color: "light.main",
           },
           borderTop: "0.5ch solid",
-          borderTopColor: "primary.main",
+          borderTopColor: (theme) => theme.palette.primary.main,
           borderBottom: "0.5ch solid",
           borderBottomColor: "rgba(13,24,33,1)",
           paddingTop: "2rem",
@@ -451,18 +467,16 @@ const LandingPage = () => {
           // paddingRight: "max(3rem, calc((100vw - 120ch)/2))",
           paddingLeft: "calc((100vw - 120ch)/2)",
           paddingRight: "calc((100vw - 120ch)/2)",
-          ".muted-link": {
-            variant: "links.muted",
-          },
         }}
       >
         {/* <h2>Explore Public Data</h2> */}
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section"
         sx={{
-          color: "sgdarkblue",
+          color: "sgdarkblue.main",
           background:
             "linear-gradient(180deg, rgba(221,221,223,1) 0%, rgba(255,255,255,1) 72%)",
           paddingLeft: ["1rem", "1rem", "3rem"],
@@ -473,11 +487,11 @@ const LandingPage = () => {
         <h2>
           What is Splitgraph?
           <br />
-          <span sx={{ fontWeight: "200" }}>
+          <Box component="span" sx={{ fontWeight: "200" }}>
             Splitgraph is an integrated
             <br className="mobile-line-break" /> data catalog and database
             proxy.
-          </span>
+          </Box>
           <br />
           <br />
         </h2>
@@ -490,7 +504,7 @@ const LandingPage = () => {
               extraStyle={{ display: "inline-flex" }}
             />
             <h3>Discover Data</h3>
-            <p>
+            <p class="justified">
               The Splitgraph catalog indexes 40k+ data sources, including both
               live databases and versioned data snapshots called "data images."
               Discover data and explore it with features like an auto-generated
@@ -506,7 +520,7 @@ const LandingPage = () => {
               extraStyle={{ display: "inline-flex" }}
             />
             <h3>Query Data</h3>
-            <p>
+            <p class="justified">
               Connect to the Data Delivery Network (DDN) to query the catalog
               like it's a Postgres database. The DDN is a distributed SQL
               caching proxy built on the PostgreSQL wire protocol. It can route
@@ -521,8 +535,8 @@ const LandingPage = () => {
               size={"6rem"}
               extraStyle={{ display: "inline-flex", color: "red" }}
             />
-            <h3>Build & Share Data</h3>
-            <p>
+            <h3>Build &amp; Share Data</h3>
+            <p class="justified">
               Build versioned datasets from your own data, package them and push
               them to the Splitgraph catalog for other people to discover and
               query. Store the data as column oriented, delta-compressed objects
@@ -534,12 +548,13 @@ const LandingPage = () => {
             </Link>
           </Box>
         </Box>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section"
         sx={{
-          color: "sgdarkblue",
+          color: "sgdarkblue.main",
           backgroundColor: "white",
           paddingLeft: ["1rem", "1rem", "3rem"],
           paddingRight: ["1rem", "1rem", "3rem"],
@@ -574,23 +589,24 @@ const LandingPage = () => {
           </Link>
         </Box>
 
-        <h2 sx={{ fontWeight: 200 }}>
+        <Box component="h2" sx={{ fontWeight: 200 }}>
           Splitgraph.com is a hosted service built around Splitgraph Core.
           <br />
           It adds features like a public SQL proxy and data catalog.
-        </h2>
+        </Box>
 
         <Box>
           <Link href="/blog/data-delivery-network-launch">
             Read the DDN launch blog post &raquo;
           </Link>
         </Box>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section"
         sx={{
-          color: "sgdarkblue",
+          color: "sgdarkblue.main",
           backgroundColor: "white",
           paddingLeft: ["1rem", "1rem", "3rem"],
           paddingRight: ["1rem", "1rem", "3rem"],
@@ -601,10 +617,14 @@ const LandingPage = () => {
         }}
       >
         <h2>Discover Data in the Catalog</h2>
-        <h2 sx={{ marginTop: "2rem !important", fontWeight: "200" }}>
+        <Box
+          component="h2"
+          sx={{ marginTop: "2rem !important", fontWeight: "200" }}
+        >
           We index 40k+ public datasets
-          <br className="mobile-line-break" /> & make them queryable with SQL.
-        </h2>
+          <br className="mobile-line-break" /> &amp; make them queryable with
+          SQL.
+        </Box>
 
         <Box>
           <iframe
@@ -644,12 +664,16 @@ const LandingPage = () => {
         <Link className="muted-link" href="/explore">
           Explore over 40,000 datasets &raquo;
         </Link>
-      </section>
+      </Box>
 
       {/* Placeholder section to make the Splitfiles start on the right (due to odd/even) */}
       <section className="lp-section"></section>
 
-      <section className="lp-section lp-cta" sx={ctaSectionStyle}>
+      <Box
+        component="section"
+        className="lp-section lp-cta"
+        sx={ctaSectionStyle}
+      >
         <Link className="button-link-secondary" href="/connect">
           Connect to DDN
         </Link>
@@ -657,12 +681,13 @@ const LandingPage = () => {
         <Link className="muted-link" href="/docs">
           Read the Docs &raquo;
         </Link>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section"
         sx={{
-          color: "primary.main",
+          color: (theme) => theme.palette.primary.main,
           // backgroundColor: "rgba(221,221,223,1)",
           backgroundColor: "white",
           textAlign: "center",
@@ -677,13 +702,17 @@ const LandingPage = () => {
       >
         <h2>Build Reproducible Data Snapshots</h2>
 
-        <h2 sx={{ marginTop: "2rem !important", fontWeight: "200" }}>
+        <Box
+          component="h2"
+          sx={{ marginTop: "2rem !important", fontWeight: "200" }}
+        >
           Combine data sources into reproducible data "images"
           <br /> using a CI-friendly build process.
-        </h2>
-      </section>
+        </Box>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-feature-section"
         sx={{
           ...featureSectionStyle,
@@ -825,12 +854,13 @@ const LandingPage = () => {
             </Box>
           </li>
         </ul>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section"
         sx={{
-          color: "sgdarkblue",
+          color: "sgdarkblue.main",
           backgroundColor: "white",
           paddingLeft: ["1rem", "1rem", "3rem"],
           paddingRight: ["1rem", "1rem", "3rem"],
@@ -866,9 +896,10 @@ const LandingPage = () => {
             derivative image.
           </Typography>
         </Box>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section"
         sx={{
           color: "primary.main",
@@ -886,14 +917,18 @@ const LandingPage = () => {
       >
         <h2>Push Data to Splitgraph</h2>
 
-        <h2 sx={{ marginTop: "2rem !important", fontWeight: "200" }}>
+        <Box
+          component="h2"
+          sx={{ marginTop: "2rem !important", fontWeight: "200" }}
+        >
           Push images to Splitgraph using an
           <br /> immutable and content-addressable{" "}
           <br className="mobile-line-break" /> storage format.
-        </h2>
-      </section>
+        </Box>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-feature-section"
         sx={{
           ...featureSectionStyle,
@@ -974,12 +1009,13 @@ const LandingPage = () => {
             </Box>
           </li>
         </ul>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section"
         sx={{
-          color: "sgdarkblue",
+          color: "sgdarkblue.main",
           backgroundColor: "rgba(221,221,223,1) !important",
           paddingLeft: ["1rem", "1rem", "3rem"],
           paddingRight: ["1rem", "1rem", "3rem"],
@@ -1007,13 +1043,13 @@ const LandingPage = () => {
         >
           <Box
             sx={{
-              backgroundColor: "sgdarkblue",
+              backgroundColor: "sgdarkblue.main",
               color: "white",
               minWidth: ["90vw", "60ch", "min(80ch, 100%)"],
               maxWidth: ["90vw", "60ch", "min(80ch, 100%)"],
               marginTop: "2rem",
               marginBottom: "2rem",
-              boxShadow: "card",
+              boxShadow: "0 0 4px rgba(0, 0, 0, .125)", //formerly 'card' TODO MUI-ify more idiomatically
             }}
           >
             <HeroSampleQuery
@@ -1038,12 +1074,13 @@ const LandingPage = () => {
             />
           </Box>
         </Box>
-      </section>
+      </Box>
 
       {/* Placeholder to shift side of next list */}
       <section className="lp-section"></section>
 
-      <section
+      <Box
+        component="section"
         className="lp-feature-section"
         sx={{
           ...featureSectionStyle,
@@ -1052,7 +1089,7 @@ const LandingPage = () => {
         }}
       >
         <Box className="feature-section-header">
-          <h2>Store & Query Efficiently</h2>
+          <h2>Store &amp; Query Efficiently</h2>
           <Link href="/product/data-lifecycle/storage">
             Save on storage costs with a columnar format and delta compression.
           </Link>
@@ -1123,9 +1160,10 @@ const LandingPage = () => {
             </Box>
           </li>
         </ul>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section lp-cta"
         sx={{
           ...ctaSectionStyle,
@@ -1158,9 +1196,10 @@ const LandingPage = () => {
         <Link className="muted-link" href="/about/company/private-cloud-beta">
           Read About the Beta &raquo;
         </Link>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section"
         sx={{
           color: "primary.main",
@@ -1178,15 +1217,19 @@ const LandingPage = () => {
       >
         <h2>Run Splitgraph Locally</h2>
 
-        <h2 sx={{ marginTop: "2rem !important", fontWeight: "200" }}>
+        <Box
+          component="h2"
+          sx={{ marginTop: "2rem !important", fontWeight: "200" }}
+        >
           Run a local Splitgraph Engine <br className="mobile-line-break" />
           on top of Postgres
           <br />
           to mount or clone data into tables.
-        </h2>
-      </section>
+        </Box>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-feature-section"
         sx={{
           ...featureSectionStyle,
@@ -1212,9 +1255,12 @@ const LandingPage = () => {
           >
             <h2>Powered by Postgres</h2>
 
-            <h2 sx={{ marginTop: "2rem !important", fontWeight: "200" }}>
+            <Box
+              component="h2"
+              sx={{ marginTop: "2rem !important", fontWeight: "200" }}
+            >
               Plug into a growing ecosystem.
-            </h2>
+            </Box>
 
             <IconPostgresLogo
               size={"6em"}
@@ -1277,9 +1323,10 @@ const LandingPage = () => {
             </Box>
           </li>
         </ul>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section lp-cta"
         sx={{
           ...ctaSectionStyle,
@@ -1332,7 +1379,7 @@ const LandingPage = () => {
             Community Discord Chat
           </Link>
         </Box>
-      </section>
+      </Box>
 
       <Footer Link={Link} />
     </LandingPageLayout>

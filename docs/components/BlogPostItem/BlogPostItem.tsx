@@ -26,13 +26,13 @@ const itemBoxStyle = {
   // variant: "links.unstyled",
   backgroundColor: "white !important",
   padding: "1rem",
-  boxShadow: "card",
+  boxShadow: "0 0 4px rgba(0, 0, 0, .125)", //formerly 'card' TODO MUI-ify more idiomatically
   display: "flex",
   width: "100%",
   flexDirection: "column",
   marginBottom: "2rem",
   ":hover": {
-    boxShadow: "cardHover",
+    boxShadow: "0 0 4px rgba(0, 0, 0, .5)", //formerly cardHover. TODO MUI-ify
     textDecoration: "none !important",
   },
   ".top-row": {

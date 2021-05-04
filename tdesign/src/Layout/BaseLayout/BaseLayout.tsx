@@ -32,7 +32,26 @@ const BaseLayout = ({
       variant: "links.unstyled",
     },
     ".button-link": {
-      variant: "links.button",
+      // from theme-ui's links.button
+      backgroundColor: "primary.main",
+      // backgroundColor: "secondary",
+      color: "muted.main",
+      px: "0.3rem",
+      py: "0.2rem",
+      fontWeight: "bold",
+      borderRadius: "0.5em",
+      transition: "background-color .5s",
+      ":hover": {
+        cursor: "pointer",
+        color: "white",
+        border: 0,
+        backgroundColor: "#437eab",
+        backgroundImage:
+          "linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,.7) 100%)",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "200% 100%",
+        transition: "background-size 1s, background-color 1s",
+      },
       display: "inline-table",
     },
     ".button-link-secondary": {

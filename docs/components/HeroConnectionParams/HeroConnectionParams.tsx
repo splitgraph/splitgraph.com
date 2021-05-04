@@ -33,7 +33,7 @@ const HeroConnectionParams = ({
         backgroundColor: "white",
         color: "primary.main",
         // maxWidth: "90vw",
-        boxShadow: "card",
+        boxShadow: "0 0 4px rgba(0, 0, 0, .125)", //formerly 'card' TODO MUI-ify more idiomatically
         // minWidth: ["calc(100vw - 4rem)", "400px", "400px"],
         // minHeight: "600px",
         maxWidth: [
@@ -99,7 +99,8 @@ const HeroConnectionParams = ({
         ) : (
           <Box>
             <Typography
-              sx={{ color: "heavy.main", fontWeight: "bold", display: "block" }}
+              color="common.black"
+              sx={{ fontWeight: "bold", display: "block" }}
             >
               Username / Password
             </Typography>

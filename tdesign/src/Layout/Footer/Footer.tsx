@@ -257,7 +257,7 @@ const Footer = ({
             <span>Made with</span>
             <IconHeart
               size={"1rem"}
-              color="muted"
+              color="muted.main"
               extraStyle={{
                 display: "inline-flex",
                 marginRight: "1ch",

@@ -85,7 +85,9 @@ const PreWithCopy = ({
   return (
     <Box sx={preContainerStyle}>
       {title && typeof title === "string" ? (
-        <Typography className="pre-title">{title}</Typography>
+        <Typography className="pre-title" color="common.black">
+          {title}
+        </Typography>
       ) : title ? (
         title
       ) : null}

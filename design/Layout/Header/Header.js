@@ -9,7 +9,7 @@ const Header = ({ children, gridArea = "header" }) => (
       justifyContent: "space-between",
       padding: "4px",
       a: {
-        variant: "muted.main",
+        color: "muted.main",
         // textDecoration: "underline",
         fontWeight: "bold",
         marginRight: "1ch",
