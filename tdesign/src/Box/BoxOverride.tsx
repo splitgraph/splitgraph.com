@@ -55,14 +55,14 @@ const noticeStyle = {
   },
   borderWidth: "1px",
   borderStyle: "solid",
-  borderColor: "primary",
+  borderColor: "primary.main",
   backgroundColor: "sglightblue.light",
   padding: ".5em",
   a: {
     backgroundColor: "transparent",
     cursor: "pointer",
     outline: 0,
-    color: "primary",
+    color: "primary.main",
     textDecoration: "none",
     "&:hover": {
       textDecoration: "underline",

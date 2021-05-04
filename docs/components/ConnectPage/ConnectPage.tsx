@@ -116,7 +116,7 @@ const ConnectPage = ({
                 // backgroundColor: "sglightblue",
                 paddingTop: "1rem",
                 // border: "1px solid",
-                // borderColor: "primary",
+                // borderColor: "primary.main",
                 color: "heavy",
                 width: "100%",
                 a: {

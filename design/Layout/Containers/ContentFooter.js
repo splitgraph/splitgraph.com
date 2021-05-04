@@ -8,7 +8,7 @@ const getStyle = (depth) => ({
     backgroundColor: "white",
   },
   "@media (max-width: 768px)": {
-    // backgroundColor: "primary",
+    // backgroundColor: "primary.main",
     // color: "white",
     // borderRadius: "40px",
     paddingTop: `${4 * (depth - 1)}rem`,

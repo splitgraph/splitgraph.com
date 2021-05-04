@@ -47,7 +47,7 @@ const HorizontalStyle = {
     // backgroundColor: "green",
     borderTopWidth: "0px",
     borderTopStyle: "dotted",
-    borderTopColor: "secondary",
+    borderTopColor: "legacySecondary.main",
     height: "4rem",
     backgroundColor: "background",
   },

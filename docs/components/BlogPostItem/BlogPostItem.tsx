@@ -43,7 +43,7 @@ const itemBoxStyle = {
   },
   ".blog-title": {
     fontWeight: "bold",
-    color: "primary",
+    color: "primary.main",
     fontSize: "1.5rem",
     paddingRight: "1rem",
   },

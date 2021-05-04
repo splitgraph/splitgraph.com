@@ -79,7 +79,7 @@ const BlogPost = ({ children, meta }: IBlogPostProps) => {
             fontWeight: "normal",
             fontSize: 2,
             borderBottom: "1px solid",
-            borderBottomColor: "gray",
+            borderBottomColor: "gray.main",
           },
         }}
       >
@@ -106,7 +106,7 @@ const BlogPost = ({ children, meta }: IBlogPostProps) => {
         >
           <IconRss
             size={"2rem"}
-            color={"primary"}
+            color={"primary.main"}
             extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
           />
           Subscribe to RSS

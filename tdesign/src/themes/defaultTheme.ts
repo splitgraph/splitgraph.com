@@ -9,7 +9,8 @@ export const muiTheme = createMuiTheme({
   palette: {
     // mode: "dark",
     primary: {
-      // TODO: this affects <MuiLink>, consider what else?
+      // TODO: this is a core color and affects many, many components' default look.
+      // Consider if using the flambeeRed color here instead makes more components look 'right' / Flambee conformant by default
       main: "#36678d",
     },
     // secondary: {
@@ -87,6 +88,9 @@ export const muiTheme = createMuiTheme({
       main: "#2a81f6",
       light: "#73b0ff",
       dark: "#0056c2",
+    },
+    legacySecondary: {
+      main: "#89368d",
     },
   },
   typography: {
@@ -213,7 +217,8 @@ declare module "@material-ui/core/styles/createPalette" {
     heavy?: Palette["primary"];
     muted?: Palette["primary"];
     light?: Palette["primary"];
-    links: Palette["primary"];
+    links?: Palette["primary"];
+    legacySecondary?: Palette["primary"];
   }
   interface PaletteOptions {
     flambeeDarkGray?: PaletteOptions["primary"];
@@ -233,6 +238,7 @@ declare module "@material-ui/core/styles/createPalette" {
     muted?: PaletteOptions["primary"];
     light?: PaletteOptions["primary"];
     link?: PaletteOptions["primary"];
+    legacySecondary?: PaletteOptions["primary"];
   }
 }
 

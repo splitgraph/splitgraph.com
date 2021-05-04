@@ -11,7 +11,7 @@ const BlogTopicLink = ({ topic }: IBlogTopicLinkProps) => {
     <Box
       sx={{
         border: "1px solid",
-        borderColor: "gray",
+        borderColor: "gray.main",
         padding: "5px",
         display: "inline",
         marginRight: "1em",

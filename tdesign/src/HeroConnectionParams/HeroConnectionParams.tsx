@@ -23,7 +23,7 @@ const HeroConnectionParams = ({
       className="hero-subsection hero-subsection--splitfile hero--connection-params"
       sx={{
         backgroundColor: "white",
-        color: "primary",
+        color: "primary.main",
         // maxWidth: "90vw",
         boxShadow: "0 0 4px rgba(0, 0, 0, .125)",
         // minWidth: ["calc(100vw - 4rem)", "400px", "400px"],

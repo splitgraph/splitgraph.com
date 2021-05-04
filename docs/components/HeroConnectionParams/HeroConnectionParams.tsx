@@ -118,7 +118,7 @@ const HeroConnectionParams = ({
                 // padding: "1rem",
                 borderWidth: "1px",
                 borderStyle: "solid",
-                borderColor: "gray",
+                borderColor: "gray.main",
                 a: {
                   textDecoration: "underline",
                   marginBottom: "1rem",

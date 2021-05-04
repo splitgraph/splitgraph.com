@@ -24,7 +24,7 @@ const linkBoxStyle = {
     flexDirection: "column",
     ".link-meta": {
       textTransform: "uppercase",
-      color: "primary",
+      color: "primary.main",
       opacity: "0.5",
       fontSize: "x-small",
       marginTop: "1em",
@@ -94,7 +94,7 @@ const InterPageNav = ({ Link, right, left }) => {
     borderTopStyle: "solid",
     borderTopWidth: "1px",
     a: {
-      color: "primary",
+      color: "primary.main",
       textDecoration: "none",
     },
   };
