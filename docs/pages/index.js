@@ -2,7 +2,7 @@ import { Box, Typography } from "@material-ui/core";
 
 import { NextSeo } from "next-seo";
 
-import withTheme from "../hocs/withTheme";
+import { withMUITheme } from "@splitgraph/tdesign";
 import { LandingPageLayout } from "../components/LandingPageLayout";
 import { HeroBox } from "../components/HeroBox";
 import { HeroSampleQuery } from "../components/HeroSampleQuery";
@@ -43,9 +43,10 @@ import {
   IconFeatureProvenance,
   IconFeatureSplitfiles,
   IconFeatureVersioning,
+  MuiLink as Link,
 } from "@splitgraph/tdesign";
 
-import { Link } from "@splitgraph/docs/components";
+// import { Link } from "@splitgraph/docs/components";
 
 const mdxComponents = {
   pre: ({ children, ...rest }) => (
@@ -350,13 +351,13 @@ const LandingPage = () => {
           className="hero-subsection hero-subsection--text"
           sx={{ maxWidth: "50%" }}
         >
-          <h1 sx={{ fontWeight: 100, color: "gray.main" }}>
+          <Box component="h1" sx={{ fontWeight: 100, color: "gray.main" }}>
             Port 5432 is open...
             <br />
-            <span sx={{ fontWeight: 400, color: "light" }}>
+            <Box component="span" sx={{ fontWeight: 400, color: "light.main" }}>
               Query 40k+ datasets with SQL
-            </span>
-          </h1>
+            </Box>
+          </Box>
 
           <Box
             sx={{
@@ -1338,4 +1339,4 @@ const LandingPage = () => {
   );
 };
 
-export default withTheme(LandingPage);
+export default withMUITheme(LandingPage);

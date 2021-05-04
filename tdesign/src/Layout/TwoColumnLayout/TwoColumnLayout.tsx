@@ -48,7 +48,7 @@ const useResponsiveStyle = (): ILayoutContext => {
       borderBottomColor: ["#36678d", "#36678d", null], //TODO use MUI theme
       borderBottomStyle: ["solid", "solid", null],
       borderBottomSize: ["10px", "10px", null],
-      filter: "dropShadow(2px 4px 6px var(--theme-ui-colors-heavy))",
+      filter: "dropShadow(2px 4px 6px heavy.main)", // TODO use MUI theme
     },
     ".two-col-main": {
       gridArea: rightArea,

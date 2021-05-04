@@ -1,11 +1,9 @@
-/** @jsxImportSource theme-ui */
 import { useMemo } from "react";
 
-import { mdxComponents } from "@splitgraph/tdesign";
+import { mdxComponents, withMUITheme } from "@splitgraph/tdesign";
 
 import { Link } from "@splitgraph/docs/components";
 import { InnerPageLayout } from "@splitgraph/docs/components/InnerPageLayout";
-import withTheme from "@splitgraph/docs/hocs/withTheme";
 
 import { NextSeo } from "next-seo";
 
@@ -45,7 +43,7 @@ const withBasicLayout = ({ MdxPage, meta = {}, contentTree }) => {
 
   WithBasicLayout.displayName = `WithBasicLayout`;
 
-  return withTheme(WithBasicLayout);
+  return withMUITheme(WithBasicLayout);
 };
 
 export default withBasicLayout;
