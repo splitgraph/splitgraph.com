@@ -1,13 +1,12 @@
 import { NextSeo } from "next-seo";
 import { Footer } from "@splitgraph/tdesign";
 import {
-  Link,
   LandingPageLayout,
   ConnectPage,
   useConnectPageData,
   getStaticPropsForConnectPage,
 } from "@splitgraph/docs/components";
-import { withMUITheme } from "@splitgraph/tdesign";
+import { withMUITheme, MuiLink as Link } from "@splitgraph/tdesign";
 
 const OuterConnectPage = ({ helpSectionComponents }) => {
   const {
