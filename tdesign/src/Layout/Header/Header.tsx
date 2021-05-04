@@ -20,7 +20,7 @@ const Header = ({ children }: HeaderProps) => {
           gridTemplateRows: "1fr",
           gridColumnGap: "0px",
           gridRowGap: "0px",
-          minHeight: "5vh",
+          // minHeight: "5vh",
           background:
             "linear-gradient(0deg, rgba(42, 129, 246, 0.02), rgba(42, 129, 246, 0.02)), #FFFFFF",
           [theme.breakpoints.down("md")]: {
