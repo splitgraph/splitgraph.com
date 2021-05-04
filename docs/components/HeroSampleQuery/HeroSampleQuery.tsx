@@ -1,6 +1,5 @@
-/** @jsxImportSource theme-ui */
-import { Box, Button } from "theme-ui";
 import * as React from "react";
+import { Box, Button } from "@material-ui/core";
 
 import { IconChevronRight, IconChevronLeft } from "@splitgraph/tdesign";
 
@@ -60,7 +59,7 @@ const HeroSampleQuery = ({
           width: fixedWidth,
           // width: "min(80ch, 100%)",
           // width: "80ch",
-          backgroundColor: "heavy",
+          backgroundColor: "heavy.main",
           color: "light",
           display: "flex",
           justifyContent: "space-between",

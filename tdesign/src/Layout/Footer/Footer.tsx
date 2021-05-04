@@ -21,15 +21,16 @@ export interface IFooterProps {
 
 const darkVariant = {
   ".footer-section-header": {
-    color: "muted",
+    color: "muted.main",
   },
   ul: {},
   a: {
-    variant: "links.muted",
+    color: "muted.main",
+    textDecoration: "none",
   },
-  backgroundColor: "primary",
+  backgroundColor: "primary.main",
   borderTop: "0.5ch solid",
-  borderTopColor: "lightaccent",
+  borderTopColor: "lightaccent.main",
 };
 
 const mixStyles = (property: string, ...styles: object[]) => {
@@ -87,7 +88,7 @@ const Footer = ({
         ".footer-copyright-row": {
           fontSize: "small",
           textTransform: "uppercase",
-          color: "muted",
+          color: "muted.main",
           // justifyContent: "center",
         },
         ".footer-section-header": {

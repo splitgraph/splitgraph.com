@@ -14,7 +14,7 @@ const BaseStyle = {
   Item: {
     // whiteSpace: "nowrap",
     // padding: 100,
-    color: "blue",
+    color: "primary.main",
   },
   Label: {},
 };

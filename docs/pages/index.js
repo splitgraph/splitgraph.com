@@ -1,5 +1,4 @@
-/** @jsxImportSource theme-ui */
-import { Box, Text } from "theme-ui";
+import { Box, Typography } from "@material-ui/core";
 
 import { NextSeo } from "next-seo";
 
@@ -858,11 +857,13 @@ const LandingPage = () => {
             justifyContent: "center",
           }}
         >
-          <Text sx={{ fontWeight: "800", marginRight: "1rem" }}>EXAMPLE</Text>
-          <Text>
+          <Typography sx={{ fontWeight: "800", marginRight: "1rem" }}>
+            EXAMPLE
+          </Typography>
+          <Typography>
             Import data from a CSV, then reference it in a Splitfile to build a
             derivative image.
-          </Text>
+          </Typography>
         </Box>
       </section>
 

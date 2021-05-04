@@ -1,7 +1,4 @@
-/** @jsxImportSource theme-ui */
-
 import { useMemo } from "react";
-
 import { Box } from "@material-ui/core";
 
 import useSidebar from "./useSidebar";
@@ -111,7 +108,8 @@ const DopeWaterLoadingAnimation = ({ loading }) => {
 
 const ResetButton = ({ reset, show }) => {
   return (
-    <span
+    <Box
+      component="span"
       sx={{
         textTransform: "uppercase",
         fontSize: "1rem",
@@ -123,7 +121,7 @@ const ResetButton = ({ reset, show }) => {
       onClick={reset}
     >
       Collapse
-    </span>
+    </Box>
   );
 };
 
@@ -225,8 +223,8 @@ const SidebarNode = ({
         anythingBeenClicked={anythingBeenClicked}
       />
       {children && (
-        <div className="ul-wrapper" sx={childListContainerStyle}>
-          <ul key={`${slug}`} sx={childListStyle}>
+        <Box className="ul-wrapper" sx={childListContainerStyle}>
+          <Box component="ul" key={`${slug}`} sx={childListStyle}>
             {children.map((child) => (
               <SidebarNode
                 key={`${child.slug}`}
@@ -243,8 +241,8 @@ const SidebarNode = ({
                 mutex={mutex}
               />
             ))}
-          </ul>
-        </div>
+          </Box>
+        </Box>
       )}
     </>
   );
@@ -271,7 +269,7 @@ const Sidebar = ({
   reset,
 }) => {
   return (
-    <>
+    <Box>
       {!minLabelDepth &&
         rootNode &&
         rootNode.metadata &&
@@ -300,7 +298,7 @@ const Sidebar = ({
         loading={loading}
         reset={reset}
       />
-    </>
+    </Box>
   );
 };
 

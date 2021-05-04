@@ -1,7 +1,7 @@
-/** @jsxImportSource theme-ui */
-import { Box, ThemeUIStyleObject } from "theme-ui";
-
-import { Link } from "../../Link";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { MuiLink as Link } from "@splitgraph/tdesign";
 import { IBlogPostMetadata } from "../../BlogPostItem";
 
 import formatDate from "../formatDate";
@@ -11,7 +11,7 @@ type IBlogPostHeaderMetadataProps = Pick<
   "date" | "authors" | "topics" | "description"
 >;
 
-const containerStyle = {
+const containerStyle: SxProps<Theme> = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
@@ -35,7 +35,7 @@ const containerStyle = {
   ".date-value": {
     opacity: "0.5",
   },
-} as ThemeUIStyleObject;
+};
 
 const BlogPostHeaderMetadata = ({
   date,

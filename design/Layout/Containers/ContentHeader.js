@@ -1,5 +1,4 @@
-/** @jsxImportSource theme-ui */
-import { Box } from "theme-ui";
+import { Box } from "@material-ui/core";
 
 const getStyle = (depth) => ({
   paddingLeft: 4,
@@ -8,7 +7,7 @@ const getStyle = (depth) => ({
     backgroundColor: "white",
   },
   "@media (max-width: 768px)": {
-    backgroundColor: "primary",
+    backgroundColor: "primary.main",
     color: "white",
     borderRadius: "40px",
     paddingTop: `${4 * (depth - 1)}rem`,

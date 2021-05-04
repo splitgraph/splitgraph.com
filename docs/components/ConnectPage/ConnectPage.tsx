@@ -1,6 +1,6 @@
-/** @jsxImportSource theme-ui */
-import { Box, ThemeUIStyleObject } from "theme-ui";
-import * as React from "react";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 import { HeroConnectionParams } from "../HeroConnectionParams";
 import { HeroSampleQuery, IHeroSampleQueryItem } from "../HeroSampleQuery";
@@ -51,7 +51,7 @@ const ConnectPage = ({
           },
           ".left-col": {
             flexGrow: "1",
-            backgroundColor: "primary",
+            backgroundColor: "primary.main",
             padding: 0,
             paddingBottom: "4rem",
             display: "flex",
@@ -80,7 +80,7 @@ const ConnectPage = ({
               paddingTop: "0",
               backgroundColor: "white",
               "h1, h2": {
-                color: "primary",
+                color: "primary.main",
               },
               // minHeight: "50%",
             },
@@ -89,7 +89,7 @@ const ConnectPage = ({
               // backgroundColor: "#ebebeb",
             },
           },
-        } as ThemeUIStyleObject
+        } as SxProps<Theme>
       }
     >
       <Box className="left-col">
@@ -120,7 +120,6 @@ const ConnectPage = ({
                 color: "heavy",
                 width: "100%",
                 a: {
-                  variant: "links.primary",
                   // textDecoration: "underline",
                 },
                 ":before": {

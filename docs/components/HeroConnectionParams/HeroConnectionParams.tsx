@@ -1,5 +1,4 @@
-/** @jsxImportSource theme-ui */
-import { Box, Text } from "theme-ui";
+import { Box, Typography } from "@material-ui/core";
 import IframeResizer from "iframe-resizer-react";
 
 import {
@@ -32,7 +31,7 @@ const HeroConnectionParams = ({
       className="hero-subsection hero-subsection--splitfile hero--connection-params"
       sx={{
         backgroundColor: "white",
-        color: "primary",
+        color: "primary.main",
         // maxWidth: "90vw",
         boxShadow: "card",
         // minWidth: ["calc(100vw - 4rem)", "400px", "400px"],
@@ -53,7 +52,7 @@ const HeroConnectionParams = ({
         sx={{
           width: "100%",
           h2: {
-            color: "heavy",
+            color: "heavy.main",
           },
         }}
       >
@@ -99,9 +98,11 @@ const HeroConnectionParams = ({
           />
         ) : (
           <Box>
-            <Text sx={{ color: "heavy", fontWeight: "bold", display: "block" }}>
+            <Typography
+              sx={{ color: "heavy.main", fontWeight: "bold", display: "block" }}
+            >
               Username / Password
-            </Text>
+            </Typography>
             <Box
               sx={{
                 display: "flex",
@@ -119,7 +120,6 @@ const HeroConnectionParams = ({
                 borderStyle: "solid",
                 borderColor: "gray",
                 a: {
-                  variant: "links.primary",
                   textDecoration: "underline",
                   marginBottom: "1rem",
                 },
@@ -133,7 +133,7 @@ const HeroConnectionParams = ({
                   redirectURL
                 )}`}
               >
-                Or, Sign Up with Email & Password
+                Or, Sign Up with Email &amp; Password
               </a>
             </Box>
           </Box>

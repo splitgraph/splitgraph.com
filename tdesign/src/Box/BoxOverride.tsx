@@ -56,7 +56,7 @@ const noticeStyle = {
   borderWidth: "1px",
   borderStyle: "solid",
   borderColor: "primary",
-  backgroundColor: "lightbluefaded",
+  backgroundColor: "sglightblue.light",
   padding: ".5em",
   a: {
     backgroundColor: "transparent",

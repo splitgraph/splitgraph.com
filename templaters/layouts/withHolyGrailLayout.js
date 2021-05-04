@@ -1,7 +1,5 @@
-/** @jsxImportSource theme-ui */
 import { NextSeo } from "next-seo";
 import { Helmet } from "react-helmet";
-
 import { Box } from "@material-ui/core";
 
 import {

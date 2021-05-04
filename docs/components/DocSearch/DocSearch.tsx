@@ -1,6 +1,5 @@
-/** @jsxImportSource theme-ui */
-import { Box } from "theme-ui";
 import { useState, useEffect } from "react";
+import { Box } from "@material-ui/core";
 import { Helmet } from "react-helmet";
 
 import { searchIconURI } from "@splitgraph/tdesign";

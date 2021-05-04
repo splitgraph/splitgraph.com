@@ -1,9 +1,7 @@
-/** @jsxImportSource theme-ui */
-import { Box, ThemeUIStyleObject } from "theme-ui";
-
+import { Box } from "@material-ui/core";
 import { NextSeo } from "next-seo";
 
-import withTheme from "@splitgraph/docs/hocs/withTheme";
+import { withMUITheme } from "@splitgraph/tdesign";
 import { InnerPageLayout } from "@splitgraph/docs/components/InnerPageLayout";
 import {
   Link,
@@ -196,4 +194,4 @@ const DocsIndexPage = () => {
   );
 };
 
-export default withTheme(DocsIndexPage);
+export default withMUITheme(DocsIndexPage);
