@@ -98,16 +98,11 @@ export const muiTheme = createMuiTheme({
       "-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;",
     // Default to sans-serif, b/c of all the text styles 2 are serif and the rest sans. List from systemfontstack.com -> sans-serif
     title1: {
-      fontFamily:
-        "Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol",
-      // via https://systemfontstack.com/
       fontWeight: 600,
       fontSize: "1.5rem",
       lineHeight: 1.33,
     },
     title2: {
-      fontFamily:
-        "Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol",
       fontWeight: 600,
       fontSize: "1.25rem",
       lineHeight: 1,
