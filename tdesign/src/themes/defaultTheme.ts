@@ -192,7 +192,6 @@ export const muiTheme = createMuiTheme({
     },
   },
 });
-console.log(muiTheme);
 declare module "@material-ui/core/Button" {
   interface ButtonPropsVariantOverrides {
     pill: true;
