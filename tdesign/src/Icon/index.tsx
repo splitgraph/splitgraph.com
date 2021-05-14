@@ -291,3 +291,6 @@ export { IconArrowRight };
 
 import IconArrowDown from "./IconArrowDown";
 export { IconArrowDown };
+
+import IconReset from "./IconReset";
+export { IconReset };
