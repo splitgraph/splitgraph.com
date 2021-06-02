@@ -9,3 +9,7 @@ export { GitLabLogoIcon };
 import GoogleLogoIcon from "./ThirdParty/Google/GoogleLogoIcon";
 
 export { GoogleLogoIcon };
+
+import OktaLogoIcon from "./ThirdParty/Okta/OktaLogoIcon";
+
+export { OktaLogoIcon };
