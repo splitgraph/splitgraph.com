@@ -283,8 +283,9 @@ export { IconErase };
 import Octicon from "./ThirdParty/GitHub/Octicon";
 import GitLabLogoIcon from "./ThirdParty/GitLab/GitLabLogoIcon";
 import GoogleLogoIcon from "./ThirdParty/Google/GoogleLogoIcon";
+import OktaLogoIcon from "./ThirdParty/Okta/OktaLogoIcon";
 
-export { Octicon, GitLabLogoIcon, GoogleLogoIcon };
+export { Octicon, GitLabLogoIcon, GoogleLogoIcon, OktaLogoIcon };
 
 import IconArrowRight from "./IconArrowRight";
 export { IconArrowRight };
