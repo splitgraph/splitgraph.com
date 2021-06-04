@@ -1,7 +1,14 @@
 import * as React from "react";
-import { Box } from "@material-ui/core";
+import { Box, useMediaQuery } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
 
-import { Header, HeaderLeft, HeaderCenter, HeaderRight } from "../Header";
+import {
+  Header,
+  HeaderLeft,
+  HeaderCenter,
+  HeaderRight,
+  MobileHeader,
+} from "../Header";
 import { LogoImage } from "../LogoImage";
 import { LogoText } from "../LogoText";
 
@@ -27,7 +34,7 @@ const BaseLayout = ({
   const containerStyle = {
     // maxWidth: '100vw',
     minWidth: "-webkit-fit-content",
-    // width: '100vw',
+    width: "100vw",
     ".logo-link": {
       variant: "links.unstyled",
     },
@@ -75,13 +82,15 @@ const BaseLayout = ({
     },
     ...extraStyle,
   };
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
   const headerCenter = !!renderHeaderCenter ? renderHeaderCenter() : null;
   const headerRight = !!renderHeaderRight ? renderHeaderRight() : null;
 
   return (
     <Box sx={containerStyle}>
-      {showHeader && (
+      {showHeader && matches ? (
         <Header>
           <HeaderLeft>
             <a
@@ -96,6 +105,11 @@ const BaseLayout = ({
           <HeaderCenter>{headerCenter}</HeaderCenter>
           <HeaderRight>{headerRight}</HeaderRight>
         </Header>
+      ) : (
+        <MobileHeader
+          logoText={logoText}
+          searchInput={headerCenter as React.ReactElement}
+        />
       )}
       {children}
     </Box>
