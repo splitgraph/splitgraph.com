@@ -33,7 +33,7 @@ const BaseLayout = ({
 }: BaseLayoutProps) => {
   const containerStyle = {
     // maxWidth: '100vw',
-    minWidth: "-webkit-fit-content",
+    // minWidth: "-webkit-fit-content",
     width: "100vw",
     ".logo-link": {
       variant: "links.unstyled",
