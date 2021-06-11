@@ -23,9 +23,10 @@ const MobileHeader = ({ logoText, searchInput }: IMobileHeaderProps) => {
         </IconButton>
       </Box>
       <Box sx={{ width: "100%" }}>
-        {React.cloneElement(searchInput, {
-          fullWidth: true,
-        })}
+        {searchInput &&
+          React.cloneElement(searchInput, {
+            fullWidth: true,
+          })}
       </Box>
     </Box>
   );
