@@ -48,6 +48,8 @@ export * from "./OAuthButton";
 
 export { ConnectDDNButton } from "./ConnectDDNButton";
 
+export { Dialog } from "./Dialog";
+
 export { HeroConnectionParams } from "./HeroConnectionParams";
 
 export { LogoImage, LogoText } from "./Layout/";
