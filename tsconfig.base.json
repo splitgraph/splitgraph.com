@@ -1,0 +1,53 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "disableSourceOfProjectReferenceRedirect": false,
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "incremental": true,
+    "baseUrl": ".",
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "listFiles": false,
+    "diagnostics": false,
+    "extendedDiagnostics": false,
+    // "paths": {
+      // "@splitgraph/*": [
+      //   "splitgraph.com/*"
+      // ],
+    //   "@cloud/*": [
+    //     "cloud/*"
+    //   ],
+    // }
+    // "paths": {
+    //   "@splitgraph/*": ["splitgraph.com/dist"],
+    //   "@cloud/*": ["cloud/dist"]
+    // }
+  },
+  "typeAcquisition": {
+    "enable": false
+  },
+  "watchOptions": {
+    "watchFile": "useFsEvents",
+    "watchDirectory": "useFsEvents",
+    "fallbackPolling": "dynamicPriority"
+  }
+}
