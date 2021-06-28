@@ -1,9 +1,10 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "dist"
+    "target": "es5",
+    "resolveJsonModule": true,
+    "paths": {
+      "@splitgraph/*": ["*"],
+    }
   },
-  "exclude": ["node_modules"]
-  // "references": [{ "path": "tdesign" }, { "path": "docs" }]
 }
