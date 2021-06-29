@@ -18,7 +18,7 @@ fi
 # then when running in the parent monorepo, yarn will think its in its own root
 pushd "$SPLITGRAPH_DIR" \
     && WORKSPACE_LOCKFILE=yarn-public-workspace.lock ./setup.sh \
-    && yarn install --immutable \
+    && yarn install \
     && echo "Installed successfully" \
     && (
         test ! -z "$YARN_CACHE_FOLDER" \
