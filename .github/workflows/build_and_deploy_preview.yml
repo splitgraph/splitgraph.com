@@ -12,7 +12,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 13.x
+          node-version: 15.x
       - run: ./setup.sh
       - uses: actions/cache@v1
         with:
