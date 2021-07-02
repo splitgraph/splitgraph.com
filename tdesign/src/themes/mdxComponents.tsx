@@ -1,5 +1,5 @@
 import { Box } from "@material-ui/core";
-import { makeDefaultTheme } from "./defaultTheme";
+import { makeDefaultTheme } from "./legacyTheme";
 
 const defaultTheme = makeDefaultTheme();
 
