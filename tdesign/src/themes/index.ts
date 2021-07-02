@@ -1,8 +1,6 @@
-//   export default defaultTheme;
+export { muiTheme } from "./muiTheme";
 
-export { muiTheme, marketingTheme } from "./defaultTheme";
-
-export { makeDefaultTheme, tocStyles } from "./legacyTheme";
+export { makeDefaultTheme, tocStyles, marketingTheme } from "./legacyTheme";
 
 import { mdxComponents } from "./mdxComponents";
 export { mdxComponents };
