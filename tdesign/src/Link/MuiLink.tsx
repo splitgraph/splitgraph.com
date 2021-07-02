@@ -87,7 +87,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
         />
       );
     }
-    console.log("MuiLink props", props);
+    // console.log("MuiLink props", props);
     return (
       <MuiLink
         className={className}
