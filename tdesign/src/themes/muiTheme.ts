@@ -1,6 +1,5 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 // import { theme } from "./design"; // TODO: when we're ready, the MUI palette should consume from here
-import { prismTheme } from "./legacyTheme";
 
 export const defaultTheme = createMuiTheme(); // lets us reference MUI default style values below
 
@@ -270,76 +269,3 @@ declare module "@material-ui/core/Typography" {
     smallHighlightedB: true;
   }
 }
-
-/*
-  Use the @rebass/preset theme as a starting point.
-
-  Taken from:
-    https://github.com/rebassjs/rebass/blob/master/packages/preset/src/index.js
-*/
-
-// import prismTheme from "@theme-ui/prism/presets/shades-of-purple.json";
-
-// const prismTheme = {
-//   color: "#9EFEFF",
-//   backgroundColor: "#2D2A55",
-//   ".changed": { color: "rgb(255, 238, 128)" },
-//   ".deleted": { color: "rgba(239, 83, 80, 0.56)" },
-//   ".inserted": { color: "rgb(173, 219, 103)" },
-//   ".comment": { color: "rgb(179, 98, 255)", fontStyle: "italic" },
-//   ".punctuation": { color: "rgb(255, 255, 255)" },
-//   ".constant": { color: "rgb(255, 98, 140)" },
-//   ".string,.url": { color: "rgb(165, 255, 144)" },
-//   ".variable": { color: "rgb(255, 238, 128)" },
-//   ".number,.boolean": { color: "rgb(255, 98, 140)" },
-//   ".attr-name": { color: "rgb(255, 180, 84)" },
-//   ".keyword,.operator,.property,.namespace,.tag,.selector,.doctype": {
-//     color: "rgb(255, 157, 0)",
-//   },
-//   ".builtin,.char,.constant,.function,.class-name": {
-//     color: "rgb(250, 208, 0)",
-//   },
-// };
-
-export const marketingTheme = {
-  styles: {
-    pre: {
-      ...prismTheme,
-      padding: "1ch",
-      [defaultTheme.breakpoints.down("sm")]: {},
-      fontSize: "0.8rem",
-      overflowX: "auto",
-      MsOverflowStyle: "none",
-      backgroundColor: "primary",
-      ".mdx-marker": {
-        display: "block",
-        borderLeft: `.25em solid ${prismTheme[".punctuation"].color}`,
-      },
-    },
-    inlineCode: {
-      ...prismTheme,
-      [defaultTheme.breakpoints.up("sm")]: {
-        minWidth: "initial",
-      },
-      paddingTop: 0,
-      paddingBottom: 0,
-      minHeight: "1rem",
-      display: "inline-flex",
-      alignContent: "center",
-      overflowX: "auto",
-      backgroundColor: prismTheme.color,
-      // color: "red",
-    },
-    code: {
-      backgroundColor: "primary.main",
-      fontFamily: "monospace",
-      fontSize: "inherit",
-      span: {
-        // color: "red",
-      },
-      ".comment": {
-        color: "#f4c1c0",
-      },
-    },
-  },
-};
