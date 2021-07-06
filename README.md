@@ -3,6 +3,7 @@
 As of 7/8/21, these instructions should get you running locally. It's still a WIP.
 
 **NOTE: Make sure you check out `canary` of this repository! The default `master` branch is not up to date.**
+
 ## Cloning
 
 You can get started by copying this command and pasting it into your Terminal:
@@ -12,6 +13,7 @@ git clone git@github.com:splitgraph/splitgraph.com.git \
   && cd splitgraph.com \
   && git checkout --track origin/canary
 ```
+
 ## Installation
 
 Assumptions:
@@ -113,7 +115,6 @@ To get started, you can try editing the demo `lp` page linked above.
 
 For the most part, this is a standard Next.js app in `docs`
 
-
 # Docs
 
 ## Code Layout: What are the folders for?
@@ -132,19 +133,18 @@ yarn installation.
 
 - [splitgraph.com](./docs)
   - The root workspace. You can run most commands from here, which it mostly
-  forwards to the `docs` workspace anyway.
+    forwards to the `docs` workspace anyway.
 - [docs](./docs) (Import from `@splitgraph/docs`)
   - The Next.js app that is the primary entrypoint of the repository
 - [tdesign](./tdesign) (Import from `@splitgraph/tdesign`)
   - The design kit / component library / theme / etc. Very much a WIP.
-  - It's called "`tdesign`" as in "typescript design`, because originally
-  we had JS files in `design`, and we are still migrating that.
+  - It's called "`tdesign`" as in "typescript design`, because originally we had JS files in `design`, and we are still migrating that.
 
 ### Less important workspaces
 
 - [design](./design) (Import from `@splitgraph/design`)
   - The deprecated design kit, which might still be used in a few places.
-  You can mostly ignore this.
+    You can mostly ignore this.
 - [lib](./lib) (Import from `@splitgraph/lib`)
   - Utilities and library functions
 - [content-scripts](./content-scripts) (not for importing)
@@ -194,7 +194,6 @@ These are the three themes you could import:
 These examples are available in
 [docs/components/DemoComponents](./docs/components/DemoComponents).
 
-
 - `sx` + `className`:
   React's built-in `className` prop can be a useful (and styling library agnostic) way to target child components.
   You can define some styles in a parent and pass them into the children like so:
@@ -209,7 +208,7 @@ const styles = {
     <p>Hello</p>
   </Child>
 </Parent>
-````
+```
 
 - `css` prop
   Emotion gives us a css prop that accepts vanilla CSS.
@@ -239,6 +238,7 @@ const DemoStyled = styled.div`
   }};
 `;
 ```
+
 # Debugging CI
 
 ```bash
