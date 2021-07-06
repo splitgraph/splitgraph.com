@@ -11,6 +11,9 @@
 
 SPLITGRAPH_DIR=${1-"$(cd -P -- "$(dirname -- "$0")" && pwd -P)"}
 
+# If `yarn --version` is not exact match of `$TARGET_YARN_VERSION`, install yarn
+TARGET_YARN_VERSION="${TARGET_YARN_VERSION-"2.4.2"}"
+
 prep_env() {
     echo "Ensure certs..." \
         && echo "Ensure yarn..." \
@@ -157,6 +160,11 @@ dir_has_yarn_release() {
         rm -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-constraints.cjs
     fi
 
+    if has_wrong_yarn_version "$prefixDir" ; then
+        echo "yarn seems outdated in $prefixDir, return 1 to trick into upgrade"
+        return 1
+    fi
+
     if has_broken_yarn "$prefixDir" ; then
         echo "yarn seems broken in $prefixDir, remove .yarnrc.yml"
         rm -f "$prefixDir"/.yarnrc.yml
@@ -191,6 +199,32 @@ dir_has_yarn_plugins() {
     return 1
 }
 
+
+# OPTIONAL:
+#   If $TARGET_YARN_VERSION is set, then `yarn --version` must be exact match
+has_wrong_yarn_version() {
+
+    # specifying a target version is optional, so bail out if not specified
+    if test -z "$TARGET_YARN_VERSION" ; then
+        return 1
+    fi
+
+    local prefixDir="$1"
+    shift
+
+    pushd "$prefixDir"
+
+    local yarn_version
+    yarn_version="$(yarn --version)"
+
+    # For now we just check exact match
+    if test "$yarn_version" != "$TARGET_YARN_VERSION" ; then
+        echo "yarn --version ($yarn_version) is not TARGET_YARN_VERSION ($TARGET_YARN_VERSION)"
+        popd && return 0
+    fi
+
+    popd && return 1
+}
 
 # Sometimes a mismatch between .yarnrc.yml yarnPath and the actual yarn file
 # can cause yarn to fail to start due to looking for the wrong file
