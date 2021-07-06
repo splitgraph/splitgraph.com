@@ -12,7 +12,10 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 13.x
+          node-version: 15.x
+      - name: Setup ACT debugging container
+        if: ${{ env.ACT }}
+        run: ./.ci/debug/setup_debugging.sh
       - run: ./setup.sh
       - uses: actions/cache@v1
         with:
@@ -21,6 +24,9 @@ jobs:
       - run: ./.ci/install.sh
         env:
           YARN_CACHE_FOLDER: /home/runner/yarn-cache
+
+          # For debugging only, but must be defined here or `act` ignores it
+          BREAK_INTERACTIVE_BEFORE_INSTALL: ${{ secrets.BREAK_INTERACTIVE_BEFORE_INSTALL }}
       - run: ./.ci/build.sh
         env:
           DOCSEARCH_PUBLIC_CLIENT_API_KEY: ${{ secrets.DOCSEARCH_PUBLIC_CLIENT_API_KEY }}
