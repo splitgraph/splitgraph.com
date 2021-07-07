@@ -6,6 +6,8 @@
 { sudo ./clean.sh ; } ; ./setup.sh && yarn install && yarn dev
 ```
 
+TESTTEWSTTEST
+
 ## scripts for running on host machine:
 
 - `./clean.sh`:
