@@ -6,8 +6,8 @@
   "types": "../dist/docs",
   "scripts": {
     "dev": "yarn run clean && node server.js",
-    "tsc": "yarn workspace js tsc --build --verbose splitgraph.com/docs",
-    "build": "yarn tsc && next build && next export",
+    "typecheck": "yarn workspace splitgraph.com typecheck-docs",
+    "build": "yarn run typecheck && next build && next export",
     "build-only": "NODE_ENV=production NEXT_WEBPACK_LOGGING=infrastructure IGNORE_BUILD_ERRORS=true NODE_OPTIONS='--max_old_space_size=4096' yarn next build && yarn next export",
     "deploy": "cp now.json out/ && yarn run now",
     "start": "serve out",
