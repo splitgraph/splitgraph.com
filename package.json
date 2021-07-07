@@ -17,6 +17,7 @@
     "lib"
   ],
   "scripts": {
+    "typecheck-and-build": "yarn run typecheck && yarn run build",
     "build": "yarn workspace @splitgraph/docs run build",
     "typecheck": "yarn run typecheck-docs",
     "dev": "yarn run dev:@splitgraph/docs",
