@@ -1,83 +1,199 @@
-# splitgraph.com website
+# Quick Start
 
-## reset, install, and run dev -- one liner:
+As of 7/8/21, these instructions should get you running locally. It's still a WIP.
+
+**NOTE: Make sure you check out `canary` of this repository! The default `master` branch is not up to date.**
+## Cloning
+
+You can get started by copying this command and pasting it into your Terminal:
 
 ```bash
-{ sudo ./clean.sh ; } ; ./setup.sh && yarn install && yarn dev
+git clone git@github.com:splitgraph/splitgraph.com.git \
+  && cd splitgraph.com \
+  && git checkout --track origin/canary
+```
+## Installation
+
+Assumptions:
+
+- Linux host, preferably running Ubuntu 18.04 (that's what CI uses)
+- Node 15.x or higher (15 is deprecated; 16 likely works; CI only tests with Node 15)
+- `yarn` installed ("yarn classic" is okay – it can upgrade to yarn berry)
+
+When in doubt, you can read read the CI scripts, you can check the CI scripts, since we know it's passing:
+
+- [.github/workflows/build_and_deploy_preview.yml](.github/workflows/build_and_deploy_preview.yml)
+- [.ci/install.sh](.ci/install.sh)
+- [.ci/build.sh](.ci/build.sh)
+
+Here is how you install the repository for the first time.
+
+```bash
+# Export this variable so yarn knows to use our plugin (todo: remove this step)
+export WORKSPACE_LOCKFILE=yarn-public-workspace.lock
+
+# Run the setup script to ensure correct verson of yarn berry and plugins
+# On success, the script will print nothing, and exit 0
+./setup.sh
+
+# Install all workspaces
+yarn install --immutable
 ```
 
-## scripts for running on host machine:
-
-- `./clean.sh`:
-
-  - Run this script to "reset" everything, especially if you've been running
-    in docker and are having issues with overlapping permissions, or missing
-    manifest files
-  - Note: If you are fixing permission errors, you likely want to run this with `sudo`
-
-- `./setup.sh`:
-
-  - Run this script to setup `yarn` itself, especially if you are having trouble
-    with running `yarn` (error, "missing yarn berry" or anything like this)
-
-- `yarn dev`
-  - Run this script to start dev of the docs, after running `yarn install`
-
-## debugging CI
+To verify it worked, check that `node_modules` exists:
 
 ```bash
+ls node_modules | head -n5
+```
 
-# Start `act`
-.ci/debug/run_act.sh
+Troubleshooting:
 
-# "Break" before running bulk of install step (see `install.sh`)
-.ci/debug/run_act_break_before_install.sh
+- Make sure you're running the correct `yarn`. If not, run `./setup.sh` again.
+  - `yarn --version` should print `2.4.2`
+  - `yarn config get nodeLinker` should print `node-modules`
+- `./setup.sh` exits with failure and hopefully prints some information
+  - Try to do what it says
+- Make sure `node --version` is at least `15.x`
+  - Node `16.x` is also likely to work, but it is untested; CI only tests `15.x`
+  - Any version lower than `15.x` is unlikely to work
+- Directory permission errors
+  - Make sure you own the current directory and any existing `node_modules` subdirectory
 
-# The "break" is just an infinite loop of `sleep 10`
-# To get an interactive shell, need to `docker exec` into that container
+## Note!
 
-docker exec -it $(docker ps -q --filter name=act-*) /bin/bash
+**Run all `yarn` commands in the root workspace, unless otherwise specified.**
 
-# If you need to kill the container
-docker kill $(docker ps -q --filter name=act-*)
+## Typecheck
 
-## HOWTO get started with splitgraph.com
+**Note: This part is a bit rough around the edges for local dev right now.**
 
-[splitgraph.com](https://github.com/splitgraph/splitgraph.com) is a standalone, open source repo hosted on Github. One of it's purposes is to fulfill certain needs of other Splitgraph FE apps.
+After install, you should run a typecheck to make sure everything is working
+as expected (also, it might be required for `yarn dev` to work, but not sure atm).
 
-### What are the folders inside splitgraph.com for? (e.g. `design/`,`tdesign/`, etc)
+```bash
+# (1) Prep environment with temporary hack
+# By default the `tsconfig.json` will not run in an isolated repo, so you
+# need to overwrite it with the same config used in CI.
+# Note:
+#   - this is a TEMPORARY HACK.
+#   - This will result in a changed file in Git. DO NOT COMMIT THE CHANGED TSCONFIG FILES.
+mv tsconfig.ci.json tsconfig.json
 
-Inside splitgraph.com are several folders (+ Nodejs sub-projects) that address different FE needs.
+# (2) Run typecheck
+# This will take max 2 minutes on the first run but will use incremental builds afterward
+yarn typecheck
+```
 
-Generally `index.ts` (or `index.js`) exports are used to make things available for consumers (and in some cases make it possible to swap out implementations later)
+Troubleshooting:
 
-- [design](./design) was the original place for components that get used in multiple places to live (i.e. a component library).
-- [tdesign](./tdesign) was added later as we migrated pieces to TypeScript, one by one.
-- [docs](./docs) is a Next.js app that powers splitgraph.com/docs
-- [lib](./lib) utilities and library functions
-- [content-scripts](./content-scripts) scripts for helping generate various pieces of the static site
+- Just skip this if it's broken right now
 
-As of July 2021 the majority of components have been TypeScript-ified and migrated from design to tdesign.
+## Start the dev server
 
-#### "Where should I save new React components?"
+Assuming typechecking passed, this should go smoothly:
 
-The catalog is its own Next.js app, and it depends on splitgraph.com for certain components.
-The docs app lives inside splitgraph.com, and is a separate Next.js app that can be considered 'static' and 'public.'
-Dependencies of e.g. catalog on splitgraph.com are allowed, but _NOT_ the other way around/
-Never, ever, write code inside splitgraph.com that depends on catalog.
+```
+yarn dev
+```
 
-When writing a new React component, consider "does this component need to be used by both Catalog and/or Docs?" or
-"is it likely to be useful in more than one place". If the answer is yes, consider saving it inside the splitgraph.com component library.
+This will start the Next.js dev server. Navigate to the demo page:
 
-### Whats the story with theming?
+- http://localhost:3000/docs/lp
 
-splitgraph.com and the catalog were recently migrated from Theme-UI to MUI (v5).
+If it loads, great!
 
-- [design.ts](./tdesign/src/themes/design.ts) is intended to be a place for designer-originated colors.
-- [muiTheme.ts](./tdesign/src/themes/muiTheme.ts) is where the MUI theme and various overrides live.
-- [legacyTheme.ts](./tdesign/src/themes/legacyTheme.ts) is where the remants of the old theming approach live.
+## Edit the right files
+
+To get started, you can try editing the demo `lp` page linked above.
+
+- The Next.js app is in the `docs` workspace
+- To edit the `lp` page in the above link, edit: [docs/pages/docs/lp/index.tsx](./docs/pages/docs/lp/index.tsx)
+- Note this page imports demo components from [`docs/components/DemoComponents`](./docs/components/DemoComponents)
+- Import the theme and/or components from `@splitgraph/tdesign` (the `tdesign` workspace)
+
+For the most part, this is a standard Next.js app in `docs`
+
+
+# Docs
+
+## Code Layout: What are the folders for?
+
+The `splitgraph.com` repository is a TypeScript mono-repo with multiple
+workspaces. Most importantly, the [`docs`](./docs) workspace is a Next.js app, and
+the `tdesign` workspace contains the component library and theme.
+
+To resolve imports of packages from within JS scripts or tooling, we use the
+`yarn berry` workspace feature. When typechecking, we use TypeScript project
+references with aliases to match the yarn reoslution, e.g. `@splitgraph/tdesign`.
+Note that we're using a differently named lockfile, but otherwise it's a regular
+yarn installation.
+
+### Important workspaces
+
+- [splitgraph.com](./docs)
+  - The root workspace. You can run most commands from here, which it mostly
+  forwards to the `docs` workspace anyway.
+- [docs](./docs) (Import from `@splitgraph/docs`)
+  - The Next.js app that is the primary entrypoint of the repository
+- [tdesign](./tdesign) (Import from `@splitgraph/tdesign`)
+  - The design kit / component library / theme / etc. Very much a WIP.
+  - It's called "`tdesign`" as in "typescript design`, because originally
+  we had JS files in `design`, and we are still migrating that.
+
+### Less important workspaces
+
+- [design](./design) (Import from `@splitgraph/design`)
+  - The deprecated design kit, which might still be used in a few places.
+  You can mostly ignore this.
+- [lib](./lib) (Import from `@splitgraph/lib`)
+  - Utilities and library functions
+- [content-scripts](./content-scripts) (not for importing)
+  - Various scripts meant for CLI consumption, e.g. to update docs
+
+## Where to create new pages and components
+
+Create new pages in [`docs/pages`](./docs/pages). It's a standard Next.js app for
+the most part (there are currently issues with `<Link>` due to some weird routing, but you
+can ignore that for now.)
+
+Do not save components in the `docs/pages` directory.
+
+You can save components in `docs/components`, and then import them via the
+prefix `@splitgraph/docs/components`.
+
+If you think a component is reusable outside of the docs site, you can save
+it in the design library at `@splitgraph/tdesign`.
+
+When creating components, try to follow the existing style (we'll eventually
+document this / add linter / scaffolding scripts).)
+
+## Whats the story with theming?
+
+We recently migrated from `theme-ui` to `material-ui` v5 (alpha). You may find
+it a bit rough around the edges at the moment. Note that MUI v5 depends on
+Emotion v11.
+
+New pages are not required to use a MUI theme or any MUI code. Instead, they
+can simply import the emotion theme (`design.ts`) and use it with the default
+`ThemeProvider` from emotion. You can see examples of this in
+[docs/components/DemoComponents](./docs/components/DemoComponents).
+
+### Theme Files
+
+These are the three themes you could import:
+
+- [design.ts](./tdesign/src/themes/design.ts)
+  - The basic theme that you usually want to import. Works with Emotion. WIP.
+- [muiTheme.ts](./tdesign/src/themes/muiTheme.ts)
+  - The theme you want to import if the page is using any MUI components.
+- [legacyTheme.ts](./tdesign/src/themes/legacyTheme.ts)
+  - A theme that we are slowly deprecating. Other components depend on it.
 
 ### Styling approaches
+
+These examples are available in
+[docs/components/DemoComponents](./docs/components/DemoComponents).
+
 
 - `sx` + `className`:
   React's built-in `className` prop can be a useful (and styling library agnostic) way to target child components.
@@ -93,7 +209,7 @@ const styles = {
     <p>Hello</p>
   </Child>
 </Parent>
-```
+````
 
 - `css` prop
   Emotion gives us a css prop that accepts vanilla CSS.
@@ -123,54 +239,19 @@ const DemoStyled = styled.div`
   }};
 `;
 ```
+# Debugging CI
 
-### Brief background
+```bash
+# Start `act`
+.ci/debug/run_act.sh
 
-Historically catalog (and docs) used Theme-UI, then later catalog and docs was migrated to MUI. MUIv5 (currently in late alpha) switches the styling from "JSS" to Emotion.
-The MUI docs have a page on [interop](https://next.material-ui.com/guides/interoperability/) with variety of styling approaches.
-The preference is to remain flexible/agnostic where possible, and be able to use whatever theme approach makes the most sense. Sometimes MUI components are an excellent fit, but we don't want to become overly dependent on one solution. That is one reason why both Emotion's <ThemeProvider /> and MUI's <ThemeProvider /> are worth considering.
+# "Break" before running bulk of install step (see `install.sh`)
+.ci/debug/run_act_break_before_install.sh
 
-### How should I know which <ThemeProvider /> to use
+# The "break" is just an infinite loop of `sleep 10`
+# To get an interactive shell, need to `docker exec` into that container
+docker exec -it $(docker ps -q --filter name=act-*) /bin/bash
 
-Next.js's router uses the filesystem to configure routing. [docs](https://nextjs.org/docs/routing/introduction)
-
-Different pages across the app have different Providers/Contexts; it's suggested to consider the Providers your page has before diving in and passing data around.
-
-Let's discuss an example of figuring out which ThemeProvider you may need based on a route.
-For purposes of an example let's say you're trying to add a `<Button />` to the /explore page.
-
-Suggested steps:
-
-- Pull up the page in the browser and note the path e.g. for https://splitgraph.test/explore -> 'explore' is the path
-- There will be a relevant file under /pages, e.g. /pages/explore. (If you don't see it, be aware some pages use dynamic routing e.g. `[page]`)
-- Using the React DevTools, follow your way up the parent node of the page, until you see a ThemeProvider. It will be either MUI, Theme-UI, or something else.
-
-### Installing on Ubuntu (on Windows)
-
-One way to install Node.js v15 (should work on Ubuntu + maybe Debian also):
-
-From a bash prompt:
-`su -c 'curl -sL https://deb.nodesource.com/setup_15.x | bash -'`
-
-## You may also need development tools to build native addons:
-
-     sudo apt-get install gcc g++ make
-
-## To install the Yarn package manager, run:
-
-     curl -sL $yarn_key_url | gpg --dearmor | sudo tee $local_yarn_key >/dev/null
-     echo \"deb [signed-by=$local_yarn_key] $yarn_site stable main\" | sudo tee /etc/apt/sources.list.d/yarn.list
-     sudo apt-get update && sudo apt-get install yarn
-
-## Almost done! To get splitgraph.com running:
-
-```shell
-# clone splitgraph.com
-$ git clone https://github.com/splitgraph/splitgraph.com.git
-$ cd splitgraph.com
-# yarn v2 is required. it's set on a per-project basis
-$ yarn set version berry
-# pull in the deps
-$ yarn install
-#
+# If you need to kill the container
+docker kill $(docker ps -q --filter name=act-*)
 ```
