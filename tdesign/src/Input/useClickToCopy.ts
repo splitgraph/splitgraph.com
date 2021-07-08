@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 
 const useCopyToClipboard = (text: string) => {
   const copyToClipboard = (str: string) => {
-    const el = document.createElement("textarea");
+    const el: HTMLTextAreaElement = document.createElement("textarea");
     el.value = str;
     el.setAttribute("readonly", "");
     el.style.position = "absolute";
