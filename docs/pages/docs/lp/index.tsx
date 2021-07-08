@@ -1,9 +1,9 @@
 import { Grid, Paper, Typography } from "@material-ui/core";
-import withThemes from "./withThemes";
-import StyledComponents from "./styled-components";
-import CSSProp from "./css-prop";
-import StyledUtil from "./styled-util-fn";
-import ArrowText from "./arrow-text/ArrowText";
+import withThemes from "@splitgraph/docs/components/DemoComponents/withThemes";
+import StyledComponents from "@splitgraph/docs/components/DemoComponents/styled-components";
+import CSSProp from "@splitgraph/docs/components/DemoComponents/css-prop";
+import StyledUtil from "@splitgraph/docs/components/DemoComponents/styled-util-fn";
+import ArrowText from "@splitgraph/docs/components/DemoComponents/arrow-text/ArrowText";
 
 const ThemeDemo = () => {
   return (
