@@ -2225,6 +2225,7 @@ __metadata:
     pirates: ^4.0.1
     react: ^17.0.2
     react-dom: ^17.0.2
+    react-hook-form: ^7.10.1
     rehype: ^9.0.0
     rehype-raw: ^4.0.1
     rehype-slug: ^2.0.3
@@ -8273,6 +8274,15 @@ fsevents@~2.3.1:
   peerDependencies:
     react: ">=16.3.0"
   checksum: 56fd795b0aecc89bac8d2733268751f0ef463bf6764090f8a801778741d4a6eaf135234cdaa50188bbda29c8e2d3ec43e9a42d1ec06b60092645c8754c7bad81
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.10.1":
+  version: 7.10.1
+  resolution: "react-hook-form@npm:7.10.1"
+  peerDependencies:
+    react: ^16.8.0 || ^17
+  checksum: 1ae1eaca04e83aefc6ef68d62ea5ff27a424809c7df1ea9f0f2d7a56c8e6f74d951776f6be93a1d8bea808024f2576b3ecac74e81dd12cc1800538671f6ea113
   languageName: node
   linkType: hard
 
