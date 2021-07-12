@@ -9,7 +9,9 @@ const EmotionCSS = () => {
     <Box sx={{ width: 400 }}>
       <Typography>{"MUI default <Slider>"}</Typography>
       <Slider defaultValue={30} />
-      <Typography>{"<Slider> css prop accessing theme.myColor"}</Typography>
+      <Typography>
+        {"<Slider> css prop accessing theme.primary.main"}
+      </Typography>
       <em>
         <Typography>
           {
@@ -20,7 +22,7 @@ const EmotionCSS = () => {
       <Slider
         defaultValue={30}
         css={(theme) => {
-          return { color: theme.myColor };
+          return { color: theme.primary.main };
         }}
       />
       <Typography>
