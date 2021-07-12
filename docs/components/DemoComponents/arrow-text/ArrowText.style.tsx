@@ -21,7 +21,10 @@ const ArrowTextContainer = styled.div`
       )
       1 stretch;
 
-    color: ${(props) => props.theme.palette.primary[100]};
+    color: ${(props) => {
+      console.log(">>>", props);
+      return props.theme.primary.main;
+    }};
   }
 
   &.secondary {
@@ -32,7 +35,7 @@ const ArrowTextContainer = styled.div`
       )
       1 stretch;
 
-    color: ${(props) => props.theme.palette.secondary[100]};
+    color: ${(props) => props.theme.primary.main};
   }
 
   &.success {
@@ -43,7 +46,7 @@ const ArrowTextContainer = styled.div`
       )
       1 stretch;
 
-    color: ${(props) => props.theme.palette.success[300]};
+    color: ${(props) => props.theme.primary.main};
   }
 
   h6 {
