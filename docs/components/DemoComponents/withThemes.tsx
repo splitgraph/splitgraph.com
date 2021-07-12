@@ -1,12 +1,15 @@
 import { getDisplayName } from "next/dist/next-server/lib/utils";
 import { ThemeProvider } from "@emotion/react";
-import { muiTheme } from "@splitgraph/tdesign";
-import { Theme } from "@material-ui/core/styles";
+import { theme as designTheme } from "@splitgraph/tdesign";
 
-export interface MyTheme extends Theme {
+export interface MyTheme {
   myColor: string;
+  myCoolColor: string;
 }
-const theme: MyTheme = { ...muiTheme, myColor: "red" };
+const theme: MyTheme = {
+  myColor: "red",
+  myCoolColor: designTheme.primary.main,
+};
 
 const withThemes = (Page) => {
   const WithTheme = (props) => {
