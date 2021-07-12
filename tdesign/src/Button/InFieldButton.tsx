@@ -24,6 +24,9 @@ const Button = ({ children, disabled, ...rest }: IButtonProps) => (
         boxShadow: "0px 4px 8px rgba(249, 69, 105, 0.2)",
       },
       "&.Mui-disabled": { backgroundColor: theme.grays.light.gray26 },
+      "&:focus": {
+        boxShadow: `0px 0px 0px 1px ${theme.grays.light.gray20}`,
+      },
     }}
     // endIcon={}
     {...rest}
