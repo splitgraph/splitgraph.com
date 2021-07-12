@@ -1,35 +1,28 @@
 import { useState, useCallback, useEffect } from "react";
 
-const useCopyToClipboard = (text: string) => {
-  const copyToClipboard = (str: string) => {
-    const el: HTMLTextAreaElement = document.createElement("textarea");
-    el.value = str;
-    el.setAttribute("readonly", "");
-    el.style.position = "absolute";
-    el.style.left = "-9999px";
-    document.body.appendChild(el);
-    const selected =
-      document.getSelection().rangeCount > 0
-        ? document.getSelection().getRangeAt(0)
-        : false;
-    el.select();
-    const success = document.execCommand("copy");
-    document.body.removeChild(el);
-    if (selected) {
-      document.getSelection().removeAllRanges();
-      document.getSelection().addRange(selected);
-    }
-    return success;
-  };
-
-  const [copied, setCopied] = useState(false);
-
+type CopyStatus = "inactive" | "copied" | "error";
+const useClickToCopy = (
+  text: string,
+  timeout = 2000
+): [CopyStatus, () => void] => {
+  const [status, setStatus] = useState<CopyStatus>("inactive");
   const copy = useCallback(() => {
-    if (!copied) setCopied(copyToClipboard(text));
+    navigator.clipboard.writeText(text).then(
+      () => setStatus("copied"),
+      () => setStatus("error")
+    );
   }, [text]);
-  useEffect(() => () => setCopied(false), [text]);
 
-  return [copied, copy];
+  useEffect(() => {
+    if (status === "inactive") {
+      return;
+    }
+
+    const timeoutId = setTimeout(() => setStatus("inactive"), timeout);
+
+    return () => clearTimeout(timeoutId);
+  }, [status]);
+
+  return [status, copy];
 };
-
-export default useCopyToClipboard;
+export default useClickToCopy;
