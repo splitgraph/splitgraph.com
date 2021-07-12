@@ -38,6 +38,7 @@ export {
   muiTheme,
   mdxComponents,
   withMUITheme,
+  theme,
 } from "./themes/index";
 
 export { ThemeProvider } from "theme-ui";
