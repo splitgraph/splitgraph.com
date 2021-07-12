@@ -18,7 +18,7 @@ const ThemeDemo = () => {
             <ArrowText />
             <p>
               (lp-demo-leon component using{" "}
-              <code>props.theme.palette.primary[100]</code> from our theme)
+              <code>props.theme.primary.main</code> from our theme)
             </p>
             The Emotion {"<ThemeProvider>"} covers all child components of the
             /lp page. See <a href="https://emotion.sh/docs/theming">docs</a>{" "}

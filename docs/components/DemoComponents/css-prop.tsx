@@ -26,12 +26,12 @@ const EmotionCSS = () => {
         }}
       />
       <Typography>
-        {"<Slider> css prop accessing theme.palette.primary.main"}
+        {"<Slider> css prop accessing theme.primary.main"}
       </Typography>
       <Slider
         defaultValue={30}
         css={(theme) => ({
-          color: theme.palette.primary.main,
+          color: theme.primary.main,
         })}
       />
       <Typography>{"<Slider> with css prop"}</Typography>
