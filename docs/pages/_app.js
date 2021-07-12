@@ -5,10 +5,10 @@ import "@splitgraph/design/css/base.css";
 //       pages, but that requires upating the Sphinx -> mdx transform files
 //       to make sure that every className is correctly prefixed (todo later)
 import "@splitgraph/design/css/sphinxtheme.css";
-
 import { DefaultSeo } from "next-seo";
 import App from "next/app";
-
+import { theme } from "@splitgraph/tdesign/src/themes/design";
+import { ThemeProvider } from "@emotion/react";
 import { matomoInit } from "@splitgraph/tdesign";
 
 const MATOMO_URL = process.env.MATOMO_RELATIVE_URL;
@@ -63,7 +63,9 @@ class SplitgraphWebsiteApp extends App {
     return (
       <>
         <DefaultSeo {...DEFAULT_SEO} />
-        <Component {...pageProps} />
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
       </>
     );
   }
