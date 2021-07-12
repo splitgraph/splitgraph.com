@@ -6,8 +6,8 @@ import {
   ClickToCopyInput,
   PasswordButtonInput,
 } from "@splitgraph/tdesign/src/Input";
-import { InFieldButton, Button, IconActivity } from "@splitgraph/tdesign";
-import SignInPasswordForm from "../../../components/rhf";
+import { InFieldButton, Button } from "@splitgraph/tdesign";
+// import SignInPasswordForm from "../../../components/rhf";
 
 const ThemeDemo = () => {
   return (
