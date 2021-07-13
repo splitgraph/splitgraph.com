@@ -45,7 +45,7 @@ export const ButtonContainer = styled.button`
   align-items: center;
   justify-content: center;
   height: ${rem(44)};
-  padding: ${rem(10)};
+  padding: ${rem(8)} ${rem(22)};
   transition: all 0.35s ease-in-out;
 
   &:focus,
@@ -60,7 +60,7 @@ export const ButtonContainer = styled.button`
   ${(props): any =>
     props.color === "primary" &&
     `
-    color: ${props.theme.primary.main};
+    color: ${props.theme.surfaces.light.background};
     background: linear-gradient(267.36deg, ${props.theme.primary.tint} -58.2%, ${props.theme.primary.main} 89.08%);
 
     &:hover {

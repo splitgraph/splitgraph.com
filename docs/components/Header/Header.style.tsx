@@ -11,6 +11,7 @@ const HeaderContainer = styled.div`
     padding-top: ${rem(16)};
     padding-bottom: ${rem(16)};
   }
+
   .nav {
     display: flex;
     align-items: center;
@@ -36,7 +37,7 @@ const HeaderContainer = styled.div`
         display: none;
         ${mediaQuery[2]} {
           display: grid;
-          ${grid(1, 4, 32)};
+          ${grid(1, 3, 32)};
           padding-left: ${rem(36)};
         }
         li {

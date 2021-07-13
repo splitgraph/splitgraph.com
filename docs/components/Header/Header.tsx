@@ -40,19 +40,13 @@ const Header = () => {
 
             <li>
               <Link href="/" passHref>
-                <a>Why</a>
+                <a>Our Cloud</a>
               </Link>
             </li>
 
             <li>
               <Link href="/" passHref>
-                <a>Why</a>
-              </Link>
-            </li>
-
-            <li>
-              <Link href="/" passHref>
-                <a>Why</a>
+                <a>Community</a>
               </Link>
             </li>
           </ul>
@@ -71,13 +65,13 @@ const Header = () => {
           <div className="nav-menu__login">
             <Link href="/" passHref>
               <a>
-                <h6>Sign in</h6>
+                <h6>Explore data</h6>
               </a>
             </Link>
 
             <Link href="/" passHref>
               <a>
-                <Button>Get Started - FREE</Button>
+                <Button>Sign up</Button>
               </a>
             </Link>
           </div>
