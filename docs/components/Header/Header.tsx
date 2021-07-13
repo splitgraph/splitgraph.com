@@ -21,7 +21,7 @@ const Header = () => {
             <Link href="/" passHref>
               <a>
                 <Image
-                  src={"/images/logo.svg"}
+                  src={"/static/splitgraph_logo.svg"}
                   alt="logo-icon"
                   layout="responsive"
                   width={140}
