@@ -45,6 +45,7 @@
     "pirates": "^4.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-typography": "^0.16.20",
     "rehype": "^9.0.0",
     "rehype-raw": "^4.0.1",
     "rehype-slug": "^2.0.3",
@@ -64,6 +65,8 @@
     "@types/react-toast-notifications": "^2.4.0",
     "@types/styled-system": "^5.1.9",
     "now": "^18.0.0",
+    "typography": "^0.16.21",
+    "typography-breakpoint-constants": "^0.16.19",
     "webpack": "^5.28.0"
   },
   "peerDependencies": {

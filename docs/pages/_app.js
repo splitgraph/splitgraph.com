@@ -7,7 +7,11 @@ import "@splitgraph/design/css/base.css";
 import "@splitgraph/design/css/sphinxtheme.css";
 import { DefaultSeo } from "next-seo";
 import App from "next/app";
+import { Global } from "@emotion/react";
 import { matomoInit } from "@splitgraph/tdesign";
+import { TypographyStyle } from "react-typography";
+import typography from "@splitgraph/docs/utils/typography";
+import GlobalStyles from "@splitgraph/docs/styles/global.style";
 
 const MATOMO_URL = process.env.MATOMO_RELATIVE_URL;
 const MATOMO_JS_FILE = process.env.MATOMO_JS_FILE;
@@ -61,6 +65,8 @@ class SplitgraphWebsiteApp extends App {
     return (
       <>
         <DefaultSeo {...DEFAULT_SEO} />
+        <Global styles={GlobalStyles} />
+        <TypographyStyle typography={typography} />
         <Component {...pageProps} />
       </>
     );
