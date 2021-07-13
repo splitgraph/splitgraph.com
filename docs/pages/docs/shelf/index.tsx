@@ -6,7 +6,7 @@ import {
   ClickToCopyInput,
   PasswordButtonInput,
 } from "@splitgraph/tdesign/src/Input";
-import { InFieldButton, Button } from "@splitgraph/tdesign";
+import { InFieldButton, Button, InvisibleButton } from "@splitgraph/tdesign";
 // import SignInPasswordForm from "../../../components/rhf";
 
 const ThemeDemo = () => {
@@ -47,6 +47,9 @@ const ThemeDemo = () => {
         <br />
         <br />
         <PasswordButtonInput />
+        <br />
+        <br />
+        <InvisibleButton>Set as Primary</InvisibleButton>
         {/* <SignInPasswordForm
           formErrors={{}}
           suggestedUsernameOrEmail={"asdf"}
