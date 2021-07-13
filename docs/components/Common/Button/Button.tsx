@@ -60,14 +60,14 @@ export const ButtonContainer = styled.button`
   ${(props): any =>
     props.color === "primary" &&
     `
-    color: ${props.theme.palette.primary["main"]};
-    background: linear-gradient(267.36deg, ${props.theme.colors.primary[200]} -58.2%, ${props.theme.primary["main"]} 89.08%);
+    color: ${props.theme.primary.main};
+    background: linear-gradient(267.36deg, ${props.theme.primary.tint} -58.2%, ${props.theme.primary.main} 89.08%);
 
     &:hover {
-      background: linear-gradient(267.36deg, ${props.theme.colors.primary[200]} -58.2%, ${props.theme.colors.primary[300]} 89.08%);
+      background: linear-gradient(267.36deg, ${props.theme.primary.tint} -58.2%, ${props.theme.primary.shade} 89.08%);
     }
     &:focus {
-      background: linear-gradient(267.36deg, ${props.theme.colors.primary[200]} -58.2%, ${props.theme.colors.primary[300]} 89.08%);
+      background: linear-gradient(267.36deg, ${props.theme.primary.tint} -58.2%, ${props.theme.primary.shade} 89.08%);
     }
   `}
 `;
