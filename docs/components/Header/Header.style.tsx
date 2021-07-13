@@ -41,12 +41,12 @@ const HeaderContainer = styled.div`
         }
         li {
           a {
-            color: ${(props) => props.theme.colors.black};
+            color: ${(props) => props.theme.grays.dark.gray29};
             transition: all 0.2s ease-in;
             &:hover,
             &:focus {
               text-decoration: underline;
-              color: ${(props) => props.theme.colors.grey};
+              color: ${(props) => props.theme.grays.dark.grey24};
             }
           }
         }
@@ -61,12 +61,12 @@ const HeaderContainer = styled.div`
         }
         a:first-of-type {
           margin-right: ${rem(24)};
-          color: ${(props) => props.theme.colors.black};
+          color: ${(props) => props.theme.grays.dark.gray29};
           transition: all 0.2s ease-in;
           &:hover,
           &:focus {
             text-decoration: underline;
-            color: ${(props) => props.theme.colors.grey};
+            color: ${(props) => props.theme.grays.dark.grey24};
           }
         }
       }
@@ -101,7 +101,7 @@ export const MenuToggle = styled.button`
       position: absolute;
       height: ${rem(2)};
       width: 100%;
-      background: ${(props) => props.theme.colors.black};
+      background: ${(props) => props.theme.grays.dark.gray29};
       border-radius: ${rem(4)};
       opacity: 1;
       left: 0;
