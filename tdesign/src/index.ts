@@ -7,6 +7,7 @@ export {
   LoadMoreButton,
   InFieldButton,
   Button,
+  InvisibleButton,
 } from "./Button/index";
 export {
   BaseLayout,
