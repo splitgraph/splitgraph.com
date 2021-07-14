@@ -21,11 +21,6 @@ const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
       password: "",
       showPassword: false,
     });
-    // const handleChange = (prop: keyof State) => (
-    //   event: React.ChangeEvent<HTMLInputElement>
-    // ) => {
-    //   setValues({ ...values, [prop]: event.target.value });
-    // };
 
     const handleClickShowPassword = () => {
       setValues({
@@ -64,11 +59,8 @@ const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
         }}
       >
         <OutlinedInput
-          id="outlined-input-password"
           ref={ref}
           type={values.showPassword ? "text" : "password"}
-          // value={values.password}
-          // onChange={handleChange("password")}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
