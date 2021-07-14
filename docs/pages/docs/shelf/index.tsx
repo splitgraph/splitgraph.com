@@ -93,6 +93,11 @@ const ThemeDemo = () => {
         LinkButton
         <br />
         <LinkButton>Sign up</LinkButton>
+        <br />
+        <br />
+        LinkButton (small)
+        <br />
+        <LinkButton small>Forgot your password?</LinkButton>
         {/* <SignInPasswordForm
           formErrors={{}}
           suggestedUsernameOrEmail={"asdf"}

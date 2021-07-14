@@ -8,6 +8,7 @@ export {
   InFieldButton,
   Button,
   InvisibleButton,
+  LinkButton,
 } from "./Button/index";
 export {
   BaseLayout,
