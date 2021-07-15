@@ -45,7 +45,7 @@ const Button = ({
       minHeight: large ? "40px" : null,
       ...sx,
     }}
-    {...rest}
+    {...(rest as any)}
   >
     {icon}
     <Typography variant="bodyHighlighted">{children}</Typography>

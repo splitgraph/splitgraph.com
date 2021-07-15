@@ -30,7 +30,7 @@ const SubmitButton = ({
         ...sx,
       }}
       disabled={hasErrors || disabled}
-      {...rest}
+      {...(rest as any)}
     >
       {children}
     </Button>

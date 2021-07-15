@@ -1,15 +1,11 @@
-import {
-  Button as MuiButton,
-  ButtonProps as MuiButtonProps,
-  Typography,
-} from "@material-ui/core";
+import { Button, ButtonProps, Typography } from "@material-ui/core";
 import { SxProps } from "@material-ui/system";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 // import { IconEmail } from "../Icon";
 
 import { theme } from "../themes/design";
 
-interface IButtonProps extends MuiButtonProps {
+interface IButtonProps extends ButtonProps {
   sx?: SxProps<Theme>;
   large?: boolean;
   icon?: any; // TODO narrow Icon type (our own type extending Mui's Icon?)
@@ -22,7 +18,7 @@ const InvisibleButton = ({
   large,
   ...rest
 }: IButtonProps) => (
-  <MuiButton
+  <Button
     disabled={disabled}
     sx={{
       borderRadius: "32px",
@@ -40,11 +36,11 @@ const InvisibleButton = ({
       minHeight: large ? "40px" : null,
       ...sx,
     }}
-    {...rest}
+    {...(rest as any)}
   >
     {icon}
     <Typography variant="bodyHighlighted">{children}</Typography>
-  </MuiButton>
+  </Button>
 );
 
 export default InvisibleButton;

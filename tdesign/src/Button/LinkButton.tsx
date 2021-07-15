@@ -1,8 +1,4 @@
-import {
-  Button as MuiButton,
-  ButtonProps,
-  Typography,
-} from "@material-ui/core";
+import { Button, ButtonProps, Typography } from "@material-ui/core";
 import { theme } from "../themes/design";
 
 interface ILinkButtonProps extends ButtonProps {
@@ -10,7 +6,7 @@ interface ILinkButtonProps extends ButtonProps {
 }
 const LinkButton = ({ sx, small, children, ...rest }: ILinkButtonProps) => {
   return (
-    <MuiButton
+    <Button
       sx={{
         color: small ? "#555656" : "#36CBAE", // TODO clarify if & where "On Surface" colors (confusingly named) should be computed
         textDecoration: small ? "underline" : "inherit",
@@ -25,12 +21,12 @@ const LinkButton = ({ sx, small, children, ...rest }: ILinkButtonProps) => {
         },
         ...sx,
       }}
-      {...rest}
+      {...(rest as any)}
     >
       <Typography variant={small ? "small" : "bodyHighlighted"}>
         {children}
       </Typography>
-    </MuiButton>
+    </Button>
   );
 };
 
