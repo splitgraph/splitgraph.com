@@ -29,7 +29,7 @@ const Button = ({ children, disabled, ...rest }: IButtonProps) => (
       },
     }}
     // endIcon={}
-    {...rest}
+    {...(rest as any)}
   >
     {children}
     <ArrowRightAltIcon

@@ -12,7 +12,7 @@ const LoadMoreButton = ({ children, ...rest }) => {
         padding: "12px",
         boxShadow: "none",
       }}
-      {...rest}
+      {...(rest as any)}
     >
       <IconArrowDown sx={{ mr: "9px", height: "8px" }} />
       <Typography
