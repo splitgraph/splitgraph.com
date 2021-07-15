@@ -14,6 +14,7 @@ import {
   LinkButton,
   ErrorAlert2,
   SuccessAlert2,
+  StatusChip2,
 } from "@splitgraph/tdesign";
 import { useForm } from "react-hook-form";
 
@@ -122,6 +123,12 @@ const ThemeDemo = () => {
           If an account for user@example.com exists, we will send and email with
           a reset link.
         </SuccessAlert2>
+      </Grid>
+      <Grid item xs={5}>
+        Verified
+        <StatusChip2 text={"Verified"} />
+        Unverified
+        <StatusChip2 text={"Unverified"} />
       </Grid>
       <br />
     </Paper>

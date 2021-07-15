@@ -1,2 +1,3 @@
 import StatusChip from "./StatusChip";
-export { StatusChip };
+import StatusChip2 from "./StatusChip2";
+export { StatusChip, StatusChip2 };

@@ -51,7 +51,7 @@ export { Card } from "./Card";
 export { PopoutBox } from "./PopoutBox";
 export type { IRenderPopoutButtonProps, IPopoutBoxRef } from "./PopoutBox";
 
-export { StatusChip } from "./StatusChip";
+export { StatusChip, StatusChip2 } from "./StatusChip";
 
 export { PreWithCopy } from "./PreWithCopy";
 export type { IPreWithCopyProps } from "./PreWithCopy";
