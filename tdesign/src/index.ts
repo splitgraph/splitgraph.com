@@ -1,4 +1,9 @@
-export { ErrorAlert, SuccessAlert } from "./Alert/index";
+export {
+  ErrorAlert,
+  ErrorAlert2,
+  SuccessAlert,
+  SuccessAlert2,
+} from "./Alert/index";
 
 export { Avatar } from "./Avatar";
 
