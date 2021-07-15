@@ -10,23 +10,12 @@ import { IconPasswordHide, IconPasswordSee } from "../Icon";
 import { theme } from "../themes/design";
 import InFieldButton from "../Button/InFieldButton";
 
-interface State {
-  password: string;
-  showPassword: boolean;
-}
-
 const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
   (props, ref) => {
-    const [values, setValues] = useState<State>({
-      password: "",
-      showPassword: false,
-    });
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => {
-      setValues({
-        ...values,
-        showPassword: !values.showPassword,
-      });
+      setShowPassword(!showPassword);
     };
 
     const handleMouseDownPassword = (
@@ -60,7 +49,7 @@ const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
       >
         <OutlinedInput
           ref={ref}
-          type={values.showPassword ? "text" : "password"}
+          type={showPassword ? "text" : "password"}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -70,11 +59,7 @@ const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
                 edge="end"
                 sx={{ "&:hover": { background: "none" }, mr: "16px" }}
               >
-                {values.showPassword ? (
-                  <IconPasswordSee />
-                ) : (
-                  <IconPasswordHide />
-                )}
+                {showPassword ? <IconPasswordSee /> : <IconPasswordHide />}
               </IconButton>
               <InFieldButton>Create</InFieldButton>
             </InputAdornment>
