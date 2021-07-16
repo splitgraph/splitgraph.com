@@ -1,4 +1,14 @@
-export const theme = {
+import { Theme } from "@emotion/react";
+
+interface SplitgraphTheme extends Theme {
+  grays: any;
+  primary: any;
+  navbar: any;
+  footer: any;
+  surfaces: any;
+}
+
+export const theme: SplitgraphTheme = {
   // Grays //////////////////
   grays: {
     light: {
