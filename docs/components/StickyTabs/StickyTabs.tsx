@@ -1,9 +1,31 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import { Link } from "react-scroll";
 import StickyTabsContainer from "./StickyTabs.style";
 
 export interface IStickyTabsProps {}
+
+const tabsObj = [
+  {
+    name: "Integration",
+    to: "1stRef",
+  },
+  {
+    name: "Storage",
+    to: "2ndRef",
+  },
+  {
+    name: "Modelling",
+    to: "3rdRef",
+  },
+  {
+    name: "Discovery",
+    to: "4thRef",
+  },
+  {
+    name: "Access",
+    to: "5thRef",
+  },
+];
 
 const StickyTabs = () => {
   const [isSticky, setSticky] = useState(false);
@@ -30,16 +52,22 @@ const StickyTabs = () => {
     };
   }, []);
 
-  console.log(isSticky);
-
   return (
     <StickyTabsContainer className={`${isSticky ? "is-sticky" : ""}`}>
       <ul>
-        <li>Integration</li>
-        <li>Storage</li>
-        <li>Modelling</li>
-        <li>Discovery</li>
-        <li>Access</li>
+        {tabsObj?.map((item, id) => (
+          <li key={id}>
+            <Link
+              activeClass="active"
+              spy={true}
+              smooth={true}
+              duration={500}
+              to={item.to}
+            >
+              {item.name}
+            </Link>
+          </li>
+        ))}
       </ul>
     </StickyTabsContainer>
   );

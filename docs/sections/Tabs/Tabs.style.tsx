@@ -5,19 +5,16 @@ import mediaQuery from "@splitgraph/docs/utils/breakpoints";
 const TabsContainer = styled.div`
   .tab-section {
     height: 100vh;
+    background-color: ${(props) => props.theme.grays.dark.grey24};
 
-    &:nth-of-type(odd) {
-      background-color: ${(props) => props.theme.grays.dark.grey24};
-
-      h2 {
-        color: ${(props) => props.theme.grays.dark.gray29};
-      }
-      p {
-        color: ${(props) => props.theme.grays.dark.gray29};
-      }
+    h2 {
+      color: ${(props) => props.theme.grays.dark.gray29};
+    }
+    p {
+      color: ${(props) => props.theme.grays.dark.gray29};
     }
 
-    &:nth-of-type(even) {
+    &.black {
       background-color: ${(props) => props.theme.grays.dark.gray29};
 
       h2 {
