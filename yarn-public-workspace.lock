@@ -2225,6 +2225,8 @@ __metadata:
     pirates: ^4.0.1
     react: ^17.0.2
     react-dom: ^17.0.2
+    react-scroll: ^1.8.2
+    react-typography: ^0.16.20
     rehype: ^9.0.0
     rehype-raw: ^4.0.1
     rehype-slug: ^2.0.3
@@ -2232,6 +2234,8 @@ __metadata:
     remark-disable-tokenizers: ^1.0.23
     rimraf: ^3.0.0
     serve: ^11.2.0
+    typography: ^0.16.21
+    typography-breakpoint-constants: ^0.16.19
     unist-util-find: ^1.0.1
     webpack: ^5.28.0
   peerDependencies:
@@ -4011,6 +4015,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"compass-vertical-rhythm@npm:^1.4.5":
+  version: 1.4.5
+  resolution: "compass-vertical-rhythm@npm:1.4.5"
+  dependencies:
+    convert-css-length: ^1.0.1
+    object-assign: ^4.1.0
+    parse-unit: ^1.0.1
+  checksum: 2339532a832e749d47a7bcc6ba26f49fbc32777cfac227f00ad494795020b271c7bed4b0e5dad33425208893cb29a88e8708433c9a870ae3c4b33d41de1a0d9b
+  languageName: node
+  linkType: hard
+
 "compressible@npm:~2.0.14":
   version: 2.0.18
   resolution: "compressible@npm:2.0.18"
@@ -4056,6 +4071,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"console-polyfill@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "console-polyfill@npm:0.1.2"
+  checksum: edc5d901b4113e5c62aca45ee3766d264d51b68c766093e15258c9f07696f192c4425bcc25688a21b971b5418209f4cd8cad45efa637f5633eae3c8c37b10ccf
+  languageName: node
+  linkType: hard
+
 "constant-case@npm:^2.0.0":
   version: 2.0.0
   resolution: "constant-case@npm:2.0.0"
@@ -4093,6 +4115,16 @@ __metadata:
   version: 1.0.4
   resolution: "content-type@npm:1.0.4"
   checksum: ff6e19cbf281c23d5608723a6dc60ac97e2280bd4d21602511283112321e6c1555895e395555e367672b54a0f1585276284b7c3c8be313aca73902ac2f2609fd
+  languageName: node
+  linkType: hard
+
+"convert-css-length@npm:^1.0.1":
+  version: 1.0.2
+  resolution: "convert-css-length@npm:1.0.2"
+  dependencies:
+    console-polyfill: ^0.1.2
+    parse-unit: ^1.0.1
+  checksum: 1b812aec3f978b2d8e0445495582b371db06e331bca0da561036fb618fc76f0a184c4f1200667836a665547b97151ff977615e5c369298b19e8e9746fa03b38e
   languageName: node
   linkType: hard
 
@@ -5320,6 +5352,13 @@ fsevents@~2.3.1:
   version: 4.2.6
   resolution: "graceful-fs@npm:4.2.6"
   checksum: 84d39c7756892553da990a9db7e45f844b3309b37b5a00174cbb4748476f2250c54f24594d4d252f64f085c65c2fdac7c809419bf6d55f0e6e42eb07ac0f5bf2
+  languageName: node
+  linkType: hard
+
+"gray-percentage@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "gray-percentage@npm:2.0.0"
+  checksum: 27a998d638a81e66ed4c197fa8a98bda299f9b76a7c58970d5cff13ab2f5426741eb69bc14f2de7b5b250b4d8171394ec5f51cd9340a175a9653bac78d33e197
   languageName: node
   linkType: hard
 
@@ -6616,6 +6655,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"lodash.isnumber@npm:^3.0.0":
+  version: 3.0.3
+  resolution: "lodash.isnumber@npm:3.0.3"
+  checksum: a33b10bf57dd27b32aac0bb4159d3f40db6b294095f42d7ff9f966a004932cdcc12417bf0750a9d3ac0c62690dd020d7d227b05ef486a8c9061963acf2ea3fad
+  languageName: node
+  linkType: hard
+
 "lodash.iteratee@npm:^4.5.0":
   version: 4.7.0
   resolution: "lodash.iteratee@npm:4.7.0"
@@ -6630,6 +6676,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"lodash.throttle@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "lodash.throttle@npm:4.1.1"
+  checksum: d9107c79033f609f23552f48f5ba93b8a98a07a2b38914745a48d33f18704a4c6a125610ad2bab2a0139974d1da7c5d6a24271243e21571f01e21bf3b2f6b21d
+  languageName: node
+  linkType: hard
+
 "lodash.uniq@npm:4.5.0":
   version: 4.5.0
   resolution: "lodash.uniq@npm:4.5.0"
@@ -6637,7 +6690,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.13, lodash@npm:^4.17.19, lodash@npm:^4.17.20":
+"lodash@npm:^4.13.1, lodash@npm:^4.17.13, lodash@npm:^4.17.19, lodash@npm:^4.17.20":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: 4983720b9abca930a4a46f18db163d7dad8dd00dbed6db0cc7b499b33b717cce69f80928b27bbb1ff2cbd3b19d251ee90669a8b5ea466072ca81c2ebe91e7468
@@ -7031,6 +7084,15 @@ fsevents@~2.3.1:
   bin:
     mkdirp: bin/cmd.js
   checksum: 1aa3a6a2d7514f094a91329ec09994f5d32d2955a4985ecbb3d86f2aaeafc4aa11521f98d606144c1d49cd9835004d9a73342709b8c692c92e59eacf37412468
+  languageName: node
+  linkType: hard
+
+"modularscale@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "modularscale@npm:1.0.2"
+  dependencies:
+    lodash.isnumber: ^3.0.0
+  checksum: a69b23b34c47984fe2b01028129bca7c791bfe400c0618f07065fca6b94c95c7033deec3b55c21adffe05cb3e61da933c68b13f0f0617d85aced6fabd050d24e
   languageName: node
   linkType: hard
 
@@ -7694,6 +7756,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"parse-unit@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "parse-unit@npm:1.0.1"
+  checksum: f756ecf06fa1a592173aee3f970b32c508c97c6d922b8c92ce837d99fabc038a72625baab1973cf3f68731edae6c3508702183884a6e87ee24befaea453ee98d
+  languageName: node
+  linkType: hard
+
 "parse5@npm:^5.0.0":
   version: 5.1.1
   resolution: "parse5@npm:5.1.1"
@@ -8297,6 +8366,19 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"react-scroll@npm:^1.8.2":
+  version: 1.8.2
+  resolution: "react-scroll@npm:1.8.2"
+  dependencies:
+    lodash.throttle: ^4.1.1
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ^15.5.4 || ^16.0.0 || ^17.0.0
+    react-dom: ^15.5.4 || ^16.0.0 || ^17.0.0
+  checksum: af565447c87f9e31385fbcb89a44d6a6c1d7223d7c02402ad8ec08b4c1bde95de015368a535f79b7e37eb7cc746f22e3786331e38270d3f344fd4ae6386cd814
+  languageName: node
+  linkType: hard
+
 "react-side-effect@npm:^2.1.0":
   version: 2.1.1
   resolution: "react-side-effect@npm:2.1.1"
@@ -8318,6 +8400,15 @@ fsevents@~2.3.1:
     react: ">=16.6.0"
     react-dom: ">=16.6.0"
   checksum: e14446123f820e804335c64be5270333c29e8cfaa43dfc33387e132c5d521cf4a0a7c2408058a147b254ae82a6569f373394d83e977ef340d6937bc2f4ff7d6c
+  languageName: node
+  linkType: hard
+
+"react-typography@npm:^0.16.20":
+  version: 0.16.20
+  resolution: "react-typography@npm:0.16.20"
+  peerDependencies:
+    react: ^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: c2d6f2a84ef8d3201d4160bacf851a6f9226a06d50b8afccf44afc1cf8edf0c550c13bd0f1ca0f39f6081338b1a198b33d918ab0c4dad103319f99ebf7f65054
   languageName: node
   linkType: hard
 
@@ -9936,6 +10027,35 @@ typescript@4.2.4:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 64658fdf27872904641dcaacf925e6b5a52fb4aa4881a5a726fc78a11b76748423ce9e996dac42313729321061c4dd38a06108014f8d07b222dcff2687037186
+  languageName: node
+  linkType: hard
+
+"typography-breakpoint-constants@npm:^0.16.19":
+  version: 0.16.19
+  resolution: "typography-breakpoint-constants@npm:0.16.19"
+  checksum: f46f51a52d1f0b112f7f639405931b414a5ade7f2f54c6b3f5848c44f94d58d64b329fd843256a8162c4c54de5a0c941fcf14e10403ee80bb9e46101fd87a3c1
+  languageName: node
+  linkType: hard
+
+"typography-normalize@npm:^0.16.19":
+  version: 0.16.19
+  resolution: "typography-normalize@npm:0.16.19"
+  checksum: 788fbf61be06c5b196eb32b334d3e1757e783b5f3ff63be9e8f07a612e328db348cb65ea58735526b08542704ac2c34eb401d981a1ceb3dbbaf83f5ced55cd2f
+  languageName: node
+  linkType: hard
+
+"typography@npm:^0.16.21":
+  version: 0.16.21
+  resolution: "typography@npm:0.16.21"
+  dependencies:
+    compass-vertical-rhythm: ^1.4.5
+    decamelize: ^1.2.0
+    gray-percentage: ^2.0.0
+    lodash: ^4.13.1
+    modularscale: ^1.0.2
+    object-assign: ^4.1.0
+    typography-normalize: ^0.16.19
+  checksum: 340d3ce358ccb85f966bbc9ff721182709e6821888de5bb8faf571591d3f2b3d45a33be9fdaec548de23be7b2138f5b5ef03be8b63e201f17e1b435a5ac0df49
   languageName: node
   linkType: hard
 
