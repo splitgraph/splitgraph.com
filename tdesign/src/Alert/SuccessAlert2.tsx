@@ -72,6 +72,7 @@ const SuccessAlert = ({
         sx={{
           display: "flex",
           width: dismissLinkText && dismissLinkHref && "70%",
+          alignItems: "center",
         }}
       >
         {message ? (

@@ -57,7 +57,7 @@ const ErrorAlert = ({
         ...sx,
       }}
     >
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex", alignItems: "center" }}>
         {message ? (
           <>
             <ErrorHeading />
