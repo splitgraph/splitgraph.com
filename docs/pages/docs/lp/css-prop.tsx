@@ -29,7 +29,7 @@ const EmotionCSS = () => {
       <Slider
         defaultValue={30}
         css={(theme) => ({
-          color: theme.palette.primary.main,
+          color: theme.myColor,
         })}
       />
       <Typography>{"<Slider> with css prop"}</Typography>
