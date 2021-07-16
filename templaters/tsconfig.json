@@ -13,22 +13,27 @@
     "../docs/utils/*.ts",
     "../docs/styles/*.ts",
     "../docs/hocs/*.ts",
+    "../docs/sections/*.ts",
     "../docs/components/*.js",
     "../docs/utils/*.js",
     "../docs/styles/*.js",
     "../docs/hocs/*.js",
+    "../docs/sections/*.js",
     "../docs/components/**/*.tsx",
     "../docs/utils/**/*.tsx",
     "../docs/styles/**/*.tsx",
     "../docs/hocs/**/*.tsx",
+    "../docs/sections/**/*.tsx",
     "../docs/components/**/*.ts",
     "../docs/utils/**/*.ts",
     "../docs/styles/**/*.ts",
     "../docs/hocs/**/*.ts",
+    "../docs/sections/**/*.ts",
     "../docs/components/**/*.js",
     "../docs/utils/**/*.js",
     "../docs/styles/**/*.js",
-    "../docs/hocs/**/*.js"
+    "../docs/hocs/**/*.js",
+    "../docs/sections/**/*.js"
   ],
   "references": [{ "path": "../tdesign" }, { "path": "../design" }]
 }
