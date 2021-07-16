@@ -21,7 +21,7 @@ const ArrowTextContainer = styled.div`
       )
       1 stretch;
 
-    color: ${(props) => props.theme.palette.primary[100]};
+    color: ${(props) => props.theme.myColor};
   }
 
   &.secondary {
@@ -32,7 +32,7 @@ const ArrowTextContainer = styled.div`
       )
       1 stretch;
 
-    color: ${(props) => props.theme.palette.secondary[100]};
+    color: ${(props) => props.theme.myColor};
   }
 
   &.success {
@@ -43,7 +43,7 @@ const ArrowTextContainer = styled.div`
       )
       1 stretch;
 
-    color: ${(props) => props.theme.palette.success[300]};
+    color: ${(props) => props.theme.myColor};
   }
 
   h6 {
