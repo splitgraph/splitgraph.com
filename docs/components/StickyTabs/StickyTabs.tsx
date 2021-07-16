@@ -14,12 +14,11 @@ const StickyTabs = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const contactElement = document.getElementById("start-section");
-      const offsetTop = contactElement && contactElement.offsetTop;
-      const offsetHeight = contactElement && contactElement.offsetHeight;
+      const startElement = document.getElementById("start-section");
+      const offsetTop = startElement && startElement?.offsetTop;
 
       if (offsetTop === null) return;
-      if (window.pageYOffset > offsetTop) {
+      if (window.pageYOffset > offsetTop + 60) {
         setSticky(true);
       } else setSticky(false);
     };
@@ -34,7 +33,7 @@ const StickyTabs = () => {
   console.log(isSticky);
 
   return (
-    <StickyTabsContainer>
+    <StickyTabsContainer className={`${isSticky ? "is-sticky" : ""}`}>
       <ul>
         <li>Integration</li>
         <li>Storage</li>
