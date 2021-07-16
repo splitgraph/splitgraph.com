@@ -100,7 +100,7 @@ const ThemeDemo = () => {
       <LinkButton small>Forgot your password?</LinkButton>
       <br />
       <br />
-      <Grid item xs={5}>
+      <Grid item xs={2}>
         ErrorAlert2 (message prop, legacy)
         <ErrorAlert2 message="We couldn't find an account that matches user@example.com email. Need an account?" />
         <br />
@@ -110,7 +110,7 @@ const ThemeDemo = () => {
           an account?
         </ErrorAlert2>
       </Grid>
-      <Grid item xs={5}>
+      <Grid item xs={2}>
         SuccessAlert2 (message prop, legacy)
         <SuccessAlert2
           message="If an account for user@example.com exists, we will send and email with a reset link."
