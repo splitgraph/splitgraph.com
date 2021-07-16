@@ -4,7 +4,7 @@ import mediaQuery from "@splitgraph/docs/utils/breakpoints";
 
 const HeaderContainer = styled.div`
   width: 100%;
-  position: fixed;
+  position: sticky;
   padding: ${rem(8)};
   z-index: 1000;
   ${mediaQuery[1]} {
