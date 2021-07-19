@@ -242,16 +242,22 @@ const DemoStyled = styled.div`
 # Debugging CI
 
 ```bash
-# Start `act`
+
+# To run it all the way through, just run this command:
 .ci/debug/run_act.sh
 
-# "Break" before running bulk of install step (see `install.sh`)
+# Note: No apparent way to run act as a daemon; it only runs in the foreground
+# So, to drop into a debugger, open two terminals: one to run, and one to attach
+
+# In (1), Run and "break" before pre-install. See `install.sh` (it's a sleep loop)
 .ci/debug/run_act_break_before_install.sh
 
-# The "break" is just an infinite loop of `sleep 10`
-# To get an interactive shell, need to `docker exec` into that container
+
+
+# In (2), Attach an interactive shell to the container in (1), with `docker exec`:
+# (When (1) hits the breakpoint, it will print this command before sleeping)
 docker exec -it $(docker ps -q --filter name=act-*) /bin/bash
 
-# If you need to kill the container
+# If you need to kill the container, ctrl+c isn't enough
 docker kill $(docker ps -q --filter name=act-*)
 ```
