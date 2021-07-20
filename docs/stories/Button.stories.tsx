@@ -1,6 +1,5 @@
 import { Button } from "@splitgraph/tdesign";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
-import { withDesign } from "storybook-addon-designs";
 
 export default {
   title: "Splitgraph/Button",
@@ -8,7 +7,6 @@ export default {
   argTypes: {
     sx: { color: { control: "color" } },
   },
-  decorators: [withDesign],
 };
 
 const Template = (args) => <Button {...args} />;
