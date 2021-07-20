@@ -39,7 +39,12 @@ const SplitgraphLink = React.forwardRef(
     ref: any
   ) => (
     <Link href={href} as={as} passHref>
-      <Box component="a" sx={{ ...sx, ...extraStyle }} ref={ref} {...rest}>
+      <Box
+        component="a"
+        sx={{ variant, ...sx, ...extraStyle }}
+        ref={ref}
+        {...rest}
+      >
         {children}
       </Box>
     </Link>
