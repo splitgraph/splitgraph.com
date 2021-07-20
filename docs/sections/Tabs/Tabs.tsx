@@ -15,7 +15,7 @@ const Tabs = () => {
   return (
     <TabsContainer>
       <StickyTabs />
-      <Element name="1stRef">
+      <Element name="IntegrationRef">
         <div className="tab-section black" id="start-section">
           <h2>Integration</h2>
           <p>
@@ -26,7 +26,7 @@ const Tabs = () => {
           </p>
         </div>
       </Element>
-      <Element name="2ndRef">
+      <Element name="StorageRef">
         <div className="tab-section">
           <h2>Storage</h2>
           <p>
@@ -37,7 +37,7 @@ const Tabs = () => {
           </p>
         </div>
       </Element>
-      <Element name="3rdRef">
+      <Element name="ModellingRef">
         <div className="tab-section black">
           <h2>Modelling</h2>
           <p>
@@ -48,7 +48,7 @@ const Tabs = () => {
           </p>
         </div>
       </Element>
-      <Element name="4thRef">
+      <Element name="DiscoveryRef">
         <div className="tab-section">
           <h2>Discovery</h2>
           <p>
@@ -59,7 +59,7 @@ const Tabs = () => {
           </p>
         </div>
       </Element>
-      <Element name="5thRef">
+      <Element name="AccessRef">
         <div className="tab-section black">
           <h2>Access</h2>
           <p>

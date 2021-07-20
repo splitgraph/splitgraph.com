@@ -8,23 +8,23 @@ export interface IStickyTabsProps {}
 const tabsObj = [
   {
     name: "Integration",
-    to: "1stRef",
+    to: "IntegrationRef",
   },
   {
     name: "Storage",
-    to: "2ndRef",
+    to: "StorageRef",
   },
   {
     name: "Modelling",
-    to: "3rdRef",
+    to: "ModellingRef",
   },
   {
     name: "Discovery",
-    to: "4thRef",
+    to: "DiscoveryRef",
   },
   {
     name: "Access",
-    to: "5thRef",
+    to: "AccessRef",
   },
 ];
 
