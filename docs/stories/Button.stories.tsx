@@ -1,5 +1,6 @@
 import { Button } from "@splitgraph/tdesign";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
+import { withDesign } from "storybook-addon-designs";
 
 export default {
   title: "Splitgraph/Button",
@@ -7,19 +8,34 @@ export default {
   argTypes: {
     sx: { color: { control: "color" } },
   },
+  decorators: [withDesign],
 };
 
 const Template = (args) => <Button {...args} />;
 
 export const Medium = Template.bind({});
 Medium.args = {
-  children: "Complete form to Sign in",
+  children: "Get Started - FREE",
+};
+Medium.parameters = {
+  design: {
+    type: "figma",
+    url:
+      "https://www.figma.com/file/jaOp7ncR6Zk90BeOQgrIB0/00-Component-and-Styles-Library-Splitgraph?node-id=488%3A436",
+  },
 };
 
 export const MediumWithIcon = Template.bind({});
 MediumWithIcon.args = {
   startIcon: <MailOutlineIcon />,
-  children: "Get Started - FREE",
+  children: "Delete",
+};
+MediumWithIcon.parameters = {
+  design: {
+    type: "figma",
+    url:
+      "https://www.figma.com/file/jaOp7ncR6Zk90BeOQgrIB0/00-Component-and-Styles-Library-Splitgraph?node-id=500%3A363",
+  },
 };
 
 export const Large = Template.bind({});
@@ -28,9 +44,23 @@ Large.args = {
   children: "Complete form to Sign in",
   icon: <MailOutlineIcon sx={{ position: "absolute", left: "15px" }} />,
 };
+Large.parameters = {
+  design: {
+    type: "figma",
+    url:
+      "https://www.figma.com/file/jaOp7ncR6Zk90BeOQgrIB0/00-Component-and-Styles-Library-Splitgraph?node-id=376%3A282",
+  },
+};
 
-export const Disabled = Template.bind({});
-Disabled.args = {
+export const MediumDisabled = Template.bind({});
+MediumDisabled.args = {
   disabled: true,
   children: "Get Started - FREE",
+};
+MediumDisabled.parameters = {
+  design: {
+    type: "figma",
+    url:
+      "https://www.figma.com/file/jaOp7ncR6Zk90BeOQgrIB0/00-Component-and-Styles-Library-Splitgraph?node-id=673%3A492",
+  },
 };
