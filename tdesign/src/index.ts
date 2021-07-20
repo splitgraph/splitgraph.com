@@ -4,6 +4,7 @@ export {
   SuccessAlert,
   SuccessAlert2,
 } from "./Alert/index";
+export type { ISuccessAlertProps } from "./Alert";
 
 export { Avatar } from "./Avatar";
 
@@ -15,6 +16,7 @@ export {
   InvisibleButton,
   LinkButton,
 } from "./Button/index";
+export type { IButtonProps, IInFieldButtonProps } from "./Button";
 export {
   BaseLayout,
   ContentHeader,

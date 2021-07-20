@@ -1,18 +1,19 @@
-import {
-  Button as MuiButton,
-  ButtonProps as MuiButtonProps,
-} from "@material-ui/core";
+import { Button, ButtonProps } from "@material-ui/core";
 import { SxProps } from "@material-ui/system";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 // import { IconArrowRight } from "../Icon";
 import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 import { theme } from "../themes/design";
 
-interface IButtonProps extends MuiButtonProps {
+export interface IInFieldButtonProps extends ButtonProps {
   sx?: SxProps<Theme>;
 }
-const Button = ({ children, disabled, ...rest }: IButtonProps) => (
-  <MuiButton
+const InFieldButtonProps = ({
+  children,
+  disabled,
+  ...rest
+}: IInFieldButtonProps) => (
+  <Button
     disabled={disabled}
     sx={{
       background: disabled
@@ -35,7 +36,7 @@ const Button = ({ children, disabled, ...rest }: IButtonProps) => (
     <ArrowRightAltIcon
       sx={{ ml: "10px", color: disabled ? theme.grays.light.gray22 : "white" }}
     />
-  </MuiButton>
+  </Button>
 );
 
-export default Button;
+export default InFieldButtonProps;

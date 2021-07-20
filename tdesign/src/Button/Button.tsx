@@ -9,7 +9,7 @@ import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 import { theme } from "../themes/design";
 
-interface IButtonProps extends MuiButtonProps {
+export interface IButtonProps extends MuiButtonProps {
   sx?: SxProps<Theme>;
   large?: boolean;
   icon?: any; // TODO narrow Icon type (our own type extending Mui's Icon?)
