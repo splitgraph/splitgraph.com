@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import Link, { LinkProps } from "./Link";
 
 const MutedLink = ({ children, href, ...rest }: LinkProps) => (

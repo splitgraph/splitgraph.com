@@ -1,6 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
-import { Box } from '@material-ui/core'
+import { Box } from "@material-ui/core";
 
 export interface INextDynamicLinkProps {
   pathname: string;
