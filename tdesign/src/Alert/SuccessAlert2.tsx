@@ -33,7 +33,7 @@ const SuccessResetLink = ({ text, href }: ISuccessResetLinkProps) => (
   </MuiLink>
 );
 
-interface ISuccessAlertProps {
+export interface ISuccessAlertProps {
   message?: string;
   dismissLinkText?: string;
   dismissLinkHref?: string;
