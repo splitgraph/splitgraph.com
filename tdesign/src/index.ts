@@ -81,3 +81,5 @@ export { Octicon, GitLabLogoIcon, GoogleLogoIcon } from "./Icon";
 export { SplitgraphTopBar } from "./SplitgraphTopBar";
 
 export { Box } from "./Box";
+
+export { Tabs, Tab, TabBody } from "./Tabs";

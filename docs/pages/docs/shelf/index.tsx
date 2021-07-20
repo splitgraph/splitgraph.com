@@ -16,6 +16,7 @@ import {
   SuccessAlert2,
   StatusChip2,
 } from "@splitgraph/tdesign";
+import TabsDemo from "./tabs";
 import { useForm } from "react-hook-form";
 
 const ThemeDemo = () => {
@@ -131,6 +132,10 @@ const ThemeDemo = () => {
         <StatusChip2 text={"Unverified"} />
       </Grid>
       <br />
+      <Grid item xs={5}>
+        Tabs
+        <TabsDemo />
+      </Grid>
     </Paper>
   );
 };
