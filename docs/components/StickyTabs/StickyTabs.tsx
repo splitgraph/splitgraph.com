@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { Link } from "react-scroll";
 import StickyTabsContainer from "./StickyTabs.style";
 
@@ -28,6 +29,7 @@ const tabsObj = [
 ];
 
 const StickyTabs = () => {
+  const router = useRouter();
   const [isSticky, setSticky] = useState(false);
 
   // const onMenuToggle = () => {
@@ -40,7 +42,7 @@ const StickyTabs = () => {
       const offsetTop = startElement && startElement?.offsetTop;
 
       if (offsetTop === null) return;
-      if (window.pageYOffset > offsetTop + 60) {
+      if (window.pageYOffset > offsetTop + 100) {
         setSticky(true);
       } else setSticky(false);
     };
@@ -52,6 +54,10 @@ const StickyTabs = () => {
     };
   }, []);
 
+  const handleRouter = (url) => {
+    router.push(`/docs/lp#${url.toLowerCase()}`, undefined, { shallow: true });
+  };
+
   return (
     <StickyTabsContainer className={`${isSticky ? "is-sticky" : ""}`}>
       <ul>
@@ -62,7 +68,9 @@ const StickyTabs = () => {
               spy={true}
               smooth={true}
               duration={500}
+              offset={-100}
               to={item.to}
+              onClick={() => handleRouter(item.name)}
             >
               {item.name}
             </Link>

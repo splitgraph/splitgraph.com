@@ -12,6 +12,7 @@ const StickyTabsContainer = styled.div`
     left: 0;
     width: 100%;
     background-color: ${(props) => props.theme.surfaces.light.background};
+    height: ${rem(100)};
   }
 
   ul {
@@ -26,6 +27,21 @@ const StickyTabsContainer = styled.div`
     li {
       padding: ${rem(12)} ${rem(14)};
       font-size: ${rem(20)};
+
+      a {
+        padding: ${rem(10)} ${rem(16)};
+        font-size: ${rem(20)};
+        font-weight: 600;
+        color: ${(props) => props.theme.grays.light.gray25};
+        transition: all 0.25s cubic-bezier(0.8, 0, 0.2, 1);
+        border: ${rem(1)} solid transparent;
+
+        &.active {
+          border-radius: ${rem(4)};
+          color: ${(props) => props.theme.grays.light.gray20};
+          border-color: ${(props) => props.theme.grays.light.gray20};
+        }
+      }
     }
   }
 `;
