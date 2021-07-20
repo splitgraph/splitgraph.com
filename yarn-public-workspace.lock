@@ -126,14 +126,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/generator@npm:^7.12.11, @babel/generator@npm:^7.14.5":
-  version: 7.14.5
-  resolution: "@babel/generator@npm:7.14.5"
+"@babel/generator@npm:^7.12.11, @babel/generator@npm:^7.14.8":
+  version: 7.14.8
+  resolution: "@babel/generator@npm:7.14.8"
   dependencies:
-    "@babel/types": ^7.14.5
+    "@babel/types": ^7.14.8
     jsesc: ^2.5.1
     source-map: ^0.5.0
-  checksum: 3ba48b75f7680d17b4c3657063339252cf63ea0038b05e24d1611dff2c8f136fc8ca5cb1c293fbc1abc79b153e264bc23a01dc5f440030282e4da0631f12e0b7
+  checksum: eeb19868f47edd9d128671349f46404f6a9d5143deb11669dc6181cf17116907a512c3f8ef05f1711383621e465577f34f39020cc2cdcc11e3dc2cb866d67e82
   languageName: node
   linkType: hard
 
@@ -220,18 +220,18 @@ __metadata:
   linkType: hard
 
 "@babel/helper-create-class-features-plugin@npm:^7.14.5":
-  version: 7.14.6
-  resolution: "@babel/helper-create-class-features-plugin@npm:7.14.6"
+  version: 7.14.8
+  resolution: "@babel/helper-create-class-features-plugin@npm:7.14.8"
   dependencies:
     "@babel/helper-annotate-as-pure": ^7.14.5
     "@babel/helper-function-name": ^7.14.5
-    "@babel/helper-member-expression-to-functions": ^7.14.5
+    "@babel/helper-member-expression-to-functions": ^7.14.7
     "@babel/helper-optimise-call-expression": ^7.14.5
     "@babel/helper-replace-supers": ^7.14.5
     "@babel/helper-split-export-declaration": ^7.14.5
   peerDependencies:
     "@babel/core": ^7.0.0
-  checksum: 833222da49f33c32d341c99cda796b622bd7cd7824a49c532296ed96bbfe5935187abfe59f6e5886879825140cd7f71516bff8a6afa20ceec1c32cde2d388eb9
+  checksum: 89faaec0a6514659f055f1231984610c8cf2aa49f5c01077d10a00ae6617168b2c34a2d3844784a21d12f72c9499ee3bd6f453717cd3d192b8d2d17ea1d4a179
   languageName: node
   linkType: hard
 
@@ -342,7 +342,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-member-expression-to-functions@npm:^7.14.5":
+"@babel/helper-member-expression-to-functions@npm:^7.14.5, @babel/helper-member-expression-to-functions@npm:^7.14.7":
   version: 7.14.7
   resolution: "@babel/helper-member-expression-to-functions@npm:7.14.7"
   dependencies:
@@ -511,10 +511,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-validator-identifier@npm:^7.14.5":
-  version: 7.14.5
-  resolution: "@babel/helper-validator-identifier@npm:7.14.5"
-  checksum: 778312189a7c5228daac9f7767795a74f11d1eac595ca38bfea248324666459b24aaae6aef43c957ce01bbe61672039ea1c08c5623067c3701beeb1bb1f1ee33
+"@babel/helper-validator-identifier@npm:^7.14.5, @babel/helper-validator-identifier@npm:^7.14.8":
+  version: 7.14.8
+  resolution: "@babel/helper-validator-identifier@npm:7.14.8"
+  checksum: 568d1e893950bd8860db14044e94409a7ed22ac3e6aacf5c5c891afffc123c3cadc2fc6b8b660a7bb7f36dc41504d00605f56f21a244ae60b319611ecccd241a
   languageName: node
   linkType: hard
 
@@ -577,12 +577,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.12.11, @babel/parser@npm:^7.14.5, @babel/parser@npm:^7.14.7":
-  version: 7.14.7
-  resolution: "@babel/parser@npm:7.14.7"
+"@babel/parser@npm:^7.12.11, @babel/parser@npm:^7.14.5, @babel/parser@npm:^7.14.8":
+  version: 7.14.8
+  resolution: "@babel/parser@npm:7.14.8"
   bin:
     parser: ./bin/babel-parser.js
-  checksum: 8c7c7fd9735d9de2a0531fe54338d76972aeb9a414902f5edfc317c421a2da6a8772d04dce5444c89065ae2719c48433153f9cbaa14754b1bf8d6154915095ff
+  checksum: 1f900e92675bac6120dfb3e9ea86841fdaba11d338a220017dbcb9e95815a3854ea479da8027e80acaa7f0e618b96e59bbbf3a230a05aaa3407c9419eb742cfe
   languageName: node
   linkType: hard
 
@@ -1821,11 +1821,11 @@ __metadata:
   linkType: hard
 
 "@babel/runtime@npm:^7.14.0, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.7.6":
-  version: 7.14.6
-  resolution: "@babel/runtime@npm:7.14.6"
+  version: 7.14.8
+  resolution: "@babel/runtime@npm:7.14.8"
   dependencies:
     regenerator-runtime: ^0.13.4
-  checksum: dd931f6ef1c8dab295c4a00c592db6352bf12a5c443f8222304d5c1d3e88d795fa949afcb6f053eec2e69e9827a17ff274524c1cd43813f56b61e3a540274d2f
+  checksum: ebadb3e013a26e0f62abea0da6f6f5d83c9566f0d900e65069885f93088066c64586076d15dcbe6e093c536f66cffc9e2e136ad5d8b3e66235af62f0051afa42
   languageName: node
   linkType: hard
 
@@ -1852,19 +1852,19 @@ __metadata:
   linkType: hard
 
 "@babel/traverse@npm:^7.1.6, @babel/traverse@npm:^7.12.11, @babel/traverse@npm:^7.14.5":
-  version: 7.14.7
-  resolution: "@babel/traverse@npm:7.14.7"
+  version: 7.14.8
+  resolution: "@babel/traverse@npm:7.14.8"
   dependencies:
     "@babel/code-frame": ^7.14.5
-    "@babel/generator": ^7.14.5
+    "@babel/generator": ^7.14.8
     "@babel/helper-function-name": ^7.14.5
     "@babel/helper-hoist-variables": ^7.14.5
     "@babel/helper-split-export-declaration": ^7.14.5
-    "@babel/parser": ^7.14.7
-    "@babel/types": ^7.14.5
+    "@babel/parser": ^7.14.8
+    "@babel/types": ^7.14.8
     debug: ^4.1.0
     globals: ^11.1.0
-  checksum: 1fb5578211486c45171b645d1802f60067dcf8a59edaecc0cb7bf09b72767e4225d2c6f0891ffa03c23e90a56bf2c2cc4d5d6adb14145b31ee86acecaca5f7e0
+  checksum: 237d60fb80a4841805c51ab6334e865e5b6aae559a257d4ca0a86b78f22c0cedfbbdc1365a4d97407a029c117e1f0c430d80c18ce7ab3d02990def2f3bb6bf89
   languageName: node
   linkType: hard
 
@@ -1906,13 +1906,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/types@npm:^7.12.11, @babel/types@npm:^7.14.5, @babel/types@npm:^7.2.0":
-  version: 7.14.5
-  resolution: "@babel/types@npm:7.14.5"
+"@babel/types@npm:^7.12.11, @babel/types@npm:^7.14.5, @babel/types@npm:^7.14.8, @babel/types@npm:^7.2.0":
+  version: 7.14.8
+  resolution: "@babel/types@npm:7.14.8"
   dependencies:
-    "@babel/helper-validator-identifier": ^7.14.5
+    "@babel/helper-validator-identifier": ^7.14.8
     to-fast-properties: ^2.0.0
-  checksum: 45575b46df5ec0e63454b794a60f362596c6f16beda7df3693b134db5be15eb43f7b98ca7b2a5a9628171db5192eed5b8965e43c0a6f5383bca4ddefd0ea8d30
+  checksum: e2f3be565535e5684a961a47de39320d542fc3ae3c61c1282071f260db949d756fbd5293fef68ef0a25e6f466ee9285d911f12b696edd88b38c48c88463e3064
   languageName: node
   linkType: hard
 
@@ -2232,6 +2232,27 @@ __metadata:
   version: 0.2.5
   resolution: "@emotion/weak-memoize@npm:0.2.5"
   checksum: 9fe31f0c9d761468d7868be2faf924ddef3506160c72a1979ced8f72cec5d90499403a29c904af570496ef06803e484495f84d4c311bd0787259c89dba4119ed
+  languageName: node
+  linkType: hard
+
+"@figspec/components@npm:^0.1.1":
+  version: 0.1.9
+  resolution: "@figspec/components@npm:0.1.9"
+  dependencies:
+    copy-to-clipboard: ^3.0.0
+    lit-element: ^2.4.0
+  checksum: 4621a8d664654053284382023b7b4a13497fd87275f7bdb8917f405562a4b9fac37f4a0964847921ce1fcd9e75338106337ac1eb9dd4e20d94be3eeb671af3d5
+  languageName: node
+  linkType: hard
+
+"@figspec/react@npm:^0.1.6":
+  version: 0.1.6
+  resolution: "@figspec/react@npm:0.1.6"
+  dependencies:
+    "@figspec/components": ^0.1.1
+  peerDependencies:
+    react: ^16.14.0 || ^17.0.0
+  checksum: 2768734809e40776c75f063aaa79efd8bf7e7289145c1bca64a8479807abc8194e12d27fa8b6a6053402cec704bfdfb2925f04efdf346ea43c59f3416956fe2d
   languageName: node
   linkType: hard
 
@@ -3043,6 +3064,7 @@ __metadata:
     remark-disable-tokenizers: ^1.0.23
     rimraf: ^3.0.0
     serve: ^11.2.0
+    storybook-addon-designs: ^6.0.1
     unist-util-find: ^1.0.1
     webpack: ^5.28.0
   peerDependencies:
@@ -7255,7 +7277,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copy-to-clipboard@npm:^3.3.1":
+"copy-to-clipboard@npm:^3.0.0, copy-to-clipboard@npm:^3.3.1":
   version: 3.3.1
   resolution: "copy-to-clipboard@npm:3.3.1"
   dependencies:
@@ -11542,6 +11564,22 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"lit-element@npm:^2.4.0":
+  version: 2.5.1
+  resolution: "lit-element@npm:2.5.1"
+  dependencies:
+    lit-html: ^1.1.1
+  checksum: 82f14fc0edd82eec77ad4b48c5f65c1aff15d6cfe7639b19cbac983dcf94892c94c6a202bebf89114a9500e01e9013f5a0ff7e261adf24aa7a1de669448ccd74
+  languageName: node
+  linkType: hard
+
+"lit-html@npm:^1.1.1":
+  version: 1.4.1
+  resolution: "lit-html@npm:1.4.1"
+  checksum: cf3dea0afa2cb014a258169b1b597272f868385ba7b5d7a55258500aa4f2fb3d79e903dd22aa2076ff1c801ba5fbcde3db2ca185707ae57ca3816c95e8bcc086
+  languageName: node
+  linkType: hard
+
 "load-json-file@npm:^4.0.0":
   version: 4.0.0
   resolution: "load-json-file@npm:4.0.0"
@@ -15816,6 +15854,15 @@ fsevents@^1.2.7:
   version: 2.12.0
   resolution: "store2@npm:2.12.0"
   checksum: 517b66b6bed513668b10310b08980e722a919fa8b818262480c5f975575377aedfc40d9bd5de8b2ea0e05d82a830c8664273b1a8bd6169a1ff5020e18db9f88d
+  languageName: node
+  linkType: hard
+
+"storybook-addon-designs@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "storybook-addon-designs@npm:6.0.1"
+  dependencies:
+    "@figspec/react": ^0.1.6
+  checksum: 13df02836479660f8ae293d361d226b10f5d4cfa186bfc9bbd5e1893365658f9b60731d31b364bc653d865fde6b85d4a10952a90a173d79d271a872d919b3f20
   languageName: node
   linkType: hard
 
