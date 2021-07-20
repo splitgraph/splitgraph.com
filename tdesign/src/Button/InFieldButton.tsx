@@ -8,7 +8,7 @@ import { theme } from "../themes/design";
 export interface IInFieldButtonProps extends ButtonProps {
   sx?: SxProps<Theme>;
 }
-const InFieldButtonProps = ({
+const InFieldButton = ({
   children,
   disabled,
   ...rest
@@ -39,4 +39,4 @@ const InFieldButtonProps = ({
   </Button>
 );
 
-export default InFieldButtonProps;
+export default InFieldButton;
