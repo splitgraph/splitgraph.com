@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@material-ui/core";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { muiTheme } from "@splitgraph/tdesign/src/themes/muiTheme";
 
 export const parameters = {
@@ -14,6 +15,7 @@ export const parameters = {
 export const decorators = [
   (Story) => (
     <ThemeProvider theme={muiTheme}>
+      <CssBaseline />
       <Story />
     </ThemeProvider>
   ),
