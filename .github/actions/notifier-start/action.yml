@@ -1,0 +1,43 @@
+# The Book on Composite Actions
+# https://github.com/actions/runner/issues/646
+
+name: 'Notifier Start'
+description: 'Setup the workflow environment for timing and notifying'
+runs:
+  using: "composite"
+  steps:
+    - name: Setup environment variables
+      id: env_setup
+      shell: bash
+      env:
+        COMMIT_MSG: ${{ github.event.head_commit.message }}
+      run: |
+        echo "BRANCH_NAME="${GITHUB_REF#refs/heads/}"" >> $GITHUB_ENV
+        echo "SHORT_COMMIT="${GITHUB_SHA:0:8}"" >> $GITHUB_ENV
+        echo "COMMIT_MSG_TRUNCATED="${COMMIT_MSG:0:50}"" >> $GITHUB_ENV
+        echo "START_TIME="$(printf '%(%s)T\n' -1)"" >> $GITHUB_ENV
+    - name: Setup Notification Preamble
+      id: setup_notification_preamble
+      shell: bash
+      run: |
+        echo -n "${{format('\
+        **[\`{2}:{3}\`]({0}/{1}/actions/runs/{3}?check_suite_focus=true)**\
+        &emsp;on [{1}]({0}/{1})&emsp;([all actions]({0}/{1}/actions))&emsp;
+
+        &nbsp;&nbsp;&nbsp;&emsp;&emsp;[\`{4}\`]({0}/{1}/tree/{4}):[\`{5}\`]({0}/{1}/commit/{6})\
+        &emsp;([compare]({8}))&emsp;{7}push&emsp;by [{9}]({0}/{9})
+
+        &nbsp;&nbsp;&nbsp;&emsp;&emsp;\`{10}...\`
+        ',
+          'https://www.github.com',
+          github.repository,
+          github.job,
+          github.run_id,
+          env.BRANCH_NAME,
+          env.SHORT_COMMIT,
+          github.sha,
+          github.event.forced && 'force ' || '',
+          github.event.compare,
+          github.actor,
+          env.COMMIT_MSG_TRUNCATED
+        ) }}" > preamble.txt
