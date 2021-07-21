@@ -1,6 +1,5 @@
 import { useState, forwardRef } from "react";
 import {
-  Box,
   OutlinedInput,
   OutlinedInputProps,
   InputAdornment,
@@ -33,9 +32,23 @@ const PasswordInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
     ) => {
       event.preventDefault();
     };
-
     return (
-      <Box
+      <OutlinedInput
+        id="outlined-input-password"
+        ref={ref}
+        type={values.showPassword ? "text" : "password"}
+        endAdornment={
+          <InputAdornment position="end">
+            <IconButton
+              onClick={handleClickShowPassword}
+              onMouseDown={handleMouseDownPassword}
+              aria-label="toggle password visibility"
+              edge="end"
+            >
+              {values.showPassword ? <IconPasswordSee /> : <IconPasswordHide />}
+            </IconButton>
+          </InputAdornment>
+        }
         sx={{
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
@@ -56,30 +69,8 @@ const PasswordInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
             },
           },
         }}
-      >
-        <OutlinedInput
-          id="outlined-input-password"
-          ref={ref}
-          type={values.showPassword ? "text" : "password"}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                aria-label="toggle password visibility"
-                edge="end"
-              >
-                {values.showPassword ? (
-                  <IconPasswordSee />
-                ) : (
-                  <IconPasswordHide />
-                )}
-              </IconButton>
-            </InputAdornment>
-          }
-          {...props}
-        />
-      </Box>
+        {...props}
+      />
     );
   }
 );
