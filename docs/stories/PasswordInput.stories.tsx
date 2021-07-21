@@ -10,9 +10,11 @@ export default {
 };
 
 const Template = (args) => (
-  <FormControl variant="outlined">
-    <PasswordInput {...args} />
-  </FormControl>
+  <form>
+    <FormControl variant="outlined">
+      <PasswordInput {...args} />
+    </FormControl>
+  </form>
 );
 
 export const Default = Template.bind({});
