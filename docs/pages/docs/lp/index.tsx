@@ -5,6 +5,7 @@ import { ThemeProvider } from "@emotion/react";
 import { theme } from "@splitgraph/tdesign/src/themes/design";
 import Header from "@splitgraph/docs/components/Header/Header";
 import Tabs from "@splitgraph/docs/sections/Tabs/Tabs";
+import Shape from "@splitgraph/docs/sections/Shape/Shape";
 
 const ThemeDemo = () => {
   const { asPath, pathname } = useRouter();
@@ -24,6 +25,7 @@ const ThemeDemo = () => {
     <ThemeProvider theme={theme}>
       <Header />
       <Tabs />
+      <Shape />
     </ThemeProvider>
   );
 };
