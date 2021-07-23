@@ -1,2 +1,3 @@
 import Box from "./BoxOverride";
-export { Box };
+import BoxGroup from "./BoxGroup";
+export { Box, BoxGroup };
