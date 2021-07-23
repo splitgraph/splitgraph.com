@@ -15,6 +15,7 @@ import {
   ErrorAlert2,
   SuccessAlert2,
   StatusChip2,
+  UserRow,
 } from "@splitgraph/tdesign";
 import TabsDemo from "./tabs";
 import { useForm } from "react-hook-form";
@@ -32,9 +33,10 @@ const ThemeDemo = () => {
         </FormControl>
         <br />
         PasswordInput (error)
+        <br />
         <PasswordInput error />
         <br />
-        <Paper>
+        <Paper sx={{ p: "1rem" }}>
           ClickToCopyInput
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
@@ -135,6 +137,16 @@ const ThemeDemo = () => {
       <Grid item xs={5}>
         Tabs
         <TabsDemo />
+      </Grid>
+      <Grid item xs={4}>
+        UserRow
+        <UserRow
+          name="Sophy"
+          verified="Unverified"
+          email={"user@example.com"}
+          handleSetAsPrimary={() => console.log("handleSetAsPrimary()")}
+          handleDelete={() => console.log("handleDelete()")}
+        />
       </Grid>
     </Paper>
   );
