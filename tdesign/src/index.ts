@@ -80,7 +80,7 @@ export { Octicon, GitLabLogoIcon, GoogleLogoIcon } from "./Icon";
 
 export { SplitgraphTopBar } from "./SplitgraphTopBar";
 
-export { Box } from "./Box";
+export { Box, BoxGroup } from "./Box";
 
 export { Tabs, Tab, TabBody } from "./Tabs";
 
