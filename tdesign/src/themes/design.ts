@@ -59,6 +59,8 @@ export const theme: SplitgraphTheme = {
       error: "#F9EEEF",
       success: "#DBF9F3",
       link: "#2A81F6",
+      gradient:
+        "linear-gradient(0deg, rgba(249, 69, 105, 0.08), rgba(249, 69, 105, 0.08)), #000202;",
     },
     dark: {
       background: "#000202", // should "add primary color at 8%"
