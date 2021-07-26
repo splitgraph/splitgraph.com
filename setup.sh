@@ -12,7 +12,7 @@
 SPLITGRAPH_DIR=${1-"$(cd -P -- "$(dirname -- "$0")" && pwd -P)"}
 
 # If `yarn --version` is not exact match of `$TARGET_YARN_VERSION`, install yarn
-TARGET_YARN_VERSION="${TARGET_YARN_VERSION-"2.4.2"}"
+TARGET_YARN_VERSION="${TARGET_YARN_VERSION-"2.4.1"}"
 
 prep_env() {
     echo "Ensure certs..." \
@@ -25,8 +25,69 @@ prep_env() {
 ensure_yarn() {
     set -e
     if ! dir_has_yarn_release "$SPLITGRAPH_DIR" ; then
-        echo "Install yarn berry"
-        pushd "$SPLITGRAPH_DIR" && yarn set version berry && popd
+        # yarn 1 will not allow us to do anything but `yarn set version berry`
+        # so we need to install berry first, then we can install our pinned version
+        echo "Install yarn berry so we can install our target version"
+        set -e
+        pushd "$SPLITGRAPH_DIR"
+        yarn set version berry
+
+        berry_saved_to="$(yarn config get yarnPath)"
+
+        echo "Now install the target version"
+
+        set -e
+        saved_to="$(yarn set version "${TARGET_YARN_VERSION}" \
+            | grep -i 'saving' \
+            | grep "$TARGET_YARN_VERSION" \
+            | awk '{ print $NF }')"
+
+        set +e
+
+        echo "Saved to: $saved_to"
+
+        if test "$(dirname "$saved_to")" != $(dirname ".yarn/releases/.") ; then
+            echo "Need to move newly installed file into .yarn dir"
+            mv "$saved_to" .yarn/releases/
+        fi
+
+        set_version_to=".yarn/releases/$(ls -t .yarn/releases/ | head -n1)"
+
+        echo "Delete .yarnrc.yml with wrong version and overwrite it"
+        echo "yarnPath: $set_version_to" > .yarnrc.yml
+        # rm .yarnrc.yml
+
+        # echo "Set version to: $set_version_to"
+        # yarn config set yarnPath "$set_version_to"
+
+        berry_saved_to_workspace="$(dirname $(dirname $(dirname "$berry_saved_to")))"
+        parent_dir_yarnrc="$berry_saved_to_workspace/.yarnrc.yml"
+
+        echo "berry_saved_to_workspace=$berry_saved_to_workspace"
+
+        if [[ $PWD/ = /$berry_saved_to_workspace/* ]] ; then
+            # todo: might want to save it beforehand and have a way to recover
+            echo "Berry was installed to parent, so delete that .yarnrc too"
+
+            # we're assuming it's in a dir called .yarn/releases
+            berry_saved_to_workspace="$(dirname $(dirname $(dirname "$berry_saved_to")))"
+
+            parent_dir_yarnrc="$berry_saved_to_workspace/.yarnrc.yml"
+
+            if test -f "$parent_dir_yarnrc" ; then
+                echo "delete: $parent_dir_yarnrc"
+                rm "$parent_dir_yarnrc"
+            fi
+        fi
+
+        echo "Delete yarn berry: $berry_saved_to"
+        rm "$berry_saved_to"
+
+        popd
+
+        # yarn set version "$saved_to"
+
+        echo "Installed: $(yarn --version)"
 
         # Yarn berry changes the name of the yarn executable in some releases,
         # but we want to make sure it's called yarn-berry.js for consistency,
@@ -45,29 +106,39 @@ ensure_yarn() {
 
         # Account for releases with naming scheme yarn-2*.(js|cjs)
         if ls "$SPLITGRAPH_DIR"/.yarn/releases/yarn-2* 2>/dev/null ; then
+            echo "found this one: "
+            ls "$SPLITGRAPH_DIR"/.yarn/releases/yarn-2*
+
             mv "$SPLITGRAPH_DIR"/.yarn/releases/yarn-2* \
                 "$SPLITGRAPH_DIR"/.yarn/releases/yarn-berry.js \
                 && sed -Ei 's/yarn-[0-9+\.]+\.(cjs|js)/yarn-berry.js/' "$SPLITGRAPH_DIR"/.yarnrc.yml
         fi
 
-	# Account for releases with naming scheme yarn-berry.cjs
-	if test -f "$SPLITGRAPH_DIR"/.yarn/releases/yarn-berry.cjs ; then
-	    mv "$SPLITGRAPH_DIR"/.yarn/releases/yarn-berry.cjs \
-	       "$SPLITGRAPH_DIR"/.yarn/releases/yarn-berry.js \
-	    && sed -i 's/yarn-berry\.cjs/yarn-berry\.js/' "$SPLITGRAPH_DIR"/.yarnrc.yml
-	fi
-    fi
+        # Account for releases with naming scheme yarn-3*.(js|cjs)
+        if ls "$SPLITGRAPH_DIR"/.yarn/releases/yarn-3* 2>/dev/null ; then
+            mv "$SPLITGRAPH_DIR"/.yarn/releases/yarn-3* \
+                "$SPLITGRAPH_DIR"/.yarn/releases/yarn-berry.js \
+                && sed -Ei 's/yarn-[0-9+\.]+\.(cjs|js)/yarn-berry.js/' "$SPLITGRAPH_DIR"/.yarnrc.yml
+        fi
 
-    if ! dir_has_yarn_plugins "$SPLITGRAPH_DIR" ; then
-        echo "Install yarn plugins"
-
-        install_plugins "$SPLITGRAPH_DIR"
+        # Account for releases with naming scheme yarn-berry.cjs
+        if test -f "$SPLITGRAPH_DIR"/.yarn/releases/yarn-berry.cjs ; then
+            mv "$SPLITGRAPH_DIR"/.yarn/releases/yarn-berry.cjs \
+            "$SPLITGRAPH_DIR"/.yarn/releases/yarn-berry.js \
+            && sed -i 's/yarn-berry\.cjs/yarn-berry\.js/' "$SPLITGRAPH_DIR"/.yarnrc.yml
+        fi
     fi
-    set +e
 
     pushd "$SPLITGRAPH_DIR"
     has_correct_config || setup_yarn
     popd
+
+    if ! dir_has_yarn_plugins "$SPLITGRAPH_DIR" ; then
+        echo "Install yarn plugins into $SPLITGRAPH_DIR"
+
+        install_plugins "$SPLITGRAPH_DIR"
+    fi
+    set +e
 
     return 0
 }
@@ -76,11 +147,15 @@ install_plugins() {
     local prefixDir="$1"
     shift
 
-    pushd "$prefixDir" && yarn plugin import plugin-workspace-tools && popd
-    pushd "$prefixDir" && yarn plugin import plugin-interactive-tools && popd
-    pushd "$prefixDir" && yarn plugin import plugin-constraints && popd
+    WORKSPACE_TOOLS='https://raw.githubusercontent.com/yarnpkg/berry/%40yarnpkg/plugin-workspace-tools/2.2.0/packages/plugin-workspace-tools/bin/%40yarnpkg/plugin-workspace-tools.js'
+    CONSTRAINTS='https://raw.githubusercontent.com/yarnpkg/berry/%40yarnpkg/plugin-constraints/2.2.0/packages/plugin-constraints/bin/%40yarnpkg/plugin-constraints.js'
+    INTERACTIVE_TOOLS='https://raw.githubusercontent.com/yarnpkg/berry/%40yarnpkg/plugin-interactive-tools/2.2.0/packages/plugin-interactive-tools/bin/%40yarnpkg/plugin-interactive-tools.js'
+
     pushd "$prefixDir" && yarn plugin import https://raw.githubusercontent.com/milesforks/yarn-plugin-workspace-lockfile/main/packages/plugin/bundles/%40yarnpkg/plugin-workspace-lockfile.js \
         && popd
+    pushd "$prefixDir" && yarn plugin import "$INTERACTIVE_TOOLS" && popd
+    pushd "$prefixDir" && yarn plugin import "$CONSTRAINTS" && popd
+    pushd "$prefixDir" && yarn plugin import "$WORKSPACE_TOOLS" && popd
 
     # Yarn sometimes releases workspace tools with .js and .cjs (tbh, maybe all .cjs now)
     # AFAICT it costs nothing to rename this to .js to standardize our checked in versions
@@ -162,6 +237,7 @@ dir_has_yarn_release() {
 
     if has_wrong_yarn_version "$prefixDir" ; then
         echo "yarn seems outdated in $prefixDir, return 1 to trick into upgrade"
+        rm -f "$prefixDir"/.yarnrc.yml
         return 1
     fi
 
@@ -279,9 +355,13 @@ has_correct_config() {
     return 1
 }
 
-prep_env >/dev/null || { \
-    echo "Fatal error in setup.sh. (note: message may have been sent to /dev/null)"; \
-    exit 1 ;\
-}
+if test -n "$DEBUG" && test "$DEBUG" == "1" ; then
+    prep_env || { echo "Fatal error." ; exit 1 ; }
+else
+    prep_env >/dev/null || { \
+        echo "Fatal error in setup.sh. (note: message may have been sent to /dev/null)"; \
+        exit 1 ;\
+    }
+fi
 
 exit 0
