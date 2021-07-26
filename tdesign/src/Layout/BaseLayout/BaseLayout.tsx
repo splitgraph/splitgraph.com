@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Box, useMediaQuery } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
+import { SxProps } from "@material-ui/system";
+import type { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 import {
   Header,
@@ -31,13 +33,15 @@ const BaseLayout = ({
   showHeader = true,
   logoText,
 }: BaseLayoutProps) => {
-  const containerStyle = {
+  const containerStyle: SxProps<Theme> = {
     // maxWidth: '100vw',
     // minWidth: "-webkit-fit-content",
     // width: "100vw",
-    ".logo-link": {
-      variant: "links.unstyled",
-    },
+
+    // TODO: Deprecated variant syntax only works with legacyTheme
+    // ".logo-link": {
+    //   variant: "links.unstyled",
+    // },
     ".button-link": {
       // from theme-ui's links.button
       backgroundColor: "primary.main",
@@ -61,10 +65,15 @@ const BaseLayout = ({
       },
       display: "inline-table",
     },
-    ".button-link-secondary": {
-      variant: "links.buttonSecondary",
-      display: "inline-table",
-    },
+
+    // TODO: Deprecated variant syntax only works with legacyTheme
+    // ".logo-link": {
+    //   variant: "links.unstyled",
+    // },
+    // ".button-link-secondary": {
+    //   variant: "links.buttonSecondary",
+    //   display: "inline-table",
+    // },
     // weird hack needs two class names to refer to same element...
     ".logo-link-flex": {
       display: "flex",
