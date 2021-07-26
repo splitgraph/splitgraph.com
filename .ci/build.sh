@@ -17,11 +17,9 @@ if test ! -d dist ; then
     exit 1
 fi
 
-echo "Temporary quick build" && popd && exit 0
-
-# yarn build \
-#     && cp "$SPLITGRAPH_DIR"/docs/proxyDirectories.txt "$SPLITGRAPH_DIR"/docs/out/proxyDirectories.txt \
-#     && echo "Build successful" \
-#     && exit 0
+yarn build \
+    && cp "$SPLITGRAPH_DIR"/docs/proxyDirectories.txt "$SPLITGRAPH_DIR"/docs/out/proxyDirectories.txt \
+    && echo "Build successful" \
+    && exit 0
 
 exit 1
