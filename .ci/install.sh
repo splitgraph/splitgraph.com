@@ -28,6 +28,7 @@ fi
 # We need to set the special lockfile name here, because if we use yarn.lock,
 # then when running in the parent monorepo, yarn will think its in its own root
 export WORKSPACE_LOCKFILE=yarn-public-workspace.lock
+export DEBUG=1
 pushd "$SPLITGRAPH_DIR" \
     && ./setup.sh \
     && yarn install --immutable \
