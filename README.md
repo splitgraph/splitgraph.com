@@ -3,6 +3,10 @@
 As of 7/8/21, these instructions should get you running locally. It's still a WIP.
 
 **NOTE: Make sure you check out `canary` of this repository! The default `master` branch is not up to date.**
+
+<details><summary>Installation and Setup
+</summary><p>
+
 ## Cloning
 
 You can get started by copying this command and pasting it into your Terminal:
@@ -12,6 +16,7 @@ git clone git@github.com:splitgraph/splitgraph.com.git \
   && cd splitgraph.com \
   && git checkout --track origin/canary
 ```
+
 ## Installation
 
 Assumptions:
@@ -58,6 +63,11 @@ Troubleshooting:
   - Any version lower than `15.x` is unlikely to work
 - Directory permission errors
   - Make sure you own the current directory and any existing `node_modules` subdirectory
+
+</p></details>
+
+<details><summary>Developing
+</summary><p>
 
 ## Note!
 
@@ -113,10 +123,11 @@ To get started, you can try editing the demo `lp` page linked above.
 
 For the most part, this is a standard Next.js app in `docs`
 
+</p></details>
 
-# Docs
-
-## Code Layout: What are the folders for?
+<details><summary>Code Layout: What are the folders for?
+</summary>
+<p>
 
 The `splitgraph.com` repository is a TypeScript mono-repo with multiple
 workspaces. Most importantly, the [`docs`](./docs) workspace is a Next.js app, and
@@ -132,19 +143,18 @@ yarn installation.
 
 - [splitgraph.com](./docs)
   - The root workspace. You can run most commands from here, which it mostly
-  forwards to the `docs` workspace anyway.
+    forwards to the `docs` workspace anyway.
 - [docs](./docs) (Import from `@splitgraph/docs`)
   - The Next.js app that is the primary entrypoint of the repository
 - [tdesign](./tdesign) (Import from `@splitgraph/tdesign`)
   - The design kit / component library / theme / etc. Very much a WIP.
-  - It's called "`tdesign`" as in "typescript design`, because originally
-  we had JS files in `design`, and we are still migrating that.
+  - It's called "`tdesign`" as in "typescript design`, because originally we had JS files in `design`, and we are still migrating that.
 
 ### Less important workspaces
 
 - [design](./design) (Import from `@splitgraph/design`)
   - The deprecated design kit, which might still be used in a few places.
-  You can mostly ignore this.
+    You can mostly ignore this.
 - [lib](./lib) (Import from `@splitgraph/lib`)
   - Utilities and library functions
 - [content-scripts](./content-scripts) (not for importing)
@@ -166,6 +176,12 @@ it in the design library at `@splitgraph/tdesign`.
 
 When creating components, try to follow the existing style (we'll eventually
 document this / add linter / scaffolding scripts).)
+
+</p>
+</details>
+
+<details><summary>Theming
+</summary><p>
 
 ## Whats the story with theming?
 
@@ -194,7 +210,6 @@ These are the three themes you could import:
 These examples are available in
 [docs/components/DemoComponents](./docs/components/DemoComponents).
 
-
 - `sx` + `className`:
   React's built-in `className` prop can be a useful (and styling library agnostic) way to target child components.
   You can define some styles in a parent and pass them into the children like so:
@@ -209,7 +224,7 @@ const styles = {
     <p>Hello</p>
   </Child>
 </Parent>
-````
+```
 
 - `css` prop
   Emotion gives us a css prop that accepts vanilla CSS.
@@ -239,7 +254,11 @@ const DemoStyled = styled.div`
   }};
 `;
 ```
-# Debugging CI
+
+</p></details>
+
+<details><summary>Debugging CI
+</summary><p>
 
 ```bash
 
@@ -252,8 +271,6 @@ const DemoStyled = styled.div`
 # In (1), Run and "break" before pre-install. See `install.sh` (it's a sleep loop)
 .ci/debug/run_act_break_before_install.sh
 
-
-
 # In (2), Attach an interactive shell to the container in (1), with `docker exec`:
 # (When (1) hits the breakpoint, it will print this command before sleeping)
 docker exec -it $(docker ps -q --filter name=act-*) /bin/bash
@@ -261,3 +278,99 @@ docker exec -it $(docker ps -q --filter name=act-*) /bin/bash
 # If you need to kill the container, ctrl+c isn't enough
 docker kill $(docker ps -q --filter name=act-*)
 ```
+
+</p></details>
+
+<details><summary>Installing on a fresh system with `nvm` (rough notes)
+</summary>
+<p>
+
+This was my experience cloning on a Mac recently. The instructions above contain
+the important steps, but this section includes more details and troubleshooting
+from a recent installation on a Mac. (e.g. note it doesn't include the tsconfig
+details, but that's still necessary). This process will be smoothed out
+eventually.
+
+## Install nvm
+
+Install nvm: https://github.com/nvm-sh/nvm#installing-and-updating
+
+Make sure correct lines are in `~/.bash_profile`, and if you add them,
+make sure to `source ~/.bash_profile` afterward.
+
+(taken from the above link)
+
+```bash
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+```
+
+## After cloning, create an environment
+
+```bash
+# example (note that v15 is not LTS)
+ nvm install 15.12.0
+```
+
+## Install yarn
+
+```bash
+npm install -g yarn
+```
+
+## Try to setup
+
+```bash
+./setup.sh
+```
+
+Errors like this?
+
+```bash
+❯ yarn --version
+node:internal/modules/cjs/loader:927
+  throw err;
+  ^
+
+Error: Cannot find module '/private/tmp/splitgraph.com/.yarn/releases/yarn-berry.cjs'
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:924:15)
+    at Function.Module._load (node:internal/modules/cjs/loader:769:27)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)
+    at node:internal/main/run_main_module:17:47 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+```
+
+Clean up
+
+```bash
+find .yarn -type f -delete
+rm .yarnrc
+./setup.sh
+
+```
+
+Get error again?
+
+Check `.yarnrc.yml` to make sure it's point to yarn release with the same file extension as the relase on your system. If not, edit the file `vi .yarnrc.yml` to change the extension.
+
+```bash
+cat .yarnrc.yml
+```
+
+Mismatch:
+
+```bash
+
+❯ cat .yarnrc.yml
+yarnPath: ".yarn/releases/yarn-berry.cjs" # <--- should be .js
+
+/tmp/splitgraph.com ⋄ canary-header*
+❯ ls .yarn/releases/
+yarn-berry.js   # <--- the file is .js
+
+```
+
+</p>
+</details>
