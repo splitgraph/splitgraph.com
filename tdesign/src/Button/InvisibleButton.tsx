@@ -39,7 +39,12 @@ const InvisibleButton = ({
     {...(rest as any)}
   >
     {icon}
-    <Typography variant="bodyHighlighted">{children}</Typography>
+    <Typography
+      variant="bodyHighlighted"
+      sx={{ display: "flex", alignItems: "center" }}
+    >
+      {children}
+    </Typography>
   </Button>
 );
 
