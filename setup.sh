@@ -34,7 +34,11 @@ ensure_yarn() {
 
         berry_saved_to="$(yarn config get yarnPath)"
 
-        echo "Now install the target version"
+        echo "-- .yarnrc.yml"
+        cat .yarnrc.yml
+        echo "--"
+
+        echo "Now install the target version ($TARGET_YARN_VERSION)"
 
         set -e
         saved_to="$(yarn set version "${TARGET_YARN_VERSION}" \
@@ -46,7 +50,7 @@ ensure_yarn() {
 
         echo "Saved to: $saved_to"
 
-        if test "$(dirname "$saved_to")" != $(dirname ".yarn/releases/.") ; then
+        if test -f "$saved_to" && test "$(dirname "$saved_to")" != "$(dirname ".yarn/releases/.")" ; then
             echo "Need to move newly installed file into .yarn dir"
             mv "$saved_to" .yarn/releases/
         fi
@@ -80,8 +84,10 @@ ensure_yarn() {
             fi
         fi
 
-        echo "Delete yarn berry: $berry_saved_to"
-        rm "$berry_saved_to"
+        if test -f "$berry_saved_to" ; then
+            echo "Delete yarn berry: $berry_saved_to"
+            rm "$berry_saved_to"
+        fi
 
         popd
 
@@ -215,6 +221,8 @@ dir_has_yarn_release() {
     local prefixDir="$1"
     shift
 
+    echo "Dir has yarn release?"
+
     # Clean up old files that are deprecated and shouldn't be checked in anymore if they exist
     if test -f "$prefixDir"/.yarn/releases/yarn-rc.js ; then
         rm -f "$prefixDir"/.yarn/releases/yarn-rc.js
@@ -235,14 +243,14 @@ dir_has_yarn_release() {
         rm -f "$prefixDir"/.yarn/plugins/@yarnpkg/plugin-constraints.cjs
     fi
 
-    if has_wrong_yarn_version "$prefixDir" ; then
-        echo "yarn seems outdated in $prefixDir, return 1 to trick into upgrade"
+    if has_broken_yarn "$prefixDir" ; then
+        echo "yarn seems broken in $prefixDir, remove .yarnrc.yml"
         rm -f "$prefixDir"/.yarnrc.yml
         return 1
     fi
 
-    if has_broken_yarn "$prefixDir" ; then
-        echo "yarn seems broken in $prefixDir, remove .yarnrc.yml"
+    if has_wrong_yarn_version "$prefixDir" ; then
+        echo "yarn seems outdated in $prefixDir, return 1 to trick into upgrade"
         rm -f "$prefixDir"/.yarnrc.yml
         return 1
     fi
@@ -310,7 +318,7 @@ has_broken_yarn() {
 
     pushd "$prefixDir"
     if ! yarn config >/dev/null 2>/dev/null ; then
-    echo "Broken yarn"
+        echo "Broken yarn"
         popd && return 0
     fi
     popd && return 1
