@@ -1,5 +1,6 @@
 import { useState, forwardRef } from "react";
 import {
+  Box,
   OutlinedInput,
   OutlinedInputProps,
   InputAdornment,
@@ -13,13 +14,17 @@ interface State {
   showPassword: boolean;
 }
 
-const PasswordInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
+interface IPasswordInputProps extends OutlinedInputProps {
+  extraEndAdornment?: React.ReactNode;
+}
+
+const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
   (props, ref) => {
     const [values, setValues] = useState<State>({
       password: "",
       showPassword: false,
     });
-
+    const { extraEndAdornment, ...rest } = props;
     const handleClickShowPassword = () => {
       setValues({
         ...values,
@@ -47,6 +52,9 @@ const PasswordInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
             >
               {values.showPassword ? <IconPasswordSee /> : <IconPasswordHide />}
             </IconButton>
+            {!!extraEndAdornment && (
+              <Box sx={{ ml: "1rem" }}>{extraEndAdornment}</Box>
+            )}
           </InputAdornment>
         }
         sx={{
@@ -69,7 +77,7 @@ const PasswordInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
             },
           },
         }}
-        {...props}
+        {...rest}
       />
     );
   }
