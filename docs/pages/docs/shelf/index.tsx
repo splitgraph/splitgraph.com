@@ -16,6 +16,14 @@ import {
   SuccessAlert2,
   StatusChip2,
   UserRow,
+  BoxGroup,
+  SQLCredentialsRow,
+  LinkedOAuthRow,
+  GoogleLogoIcon,
+  AddOAuthLinkRow,
+  Octicon,
+  GitLabLogoIcon,
+  SQLCredentialsNicknameRow,
 } from "@splitgraph/tdesign";
 import TabsDemo from "./tabs";
 import { useForm } from "react-hook-form";
@@ -138,7 +146,7 @@ const ThemeDemo = () => {
         Tabs
         <TabsDemo />
       </Grid>
-      <Grid item xs={4}>
+      <Grid item>
         UserRow
         <UserRow
           name="Sophy"
@@ -147,6 +155,80 @@ const ThemeDemo = () => {
           handleSetAsPrimary={() => console.log("handleSetAsPrimary()")}
           handleDelete={() => console.log("handleDelete()")}
         />
+      </Grid>
+      <br />
+      <br />
+      <Grid item>
+        SQLCredentialsRow
+        <SQLCredentialsRow />
+      </Grid>
+      <br />
+      <br />
+      <Grid item>
+        LinkedOAuthRow
+        <LinkedOAuthRow
+          name="Nicolas Panero"
+          email="nicolas.panero@example.com"
+        >
+          <InvisibleButton>
+            <GoogleLogoIcon />
+            Unlink
+          </InvisibleButton>
+        </LinkedOAuthRow>
+      </Grid>
+      <br />
+      <br />
+      <Grid item>
+        AddOAuthLinkRow
+        <AddOAuthLinkRow>
+          <InvisibleButton>
+            <Octicon /> GitHub
+          </InvisibleButton>
+          <InvisibleButton>
+            <GitLabLogoIcon /> GitLab
+          </InvisibleButton>
+          <InvisibleButton>
+            <GoogleLogoIcon /> Google
+          </InvisibleButton>
+        </AddOAuthLinkRow>
+      </Grid>
+      <br />
+      <br />
+      <Grid item>
+        BoxGroup
+        <BoxGroup>
+          <UserRow
+            name="Alice"
+            verified="Verified"
+            email={"alice@example.com"}
+            handleSetAsPrimary={() => {}}
+            handleDelete={() => {}}
+          />
+          <UserRow
+            name="Christian Really Long Name"
+            verified="Unverified"
+            email={"christian@example.com"}
+            metadata={"Owner"}
+            handleSetAsPrimary={() => {}}
+            handleDelete={() => {}}
+          />
+          <SQLCredentialsRow />
+          <LinkedOAuthRow
+            name="Nicolas Panero"
+            email="nicolas.panero@example.com"
+          >
+            <InvisibleButton>
+              <GoogleLogoIcon />
+              Unlink
+            </InvisibleButton>
+          </LinkedOAuthRow>
+        </BoxGroup>
+      </Grid>
+      <br />
+      <br />
+      <Grid item>
+        SQLCredentialsNicknameRow
+        <SQLCredentialsNicknameRow />
       </Grid>
     </Paper>
   );
