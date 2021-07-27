@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@material-ui/core";
+import { Box, Grid, Typography, FormControl } from "@material-ui/core";
 import { theme as designTheme } from "../themes/design";
 import { InFieldButton } from "../Button";
 import { PasswordInput } from "../Input";
@@ -49,10 +49,16 @@ const SQLCredentialsRow = ({}: ISQLCredentialsRowProps) => {
           </Box>
         </Grid>
         <Grid item md={6}>
-          <PasswordInput
-            extraEndAdornment={<InFieldButton>Create</InFieldButton>}
-            fullWidth
-          ></PasswordInput>
+          <FormControl fullWidth>
+            <label htmlFor="sql-credentials-input">
+              <Typography variant="small">Account Password</Typography>
+            </label>
+            <PasswordInput
+              id="sql-credentials-input"
+              extraEndAdornment={<InFieldButton>Create</InFieldButton>}
+              fullWidth
+            ></PasswordInput>
+          </FormControl>
         </Grid>
       </Grid>
     </Box>
