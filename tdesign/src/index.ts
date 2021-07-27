@@ -84,4 +84,10 @@ export { Box, BoxGroup } from "./Box";
 
 export { Tabs, Tab, TabBody } from "./Tabs";
 
-export { UserRow } from "./Rows";
+export {
+  UserRow,
+  SQLCredentialsRow,
+  LinkedOAuthRow,
+  AddOAuthLinkRow,
+  SQLCredentialsNicknameRow,
+} from "./Rows";
