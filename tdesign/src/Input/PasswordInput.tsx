@@ -39,7 +39,6 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
     };
     return (
       <OutlinedInput
-        id="outlined-input-password"
         ref={ref}
         type={values.showPassword ? "text" : "password"}
         endAdornment={
