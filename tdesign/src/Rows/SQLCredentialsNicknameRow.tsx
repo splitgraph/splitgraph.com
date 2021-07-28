@@ -32,16 +32,18 @@ const SQLCredentialsNicknameRow = ({
             </FormControl>
           </Box>
         </Grid>
-        <Grid item md={6}>
-          <FormControl fullWidth>
+        <Grid item md={6} sx={{ display: "flex" }}>
+          <FormControl fullWidth variant="outlined">
             <label htmlFor="username-input">
               <Typography variant="small">Username</Typography>
             </label>
-            <ClickToCopyInput id="username-input" fullWidth></ClickToCopyInput>
+            <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}>
+              <ClickToCopyInput id="username-input" fullWidth />
+              <Button sx={{ ml: "1rem" }} onClick={handleDelete}>
+                <IconDelete />
+              </Button>
+            </Box>
           </FormControl>
-          <Button onClick={handleDelete}>
-            <IconDelete />
-          </Button>
         </Grid>
       </Grid>
     </Box>
