@@ -8278,11 +8278,11 @@ fsevents@~2.3.1:
   linkType: hard
 
 "react-hook-form@npm:^7.10.1":
-  version: 7.10.1
-  resolution: "react-hook-form@npm:7.10.1"
+  version: 7.12.1
+  resolution: "react-hook-form@npm:7.12.1"
   peerDependencies:
     react: ^16.8.0 || ^17
-  checksum: 1ae1eaca04e83aefc6ef68d62ea5ff27a424809c7df1ea9f0f2d7a56c8e6f74d951776f6be93a1d8bea808024f2576b3ecac74e81dd12cc1800538671f6ea113
+  checksum: bc880460bb745038304a9d292f6f06c4091e679072376e14f9433975c2e458dd2f757b8990ab3a8ade35e9e609d83e13a314560c0ec7c9dd6a64d742596ad400
   languageName: node
   linkType: hard
 
