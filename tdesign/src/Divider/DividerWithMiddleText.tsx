@@ -7,7 +7,6 @@ const MiddleSegment = ({ children }) => (
       alignItems: "center",
       justifyContent: "center",
       width: "20%",
-      marginBottom: 2,
       height: "2rem",
       color: "lightgray",
     }}
