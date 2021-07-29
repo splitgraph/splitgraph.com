@@ -17,8 +17,6 @@ if test ! -d dist ; then
     exit 1
 fi
 
-echo "Temporary quick build" && popd && exit 0
-
-yarn dlx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN
+yarn dlx chromatic --project-token="$CHROMATIC_PROJECT_TOKEN"
 
 exit 1
