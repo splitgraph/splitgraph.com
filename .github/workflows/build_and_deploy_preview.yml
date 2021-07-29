@@ -72,6 +72,13 @@ jobs:
         run: ./.ci/build.sh
         env:
           DOCSEARCH_PUBLIC_CLIENT_API_KEY: ${{ secrets.DOCSEARCH_PUBLIC_CLIENT_API_KEY }}
+      
+      # Chromatic
+      - name: Upload Storybook to Chromatic
+        id: chromatic
+        run: ./.ci/chromatic.sh
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
 
       # Stop the timer, format the message, and send the notification
       - uses: ./.github/actions/notifier-complete
