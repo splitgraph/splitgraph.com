@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { OutlinedInput, OutlinedInputProps } from "@material-ui/core/";
+import { OutlinedInput, OutlinedInputProps } from "@material-ui/core";
 import { theme } from "../themes/design";
 
 const Input = forwardRef<HTMLInputElement, OutlinedInputProps>((props, ref) => {

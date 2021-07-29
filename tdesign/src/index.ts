@@ -65,7 +65,7 @@ export { Dialog } from "./Dialog";
 
 export { HeroConnectionParams } from "./HeroConnectionParams";
 
-export { LogoImage, LogoText } from "./Layout/";
+export { LogoImage, LogoText } from "./Layout";
 
 export { Input, Label } from "./Form";
 export * from "./Text";

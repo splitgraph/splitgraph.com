@@ -5,7 +5,7 @@ import {
   InputAdornment,
   FormControl,
   IconButton,
-} from "@material-ui/core/";
+} from "@material-ui/core";
 import { IconCopy } from "../Icon";
 import { theme } from "../themes/design";
 import useCopyToClipboard from "./useClickToCopy";
