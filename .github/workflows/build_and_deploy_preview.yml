@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # required by Chromatic
 
       # Start a timer and set the preamble for the notification
       - uses: ./.github/actions/notifier-start
@@ -72,7 +74,7 @@ jobs:
         run: ./.ci/build.sh
         env:
           DOCSEARCH_PUBLIC_CLIENT_API_KEY: ${{ secrets.DOCSEARCH_PUBLIC_CLIENT_API_KEY }}
-      
+
       # Chromatic
       - name: Upload Storybook to Chromatic
         id: chromatic
