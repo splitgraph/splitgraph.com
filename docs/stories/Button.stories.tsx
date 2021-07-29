@@ -15,7 +15,7 @@ const Template = (args) => <Button {...args} />;
 
 export const Medium = Template.bind({});
 Medium.args = {
-  children: "Get Started - FREE",
+  children: "Get Started - FREE!",
 };
 Medium.parameters = {
   design: {
