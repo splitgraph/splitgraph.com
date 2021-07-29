@@ -44,6 +44,11 @@ jobs:
           # For debugging only, but must be defined here or `act` ignores it
           BREAK_INTERACTIVE_BEFORE_INSTALL: ${{ secrets.BREAK_INTERACTIVE_BEFORE_INSTALL }}
 
+      # Lint
+      - name: Lint
+        id: lint
+        run: .ci/lint.sh
+
       # Typecheck
       - uses: actions/cache@v1
         with:
