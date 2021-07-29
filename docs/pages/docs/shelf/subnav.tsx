@@ -1,3 +1,7 @@
+// @ts-nocheck
+// this file is a WIP intended to demo intersection observer in its own page
+
+// safe to ignore/delete as needed
 import { useRef } from "react";
 import { Paper } from "@material-ui/core";
 import withMuiTheme from "@splitgraph/tdesign/src/themes/withMUITheme";
