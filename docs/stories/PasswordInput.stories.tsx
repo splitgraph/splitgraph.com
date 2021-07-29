@@ -7,7 +7,7 @@ export default {
   argTypes: {
     color: { control: "color" },
   },
-};
+} as unknown;
 
 const Template = (args) => (
   <form>
