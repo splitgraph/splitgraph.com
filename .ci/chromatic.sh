@@ -24,6 +24,4 @@ if test ! -d docs ; then
 fi
 
 cd docs
-yarn dlx chromatic --project-token="$CHROMATIC_PROJECT_TOKEN"
-
-exit 1
+yarn dlx chromatic --project-token="$CHROMATIC_PROJECT_TOKEN" && exit 0
