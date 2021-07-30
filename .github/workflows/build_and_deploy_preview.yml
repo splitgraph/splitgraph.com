@@ -58,6 +58,11 @@ jobs:
         id: typecheck
         run: .ci/typecheck.sh
 
+      # Static analysis
+      - name: "Statically Analyze Code"
+        id: analysis
+        run: .ci/analyze_static.sh
+
       # Build
       - name: Build Static Website
         id: build

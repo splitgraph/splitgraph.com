@@ -1,8 +1,7 @@
 import * as React from "react";
 import { Box, IconButton } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
-import { LogoImage } from "../LogoImage";
-import { LogoText } from "../LogoText";
+import { LogoImage, LogoText } from "@splitgraph/tdesign";
 
 interface IMobileHeaderProps {
   logoText: string;
