@@ -97,9 +97,11 @@ const BaseLayout = ({
   const headerCenter = !!renderHeaderCenter ? renderHeaderCenter() : null;
   const headerRight = !!renderHeaderRight ? renderHeaderRight() : null;
 
+  const isServer = typeof window === "undefined";
+
   return (
     <Box sx={containerStyle}>
-      {showHeader && matches ? (
+      {showHeader && (matches || isServer) ? (
         <Header>
           <HeaderLeft>
             <a
