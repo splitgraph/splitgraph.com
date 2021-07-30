@@ -17,8 +17,7 @@ if test ! -d dist ; then
     exit 1
 fi
 
-ls -alh # debug
-if test -d docs ; then
+if test ! -d docs ; then
     >&2 echo "Build error: missing docs package."
     popd
     exit 1
