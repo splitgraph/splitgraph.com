@@ -14,7 +14,7 @@
 CI_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 SPLITGRAPH_DIR="$CI_DIR/.."
 
-pushd "$SPLITGRAPH_DIR"
+pushd "$SPLITGRAPH_DIR" >/dev/null
 
 exec find . -type f \
        ! -path '*dist*' \
