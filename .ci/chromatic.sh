@@ -17,6 +17,12 @@ if test ! -d dist ; then
     exit 1
 fi
 
+if test -d docs; then
+    >&2 echo "Build error: missing docs package."
+    popd
+    exit 1
+fi
+cd docs
 yarn dlx chromatic --project-token="$CHROMATIC_PROJECT_TOKEN"
 
 exit 1
