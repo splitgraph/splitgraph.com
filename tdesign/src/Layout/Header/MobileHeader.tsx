@@ -4,12 +4,16 @@ import { Menu as MenuIcon } from "@material-ui/icons";
 import { LogoImage } from "../LogoImage";
 import { LogoText } from "../LogoText";
 
+// TODO: This file is deprecated
 interface IMobileHeaderProps {
   logoText: string;
-  searchInput: React.ReactElement;
+  searchInput?: React.ReactElement;
+  renderHeaderCenter?: () => React.ReactNode;
 }
 
-const MobileHeader = ({ logoText, searchInput }: IMobileHeaderProps) => {
+const MobileHeader = ({ logoText, renderHeaderCenter }: IMobileHeaderProps) => {
+  const headerCenter = !!renderHeaderCenter ? renderHeaderCenter() : null;
+
   return (
     <Box sx={{ p: "12px" }}>
       <Box
@@ -23,12 +27,7 @@ const MobileHeader = ({ logoText, searchInput }: IMobileHeaderProps) => {
           <MenuIcon />
         </IconButton>
       </Box>
-      <Box sx={{ width: "100%" }}>
-        {searchInput &&
-          React.cloneElement(searchInput, {
-            fullWidth: true,
-          })}
-      </Box>
+      <Box sx={{ width: "100%" }}>{headerCenter}</Box>
     </Box>
   );
 };
