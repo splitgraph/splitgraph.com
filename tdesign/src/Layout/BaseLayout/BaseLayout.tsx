@@ -1,27 +1,20 @@
 import * as React from "react";
-import { Box, useMediaQuery } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
+import { Box } from "@material-ui/core";
 import { SxProps } from "@material-ui/system";
 import type { Theme } from "@material-ui/core/styles/createMuiTheme";
 
-import {
-  Header,
-  HeaderLeft,
-  HeaderCenter,
-  HeaderRight,
-  MobileHeader,
-} from "../Header";
-import { LogoImage } from "../LogoImage";
-import { LogoText } from "../LogoText";
+import { Header, HeaderLeft, HeaderCenter, HeaderRight } from "../Header";
+import { Logo } from "../Logo";
+import type { ILogoProps } from "../Logo";
 
-export interface BaseLayoutProps {
+export interface BaseLayoutProps extends Omit<ILogoProps, "linkTo"> {
   children?: React.ReactNode;
   renderHeaderRight?: () => React.ReactNode;
   renderHeaderCenter?: () => React.ReactNode;
-  extraHeaderStyle?: object;
+  extraHeaderStyle?: SxProps<Theme>;
   extraStyle?: object;
   showHeader?: boolean;
-  logoText?: string;
+  logoLinkTo?: ILogoProps["linkTo"];
 }
 
 const BaseLayout = ({
@@ -31,21 +24,17 @@ const BaseLayout = ({
   extraHeaderStyle = {},
   extraStyle = {},
   showHeader = true,
+  brandmarkURL,
+  wordmarkURL,
   logoText,
+  brandName,
+  logoLinkTo = "/",
 }: BaseLayoutProps) => {
   const containerStyle: SxProps<Theme> = {
-    // maxWidth: '100vw',
-    // minWidth: "-webkit-fit-content",
-    // width: "100vw",
-
     // TODO: Deprecated variant syntax only works with legacyTheme
-    // ".logo-link": {
-    //   variant: "links.unstyled",
-    // },
+    // ".logo-link": { variant: "links.unstyled", },
     ".button-link": {
-      // from theme-ui's links.button
       backgroundColor: "primary.main",
-      // backgroundColor: "secondary",
       color: "muted.main",
       px: "0.3rem",
       py: "0.2rem",
@@ -91,36 +80,26 @@ const BaseLayout = ({
     },
     ...extraStyle,
   };
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
   const headerCenter = !!renderHeaderCenter ? renderHeaderCenter() : null;
   const headerRight = !!renderHeaderRight ? renderHeaderRight() : null;
 
-  const isServer = typeof window === "undefined";
-
   return (
     <Box sx={containerStyle}>
-      {showHeader && (matches || isServer) ? (
+      {showHeader && (
         <Header>
           <HeaderLeft>
-            <a
-              className="logo-link logo-link-flex"
-              aria-label="home"
-              href={"/"}
-            >
-              <LogoImage logoURL={"/static/brandmark.svg"} />
-              <LogoText text={logoText} />
-            </a>
+            <Logo
+              linkTo={logoLinkTo}
+              brandmarkURL={brandmarkURL}
+              wordmarkURL={wordmarkURL}
+              brandName={brandName}
+              logoText={logoText}
+            />
           </HeaderLeft>
           <HeaderCenter>{headerCenter}</HeaderCenter>
           <HeaderRight>{headerRight}</HeaderRight>
         </Header>
-      ) : (
-        <MobileHeader
-          logoText={logoText}
-          searchInput={headerCenter as React.ReactElement}
-        />
       )}
       {children}
     </Box>
