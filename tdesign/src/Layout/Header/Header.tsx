@@ -8,51 +8,82 @@ export interface HeaderProps {
   style?: any;
 }
 
+const desiredPixelWidth = 1366;
+
 const Header = ({ children }: HeaderProps) => {
   const theme = useTheme();
+
   return (
     <Box
       className="header--container"
       sx={
         {
           display: "grid",
-          gridTemplateColumns: "1fr 2fr 1fr",
-          gridTemplateRows: "1fr",
           gridColumnGap: "0px",
           gridRowGap: "0px",
+          gridTemplateColumns:
+            "min-content repeat(1, minmax(25vw, 1fr)) min-content",
+          gridAutoFlow: "column",
           minHeight: "52px",
           background:
             "linear-gradient(0deg, rgba(42, 129, 246, 0.02), rgba(42, 129, 246, 0.02)), #FFFFFF",
-          [theme.breakpoints.down("md")]: {
-            padding: theme.spacing(0.3),
-          },
           ".header--left": {
-            gridArea: "1 / 1 / 2 / 2",
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-start",
             paddingLeft: "20px",
+            marginLeft: (theme) => theme.constants.leftMargin,
+            [theme.breakpoints.down("md")]: {
+              gridColumnStart: "1",
+              gridColumnEnd: "2",
+              gridRow: "1",
+            },
           },
           ".header--center": {
-            gridArea: "1 / 2 / 2 / 3",
+            width: "100%",
             display: "flex",
             alignItems: "center",
-            justifyContent: "flex-start",
+            justifyContent: "center",
+            [theme.breakpoints.down("md")]: {
+              ":not(:focus-within)": {
+                width: "100%",
+                gridRow: "1",
+                gridColumnStart: "auto",
+                gridColumnEnd: "auto",
+                justifyContent: "flex-end",
+              },
+              ":focus-within": {
+                gridRow: "2",
+                gridColumnStart: "1",
+                gridColumnEnd: "none",
+                "*:focus": {
+                  width: "max-content",
+                },
+              },
+            },
           },
           ".header--right": {
-            gridArea: "1 / 3 / 2 / 4",
+            marginRight: (theme) => theme.constants.rightMargin,
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-end",
+            gridColumnStart: "3",
+            [theme.breakpoints.down("md")]: {
+              gridRow: "1",
+            },
           },
-
           a: {
             fontWeight: "bold",
             marginRight: "1ch",
           },
-
           ".button-link": {
             variant: "links.button",
+            width: "max-content",
+          },
+          ".logo-text": {
+            [theme.breakpoints.down("md")]: {
+              display: "none",
+            },
           },
         } as SxProps<Theme>
       }
