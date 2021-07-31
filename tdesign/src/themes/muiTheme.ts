@@ -3,7 +3,23 @@ import { createMuiTheme } from "@material-ui/core/styles";
 
 export const defaultTheme = createMuiTheme(); // lets us reference MUI default style values below
 
+const breakpointValues = {
+  xs: 0,
+  sm: 600,
+  md: 960,
+  lg: 1280,
+  desktop: 1366,
+  xl: 1920,
+};
+
 export const muiTheme = createMuiTheme({
+  breakpoints: {
+    values: breakpointValues,
+  },
+  constants: {
+    leftMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
+    rightMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
+  },
   palette: {
     // mode: "dark",
     primary: {
@@ -185,9 +201,18 @@ export const muiTheme = createMuiTheme({
     },
   },
 });
+
 declare module "@material-ui/core/Button" {
   interface ButtonPropsVariantOverrides {
     pill: true;
+  }
+}
+
+declare module "@material-ui/core/styles/createBreakpoints" {
+  // Basically: set a boolean, true for added breakpoints, false for removed
+  // https://material-ui.com/customization/breakpoints/#custom-breakpoints
+  interface BreakpointOverrides {
+    desktop: true;
   }
 }
 
@@ -233,8 +258,16 @@ declare module "@material-ui/core/styles/createPalette" {
     legacySecondary?: PaletteOptions["primary"];
   }
 }
-
+// Docs on module augmentation for customizing the theme
+// https://material-ui.com/guides/typescript/#customization-of-theme
 declare module "@material-ui/core/styles" {
+  interface Theme {
+    constants?: { [key: string]: number | string };
+  }
+  // allow configuration using `createTheme`
+  interface ThemeOptions {
+    constants?: { [key: string]: number | string };
+  }
   interface TypographyVariants {
     title1: React.CSSProperties;
     title2: React.CSSProperties;
