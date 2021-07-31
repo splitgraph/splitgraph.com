@@ -23,3 +23,4 @@ export { LogoText } from "./LogoText";
 export { ContentHeader } from "./ContentHeader";
 
 export { Footer } from "./Footer";
+export { Logo } from "./Logo";
