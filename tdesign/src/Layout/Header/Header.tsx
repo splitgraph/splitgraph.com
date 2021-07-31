@@ -8,8 +8,6 @@ export interface HeaderProps {
   style?: any;
 }
 
-const desiredPixelWidth = 1366;
-
 const Header = ({ children }: HeaderProps) => {
   const theme = useTheme();
 
