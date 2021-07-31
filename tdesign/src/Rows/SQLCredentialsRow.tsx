@@ -4,11 +4,11 @@ import { InFieldButton } from "../Button";
 import { PasswordInput } from "../Input";
 import SQLWarningIcon from "./SQLWarningIcon";
 interface ISQLCredentialsRowProps {
-  name?: string;
+  message?: React.ReactNode;
   handleClick?: () => void;
 }
 
-const SQLCredentialsRow = ({}: ISQLCredentialsRowProps) => {
+const SQLCredentialsRow = ({ message }: ISQLCredentialsRowProps) => {
   return (
     <Box
       sx={{
@@ -24,8 +24,12 @@ const SQLCredentialsRow = ({}: ISQLCredentialsRowProps) => {
           <Box sx={{ display: "flex", alignItems: "center", height: "100%" }}>
             <SQLWarningIcon />
             <Typography sx={{ ml: "1em" }}>
-              We do not save <strong>SQL passwords</strong>, but you can always{" "}
-              <strong>create new credentials.</strong>
+              {message || (
+                <span>
+                  We do not save <strong>SQL passwords</strong>, but you can
+                  always <strong>create new credentials.</strong>
+                </span>
+              )}
             </Typography>
           </Box>
         </Grid>
