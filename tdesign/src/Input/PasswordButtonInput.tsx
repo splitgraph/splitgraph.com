@@ -1,6 +1,5 @@
 import { useState, forwardRef } from "react";
 import {
-  Box,
   OutlinedInput,
   OutlinedInputProps,
   InputAdornment,
@@ -25,7 +24,8 @@ const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
     };
 
     return (
-      <Box
+      <OutlinedInput
+        ref={ref}
         sx={{
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
@@ -46,27 +46,23 @@ const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
             },
           },
         }}
-      >
-        <OutlinedInput
-          ref={ref}
-          type={showPassword ? "text" : "password"}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                aria-label="toggle password visibility"
-                edge="end"
-                sx={{ "&:hover": { background: "none" }, mr: "16px" }}
-              >
-                {showPassword ? <IconPasswordSee /> : <IconPasswordHide />}
-              </IconButton>
-              <InFieldButton>Create</InFieldButton>
-            </InputAdornment>
-          }
-          {...props}
-        />
-      </Box>
+        type={showPassword ? "text" : "password"}
+        endAdornment={
+          <InputAdornment position="end">
+            <IconButton
+              onClick={handleClickShowPassword}
+              onMouseDown={handleMouseDownPassword}
+              aria-label="toggle password visibility"
+              edge="end"
+              sx={{ "&:hover": { background: "none" }, mr: "16px" }}
+            >
+              {showPassword ? <IconPasswordSee /> : <IconPasswordHide />}
+            </IconButton>
+            <InFieldButton>Create</InFieldButton>
+          </InputAdornment>
+        }
+        {...props}
+      />
     );
   }
 );
