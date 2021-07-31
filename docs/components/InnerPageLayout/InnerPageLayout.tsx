@@ -17,6 +17,10 @@ const InnerPageLayout = ({
 }: IInnerPageLayoutProps) => {
   return (
     <BaseLayout
+      brandmarkURL={"/static/brandmark.svg"}
+      wordmarkURL={"/static/brandmark.svg"}
+      logoText={"Splitgraph"}
+      brandName={"Splitgraph"}
       extraHeaderStyle={{
         borderWidth: "0 !important",
       }}

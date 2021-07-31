@@ -68,7 +68,10 @@ const LandingPageLayout = ({
         extraHeaderStyle={{
           borderWidth: "0 !important",
         }}
-        logoText={brand || undefined}
+        brandmarkURL={"/static/brandmark.svg"}
+        wordmarkURL={"/static/brandmark.svg"}
+        logoText={brand || "Splitgraph"}
+        brandName={"Splitgraph"}
         renderHeaderRight={() => (
           <HeaderRight
             includeDashboardHeaderLink={includeDashboardHeaderLink}
