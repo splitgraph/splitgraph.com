@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { OutlinedInput, InputAdornment, IconButton } from "@material-ui/core/";
+import { OutlinedInput, InputAdornment, IconButton } from "@material-ui/core";
 import { IconCopy } from "../Icon";
 import { theme } from "../themes/design";
 import useCopyToClipboard from "./useClickToCopy";
