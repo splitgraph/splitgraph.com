@@ -12,7 +12,7 @@ import {
 } from "@splitgraph/tdesign";
 
 export default {
-  title: "Splitgraph/BoxGroup",
+  title: "Row/BoxGroup",
   component: BoxGroup,
   argTypes: {
     backgroundColor: { control: "color" },
@@ -21,11 +21,11 @@ export default {
 
 const Template = (args) => <BoxGroup {...args} />;
 
-export const GroupOne = Template.bind({});
-GroupOne.args = {
+export const ExampleGroupOne = Template.bind({});
+ExampleGroupOne.args = {
   children: [<SQLCredentialsRow />, <SQLCredentialsNicknameRow />],
 };
-GroupOne.parameters = {
+ExampleGroupOne.parameters = {
   design: {
     type: "figma",
     url:
@@ -33,8 +33,8 @@ GroupOne.parameters = {
   },
 };
 
-export const GroupTwo = Template.bind({});
-GroupTwo.args = {
+export const ExampleGroupTwo = Template.bind({});
+ExampleGroupTwo.args = {
   children: [
     <LinkedOAuthRow name="Nicolas Panero" email="nicolas.panero@example.com">
       <InvisibleButton>

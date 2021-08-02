@@ -56,7 +56,10 @@ const SubnavBar = ({
       </Box>
       <ul>
         {sections?.map(({ displayName, slug }, i) => (
-          <li className={`sectionLink ${!!visibleSection ? "active" : ""}`}>
+          <li
+            key={i}
+            className={`sectionLink ${!!visibleSection ? "active" : ""}`}
+          >
             <Typography
               variant="smallHighlightedSB"
               fontSize="14px"
