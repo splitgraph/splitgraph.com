@@ -1,5 +1,7 @@
-import { Box } from "@material-ui/core";
+import { Box, IconButton } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
+
+import { Menu as MenuIcon } from "@material-ui/icons";
 
 export interface IHamburgerContainerProps {
   children: React.ReactNode;
@@ -39,7 +41,9 @@ const HamburgerContainer = ({
           },
         }}
       >
-        <h1>H</h1>
+        <IconButton onClick={() => {}}>
+          <MenuIcon />
+        </IconButton>
       </Box>
     </Box>
   );

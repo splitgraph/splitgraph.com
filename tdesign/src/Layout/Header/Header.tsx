@@ -18,18 +18,24 @@ const Header = ({ children }: HeaderProps) => {
         {
           display: "grid",
           gridColumnGap: "0px",
-          gridRowGap: "0px",
+          gridRowGap: "7px",
           gridTemplateColumns:
             "min-content repeat(1, minmax(25vw, 1fr)) min-content",
           gridAutoFlow: "column",
-          minHeight: "52px",
+          // willChange: "transform",
           background:
             "linear-gradient(0deg, rgba(42, 129, 246, 0.02), rgba(42, 129, 246, 0.02)), #FFFFFF",
+
+          ".header--left, .header--center, .header--right": {
+            minHeight: "56px",
+            // backgroundColor: "red",
+            // animation: "3s ease-in 1s infinite reverse both running slidein",
+          },
           ".header--left": {
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-start",
-            paddingLeft: "20px",
+            paddingLeft: "22.5px",
             marginLeft: (theme) => theme.constants.leftMargin,
             [theme.breakpoints.down("md")]: {
               gridColumnStart: "1",
@@ -42,6 +48,9 @@ const Header = ({ children }: HeaderProps) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            // transition: theme.transitions.create("gridColumnStart", {
+            //   duration: 4000,
+            // }),
             [theme.breakpoints.down("md")]: {
               ":not(:focus-within)": {
                 width: "100%",
