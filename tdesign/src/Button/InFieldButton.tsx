@@ -1,6 +1,6 @@
 import { Button, ButtonProps } from "@material-ui/core";
 import { SxProps } from "@material-ui/system";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { Theme } from "@material-ui/core/styles";
 import { theme } from "../themes/design";
 
 export interface IInFieldButtonProps extends ButtonProps {
