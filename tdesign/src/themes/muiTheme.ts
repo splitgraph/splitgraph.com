@@ -1,6 +1,13 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 // import { theme } from "./design"; // TODO: when we're ready, the MUI palette should consume from here
 
+// import type {
+//   PaletteColorOptions,
+//   PaletteColor,
+// } from "@material-ui/core/styles";
+
+// import { theme as coreTheme } from "./design";
+
 export const defaultTheme = createMuiTheme(); // lets us reference MUI default style values below
 
 const breakpointValues = {
@@ -21,12 +28,89 @@ export const muiTheme = createMuiTheme({
     rightMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
   },
   palette: {
+    contrastThreshold: 3,
+    tonalOffset: 0.2,
     // mode: "dark",
     primary: {
       // TODO: this is a core color and affects many, many components' default look.
       // Consider if using the flambeeRed color here instead makes more components look 'right' / Flambee conformant by default
-      main: "#36678d",
+      // main: "#36678d",
+      // main: "#F94569",
+      main: "#F94569",
+      light: "#FF7C97",
+      dark: "#C0003F",
+      contrastText: defaultTheme.palette.getContrastText("#F94569"),
     },
+    surfaces: {
+      light: {
+        background: { main: "#FFFFFF" },
+        sql: { main: "#E3EFFE" },
+        error: { main: "#F9EEEF" },
+        success: { main: "#DBF9F3" },
+        link: { main: "#2A81F6" },
+      },
+      dark: {
+        background: { main: "#000202" }, // should "add primary color at 8%"
+        sql: { main: "#27293B" },
+        error: { main: "#370D10" },
+        success: { main: "#103D34" },
+        link: { main: "#2A81F6" },
+      },
+    },
+    textures: {
+      onLight: {
+        dots: {
+          background: "radial-gradient(rgb(85 85 85 / 32%) 1px, transparent 0)",
+          backgroundSize: "40px 40px",
+        },
+      },
+    },
+    // texturize:
+    navbar: {
+      light: { main: "#FBFCFF" },
+      dark: { main: "#201316" },
+    },
+    footer: {
+      light: { main: "#00224E" },
+      dark: { main: "201316" },
+    },
+    grays: {
+      light: {
+        gray20: { main: "#000202" },
+
+        gray21: {
+          main: "#2C2D2D",
+
+          // experimenting in dev tools - this looks ok?
+          dark: `linear-gradient(90deg, rgb(249 69 105 / 8%) 0%, rgb(255 128 153 / 8%) 100%),#2C2D2D`,
+        },
+        gray22: { main: "#555656" },
+        gray23: { main: "#818285" },
+        gray24: { main: "#A0A3A9" },
+        gray25: { main: "#C0C3CC" },
+        gray26: { main: "#E6E7EB" },
+        gray27: { main: "#F2F4F6" },
+        gray28: { main: "#F9FAFB" },
+        gray29: { main: "#FCFCFD" },
+      },
+      dark: {
+        gray20: { main: "#FCFCFD" },
+        gray21: {
+          main: "#E6E7EB",
+          dark: `linear-gradient(90deg, rgb(249 69 105 / 8%) 0%, rgb(255 128 153 / 8%) 100%),#E6E7EB`,
+        },
+        gray22: { main: "#A0A3A9" },
+        gray23: { main: "#818285" },
+        gray24: { main: "#555656" },
+        gray25: { main: "#292A2A" },
+        gray26: { main: "#1C1E1E" },
+        gray27: { main: "#141616" },
+        gray28: { main: "#0D0F0F" },
+        gray29: { main: "#000202" },
+        // Gray25-29: should be dynamic "add primary color at 8%"
+      },
+    },
+
     // secondary: {
     //   main: "#89368d",
     // },
@@ -200,6 +284,16 @@ export const muiTheme = createMuiTheme({
       ],
     },
   },
+  texturize: (
+    base: React.CSSProperties,
+    texture: React.CSSProperties
+  ): React.CSSProperties => ({
+    ...base,
+    ...texture,
+    background: base.background
+      ? `${texture.background},${base.background}`
+      : texture.background,
+  }),
 });
 
 declare module "@material-ui/core/Button" {
@@ -217,45 +311,144 @@ declare module "@material-ui/core/styles/createBreakpoints" {
 }
 
 declare module "@material-ui/core/styles/createPalette" {
+  interface SurfacePalette {
+    background: PaletteColor;
+    sql: PaletteColor;
+    error: PaletteColor;
+    success: PaletteColor;
+    link: PaletteColor;
+  }
+
+  interface TexturePalette {
+    dots: React.CSSProperties;
+  }
+
+  interface GrayPalette {
+    gray20: PaletteColor;
+    gray21: PaletteColor;
+    gray22: PaletteColor;
+    gray23: PaletteColor;
+    gray24: PaletteColor;
+    gray25: PaletteColor;
+    gray26: PaletteColor;
+    gray27: PaletteColor;
+    gray28: PaletteColor;
+    gray29: PaletteColor;
+  }
+
   interface Palette {
-    flambeeDarkGray?: Palette["primary"];
-    flambeeLightGray?: Palette["primary"];
-    flambeeBlue?: Palette["primary"];
-    flambeeRed?: Palette["primary"];
-    flambeeGreen?: Palette["primary"];
-    errorBackground?: Palette["primary"];
-    successBackground?: Palette["primary"];
-    danger?: Palette["primary"];
-    dark2light?: Palette["primary"];
-    lightaccent?: Palette["primary"];
-    gray?: Palette["primary"];
-    sglightblue?: Palette["primary"];
-    sgdarkblue?: Palette["primary"];
-    heavy?: Palette["primary"];
-    muted?: Palette["primary"];
-    light?: Palette["primary"];
-    links?: Palette["primary"];
-    legacySecondary?: Palette["primary"];
+    surfaces?: {
+      light?: SurfacePalette;
+      dark?: SurfacePalette;
+    };
+
+    navbar?: {
+      light?: PaletteColor;
+      dark?: PaletteColor;
+    };
+
+    footer?: {
+      light?: PaletteColor;
+      dark?: PaletteColor;
+    };
+
+    grays?: {
+      light?: GrayPalette;
+      dark?: GrayPalette;
+    };
+
+    textures?: {
+      onLight?: TexturePalette;
+      onDark?: TexturePalette;
+    };
+
+    flambeeDarkGray?: PaletteColor;
+    flambeeLightGray?: PaletteColor;
+    flambeeBlue?: PaletteColor;
+    flambeeRed?: PaletteColor;
+    flambeeGreen?: PaletteColor;
+    errorBackground?: PaletteColor;
+    successBackground?: PaletteColor;
+    danger?: PaletteColor;
+    dark2light?: PaletteColor;
+    lightaccent?: PaletteColor;
+    gray?: PaletteColor;
+    sglightblue?: PaletteColor;
+    sgdarkblue?: PaletteColor;
+    heavy?: PaletteColor;
+    muted?: PaletteColor;
+    light?: PaletteColor;
+    links?: PaletteColor;
+    legacySecondary?: PaletteColor;
+  }
+  interface SurfacePaletteOptions {
+    background: PaletteColorOptions;
+    sql: PaletteColorOptions;
+    error: PaletteColorOptions;
+    success: PaletteColorOptions;
+    link: PaletteColorOptions;
+  }
+
+  interface TexturePaletteOptions {
+    dots?: React.CSSProperties;
+  }
+
+  interface GrayPaletteOptions {
+    gray20: PaletteColorOptions;
+    gray21: PaletteColorOptions;
+    gray22: PaletteColorOptions;
+    gray23: PaletteColorOptions;
+    gray24: PaletteColorOptions;
+    gray25: PaletteColorOptions;
+    gray26: PaletteColorOptions;
+    gray27: PaletteColorOptions;
+    gray28: PaletteColorOptions;
+    gray29: PaletteColorOptions;
   }
   interface PaletteOptions {
-    flambeeDarkGray?: PaletteOptions["primary"];
-    flambeeLightGray?: PaletteOptions["primary"];
-    flambeeBlue?: PaletteOptions["primary"];
-    flambeeRed?: PaletteOptions["primary"];
-    flambeeGreen?: PaletteOptions["primary"];
-    errorBackground?: PaletteOptions["primary"];
-    successBackground?: PaletteOptions["primary"];
-    danger?: PaletteOptions["primary"];
-    dark2light?: PaletteOptions["primary"];
-    lightaccent?: PaletteOptions["primary"];
-    gray?: PaletteOptions["primary"];
-    sglightblue?: PaletteOptions["primary"];
-    sgdarkblue?: PaletteOptions["primary"];
-    heavy?: PaletteOptions["primary"];
-    muted?: PaletteOptions["primary"];
-    light?: PaletteOptions["primary"];
-    link?: PaletteOptions["primary"];
-    legacySecondary?: PaletteOptions["primary"];
+    surfaces?: {
+      light?: SurfacePaletteOptions;
+      dark?: SurfacePaletteOptions;
+    };
+
+    textures?: {
+      onLight?: TexturePaletteOptions;
+      onDark?: TexturePaletteOptions;
+    };
+
+    navbar?: {
+      light?: PaletteColorOptions;
+      dark?: PaletteColorOptions;
+    };
+
+    footer?: {
+      light?: PaletteColorOptions;
+      dark?: PaletteColorOptions;
+    };
+
+    grays?: {
+      light?: GrayPaletteOptions;
+      dark?: GrayPaletteOptions;
+    };
+
+    flambeeDarkGray?: PaletteColorOptions;
+    flambeeLightGray?: PaletteColorOptions;
+    flambeeBlue?: PaletteColorOptions;
+    flambeeRed?: PaletteColorOptions;
+    flambeeGreen?: PaletteColorOptions;
+    errorBackground?: PaletteColorOptions;
+    successBackground?: PaletteColorOptions;
+    danger?: PaletteColorOptions;
+    dark2light?: PaletteColorOptions;
+    lightaccent?: PaletteColorOptions;
+    gray?: PaletteColorOptions;
+    sglightblue?: PaletteColorOptions;
+    sgdarkblue?: PaletteColorOptions;
+    heavy?: PaletteColorOptions;
+    muted?: PaletteColorOptions;
+    light?: PaletteColorOptions;
+    link?: PaletteColorOptions;
+    legacySecondary?: PaletteColorOptions;
   }
 }
 // Docs on module augmentation for customizing the theme
@@ -263,10 +456,18 @@ declare module "@material-ui/core/styles/createPalette" {
 declare module "@material-ui/core/styles" {
   interface Theme {
     constants?: { [key: string]: number | string };
+    texturize: (
+      base: React.CSSProperties,
+      texture: React.CSSProperties
+    ) => React.CSSProperties;
   }
   // allow configuration using `createTheme`
   interface ThemeOptions {
     constants?: { [key: string]: number | string };
+    texturize: (
+      base: React.CSSProperties,
+      texture: React.CSSProperties
+    ) => React.CSSProperties;
   }
   interface TypographyVariants {
     title1: React.CSSProperties;
