@@ -1,5 +1,6 @@
 import { Grid, Paper, FormControl } from "@material-ui/core";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
+import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 import withMuiTheme from "@splitgraph/tdesign/src/themes/withMUITheme";
 import {
   PasswordInput,
@@ -24,6 +25,7 @@ import {
   Octicon,
   GitLabLogoIcon,
   SQLCredentialsNicknameRow,
+  AddNewUserRow,
 } from "@splitgraph/tdesign";
 import TabsDemo from "./tabs";
 import { useForm } from "react-hook-form";
@@ -83,7 +85,14 @@ const ThemeDemo = () => {
       <br />
       {"InFieldButton (used in certain <Input>s)"}
       <br />
-      <InFieldButton>Create</InFieldButton>
+      <InFieldButton>
+        Create &nbsp;
+        <ArrowRightAltIcon
+          sx={{
+            ml: "10px",
+          }}
+        />
+      </InFieldButton>
       <br />
       <br />
       InFieldButton (disabled)
@@ -229,6 +238,10 @@ const ThemeDemo = () => {
       <Grid item>
         SQLCredentialsNicknameRow
         <SQLCredentialsNicknameRow />
+      </Grid>
+      <Grid item>
+        AddNewUserRow
+        <AddNewUserRow />
       </Grid>
     </Paper>
   );
