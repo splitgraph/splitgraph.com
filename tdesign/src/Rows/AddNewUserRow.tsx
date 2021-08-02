@@ -1,15 +1,18 @@
-import { Box, Grid, Typography, FormControl } from "@material-ui/core";
+// import { forwardRef } from "react";
+import {
+  Box,
+  Grid,
+  Typography,
+  FormControl,
+  // OutlinedInputProps,
+} from "@material-ui/core";
 import { theme as designTheme } from "../themes/design";
 import { IconEmail } from "../Icon";
 import { InFieldButton } from "../Button";
 import { Input } from "../Input";
 
-interface IAddNewUserRowProps {
-  name?: string;
-  handleClick?: () => void;
-}
-
-const AddNewUserRow = ({}: IAddNewUserRowProps) => {
+// const AddNewUserRow = forwardRef<HTMLInputElement, OutlinedInputProps>((props, ref) => {
+const AddNewUserRow = (props) => {
   return (
     <Box
       sx={{
@@ -28,6 +31,7 @@ const AddNewUserRow = ({}: IAddNewUserRowProps) => {
               <Typography variant="small">Add new email</Typography>
             </label>
             <Input
+              // ref={ref}
               id="add-new-email-input"
               fullWidth
               endAdornment={
@@ -36,7 +40,8 @@ const AddNewUserRow = ({}: IAddNewUserRowProps) => {
                   Add
                 </InFieldButton>
               }
-            ></Input>
+              {...props}
+            />
           </FormControl>
         </Grid>
         <Grid item md={1} />
