@@ -31,17 +31,15 @@ const AddNewUserRow = (props) => {
               <Typography variant="small">Add new email</Typography>
             </label>
             <Input
-              // ref={ref}
               id="add-new-email-input"
               fullWidth
               endAdornment={
                 <InFieldButton>
-                  <IconEmail sx={{ mr: ".5rem" }} />
-                  Add
+                  <IconEmail /> Add
                 </InFieldButton>
               }
               {...props}
-            />
+            ></Input>
           </FormControl>
         </Grid>
         <Grid item md={1} />
