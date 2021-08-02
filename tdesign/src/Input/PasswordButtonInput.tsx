@@ -48,6 +48,7 @@ const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
             },
           },
         }}
+        disabled={disabled}
         type={showPassword ? "text" : "password"}
         endAdornment={
           <InputAdornment position="end">
