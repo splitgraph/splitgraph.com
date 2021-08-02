@@ -2,8 +2,8 @@ import { SxProps } from "@material-ui/system";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import { defaultTheme } from "./muiTheme";
 
-/* 
-Pre-April 2021, different areas used different styles provided by different files 
+/*
+Pre-April 2021, different areas used different styles provided by different files
 Catalog: used theme-ui theme
 LP: used prismTheme
 mdxComponent: <pre>/<code> provided by defaultTheme (which is ThemeUI theme)
@@ -260,8 +260,11 @@ export const makeDefaultTheme = () => ({
   },
   variants: {
     paddedContentArea: {
-      paddingLeft: ["2rem", "2rem", "10%"],
-      paddingRight: ["2rem", "2rem", "10%"],
+      // paddingLeft: ["2rem", "2rem", "10%"],
+      // paddingRight: ["2rem", "2rem", "10%"],
+
+      paddingLeft: ["2rem", "2rem", "max(0px, calc((100vw - 1366px) / 2))"],
+      paddingRight: ["2rem", "2rem", "max(0px, calc((100vw - 1366px) / 2))"],
     },
     avatar: {
       width: "avatar",
