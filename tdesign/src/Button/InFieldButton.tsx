@@ -4,8 +4,6 @@ import {
 } from "@material-ui/core";
 import { SxProps } from "@material-ui/system";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
-// import { IconArrowRight } from "../Icon";
-import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 import { theme } from "../themes/design";
 
 interface IButtonProps extends MuiButtonProps {
@@ -32,9 +30,6 @@ const Button = ({ children, disabled, ...rest }: IButtonProps) => (
     {...(rest as any)}
   >
     {children}
-    <ArrowRightAltIcon
-      sx={{ ml: "10px", color: disabled ? theme.grays.light.gray22 : "white" }}
-    />
   </MuiButton>
 );
 
