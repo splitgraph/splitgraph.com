@@ -16,6 +16,7 @@ const Header = ({ children }: HeaderProps) => {
       className="header--container"
       sx={
         {
+          boxShadow: "0px 4px 8px rgba(195, 195, 195, 0.2)",
           display: "grid",
           gridColumnGap: "0px",
           gridRowGap: "7px",
@@ -25,11 +26,8 @@ const Header = ({ children }: HeaderProps) => {
           // willChange: "transform",
           background:
             "linear-gradient(0deg, rgba(42, 129, 246, 0.02), rgba(42, 129, 246, 0.02)), #FFFFFF",
-
           ".header--left, .header--center, .header--right": {
             minHeight: "56px",
-            // backgroundColor: "red",
-            // animation: "3s ease-in 1s infinite reverse both running slidein",
           },
           ".header--left": {
             display: "flex",
