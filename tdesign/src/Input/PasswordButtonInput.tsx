@@ -8,10 +8,12 @@ import {
 import { IconPasswordHide, IconPasswordSee } from "../Icon";
 import { theme } from "../themes/design";
 import InFieldButton from "../Button/InFieldButton";
+import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 
 const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
   (props, ref) => {
     const [showPassword, setShowPassword] = useState(false);
+    const { disabled } = props;
 
     const handleClickShowPassword = () => {
       setShowPassword(!showPassword);
@@ -58,7 +60,15 @@ const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
             >
               {showPassword ? <IconPasswordSee /> : <IconPasswordHide />}
             </IconButton>
-            <InFieldButton>Create</InFieldButton>
+            <InFieldButton>
+              Create &nbsp;{" "}
+              <ArrowRightAltIcon
+                sx={{
+                  ml: "10px",
+                  color: disabled ? theme.grays.light.gray22 : "white",
+                }}
+              />
+            </InFieldButton>
           </InputAdornment>
         }
         {...props}

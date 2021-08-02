@@ -93,4 +93,5 @@ export {
   LinkedOAuthRow,
   AddOAuthLinkRow,
   SQLCredentialsNicknameRow,
+  AddNewUserRow,
 } from "./Rows";
