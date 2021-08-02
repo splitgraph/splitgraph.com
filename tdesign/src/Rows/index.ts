@@ -3,6 +3,7 @@ import SQLCredentialsRow from "./SQLCredentialsRow";
 import LinkedOAuthRow from "./LinkedOAuthRow";
 import AddOAuthLinkRow from "./AddOAuthLinkRow";
 import SQLCredentialsNicknameRow from "./SQLCredentialsNicknameRow";
+import AddNewUserRow from "./AddNewUserRow";
 
 export {
   UserRow,
@@ -10,4 +11,5 @@ export {
   SQLCredentialsNicknameRow,
   LinkedOAuthRow,
   AddOAuthLinkRow,
+  AddNewUserRow,
 };

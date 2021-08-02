@@ -1,6 +1,5 @@
 import { useState, forwardRef } from "react";
 import {
-  Box,
   OutlinedInput,
   OutlinedInputProps,
   InputAdornment,
@@ -9,10 +8,12 @@ import {
 import { IconPasswordHide, IconPasswordSee } from "../Icon";
 import { theme } from "../themes/design";
 import InFieldButton from "../Button/InFieldButton";
+import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 
 const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
   (props, ref) => {
     const [showPassword, setShowPassword] = useState(false);
+    const { disabled } = props;
 
     const handleClickShowPassword = () => {
       setShowPassword(!showPassword);
@@ -25,7 +26,8 @@ const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
     };
 
     return (
-      <Box
+      <OutlinedInput
+        ref={ref}
         sx={{
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
@@ -46,27 +48,32 @@ const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
             },
           },
         }}
-      >
-        <OutlinedInput
-          ref={ref}
-          type={showPassword ? "text" : "password"}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                aria-label="toggle password visibility"
-                edge="end"
-                sx={{ "&:hover": { background: "none" }, mr: "16px" }}
-              >
-                {showPassword ? <IconPasswordSee /> : <IconPasswordHide />}
-              </IconButton>
-              <InFieldButton>Create</InFieldButton>
-            </InputAdornment>
-          }
-          {...props}
-        />
-      </Box>
+        disabled={disabled}
+        type={showPassword ? "text" : "password"}
+        endAdornment={
+          <InputAdornment position="end">
+            <IconButton
+              onClick={handleClickShowPassword}
+              onMouseDown={handleMouseDownPassword}
+              aria-label="toggle password visibility"
+              edge="end"
+              sx={{ "&:hover": { background: "none" }, mr: "16px" }}
+            >
+              {showPassword ? <IconPasswordSee /> : <IconPasswordHide />}
+            </IconButton>
+            <InFieldButton>
+              Create &nbsp;{" "}
+              <ArrowRightAltIcon
+                sx={{
+                  ml: "10px",
+                  color: disabled ? theme.grays.light.gray22 : "white",
+                }}
+              />
+            </InFieldButton>
+          </InputAdornment>
+        }
+        {...props}
+      />
     );
   }
 );
