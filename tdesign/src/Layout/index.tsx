@@ -24,3 +24,4 @@ export { ContentHeader } from "./ContentHeader";
 
 export { Footer } from "./Footer";
 export { Logo } from "./Logo";
+export type { ILogoProps } from "./Logo";

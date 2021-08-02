@@ -25,6 +25,8 @@ const BaseLayout = ({
   extraStyle = {},
   showHeader = true,
   brandmarkURL,
+  onHoverBrandmarkURL,
+  animateWordmarkOnHover,
   wordmarkURL,
   logoText,
   brandName,
@@ -92,6 +94,8 @@ const BaseLayout = ({
             <Logo
               linkTo={logoLinkTo}
               brandmarkURL={brandmarkURL}
+              onHoverBrandmarkURL={onHoverBrandmarkURL}
+              animateWordmarkOnHover={animateWordmarkOnHover}
               wordmarkURL={wordmarkURL}
               brandName={brandName}
               logoText={logoText}
