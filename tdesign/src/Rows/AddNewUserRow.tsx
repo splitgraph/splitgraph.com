@@ -35,7 +35,8 @@ const AddNewUserRow = (props) => {
               fullWidth
               endAdornment={
                 <InFieldButton>
-                  <IconEmail /> Add
+                  <IconEmail sx={{ mr: ".5rem" }} />
+                  Add
                 </InFieldButton>
               }
               {...props}
