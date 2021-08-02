@@ -1,5 +1,6 @@
 import { Box, Grid, Typography, FormControl } from "@material-ui/core";
 import { theme as designTheme } from "../themes/design";
+import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 import { InFieldButton } from "../Button";
 import { PasswordInput } from "../Input";
 import SQLWarningIcon from "./SQLWarningIcon";
@@ -40,7 +41,17 @@ const SQLCredentialsRow = ({ message }: ISQLCredentialsRowProps) => {
             </label>
             <PasswordInput
               id="sql-credentials-input"
-              extraEndAdornment={<InFieldButton>Create</InFieldButton>}
+              extraEndAdornment={
+                <InFieldButton>
+                  <Typography variant="bodyHighlighted">Create</Typography>
+                  <ArrowRightAltIcon
+                    sx={{
+                      ml: "10.4px",
+                      color: (theme) => theme.palette.common.white,
+                    }}
+                  />
+                </InFieldButton>
+              }
               fullWidth
             ></PasswordInput>
           </FormControl>

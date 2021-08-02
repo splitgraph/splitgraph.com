@@ -28,11 +28,11 @@ import {
   AddNewUserRow,
 } from "@splitgraph/tdesign";
 import TabsDemo from "./tabs";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 
 const ThemeDemo = () => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  // const { register, handleSubmit } = useForm();
+  // const onSubmit = (data) => console.log(data);
 
   return (
     <Paper sx={{ m: "1rem", p: "1rem" }}>
@@ -48,12 +48,14 @@ const ThemeDemo = () => {
         <br />
         <Paper sx={{ p: "1rem" }}>
           ClickToCopyInput
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-              <ClickToCopyInput {...register("example")} />
-            </FormControl>
-            <input type="submit" />
-          </form>
+          <br />
+          <ClickToCopyInput />
+          {/* <form onSubmit={handleSubmit(onSubmit)}> */}
+          {/* <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined"> */}
+          {/* <ClickToCopyInput {...register("example")} /> */}
+          {/* </FormControl> */}
+          {/* <input type="submit" /> */}
+          {/* </form> */}
         </Paper>
         {/* ClickToCopySelect */}
         {/* <ClickToCopySelect /> */}
@@ -101,7 +103,7 @@ const ThemeDemo = () => {
       <br />
       <br />
       <br />
-      PasswordButtonInput
+      PasswordButtonInput <br />
       <PasswordButtonInput />
       <br />
       <br />

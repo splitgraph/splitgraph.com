@@ -1,6 +1,6 @@
 import { Box, Grid, Typography, FormControl } from "@material-ui/core";
-import MailIcon from "@material-ui/icons/Mail";
 import { theme as designTheme } from "../themes/design";
+import { IconEmail } from "../Icon";
 import { InFieldButton } from "../Button";
 import { Input } from "../Input";
 
@@ -32,7 +32,8 @@ const AddNewUserRow = ({}: IAddNewUserRowProps) => {
               fullWidth
               endAdornment={
                 <InFieldButton>
-                  <MailIcon /> Add
+                  <IconEmail sx={{ mr: ".5rem" }} />
+                  Add
                 </InFieldButton>
               }
             ></Input>
