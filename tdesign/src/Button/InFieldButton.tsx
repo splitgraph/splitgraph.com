@@ -1,8 +1,6 @@
 import { Button, ButtonProps } from "@material-ui/core";
 import { SxProps } from "@material-ui/system";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
-// import { IconArrowRight } from "../Icon";
-import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 import { theme } from "../themes/design";
 
 export interface IInFieldButtonProps extends ButtonProps {
@@ -33,9 +31,6 @@ const InFieldButton = ({
     {...(rest as any)}
   >
     {children}
-    <ArrowRightAltIcon
-      sx={{ ml: "10px", color: disabled ? theme.grays.light.gray22 : "white" }}
-    />
   </Button>
 );
 
