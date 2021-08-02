@@ -26,6 +26,7 @@ export const muiTheme = createMuiTheme({
   constants: {
     leftMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
     rightMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
+    leftMarginLogoAligned: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2 + 22.5px + 40px))`,
   },
   palette: {
     contrastThreshold: 3,
