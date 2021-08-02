@@ -1,7 +1,7 @@
 import { SQLCredentialsRow } from "@splitgraph/tdesign";
 
 export default {
-  title: "Splitgraph/SQLCredentialsRow",
+  title: "Row/SQLCredentialsRow",
   component: SQLCredentialsRow,
   argTypes: {
     message: {
@@ -27,14 +27,7 @@ Default.parameters = {
   },
 };
 
-export const Message = Template.bind({});
-Message.args = {
+export const CustomMessage = Template.bind({});
+CustomMessage.args = {
   message: "Hello, world",
-};
-Message.parameters = {
-  design: {
-    type: "figma",
-    url:
-      "https://www.figma.com/file/jaOp7ncR6Zk90BeOQgrIB0/00-Component-and-Styles-Library-Splitgraph?node-id=698%3A550",
-  },
 };

@@ -19,11 +19,16 @@ const Template = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {};
-
 Default.parameters = {
   design: {
     type: "figma",
     url:
       "https://www.figma.com/file/jaOp7ncR6Zk90BeOQgrIB0/00-Component-and-Styles-Library-Splitgraph?node-id=370%3A35",
   },
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  disabled: true,
+  value: "disabled",
 };
