@@ -32,3 +32,15 @@ Disabled.args = {
   disabled: true,
   value: "disabled",
 };
+
+export const Error = Template.bind({});
+Error.args = {
+  error: true,
+};
+Error.paramters = {
+  design: {
+    type: "figma",
+    url:
+      "https://www.figma.com/file/jaOp7ncR6Zk90BeOQgrIB0/00-Component-and-Styles-Library-Splitgraph?node-id=370%3A6",
+  },
+};
