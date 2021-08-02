@@ -1,7 +1,3 @@
-import { ThemeProvider } from "@material-ui/core";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { muiTheme } from "@splitgraph/tdesign/src/themes/muiTheme";
-
 import { StatusChip2 } from "@splitgraph/tdesign";
 
 export default {
