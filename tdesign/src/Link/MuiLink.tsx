@@ -12,6 +12,11 @@ interface NextLinkComposedProps
     Omit<NextLinkProps, "href"> {
   to: NextHref;
   href?: NextHref;
+
+  // There seems to be some conflict with `as`. If we use it here, MUI breaks
+  // when rendering with prop `component = { NextLinkComposed }`. Given the
+  // term "as", it could be a failure at any number of places. This resolves it.
+  nextAs?: NextHref;
 }
 
 export const NextLinkComposed = forwardRef<
@@ -27,12 +32,14 @@ export const NextLinkComposed = forwardRef<
     shallow,
     prefetch,
     locale,
+    nextAs,
     ...other
   } = props;
 
   return (
     <NextLink
       href={to}
+      as={nextAs}
       prefetch={prefetch}
       replace={replace}
       scroll={scroll}
@@ -49,6 +56,7 @@ export type LinkProps = {
   activeClassName?: string;
   href: NextHref;
   noLinkStyle?: boolean;
+  as?: NextHref;
 } & Omit<MuiLinkProps, "href">;
 
 // A styled version of the Next.js Link component:
@@ -63,13 +71,29 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
     href,
     noLinkStyle,
     role, // Link don't have roles.
+    as,
     ...other
   } = props;
 
   const router = useRouter();
-  const pathname = typeof href === "string" ? href : href.pathname;
+
+  const pathname =
+    typeof as === "undefined"
+      ? typeof href !== "undefined"
+        ? typeof href === "string"
+          ? href
+          : href.pathname
+        : ""
+      : typeof as === "string"
+      ? as
+      : as.pathname;
+
+  // Make sure to compare to router.asPath to match dynamic URL segments
+  // e.g. when `router.pathname` is `/[namespace]`, `router.asPath` is `/miles`
+  const isActive = router.asPath === pathname;
+
   const className = clsx(classNameProps, {
-    [activeClassName]: router.pathname === pathname && activeClassName,
+    [activeClassName]: isActive,
   });
 
   const isExternal =
@@ -87,7 +111,6 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
         />
       );
     }
-    // console.log("MuiLink props", props);
     return (
       <MuiLink
         className={className}
@@ -104,6 +127,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
         className={className}
         ref={ref as any}
         to={href}
+        nextAs={as}
         {...(other as any)}
       />
     );
@@ -115,6 +139,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
       className={className}
       ref={ref}
       to={href}
+      nextAs={as}
       {...(other as any)}
     />
   );
