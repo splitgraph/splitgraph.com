@@ -27,6 +27,8 @@ export const muiTheme = createMuiTheme({
     leftMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
     rightMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
     leftMarginLogoAligned: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2 + 22.5px + 40px))`,
+    rightMarginNavAligned: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
+    brandGradient: `linear-gradient(90deg, rgb(249 69 105 / 100%) 0%, rgb(255 128 153 / 50%) 100%)`,
   },
   palette: {
     contrastThreshold: 3,
@@ -64,11 +66,23 @@ export const muiTheme = createMuiTheme({
           background: "radial-gradient(rgb(85 85 85 / 32%) 1px, transparent 0)",
           backgroundSize: "40px 40px",
         },
+
+        // todo: This should be able to be a texturize callback
+        grid: {
+          // backgroundColor: "#1e4000",
+          // opacity: "0.1",
+          background: `linear-gradient(rgb(0 0 0 / 4%) 1px, transparent 1px),
+          linear-gradient(to right, rgb(0 0 0 / 4%) 1px, transparent 1px)`,
+          backgroundSize: "24px 24px",
+        },
       },
     },
     // texturize:
     navbar: {
-      light: { main: "#FBFCFF" },
+      light: {
+        /*main: "#FBFCFF",*/
+        main: `linear-gradient(0deg, rgba(42, 129, 246, 0.02), rgba(42, 129, 246, 0.02)),#FFFFFF`,
+      },
       dark: { main: "#201316" },
     },
     footer: {
@@ -246,6 +260,10 @@ export const muiTheme = createMuiTheme({
       styleOverrides: {
         root: {
           color: "link.main",
+          textDecoration: "none",
+          "&:hover": {
+            textDecoration: "underline",
+          },
           "&:visited": {
             color: "link.main",
           },
@@ -255,7 +273,7 @@ export const muiTheme = createMuiTheme({
         },
       },
       defaultProps: {
-        color: "link,main",
+        color: "link.main",
       },
     },
     MuiButtonBase: {
@@ -337,7 +355,8 @@ declare module "@material-ui/core/styles/createPalette" {
   }
 
   interface TexturePalette {
-    dots: React.CSSProperties;
+    dots?: React.CSSProperties;
+    grid?: React.CSSProperties;
   }
 
   interface GrayPalette {
@@ -408,6 +427,7 @@ declare module "@material-ui/core/styles/createPalette" {
 
   interface TexturePaletteOptions {
     dots?: React.CSSProperties;
+    grid?: React.CSSProperties;
   }
 
   interface GrayPaletteOptions {

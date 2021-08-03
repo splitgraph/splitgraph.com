@@ -20,12 +20,12 @@ const paddedContentAreaStyle = {
   paddingLeft: (theme) => [
     "2rem",
     "2rem",
-    `calc(67.5px + ${theme.constants.leftMargin})`,
+    theme.constants.leftMarginLogoAligned,
   ],
   paddingRight: (theme) => [
     "2rem",
     "2rem",
-    `calc(67.5px + ${theme.constants.rightMargin})`,
+    theme.constants.rightMarginNavAligned,
   ],
 };
 const errorNoticeStyle = {
@@ -95,7 +95,7 @@ const BoxOverride = (props: BoxOverrideProps) => {
   } else if (variant === "notice") {
     return <Box sx={{ ...sx, ...noticeStyle }} {...rest} />;
   }
-  return <Box {...rest} />;
+  return <Box sx={sx} {...rest} />;
 };
 
 export default BoxOverride;

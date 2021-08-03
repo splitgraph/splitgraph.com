@@ -24,8 +24,7 @@ const Header = ({ children }: HeaderProps) => {
             "min-content repeat(1, minmax(25vw, 1fr)) min-content",
           gridAutoFlow: "column",
           // willChange: "transform",
-          background:
-            "linear-gradient(0deg, rgba(42, 129, 246, 0.02), rgba(42, 129, 246, 0.02)), #FFFFFF",
+          background: (theme) => theme.palette.navbar.light.main,
           ".header--left, .header--center, .header--right": {
             minHeight: "56px",
           },
