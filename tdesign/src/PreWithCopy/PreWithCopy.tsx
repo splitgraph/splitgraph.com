@@ -100,7 +100,7 @@ const PreWithCopy = ({
           onClick={handleClickCopy}
           title="Copy to clipboard"
         >
-          <IconClipboard color={"primary.main"} />
+          <IconClipboard color={"grays.light.gray23.main"} />
         </Box>
       </Box>
     </Box>
