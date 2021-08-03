@@ -5,7 +5,7 @@ import { theme } from "../themes/design";
 const Input = forwardRef<HTMLInputElement, OutlinedInputProps>((props, ref) => {
   return (
     <OutlinedInput
-      ref={ref}
+      inputRef={ref}
       sx={{
         "& .MuiOutlinedInput-root": {
           "& fieldset": {
