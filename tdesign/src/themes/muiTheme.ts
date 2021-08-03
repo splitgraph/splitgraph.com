@@ -242,6 +242,22 @@ export const muiTheme = createMuiTheme({
     },
   },
   components: {
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          color: "link.main",
+          "&:visited": {
+            color: "link.main",
+          },
+          "&:active": {
+            color: "link.main",
+          },
+        },
+      },
+      defaultProps: {
+        color: "link,main",
+      },
+    },
     MuiButtonBase: {
       defaultProps: {
         disableRipple: true,

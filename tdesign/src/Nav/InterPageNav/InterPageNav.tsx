@@ -24,7 +24,7 @@ const linkBoxStyle = {
     flexDirection: "column",
     ".link-meta": {
       textTransform: "uppercase",
-      color: "primary.main",
+      color: "link.main",
       opacity: "0.5",
       fontSize: "x-small",
       marginTop: "1em",
@@ -80,7 +80,7 @@ const RightNav = ({ node, Link, ...rest }) => {
         </span>
         <span className="link-meta">Next</span>
       </Box>
-      <IconChevronRightPrimaryColor size="3rem" />
+      <IconChevronRightPrimaryColor size="3rem" color="red" />
     </NavLink>
   ) : null;
 };
@@ -94,7 +94,7 @@ const InterPageNav = ({ Link, right, left }) => {
     borderTopStyle: "solid",
     borderTopWidth: "1px",
     a: {
-      color: "primary.main",
+      color: "link.main",
       textDecoration: "none",
     },
   };
