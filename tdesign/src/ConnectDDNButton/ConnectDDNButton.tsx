@@ -1,4 +1,4 @@
-import { Box, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 export interface IConnectDDNButtonProps {
   connectParams?: string;
@@ -12,34 +12,13 @@ const ConnectDDNButton = ({
   children,
 }: IConnectDDNButtonProps) => {
   return (
-    <Box
-      sx={{
-        display: "inline",
-        a: {
-          display: "block",
-          textDecoration: "none",
-          color: "white",
-          ":hover": {
-            color: "sglightblue.main",
-            cursor: "pointer",
-          },
-          mx: "1rem",
-        },
-      }}
+    <Button
+      variant="contained"
+      href={connectParams ? `${connectURL}?${connectParams}` : `${connectURL}`}
+      sx={{ backgroundColor: "legacySecondary.main" }}
     >
-      <a
-        href={
-          connectParams ? `${connectURL}?${connectParams}` : `${connectURL}`
-        }
-      >
-        <Button
-          variant="contained"
-          sx={{ backgroundColor: "legacySecondary.main" }}
-        >
-          {children || <>Connect to DDN</>}
-        </Button>
-      </a>
-    </Box>
+      {children || <>Connect to DDN</>}
+    </Button>
   );
 };
 
