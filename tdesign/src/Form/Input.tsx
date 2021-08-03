@@ -34,7 +34,7 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
     return (
       <>
         <MuiInput
-          ref={ref}
+          inputRef={ref}
           sx={{
             width: 200,
             borderColor: error ? "danger" : "initial",
