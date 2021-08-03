@@ -27,8 +27,11 @@ const darkVariant = {
   a: {
     color: "muted.main",
     textDecoration: "none",
+    ":hover": {
+      textDecoration: "underline",
+    },
   },
-  backgroundColor: "primary.main",
+  backgroundColor: "surfaces.dark.sql.main",
   borderTop: "0.5ch solid",
   borderTopColor: "lightaccent.main",
 };
@@ -100,6 +103,9 @@ const Footer = ({
           display: "flex",
           a: {
             variant: "links.unstyled",
+            ":hover": {
+              textDecoration: "none",
+            },
           },
           // marginBottom: ["2rem", "inherit", "inherit"],
           ...mixStyles(".community-logos", baseVariant, extraStyle),
@@ -174,11 +180,9 @@ const Footer = ({
               href="https://www.github.com/splitgraph/splitgraph"
               title="Splitgraph on GitHub"
               aria-label="Splitgraph on GitHub"
+              style={{ marginRight: "1rem" }}
             >
-              <IconLogoGitHub
-                size={"2rem"}
-                extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
-              />
+              <IconLogoGitHub color={"#fff"} size={"2rem"} />
             </a>
             <a
               href="https://www.linkedin.com/company/12620006/"
@@ -186,6 +190,7 @@ const Footer = ({
               aria-label="Splitgraph on LinkedIn"
             >
               <IconLogoLinkedIn
+                color={"#ffffff"}
                 size={"2rem"}
                 extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
               />
@@ -196,6 +201,7 @@ const Footer = ({
               aria-label="Splitgraph on Twitter (@splitgraph)"
             >
               <IconLogoTwitter
+                color={"white"}
                 size={"2rem"}
                 extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
               />
@@ -206,6 +212,7 @@ const Footer = ({
               aria-label="Splitgraph on Reddit (r/splitgraph)"
             >
               <IconLogoReddit
+                color={"white"}
                 size={"2rem"}
                 extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
               />
@@ -216,6 +223,7 @@ const Footer = ({
               aria-label="Splitgraph Blog RSS Feed"
             >
               <IconRss
+                color={"white"}
                 size={"2rem"}
                 extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
               />
