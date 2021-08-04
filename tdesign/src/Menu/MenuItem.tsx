@@ -1,7 +1,8 @@
 import { useContext, useEffect, useRef } from "react";
 import { Box, Typography } from "@material-ui/core";
-import { SxProps } from "@material-ui/system";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import type { SxProps } from "@material-ui/system";
+import type { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { useTheme } from "@material-ui/core/styles";
 
 import { IIconProps } from "../Icon/BaseIcon";
 import { MuiLink as Link } from "../Link";
@@ -18,6 +19,7 @@ export interface MenuItemProps {
   isActive?: boolean;
   scrollIntoViewIfNeeded?: boolean;
   isHeading?: boolean;
+  activeIconColor?: string | ((theme: Theme) => string);
 }
 
 const MenuItem = ({
@@ -29,8 +31,10 @@ const MenuItem = ({
   isActive = false,
   scrollIntoViewIfNeeded = true,
   isHeading = false,
+  activeIconColor,
 }: MenuItemProps) => {
   const { expanded } = useContext(LayoutContext);
+  const theme = useTheme();
 
   const itemRef = useRef<HTMLLIElement>(null);
   const scrolltoItem = () =>
@@ -93,7 +97,12 @@ const MenuItem = ({
   return (
     <li className={listItemClassName} ref={itemRef}>
       <Box sx={containerStyle} className={innerContainerClassName}>
-        {Icon && <Icon extraStyle={iconStyle} />}{" "}
+        {Icon && (
+          <Icon
+            extraStyle={iconStyle}
+            color={isActive && activeIconColor ? activeIconColor : undefined}
+          />
+        )}{" "}
         {href ? (
           <Link
             // extraStyle={linkStyle} // TODO consider if still needed?

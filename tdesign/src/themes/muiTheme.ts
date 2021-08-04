@@ -414,7 +414,7 @@ declare module "@material-ui/core/styles/createPalette" {
     heavy?: PaletteColor;
     muted?: PaletteColor;
     light?: PaletteColor;
-    links?: PaletteColor;
+    link?: PaletteColor;
     legacySecondary?: PaletteColor;
   }
   interface SurfacePaletteOptions {
