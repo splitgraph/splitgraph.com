@@ -1,8 +1,7 @@
 import { useContext, useEffect, useRef } from "react";
 import { Box, Typography } from "@material-ui/core";
 import type { SxProps } from "@material-ui/system";
-import type { Theme } from "@material-ui/core/styles/createMuiTheme";
-import { useTheme } from "@material-ui/core/styles";
+import type { Theme } from "@material-ui/core/styles";
 
 import { IIconProps } from "../Icon/BaseIcon";
 import { MuiLink as Link } from "../Link";

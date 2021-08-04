@@ -3,8 +3,8 @@ import {
   ButtonProps as MuiButtonProps,
   Typography,
 } from "@material-ui/core";
-import { SxProps } from "@material-ui/system";
-import { Theme } from "@material-ui/core/styles";
+import type { SxProps } from "@material-ui/system";
+import type { Theme } from "@material-ui/core/styles";
 // import { IconEmail } from "../Icon";
 
 import { theme } from "../themes/design";

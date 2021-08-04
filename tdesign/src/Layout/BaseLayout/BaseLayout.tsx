@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box } from "@material-ui/core";
-import { SxProps } from "@material-ui/system";
+import type { SxProps } from "@material-ui/system";
 import type { Theme } from "@material-ui/core/styles";
 
 import { Header, HeaderLeft, HeaderCenter, HeaderRight } from "../Header";
