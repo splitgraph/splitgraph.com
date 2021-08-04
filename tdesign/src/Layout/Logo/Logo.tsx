@@ -1,7 +1,7 @@
 import { Box } from "@material-ui/core";
 
 import type { SxProps } from "@material-ui/system";
-import type { Theme } from "@material-ui/core/styles/createMuiTheme";
+import type { Theme } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 
 import { keyframes } from "@material-ui/styled-engine";

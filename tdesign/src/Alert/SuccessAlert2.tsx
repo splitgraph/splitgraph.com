@@ -1,6 +1,6 @@
 import { Box, Typography } from "@material-ui/core";
 import { SxProps } from "@material-ui/system";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { Theme } from "@material-ui/core/styles";
 import MuiLink from "../Link/MuiLink";
 import IconCheckCircle2 from "../Icon/IconCheckCircle2";
 import { theme as design } from "../themes/design";

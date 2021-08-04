@@ -6,7 +6,7 @@ import {
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import { SxProps } from "@material-ui/system";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { Theme } from "@material-ui/core/styles";
 
 interface TabPanelProps {
   children?: React.ReactNode;

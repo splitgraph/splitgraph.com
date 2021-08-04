@@ -1,6 +1,6 @@
 import { Box, BoxProps } from "@material-ui/core";
 import type { SxProps } from "@material-ui/system";
-import type { Theme } from "@material-ui/core/styles/createMuiTheme";
+import type { Theme } from "@material-ui/core/styles";
 
 // MUI supports variants but not for the default <Box> component;
 // https://github.com/mui-org/material-ui/issues/25759

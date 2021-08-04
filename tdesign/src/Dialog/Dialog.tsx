@@ -52,7 +52,6 @@ const CloseableDialogTitle = (props: ICloseableDialogTitleProps) => {
 
   return (
     <DialogTitle
-      disableTypography
       sx={{
         m: 0,
         p: 2,

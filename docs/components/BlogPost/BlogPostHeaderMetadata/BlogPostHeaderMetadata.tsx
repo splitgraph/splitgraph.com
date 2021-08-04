@@ -1,6 +1,6 @@
 import { Box } from "@material-ui/core";
 import { SxProps } from "@material-ui/system";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { Theme } from "@material-ui/core/styles";
 import { MuiLink as Link } from "@splitgraph/tdesign";
 import { IBlogPostMetadata } from "../../BlogPostItem";
 

@@ -3,7 +3,7 @@ import {
   ButtonProps as MuiButtonProps,
 } from "@material-ui/core";
 import { SxProps } from "@material-ui/system";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { Theme } from "@material-ui/core/styles";
 // import { IconArrowRight } from "../Icon";
 import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 import { theme } from "../themes/design";

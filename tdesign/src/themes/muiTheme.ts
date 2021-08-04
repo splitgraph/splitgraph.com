@@ -372,7 +372,7 @@ declare module "@material-ui/core/Button" {
   }
 }
 
-declare module "@material-ui/core/styles/createBreakpoints" {
+declare module "@material-ui/system/createTheme/createBreakpoints" {
   // Basically: set a boolean, true for added breakpoints, false for removed
   // https://material-ui.com/customization/breakpoints/#custom-breakpoints
   interface BreakpointOverrides {

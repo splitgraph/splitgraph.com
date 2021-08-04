@@ -1,5 +1,5 @@
 import { Box } from "@material-ui/core";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { Theme } from "@material-ui/core/styles";
 import { SxProps } from "@material-ui/system";
 
 import {
