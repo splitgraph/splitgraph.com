@@ -1,4 +1,4 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
 // import { theme } from "./design"; // TODO: when we're ready, the MUI palette should consume from here
 
 // import type {
@@ -8,7 +8,7 @@ import { createMuiTheme } from "@material-ui/core/styles";
 
 // import { theme as coreTheme } from "./design";
 
-export const defaultTheme = createMuiTheme(); // lets us reference MUI default style values below
+export const defaultTheme = createTheme(); // lets us reference MUI default style values below
 
 const breakpointValues = {
   xs: 0,
@@ -19,7 +19,7 @@ const breakpointValues = {
   xl: 1920,
 };
 
-export const muiTheme = createMuiTheme({
+export const muiTheme = createTheme({
   breakpoints: {
     values: breakpointValues,
   },
@@ -553,7 +553,7 @@ declare module "@material-ui/core/styles" {
     smallHighlightedB: React.CSSProperties;
   }
 
-  // allow configuration using `createMuiTheme`
+  // allow configuration using `createTheme`
   interface TypographyVariantsOptions {
     title1?: React.CSSProperties;
     title2?: React.CSSProperties;
