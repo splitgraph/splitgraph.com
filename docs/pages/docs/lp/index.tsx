@@ -4,6 +4,7 @@ import { scroller } from "react-scroll";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "@splitgraph/tdesign/src/themes/design";
 import Header from "@splitgraph/docs/components/Header/Header";
+import Footer from "@splitgraph/docs/components/Footer/Footer";
 import Tabs from "@splitgraph/docs/sections/Tabs/Tabs";
 import Shape from "@splitgraph/docs/sections/Shape/Shape";
 
@@ -25,7 +26,7 @@ const ThemeDemo = () => {
     <ThemeProvider theme={theme}>
       <Header />
       <Tabs />
-      <Shape />
+      <Footer />
     </ThemeProvider>
   );
 };

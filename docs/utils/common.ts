@@ -26,13 +26,17 @@ export const grid = (
 export const container = () => {
   return css`
     max-width: ${rem(1366)};
-    padding-left: ${rem(16)};
-    padding-right: ${rem(16)};
+    padding-left: ${rem(20)};
+    padding-right: ${rem(20)};
     margin: 0 auto;
 
+    ${mediaQuery[1]} {
+      padding-left: ${rem(36)};
+      padding-right: ${rem(36)};
+    }
     ${mediaQuery[2]} {
-      padding-left: ${rem(24)};
-      padding-right: ${rem(24)};
+      padding-left: ${rem(80)};
+      padding-right: ${rem(80)};
     }
   `;
 };
