@@ -15,6 +15,8 @@ const Menu = ({ children, style = {} }: MenuProps) => {
   const { expanded } = useContext(LayoutContext);
 
   const containerStyle: SxProps<Theme> = {
+    ...style,
+    maxWidth: "100%",
     ".menu-list": {
       paddingLeft: "1em",
       paddingTop: "1em",
@@ -29,8 +31,8 @@ const Menu = ({ children, style = {} }: MenuProps) => {
         "column",
       ],
       overflowX: [
-        expanded ? "initial" : "scroll",
-        expanded ? "initial" : "scroll",
+        expanded ? "initial" : "auto",
+        expanded ? "initial" : "auto",
         "initial",
       ],
       scrollBehavior: [
@@ -47,8 +49,8 @@ const Menu = ({ children, style = {} }: MenuProps) => {
         "initial",
       ],
       backgroundColor: [
-        expanded ? "initial" : "lessHeavy",
-        expanded ? "initial" : "lessHeavy",
+        expanded ? "initial" : "surfaces.light.background.main",
+        expanded ? "initial" : "surfaces.light.background.main",
         "initial",
       ],
       padding: "1em",
@@ -77,7 +79,7 @@ const Menu = ({ children, style = {} }: MenuProps) => {
     // },
     ".menu-item--active": {
       borderLeftWidth: "5px",
-      borderLeftColor: "primary.main",
+      borderLeftColor: "link.main",
       borderLeftStyle: "solid",
 
       ...(style.hasOwnProperty(".menu-item--active")
@@ -112,16 +114,14 @@ const Menu = ({ children, style = {} }: MenuProps) => {
         : {}),
     },
     ".menu-item-link": {
-      //   Should match the background ("hide" it without bumpy shift)
-      borderBottomColor: [
-        expanded ? "heavy" : "legacySecondary.main",
-        expanded ? "heavy" : "legacySecondary.main",
-        "heavy",
-      ],
-      borderBottomStyle: "solid",
-      borderBottomWidth: "1px",
+      color: (theme) =>
+        theme.palette.getContrastText(
+          theme.palette.surfaces.light.background.main
+        ),
+      fontWeight: "bold",
+      textDecoration: "none",
       ":hover": {
-        borderBottomColor: "light",
+        textDecoration: "underline",
       },
 
       ...(style.hasOwnProperty(".menu-item-link")
