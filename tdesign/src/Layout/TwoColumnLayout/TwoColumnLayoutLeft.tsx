@@ -46,6 +46,7 @@ const ExpandColumnPushDown = ({ expanded, setExpanded }: ILayoutContext) => {
       sx={pushdownStyle}
       onClick={() => (setExpanded ? setExpanded(!expanded) : true)}
     >
+      Expand
       <div>&nbsp;</div>
       <div>&nbsp;</div>
     </Box>
@@ -61,6 +62,7 @@ const TwoColumnLayoutLeft = ({ children }: TwoColumnLayoutLeftProps) => {
     justifyContent: "space-between",
     ".two-col-left-inner": {
       minHeight: "10vh",
+      maxWidth: "100vw",
     },
     ".expand-col-pushdown": {
       minHeight: "5vh",

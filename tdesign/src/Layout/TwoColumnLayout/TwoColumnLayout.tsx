@@ -1,7 +1,7 @@
 import { useState, createContext } from "react";
 import { Box } from "@material-ui/core";
-import { SxProps } from "@material-ui/system";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import type { SxProps } from "@material-ui/system";
+import type { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 export interface TwoColumnLayoutProps {
   children?: React.ReactNode;
@@ -29,6 +29,8 @@ const useResponsiveStyle = (): ILayoutContext => {
   const style = {
     display: "grid",
     // minHeight: '95vh',
+    marginLeft: (theme) => theme.constants.leftMarginLogoAligned,
+    marginRight: (theme) => theme.constants.rightMarginNavAligned,
     gridTemplateColumns: ["1fr", "1fr", expanded ? "1fr 12fr" : "1fr 3fr"],
     gridTemplateRows: ["1fr", "1fr", expanded ? "6fr" : "1fr"],
     gridColumnGap: 0,
@@ -36,19 +38,11 @@ const useResponsiveStyle = (): ILayoutContext => {
     gridRowGap: 0,
     ".two-col-left": {
       gridArea: leftArea,
-      backgroundColor: "#0d1821", //TODO use MUI theme
-      color: "#ebebeb", //TODO use MUI theme
-      a: {
-        color: "#ebebeb", //TODO use MUI theme
-        fontWeight: "bold",
-      },
-      borderRightColor: [null, null, "sgdarkblue.main"],
-      borderRightStyle: [null, null, "solid"],
-      borderRightSize: [null, null, "10px"],
-      borderBottomColor: ["#36678d", "#36678d", null], //TODO use MUI theme
-      borderBottomStyle: ["solid", "solid", null],
-      borderBottomSize: ["10px", "10px", null],
-      filter: "dropShadow(2px 4px 6px heavy.main)", // TODO use MUI theme
+      backgroundColor: (theme) => theme.palette.navbar.light.main,
+      color: (theme) =>
+        theme.palette.getContrastText(
+          theme.palette.surfaces.light.background.main
+        ),
     },
     ".two-col-main": {
       gridArea: rightArea,

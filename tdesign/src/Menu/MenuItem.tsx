@@ -20,6 +20,7 @@ export interface MenuItemProps {
   scrollIntoViewIfNeeded?: boolean;
   isHeading?: boolean;
   activeIconColor?: string | ((theme: Theme) => string);
+  defaultIconColor?: string | ((theme: Theme) => string);
 }
 
 const MenuItem = ({
@@ -32,9 +33,16 @@ const MenuItem = ({
   scrollIntoViewIfNeeded = true,
   isHeading = false,
   activeIconColor,
+  defaultIconColor,
 }: MenuItemProps) => {
   const { expanded } = useContext(LayoutContext);
   const theme = useTheme();
+
+  if (!defaultIconColor) {
+    defaultIconColor = theme.palette.getContrastText(
+      theme.palette.surfaces.light.background.main
+    );
+  }
 
   const itemRef = useRef<HTMLLIElement>(null);
   const scrolltoItem = () =>
@@ -68,6 +76,19 @@ const MenuItem = ({
       fontSize: "small",
       textTransform: "uppercase",
     },
+    "a:hover": {
+      textDecoration: "underline",
+    },
+    "a.menu-item-label--active": {
+      color: "link.main",
+    },
+    "a:not(.menu-item-label--active)": {
+      color: (theme) =>
+        theme.palette.getContrastText(
+          theme.palette.surfaces.light.background.main
+        ),
+      textDecoration: "none",
+    },
     ":hover": {
       cursor: !href ? "initial" : "pointer",
     },
@@ -82,7 +103,6 @@ const MenuItem = ({
   const textStyle = {};
 
   const iconStyle: SxProps<Theme> = {
-    filter: "invert(1)",
     marginRight: "0.5em",
     ...iconSx,
   };
@@ -100,7 +120,7 @@ const MenuItem = ({
         {Icon && (
           <Icon
             extraStyle={iconStyle}
-            color={isActive && activeIconColor ? activeIconColor : undefined}
+            color={isActive ? activeIconColor ?? "link.main" : defaultIconColor}
           />
         )}{" "}
         {href ? (
