@@ -42,8 +42,31 @@ const Header = ({ children }: HeaderProps) => {
           },
           /* end hack :) */
 
+          // '*[class^="header--"]:focus-within': {
+          //   fontWeight: "500 !important",
+          //   backgroundColor: "red !important",
+          // },
+
           ".header--left, .header--center, .header--right": {
             minHeight: "56px",
+          },
+
+          [theme.breakpoints.down("md")]: {
+            ":focus-within": {
+              ".header--center": {
+                gridRow: "2",
+                gridColumnStart: "1",
+                gridColumnEnd: "none",
+                ".search-input-container": {
+                  width: "100%",
+                },
+              },
+
+              ".header--right:focus-within": {
+                gridRowStart: "3",
+                gridColumnStart: "1",
+              },
+            },
           },
 
           ".header--left": {
@@ -59,40 +82,54 @@ const Header = ({ children }: HeaderProps) => {
             },
           },
           ".header--center": {
-            width: "100%",
+            width: "100% !important",
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
+            // justifyContent: "center",
+            gridRow: "1",
+            gridColumnStart: "auto",
+            gridColumnEnd: "auto",
+            justifyContent: "flex-end",
             // transition: theme.transitions.create("gridColumnStart", {
             //   duration: 4000,
             // }),
-            [theme.breakpoints.down("md")]: {
-              ":not(:focus-within)": {
-                width: "100%",
-                gridRow: "1",
-                gridColumnStart: "auto",
-                gridColumnEnd: "auto",
-                justifyContent: "flex-end",
-              },
-              ":focus-within": {
-                gridRow: "2",
-                gridColumnStart: "1",
-                gridColumnEnd: "none",
-                "*:focus": {
-                  width: "max-content",
-                },
-              },
-            },
+            // [theme.breakpoints.down("md")]: {
+            //   ":not(:focus-within)": {
+            //     width: "100%",
+            //     gridRow: "1",
+            //     gridColumnStart: "auto",
+            //     gridColumnEnd: "auto",
+            //     justifyContent: "flex-end",
+            //   },
+            //   ":focus-within": {
+            //     gridRow: "2",
+            //     gridColumnStart: "1",
+            //     gridColumnEnd: "none",
+            //     "*:focus": {
+            //       width: "max-content",
+            //     },
+            //   },
+            // },
           },
+          // "& .header--left:not(& div:focus-within ~ div)": {
+          //   color: "green",
+          // },
           ".header--right": {
             marginRight: (theme) => theme.constants.rightMargin,
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-end",
-            gridColumnStart: "3",
-            [theme.breakpoints.down("md")]: {
-              gridRow: "1",
-            },
+
+            // [theme.breakpoints.down("md")]: {
+            //   ":not(:focus-within)": {
+            //     gridRow: "1",
+            //     gridColumnStart: "3",
+            //   },
+            //   ":focus-within": {
+            //     gridRowStart: "3",
+            //     gridColumnStart: "1",
+            //   },
+            // },
           },
           a: {
             fontWeight: "bold",
