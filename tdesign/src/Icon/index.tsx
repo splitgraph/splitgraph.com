@@ -1,7 +1,7 @@
 export * from "./cssSvgStrings";
 
-import BaseIcon from "./BaseIcon";
-export { BaseIcon };
+import BaseIcon, { makeIconStyle } from "./BaseIcon";
+export { BaseIcon, makeIconStyle };
 
 import IconAccount from "./IconAccount";
 export { IconAccount };
