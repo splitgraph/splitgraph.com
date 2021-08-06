@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import { Link } from "react-scroll";
+import { Link as ScrollLink } from "react-scroll";
 import StickyTabsContainer from "./StickyTabs.style";
 
 export interface IStickyTabsProps {}
@@ -63,7 +65,7 @@ const StickyTabs = () => {
       <ul>
         {tabsObj?.map((item, id) => (
           <li key={id}>
-            <Link
+            <ScrollLink
               activeClass="active"
               spy={true}
               smooth={true}
@@ -72,8 +74,21 @@ const StickyTabs = () => {
               to={item.to}
               onClick={() => handleRouter(item.name)}
             >
-              {item.name}
-            </Link>
+              <div className="tab-icon">
+                <Link href="/" passHref>
+                  <a>
+                    <Image
+                      src={"/static/icon-tab-related.svg"}
+                      alt="logo-icon"
+                      layout="responsive"
+                      width={140}
+                      height={32}
+                    />
+                  </a>
+                </Link>
+              </div>
+              <span>{item.name}</span>
+            </ScrollLink>
           </li>
         ))}
       </ul>
