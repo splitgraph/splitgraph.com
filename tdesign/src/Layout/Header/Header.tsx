@@ -23,11 +23,29 @@ const Header = ({ children }: HeaderProps) => {
           gridTemplateColumns:
             "min-content repeat(1, minmax(25vw, 1fr)) min-content",
           gridAutoFlow: "column",
-          // willChange: "transform",
           background: (theme) => theme.palette.navbar.light.main,
+
+          // !! HACK
+          /* There is a bug in Emotion SSR that causes style tags to get injected
+             into the DOM – as in, literally the text of the style tags is injected
+             as part of the HTML.
+
+             Fortunately those style tags all have attr data-emotion="css", so we
+             can set a rule to hide them :)
+
+             Long term the fix for this is around constructing the EmotionCache
+             in SSR, but it's not supposed to be our problem (should be MUI),
+             and it's probably been fixed in a new version by now anyway.
+          */
+          [`style[data-emotion^="css"]`]: {
+            display: "none",
+          },
+          /* end hack :) */
+
           ".header--left, .header--center, .header--right": {
             minHeight: "56px",
           },
+
           ".header--left": {
             display: "flex",
             alignItems: "center",
