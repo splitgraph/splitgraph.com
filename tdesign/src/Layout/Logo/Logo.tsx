@@ -103,9 +103,11 @@ const Logo = ({
                   maskImage: `url("${wordmarkURL}")`,
                   WebkitMaskRepeat: "no-repeat",
                   maskRepeat: "no-repeat",
+                  backgroundRepeat: "no-repeat",
                 }
               : {
                   backgroundImage: `url("${wordmarkURL}")`,
+                  backgroundRepeat: "no-repeat",
                 }),
           },
         },
@@ -120,6 +122,7 @@ const Logo = ({
           },
           ".wordmark": {
             backgroundImage: `url("${wordmarkURL}")`,
+            backgroundRepeat: "no-repeat",
           },
         },
         ".brandmark-container": {
