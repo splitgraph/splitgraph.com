@@ -240,7 +240,7 @@ export const muiTheme = createMuiTheme({
     // Default to sans-serif, b/c of all the text styles 2 are serif and the rest sans. List from systemfontstack.com -> sans-serif
     title1: {
       fontWeight: 600,
-      fontSize: "1.5rem",
+      fontSize: "24px",
       lineHeight: 1.33,
     },
     title2: {
@@ -250,25 +250,25 @@ export const muiTheme = createMuiTheme({
     },
     subtitle1: {
       fontWeight: 600,
-      fontSize: "1rem",
+      fontSize: "14px",
       lineHeight: 1.375,
     },
     subtitle2: {
-      fontSize: "1rem",
+      fontSize: "14px",
       lineHeight: 1.5,
     },
     body: {
-      fontSize: ".875rem",
+      fontSize: "14px",
       lineHeight: 1.71,
       // color: defaultTheme.palette.flambeeDarkGray.dark,
     },
     bodyHighlighted: {
       fontWeight: 600,
-      fontSize: ".875rem",
+      fontSize: "14px",
       lineHeight: 1.429,
     },
     small: {
-      fontSize: ".75rem",
+      fontSize: "12px",
       color: "rgb(85, 86, 86)",
       lineHeight: 1.67,
     },
@@ -284,6 +284,13 @@ export const muiTheme = createMuiTheme({
     },
   },
   components: {
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          fontSize: "12px",
+        },
+      },
+    },
     MuiLink: {
       styleOverrides: {
         root: {
