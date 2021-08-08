@@ -1,7 +1,6 @@
-/** @jsxImportSource theme-ui */
-import { ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 import Link from "next/link";
+import { Box } from '@material-ui/core'
 
 export interface INextDynamicLinkProps {
   pathname: string;
@@ -40,13 +39,9 @@ const SplitgraphLink = React.forwardRef(
     ref: any
   ) => (
     <Link href={href} as={as} passHref>
-      <a
-        sx={{ variant, ...sx, ...extraStyle } as ThemeUIStyleObject}
-        ref={ref}
-        {...rest}
-      >
+      <Box component="a" sx={{ ...sx, ...extraStyle }} ref={ref} {...rest}>
         {children}
-      </a>
+      </Box>
     </Link>
   )
 );
