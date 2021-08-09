@@ -191,7 +191,7 @@ Emotion v11.
 
 New pages are not required to use a MUI theme or any MUI code. Instead, they
 can simply import the emotion theme (`design.ts`) and use it with the default
-`ThemeProvider` from emotion. You can see examples of this in
+`ThemeProvider` from Emotion. You can see examples of this in
 [docs/components/DemoComponents](./docs/components/DemoComponents).
 
 ### Theme Files
