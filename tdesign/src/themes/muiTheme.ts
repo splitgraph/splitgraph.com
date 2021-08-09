@@ -8,6 +8,8 @@ import { createMuiTheme } from "@material-ui/core/styles";
 
 // import { theme as coreTheme } from "./design";
 
+import prismTheme from "./prismTheme";
+
 export const defaultTheme = createMuiTheme(); // lets us reference MUI default style values below
 
 const breakpointValues = {
@@ -205,33 +207,54 @@ export const muiTheme = createMuiTheme({
     legacySecondary: {
       main: "#89368d",
     },
-    prismTheme: {
-      color: "#e0ffff",
-      backgroundColor: "sgdarkblue.main",
-      ".changed": { color: "#ffd700" },
-      ".operator": { color: "#ffd700" },
-      ".deleted": { color: "#ffa07a77" },
-      ".inserted": { color: "#66cc99" },
-      ".comment": { color: "#81cfe0", fontStyle: "italic" },
-      ".punctuation": { color: "#e0ffff" },
-      ".constant": { color: "#dcc6e0" },
-      ".string, .url": { color: "#00ff7f" },
-      ".variable": { color: "#36d7b7" },
-      ".number, .boolean, .attr-value": { color: "#ffecdb" },
-      ".attr-name": { color: "#ffb454" },
-      ".keyword,.key, .property, .namespace, .tag, .selector, .doctype": {
-        color: "#00ffff",
+    /*=== prismTheme ===*/
+    prismTheme,
+    pre: {
+      ...prismTheme,
+      [defaultTheme.breakpoints.down("sm")]: {
+        marginLeft: "-4px",
+        marginRight: "-4px",
+        paddingLeft: "1ch",
+        paddingRight: "1ch",
+        paddingTop: "1rem",
+        paddingBottom: "1rem",
+        borderTop: "4px solid #efefef",
+        borderBottom: "4px solid #efefef",
       },
-      ".builtin, .char, .constant, .function, .class-name, .symbol": {
-        color: "#ffa07a",
+      [defaultTheme.breakpoints.up("sm")]: {
+        minWidth: "min(80ch, 100%)",
       },
-      // Used by shell-session
-      ".output": {
-        color: "#e0ffff",
+      fontSize: "0.8rem",
+      padding: "10px",
+      overflowX: "auto",
+      backgroundColor: "primary",
+      ".mdx-marker": {
+        // backgroundColor: "rgba(255,255,255,0.1)",
+        display: "block",
+        marginLeft: "-1em",
+        marginRight: "-1em",
+        paddingRight: "1em",
+        paddingLeft: "1em",
+        borderLeft: `.25em solid ${prismTheme[".punctuation"].color}`,
       },
-      ".important, .language-bash": {
-        color: "#ffa07a",
+    },
+    inlineCode: {
+      ...prismTheme,
+      [defaultTheme.breakpoints.up("sm")]: {
+        minWidth: "initial",
       },
+      paddingLeft: "0.5ch",
+      paddingRight: "0.5ch",
+      paddingTop: "0",
+      paddingBottom: "0",
+      minHeight: "1rem",
+      display: "inline-flex",
+      alignContent: "center",
+      overflowX: "auto",
+      // backgroundColor: "primary",
+      wordBreak: "break-all",
+      backgroundColor: prismTheme.color,
+      color: "red",
     },
   },
   typography: {
@@ -452,6 +475,8 @@ declare module "@material-ui/core/styles/createPalette" {
     link?: PaletteColor;
     legacySecondary?: PaletteColor;
     prismTheme?: { [key: string]: React.CSSProperties | string };
+    pre?: { [key: string]: React.CSSProperties | string };
+    inlineCode?: { [key: string]: React.CSSProperties | string };
   }
   interface SurfacePaletteOptions {
     background: PaletteColorOptions;
@@ -523,6 +548,8 @@ declare module "@material-ui/core/styles/createPalette" {
     link?: PaletteColorOptions;
     legacySecondary?: PaletteColorOptions;
     prismTheme?: { [key: string]: React.CSSProperties | string };
+    pre?: { [key: string]: React.CSSProperties | string };
+    inlineCode?: { [key: string]: React.CSSProperties | string };
   }
 }
 // Docs on module augmentation for customizing the theme
