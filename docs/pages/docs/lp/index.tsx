@@ -6,6 +6,8 @@ import { theme } from "@splitgraph/tdesign/src/themes/design";
 import Header from "@splitgraph/docs/components/Header/Header";
 // import Footer from "@splitgraph/docs/components/Footer/Footer";
 import Tabs from "@splitgraph/docs/sections/Tabs/Tabs";
+import Access from "@splitgraph/docs/sections/Access/Access";
+import Discovery from "@splitgraph/docs/sections/Discovery/Discovery";
 
 const ThemeDemo = () => {
   const { asPath, pathname } = useRouter();
@@ -25,6 +27,8 @@ const ThemeDemo = () => {
     <ThemeProvider theme={theme}>
       <Header />
       <Tabs />
+      <Discovery />
+      <Access />
       {/* <Footer /> */}
     </ThemeProvider>
   );

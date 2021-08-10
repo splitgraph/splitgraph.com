@@ -131,18 +131,7 @@ const Tabs = () => {
         </div>
       </Element>
 
-      <Element name="DiscoveryRef">
-        <div className="tab-section">
-          <h2>Discovery</h2>
-          <p>
-            This is where data enters the stack, and it's where problems with
-            the stack originate. An out-of-control pipeline leads to surprise
-            bandwidth bills from ASW. On top of that, you have to worry about
-            missing and out-of-sink data.
-          </p>
-        </div>
-      </Element>
-      <Element name="AccessRef">
+      {/* <Element name="AccessRef">
         <div className="tab-section black">
           <h2>Access</h2>
           <p>
@@ -152,7 +141,7 @@ const Tabs = () => {
             missing and out-of-sink data.
           </p>
         </div>
-      </Element>
+      </Element> */}
     </TabsContainer>
   );
 };

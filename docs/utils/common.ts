@@ -8,7 +8,7 @@ export const rem = (pixel: number) => {
 export const grid = (
   mediumColumns: number = 1,
   largeColumns: number = 2,
-  gap: number = 30
+  gap: number = 16
 ) => {
   return css`
     display: grid;

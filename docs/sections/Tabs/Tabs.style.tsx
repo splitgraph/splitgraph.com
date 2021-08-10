@@ -38,7 +38,7 @@ const TabsContainer = styled.div`
     ${container()};
     padding: 0;
     background: ${(props) => props.theme.grays.light.gray20};
-    ${mediaQuery[2]} {
+    ${mediaQuery[1]} {
       padding: 0;
     }
 
