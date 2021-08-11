@@ -256,6 +256,17 @@ export const muiTheme = createMuiTheme({
       backgroundColor: prismTheme.color,
       color: "red",
     },
+    code: {
+      backgroundColor: "primary.main",
+      fontFamily: "monospace",
+      fontSize: "inherit",
+      span: {
+        // color: "red",
+      },
+      ".comment": {
+        color: "#f4c1c0",
+      },
+    },
   },
   typography: {
     fontFamily:
@@ -477,6 +488,7 @@ declare module "@material-ui/core/styles/createPalette" {
     prismTheme?: { [key: string]: React.CSSProperties | string };
     pre?: { [key: string]: React.CSSProperties | string };
     inlineCode?: { [key: string]: React.CSSProperties | string };
+    code?: { [key: string]: React.CSSProperties | string };
   }
   interface SurfacePaletteOptions {
     background: PaletteColorOptions;
@@ -550,6 +562,7 @@ declare module "@material-ui/core/styles/createPalette" {
     prismTheme?: { [key: string]: React.CSSProperties | string };
     pre?: { [key: string]: React.CSSProperties | string };
     inlineCode?: { [key: string]: React.CSSProperties | string };
+    code?: { [key: string]: React.CSSProperties | string };
   }
 }
 // Docs on module augmentation for customizing the theme
