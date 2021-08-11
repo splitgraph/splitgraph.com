@@ -34,13 +34,14 @@ const Access = () => {
                 }
               />
               <ImageAndText
-                title="Bring your own tools"
+                title="Data governance"
                 text={
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dictum eros mauris. dictum eros mauris. Mauris dictum eros mauris.  dictum eros mauris"
                 }
+                imageLeft
               />
               <ImageAndText
-                title="Bring your own tools"
+                title="A simple web editor"
                 text={
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dictum eros mauris. dictum eros mauris. Mauris dictum eros mauris.  dictum eros mauris"
                 }

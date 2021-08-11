@@ -5,7 +5,14 @@ import mediaQuery from "@splitgraph/docs/utils/breakpoints";
 const ImageAndTextContainer = styled.div`
   .image-text-col {
     ${mediaQuery[1]} {
-      ${grid(2, 2, 0)};
+      display: flex;
+      align-items: center;
+    }
+
+    &.left {
+      ${mediaQuery[1]} {
+        flex-direction: row-reverse;
+      }
     }
 
     a {
@@ -15,18 +22,22 @@ const ImageAndTextContainer = styled.div`
     &__text {
       margin-bottom: ${rem(60)};
       ${mediaQuery[1]} {
-        margin: 0 auto;
-        max-width: ${rem(340)};
+        flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: center;
       }
-      ${mediaQuery[2]} {
-        max-width: ${rem(420)};
-      }
 
       &-wrap {
         display: inline-block;
+
+        ${mediaQuery[1]} {
+          margin: 0 auto;
+          max-width: ${rem(340)};
+        }
+        ${mediaQuery[2]} {
+          max-width: ${rem(420)};
+        }
       }
 
       h3 {
@@ -49,6 +60,10 @@ const ImageAndTextContainer = styled.div`
           margin-bottom: ${rem(12)};
         }
       }
+    }
+
+    &__image {
+      flex: 1;
     }
   }
 `;

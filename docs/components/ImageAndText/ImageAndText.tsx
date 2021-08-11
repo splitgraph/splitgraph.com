@@ -7,18 +7,13 @@ export interface IImageAndTextProps {
   title?: string;
   text?: string;
   link?: string;
-  imageRight?: boolean;
+  imageLeft?: boolean;
 }
 
-const ImageAndText = ({
-  title,
-  text,
-  link,
-  imageRight,
-}: IImageAndTextProps) => {
+const ImageAndText = ({ title, text, link, imageLeft }: IImageAndTextProps) => {
   return (
     <ImageAndTextContainer>
-      <div className="image-text-col">
+      <div className={`image-text-col ${imageLeft ? "left" : "right"}`}>
         <div className="image-text-col__text">
           <div className="image-text-col__text-wrap">
             <div className="image-text-col__text-icon">
