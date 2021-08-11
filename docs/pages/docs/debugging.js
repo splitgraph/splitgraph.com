@@ -52,7 +52,7 @@ const DocsIndexPage = () => {
               "calc(100% - 4rem)",
             ],
             borderRadius: 8,
-            border: "1px solid heavy",
+            border: "1px solid heavy.main",
             boxShadow: "0 0 1rem rgba(0, 0, 0, .25)",
           },
         },

@@ -114,7 +114,7 @@ const DocSearch = ({}: IDocSearchProps) => {
       paddingTop: "0.5em",
       paddingBottom: "0.5em",
       backgroundColor: "white",
-      color: "heavy",
+      color: "heavy.main",
       border: "1px solid gray",
       // color: "gray.main",
       // min 16px font size so iOS does not zoom on focus

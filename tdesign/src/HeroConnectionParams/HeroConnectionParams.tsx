@@ -44,7 +44,7 @@ const HeroConnectionParams = ({
         sx={{
           width: "100%",
           h2: {
-            color: "heavy",
+            color: "heavy.main",
           },
         }}
       >
@@ -90,7 +90,9 @@ const HeroConnectionParams = ({
           />
         ) : (
           <Box>
-            <Box sx={{ color: "heavy", fontWeight: "bold", display: "block" }}>
+            <Box
+              sx={{ color: "heavy.main", fontWeight: "bold", display: "block" }}
+            >
               Username / Password
             </Box>
             <Box

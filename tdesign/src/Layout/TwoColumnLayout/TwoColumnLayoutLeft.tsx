@@ -22,7 +22,7 @@ const ExpandColumnPushDown = ({ expanded, setExpanded }: ILayoutContext) => {
     filter: "invert(1) opacity(0.5)",
     borderTopWidth: "0px",
     borderTopStyle: "solid",
-    borderTopColor: "heavy",
+    borderTopColor: "heavy.main",
     backgroundImage: [
       expanded
         ? `url("${chevronsUpIconURI}")`

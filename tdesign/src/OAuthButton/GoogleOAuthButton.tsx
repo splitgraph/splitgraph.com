@@ -41,7 +41,7 @@ const button = (
       display: "flex",
       alignItems: "center",
       backgroundColor: "white",
-      color: "heavy",
+      color: "heavy.main",
     }}
   >
     <GoogleLogoIcon /> Login with Google

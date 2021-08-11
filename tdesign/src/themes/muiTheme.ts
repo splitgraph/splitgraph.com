@@ -227,7 +227,7 @@ export const muiTheme = createMuiTheme({
       fontSize: "0.8rem",
       padding: "10px",
       overflowX: "auto",
-      backgroundColor: "primary",
+      backgroundColor: "sgdarkblue.main",
       ".mdx-marker": {
         // backgroundColor: "rgba(255,255,255,0.1)",
         display: "block",
@@ -251,18 +251,14 @@ export const muiTheme = createMuiTheme({
       display: "inline-flex",
       alignContent: "center",
       overflowX: "auto",
-      // backgroundColor: "primary",
       wordBreak: "break-all",
       backgroundColor: prismTheme.color,
       color: "red",
     },
     code: {
-      backgroundColor: "primary.main",
+      backgroundColor: "sgdarkblue.main",
       fontFamily: "monospace",
       fontSize: "inherit",
-      span: {
-        // color: "red",
-      },
       ".comment": {
         color: "#f4c1c0",
       },
