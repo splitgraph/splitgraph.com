@@ -32,6 +32,15 @@ const AccessContainer = styled.div`
         }
       }
     }
+
+    &__columns {
+      ${grid(1, 1, 100)};
+      margin-bottom: ${rem(100)};
+      ${mediaQuery[1]} {
+        gap: 0;
+        margin-bottom: ${rem(200)};
+      }
+    }
   }
 `;
 
