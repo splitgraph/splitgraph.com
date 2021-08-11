@@ -69,12 +69,12 @@ export const asciinemaEmbedStyles = {
 
 export const tocStyles = {
   "ol.toc-level": {
-    color: "primary",
+    color: "primary.main",
     listStyleType: "circle",
   },
 
   ".toc-item": {
-    color: "primary",
+    color: "primary.main",
   },
 
   ".toc-item a": {
