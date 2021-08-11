@@ -37,7 +37,7 @@ const PreWithCopy = ({
     },
     ".pre-title": {
       fontWeight: "bold",
-      color: "heavy",
+      color: "heavy.main",
       ...(extraStyle.hasOwnProperty(".pre-title")
         ? extraStyle[".pre-title"]
         : {}),

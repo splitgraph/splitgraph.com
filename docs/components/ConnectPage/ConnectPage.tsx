@@ -117,7 +117,7 @@ const ConnectPage = ({
                 paddingTop: "1rem",
                 // border: "1px solid",
                 // borderColor: "primary.main",
-                color: "heavy",
+                color: "heavy.main",
                 width: "100%",
                 a: {
                   // textDecoration: "underline",

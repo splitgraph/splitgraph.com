@@ -30,7 +30,7 @@ const BlogPostMarketingNotice = ({}: IBlogPostMarketingNoticeProps) => {
           },
           ".muted": {
             fontWeight: "lighter",
-            color: "heavy",
+            color: "heavy.main",
           },
           ".padded": {
             paddingLeft: "1ch",

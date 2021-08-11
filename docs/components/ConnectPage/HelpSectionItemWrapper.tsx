@@ -27,7 +27,7 @@ const HelpSectionItemWrapper = ({
             width: "100%",
             display: "flex",
             justifyContent: "flex-start",
-            color: "heavy",
+            color: "heavy.main",
             borderBottom: "1px solid",
             borderBottomColor: "heavy.main",
             textAlign: "left !important",

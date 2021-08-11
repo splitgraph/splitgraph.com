@@ -26,7 +26,7 @@ const button = (
       display: "flex",
       alignItems: "center",
       backgroundColor: "white",
-      color: "heavy",
+      color: "heavy.main",
     }}
   >
     <GitLabLogoIcon /> Login with GitLab
