@@ -7,6 +7,8 @@ import { Header, HeaderLeft, HeaderCenter, HeaderRight } from "../Header";
 import { Logo } from "../Logo";
 import type { ILogoProps } from "../Logo";
 
+import { UserThemeContext } from "../../themes/UserTheme";
+
 export interface BaseLayoutProps extends Omit<ILogoProps, "linkTo"> {
   children?: React.ReactNode;
   renderHeaderRight?: () => React.ReactNode;
@@ -103,6 +105,14 @@ const BaseLayout = ({
           </HeaderLeft>
           <HeaderCenter>{headerCenter}</HeaderCenter>
           <HeaderRight>{headerRight}</HeaderRight>
+          <UserThemeContext.Consumer>
+            {({ userColors, handleSetUserColors }) => (
+              <div onClick={handleSetUserColors}>
+                {userColors.mode === "light" ? "🌙" : "🌞"}
+                &nbsp;
+              </div>
+            )}
+          </UserThemeContext.Consumer>
         </Header>
       )}
       {children}

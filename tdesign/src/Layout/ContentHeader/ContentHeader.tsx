@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box } from "@material-ui/core";
+import { Box, Paper } from "@material-ui/core";
 import { SxProps } from "@material-ui/system";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
@@ -11,11 +11,11 @@ export interface IContentHeaderProps {
 const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
   const headerContainerStyle: SxProps<Theme> = {
     marginBottom: "2rem",
-    color: (theme: Theme) =>
-      theme.palette.getContrastText(
-        theme.palette.surfaces.light.background.main
-      ),
-    ...extraStyle,
+    // color: (theme: Theme) =>
+    //   theme.palette.getContrastText(
+    //     theme.palette.surfaces.light.background.main
+    //   ),
+    // ...extraStyle,
     ".content-header--banner": {
       // padding: "0.5em",
       marginBottom: { md: "2rem" },
@@ -34,9 +34,9 @@ const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
   };
 
   return (
-    <Box sx={headerContainerStyle}>
+    <Paper elevation={0} sx={headerContainerStyle}>
       <Box className="content-header--banner">{children}</Box>
-    </Box>
+    </Paper>
   );
 };
 
