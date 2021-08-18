@@ -67,7 +67,12 @@ const ColorDialog = ({
   };
 
   return (
-    <Dialog onClose={handleClose} open={open} TransitionComponent={Transition}>
+    <Dialog
+      onClose={handleClose}
+      open={open}
+      TransitionComponent={Transition}
+      maxWidth="lg"
+    >
       <DialogTitle>Major colors</DialogTitle>
       <DialogContent>
         <form action="none">
