@@ -20,6 +20,7 @@ module.exports = {
     const { ppath } = require("@yarnpkg/fslib");
 
     const green = (text) => `\x1b[32m${text}\x1b[0m`;
+    const yellow = (text) => `\x1b[33m${text}\x1b[0m`;
 
     class PinDepsCommand extends Command {
       async execute() {
@@ -42,6 +43,28 @@ module.exports = {
           report: new ThrowReport(),
         });
 
+        // this.alsoIncludePackages;
+        // this.onlyWorkspaces;
+        // this.onlyPackages;
+
+        await StreamReport.start(
+          {
+            configuration: this.configuration,
+            stdout: this.context.stdout,
+            includeLogs: true,
+            json: false,
+          },
+          async (streamReport) => {
+            this.log = streamReport;
+            this.gatherWorkspaces();
+            this.createLocatorsByIdentMap();
+            await this.findPinnableDependencies();
+            await this.pinDependencies();
+          }
+        );
+      }
+
+      createLocatorsByIdentMap() {
         const locatorsByIdent = new Map();
         for (const [
           descriptorHash,
@@ -62,19 +85,48 @@ module.exports = {
 
         this.locatorsByIdent = locatorsByIdent;
 
-        await StreamReport.start(
-          {
-            configuration: this.configuration,
-            stdout: this.context.stdout,
-            includeLogs: true,
-            json: false,
-          },
-          async (streamReport) => {
-            this.log = streamReport;
-            await this.findPinnableDependencies();
-            await this.pinDependencies();
-          }
-        );
+        return this.locatorsByIdent;
+      }
+
+      gatherWorkspaces() {
+        let shouldCheckAllWorkspaces =
+          !this.onlyWorkspaces || this.onlyWorkspaces.length === 0;
+
+        this.workspaces = shouldCheckAllWorkspaces
+          ? this.project.workspaces
+          : this.project.workspaces.filter((workspace) => {
+              let possibleWorkspaceRefs = [
+                workspace.cwd,
+                workspace.relativeCwd,
+                workspace.manifest?.name?.name,
+              ].filter((pwr) => !!pwr);
+
+              let include = this.onlyWorkspaces.some((givenWorkspaceRef) =>
+                possibleWorkspaceRefs.includes(givenWorkspaceRef)
+              );
+
+              if (include) {
+                this.log.reportWarning(
+                  `gatherWorkspaces`,
+                  `${green(`✓`)} Including workspace ${
+                    workspace.manifest.name.name
+                  } at ${workspace.cwd}`
+                );
+              } else {
+                this.logVerboseWarning(
+                  `gatherWorkspaces`,
+                  `${yellow(`x`)} Excluding workspace ${
+                    workspace.manifest.name.name
+                  }, no match for ${possibleWorkspaceRefs
+                    .map((r) => `'${r}'`)
+                    .join(" or ")}`
+                );
+              }
+
+              return include;
+            });
+
+        return this.workspaces;
       }
 
       async pinDependencies() {
@@ -85,8 +137,9 @@ module.exports = {
           data: this.pinnableJSON,
         });
 
-        for (const workspace of this.project.workspaces) {
+        for (const workspace of this.workspaces) {
           const { manifest, cwd: workspaceCwd } = workspace;
+          const manifestPath = ppath.join(workspaceCwd, Manifest.fileName);
           const needsPinning = this.pinnableByWorkspaceCwd.get(workspaceCwd);
 
           let numPinned = 0;
@@ -97,11 +150,18 @@ module.exports = {
               continue;
             }
 
-            manifest.dependencies.set(
-              identHash,
-              Object.assign(manifest.dependencies.get(identHash), {
+            const newDependency = Object.assign(
+              manifest.dependencies.get(identHash),
+              {
                 range: version,
-              })
+              }
+            );
+
+            manifest.dependencies.set(identHash, newDependency);
+
+            this.log.reportInfo(
+              `${manifestPath}`,
+              `${green(`→`)} Pin ${newDependency.name}:${newDependency.range}`
             );
 
             numPinned = numPinned + 1;
@@ -112,20 +172,42 @@ module.exports = {
           if (needsPersist) {
             if (!this.dryRun) {
               await workspace.persistManifest();
+              // console.log("(persist)");
             }
 
-            let manifestPath = ppath.join(workspaceCwd, Manifest.fileName);
             this.log.reportInfo(
-              null,
-              `${green(`✓`)} Pinned ${numPinned}, wrote to ${manifestPath}`
+              `${manifestPath}`,
+              `${green(`✓`)} Pinned ${numPinned} and saved to ${manifestPath}`
             );
           }
         }
       }
 
-      async findPinnableDependencies() {
-        const { workspaces } = this.project;
+      isDependencyExplicitlyIncluded({ name, range }) {
+        let packageRef = `${name}:${range}`;
+        let included = (this.alsoIncludePackages ?? []).includes(packageRef);
+        let selected = (this.onlyPackages ?? []).includes(packageRef);
 
+        return included || selected;
+      }
+
+      logVerboseWarning(prefix, msg) {
+        if (!this.verbose) {
+          return;
+        }
+
+        return this.log.reportWarning(prefix, msg);
+      }
+
+      logVerboseInfo(prefix, msg) {
+        if (!this.verbose) {
+          return;
+        }
+
+        return this.log.reportInfo(prefix, msg);
+      }
+
+      async findPinnableDependencies() {
         this.pinnableByWorkspaceCwd = new Map();
 
         // simplified version of pinnableByWorkspaceCwd, for reporting
@@ -135,7 +217,7 @@ module.exports = {
         for (let {
           manifest: { dependencies },
           cwd: workspaceCwd,
-        } of workspaces) {
+        } of this.workspaces) {
           let pinnableInWorkspace = new Map();
           this.pinnableByWorkspaceCwd.set(workspaceCwd, pinnableInWorkspace);
 
@@ -147,23 +229,41 @@ module.exports = {
 
           for (const [identHash, dependency] of dependencies) {
             const { name, range } = dependency;
+            let explicitlyIncluded = this.isDependencyExplicitlyIncluded({
+              name,
+              range,
+            });
+
             if (!PinDepsCommand.needsPin(range)) {
-              this.log.reportWarning(
+              if (explicitlyIncluded) {
+                this.logVerboseInfo(
+                  `${workspaceCwd}`,
+                  `Include: ${name}:${range}`
+                );
+              } else {
+                this.logVerboseWarning(
+                  `${workspaceCwd}`,
+                  `Skip: ${name}:${range}`
+                );
+              }
+
+              if (!explicitlyIncluded) {
+                continue;
+              }
+            }
+
+            if (
+              this.onlyPackages &&
+              !this.onlyPackages.includes(`${name}:${range}`)
+            ) {
+              this.logVerboseWarning(
                 `${workspaceCwd}`,
-                `Skip: ${name}:${range}`
+                `Omit: ${name}:${range}`
               );
               continue;
             }
 
             const semverMatch = range.match(/^(.*)$/);
-
-            if (semverMatch === null) {
-              this.log.reportWarning(
-                `${workspaceCwd}`,
-                `No semverMatch: ${name}:${range}`
-              );
-              continue;
-            }
 
             // Adapt logic for package locator lookup from deduplicate plugin:
             // https://github.com/yarnplugins/yarn-plugin-deduplicate
@@ -192,13 +292,18 @@ module.exports = {
                 .filter((sourcePackage) => {
                   if (sourcePackage.version === null) return false;
 
-                  return semver.satisfies(
-                    sourcePackage.version,
-                    semverMatch[1]
-                  );
+                  return explicitlyIncluded
+                    ? true
+                    : semverMatch === null
+                    ? false
+                    : semver.satisfies(sourcePackage.version, semverMatch[1]);
                 })
                 .sort((a, b) => {
-                  return semver.gt(a.version, b.version) ? -1 : 1;
+                  return explicitlyIncluded
+                    ? -1
+                    : semver.gt(a.version, b.version)
+                    ? -1
+                    : 1;
                 });
 
               if (candidates.length > 1) {
@@ -237,15 +342,21 @@ module.exports = {
             }
 
             if (pinTo.version === range) {
-              this.log.reportWarning(
-                `${workspaceCwd}`,
-                `already pinned ${name}:${range} to ${pinTo.version}`
-              );
+              if (explicitlyIncluded) {
+                this.log.reportInfo(
+                  `${yellow("-")} Already pinned: ${name}:${range}`
+                );
+              } else {
+                this.logVerboseWarning(
+                  `${workspaceCwd}`,
+                  `already pinned ${name}:${range} to ${pinTo.version}`
+                );
+              }
             } else {
               pinnableInWorkspace.set(identHash, pinTo);
               reportablePinsInWorkspace.set(`${name}:${range}`, pinTo.version);
 
-              this.log.reportInfo(
+              this.logVerboseInfo(
                 `${workspaceCwd}`,
                 `will pin ${name}:${range} to ${pinTo.version} in ${workspaceCwd}`
               );
@@ -286,13 +397,84 @@ module.exports = {
       })
     );
 
+    PinDepsCommand.addOption(
+      `verbose`,
+      Command.Boolean("--verbose", false, {
+        description: `Print more information about skipped or already pinned packages`,
+      })
+    );
+
+    PinDepsCommand.addOption(
+      `onlyWorkspaces`,
+      Command.Array(`--workspace`, undefined, {
+        description: `To _only_ include a specific workspace (or workspaces)`,
+      })
+    );
+
+    PinDepsCommand.addOption(
+      `alsoIncludePackages`,
+      Command.Array(`--include`, undefined, {
+        description: `To pin a specific name:range that would otherwise be skipped`,
+      })
+    );
+
+    PinDepsCommand.addOption(
+      `onlyPackages`,
+      Command.Array(`--only`, undefined, {
+        description: `To _only_ include a specific name:range package (or packages).`,
+      })
+    );
+
     // Show descriptive usage for a --help argument passed to this command
     PinDepsCommand.usage = Command.Usage({
-      description: `pin-deps [--dry]`,
+      description: `pin-deps [--dry] [--include name:range]`,
       details: `
         Pin any unpinned dependencies to their currently resolved version.
+
+        Pass \`--dry\` for a dry-run. Otherwise, write changes to \`package.json\`
+        files directly. You will still need to \`yarn install\` for the changes
+        to take effect.
+
+        Search all workspaces by default. Pass \`--workspace\` flag(s) to focus
+        on one or multiple workspace(s).
+
+        Search all packages with semver range references by default. To include
+        otherwise skipped packages, specify \`--include name:range\`. To focus
+        only on specific package(s), specify \`--only name:range\`
       `,
-      examples: [[`Print changes without applying them`, `pin-deps --dry`]],
+      examples: [
+        [
+          `Update package.json in every workspace, to pin all packages with
+          semver range to their currently resolved version.`,
+          `$0 pin-deps`,
+        ],
+        [
+          `Perform a "dry run" – do not apply any changes to files, but otherwise
+          run command as normally.`,
+          `$0 pin-deps --dry`,
+        ],
+        [
+          `Include (do not skip) any packages with reference next:canary`,
+          `$0 pin-deps --include next:canary`,
+        ],
+        [
+          `Include _only_ packages with reference next:canary or material-ui/core:latest`,
+          `$0 pin-deps --only next:canary --only material-ui/core:latest`,
+        ],
+        [
+          `Include _only_ workspaces by matching one of workspace.name, workspace.cwd, or workspace.relativeCwd`,
+          `$0 pin-deps --workspace acmeco/design --workspace acmeco/auth`,
+        ],
+        [
+          `Hacky: print a specific package resolution (\`yarn why\` or \`yarn info\` is likely better)`,
+
+          `$0 pin-deps --dry --workspace @acmeco/design --only next:canary`,
+        ],
+        [
+          `Print verbose logs (including alerady pinned packages)`,
+          `$0 --verbose`,
+        ],
+      ],
     });
 
     return {
