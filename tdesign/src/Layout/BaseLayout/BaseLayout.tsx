@@ -8,6 +8,7 @@ import { Logo } from "../Logo";
 import type { ILogoProps } from "../Logo";
 
 import { UserThemeContext } from "../../themes/UserTheme";
+import { UserColorPicker } from "./UserColorPicker";
 
 export interface BaseLayoutProps extends Omit<ILogoProps, "linkTo"> {
   children?: React.ReactNode;
@@ -106,10 +107,17 @@ const BaseLayout = ({
           <HeaderCenter>{headerCenter}</HeaderCenter>
           <HeaderRight>{headerRight}</HeaderRight>
           <UserThemeContext.Consumer>
-            {({ userColors, handleSetUserColors }) => (
-              <div onClick={handleSetUserColors}>
-                {userColors.mode === "light" ? "🌙" : "🌞"}
-                &nbsp;
+            {({ userColors, setUserColors, toggleDarkMode }) => (
+              <div>
+                <span onClick={toggleDarkMode}>
+                  {userColors.mode === "light" ? "🌙" : "🌞"}
+                  &nbsp;
+                </span>
+                <UserColorPicker
+                  userColors={userColors}
+                  setUserColors={setUserColors}
+                  toggleDarkMode={toggleDarkMode}
+                />
               </div>
             )}
           </UserThemeContext.Consumer>
