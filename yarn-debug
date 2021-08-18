@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+yarnPath="$(yarn config get yarnPath)"
+NODE_OPTIONS="$NODE_OPTIONS --inspect-brk=0.0.0.0:9229" exec node "$yarnPath" "$@"
