@@ -7,7 +7,8 @@ import { muiTheme } from "./muiTheme";
 export const UserThemeContext = createContext(null);
 const UserThemeWrapper = ({ children }) => {
   const [userColors, setUserColors] = useState(initUserColors); //TODO should come from a real 'upstream'
-  const handleSetUserColors = () => {
+
+  const toggleDarkMode = () => {
     const { mode, ...rest } = userColors;
 
     setUserColors({
@@ -15,8 +16,11 @@ const UserThemeWrapper = ({ children }) => {
       ...rest,
     });
   };
+
   return (
-    <UserThemeContext.Provider value={{ userColors, handleSetUserColors }}>
+    <UserThemeContext.Provider
+      value={{ userColors, setUserColors, toggleDarkMode }}
+    >
       <ThemeProvider theme={muiTheme(userColors)}>
         <CssBaseline />
         {children}
