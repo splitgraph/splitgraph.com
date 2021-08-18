@@ -144,20 +144,31 @@ module.exports = {
 
           let numPinned = 0;
           for (const [identHash, { version }] of needsPinning) {
-            let curValue = manifest.dependencies.get(identHash);
+            // May cause unpredictable behavior if a package is both dependency and devDependency
+            let curDependency = manifest.dependencies.get(identHash);
+            let curDevDependency = manifest.devDependencies.get(identHash);
+            let curValue = curDependency ?? curDevDependency;
+
+            if (curDependency && curDevDependency) {
+              this.log.reportWarning(
+                `${manifestPath}`,
+                `Possible package.json conflict between devDependencies and dependencies in ${curValue.name}`
+              );
+            }
 
             if (curValue.range === version) {
               continue;
             }
 
-            const newDependency = Object.assign(
-              manifest.dependencies.get(identHash),
-              {
-                range: version,
-              }
-            );
+            const newDependency = Object.assign(curValue, {
+              range: version,
+            });
 
-            manifest.dependencies.set(identHash, newDependency);
+            if (curDependency) {
+              manifest.dependencies.set(identHash, newDependency);
+            } else if (curDevDependency) {
+              manifest.devDependencies.set(identHash, newDependency);
+            }
 
             this.log.reportInfo(
               `${manifestPath}`,
@@ -177,7 +188,9 @@ module.exports = {
 
             this.log.reportInfo(
               `${manifestPath}`,
-              `${green(`✓`)} Pinned ${numPinned} and saved to ${manifestPath}`
+              `${green(`✓`)} Pinned ${numPinned} and ${
+                this.dryRun ? `saved[DRY RUN]` : "saved"
+              } to ${manifestPath}`
             );
           }
         }
@@ -215,7 +228,7 @@ module.exports = {
         this.reportablePinsByWorkspaceCwd = new Map();
 
         for (let {
-          manifest: { dependencies },
+          manifest: { dependencies, devDependencies },
           cwd: workspaceCwd,
         } of this.workspaces) {
           let pinnableInWorkspace = new Map();
@@ -227,141 +240,159 @@ module.exports = {
             reportablePinsInWorkspace
           );
 
-          for (const [identHash, dependency] of dependencies) {
-            const { name, range } = dependency;
-            let explicitlyIncluded = this.isDependencyExplicitlyIncluded({
-              name,
-              range,
+          // Process regular dependencies
+          if (!this.onlyDevDependencies) {
+            for (const [identHash, dependency] of dependencies) {
+              this.processDependency([identHash, dependency], {
+                workspaceCwd,
+                pinnableInWorkspace,
+                reportablePinsInWorkspace,
+                isDevDependency: false,
+              });
+            }
+          }
+
+          // Process devDependencies
+          if (this.onlyDevDependencies && !this.ignoreDevDependencies) {
+            for (const [identHash, dependency] of devDependencies) {
+              this.processDependency([identHash, dependency], {
+                workspaceCwd,
+                pinnableInWorkspace,
+                reportablePinsInWorkspace,
+                isDevDependency: true,
+              });
+            }
+          }
+        }
+      }
+
+      processDependency([identHash, dependency], opts) {
+        const {
+          workspaceCwd,
+          pinnableInWorkspace,
+          reportablePinsInWorkspace,
+          isDevDependency = false,
+        } = opts;
+
+        const { name, range } = dependency;
+        let explicitlyIncluded = this.isDependencyExplicitlyIncluded({
+          name,
+          range,
+        });
+
+        if (!PinDepsCommand.needsPin(range)) {
+          if (explicitlyIncluded) {
+            this.logVerboseInfo(`${workspaceCwd}`, `Include: ${name}:${range}`);
+          } else {
+            this.logVerboseWarning(`${workspaceCwd}`, `Skip: ${name}:${range}`);
+          }
+
+          if (!explicitlyIncluded) {
+            return;
+          }
+        }
+
+        if (
+          this.onlyPackages &&
+          !this.onlyPackages.includes(`${name}:${range}`)
+        ) {
+          this.logVerboseWarning(`${workspaceCwd}`, `Omit: ${name}:${range}`);
+          return;
+        }
+
+        const semverMatch = range.match(/^(.*)$/);
+
+        // Adapt logic for package locator lookup from deduplicate plugin:
+        // https://github.com/yarnplugins/yarn-plugin-deduplicate
+
+        const locatorHashes = this.locatorsByIdent.get(identHash);
+
+        let pinTo;
+        if (locatorHashes !== undefined && locatorHashes.size > 1) {
+          const candidates = Array.from(locatorHashes)
+            .map((locatorHash) => {
+              const pkg = this.project.storedPackages.get(locatorHash);
+              if (pkg === undefined) {
+                throw new TypeError(
+                  `Can't find package for locator hash '${locatorHash}'`
+                );
+              }
+              if (structUtils.isVirtualLocator(pkg)) {
+                const sourceLocator = structUtils.devirtualizeLocator(pkg);
+                return this.project.storedPackages.get(
+                  sourceLocator.locatorHash
+                );
+              }
+
+              return pkg;
+            })
+            .filter((sourcePackage) => {
+              if (sourcePackage.version === null) return false;
+
+              return explicitlyIncluded
+                ? true
+                : semverMatch === null
+                ? false
+                : semver.satisfies(sourcePackage.version, semverMatch[1]);
+            })
+            .sort((a, b) => {
+              return explicitlyIncluded
+                ? -1
+                : semver.gt(a.version, b.version)
+                ? -1
+                : 1;
             });
 
-            if (!PinDepsCommand.needsPin(range)) {
-              if (explicitlyIncluded) {
-                this.logVerboseInfo(
-                  `${workspaceCwd}`,
-                  `Include: ${name}:${range}`
-                );
-              } else {
-                this.logVerboseWarning(
-                  `${workspaceCwd}`,
-                  `Skip: ${name}:${range}`
-                );
-              }
+          if (candidates.length > 1) {
+            // https://stackoverflow.com/questions/22566379
+            const candidatePairs = candidates
+              .map((v, i) => candidates.slice(i + 1).map((w) => [v, w]))
+              .flat();
 
-              if (!explicitlyIncluded) {
-                continue;
+            let numDupes = 0;
+            for (let [candidateA, candidateB] of candidatePairs) {
+              if (!structUtils.areLocatorsEqual(candidateA, candidateB)) {
+                numDupes = numDupes + 1;
               }
             }
 
-            if (
-              this.onlyPackages &&
-              !this.onlyPackages.includes(`${name}:${range}`)
-            ) {
-              this.logVerboseWarning(
+            if (numDupes > 0) {
+              this.log.reportWarningOnce(
                 `${workspaceCwd}`,
-                `Omit: ${name}:${range}`
-              );
-              continue;
-            }
-
-            const semverMatch = range.match(/^(.*)$/);
-
-            // Adapt logic for package locator lookup from deduplicate plugin:
-            // https://github.com/yarnplugins/yarn-plugin-deduplicate
-
-            const locatorHashes = this.locatorsByIdent.get(identHash);
-
-            let pinTo;
-            if (locatorHashes !== undefined && locatorHashes.size > 1) {
-              const candidates = Array.from(locatorHashes)
-                .map((locatorHash) => {
-                  const pkg = this.project.storedPackages.get(locatorHash);
-                  if (pkg === undefined) {
-                    throw new TypeError(
-                      `Can't find package for locator hash '${locatorHash}'`
-                    );
-                  }
-                  if (structUtils.isVirtualLocator(pkg)) {
-                    const sourceLocator = structUtils.devirtualizeLocator(pkg);
-                    return this.project.storedPackages.get(
-                      sourceLocator.locatorHash
-                    );
-                  }
-
-                  return pkg;
-                })
-                .filter((sourcePackage) => {
-                  if (sourcePackage.version === null) return false;
-
-                  return explicitlyIncluded
-                    ? true
-                    : semverMatch === null
-                    ? false
-                    : semver.satisfies(sourcePackage.version, semverMatch[1]);
-                })
-                .sort((a, b) => {
-                  return explicitlyIncluded
-                    ? -1
-                    : semver.gt(a.version, b.version)
-                    ? -1
-                    : 1;
-                });
-
-              if (candidates.length > 1) {
-                // https://stackoverflow.com/questions/22566379
-                const candidatePairs = candidates
-                  .map((v, i) => candidates.slice(i + 1).map((w) => [v, w]))
-                  .flat();
-
-                let numDupes = 0;
-                for (let [candidateA, candidateB] of candidatePairs) {
-                  if (!structUtils.areLocatorsEqual(candidateA, candidateB)) {
-                    numDupes = numDupes + 1;
-                  }
-                }
-
-                if (numDupes > 0) {
-                  this.log.reportWarningOnce(
-                    `${workspaceCwd}`,
-                    `Possible duplicate: ${name} has ${candidates.length} candidates (${numDupes} conflicting pairs)`
-                  );
-                }
-              }
-
-              pinTo = this.project.storedPackages.get(
-                candidates[0].locatorHash
-              );
-            } else if (locatorHashes.size === 1) {
-              pinTo = this.project.storedPackages.get(
-                Array.from(locatorHashes)[0]
-              );
-            } else {
-              this.log.reportWarning(
-                `${workspaceCwd}`,
-                `Missing locator: ${name}:${range}`
-              );
-            }
-
-            if (pinTo.version === range) {
-              if (explicitlyIncluded) {
-                this.log.reportInfo(
-                  `${yellow("-")} Already pinned: ${name}:${range}`
-                );
-              } else {
-                this.logVerboseWarning(
-                  `${workspaceCwd}`,
-                  `already pinned ${name}:${range} to ${pinTo.version}`
-                );
-              }
-            } else {
-              pinnableInWorkspace.set(identHash, pinTo);
-              reportablePinsInWorkspace.set(`${name}:${range}`, pinTo.version);
-
-              this.logVerboseInfo(
-                `${workspaceCwd}`,
-                `will pin ${name}:${range} to ${pinTo.version} in ${workspaceCwd}`
+                `Possible duplicate: ${name} has ${candidates.length} candidates (${numDupes} conflicting pairs)`
               );
             }
           }
+
+          pinTo = this.project.storedPackages.get(candidates[0].locatorHash);
+        } else if (locatorHashes.size === 1) {
+          pinTo = this.project.storedPackages.get(Array.from(locatorHashes)[0]);
+        } else {
+          this.log.reportWarning(
+            `${workspaceCwd}`,
+            `Missing locator: ${name}:${range}`
+          );
+        }
+
+        if (pinTo.version === range) {
+          if (explicitlyIncluded) {
+            this.log.reportInfo(
+              `${yellow("-")} Already pinned: ${name}:${range}`
+            );
+          } else {
+            this.logVerboseWarning(
+              `${workspaceCwd}`,
+              `already pinned ${name}:${range} to ${pinTo.version}`
+            );
+          }
+        } else {
+          pinnableInWorkspace.set(identHash, pinTo);
+          reportablePinsInWorkspace.set(`${name}:${range}`, pinTo.version);
+
+          this.logVerboseInfo(
+            `${workspaceCwd}`,
+            `will pin ${name}:${range} to ${pinTo.version} in ${workspaceCwd}`
+          );
         }
       }
 
@@ -394,6 +425,20 @@ module.exports = {
       `dryRun`,
       Command.Boolean("--dry", false, {
         description: `Print the changes to stdout but do not apply them to package.json files.`,
+      })
+    );
+
+    PinDepsCommand.addOption(
+      `ignoreDevDependencies`,
+      Command.Boolean("--ignore-dev", false, {
+        description: `Ignore devDependencies (default is false, to pin dependencies and devDependencies).`,
+      })
+    );
+
+    PinDepsCommand.addOption(
+      `onlyDevDependencies`,
+      Command.Boolean("--only-dev", false, {
+        description: `Only devDependencies`,
       })
     );
 
@@ -466,8 +511,15 @@ module.exports = {
           `$0 pin-deps --workspace acmeco/design --workspace acmeco/auth`,
         ],
         [
+          `Ignore devDependencies (pin only regular dependencies)`,
+          `$0 pin-deps --ignore-dev`,
+        ],
+        [
+          `Pin only devDependencies in acmeco/design or acmeco/components`,
+          `$0 pin-deps --only-dev --workspace acmeco/design --workspace acmeco/components`,
+        ],
+        [
           `Hacky: print a specific package resolution (\`yarn why\` or \`yarn info\` is likely better)`,
-
           `$0 pin-deps --dry --workspace @acmeco/design --only next:canary`,
         ],
         [
