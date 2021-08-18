@@ -1042,7 +1042,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-react-jsx@npm:^7.12.1, @babel/plugin-transform-react-jsx@npm:^7.12.17, @babel/plugin-transform-react-jsx@npm:^7.13.12":
+"@babel/plugin-transform-react-jsx@npm:7.13.12, @babel/plugin-transform-react-jsx@npm:^7.12.1, @babel/plugin-transform-react-jsx@npm:^7.12.17, @babel/plugin-transform-react-jsx@npm:^7.13.12":
   version: 7.13.12
   resolution: "@babel/plugin-transform-react-jsx@npm:7.13.12"
   dependencies:
@@ -1183,7 +1183,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-env@npm:^7.12.11, @babel/preset-env@npm:^7.13.12":
+"@babel/preset-env@npm:7.13.12, @babel/preset-env@npm:^7.12.11":
   version: 7.13.12
   resolution: "@babel/preset-env@npm:7.13.12"
   dependencies:
@@ -1277,7 +1277,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-react@npm:^7.12.10, @babel/preset-react@npm:^7.12.13":
+"@babel/preset-react@npm:7.13.13, @babel/preset-react@npm:^7.12.10":
   version: 7.13.13
   resolution: "@babel/preset-react@npm:7.13.13"
   dependencies:
@@ -1373,7 +1373,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@csstools/normalize.css@npm:^10.1.0":
+"@csstools/normalize.css@npm:10.1.0":
   version: 10.1.0
   resolution: "@csstools/normalize.css@npm:10.1.0"
   checksum: 75d6c92d2ed1c643dd3f33c07feda78983790717c1b03c8b6a35215feac571d1d79e65a3668774eb420bd352651a2c33afd53cd580a25e93b6c6fd8bb0756071
@@ -1759,6 +1759,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mdx-js/loader@npm:1.6.22":
+  version: 1.6.22
+  resolution: "@mdx-js/loader@npm:1.6.22"
+  dependencies:
+    "@mdx-js/mdx": 1.6.22
+    "@mdx-js/react": 1.6.22
+    loader-utils: 2.0.0
+  checksum: 1ef0aabbc826659b31533f567acfe50fbf2411b6ca2f9b002fc61c6386820ee93ffc6c8e8925adb5b19104c18273d6a5de90d48b57838894d62fe64764f34d57
+  languageName: node
+  linkType: hard
+
 "@mdx-js/loader@npm:^0.15.0":
   version: 0.15.7
   resolution: "@mdx-js/loader@npm:0.15.7"
@@ -1767,17 +1778,6 @@ __metadata:
     "@mdx-js/tag": ^0.15.6
     loader-utils: ^1.1.0
   checksum: e1c1a146b5829a7e32a7bc33aef858aed55f12b81e5a87a8292ea4ea55c85d0c9631dc8d0ea531c1b04c65a5c1ac99d0f15649a66f81e6ddbbe7fa4a1a80848b
-  languageName: node
-  linkType: hard
-
-"@mdx-js/loader@npm:^1.6.22":
-  version: 1.6.22
-  resolution: "@mdx-js/loader@npm:1.6.22"
-  dependencies:
-    "@mdx-js/mdx": 1.6.22
-    "@mdx-js/react": 1.6.22
-    loader-utils: 2.0.0
-  checksum: 1ef0aabbc826659b31533f567acfe50fbf2411b6ca2f9b002fc61c6386820ee93ffc6c8e8925adb5b19104c18273d6a5de90d48b57838894d62fe64764f34d57
   languageName: node
   linkType: hard
 
@@ -1824,7 +1824,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/react@npm:1.6.22, @mdx-js/react@npm:^1.4.5, @mdx-js/react@npm:^1.6.22":
+"@mdx-js/react@npm:1.6.22, @mdx-js/react@npm:^1.6.22":
   version: 1.6.22
   resolution: "@mdx-js/react@npm:1.6.22"
   peerDependencies:
@@ -1853,7 +1853,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:^10.1.3":
+"@next/bundle-analyzer@npm:10.1.3":
   version: 10.1.3
   resolution: "@next/bundle-analyzer@npm:10.1.3"
   dependencies:
@@ -1869,7 +1869,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/mdx@npm:^10.0.9":
+"@next/mdx@npm:10.0.9":
   version: 10.0.9
   resolution: "@next/mdx@npm:10.0.9"
   peerDependencies:
@@ -1957,7 +1957,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/core@npm:^2.4.2, @octokit/core@npm:^2.4.3":
+"@octokit/core@npm:2.5.4, @octokit/core@npm:^2.4.3":
   version: 2.5.4
   resolution: "@octokit/core@npm:2.5.4"
   dependencies:
@@ -2000,7 +2000,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-paginate-rest@npm:^2.0.2, @octokit/plugin-paginate-rest@npm:^2.2.0":
+"@octokit/plugin-paginate-rest@npm:2.13.3, @octokit/plugin-paginate-rest@npm:^2.2.0":
   version: 2.13.3
   resolution: "@octokit/plugin-paginate-rest@npm:2.13.3"
   dependencies:
@@ -2057,7 +2057,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/rest@npm:^17.1.0":
+"@octokit/rest@npm:17.11.2":
   version: 17.11.2
   resolution: "@octokit/rest@npm:17.11.2"
   dependencies:
@@ -2137,25 +2137,25 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@splitgraph/content-scripts@workspace:content-scripts"
   dependencies:
-    "@octokit/core": ^2.4.2
-    "@octokit/plugin-paginate-rest": ^2.0.2
-    "@octokit/rest": ^17.1.0
-    download-tarball: ^2.0.0
-    fs-extra: ^8.1.0
-    globby: ^10.0.1
-    object-hash: ^2.0.3
-    rehype-parse: ^6.0.1
-    rehype-slug: ^2.0.3
-    rehype-stringify: ^6.0.0
-    rehype-toc: ^2.2.2
-    rehype-urls: ^1.0.0
-    shelljs: ^0.8.3
-    unified: ^8.4.1
-    unist-util-find: ^1.0.1
-    unist-util-find-all-after: ^1.0.4
-    unist-util-remove: ^1.0.3
-    unist-util-visit: ^2.0.0
-    yargs: ^14.2.0
+    "@octokit/core": 2.5.4
+    "@octokit/plugin-paginate-rest": 2.13.3
+    "@octokit/rest": 17.11.2
+    download-tarball: 2.0.0
+    fs-extra: 8.1.0
+    globby: 10.0.2
+    object-hash: 2.1.1
+    rehype-parse: 6.0.2
+    rehype-slug: 2.0.3
+    rehype-stringify: 6.0.1
+    rehype-toc: 2.2.3
+    rehype-urls: 1.1.1
+    shelljs: 0.8.4
+    unified: 8.4.2
+    unist-util-find: 1.0.2
+    unist-util-find-all-after: 1.0.5
+    unist-util-remove: 1.0.3
+    unist-util-visit: 2.0.3
+    yargs: 14.2.3
   languageName: unknown
   linkType: soft
 
@@ -2186,16 +2186,16 @@ __metadata:
   resolution: "@splitgraph/docs@workspace:docs"
   dependencies:
     "@babel/core": 7.13.10
-    "@babel/plugin-transform-react-jsx": ^7.13.12
-    "@babel/preset-env": ^7.13.12
-    "@babel/preset-react": ^7.12.13
-    "@csstools/normalize.css": ^10.1.0
+    "@babel/plugin-transform-react-jsx": 7.13.12
+    "@babel/preset-env": 7.13.12
+    "@babel/preset-react": 7.13.13
+    "@csstools/normalize.css": 10.1.0
     "@emotion/babel-plugin": ^11.2.0
     "@emotion/babel-preset-css-prop": ^11.2.0
-    "@mdx-js/loader": ^1.6.22
-    "@mdx-js/react": ^1.4.5
-    "@next/bundle-analyzer": ^10.1.3
-    "@next/mdx": ^10.0.9
+    "@mdx-js/loader": 1.6.22
+    "@mdx-js/react": 1.6.22
+    "@next/bundle-analyzer": 10.1.3
+    "@next/mdx": 10.0.9
     "@splitgraph/content": "workspace:*"
     "@splitgraph/design": "workspace:*"
     "@splitgraph/lib": "workspace:*"
@@ -2207,33 +2207,33 @@ __metadata:
     "@types/react-helmet": ^6.0.0
     "@types/react-toast-notifications": ^2.4.0
     "@types/styled-system": ^5.1.9
-    "@zeit/next-mdx": ^1.2.0
-    babel-plugin-add-module-exports: ^1.0.2
-    babel-plugin-macros: ^2.6.1
-    babel-plugin-preval: ^3.0.1
-    babel-plugin-react-require: ^3.1.1
-    dayjs: ^1.8.27
-    directory-tree: ^2.2.4
-    express: ^4.17.1
-    iframe-resizer-react: ^1.0.4
-    mdx-prism: ^0.3.1
+    "@zeit/next-mdx": 1.2.0
+    babel-plugin-add-module-exports: 1.0.4
+    babel-plugin-macros: 2.8.0
+    babel-plugin-preval: 3.0.1
+    babel-plugin-react-require: 3.1.3
+    dayjs: 1.10.4
+    directory-tree: 2.2.7
+    express: 4.17.1
+    iframe-resizer-react: 1.1.0
+    mdx-prism: 0.3.3
     next: canary
-    next-compose-plugins: ^2.2.1
-    next-mdx-remote: ^2.1.3
-    next-transpile-modules: ^6.3.0
+    next-compose-plugins: 2.2.1
+    next-mdx-remote: 2.1.3
+    next-transpile-modules: 6.3.0
     now: ^18.0.0
-    pirates: ^4.0.1
-    react: ^17.0.2
-    react-dom: ^17.0.2
-    react-hook-form: ^7.10.1
-    rehype: ^9.0.0
-    rehype-raw: ^4.0.1
-    rehype-slug: ^2.0.3
-    rehype-toc: ^2.2.2
-    remark-disable-tokenizers: ^1.0.23
-    rimraf: ^3.0.0
-    serve: ^11.2.0
-    unist-util-find: ^1.0.1
+    pirates: 4.0.1
+    react: 17.0.2
+    react-dom: 17.0.2
+    react-hook-form: 7.12.1
+    rehype: 9.0.1
+    rehype-raw: 4.0.2
+    rehype-slug: 2.0.3
+    rehype-toc: 2.2.3
+    remark-disable-tokenizers: 1.1.0
+    rimraf: 3.0.2
+    serve: 11.3.2
+    unist-util-find: 1.0.2
     webpack: ^5.28.0
   peerDependencies:
     "@emotion/react": "*"
@@ -2258,7 +2258,7 @@ __metadata:
     "@emotion/styled": 11.1.5
     "@material-ui/core": 5.0.0-alpha.32
     "@material-ui/icons": 5.0.0-alpha.29
-    theme-ui: ^0.6.2
+    theme-ui: 0.6.2
   peerDependencies:
     "@csstools/normalize.css": "*"
     "@mdx-js/react": "*"
@@ -2885,7 +2885,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@zeit/next-mdx@npm:^1.2.0":
+"@zeit/next-mdx@npm:1.2.0":
   version: 1.2.0
   resolution: "@zeit/next-mdx@npm:1.2.0"
   dependencies:
@@ -3187,7 +3187,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-add-module-exports@npm:^1.0.2":
+"babel-plugin-add-module-exports@npm:1.0.4":
   version: 1.0.4
   resolution: "babel-plugin-add-module-exports@npm:1.0.4"
   checksum: 80bd414662f53639adfccc57db750567828b5a7bd5702be2a18540f4410aae5117ed41be1a4e74ede04800dff5011eac90b347e08b1b9c3b7fbc8abba9bf12fa
@@ -3224,7 +3224,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-macros@npm:^2.2.2, babel-plugin-macros@npm:^2.6.1":
+"babel-plugin-macros@npm:2.8.0, babel-plugin-macros@npm:^2.2.2, babel-plugin-macros@npm:^2.6.1":
   version: 2.8.0
   resolution: "babel-plugin-macros@npm:2.8.0"
   dependencies:
@@ -3271,7 +3271,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-preval@npm:^3.0.1":
+"babel-plugin-preval@npm:3.0.1":
   version: 3.0.1
   resolution: "babel-plugin-preval@npm:3.0.1"
   dependencies:
@@ -3281,7 +3281,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-react-require@npm:^3.1.1":
+"babel-plugin-react-require@npm:3.1.3":
   version: 3.1.3
   resolution: "babel-plugin-react-require@npm:3.1.3"
   checksum: eb42b7769dfedc92b9a3af8b70d659a9b480b834e64b69aa7cf60610d6908a0e0cbf8eebe8acab0ffbc76a84b6a7a6b34f082e21060de73ebc7c02c648ba39d6
@@ -4310,7 +4310,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:^1.8.27":
+"dayjs@npm:1.10.4":
   version: 1.10.4
   resolution: "dayjs@npm:1.10.4"
   checksum: 3b7bb2232fff808209870bc72d4b2000941a1aa45f0226e2907f9dd1dda306d4b3a1eb9058450fd2c324b01a007a37809ac6f9b525806a86902c55e2934cd5d5
@@ -4465,7 +4465,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"directory-tree@npm:^2.2.4":
+"directory-tree@npm:2.2.7":
   version: 2.2.7
   resolution: "directory-tree@npm:2.2.7"
   checksum: b4fa4902ae84d5d9750dcf1980ab3e6f10c015d89b2886ba4277467119a3f1ecddb954cdb4c69c02cc320e11b5104e6185526c5582a6d5822812d6b3d8f9c676
@@ -4505,7 +4505,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"download-tarball@npm:^2.0.0":
+"download-tarball@npm:2.0.0":
   version: 2.0.0
   resolution: "download-tarball@npm:2.0.0"
   dependencies:
@@ -4850,7 +4850,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express@npm:^4.17.1":
+"express@npm:4.17.1":
   version: 4.17.1
   resolution: "express@npm:4.17.1"
   dependencies:
@@ -5094,7 +5094,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:^8.1.0":
+"fs-extra@npm:8.1.0":
   version: 8.1.0
   resolution: "fs-extra@npm:8.1.0"
   dependencies:
@@ -5267,7 +5267,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"globby@npm:^10.0.1":
+"globby@npm:10.0.2":
   version: 10.0.2
   resolution: "globby@npm:10.0.2"
   dependencies:
@@ -5791,7 +5791,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"iframe-resizer-react@npm:^1.0.4":
+"iframe-resizer-react@npm:1.1.0":
   version: 1.1.0
   resolution: "iframe-resizer-react@npm:1.1.0"
   dependencies:
@@ -6817,7 +6817,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"mdx-prism@npm:^0.3.1":
+"mdx-prism@npm:0.3.3":
   version: 0.3.3
   resolution: "mdx-prism@npm:0.3.3"
   dependencies:
@@ -7088,14 +7088,14 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"next-compose-plugins@npm:^2.2.1":
+"next-compose-plugins@npm:2.2.1":
   version: 2.2.1
   resolution: "next-compose-plugins@npm:2.2.1"
   checksum: bb1376aad78e7a8d6514ebe01842ff4285871ac85b1cf475bee03ddc682426a462ba38659d84de0f9db2b53de1c884aa74969740c5b999adc43654b1371d6e78
   languageName: node
   linkType: hard
 
-"next-mdx-remote@npm:^2.1.3":
+"next-mdx-remote@npm:2.1.3":
   version: 2.1.3
   resolution: "next-mdx-remote@npm:2.1.3"
   dependencies:
@@ -7112,7 +7112,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"next-seo@npm:^4.4.0":
+"next-seo@npm:4.23.0":
   version: 4.23.0
   resolution: "next-seo@npm:4.23.0"
   peerDependencies:
@@ -7123,7 +7123,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"next-transpile-modules@npm:^6.3.0":
+"next-transpile-modules@npm:6.3.0":
   version: 6.3.0
   resolution: "next-transpile-modules@npm:6.3.0"
   dependencies:
@@ -7426,7 +7426,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"object-hash@npm:^2.0.3":
+"object-hash@npm:2.1.1":
   version: 2.1.1
   resolution: "object-hash@npm:2.1.1"
   checksum: fe49a0864cba7ac4055c604295692ae75f5f4d22ba929aaaa987469809d17ab030d1111e8f0d425a070fa4a78b8021b55260e26e98b66b59e0f7be2bd9069fb8
@@ -7875,7 +7875,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"pirates@npm:^4.0.1":
+"pirates@npm:4.0.1":
   version: 4.0.1
   resolution: "pirates@npm:4.0.1"
   dependencies:
@@ -8243,7 +8243,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^17.0.2":
+"react-dom@npm:17.0.2":
   version: 17.0.2
   resolution: "react-dom@npm:17.0.2"
   dependencies:
@@ -8263,7 +8263,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"react-helmet@npm:^6.0.0":
+"react-helmet@npm:6.1.0":
   version: 6.1.0
   resolution: "react-helmet@npm:6.1.0"
   dependencies:
@@ -8277,7 +8277,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.10.1":
+"react-hook-form@npm:7.12.1":
   version: 7.12.1
   resolution: "react-hook-form@npm:7.12.1"
   peerDependencies:
@@ -8331,7 +8331,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"react@npm:^17.0.2":
+"react@npm:17.0.2":
   version: 17.0.2
   resolution: "react@npm:17.0.2"
   dependencies:
@@ -8490,7 +8490,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"rehype-parse@npm:^6.0.0, rehype-parse@npm:^6.0.1":
+"rehype-parse@npm:6.0.2, rehype-parse@npm:^6.0.0":
   version: 6.0.2
   resolution: "rehype-parse@npm:6.0.2"
   dependencies:
@@ -8501,7 +8501,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"rehype-raw@npm:^4.0.1":
+"rehype-raw@npm:4.0.2":
   version: 4.0.2
   resolution: "rehype-raw@npm:4.0.2"
   dependencies:
@@ -8510,7 +8510,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"rehype-slug@npm:^2.0.3":
+"rehype-slug@npm:2.0.3":
   version: 2.0.3
   resolution: "rehype-slug@npm:2.0.3"
   dependencies:
@@ -8523,7 +8523,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"rehype-stringify@npm:^6.0.0":
+"rehype-stringify@npm:6.0.1, rehype-stringify@npm:^6.0.0":
   version: 6.0.1
   resolution: "rehype-stringify@npm:6.0.1"
   dependencies:
@@ -8533,14 +8533,14 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"rehype-toc@npm:^2.2.2":
+"rehype-toc@npm:2.2.3":
   version: 2.2.3
   resolution: "rehype-toc@npm:2.2.3"
   checksum: 82355906dcb2114892f898ee863d535db89da4b381005a79c18a27828e1e4cc7301732b5c3a47ee04d6d96b1386666c8ccc6ddf1c2cb28df079fd15f4448f2da
   languageName: node
   linkType: hard
 
-"rehype-urls@npm:^1.0.0":
+"rehype-urls@npm:1.1.1":
   version: 1.1.1
   resolution: "rehype-urls@npm:1.1.1"
   dependencies:
@@ -8551,7 +8551,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"rehype@npm:^9.0.0":
+"rehype@npm:9.0.1":
   version: 9.0.1
   resolution: "rehype@npm:9.0.1"
   dependencies:
@@ -8562,7 +8562,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"remark-disable-tokenizers@npm:^1.0.23":
+"remark-disable-tokenizers@npm:1.1.0":
   version: 1.1.0
   resolution: "remark-disable-tokenizers@npm:1.1.0"
   dependencies:
@@ -8641,7 +8641,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"remark-sectionize@npm:^1.1.1":
+"remark-sectionize@npm:1.1.1":
   version: 1.1.1
   resolution: "remark-sectionize@npm:1.1.1"
   dependencies:
@@ -8775,7 +8775,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"rimraf@npm:^3.0.0, rimraf@npm:^3.0.2":
+"rimraf@npm:3.0.2, rimraf@npm:^3.0.2":
   version: 3.0.2
   resolution: "rimraf@npm:3.0.2"
   dependencies:
@@ -8796,7 +8796,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"rss@npm:^1.2.2":
+"rss@npm:1.2.2":
   version: 1.2.2
   resolution: "rss@npm:1.2.2"
   dependencies:
@@ -8970,7 +8970,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"serve@npm:^11.2.0":
+"serve@npm:11.3.2":
   version: 11.3.2
   resolution: "serve@npm:11.3.2"
   dependencies:
@@ -9045,7 +9045,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"shelljs@npm:^0.8.3":
+"shelljs@npm:0.8.4":
   version: 0.8.4
   resolution: "shelljs@npm:0.8.4"
   dependencies:
@@ -9193,12 +9193,12 @@ fsevents@~2.3.1:
   version: 0.0.0-use.local
   resolution: "splitgraph.com@workspace:."
   dependencies:
-    next-seo: ^4.4.0
+    next-seo: 4.23.0
     npm-run-all: ^4.1.5
     prettier: ^2.2.1
-    react-helmet: ^6.0.0
-    remark-sectionize: ^1.1.1
-    rss: ^1.2.2
+    react-helmet: 6.1.0
+    remark-sectionize: 1.1.1
+    rss: 1.2.2
     typescript: 4.2.4
   languageName: unknown
   linkType: soft
@@ -9701,7 +9701,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"theme-ui@npm:^0.6.2":
+"theme-ui@npm:0.6.2":
   version: 0.6.2
   resolution: "theme-ui@npm:0.6.2"
   dependencies:
@@ -10009,6 +10009,19 @@ typescript@4.2.4:
   languageName: node
   linkType: hard
 
+"unified@npm:8.4.2, unified@npm:^8.0.0":
+  version: 8.4.2
+  resolution: "unified@npm:8.4.2"
+  dependencies:
+    bail: ^1.0.0
+    extend: ^3.0.0
+    is-plain-obj: ^2.0.0
+    trough: ^1.0.0
+    vfile: ^4.0.0
+  checksum: d94242a81660436d762f18587e080da8065fea7a81b2008ee411b4dccef7df7d98f969ea4db1ee12b18fb7ac91b8b94fbc8f95b016410e5dff29c9bcad8eb812
+  languageName: node
+  linkType: hard
+
 "unified@npm:9.2.0":
   version: 9.2.0
   resolution: "unified@npm:9.2.0"
@@ -10037,19 +10050,6 @@ typescript@4.2.4:
   languageName: node
   linkType: hard
 
-"unified@npm:^8.0.0, unified@npm:^8.4.1":
-  version: 8.4.2
-  resolution: "unified@npm:8.4.2"
-  dependencies:
-    bail: ^1.0.0
-    extend: ^3.0.0
-    is-plain-obj: ^2.0.0
-    trough: ^1.0.0
-    vfile: ^4.0.0
-  checksum: d94242a81660436d762f18587e080da8065fea7a81b2008ee411b4dccef7df7d98f969ea4db1ee12b18fb7ac91b8b94fbc8f95b016410e5dff29c9bcad8eb812
-  languageName: node
-  linkType: hard
-
 "unist-builder@npm:2.0.3, unist-builder@npm:^2.0.0":
   version: 2.0.3
   resolution: "unist-builder@npm:2.0.3"
@@ -10075,7 +10075,7 @@ typescript@4.2.4:
   languageName: node
   linkType: hard
 
-"unist-util-find-all-after@npm:^1.0.4":
+"unist-util-find-all-after@npm:1.0.5":
   version: 1.0.5
   resolution: "unist-util-find-all-after@npm:1.0.5"
   dependencies:
@@ -10084,7 +10084,7 @@ typescript@4.2.4:
   languageName: node
   linkType: hard
 
-"unist-util-find@npm:^1.0.1":
+"unist-util-find@npm:1.0.2":
   version: 1.0.2
   resolution: "unist-util-find@npm:1.0.2"
   dependencies:
@@ -10140,7 +10140,7 @@ typescript@4.2.4:
   languageName: node
   linkType: hard
 
-"unist-util-remove@npm:^1.0.0, unist-util-remove@npm:^1.0.3":
+"unist-util-remove@npm:1.0.3, unist-util-remove@npm:^1.0.0":
   version: 1.0.3
   resolution: "unist-util-remove@npm:1.0.3"
   dependencies:
@@ -10754,7 +10754,7 @@ typescript@4.2.4:
   languageName: node
   linkType: hard
 
-"yargs@npm:^14.2.0":
+"yargs@npm:14.2.3":
   version: 14.2.3
   resolution: "yargs@npm:14.2.3"
   dependencies:
