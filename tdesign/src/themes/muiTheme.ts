@@ -21,7 +21,14 @@ const breakpointValues = {
   xl: 1920,
 };
 
-export const muiTheme = ({ userPrimaryColor, mode }) =>
+export const muiTheme = ({
+  userPrimaryColor,
+  userNavbarLight,
+  userNavbarDark,
+  userFooterLight,
+  userFooterDark,
+  mode,
+}) =>
   createMuiTheme({
     breakpoints: {
       values: breakpointValues,
@@ -36,7 +43,7 @@ export const muiTheme = ({ userPrimaryColor, mode }) =>
     palette: {
       contrastThreshold: 3,
       tonalOffset: 0.2,
-      mode, /*=== Light/Dark mode ===*/
+      mode /*=== Light/Dark mode ===*/,
       primary: {
         main: userPrimaryColor || "#F94569",
         contrastText: defaultTheme.palette.getContrastText("#F94569"),
@@ -79,13 +86,15 @@ export const muiTheme = ({ userPrimaryColor, mode }) =>
       navbar: {
         light: {
           /*main: "#FBFCFF",*/
-          main: `linear-gradient(0deg, rgba(42, 129, 246, 0.02), rgba(42, 129, 246, 0.02)),#FFFFFF`,
+          main:
+            userNavbarLight ||
+            `linear-gradient(0deg, rgba(42, 129, 246, 0.02), rgba(42, 129, 246, 0.02)),#FFFFFF`,
         },
-        dark: { main: "#201316" },
+        dark: { main: userNavbarDark || "#201316" },
       },
       footer: {
-        light: { main: "#00224E" },
-        dark: { main: "201316" },
+        light: { main: userFooterLight || "#00224E" },
+        dark: { main: userFooterDark || "201316" },
       },
       grays: {
         light: {

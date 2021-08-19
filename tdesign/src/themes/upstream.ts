@@ -13,11 +13,11 @@ export interface UserColors {
 }
 
 const userColors: UserColors = {
-  userPrimaryColor: "#555500",
-  userNavbarLight: "#D3D3D3",
-  userNavbarDark: "#A9A9A9",
-  userFooterLight: "#F0F8FF",
-  userFooterDark: "#00008B",
+  userPrimaryColor: undefined,
+  userNavbarLight: undefined,
+  userNavbarDark: undefined,
+  userFooterLight: undefined,
+  userFooterDark: undefined,
   mode: "light",
 };
 
