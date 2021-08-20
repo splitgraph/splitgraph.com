@@ -11,10 +11,8 @@
     "deploy": "cp now.json out/ && yarn run now",
     "start": "serve out",
     "clean": "./clean.sh",
-    "hello": "echo Hello from $(pwd)",
-    "storybook": "start-storybook -p 3000",
     "storybook-build": "yarn run build-storybook -o out-storybook",
-    "storybook-dev": "yarn run storybook --host 0.0.0.0 --port 3000 --no-open",
+    "storybook-dev": "yarn run start-storybook --host 0.0.0.0 --port 3000 --no-open",
     "storybook-diagnostic": "yarn run storybook-dev --loglevel silly --debug-webpack"
   },
   "dependencies": {

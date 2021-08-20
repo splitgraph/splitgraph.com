@@ -29,11 +29,20 @@ if test ! -d docs ; then
     exit 1
 fi
 
+# Move to the docs directory where storybook is
 cd docs || { echo "Failed to cd to docs" ; exit 1 ; }
 
-# Chromatic expects `yarn build-storybook` to exist (we are in docs directory)
+# Write the build to a known location (not default /tmp) so that CI can cache it
+mkdir -p out-storybook
+
+# https://www.chromatic.com/docs/cli
+# note: --ignore-last-build-on-branch is for rebase situations (see above link)
+# todo: add --skip argument, if commit msg includes e.g. [skip chromatic]
 yarn dlx chromatic \
+    --build-script-name "storybook-build" \
+    --output-dir "out-storybook" \
     --project-token="$CHROMATIC_PROJECT_TOKEN" \
+    --ignore-last-build-on-branch \
     --auto-accept-changes \
     && exit 0
 
