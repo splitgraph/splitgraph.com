@@ -37,11 +37,7 @@ const Header = ({ children }: HeaderProps) => {
           gridTemplateColumns:
             "min-content repeat(1, minmax(25vw, 1fr)) min-content",
           gridAutoFlow: "column",
-          background: ({ palette }) =>
-            palette.mode === "light"
-              ? palette.navbar.light.main
-              : palette.navbar.dark.main,
-          // background: (theme) => theme.palette.background.default,
+          background: ({ palette }) => palette.navbar.main,
 
           // !! HACK
           /* There is a bug in Emotion SSR that causes style tags to get injected

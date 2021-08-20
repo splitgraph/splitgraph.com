@@ -49,8 +49,8 @@ const Menu = ({ children, style = {} }: MenuProps) => {
         "initial",
       ],
       backgroundColor: [
-        expanded ? "initial" : "surfaces.light.background.main",
-        expanded ? "initial" : "surfaces.light.background.main",
+        expanded ? "initial" : "surfaces.background.main",
+        expanded ? "initial" : "surfaces.background.main",
         "initial",
       ],
       padding: "1em",
@@ -115,9 +115,7 @@ const Menu = ({ children, style = {} }: MenuProps) => {
     },
     ".menu-item-link": {
       color: (theme) =>
-        theme.palette.getContrastText(
-          theme.palette.surfaces.light.background.main
-        ),
+        theme.palette.getContrastText(theme.palette.surfaces.background.main),
       fontWeight: "bold",
       textDecoration: "none",
       ":hover": {
