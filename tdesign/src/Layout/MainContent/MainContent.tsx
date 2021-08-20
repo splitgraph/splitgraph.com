@@ -10,7 +10,7 @@ export interface IMainContentProps {
 const mainContentStyle: SxProps<Theme> = {};
 
 const MainContent = ({ children, extraStyle = {} }: IMainContentProps) => {
-  const outerContainerStyle: SxProps<Theme> = {
+  const outerContainerStyle = {
     // backgroundColor: "white",
     minHeight: "100vh",
     fontFamily:
