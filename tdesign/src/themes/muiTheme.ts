@@ -1,16 +1,6 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-// import { theme } from "./design"; // TODO: when we're ready, the MUI palette should consume from here
-
-// import type {
-//   PaletteColorOptions,
-//   PaletteColor,
-// } from "@material-ui/core/styles";
-
 // import { theme as coreTheme } from "./design";
-
 import prismTheme from "./prismTheme";
-
-export const defaultTheme = createMuiTheme(); // lets us reference MUI default style values below
 
 const breakpointValues = {
   xs: 0,
@@ -28,25 +18,18 @@ export const muiTheme = ({
   userFooterLight,
   userFooterDark,
   mode,
-}) =>
-  createMuiTheme({
-    breakpoints: {
-      values: breakpointValues,
-    },
-    constants: {
-      leftMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
-      rightMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
-      leftMarginLogoAligned: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2 + 22.5px + 40px))`,
-      rightMarginNavAligned: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
-      brandGradient: `linear-gradient(90deg, rgb(249 69 105 / 100%) 0%, rgb(255 128 153 / 50%) 100%)`,
-    },
+}) => {
+  // following https://github.com/mui-org/material-ui/issues/21757, we split into two calls
+  // first call instantiates a theme that doesn't depend on any default theme values (e.g. `defaultTheme.breakpoints`)
+  // second pass uses our first instantiation (`baseTheme`) and deep merges.
+  // Deep merge should perform better, at a hopefully small hit to readability
+  // more info https://stackoverflow.com/questions/57630926/material-ui-theme-overrides-leveraging-theme-palette-colors
+
+  const baseTheme = createMuiTheme({
     palette: {
-      contrastThreshold: 3,
-      tonalOffset: 0.2,
       mode /*=== Light/Dark mode ===*/,
       primary: {
         main: userPrimaryColor || "#F94569",
-        contrastText: defaultTheme.palette.getContrastText("#F94569"),
       },
       surfaces: {
         light: {
@@ -133,17 +116,9 @@ export const muiTheme = ({
         },
       },
 
-      // secondary: {
-      //   main: "#89368d",
-      // },
       danger: {
         main: "#8D363C",
-        contrastText: defaultTheme.palette.getContrastText("#8D363C"),
-        // TODO look into more idiomatic MUI way - want hover states also
       },
-      // background: {
-      //   default: "#e0ffff",
-      // },
       errorBackground: {
         main: "rgba(193, 18, 18, 0.5)",
       },
@@ -210,52 +185,6 @@ export const muiTheme = ({
       },
       /*=== prismTheme ===*/
       prismTheme,
-      pre: {
-        ...prismTheme,
-        [defaultTheme.breakpoints.down("sm")]: {
-          marginLeft: "-4px",
-          marginRight: "-4px",
-          paddingLeft: "1ch",
-          paddingRight: "1ch",
-          paddingTop: "1rem",
-          paddingBottom: "1rem",
-          borderTop: "4px solid #efefef",
-          borderBottom: "4px solid #efefef",
-        },
-        [defaultTheme.breakpoints.up("sm")]: {
-          minWidth: "min(80ch, 100%)",
-        },
-        fontSize: "0.8rem",
-        padding: "10px",
-        overflowX: "auto",
-        backgroundColor: "sgdarkblue.main",
-        ".mdx-marker": {
-          // backgroundColor: "rgba(255,255,255,0.1)",
-          display: "block",
-          marginLeft: "-1em",
-          marginRight: "-1em",
-          paddingRight: "1em",
-          paddingLeft: "1em",
-          borderLeft: `.25em solid ${prismTheme[".punctuation"].color}`,
-        },
-      },
-      inlineCode: {
-        ...prismTheme,
-        [defaultTheme.breakpoints.up("sm")]: {
-          minWidth: "initial",
-        },
-        paddingLeft: "0.5ch",
-        paddingRight: "0.5ch",
-        paddingTop: "0",
-        paddingBottom: "0",
-        minHeight: "1rem",
-        display: "inline-flex",
-        alignContent: "center",
-        overflowX: "auto",
-        wordBreak: "break-all",
-        backgroundColor: prismTheme.color,
-        color: "red",
-      },
       code: {
         backgroundColor: "sgdarkblue.main",
         fontFamily: "monospace",
@@ -346,6 +275,84 @@ export const muiTheme = ({
           disableRipple: true,
         },
       },
+    },
+    texturize: (
+      base: React.CSSProperties,
+      texture: React.CSSProperties
+    ): React.CSSProperties => ({
+      ...base,
+      ...texture,
+      background: base.background
+        ? `${texture.background},${base.background}`
+        : texture.background,
+    }),
+  });
+  return createMuiTheme(baseTheme, {
+    breakpoints: {
+      values: breakpointValues,
+    },
+    constants: {
+      leftMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
+      rightMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
+      leftMarginLogoAligned: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2 + 22.5px + 40px))`,
+      rightMarginNavAligned: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
+      brandGradient: `linear-gradient(90deg, rgb(249 69 105 / 100%) 0%, rgb(255 128 153 / 50%) 100%)`,
+    },
+    palette: {
+      primary: {
+        contrastText: baseTheme.palette.getContrastText("#F94569"),
+      },
+      danger: {
+        contrastText: baseTheme.palette.getContrastText("#8D363C"),
+      },
+      pre: {
+        ...prismTheme,
+        [baseTheme.breakpoints.down("sm")]: {
+          marginLeft: "-4px",
+          marginRight: "-4px",
+          paddingLeft: "1ch",
+          paddingRight: "1ch",
+          paddingTop: "1rem",
+          paddingBottom: "1rem",
+          borderTop: "4px solid #efefef",
+          borderBottom: "4px solid #efefef",
+        },
+        [baseTheme.breakpoints.up("sm")]: {
+          minWidth: "min(80ch, 100%)",
+        },
+        fontSize: "0.8rem",
+        padding: "10px",
+        overflowX: "auto",
+        backgroundColor: "sgdarkblue.main",
+        ".mdx-marker": {
+          // backgroundColor: "rgba(255,255,255,0.1)",
+          display: "block",
+          marginLeft: "-1em",
+          marginRight: "-1em",
+          paddingRight: "1em",
+          paddingLeft: "1em",
+          borderLeft: `.25em solid ${prismTheme[".punctuation"].color}`,
+        },
+      },
+      inlineCode: {
+        ...prismTheme,
+        [baseTheme.breakpoints.up("sm")]: {
+          minWidth: "initial",
+        },
+        paddingLeft: "0.5ch",
+        paddingRight: "0.5ch",
+        paddingTop: "0",
+        paddingBottom: "0",
+        minHeight: "1rem",
+        display: "inline-flex",
+        alignContent: "center",
+        overflowX: "auto",
+        wordBreak: "break-all",
+        backgroundColor: prismTheme.color,
+        color: "red",
+      },
+    },
+    components: {
       MuiButton: {
         styleOverrides: {
           root: {
@@ -360,41 +367,32 @@ export const muiTheme = ({
               root: { textTransform: "inherit" },
               padding: "6px 16px",
               border: "3px solid #ccc",
-              backgroundColor: defaultTheme.palette.common.white,
+              backgroundColor: baseTheme.palette.common.white,
               borderRadius:
-                Number.parseInt(`${defaultTheme.shape.borderRadius}`, 10) * 50,
-              transition: defaultTheme.transitions.create(
+                Number.parseInt(`${baseTheme.shape.borderRadius}`, 10) * 50,
+              transition: baseTheme.transitions.create(
                 ["background-color", "box-shadow", "border-color", "color"],
                 {
-                  duration: defaultTheme.transitions.duration.short,
+                  duration: baseTheme.transitions.duration.short,
                 }
               ),
-              boxShadow: defaultTheme.shadows[2],
+              boxShadow: baseTheme.shadows[2],
               "&:hover": {
-                backgroundColor: defaultTheme.palette.common.white,
-                boxShadow: defaultTheme.shadows[4],
+                backgroundColor: baseTheme.palette.common.white,
+                boxShadow: baseTheme.shadows[4],
               },
               // Reset on touch devices, it doesn't add specificity
               "@media (hover: none)": {
-                boxShadow: defaultTheme.shadows[2],
-                backgroundColor: defaultTheme.palette.grey[300],
+                boxShadow: baseTheme.shadows[2],
+                backgroundColor: baseTheme.palette.grey[300],
               },
             },
           },
         ],
       },
     },
-    texturize: (
-      base: React.CSSProperties,
-      texture: React.CSSProperties
-    ): React.CSSProperties => ({
-      ...base,
-      ...texture,
-      background: base.background
-        ? `${texture.background},${base.background}`
-        : texture.background,
-    }),
   });
+};
 
 declare module "@material-ui/core/Button" {
   interface ButtonPropsVariantOverrides {
