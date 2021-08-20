@@ -19,33 +19,26 @@ export const muiTheme = ({
   userFooterDark,
   mode,
 }) => {
-  // following https://github.com/mui-org/material-ui/issues/21757, we split into two calls
+  // following https://github.com/mui-org/material-ui/issues/21757, we split createMuiTheme up.
   // first call instantiates a theme that doesn't depend on any default theme values (e.g. `defaultTheme.breakpoints`)
   // second pass uses our first instantiation (`baseTheme`) and deep merges.
   // Deep merge should perform better, at a hopefully small hit to readability
   // more info https://stackoverflow.com/questions/57630926/material-ui-theme-overrides-leveraging-theme-palette-colors
 
   const baseTheme = createMuiTheme({
+    breakpoints: {
+      values: breakpointValues,
+    },
+    constants: {
+      leftMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
+      rightMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
+      leftMarginLogoAligned: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2 + 22.5px + 40px))`,
+      rightMarginNavAligned: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
+      brandGradient: `linear-gradient(90deg, rgb(249 69 105 / 100%) 0%, rgb(255 128 153 / 50%) 100%)`,
+    },
     palette: {
-      mode /*=== Light/Dark mode ===*/,
       primary: {
         main: userPrimaryColor || "#F94569",
-      },
-      surfaces: {
-        light: {
-          background: { main: "#FFFFFF" },
-          sql: { main: "#E3EFFE" },
-          error: { main: "#F9EEEF" },
-          success: { main: "#DBF9F3" },
-          link: { main: "#2A81F6" },
-        },
-        dark: {
-          background: { main: "#000202" }, // should "add primary color at 8%"
-          sql: { main: "#27293B" },
-          error: { main: "#370D10" },
-          success: { main: "#103D34" },
-          link: { main: "#2A81F6" },
-        },
       },
       textures: {
         onLight: {
@@ -63,56 +56,6 @@ export const muiTheme = ({
           linear-gradient(to right, rgb(0 0 0 / 4%) 1px, transparent 1px)`,
             backgroundSize: "24px 24px",
           },
-        },
-      },
-      // texturize:
-      navbar: {
-        light: {
-          /*main: "#FBFCFF",*/
-          main:
-            userNavbarLight ||
-            `linear-gradient(0deg, rgba(42, 129, 246, 0.02), rgba(42, 129, 246, 0.02)),#FFFFFF`,
-        },
-        dark: { main: userNavbarDark || "#201316" },
-      },
-      footer: {
-        light: { main: userFooterLight || "#00224E" },
-        dark: { main: userFooterDark || "201316" },
-      },
-      grays: {
-        light: {
-          gray20: { main: "#000202" },
-
-          gray21: {
-            main: "#2C2D2D",
-
-            // experimenting in dev tools - this looks ok?
-            dark: `linear-gradient(90deg, rgb(249 69 105 / 8%) 0%, rgb(255 128 153 / 8%) 100%),#2C2D2D`,
-          },
-          gray22: { main: "#555656" },
-          gray23: { main: "#818285" },
-          gray24: { main: "#A0A3A9" },
-          gray25: { main: "#C0C3CC" },
-          gray26: { main: "#E6E7EB" },
-          gray27: { main: "#F2F4F6" },
-          gray28: { main: "#F9FAFB" },
-          gray29: { main: "#FCFCFD" },
-        },
-        dark: {
-          gray20: { main: "#FCFCFD" },
-          gray21: {
-            main: "#E6E7EB",
-            dark: `linear-gradient(90deg, rgb(249 69 105 / 8%) 0%, rgb(255 128 153 / 8%) 100%),#E6E7EB`,
-          },
-          gray22: { main: "#A0A3A9" },
-          gray23: { main: "#818285" },
-          gray24: { main: "#555656" },
-          gray25: { main: "#292A2A" },
-          gray26: { main: "#1C1E1E" },
-          gray27: { main: "#141616" },
-          gray28: { main: "#0D0F0F" },
-          gray29: { main: "#000202" },
-          // Gray25-29: should be dynamic "add primary color at 8%"
         },
       },
 
@@ -287,17 +230,8 @@ export const muiTheme = ({
         : texture.background,
     }),
   });
-  return createMuiTheme(baseTheme, {
-    breakpoints: {
-      values: breakpointValues,
-    },
-    constants: {
-      leftMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
-      rightMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
-      leftMarginLogoAligned: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2 + 22.5px + 40px))`,
-      rightMarginNavAligned: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
-      brandGradient: `linear-gradient(90deg, rgb(249 69 105 / 100%) 0%, rgb(255 128 153 / 50%) 100%)`,
-    },
+
+  const dependentTheme = createMuiTheme(baseTheme, {
     palette: {
       primary: {
         contrastText: baseTheme.palette.getContrastText("#F94569"),
@@ -392,6 +326,82 @@ export const muiTheme = ({
       },
     },
   });
+
+  const lightTheme = createMuiTheme(dependentTheme, {
+    palette: {
+      mode: "light",
+      surfaces: {
+        background: { main: "#FFFFFF" },
+        sql: { main: "#E3EFFE" },
+        error: { main: "#F9EEEF" },
+        success: { main: "#DBF9F3" },
+        link: { main: "#2A81F6" },
+      },
+      navbar: {
+        /*main: "#FBFCFF",*/
+        main:
+          userNavbarLight ||
+          `linear-gradient(0deg, rgba(42, 129, 246, 0.02), rgba(42, 129, 246, 0.02)),#FFFFFF`,
+      },
+      footer: {
+        main: userFooterLight || "#00224E",
+      },
+      grays: {
+        gray20: { main: "#000202" },
+
+        gray21: {
+          main: "#2C2D2D",
+
+          // experimenting in dev tools - this looks ok?
+          dark: `linear-gradient(90deg, rgb(249 69 105 / 8%) 0%, rgb(255 128 153 / 8%) 100%),#2C2D2D`,
+        },
+        gray22: { main: "#555656" },
+        gray23: { main: "#818285" },
+        gray24: { main: "#A0A3A9" },
+        gray25: { main: "#C0C3CC" },
+        gray26: { main: "#E6E7EB" },
+        gray27: { main: "#F2F4F6" },
+        gray28: { main: "#F9FAFB" },
+        gray29: { main: "#FCFCFD" },
+      },
+    },
+  });
+  const darkTheme = createMuiTheme(dependentTheme, {
+    palette: {
+      mode: "dark",
+      surfaces: {
+        background: { main: "#000202" },
+        sql: { main: "#27293B" },
+        error: { main: "#370D10" },
+        success: { main: "#103D34" },
+        link: { main: "#2A81F6" },
+      },
+      navbar: {
+        main: userNavbarDark || "#201316",
+      },
+      footer: {
+        main: userFooterDark || "201316",
+      },
+      grays: {
+        gray20: { main: "#FCFCFD" },
+        gray21: {
+          main: "#E6E7EB",
+          dark: `linear-gradient(90deg, rgb(249 69 105 / 8%) 0%, rgb(255 128 153 / 8%) 100%),#E6E7EB`,
+        },
+        gray22: { main: "#A0A3A9" },
+        gray23: { main: "#818285" },
+        gray24: { main: "#555656" },
+        gray25: { main: "#292A2A" },
+        gray26: { main: "#1C1E1E" },
+        gray27: { main: "#141616" },
+        gray28: { main: "#0D0F0F" },
+        gray29: { main: "#000202" },
+        // Gray25-29: should be dynamic "add primary color at 8%"
+      },
+    },
+  });
+
+  return mode === "light" ? lightTheme : darkTheme;
 };
 
 declare module "@material-ui/core/Button" {
@@ -436,25 +446,13 @@ declare module "@material-ui/core/styles/createPalette" {
   }
 
   interface Palette {
-    surfaces?: {
-      light?: SurfacePalette;
-      dark?: SurfacePalette;
-    };
+    surfaces?: SurfacePalette;
 
-    navbar?: {
-      light?: PaletteColor;
-      dark?: PaletteColor;
-    };
+    navbar?: PaletteColor;
 
-    footer?: {
-      light?: PaletteColor;
-      dark?: PaletteColor;
-    };
+    footer?: PaletteColor;
 
-    grays?: {
-      light?: GrayPalette;
-      dark?: GrayPalette;
-    };
+    grays?: GrayPalette;
 
     textures?: {
       onLight?: TexturePalette;
@@ -509,30 +507,18 @@ declare module "@material-ui/core/styles/createPalette" {
     gray29: PaletteColorOptions;
   }
   interface PaletteOptions {
-    surfaces?: {
-      light?: SurfacePaletteOptions;
-      dark?: SurfacePaletteOptions;
-    };
+    surfaces?: SurfacePaletteOptions;
 
     textures?: {
       onLight?: TexturePaletteOptions;
       onDark?: TexturePaletteOptions;
     };
 
-    navbar?: {
-      light?: PaletteColorOptions;
-      dark?: PaletteColorOptions;
-    };
+    navbar?: PaletteColorOptions;
 
-    footer?: {
-      light?: PaletteColorOptions;
-      dark?: PaletteColorOptions;
-    };
+    footer?: PaletteColorOptions;
 
-    grays?: {
-      light?: GrayPaletteOptions;
-      dark?: GrayPaletteOptions;
-    };
+    grays?: GrayPaletteOptions;
 
     flambeeDarkGray?: PaletteColorOptions;
     flambeeLightGray?: PaletteColorOptions;
