@@ -16,6 +16,9 @@
     "templaters",
     "lib"
   ],
+  "resolutions": {
+    "@storybook/react/webpack": "5.51.1"
+  },
   "scripts": {
     "typecheck-and-build": "yarn run typecheck && yarn run build",
     "build": "yarn workspace @splitgraph/docs run build",
