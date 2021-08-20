@@ -54,7 +54,7 @@ jobs:
       # Typecheck
       - uses: actions/cache@v1
         with:
-          path: ${github.workspace}
+          path: ${github.workspace}/dist
           key: typecache
       - name: Typecheck
         id: typecheck

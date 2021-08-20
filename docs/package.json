@@ -76,7 +76,7 @@
     "@types/styled-system": "5.1.10",
     "babel-loader": "8.2.2",
     "now": "18.0.0",
-    "webpack": "5.28.0"
+    "webpack": "5.51.1"
   },
   "peerDependencies": {
     "@emotion/react": "*",
