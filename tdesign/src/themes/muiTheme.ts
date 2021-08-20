@@ -178,10 +178,6 @@ export const muiTheme = ({
         light: "#FFFFFF",
         dark: "#C0C3CC",
       },
-      dark2light: {
-        main:
-          "linear-gradient(180deg, rgba(13,24,33,1) 0%, rgba(54,102,141,1) 100%)",
-      },
       lightaccent: {
         main: "#96ccff",
       },
@@ -475,7 +471,6 @@ declare module "@material-ui/core/styles/createPalette" {
     errorBackground?: PaletteColor;
     successBackground?: PaletteColor;
     danger?: PaletteColor;
-    dark2light?: PaletteColor;
     lightaccent?: PaletteColor;
     gray?: PaletteColor;
     sglightblue?: PaletteColor;
@@ -549,7 +544,6 @@ declare module "@material-ui/core/styles/createPalette" {
     errorBackground?: PaletteColorOptions;
     successBackground?: PaletteColorOptions;
     danger?: PaletteColorOptions;
-    dark2light?: PaletteColorOptions;
     lightaccent?: PaletteColorOptions;
     gray?: PaletteColorOptions;
     sglightblue?: PaletteColorOptions;
