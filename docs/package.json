@@ -13,7 +13,9 @@
     "clean": "./clean.sh",
     "hello": "echo Hello from $(pwd)",
     "storybook": "start-storybook -p 3000",
-    "build-storybook": "build-storybook"
+    "storybook-build": "yarn run build-storybook -o out-storybook",
+    "storybook-dev": "yarn run storybook --host 0.0.0.0 --port 3000 --no-open",
+    "storybook-diagnostic": "yarn run storybook-dev --loglevel silly --debug-webpack"
   },
   "dependencies": {
     "@babel/plugin-transform-react-jsx": "7.13.12",

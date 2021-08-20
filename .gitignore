@@ -38,3 +38,4 @@ dist
 # During development it can be useful to serve a rootCA.pem 
 # from `docs/public/static` for easy download on a mobile device
 *.pem
+docs/out-storybook

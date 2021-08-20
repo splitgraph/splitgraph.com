@@ -146,6 +146,7 @@ yarn installation.
     forwards to the `docs` workspace anyway.
 - [docs](./docs) (Import from `@splitgraph/docs`)
   - The Next.js app that is the primary entrypoint of the repository
+  - Currently, storybook is part of the docs package
 - [tdesign](./tdesign) (Import from `@splitgraph/tdesign`)
   - The design kit / component library / theme / etc. Very much a WIP.
   - It's called "`tdesign`" as in "typescript design`, because originally we had JS files in `design`, and we are still migrating that.
@@ -253,6 +254,54 @@ const DemoStyled = styled.div`
     return props.theme.myColor;
   }};
 `;
+```
+
+</p></details>
+
+<details><summary>Storybook
+</summary><p>
+
+## Storybook
+
+Storybook is installed in the `@splitgraph/docs` workspace in the `docs` directory.
+The commands below assume that `docs` is the current working directory. Regardless
+of directory, you can always call the command by substituting `yarn`
+with `yarn workspace @splitgraph/docs`, e.g. `yarn workspace @splitgraph/docs storybook-dev`
+
+### Developing Storybook
+
+Will default bind to port `0.0.0.0:3000` (suitable for running in Docker).
+
+```bash
+# Command:
+yarn storybook-dev
+
+# Implementation:
+# "storybook-dev": "yarn run storybook --host 0.0.0.0 --port 3000 --no-open",
+```
+
+### Developing Storybook, but with more logs
+
+Same as development, but adds flags `--loglevel silly --debug-webpack`
+
+```bash
+# Command
+yarn storybook-diagnostic
+
+# Implementation
+# "storybook-diagnostic": "yarn run storybook-dev --loglevel silly --debug-webpack"
+```
+
+### Building Storybook
+
+Output will default to `docs/out-storybook`
+
+```bash
+# Command:
+yarn storybook-build
+
+# Implementation:
+# "storybook-build": "yarn run build-storybook -o out-storybook",
 ```
 
 </p></details>
