@@ -22,6 +22,26 @@ module.exports = {
     const green = (text) => `\x1b[32m${text}\x1b[0m`;
     const yellow = (text) => `\x1b[33m${text}\x1b[0m`;
 
+    const pRef = (pkg, opts) => {
+      const { scope, name, range } = pkg;
+      const { highlight } = opts ?? {};
+
+      const identity = (x) => x;
+
+      const hi = {
+        all: typeof highlight === "function" ? highlight : identity,
+        range: highlight?.range ?? identity,
+        name: highlight?.name ?? identity,
+        scope: highlight?.scope ?? identity,
+      };
+
+      return hi.all(
+        `${scope ? `@${hi.scope(scope)}/` : ""}${hi.name(name)}:${hi.range(
+          range
+        )}`
+      );
+    };
+
     class PinDepsCommand extends Command {
       async execute() {
         this.configuration = await Configuration.find(
@@ -147,7 +167,15 @@ module.exports = {
             // May cause unpredictable behavior if a package is both dependency and devDependency
             let curDependency = manifest.dependencies.get(identHash);
             let curDevDependency = manifest.devDependencies.get(identHash);
+
+            // note that curValue will be mutated when applying changes
             let curValue = curDependency ?? curDevDependency;
+
+            // do not mutate oldValue. if typescript, would use readonly
+            // (makes copy for name,scope,range – YMMV for other properties)
+            const oldValue = { ...curValue };
+
+            // let curPkgRef = highlight => pRef({ ...oldValue }, {highlight})
 
             if (curDependency && curDevDependency) {
               this.log.reportWarning(
@@ -172,7 +200,11 @@ module.exports = {
 
             this.log.reportInfo(
               `${manifestPath}`,
-              `${green(`→`)} Pin ${newDependency.name}:${newDependency.range}`
+              `${green(`→`)} Pin ${pRef(oldValue, {
+                highlight: { range: yellow },
+              })} → ${pRef(newDependency, {
+                highlight: { range: green },
+              })}`
             );
 
             numPinned = numPinned + 1;
@@ -196,10 +228,23 @@ module.exports = {
         }
       }
 
-      isDependencyExplicitlyIncluded({ name, range }) {
-        let packageRef = `${name}:${range}`;
-        let included = (this.alsoIncludePackages ?? []).includes(packageRef);
-        let selected = (this.onlyPackages ?? []).includes(packageRef);
+      // really should not be rolling our own here, but easier for specific use case
+      static referencesPackage(refPkg, { scope, name, range }) {
+        let candidatePkg = pRef({ scope, name, range });
+
+        let exactMatch = refPkg === candidatePkg;
+        let rangeMatch = [`:${range}`, `*:${range}`].includes(refPkg);
+
+        return exactMatch || rangeMatch;
+      }
+
+      isDependencyExplicitlyIncluded({ scope, name, range }) {
+        let included = (this.alsoIncludePackages ?? []).some((includeRef) =>
+          PinDepsCommand.referencesPackage(includeRef, { scope, name, range })
+        );
+        let selected = (this.onlyPackages ?? []).some((selectRef) =>
+          PinDepsCommand.referencesPackage(selectRef, { scope, name, range })
+        );
 
         return included || selected;
       }
@@ -253,7 +298,7 @@ module.exports = {
           }
 
           // Process devDependencies
-          if (this.onlyDevDependencies && !this.ignoreDevDependencies) {
+          if (this.onlyDevDependencies || !this.ignoreDevDependencies) {
             for (const [identHash, dependency] of devDependencies) {
               this.processDependency([identHash, dependency], {
                 workspaceCwd,
@@ -274,7 +319,8 @@ module.exports = {
           isDevDependency = false,
         } = opts;
 
-        const { name, range } = dependency;
+        const { scope, name, range } = dependency;
+        const depPkgRef = pRef({ scope, name, range });
         let explicitlyIncluded = this.isDependencyExplicitlyIncluded({
           name,
           range,
@@ -282,9 +328,9 @@ module.exports = {
 
         if (!PinDepsCommand.needsPin(range)) {
           if (explicitlyIncluded) {
-            this.logVerboseInfo(`${workspaceCwd}`, `Include: ${name}:${range}`);
+            this.logVerboseInfo(`${workspaceCwd}`, `Include: ${depPkgRef}`);
           } else {
-            this.logVerboseWarning(`${workspaceCwd}`, `Skip: ${name}:${range}`);
+            this.logVerboseWarning(`${workspaceCwd}`, `Skip: ${depPkgRef}`);
           }
 
           if (!explicitlyIncluded) {
@@ -292,11 +338,8 @@ module.exports = {
           }
         }
 
-        if (
-          this.onlyPackages &&
-          !this.onlyPackages.includes(`${name}:${range}`)
-        ) {
-          this.logVerboseWarning(`${workspaceCwd}`, `Omit: ${name}:${range}`);
+        if (this.onlyPackages && !this.onlyPackages.includes(depPkgRef)) {
+          this.logVerboseWarning(`${workspaceCwd}`, `Omit: ${depPkgRef}`);
           return;
         }
 
@@ -359,7 +402,7 @@ module.exports = {
             if (numDupes > 0) {
               this.log.reportWarningOnce(
                 `${workspaceCwd}`,
-                `Possible duplicate: ${name} has ${candidates.length} candidates (${numDupes} conflicting pairs)`
+                `Possible duplicate: ${depPkgRef} has ${candidates.length} candidates (${numDupes} conflicting pairs)`
               );
             }
           }
@@ -370,28 +413,26 @@ module.exports = {
         } else {
           this.log.reportWarning(
             `${workspaceCwd}`,
-            `Missing locator: ${name}:${range}`
+            `Missing locator: ${depPkgRef}`
           );
         }
 
         if (pinTo.version === range) {
           if (explicitlyIncluded) {
-            this.log.reportInfo(
-              `${yellow("-")} Already pinned: ${name}:${range}`
-            );
+            this.log.reportInfo(`${yellow("-")} Already pinned: ${depPkgRef}`);
           } else {
             this.logVerboseWarning(
               `${workspaceCwd}`,
-              `already pinned ${name}:${range} to ${pinTo.version}`
+              `already pinned ${depPkgRef} to ${pinTo.version}`
             );
           }
         } else {
           pinnableInWorkspace.set(identHash, pinTo);
-          reportablePinsInWorkspace.set(`${name}:${range}`, pinTo.version);
+          reportablePinsInWorkspace.set(depPkgRef, pinTo.version);
 
           this.logVerboseInfo(
             `${workspaceCwd}`,
-            `will pin ${name}:${range} to ${pinTo.version} in ${workspaceCwd}`
+            `will pin ${depPkgRef} to ${pinTo.version} in ${workspaceCwd}`
           );
         }
       }
@@ -501,6 +542,10 @@ module.exports = {
         [
           `Include (do not skip) any packages with reference next:canary`,
           `$0 pin-deps --include next:canary`,
+        ],
+        [
+          `Include any package with range \`canary\` (not a regex, only works for this syntax)`,
+          `$0 pin-deps --include :canary`,
         ],
         [
           `Include _only_ packages with reference next:canary or material-ui/core:latest`,
