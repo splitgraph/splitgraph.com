@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardContent,
   Slide,
+  SlideProps,
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 
@@ -42,9 +43,9 @@ export const UserColorPicker = ({
   );
 };
 
-const Transition = function Transition(props) {
-  return <Slide direction="up" {...props} />;
-};
+const Transition = forwardRef<unknown, SlideProps>((props, ref) => (
+  <Slide direction="up" ref={ref} {...props} />
+));
 
 const ColorDialog = ({
   onClose,
