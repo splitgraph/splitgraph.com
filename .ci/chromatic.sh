@@ -5,6 +5,12 @@ SPLITGRAPH_DIR="$CI_DIR/.."
 
 pushd "$SPLITGRAPH_DIR"
 
+if test -z "$CHROMATIC_PROJECT_TOKEN" ; then
+    >&2 echo "Configuration error: Missing required secret CHROMATIC_PROJECT_TOKEN"
+    popd
+    exit 1
+fi
+
 if test -f tsconfig.ci.json ; then
     >&2 echo "Build error: tsconfig.ci.json still exists, which means typecheck did not happen"
     popd
@@ -23,5 +29,12 @@ if test ! -d docs ; then
     exit 1
 fi
 
-cd docs
-yarn dlx chromatic --project-token="$CHROMATIC_PROJECT_TOKEN" --auto-accept-changes && exit 0
+cd docs || { echo "Failed to cd to docs" ; exit 1 ; }
+
+# Chromatic expects `yarn build-storybook` to exist (we are in docs directory)
+yarn dlx chromatic \
+    --project-token="$CHROMATIC_PROJECT_TOKEN" \
+    --auto-accept-changes \
+    && exit 0
+
+exit 1
