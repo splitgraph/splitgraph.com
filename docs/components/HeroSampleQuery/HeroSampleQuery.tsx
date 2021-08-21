@@ -60,7 +60,7 @@ const HeroSampleQuery = ({
           // width: "min(80ch, 100%)",
           // width: "80ch",
           backgroundColor: "heavy.main",
-          color: "light",
+          color: "light.main",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
@@ -74,7 +74,7 @@ const HeroSampleQuery = ({
           }}
           onClick={onClickPrev}
         >
-          <IconChevronLeft color={"light"} size={"1rem"} />
+          <IconChevronLeft color={"light.main"} size={"1rem"} />
         </Button>
         {description}
         <Button
@@ -84,7 +84,7 @@ const HeroSampleQuery = ({
           }}
           onClick={onClickNext}
         >
-          <IconChevronRight color={"light"} size={"1rem"} />
+          <IconChevronRight color={"light.main"} size={"1rem"} />
         </Button>
       </Box>
     </Box>

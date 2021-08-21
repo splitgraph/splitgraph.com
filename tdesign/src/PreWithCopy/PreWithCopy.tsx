@@ -24,7 +24,7 @@ const PreWithCopy = ({
     ...extraStyle,
     pre: {
       padding: "1rem",
-      backgroundColor: "surfaces.light.sql.main",
+      backgroundColor: ({ palette }) => palette.surfaces.sql.main,
       width: "100%",
       overflowX: "hidden",
       margin: 0,
@@ -45,7 +45,7 @@ const PreWithCopy = ({
     ".pre-row": {
       display: "flex",
       justifyContent: "space-between",
-      backgroundColor: "surfaces.light.sql.main",
+      backgroundColor: ({ palette }) => palette.surfaces.sql.main,
       ...(extraStyle.hasOwnProperty(".pre-row") ? extraStyle[".pre-row"] : {}),
     },
     ".copy-icon-container": {

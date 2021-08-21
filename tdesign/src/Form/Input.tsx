@@ -37,7 +37,7 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
           inputRef={ref}
           sx={{
             width: 200,
-            borderColor: error ? "danger" : "initial",
+            borderColor: error ? "danger.main" : "initial",
           }}
           id={id}
           name={name}

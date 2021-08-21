@@ -63,7 +63,7 @@ const HeroSampleSplitfile = ({ splitfiles }: IHeroSampleSplitfileProps) => {
           }}
           onClick={onClickPrev}
         >
-          <IconChevronLeft color={"light"} size={"1rem"} />
+          <IconChevronLeft color={"light.main"} size={"1rem"} />
         </Button>
         {description}
         <Button
@@ -73,7 +73,7 @@ const HeroSampleSplitfile = ({ splitfiles }: IHeroSampleSplitfileProps) => {
           }}
           onClick={onClickNext}
         >
-          <IconChevronRight color={"light"} size={"1rem"} />
+          <IconChevronRight color={"light.main"} size={"1rem"} />
         </Button>
       </Box>
     </Box>

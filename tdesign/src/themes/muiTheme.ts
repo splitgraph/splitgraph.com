@@ -65,9 +65,6 @@ export const muiTheme = ({
       errorBackground: {
         main: "rgba(193, 18, 18, 0.5)",
       },
-      successBackground: {
-        main: "rgba(59, 141, 54, 0.5)",
-      },
       success: {
         main: "#3B8D36",
       },
@@ -231,6 +228,7 @@ export const muiTheme = ({
     }),
   });
 
+  // this pass depends on certain defaults returned by the first createMuiTheme
   const dependentTheme = createMuiTheme(baseTheme, {
     palette: {
       primary: {
@@ -327,6 +325,7 @@ export const muiTheme = ({
     },
   });
 
+  // add in colors that are unique to light theme
   const lightTheme = createMuiTheme(dependentTheme, {
     palette: {
       mode: "light",
@@ -348,10 +347,8 @@ export const muiTheme = ({
       },
       grays: {
         gray20: { main: "#000202" },
-
         gray21: {
           main: "#2C2D2D",
-
           // experimenting in dev tools - this looks ok?
           dark: `linear-gradient(90deg, rgb(249 69 105 / 8%) 0%, rgb(255 128 153 / 8%) 100%),#2C2D2D`,
         },
@@ -366,6 +363,8 @@ export const muiTheme = ({
       },
     },
   });
+
+  // finally add in colors that are unique to dark theme
   const darkTheme = createMuiTheme(dependentTheme, {
     palette: {
       mode: "dark",
@@ -465,7 +464,6 @@ declare module "@material-ui/core/styles/createPalette" {
     flambeeRed?: PaletteColor;
     flambeeGreen?: PaletteColor;
     errorBackground?: PaletteColor;
-    successBackground?: PaletteColor;
     danger?: PaletteColor;
     lightaccent?: PaletteColor;
     gray?: PaletteColor;
@@ -526,7 +524,6 @@ declare module "@material-ui/core/styles/createPalette" {
     flambeeRed?: PaletteColorOptions;
     flambeeGreen?: PaletteColorOptions;
     errorBackground?: PaletteColorOptions;
-    successBackground?: PaletteColorOptions;
     danger?: PaletteColorOptions;
     lightaccent?: PaletteColorOptions;
     gray?: PaletteColorOptions;

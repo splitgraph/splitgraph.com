@@ -69,7 +69,7 @@ const DividedBox = ({
     background,
     ...containerStyle,
     ".divided-top": {
-      color: "light",
+      color: "light.main",
       fontSize: [5, 5, 6],
       paddingLeft: ["1rem", "1rem", "4rem"],
       paddingRight: "4rem",
