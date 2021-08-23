@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { OutlinedInput, InputAdornment, IconButton } from "@material-ui/core";
 import { IconCopy } from "../Icon";
-import { theme } from "../themes/design";
 import useCopyToClipboard from "./useClickToCopy";
 
 const ClickToCopyInput = (props) => {
@@ -20,9 +19,9 @@ const ClickToCopyInput = (props) => {
     <OutlinedInput
       sx={{
         "& .MuiOutlinedInput-root": {
-          background: theme.surfaces.light.sql,
+          background: ({ palette }) => palette.surfaces.sql.main,
           "& fieldset": {
-            borderColor: theme.grays.light.gray26,
+            borderColor: ({ palette }) => palette.grays.gray26.main,
           },
           "&:hover fieldset": {
             borderColor: "flambeeBlue.light",
@@ -33,7 +32,7 @@ const ClickToCopyInput = (props) => {
           },
         },
         "& .MuiOutlinedInput-root.Mui-error": {
-          backgroundColor: theme.surfaces.light.error,
+          backgroundColor: ({ palette }) => palette.surfaces.error.main,
           "& fieldset": {
             borderColor: "#B62B35", //TODO should this be computed?
           },

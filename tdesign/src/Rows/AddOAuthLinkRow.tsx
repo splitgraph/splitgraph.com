@@ -1,5 +1,4 @@
 import { Box, Typography } from "@material-ui/core";
-import { theme as designTheme } from "../themes/design";
 
 interface IAddOAuthLinkRowProps {
   children: React.ReactNode;
@@ -15,7 +14,7 @@ const AddOAuthLinkRow = ({ children }: IAddOAuthLinkRowProps) => {
         boxSizing: "border-box",
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.02);",
         borderRadius: "4px",
-        border: `1px solid ${designTheme.grays.light.gray26};`,
+        border: ({ palette }) => `1px solid ${palette.grays.gray26.main};`,
       }}
     >
       <Typography variant="bodyHighlighted" sx={{ ml: "1rem", mr: "29px" }}>

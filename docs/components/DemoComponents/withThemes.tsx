@@ -1,6 +1,5 @@
 import { getDisplayName } from "next/dist/next-server/lib/utils";
 import { ThemeProvider } from "@emotion/react";
-import { theme as designTheme } from "@splitgraph/tdesign";
 
 export interface MyTheme {
   myColor: string;
@@ -8,7 +7,7 @@ export interface MyTheme {
 }
 const theme: MyTheme = {
   myColor: "red",
-  myCoolColor: designTheme.primary.main,
+  myCoolColor: "blue",
 };
 
 const withThemes = (Page) => {

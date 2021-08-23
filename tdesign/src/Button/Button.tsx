@@ -7,8 +7,6 @@ import { SxProps } from "@material-ui/system";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 // import { IconEmail } from "../Icon";
 
-import { theme } from "../themes/design";
-
 export interface IButtonProps extends MuiButtonProps {
   sx?: SxProps<Theme>;
   large?: boolean;
@@ -28,17 +26,20 @@ const Button = ({
       borderRadius: "32px",
       px: "1rem",
       // pl: icon ? "3.5rem" : "2rem",
-      background: disabled
-        ? theme.grays.light.gray26
-        : "linear-gradient(270.8deg, #FF8099 4.38%, #F94569 93.29%)",
-      color: disabled ? theme.grays.light.gray22 : "white",
-      "&.Mui-disabled": { backgroundColor: theme.grays.light.gray26 },
+      background: ({ palette }) =>
+        disabled
+          ? palette.grays.gray26.main
+          : "linear-gradient(270.8deg, #FF8099 4.38%, #F94569 93.29%)",
+      color: ({ palette }) => (disabled ? palette.grays.gray22.main : "white"),
+      "&.Mui-disabled": {
+        backgroundColor: ({ palette }) => palette.grays.gray26.main,
+      },
       "&:hover": {
         background: "linear-gradient(270.8deg, #F94569 4.38%, #FF8099 93.29%)",
         boxShadow: "0px 4px 8px rgba(249, 69, 105, 0.2)",
       },
       "&:focus": {
-        boxShadow: `0px 0px 0px 1px ${theme.grays.light.gray20}`,
+        boxShadow: ({ palette }) => `0px 0px 0px 1px ${palette.grays.gray20}`,
         // July 2021: webkit doesn't support rounded outlines, so boxShadow is next best thing
       },
       minWidth: large ? "360px" : null,

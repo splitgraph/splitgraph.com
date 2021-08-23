@@ -1,5 +1,4 @@
 import { Button, ButtonProps, Typography } from "@material-ui/core";
-import { theme } from "../themes/design";
 
 interface ILinkButtonProps extends ButtonProps {
   small?: boolean;
@@ -13,7 +12,7 @@ const LinkButton = ({ sx, small, children, ...rest }: ILinkButtonProps) => {
         ":hover": {
           background: "inherit",
           textDecoration: "underline",
-          color: small ? theme.grays.light.gray22 : "inherit",
+          color: ({ palette }) => (small ? palette.grays.gray22 : "inherit"),
         },
         ":focus": {
           textDecoration: "underline",

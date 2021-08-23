@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Box } from "@material-ui/core";
-import { theme as designTheme } from "../themes/design";
 
 interface IBoxGroupProps {
   children: React.ReactNode;
@@ -16,7 +15,8 @@ const BoxGroup = ({ children }: IBoxGroupProps) => {
                 sx={{
                   height: "16px",
                   ml: ["50%", "36px"],
-                  borderLeft: `1px solid ${designTheme.grays.light.gray26}`,
+                  borderLeft: ({ palette }) =>
+                    `1px solid ${palette.grays.gray26.main}`,
                   userSelect: "none",
                 }}
               >

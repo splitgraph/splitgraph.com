@@ -6,7 +6,6 @@ import {
   IconButton,
 } from "@material-ui/core";
 import { IconPasswordHide, IconPasswordSee } from "../Icon";
-import { theme } from "../themes/design";
 import InFieldButton from "../Button/InFieldButton";
 import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 
@@ -31,7 +30,7 @@ const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
         sx={{
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
-              borderColor: theme.grays.light.gray26,
+              borderColor: ({ palette }) => palette.grays.gray26.main,
             },
             "&:hover fieldset": {
               borderColor: "flambeeBlue.light",
@@ -42,7 +41,7 @@ const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
             },
           },
           "& .MuiOutlinedInput-root.Mui-error": {
-            backgroundColor: theme.surfaces.light.error,
+            backgroundColor: ({ palette }) => palette.surfaces.error.main,
             "& fieldset": {
               borderColor: "#B62B35", //TODO is this computed?
             },
@@ -66,7 +65,8 @@ const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
               <ArrowRightAltIcon
                 sx={{
                   ml: "10px",
-                  color: disabled ? theme.grays.light.gray22 : "white",
+                  color: ({ palette }) =>
+                    disabled ? palette.grays.gray22.main : "white",
                 }}
               />
             </InFieldButton>

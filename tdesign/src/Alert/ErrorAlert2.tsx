@@ -3,7 +3,6 @@ import { SxProps } from "@material-ui/system";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import MuiLink from "../Link/MuiLink";
 import IconAlertTriangle from "../Icon/IconAlertTriangle";
-import { theme } from "../themes/design";
 
 const ErrorHeading = () => {
   return (
@@ -51,7 +50,7 @@ const ErrorAlert = ({
         display: "flex",
         alignItems: "center",
         marginBottom: 4,
-        backgroundColor: theme.surfaces.light.error,
+        backgroundColor: (theme) => theme.palette.surfaces.error.main,
         borderRadius: "4px",
         padding: "8px 8px 10px",
         ...sx,

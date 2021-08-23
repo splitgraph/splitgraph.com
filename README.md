@@ -201,6 +201,7 @@ These are the three themes you could import:
 
 - [design.ts](./tdesign/src/themes/design.ts)
   - The basic theme that you usually want to import. Works with Emotion. WIP.
+  - Aug 2021: this has been merged with muiTheme.ts and may be considered 'soft deprecated'.
 - [muiTheme.ts](./tdesign/src/themes/muiTheme.ts)
   - The theme you want to import if the page is using any MUI components.
 - [legacyTheme.ts](./tdesign/src/themes/legacyTheme.ts)

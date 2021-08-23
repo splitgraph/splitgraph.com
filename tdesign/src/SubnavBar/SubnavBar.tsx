@@ -1,5 +1,4 @@
 import { Box, Typography } from "@material-ui/core";
-import { theme as designTheme } from "../themes/design";
 
 interface Section {
   displayName: string;
@@ -22,7 +21,7 @@ const SubnavBar = ({
       sx={{
         display: "flex",
         alignItems: "center",
-        borderBottom: `1px solid ${designTheme.grays.light.gray26}`,
+        borderBottom: ({ palette }) => `1px solid ${palette.grays.gray26.main}`,
         ul: { pl: "0px" },
         ".unstyledLink": {
           color: "inherit",
@@ -30,7 +29,7 @@ const SubnavBar = ({
         },
         ".sectionLink": {
           display: "inline",
-          color: designTheme.grays.light.gray25,
+          color: ({ palette }) => `1px solid ${palette.grays.gray25.main}`,
           "&:not(:last-child)": {
             mr: "24px",
           },

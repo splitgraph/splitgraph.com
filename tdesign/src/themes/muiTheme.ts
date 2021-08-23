@@ -1,5 +1,4 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-// import { theme as coreTheme } from "./design";
 import prismTheme from "./prismTheme";
 
 const breakpointValues = {
@@ -232,10 +231,14 @@ export const muiTheme = ({
   const dependentTheme = createMuiTheme(baseTheme, {
     palette: {
       primary: {
-        contrastText: baseTheme.palette.getContrastText("#F94569"),
+        contrastText: baseTheme.palette.getContrastText(
+          baseTheme.palette.primary.main
+        ),
       },
       danger: {
-        contrastText: baseTheme.palette.getContrastText("#8D363C"),
+        contrastText: baseTheme.palette.getContrastText(
+          baseTheme.palette.danger.main
+        ),
       },
       pre: {
         ...prismTheme,
