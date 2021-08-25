@@ -71,7 +71,7 @@ const ErrorAlert = ({
       </Box>
 
       {dismissLinkText && dismissLinkHref && (
-        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Box sx={{ display: "flex", justifyContent: "flex-end", pl: "2rem" }}>
           <ErrorResetLink text={dismissLinkText} href={dismissLinkHref} />
         </Box>
       )}

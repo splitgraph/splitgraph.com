@@ -93,6 +93,7 @@ const SuccessAlert = ({
           sx={{
             display: "flex",
             justifyContent: dismissLinkOwnRow ? "flex-start" : "flex-end",
+            pl: "2rem",
           }}
         >
           {dismissLinkHref ? (
