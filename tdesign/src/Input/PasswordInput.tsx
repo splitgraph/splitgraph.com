@@ -8,7 +8,7 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 import { IconPasswordHide, IconPasswordSee } from "../Icon";
-import { NestDataObject, FieldValues, FieldError} from 'react-hook-form'
+import { NestDataObject, FieldValues, FieldError } from "react-hook-form";
 
 interface IPasswordInputProps extends OutlinedInputProps {
   extraEndAdornment?: React.ReactNode;
@@ -41,11 +41,7 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
                 aria-label="toggle password visibility"
                 edge="end"
               >
-                {showPassword ? (
-                  <IconPasswordSee />
-                ) : (
-                  <IconPasswordHide />
-                )}
+                {showPassword ? <IconPasswordSee /> : <IconPasswordHide />}
               </IconButton>
               {!!extraEndAdornment && (
                 <Box sx={{ ml: "1rem" }}>{extraEndAdornment}</Box>
@@ -72,11 +68,13 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
               },
             },
           }}
-          error={!!errors[name]}
+          error={!!errors && !!errors[name]}
           name={name}
           {...rest}
         />
-        {!!errors[name] && <FormHelperText>{errors[name]?.message}</FormHelperText>}
+        {!!errors && !!errors[name] && (
+          <FormHelperText>{errors[name]?.message}</FormHelperText>
+        )}
       </>
     );
   }

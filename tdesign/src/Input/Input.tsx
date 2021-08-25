@@ -4,7 +4,7 @@ import {
   OutlinedInputProps,
   FormHelperText,
 } from "@material-ui/core";
-import { NestDataObject, FieldValues, FieldError} from 'react-hook-form'
+import type { NestDataObject, FieldValues, FieldError } from "react-hook-form";
 
 interface IInputProps extends OutlinedInputProps {
   errors?: NestDataObject<FieldValues, FieldError>;
@@ -36,11 +36,13 @@ const Input = forwardRef<HTMLInputElement, IInputProps>((props, ref) => {
             },
           },
         }}
-        error={!!errors[name]}
+        error={!!errors && !!errors[name]}
         name={name}
         {...rest}
       />
-      {!!errors[name] && <FormHelperText>{errors[name]?.message}</FormHelperText>}
+      {!!errors && !!errors[name] && (
+        <FormHelperText>{errors[name]?.message}</FormHelperText>
+      )}
     </>
   );
 });
