@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { Box } from "@material-ui/core";
 import { SxProps } from "@material-ui/system";
 import type { Theme } from "@material-ui/core/styles/createMuiTheme";
@@ -89,6 +90,18 @@ const BaseLayout = ({
   const headerCenter = !!renderHeaderCenter ? renderHeaderCenter() : null;
   const headerRight = !!renderHeaderRight ? renderHeaderRight() : null;
 
+  // TEMPORARY: require user action to show the dark mode toggle
+  // From a JS console, run window.toggleShowDarkModeControl(true)
+  const [showDarkModeToggle, setShowDarkModeToggle] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    // @ts-ignore next
+    window.toggleShowDarkModeControl = (v) => setShowDarkModeToggle(v);
+  }, []);
+
   return (
     <Box sx={containerStyle}>
       {showHeader && (
@@ -106,21 +119,23 @@ const BaseLayout = ({
           </HeaderLeft>
           <HeaderCenter>{headerCenter}</HeaderCenter>
           <HeaderRight>{headerRight}</HeaderRight>
-          <UserThemeContext.Consumer>
-            {({ userColors, setUserColors, toggleDarkMode }) => (
-              <div>
-                <span onClick={toggleDarkMode}>
-                  {userColors.mode === "light" ? "🌙" : "🌞"}
-                  &nbsp;
-                </span>
-                <UserColorPicker
-                  userColors={userColors}
-                  setUserColors={setUserColors}
-                  toggleDarkMode={toggleDarkMode}
-                />
-              </div>
-            )}
-          </UserThemeContext.Consumer>
+          {showDarkModeToggle && (
+            <UserThemeContext.Consumer>
+              {({ userColors, setUserColors, toggleDarkMode }) => (
+                <div>
+                  <span onClick={toggleDarkMode}>
+                    {userColors.mode === "light" ? "🌙" : "🌞"}
+                    &nbsp;
+                  </span>
+                  <UserColorPicker
+                    userColors={userColors}
+                    setUserColors={setUserColors}
+                    toggleDarkMode={toggleDarkMode}
+                  />
+                </div>
+              )}
+            </UserThemeContext.Consumer>
+          )}
         </Header>
       )}
       {children}
