@@ -10,8 +10,8 @@ export interface IMainContentProps {
 const mainContentStyle: SxProps<Theme> = {};
 
 const MainContent = ({ children, extraStyle = {} }: IMainContentProps) => {
-  const outerContainerStyle: SxProps<Theme> = {
-    backgroundColor: "white",
+  const outerContainerStyle = {
+    // backgroundColor: "white",
     minHeight: "100vh",
     fontFamily:
       "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji",

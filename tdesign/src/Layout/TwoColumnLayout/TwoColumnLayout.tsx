@@ -38,11 +38,9 @@ const useResponsiveStyle = (): ILayoutContext => {
     gridRowGap: 0,
     ".two-col-left": {
       gridArea: leftArea,
-      backgroundColor: (theme) => theme.palette.navbar.light.main,
-      color: (theme) =>
-        theme.palette.getContrastText(
-          theme.palette.surfaces.light.background.main
-        ),
+      backgroundColor: ({ palette }) => palette.navbar.main,
+      color: ({ palette }) =>
+        palette.getContrastText(palette.surfaces.background.main),
     },
     ".two-col-main": {
       gridArea: rightArea,

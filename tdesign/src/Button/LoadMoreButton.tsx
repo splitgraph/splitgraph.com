@@ -8,7 +8,7 @@ const LoadMoreButton = ({ children, ...rest }) => {
     <Button
       variant="pill"
       sx={{
-        border: (theme) => `1px solid ${theme.palette.flambeeRed.light}`,
+        border: ({ palette }) => `1px solid ${palette.flambeeRed.light}`,
         padding: "12px",
         boxShadow: "none",
       }}

@@ -3,7 +3,6 @@ import { SxProps } from "@material-ui/system";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import MuiLink from "../Link/MuiLink";
 import IconCheckCircle2 from "../Icon/IconCheckCircle2";
-import { theme as design } from "../themes/design";
 
 const Checkmark = () => {
   return (
@@ -59,7 +58,7 @@ const SuccessAlert = ({
     borderRadius: "4px",
     padding: "8px 8px 10px",
     color: "#43766C", //TODO consider 'on surface'
-    backgroundColor: design.surfaces.light.success,
+    backgroundColor: (theme) => theme.palette.surfaces.success.main,
     ...(dismissLinkOwnRow
       ? {
           flexWrap: "wrap",

@@ -3,8 +3,6 @@ import { SxProps } from "@material-ui/system";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 // import { IconEmail } from "../Icon";
 
-import { theme } from "../themes/design";
-
 interface IButtonProps extends ButtonProps {
   sx?: SxProps<Theme>;
   large?: boolean;
@@ -23,14 +21,19 @@ const InvisibleButton = ({
     sx={{
       borderRadius: "32px",
       px: "1rem",
-      color: disabled ? theme.grays.light.gray20 : "black",
-      "&.Mui-disabled": { backgroundColor: theme.grays.light.gray26 },
+      color: ({ palette }) =>
+        disabled ? palette.grays.gray20.main : palette.common.black,
+      "&.Mui-disabled": {
+        backgroundColor: ({ palette }) => palette.grays.gray26.main,
+      },
       "&:hover": {
-        boxShadow: `0px 0px 0px 1px ${theme.grays.light.gray25}`,
+        boxShadow: ({ palette }) =>
+          `0px 0px 0px 1px ${palette.grays.gray25.main}`,
         background: "transparent",
       },
       "&:focus": {
-        boxShadow: `0px 0px 0px 1px ${theme.grays.light.gray20}`,
+        boxShadow: ({ palette }) =>
+          `0px 0px 0px 1px ${palette.grays.gray20.main}`,
       },
       minWidth: large ? "360px" : null,
       minHeight: large ? "40px" : null,

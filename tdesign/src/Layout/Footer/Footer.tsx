@@ -31,7 +31,7 @@ const darkVariant = {
       textDecoration: "underline",
     },
   },
-  backgroundColor: "surfaces.dark.sql.main",
+  backgroundColor: ({ palette }) => palette.footer.main,
   borderTop: "0.5ch solid",
   borderTopColor: "lightaccent.main",
 };

@@ -40,7 +40,7 @@ const MenuItem = ({
 
   if (!defaultIconColor) {
     defaultIconColor = theme.palette.getContrastText(
-      theme.palette.surfaces.light.background.main
+      theme.palette.surfaces.background.main
     );
   }
 
@@ -84,9 +84,7 @@ const MenuItem = ({
     },
     "a:not(.menu-item-label--active)": {
       color: (theme) =>
-        theme.palette.getContrastText(
-          theme.palette.surfaces.light.background.main
-        ),
+        theme.palette.getContrastText(theme.palette.surfaces.background.main),
       textDecoration: "none",
     },
     ":hover": {

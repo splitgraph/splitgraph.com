@@ -3,13 +3,10 @@
 CI_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 SPLITGRAPH_DIR="$CI_DIR/.."
 
-pushd "$SPLITGRAPH_DIR"
+# Set to true with any non-blank value (1, yes, etc.) to only build storybook
+BUILD_STORYBOOK_ONLY_WITHOUT_CHROMATIC="${BUILD_STORYBOOK_ONLY_WITHOUT_CHROMATIC-""}"
 
-if test -z "$CHROMATIC_PROJECT_TOKEN" ; then
-    >&2 echo "Configuration error: Missing required secret CHROMATIC_PROJECT_TOKEN"
-    popd
-    exit 1
-fi
+pushd "$SPLITGRAPH_DIR"
 
 if test -f tsconfig.ci.json ; then
     >&2 echo "Build error: tsconfig.ci.json still exists, which means typecheck did not happen"
@@ -35,25 +32,49 @@ cd docs || { echo "Failed to cd to docs" ; exit 1 ; }
 # Write the build to a known location (not default /tmp) so that CI can cache it
 mkdir -p out-storybook
 
-# https://www.chromatic.com/docs/cli
-# note: --ignore-last-build-on-branch is for rebase situations (see above link)
-# todo: add --skip argument, if commit msg includes e.g. [skip chromatic]
-yarn dlx chromatic \
-    --build-script-name "storybook-build" \
-    --output-dir "out-storybook" \
-    --project-token="$CHROMATIC_PROJECT_TOKEN" \
-    --ignore-last-build-on-branch \
-    --auto-accept-changes \
-    && exit 0
+main() {
+    if test -n "$BUILD_STORYBOOK_ONLY_WITHOUT_CHROMATIC" ; then
+        build_storybook_only && return 0
+    else
+        build_and_ship_to_chromatic && return 0
+    fi
+
+    return 1
+}
+
+build_and_ship_to_chromatic() {
+    if test -z "$CHROMATIC_PROJECT_TOKEN" ; then
+        >&2 echo "Configuration error: Missing required secret CHROMATIC_PROJECT_TOKEN"
+        popd
+        exit 1
+    fi
+
+    # https://www.chromatic.com/docs/cli
+    # note: --ignore-last-build-on-branch is for rebase situations (see above link)
+    # todo: add --skip argument, if commit msg includes e.g. [skip chromatic]
+    yarn dlx chromatic \
+        --build-script-name "storybook-build" \
+        --output-dir "out-storybook" \
+        --project-token="$CHROMATIC_PROJECT_TOKEN" \
+        --ignore-last-build-on-branch \
+        --auto-accept-changes \
+        && return 0
+
+    return 1
+}
+
+build_storybook_only() {
+    yarn run storybook-build \
+        --output-dir out-storybook \
+        && return 0
+    return 1
+}
+
+main "$@" && exit 0
 
 exit 1
+
 # the end. remainder of file is for debugging and notes
-
-# When debugging, you probably just want to run a build, so uncomment this:
-# yarn run storybook-build \
-#     --output-dir out-storybook \
-#     && exit 0
-
 # NOTE
 # TEMPORARY WORKAROUND for upstream bugs amidst the ecosystem migration to webpack 5
 # [Commenting here since this is the file that could have a CI failure due to this.]

@@ -1,6 +1,5 @@
 import { forwardRef } from "react";
 import { OutlinedInput, OutlinedInputProps } from "@material-ui/core";
-import { theme } from "../themes/design";
 
 const Input = forwardRef<HTMLInputElement, OutlinedInputProps>((props, ref) => {
   return (
@@ -9,7 +8,7 @@ const Input = forwardRef<HTMLInputElement, OutlinedInputProps>((props, ref) => {
       sx={{
         "& .MuiOutlinedInput-root": {
           "& fieldset": {
-            borderColor: theme.grays.light.gray26,
+            borderColor: ({ palette }) => palette.grays.gray26.main,
           },
           "&:hover fieldset": {
             borderColor: "flambeeBlue.light",
@@ -20,7 +19,7 @@ const Input = forwardRef<HTMLInputElement, OutlinedInputProps>((props, ref) => {
           },
         },
         "& .MuiOutlinedInput-root.Mui-error": {
-          backgroundColor: theme.surfaces.light.error,
+          backgroundColor: ({ palette }) => palette.surfaces.error.main,
           "& fieldset": {
             borderColor: "#B62B35", //TODO is this computed?
           },

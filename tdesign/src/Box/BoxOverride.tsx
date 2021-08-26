@@ -1,6 +1,6 @@
 import { Box, BoxProps } from "@material-ui/core";
-import type { SxProps } from "@material-ui/system";
-import type { Theme } from "@material-ui/core/styles/createMuiTheme";
+// import type { SxProps } from "@material-ui/system";
+// import type { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 // MUI supports variants but not for the default <Box> component;
 // https://github.com/mui-org/material-ui/issues/25759
@@ -13,7 +13,7 @@ export interface BoxOverrideProps extends BoxProps {
     | "errorNotice"
     | "errorText"
     | "notice";
-  sx?: SxProps<Theme>;
+  // sx?: SxProps<Theme>;
 }
 
 const paddedContentAreaStyle = {

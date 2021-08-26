@@ -53,8 +53,8 @@ const SuccessAlert = ({
     padding: "8px",
     marginBottom: "4px",
     minWidth: "30vw",
-    backgroundColor: (theme) => theme.palette.successBackground.main,
-    border: (theme) => `1px solid ${theme.palette.success.main}`,
+    backgroundColor: "rgba(59, 141, 54, 0.5)",
+    border: ({ palette }) => `1px solid ${palette.success.main}`,
     ...(dismissLinkOwnRow
       ? {
           flexWrap: "wrap",

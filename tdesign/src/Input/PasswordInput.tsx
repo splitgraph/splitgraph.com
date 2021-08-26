@@ -7,7 +7,6 @@ import {
   IconButton,
 } from "@material-ui/core";
 import { IconPasswordHide, IconPasswordSee } from "../Icon";
-import { theme } from "../themes/design";
 
 interface State {
   password: string;
@@ -59,7 +58,7 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
         sx={{
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
-              borderColor: theme.grays.light.gray26,
+              borderColor: ({ palette }) => palette.grays.gray26.main,
             },
             "&:hover fieldset": {
               borderColor: "flambeeBlue.light",
@@ -70,7 +69,7 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
             },
           },
           "& .MuiOutlinedInput-root.Mui-error": {
-            backgroundColor: theme.surfaces.light.error,
+            backgroundColor: ({ palette }) => palette.surfaces.error.main,
             "& fieldset": {
               borderColor: "#B62B35", //TODO is this computed?
             },

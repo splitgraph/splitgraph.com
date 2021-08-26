@@ -1,5 +1,4 @@
 import { Box, Typography, Avatar } from "@material-ui/core";
-import { theme as designTheme } from "../themes/design";
 
 interface ILinkedOAuthRowProps {
   name: string;
@@ -24,7 +23,7 @@ const LinkedOAuthRow = ({
         boxSizing: "border-box",
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.02);",
         borderRadius: "4px",
-        border: `1px solid ${designTheme.grays.light.gray26};`,
+        border: ({ palette }) => `1px solid ${palette.grays.gray26.main};`,
       }}
     >
       <Box sx={{ display: "flex" }}>
