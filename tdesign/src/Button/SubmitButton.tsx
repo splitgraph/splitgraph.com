@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Button } from "@material-ui/core";
+import { Button, ButtonProps } from "@material-ui/core";
 
-export interface SubmitButtonProps {
+export interface SubmitButtonProps extends ButtonProps {
   disabled?: boolean;
   hasErrors?: boolean;
   sx?: {};

@@ -13,6 +13,7 @@ export interface ILogoProps {
   wordmarkURL: string | null;
   logoText: string | null;
   brandName: string | null;
+  brandmarkColor?: string | null;
 
   // in the logo we use <a>, so we don't need the Next.js URL type
   linkTo?: string;
@@ -37,6 +38,7 @@ const Logo = ({
   logoText,
   // todo
   // brandName,
+  brandmarkColor = "#FF8099",
   linkTo = "/",
   scale,
 }: ILogoProps) => {
@@ -92,7 +94,7 @@ const Logo = ({
           },
           ".brandmark": {
             cursor: "pointer",
-            display: "none",
+            display: animateWordmarkOnHover ? "none" : "inherit",
           },
           ".wordmark": {
             ...(animateWordmarkOnHover
@@ -119,6 +121,7 @@ const Logo = ({
           ".brandmark": {
             cursor: "pointer",
             display: "flex",
+            color: brandmarkColor,
           },
           ".wordmark": {
             backgroundImage: `url("${wordmarkURL}")`,
@@ -150,7 +153,9 @@ const Logo = ({
       >
         <Box className="brandmark-container">
           <img className="brandmark" src={brandmarkURL} alt={logoText} />
-          <img className="brandmark-animated" src={onHoverBrandmarkURL} />
+          {animateWordmarkOnHover && (
+            <img className="brandmark-animated" src={onHoverBrandmarkURL} />
+          )}
         </Box>
         <Box className="wordmark-container">
           <div className="wordmark">&nbsp;</div>

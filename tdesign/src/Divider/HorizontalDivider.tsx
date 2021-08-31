@@ -1,6 +1,10 @@
 import { Box } from "@material-ui/core";
 
-const HorizontalDivider = ({ children, ...rest }) => (
+interface IHorizontalDividerProps {
+  children?: React.ReactNode;
+}
+
+const HorizontalDivider = ({ children, ...rest }: IHorizontalDividerProps) => (
   <Box sx={{ display: "flex", justifyContent: "center" }}>
     <Box
       sx={{

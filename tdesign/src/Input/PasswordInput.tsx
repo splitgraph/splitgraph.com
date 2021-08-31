@@ -8,27 +8,16 @@ import {
 } from "@material-ui/core";
 import { IconPasswordHide, IconPasswordSee } from "../Icon";
 
-interface State {
-  password: string;
-  showPassword: boolean;
-}
-
 interface IPasswordInputProps extends OutlinedInputProps {
   extraEndAdornment?: React.ReactNode;
 }
 
 const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
   (props, ref) => {
-    const [values, setValues] = useState<State>({
-      password: "",
-      showPassword: false,
-    });
+    const [showPassword, setShowPassword] = useState(false);
     const { extraEndAdornment, ...rest } = props;
     const handleClickShowPassword = () => {
-      setValues({
-        ...values,
-        showPassword: !values.showPassword,
-      });
+      setShowPassword(!showPassword);
     };
 
     const handleMouseDownPassword = (
@@ -39,7 +28,7 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
     return (
       <OutlinedInput
         inputRef={ref}
-        type={values.showPassword ? "text" : "password"}
+        type={showPassword ? "text" : "password"}
         endAdornment={
           <InputAdornment position="end">
             <IconButton
@@ -48,7 +37,7 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
               aria-label="toggle password visibility"
               edge="end"
             >
-              {values.showPassword ? <IconPasswordSee /> : <IconPasswordHide />}
+              {showPassword ? <IconPasswordSee /> : <IconPasswordHide />}
             </IconButton>
             {!!extraEndAdornment && (
               <Box sx={{ ml: "1rem" }}>{extraEndAdornment}</Box>
