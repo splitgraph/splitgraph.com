@@ -319,7 +319,6 @@ export const muiTheme = ({
               // Reset on touch devices, it doesn't add specificity
               "@media (hover: none)": {
                 boxShadow: baseTheme.shadows[2],
-                backgroundColor: baseTheme.palette.grey[300],
               },
             },
           },
