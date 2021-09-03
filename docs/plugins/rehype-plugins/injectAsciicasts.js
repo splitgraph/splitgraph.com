@@ -11,14 +11,14 @@ const makeCastNode = ({ castManifest, inputNode }) => {
   if (!inputSrc) {
     return {
       type: "text",
-      value: "Error: cast has no src"
+      value: "Error: cast has no src",
     };
   }
 
   if (!Object.keys(castManifest).includes(inputSrc)) {
     return {
       type: "text",
-      value: "Error: Invalid cast src"
+      value: "Error: Invalid cast src",
     };
   }
 
@@ -36,7 +36,7 @@ const makeCastNode = ({ castManifest, inputNode }) => {
   const toolbarHeightPx = 47; // 32 height, 15 padding
   const iframePxHeight = fontSize * lineHeight * intHeight + toolbarHeightPx;
 
-  const containerPaddingTop = `height: ${400}`;
+  const containerPaddingTop = `height: 400px`;
 
   // Render a background ahead of time, so there is less of a white flash
   // Use linear-gradient trick to render background to expected height exactly
@@ -47,8 +47,8 @@ const makeCastNode = ({ castManifest, inputNode }) => {
     tagName: "div",
     properties: {
       className: "asciinema-embed-container",
-      style: `overflow:hidden; ${containerPaddingTop}; position:relative;`
-    }
+      style: `overflow:hidden; ${containerPaddingTop}; position:relative;`,
+    },
   };
 
   const iframeNode = {
@@ -58,13 +58,13 @@ const makeCastNode = ({ castManifest, inputNode }) => {
       src: embedHttpPath,
       className: "asciinema-embed",
       style: `position:absolute;left:0;top:0;min-width:100%;width:100%;height:100%;border:none;background:${background};`,
-      allowFullScreen: true
-    }
+      allowFullScreen: true,
+    },
   };
 
   const newNode = {
     ...containerNode,
-    children: [iframeNode]
+    children: [iframeNode],
   };
 
   return newNode;
@@ -80,8 +80,8 @@ const injectAsciicasts = ({ castManifest }) => (tree, file) => {
 
   visit(
     tree,
-    node => node.type === "jsx" || node.type == "html",
-    node => {
+    (node) => node.type === "jsx" || node.type == "html",
+    (node) => {
       const isRawCastHtml =
         node.value && node.value.includes(`<${CAST_TAGNAME}`);
 
@@ -96,13 +96,13 @@ const injectAsciicasts = ({ castManifest }) => (tree, file) => {
         nodeType: "element",
         tagName: "cast",
         properties: {
-          src: extractedSrc
-        }
+          src: extractedSrc,
+        },
       };
 
       let newNode = makeCastNode({
         castManifest,
-        inputNode
+        inputNode,
       });
 
       Object.assign(node, newNode);

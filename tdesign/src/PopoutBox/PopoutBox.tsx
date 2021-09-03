@@ -1,7 +1,7 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
 import * as React from "react";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 export interface IRenderPopoutButtonProps {
   onClick: () => void;
@@ -23,22 +23,19 @@ export type PopoutAnchorPosition =
       PopoutAnchorPositionString
     ];
 
-
 export interface IPopoutBoxRef {
   toggleOpen: () => void;
 }
 export interface IPopoutBoxProps {
   renderButton: (opts: IRenderPopoutButtonProps) => React.ReactNode;
   children?: React.ReactNode;
-  popoutContainerStyle?: SystemStyleObject;
+  popoutContainerStyle?: SxProps<Theme>;
   anchorPosition?: PopoutAnchorPosition;
   buttonProps?: any;
   popoutBoxRef?: React.RefObject<IPopoutBoxRef>;
 }
 
-const getAnchorPositionStyle = (
-  pos?: PopoutAnchorPosition
-): SystemStyleObject => {
+const getAnchorPositionStyle = (pos?: PopoutAnchorPosition): object => {
   const posInitial = {
     top: "initial",
     bottom: "initial",
@@ -83,19 +80,18 @@ const getAnchorPositionStyle = (
       ],
       left: [posMap[pos[0]].left, posMap[pos[1]].left, posMap[pos[2]].left],
       right: [posMap[pos[0]].right, posMap[pos[1]].right, posMap[pos[2]].right],
-    } as SystemStyleObject;
+    };
   } else if (pos) {
-    return posMap[pos] as SystemStyleObject;
+    return posMap[pos];
   }
 
-  return posInitial as SystemStyleObject;
+  return posInitial;
 };
 
-const containerStyle = {
+const containerStyle: SxProps<Theme> = {
   display: "inline",
   position: "relative",
-} as SystemStyleObject;
-
+};
 
 const PopoutBox = ({
   children,
@@ -103,26 +99,26 @@ const PopoutBox = ({
   popoutContainerStyle = {},
   anchorPosition,
   buttonProps = {},
-  popoutBoxRef
+  popoutBoxRef,
 }: IPopoutBoxProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const containerRef = React.useRef<IPopoutBoxRef & HTMLDivElement>(null);
 
   React.useImperativeHandle(popoutBoxRef, () => ({
     toggleOpen: () => {
-      setIsOpen(!isOpen)
-    }
+      setIsOpen(!isOpen);
+    },
   }));
 
   const anchorPositionStyle = getAnchorPositionStyle(anchorPosition);
 
-  const mergedPopoutContainerStyle = {
+  const mergedPopoutContainerStyle: SxProps<Theme> = {
     zIndex: 10,
     position: "absolute",
-    boxShadow: "hovering",
+    boxShadow: "0 0 1rem rgba(0, 0, 0, .5)",
     ...anchorPositionStyle,
     ...popoutContainerStyle,
-  } as SystemStyleObject;
+  };
 
   // When user clicks outside of container, close the popout
   const handleDocumentClick = (e: any) => {

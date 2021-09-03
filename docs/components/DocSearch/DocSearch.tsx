@@ -1,7 +1,5 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box } from "theme-ui";
-import * as React from "react";
+import { useState, useEffect } from "react";
+import { Box } from "@material-ui/core";
 import { Helmet } from "react-helmet";
 
 import { searchIconURI } from "@splitgraph/tdesign";
@@ -47,11 +45,11 @@ const mountBodyScript = ({ onLoad }) => {
 };
 
 const DocSearch = ({}: IDocSearchProps) => {
-  const [enabled, setEnabled] = React.useState(true);
+  const [enabled, setEnabled] = useState(true);
 
-  const [windowReady, setWindowReady] = React.useState(false);
+  const [windowReady, setWindowReady] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (typeof window === "undefined") {
       setWindowReady(false);
       return;
@@ -74,7 +72,7 @@ const DocSearch = ({}: IDocSearchProps) => {
     });
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!windowReady) {
       return;
     }
@@ -116,9 +114,9 @@ const DocSearch = ({}: IDocSearchProps) => {
       paddingTop: "0.5em",
       paddingBottom: "0.5em",
       backgroundColor: "white",
-      color: "heavy",
+      color: "heavy.main",
       border: "1px solid gray",
-      // color: "gray",
+      // color: "gray.main",
       // min 16px font size so iOS does not zoom on focus
       fontSize: ["16px", "inherit", "inherit"],
     },

@@ -1,21 +1,22 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
-import * as React from "react";
 import { useContext } from "react";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 // ILayoutContext,
 import { LayoutContext } from "../Layout/TwoColumnLayout";
 
 export interface MenuProps {
   children?: React.ReactNode;
-  style?: SystemStyleObject;
+  style?: SxProps<Theme>;
 }
 
-export default ({ children, style = {} }: MenuProps) => {
+const Menu = ({ children, style = {} }: MenuProps) => {
   const { expanded } = useContext(LayoutContext);
 
-  const containerStyle = {
+  const containerStyle: SxProps<Theme> = {
+    ...style,
+    maxWidth: "100%",
     ".menu-list": {
       paddingLeft: "1em",
       paddingTop: "1em",
@@ -30,8 +31,8 @@ export default ({ children, style = {} }: MenuProps) => {
         "column",
       ],
       overflowX: [
-        expanded ? "initial" : "scroll",
-        expanded ? "initial" : "scroll",
+        expanded ? "initial" : "auto",
+        expanded ? "initial" : "auto",
         "initial",
       ],
       scrollBehavior: [
@@ -48,8 +49,8 @@ export default ({ children, style = {} }: MenuProps) => {
         "initial",
       ],
       backgroundColor: [
-        expanded ? "initial" : "lessHeavy",
-        expanded ? "initial" : "lessHeavy",
+        expanded ? "initial" : "surfaces.background.main",
+        expanded ? "initial" : "surfaces.background.main",
         "initial",
       ],
       padding: "1em",
@@ -78,7 +79,7 @@ export default ({ children, style = {} }: MenuProps) => {
     // },
     ".menu-item--active": {
       borderLeftWidth: "5px",
-      borderLeftColor: "primary",
+      borderLeftColor: "link.main",
       borderLeftStyle: "solid",
 
       ...(style.hasOwnProperty(".menu-item--active")
@@ -113,16 +114,12 @@ export default ({ children, style = {} }: MenuProps) => {
         : {}),
     },
     ".menu-item-link": {
-      //   Should match the background ("hide" it without bumpy shift)
-      borderBottomColor: [
-        expanded ? "heavy" : "secondary",
-        expanded ? "heavy" : "secondary",
-        "heavy",
-      ],
-      borderBottomStyle: "solid",
-      borderBottomWidth: "1px",
+      color: (theme) =>
+        theme.palette.getContrastText(theme.palette.surfaces.background.main),
+      fontWeight: "bold",
+      textDecoration: "none",
       ":hover": {
-        borderBottomColor: "light",
+        textDecoration: "underline",
       },
 
       ...(style.hasOwnProperty(".menu-item-link")
@@ -140,7 +137,7 @@ export default ({ children, style = {} }: MenuProps) => {
         ? { ...style[".menu-item-label"] }
         : {}),
     },
-  } as SystemStyleObject;
+  };
 
   return (
     <Box sx={containerStyle}>
@@ -148,3 +145,5 @@ export default ({ children, style = {} }: MenuProps) => {
     </Box>
   );
 };
+
+export default Menu;

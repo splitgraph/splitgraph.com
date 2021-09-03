@@ -5,7 +5,7 @@ import { findNodeInTree, findParentsOfNodeInTree } from "@splitgraph/lib/tree";
 const findParentsOfNode = ({ nodeId, contentTree, idKey }) => {
   return findParentsOfNodeInTree({
     root: contentTree,
-    match: node => node[idKey] === nodeId
+    match: (node) => node[idKey] === nodeId,
   });
 };
 
@@ -13,12 +13,12 @@ const sidebarStateFromProps = ({
   contentTree,
   activeNodeId,
   matchActiveNode,
-  idKey
+  idKey,
 }) => {
   if (!activeNodeId && matchActiveNode) {
     const activeNode = findNodeInTree({
       root: contentTree,
-      match: matchActiveNode
+      match: matchActiveNode,
     });
     activeNodeId = activeNode.nodeId;
   }
@@ -29,7 +29,7 @@ const sidebarStateFromProps = ({
     lastClickedDepth: null,
     nextDepth: null,
     mutex: activeNodeId,
-    loading: false
+    loading: false,
   };
 };
 
@@ -37,7 +37,7 @@ const SidebarActions = {
   ClickedNode: "clicked_node",
   AcquireMutex: "acquire_mutex",
   Reset: "reset",
-  SetLoading: "set_loading"
+  SetLoading: "set_loading",
 };
 
 const sidebarReducer = (state, action) => {
@@ -51,14 +51,14 @@ const sidebarReducer = (state, action) => {
         ...(action.setActive
           ? {
               activeNodeId: action.nodeId,
-              loading: action.loading ? true : false
+              loading: action.loading ? true : false,
             }
-          : {})
+          : {}),
       };
     case SidebarActions.AcquireMutex:
       return {
         ...state,
-        mutex: action.nodeId
+        mutex: action.nodeId,
       };
     case SidebarActions.Reset:
       return {
@@ -67,17 +67,17 @@ const sidebarReducer = (state, action) => {
         lastClickedNodeId: null,
         lastClickedDepth: null,
         nextDepth: null,
-        loading: false
+        loading: false,
       };
     case SidebarActions.SetLoading:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case SidebarActions.CompleteLoading:
       return {
         ...state,
-        loading: false
+        loading: false,
       };
   }
 };
@@ -91,8 +91,8 @@ const useLastClickedPath = ({ contentTree, lastClickedNodeId, idKey }) => {
             ...findParentsOfNode({
               nodeId: lastClickedNodeId,
               contentTree,
-              idKey
-            })
+              idKey,
+            }),
           ]
         : [],
     [lastClickedNodeId, idKey]
@@ -105,7 +105,7 @@ const useActivePath = ({ contentTree, activeNodeId, idKey }) => {
       activeNodeId
         ? [
             { nodeId: activeNodeId },
-            ...findParentsOfNode({ nodeId: activeNodeId, contentTree, idKey })
+            ...findParentsOfNode({ nodeId: activeNodeId, contentTree, idKey }),
           ]
         : [],
     [activeNodeId, idKey]
@@ -124,7 +124,7 @@ const useSidebar = ({
   contentTree,
   activeNodeId,
   matchActiveNode,
-  idKey = "nodeId"
+  idKey = "nodeId",
 }) => {
   const [state, dispatch] = useReducer(
     sidebarReducer,
@@ -134,12 +134,12 @@ const useSidebar = ({
   const lastClickedPath = useLastClickedPath({
     contentTree,
     idKey,
-    lastClickedNodeId: state.lastClickedNodeId
+    lastClickedNodeId: state.lastClickedNodeId,
   });
   const activeNodePath = useActivePath({
     contentTree,
     idKey,
-    activeNodeId: state.activeNodeId
+    activeNodeId: state.activeNodeId,
   });
 
   // TODO: Pass dispatch down instead of redundant callbacks
@@ -150,7 +150,7 @@ const useSidebar = ({
       depth,
       loading,
       setActive,
-      nextDepth
+      nextDepth,
     });
   const acquireMutex = ({ nodeId }) =>
     dispatch({ type: SidebarActions.AcquireMutex, nodeId });
@@ -168,7 +168,7 @@ const useSidebar = ({
     activeNodePath,
     onClickNode,
     acquireMutex,
-    reset
+    reset,
   };
 };
 

@@ -1,15 +1,13 @@
-// @jsx jsx
-import { jsx } from "theme-ui";
-import * as React from "react";
-
-import { Flex, Text } from "rebass";
-import MutedLink from "../Link/MutedLink";
+import { Box, Typography } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import MuiLink from "../Link/MuiLink";
 
 const Checkmark = () => {
   return (
-    <Text mr={2} fontWeight="bold">
+    <Typography sx={{ marginRight: 2, fontWeight: "bold" }}>
       &#10003;
-    </Text>
+    </Typography>
   );
 };
 
@@ -21,51 +19,90 @@ const SuccessMessage = ({ message }: SuccessMessageProps) => {
   return <>{message}</>;
 };
 
-interface SuccessResetLinkProps {
+interface ISuccessResetLinkProps {
   text?: string;
   href?: string;
+  onClick: () => void;
 }
 
-const SuccessResetLink = ({ text, href }: SuccessResetLinkProps) => (
-  <MutedLink sx={{ color: "#fff" }} href={href || "#"}>
+const SuccessResetLink = ({ text, href }: ISuccessResetLinkProps) => (
+  <MuiLink sx={{ color: "#fff" }} href={href || "#"}>
     {text}
-  </MutedLink>
+  </MuiLink>
 );
 
-export interface ErrorAlertProps {
+interface ISuccessAlertProps {
   message?: string;
   dismissLinkText?: string;
   dismissLinkHref?: string;
+  onClickDismiss?: () => void;
+  dismissLinkOwnRow?: boolean;
 }
 
-export default ({
+const SuccessAlert = ({
   message,
   dismissLinkText,
-  dismissLinkHref,
-}: ErrorAlertProps) => {
+  dismissLinkHref = null,
+  onClickDismiss,
+  dismissLinkOwnRow = false,
+}: ISuccessAlertProps) => {
+  const styles: SxProps<Theme> = {
+    display: "flex",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    padding: "8px",
+    marginBottom: "4px",
+    minWidth: "30vw",
+    backgroundColor: "rgba(59, 141, 54, 0.5)",
+    border: ({ palette }) => `1px solid ${palette.success.main}`,
+    ...(dismissLinkOwnRow
+      ? {
+          flexWrap: "wrap",
+        }
+      : {}),
+  };
   return (
-    <Flex
-      flexDirection={"row"}
-      justifyContent={"space-between"}
-      p={2}
-      mb={4}
-      sx={{
-        minWidth: "30vw",
-        backgroundColor: "successBackground",
-        backgroundOpacity: 0.2,
-        border: "1px solid success",
-      }}
-    >
-      <Flex width={dismissLinkText && dismissLinkHref ? 7 / 10 : 10 / 10}>
+    <Box sx={styles}>
+      <Box
+        sx={{
+          display: "flex",
+          width: dismissLinkText && dismissLinkHref && "70%",
+        }}
+      >
         <Checkmark />
         <SuccessMessage message={message} />
-      </Flex>
+      </Box>
 
-      {dismissLinkText && dismissLinkHref && (
-        <Flex width={3 / 10} justifyContent="flex-end">
-          <SuccessResetLink text={dismissLinkText} href={dismissLinkHref} />
-        </Flex>
+      {dismissLinkText && (dismissLinkHref || onClickDismiss) && (
+        <Box
+          sx={{
+            display: "flex",
+            // width: "30%",
+            // flexGrow: 1,
+            justifyContent: dismissLinkOwnRow ? "flex-start" : "flex-end",
+          }}
+        >
+          {dismissLinkHref ? (
+            <SuccessResetLink
+              text={dismissLinkText}
+              href={dismissLinkHref || "#"}
+              onClick={onClickDismiss}
+            />
+          ) : (
+            <Typography
+              sx={{
+                color: "muted",
+                ":hover": { cursor: "pointer", textDecoration: "underline" },
+              }}
+              onClick={onClickDismiss}
+            >
+              {dismissLinkText}
+            </Typography>
+          )}
+        </Box>
       )}
-    </Flex>
+    </Box>
   );
 };
+
+export default SuccessAlert;

@@ -14,7 +14,7 @@ const BaseStyle = {
   Item: {
     // whiteSpace: "nowrap",
     // padding: 100,
-    color: "blue",
+    color: "primary.main",
   },
   Label: {},
 };
@@ -47,7 +47,7 @@ const HorizontalStyle = {
     // backgroundColor: "green",
     borderTopWidth: "0px",
     borderTopStyle: "dotted",
-    borderTopColor: "secondary",
+    borderTopColor: "legacySecondary.main",
     height: "4rem",
     backgroundColor: "background",
   },

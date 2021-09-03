@@ -1,0 +1,10 @@
+scripts
+.yarn
+node_modules
+.next
+public
+content
+out
+exports.json
+_content
+analyze

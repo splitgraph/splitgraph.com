@@ -1,12 +1,12 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box } from 'theme-ui';
-import * as React from 'react';
+import * as React from "react";
+import { Box } from "@material-ui/core";
 
 export interface IHeaderCenterProps {
   children?: React.ReactNode;
 }
 
-export default ({ children }: IHeaderCenterProps) => {
+const HeaderCenter = ({ children }: IHeaderCenterProps) => {
   return <Box className="header--center">{children}</Box>;
 };
+
+export default HeaderCenter;

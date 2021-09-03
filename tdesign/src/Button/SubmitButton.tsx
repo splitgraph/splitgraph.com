@@ -1,39 +1,40 @@
-// @jsx jsx
-import { jsx } from "theme-ui";
 import * as React from "react";
+import { Button, ButtonProps } from "@material-ui/core";
 
-import { Button } from "rebass";
-
-export interface SubmitButtonProps {
+export interface SubmitButtonProps extends ButtonProps {
   disabled?: boolean;
   hasErrors?: boolean;
   sx?: {};
-  variant?: string;
+  variant?: "text" | "outlined" | "contained" | "pill";
   children?: React.ReactNode;
 }
 
-export default ({
+const SubmitButton = ({
   disabled = false,
   hasErrors = false,
   sx = {},
-  variant = "primary",
+  variant = "contained",
   children,
   ...rest
-}: SubmitButtonProps) => (
-  <Button
-    type="submit"
-    variant={variant}
-    sx={{
-      backgroundColor: "red",
-      opacity: disabled ? "0.5" : "initial",
-      ":hover": {
-        cursor: disabled ? "initial" : "pointer",
-      },
-      ...sx,
-    }}
-    disabled={hasErrors || disabled}
-    {...rest}
-  >
-    Does it still work uhhh
-  </Button>
-);
+}: SubmitButtonProps) => {
+  return (
+    <Button
+      type="submit"
+      variant={variant}
+      disableRipple
+      sx={{
+        opacity: disabled ? "0.5" : "initial",
+        ":hover": {
+          cursor: disabled ? "initial" : "pointer",
+        },
+        ...sx,
+      }}
+      disabled={hasErrors || disabled}
+      {...(rest as any)}
+    >
+      {children}
+    </Button>
+  );
+};
+
+export default SubmitButton;

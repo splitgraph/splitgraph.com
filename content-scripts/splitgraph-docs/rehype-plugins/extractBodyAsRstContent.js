@@ -5,7 +5,7 @@ const find = require("unist-util-find");
   have two body elements, and so CSS can use .rst-content as a scoping mechanism.
 */
 const extractBodyAsRstContent = () => (tree, file) => {
-  const body = find(tree, node => node.tagName === "body");
+  const body = find(tree, (node) => node.tagName === "body");
 
   body.tagName = "div";
 

@@ -1,4 +1,4 @@
-import { Box } from "../../index";
+import { Box } from "@material-ui/core";
 import { makeDefaultTheme } from "@splitgraph/tdesign";
 
 const defaultTheme = makeDefaultTheme();
@@ -12,12 +12,14 @@ const getStyle = (depth) => ({
     textDecoration: "underline",
     ":hover": {
       borderBottom: "1px solid",
-      borderBottomColor: "primary",
+      borderBottomColor: "primary.main",
     },
   },
   ".link-anchor-text": defaultTheme.links.primary,
 });
 
-export default ({ children, depth }) => {
+const ContentBody = ({ children, depth }) => {
   return <Box sx={getStyle(depth)}>{children}</Box>;
 };
+
+export default ContentBody;

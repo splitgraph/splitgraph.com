@@ -1,26 +1,15 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve"
+    "jsxImportSource": "@emotion/react",
+    "noEmit": false
   },
-  "exclude": ["node_modules"],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "../**/*.ts",
-    "../**/*.tsx",
-  ]
+  "references": [
+    { "path": "../design" },
+    { "path": "../tdesign" },
+    { "path": "../lib" },
+    { "path": "../templaters" }
+  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.jsx", "**/*.js"],
+  "exclude": ["node_modules", "pages/_content", ".next"]
 }

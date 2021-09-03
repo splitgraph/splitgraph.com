@@ -1,14 +1,14 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, Text, SystemStyleObject } from "theme-ui";
 import * as React from "react";
+import { Box, Typography } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 import { IconClipboard } from "../Icon";
 
 export interface IPreWithCopyProps {
   title?: string | React.ReactNode;
   children?: React.ReactNode;
-  extraStyle?: SystemStyleObject;
+  extraStyle?: object;
   onCopy?: (message?: string) => void;
 }
 
@@ -18,13 +18,13 @@ const PreWithCopy = ({
   extraStyle = {},
   onCopy = () => {},
 }: IPreWithCopyProps) => {
-  const preContainerStyle = {
+  const preContainerStyle: SxProps<Theme> = {
     display: "flex",
     flexDirection: "column",
     ...extraStyle,
     pre: {
       padding: "1rem",
-      backgroundColor: "lightbluefaded",
+      backgroundColor: ({ palette }) => palette.surfaces.sql.main,
       width: "100%",
       overflowX: "hidden",
       margin: 0,
@@ -37,7 +37,7 @@ const PreWithCopy = ({
     },
     ".pre-title": {
       fontWeight: "bold",
-      color: "heavy",
+      color: "heavy.main",
       ...(extraStyle.hasOwnProperty(".pre-title")
         ? extraStyle[".pre-title"]
         : {}),
@@ -45,7 +45,7 @@ const PreWithCopy = ({
     ".pre-row": {
       display: "flex",
       justifyContent: "space-between",
-      backgroundColor: "lightbluefaded",
+      backgroundColor: ({ palette }) => palette.surfaces.sql.main,
       ...(extraStyle.hasOwnProperty(".pre-row") ? extraStyle[".pre-row"] : {}),
     },
     ".copy-icon-container": {
@@ -60,7 +60,7 @@ const PreWithCopy = ({
         ? extraStyle[".copy-icon-container"]
         : {}),
     },
-  } as SystemStyleObject;
+  };
 
   const codeRef = React.useRef<HTMLElement>(null);
 
@@ -85,7 +85,9 @@ const PreWithCopy = ({
   return (
     <Box sx={preContainerStyle}>
       {title && typeof title === "string" ? (
-        <Text className="pre-title">{title}</Text>
+        <Typography className="pre-title" color="common.black">
+          {title}
+        </Typography>
       ) : title ? (
         title
       ) : null}
@@ -98,7 +100,7 @@ const PreWithCopy = ({
           onClick={handleClickCopy}
           title="Copy to clipboard"
         >
-          <IconClipboard color={"primary"} />
+          <IconClipboard color={"grays.light.gray23.main"} />
         </Box>
       </Box>
     </Box>

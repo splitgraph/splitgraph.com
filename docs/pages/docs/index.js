@@ -1,22 +1,17 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
-
-import React from "react";
+import { Box } from "@material-ui/core";
 
 import { NextSeo } from "next-seo";
 
-import withTheme from "@splitgraph/docs/hocs/withTheme";
+import { withMUITheme } from "@splitgraph/tdesign";
 import { InnerPageLayout } from "@splitgraph/docs/components/InnerPageLayout";
 import {
-  Link,
   DividedBox,
   BoxSet,
   BoxTwo,
   BoxThree,
 } from "@splitgraph/docs/components";
 
-import Octicon from "@splitgraph/design/Icon/ThirdParty/GitHub/Octicon";
+import { MuiLink as Link, Octicon } from "@splitgraph/tdesign";
 
 const DocsBox = ({ header, body, anchor, href }) => {
   return (
@@ -26,7 +21,7 @@ const DocsBox = ({ header, body, anchor, href }) => {
       renderFooter={() => <Link href={href}>{anchor}</Link>}
       footerStyle={{
         a: {
-          backgroundColor: "primary",
+          backgroundColor: "primary.main",
           width: "100%",
           textAlign: "center",
         },
@@ -118,7 +113,8 @@ const DocsIndexPage = () => {
           />
         </BoxSet>
       </section>
-      <section
+      <Box
+        component="section"
         sx={{ paddingLeft: "0 !important", paddingRight: "0 !important" }}
       >
         <DividedBox
@@ -136,9 +132,6 @@ const DocsIndexPage = () => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            a: {
-              variant: "links.primary",
-            },
           }}
         >
           <h2>Community</h2>
@@ -146,7 +139,7 @@ const DocsIndexPage = () => {
             sx={{
               padding: "1rem",
               border: "1px solid",
-              borderColor: "gray",
+              borderColor: "gray.main",
               display: "inline-flex",
               alignItems: "center",
             }}
@@ -157,9 +150,9 @@ const DocsIndexPage = () => {
             </Link>
           </Box>
         </DividedBox>
-      </section>
+      </Box>
     </InnerPageLayout>
   );
 };
 
-export default withTheme(DocsIndexPage);
+export default withMUITheme(DocsIndexPage);

@@ -1,12 +1,8 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
-
-import React from "react";
+import { Box } from "@material-ui/core";
 
 import { NextSeo } from "next-seo";
 
-import withTheme from "@splitgraph/docs/hocs/withTheme";
+import { withMUITheme } from "@splitgraph/tdesign";
 import { InnerPageLayout } from "@splitgraph/docs/components/InnerPageLayout";
 import { BlogPostItem, RSSMetaTag } from "@splitgraph/docs/components";
 
@@ -23,13 +19,13 @@ const BlogIndexPage = () => {
       <header>
         <h1>Blog</h1>
       </header>
-      <section sx={{ paddingTop: "2rem" }}>
+      <Box component="section" sx={{ paddingTop: "2rem" }}>
         {blogPosts.children.map(({ url, slug, metadata }) => (
           <BlogPostItem key={slug} url={url} metadata={metadata} />
         ))}
-      </section>
+      </Box>
     </InnerPageLayout>
   );
 };
 
-export default withTheme(BlogIndexPage);
+export default withMUITheme(BlogIndexPage);

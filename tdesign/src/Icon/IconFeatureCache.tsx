@@ -1,17 +1,14 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx } from 'theme-ui';
-import * as React from 'react';
+import { featureCacheIconURI } from "./cssSvgStrings";
+import BaseIcon, { IIconProps } from "./BaseIcon";
 
-import { featureCacheIconURI } from './cssSvgStrings';
-import BaseIcon, { IIconProps } from './BaseIcon';
-
-export default (props: IIconProps) => {
+const IconFeatureCache = (props: IIconProps) => {
   return (
     <BaseIcon
-      iconSlug={'featureCache'}
+      iconSlug={"featureCache"}
       svgURI={featureCacheIconURI}
       {...props}
     />
   );
 };
+
+export default IconFeatureCache;

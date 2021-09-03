@@ -1,12 +1,14 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx } from 'theme-ui';
-import * as React from 'react';
+import { chevronsRightIconURI } from "./cssSvgStrings";
+import BaseIcon, { IIconProps } from "./BaseIcon";
 
-import { chevronsRightIconURI } from './cssSvgStrings';
-import BaseIcon, { IIconProps } from './BaseIcon';
-
-export default (props: IIconProps) => {
-  return <BaseIcon iconSlug={'chevronsRight'} svgURI={chevronsRightIconURI} {...props} />;
+const IconChevronsRight = (props: IIconProps) => {
+  return (
+    <BaseIcon
+      iconSlug={"chevronsRight"}
+      svgURI={chevronsRightIconURI}
+      {...props}
+    />
+  );
 };
 
+export default IconChevronsRight;

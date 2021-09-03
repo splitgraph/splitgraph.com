@@ -6,6 +6,8 @@
   "author": "Splitgraph",
   "license": "MIT",
   "private": true,
+  "types": "../dist/templaters",
+  "sideEffects": false,
   "peerDependencies": {
     "dayjs": "*",
     "next": "*",

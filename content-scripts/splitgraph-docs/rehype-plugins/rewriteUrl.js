@@ -9,7 +9,7 @@
   of their parent package), then rewrites will be more complicated
 */
 
-const rewriteUrl = url => {
+const rewriteUrl = (url) => {
   const isLocalAnchor = url.hash && !url.path;
 
   if (isLocalAnchor) {

@@ -1,23 +1,22 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
-import * as React from "react";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 export interface IMainContentProps {
   children: React.ReactNode;
-  extraStyle?: SystemStyleObject;
+  extraStyle?: SxProps<Theme>;
 }
 
-const mainContentStyle = {} as SystemStyleObject;
+const mainContentStyle: SxProps<Theme> = {};
 
-export default ({ children, extraStyle = {} }: IMainContentProps) => {
+const MainContent = ({ children, extraStyle = {} }: IMainContentProps) => {
   const outerContainerStyle = {
-    backgroundColor: "white",
+    // backgroundColor: "white",
     minHeight: "100vh",
     fontFamily:
       "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji",
     ...extraStyle,
-  } as SystemStyleObject;
+  };
 
   return (
     <Box className="main-content" sx={outerContainerStyle}>
@@ -25,3 +24,5 @@ export default ({ children, extraStyle = {} }: IMainContentProps) => {
     </Box>
   );
 };
+
+export default MainContent;

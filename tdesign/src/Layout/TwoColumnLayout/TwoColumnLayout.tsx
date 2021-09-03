@@ -1,8 +1,7 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box } from "theme-ui";
-import * as React from "react";
 import { useState, createContext } from "react";
+import { Box } from "@material-ui/core";
+import type { SxProps } from "@material-ui/system";
+import type { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 export interface TwoColumnLayoutProps {
   children?: React.ReactNode;
@@ -24,36 +23,24 @@ export interface ILayoutContext {
 const useResponsiveStyle = (): ILayoutContext => {
   const [expanded, setExpanded] = useState<boolean>(false);
 
-  const gridTemplateColumns = ["1fr", "1fr", expanded ? "1fr 12fr" : "1fr 3fr"];
-
-  const gridTemplateRows = ["1fr", "1fr", expanded ? "6fr" : "1fr"];
-
   const leftArea = "1 / 1 / 2 / 2";
   const rightArea = ["2 / 1 / 3 / 2", "2 / 1 / 3 / 2", "1 / 2 / 2 / 3"];
 
   const style = {
     display: "grid",
     // minHeight: '95vh',
-    gridTemplateColumns,
-    gridTemplateRows,
+    marginLeft: (theme) => theme.constants.leftMarginLogoAligned,
+    marginRight: (theme) => theme.constants.rightMarginNavAligned,
+    gridTemplateColumns: ["1fr", "1fr", expanded ? "1fr 12fr" : "1fr 3fr"],
+    gridTemplateRows: ["1fr", "1fr", expanded ? "6fr" : "1fr"],
     gridColumnGap: 0,
     minHeight: ["inherit", "inherit", "calc(95vh - 2em)"],
     gridRowGap: 0,
     ".two-col-left": {
       gridArea: leftArea,
-      backgroundColor: "heavy",
-      color: "light",
-      a: {
-        color: "light",
-        fontWeight: "bold",
-      },
-      borderRightColor: [null, null, "sgdarkblue"],
-      borderRightStyle: [null, null, "solid"],
-      borderRightSize: [null, null, "10px"],
-      borderBottomColor: ["sgdarkblue", "sgdarkblue", null],
-      borderBottomStyle: ["solid", "solid", null],
-      borderBottomSize: ["10px", "10px", null],
-      filter: "dropShadow(2px 4px 6px var(--theme-ui-colors-heavy))",
+      backgroundColor: ({ palette }) => palette.navbar.main,
+      color: ({ palette }) =>
+        palette.getContrastText(palette.surfaces.background.main),
     },
     ".two-col-main": {
       gridArea: rightArea,
@@ -70,14 +57,16 @@ export const LayoutContext = createContext<ILayoutContext>({
   expanded: false,
 });
 
-export default ({ children }: TwoColumnLayoutProps) => {
+const TwoColumnLayout = ({ children }: TwoColumnLayoutProps) => {
   const { style, expanded, setExpanded } = useResponsiveStyle();
 
   return (
-    <Box className="two-col" sx={style}>
+    <Box className="two-col" sx={style as SxProps<Theme>}>
       <LayoutContext.Provider value={{ expanded, setExpanded }}>
         {children}
       </LayoutContext.Provider>
     </Box>
   );
 };
+
+export default TwoColumnLayout;

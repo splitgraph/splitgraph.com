@@ -1,0 +1,113 @@
+name: 'Notifier Complete'
+description: 'Stop the timer and create the notification'
+inputs:
+  job_status:
+    description: 'Workflow should pass job.status to this action with job-status'
+    default: 'failure'
+
+  parent_steps:
+    description: 'Parent step context'
+    default: '{}'
+
+  notification_body_file:
+    description: The file where to write the body of the notification
+    default: notify.txt
+
+  # For emoji text (for job status and step failure(s))
+  ICON_SUCCESS:
+    default: ':white_check_mark:'
+  ICON_FAIL:
+    default: ':skull_and_crossbones:'
+  ICON_CANCEL:
+    default: ':heavy_multiplication_x:'
+  ICON_UNKNOWN:
+    default: ':grey_question:'
+
+  # Unicode icons (for deemphasized statuses)
+  UNI_SUCCESS:
+    default: '&#10003;'
+  UNI_CANCEL:
+    default: '&#88;'
+  UNI_SKIP:
+    default: '&#8213;'
+  UNI_UNKNOWN:
+    default: '&#63;'
+runs:
+  using: "composite"
+  steps:
+    - name: Dump steps context
+      shell: bash
+      env:
+        STEPS_CONTEXT: ${{ inputs.parent_steps }}
+      run: echo "$STEPS_CONTEXT"
+
+    - name: Stop Timer
+      id: stop_timer
+      shell: bash
+      run: |
+        export END_TIME="$(printf '%(%s)T\n' -1)"
+        export TIME_ELAPSED="$(($END_TIME-$START_TIME))"
+        export DURATION="$(printf '%dm:%ds\n' $((TIME_ELAPSED%3600/60)) $((TIME_ELAPSED%60)))"
+
+        echo "END_TIME="$END_TIME"" >> $GITHUB_ENV
+        echo "DURATION="$DURATION"" >> $GITHUB_ENV
+        echo "JOB_STATUS=${{ inputs.job_status }}" >> $GITHUB_ENV
+
+    - name: Set Job Icon From Status
+      id: set_job_icon
+      shell: bash
+      run: |
+        export JOB_STATUS="${{ job.status }}"
+        export JOB_ICON="${{ inputs.ICON_UNKNOWN }}"
+
+        if test "$JOB_STATUS" == 'success' ; then
+          export JOB_ICON="${{ inputs.ICON_SUCCESS }}"
+        elif test "$JOB_STATUS" == 'failure' ; then
+          export JOB_ICON="${{ inputs.ICON_FAIL }}"
+        elif test "$JOB_STATUS" == 'cancelled' ; then
+          export JOB_ICON="${{ inputs.ICON_CANCEL }}"
+        else
+          echo "Warning: Unknown job JOB_STATUS: $JOB_STATUS"
+          export JOB_ICON="${{ inputs.ICON_UNKNOWN }}"
+        fi
+
+        echo "JOB_STATUS="$JOB_STATUS"" >> $GITHUB_ENV
+        echo "JOB_ICON="$JOB_ICON"" >> $GITHUB_ENV
+
+    - name: Write Step Outcomes to Body
+      id: map_step_outcomes
+      shell: bash
+      env:
+        STEPS_CONTEXT: ${{ inputs.parent_steps }}
+        NOTIFY_FILE: ${{ inputs.notification_body_file }}
+      run: |
+        while IFS=, read -r step outcome
+        do
+          if test "$outcome" == 'failure' ; then
+            step_icon="${{ inputs.ICON_FAIL }}"
+          elif test "$outcome" == 'success' ; then
+            step_icon="${{ inputs.UNI_SUCCESS }}"
+          elif test "$outcome" == 'cancelled' ; then
+            step_icon="${{ inputs.UNI_CANCEL }}"
+          elif test "$outcome" == 'skipped' ; then
+            step_icon="${{ inputs.UNI_SKIP }}"
+          else
+            echo "Warning, Unknown step outcome '$outcome'"
+            step_icon="${{ inputs.ICON_UNKNOWN }}"
+          fi
+
+          echo "&emsp;${step_icon}&emsp;${step}" >> "$NOTIFY_FILE"
+        done < <(echo "$STEPS_CONTEXT" | jq -r 'keys[] as $k | "\($k),\(.[$k] | .outcome)"' -)
+
+        echo "" >> "$NOTIFY_FILE"
+        echo "&emsp;&#9719;&emsp; _${DURATION}_" >> "$NOTIFY_FILE"
+        echo "" >> "$NOTIFY_FILE"
+
+    - name: Send Notification
+      id: send_notification
+      shell: bash
+      env:
+        NOTIFY_FILE: ${{ inputs.notification_body_file }}
+      run: |
+        ./.ci/notify.sh "$NOTIFY_FILE"
+

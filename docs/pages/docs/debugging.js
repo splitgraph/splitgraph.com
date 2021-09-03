@@ -1,12 +1,7 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
-
-import React from "react";
-
+import { Box } from "@material-ui/core";
 import { NextSeo } from "next-seo";
 
-import withTheme from "@splitgraph/docs/hocs/withTheme";
+import { withMUITheme } from "@splitgraph/tdesign";
 import { InnerPageLayout } from "@splitgraph/docs/components/InnerPageLayout";
 import {
   Link,
@@ -44,7 +39,7 @@ const DocsIndexPage = () => {
           },
           h2: {
             backgroundColor: "white",
-            color: "primary",
+            color: "primary.main",
             paddingTop: "4rem",
             paddingBottom: "4rem",
             marginLeft: ["0.5rem", "0.5rem", "2rem"],
@@ -57,7 +52,7 @@ const DocsIndexPage = () => {
               "calc(100% - 4rem)",
             ],
             borderRadius: 8,
-            border: "1px solid heavy",
+            border: "1px solid heavy.main",
             boxShadow: "0 0 1rem rgba(0, 0, 0, .25)",
           },
         },
@@ -199,4 +194,4 @@ const DocsIndexPage = () => {
   );
 };
 
-export default withTheme(DocsIndexPage);
+export default withMUITheme(DocsIndexPage);

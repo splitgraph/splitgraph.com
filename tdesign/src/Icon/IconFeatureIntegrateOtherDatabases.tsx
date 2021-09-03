@@ -1,17 +1,14 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx } from 'theme-ui';
-import * as React from 'react';
+import { featureIntegrateOtherDatabasesIconURI } from "./cssSvgStrings";
+import BaseIcon, { IIconProps } from "./BaseIcon";
 
-import { featureIntegrateOtherDatabasesIconURI } from './cssSvgStrings';
-import BaseIcon, { IIconProps } from './BaseIcon';
-
-export default (props: IIconProps) => {
+const IconFeatureIntegrateOtherDatabases = (props: IIconProps) => {
   return (
     <BaseIcon
-      iconSlug={'featureIntegrateOtherDatabases'}
+      iconSlug={"featureIntegrateOtherDatabases"}
       svgURI={featureIntegrateOtherDatabasesIconURI}
       {...props}
     />
   );
 };
+
+export default IconFeatureIntegrateOtherDatabases;

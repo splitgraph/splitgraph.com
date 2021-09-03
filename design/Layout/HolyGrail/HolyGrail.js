@@ -1,4 +1,4 @@
-import { Box } from "../../index";
+import { Box } from "@material-ui/core";
 
 export const GridArea = {
   Header: "header",
@@ -8,24 +8,21 @@ export const GridArea = {
   Footer: "footer",
 };
 
-export default ({ children }) => (
+const HolyGrail = ({ children }) => (
   <Box
     sx={{
       display: "grid",
       gridGap: 4,
       gridTemplateAreas: `
-          "${GridArea.Header} ${GridArea.Header}  ${GridArea.Header}"
-          "${GridArea.Nav}    ${GridArea.Content} ${GridArea.Content}"
-          "${GridArea.Footer} ${GridArea.Footer}  ${GridArea.Footer}"
-      `,
+        "${GridArea.Header} ${GridArea.Header}  ${GridArea.Header}"
+        "${GridArea.Nav}    ${GridArea.Content} ${GridArea.Content}"
+        "${GridArea.Footer} ${GridArea.Footer}  ${GridArea.Footer}"
+    `,
       gridTemplateColumns: "300px 1fr",
       gridTemplateRows: "auto 100vh 1fr auto auto",
       gridGap: 0,
       maxHeight: "100vh",
       ".right-sidebar": {
-        a: {
-          variant: "links.primary",
-        },
         // display: ["none", "none", "initial"],
         "@media (min-width: 769px)": {
           position: "absolute",
@@ -46,7 +43,7 @@ export default ({ children }) => (
         gridArea: GridArea.Content,
       },
       ".main-content": {
-        backgroundColor: "background",
+        // backgroundColor: "#e0ffff",
         minHeight: "calc(100vh - 3rem)",
         img: {
           maxWidth: "100%",
@@ -63,29 +60,28 @@ export default ({ children }) => (
         paddingBottom: "8rem",
         // backgroundColor: "#efefef",
         width: "100%",
-        a: {
-          variant: "links.primary",
-        },
       },
       "@media (max-width: 768px)": {
         gridTemplateAreas: `
-          "${GridArea.Header}"
-          "${GridArea.Nav}"
-          "${GridArea.Content}"
-          "${GridArea.Side}"
-          "${GridArea.Footer}"
-        `,
+        "${GridArea.Header}"
+        "${GridArea.Nav}"
+        "${GridArea.Content}"
+        "${GridArea.Side}"
+        "${GridArea.Footer}"
+      `,
         gridTemplateColumns: "1fr",
         gridTemplateRows: `
-          minmax(3rem, auto)
-          minmax(4rem, auto)
-          auto
-          minmax(75px, auto)
-          auto
-        `,
+        minmax(3rem, auto)
+        minmax(4rem, auto)
+        auto
+        minmax(75px, auto)
+        auto
+      `,
       },
     }}
   >
     {children}
   </Box>
 );
+
+export default HolyGrail;

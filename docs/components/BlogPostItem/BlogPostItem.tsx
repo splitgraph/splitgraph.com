@@ -1,11 +1,6 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
-import * as React from "react";
-
-import { Link } from "../Link";
-
-import { formatDate } from "../BlogPost";
+import { Box } from "@material-ui/core";
+import { MuiLink as Link } from "@splitgraph/tdesign";
+import formatDate from "../BlogPost/formatDate";
 
 interface IBlogPostMetadata {
   id: string;
@@ -28,16 +23,16 @@ export interface IBlogPostItemProps {
 }
 
 const itemBoxStyle = {
-  variant: "links.unstyled",
+  // variant: "links.unstyled",
   backgroundColor: "white !important",
   padding: "1rem",
-  boxShadow: "card",
+  boxShadow: "0 0 4px rgba(0, 0, 0, .125)", //formerly 'card' TODO MUI-ify more idiomatically
   display: "flex",
   width: "100%",
   flexDirection: "column",
   marginBottom: "2rem",
   ":hover": {
-    boxShadow: "cardHover",
+    boxShadow: "0 0 4px rgba(0, 0, 0, .5)", //formerly cardHover. TODO MUI-ify
     textDecoration: "none !important",
   },
   ".top-row": {
@@ -48,23 +43,23 @@ const itemBoxStyle = {
   },
   ".blog-title": {
     fontWeight: "bold",
-    color: "primary",
+    color: "primary.main",
     fontSize: "1.5rem",
-    paddingRight: "1rem"
+    paddingRight: "1rem",
   },
   ".blog-byline": {
-    color: "heavy",
+    color: "heavy.main",
     opacity: "0.5",
     fontStyle: "italic",
     textTransform: "uppercase",
     fontSize: "small",
     minWidth: "15ch",
-    textAlign: "right"
+    textAlign: "right",
   },
   ".blog-description": {
-    color: "heavy",
+    color: "heavy.main",
   },
-} as SystemStyleObject;
+};
 
 const BlogPostItem = ({ url, metadata }: IBlogPostItemProps) => {
   const formattedDate = formatDate(metadata.date);

@@ -1,3 +1,2 @@
-import ConnectDDNButton from './ConnectDDNButton';
+import ConnectDDNButton from "./ConnectDDNButton";
 export { ConnectDDNButton };
-

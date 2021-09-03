@@ -1,22 +1,25 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
 import * as React from "react";
+import { Box, Paper } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 export interface IContentHeaderProps {
   children?: React.ReactNode;
-  extraStyle?: SystemStyleObject;
+  extraStyle?: object;
 }
 
-export default ({ children, extraStyle = {} }: IContentHeaderProps) => {
-  const headerContainerStyle = {
+const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
+  const headerContainerStyle: SxProps<Theme> = {
     marginBottom: "2rem",
-    color: "primary",
-    ...extraStyle,
+    // color: (theme: Theme) =>
+    //   theme.palette.getContrastText(
+    //     theme.palette.surfaces.light.background.main
+    //   ),
+    // ...extraStyle,
     ".content-header--banner": {
       // padding: "0.5em",
-      marginBottom: "2rem",
-      display: "flex",
+      marginBottom: { md: "2rem" },
+      display: { md: "flex" },
       justifyContent: "space-between",
       alignContent: "center",
       alignItems: "flex-end",
@@ -28,11 +31,13 @@ export default ({ children, extraStyle = {} }: IContentHeaderProps) => {
         margin: 0,
       },
     },
-  } as SystemStyleObject;
+  };
 
   return (
-    <Box sx={headerContainerStyle}>
+    <Paper elevation={0} sx={headerContainerStyle}>
       <Box className="content-header--banner">{children}</Box>
-    </Box>
+    </Paper>
   );
 };
+
+export default ContentHeader;

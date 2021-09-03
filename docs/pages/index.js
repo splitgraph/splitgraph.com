@@ -1,20 +1,18 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, Text } from "theme-ui";
-
-import React from "react";
-
+import { Box, Typography } from "@material-ui/core";
 import { NextSeo } from "next-seo";
 
-import withTheme from "../hocs/withTheme";
 import { LandingPageLayout } from "../components/LandingPageLayout";
 import { HeroBox } from "../components/HeroBox";
 import { HeroSampleQuery } from "../components/HeroSampleQuery";
 import { HeroSampleSplitfile } from "../components/HeroSampleSplitfile";
 import { HeroConnectionParams } from "../components/HeroConnectionParams";
-import { Footer, IconLogoDiscord, marketingTheme } from "@splitgraph/tdesign";
-
-import Octicon from "@splitgraph/design/Icon/ThirdParty/GitHub/Octicon";
+import {
+  Footer,
+  IconLogoDiscord,
+  marketingTheme,
+  Octicon,
+  withMUITheme,
+} from "@splitgraph/tdesign";
 
 import CambridgeChicagoJOIN from "@splitgraph/content/marketing/sample-queries/CambridgeChicagoJOIN.mdx";
 import NewSocrataDatasets from "@splitgraph/content/marketing/sample-queries/NewSocrataDatasets.mdx";
@@ -47,20 +45,21 @@ import {
   IconFeatureProvenance,
   IconFeatureSplitfiles,
   IconFeatureVersioning,
+  MuiLink as Link,
 } from "@splitgraph/tdesign";
 
-import { Link } from "@splitgraph/docs/components";
+// import { Link } from "@splitgraph/docs/components";
 
 const mdxComponents = {
   pre: ({ children, ...rest }) => (
-    <pre sx={marketingTheme.styles.pre} {...rest}>
+    <Box component="pre" sx={marketingTheme.styles.pre} {...rest}>
       {children}
-    </pre>
+    </Box>
   ),
   code: ({ children, ...rest }) => (
-    <code sx={marketingTheme.styles.code} {...rest}>
+    <Box component="code" sx={marketingTheme.styles.code} {...rest}>
       {children}
-    </code>
+    </Box>
   ),
 };
 
@@ -68,23 +67,31 @@ const ctaSectionStyle = {
   minWidth: "100%",
   maxWidth: "100%",
   width: "100%",
-  backgroundColor: "heavy",
+  backgroundColor: "heavy.main",
   paddingTop: "3rem",
   paddingBottom: "3rem",
   paddingLeft: ["1rem", "1rem", "3rem"],
   paddingRight: ["1rem", "1rem", "3rem"],
   borderTop: "0.5ch solid",
-  borderTopColor: "primary",
+  borderTopColor: "primary.main",
   borderBottom: "0.5ch solid",
-  borderBottomColor: "primary",
+  borderBottomColor: "primary.main",
   h2: {
     color: "white",
   },
   ".button-link-secondary": {
+    backgroundColor: "legacySecondary.main",
+    borderRadius: "0.5em",
     marginBottom: "2rem",
+    color: "common.white",
+    fontWeight: "bold",
   },
   ".muted-link": {
-    variant: "links.muted",
+    color: "muted.main",
+    "&:active, &:hover": {
+      color: "muted.main",
+      textDecoration: "underline",
+    },
   },
   ".mobile-shrink": {
     fontSize: ["1.2rem", "1.5rem", "2rem"],
@@ -96,7 +103,7 @@ const ctaSectionStyle = {
 // todo: rename to benefitPanelStyle, and .feature -> .benefit
 const featurePanelStyle = {
   display: "flex",
-  color: "primary",
+  color: "primary.main",
   flexWrap: "wrap",
   justifyContent: "center",
   maxWidth: "90vw",
@@ -111,18 +118,18 @@ const featurePanelStyle = {
     flexGrow: 0,
     flexShrink: 1,
     minHeight: "200px",
+    textAlign: "center",
     h3: {
       marginTop: "2rem",
-      color: "primary",
+      color: "primary.main",
     },
     p: {
-      textAlign: "justify",
-      color: "primary",
+      // textAlign: "justify",
+      color: (theme) => theme.palette.primary.main,
     },
     a: {
-      variant: "links.primary",
       textDecoration: "underline",
-      color: "sgdarkblue",
+      color: "sgdarkblue.main",
       alignSelf: "flex-end",
       ":hover": {
         borderBottom: "2px solid",
@@ -131,10 +138,13 @@ const featurePanelStyle = {
       },
     },
   },
+  ".justified": {
+    textAlign: "justify",
+  },
 };
 
 const featureSectionStyle = {
-  color: "primary",
+  color: "primary.main",
   display: ["inherit", "inherit", "flex"],
   paddingTop: "4rem",
   paddingBottom: "4rem",
@@ -198,7 +208,7 @@ const featureSectionStyle = {
   },
   ".feature-section-header": {
     paddingBottom: ["4rem", "4rem", "inherit"],
-    color: ["inherit", "inherit", "primary"],
+    color: ["inherit", "inherit", "primary.main"],
     width: ["inherit", "inherit", "50%"],
     display: "flex",
     // alignItems: "center",
@@ -300,11 +310,11 @@ const communityLinksStyle = {
     padding: "1rem",
     margin: "1rem",
     border: "1px solid",
-    borderColor: "gray",
+    borderColor: "gray.main",
     display: "inline-flex",
     alignItems: "center",
     ":hover": {
-      borderColor: "secondary",
+      borderColor: "legacySecondary.main",
     },
   },
 };
@@ -354,24 +364,24 @@ const LandingPage = () => {
           className="hero-subsection hero-subsection--text"
           sx={{ maxWidth: "50%" }}
         >
-          <h1 sx={{ fontWeight: 100, color: "gray" }}>
+          <Box component="h1" sx={{ fontWeight: 100, color: "gray.main" }}>
             Port 5432 is open...
             <br />
-            <span sx={{ fontWeight: 400, color: "light" }}>
+            <Box component="span" sx={{ fontWeight: 400, color: "light.main" }}>
               Query 40k+ datasets with SQL
-            </span>
-          </h1>
+            </Box>
+          </Box>
 
           <Box
             sx={{
-              backgroundColor: "sgdarkblue",
+              backgroundColor: "sgdarkblue.main",
               color: "white",
               minWidth: ["90vw", "60ch", "min(80ch, 100%)"],
               maxWidth: ["90vw", "60ch", "min(80ch, 100%)"],
               // maxWidth: ["90vw", "60ch", "min(80ch, 90%)"],
               // minWidth: ["90vw", "60ch", "min(80ch, 90%)"],
               // minWidth: ["90vw", "60ch", "min(80ch, 100%)"],
-              boxShadow: "card",
+              boxShadow: "0 0 4px rgba(0, 0, 0, .125)",
             }}
           >
             <HeroSampleQuery
@@ -418,15 +428,17 @@ const LandingPage = () => {
             />
           </Box>
 
-          <h1 sx={{ fontWeight: 100, color: "gray" }}>
+          <Box component="h1" sx={{ fontWeight: 100, color: "gray.main" }}>
             Connect to the
             <br className="mobile-line-break" />{" "}
-            <span sx={{ fontWeight: 400, color: "light" }}>
+            <Box component="span" sx={{ fontWeight: 400, color: "light" }}>
               Data Delivery Network
-            </span>
+            </Box>
             <br />
-            <span sx={{ fontWeight: 100 }}>with any PostgreSQL client.</span>
-          </h1>
+            <Box component="span" sx={{ fontWeight: 100 }}>
+              with any PostgreSQL client.
+            </Box>
+          </Box>
         </Box>
 
         <HeroConnectionParams />
@@ -434,18 +446,19 @@ const LandingPage = () => {
         <br />
       </HeroBox>
 
-      <section
+      <Box
+        component="section"
         className="lp-section lp-section--darkgrad"
         sx={{
           // background:
           //   "linear-gradient(180deg, rgba(13,24,33,1) 0%, rgba(54,103,141,1) 50%)",
-          backgroundColor: "primary",
-          color: "light",
+          backgroundColor: "primary.main",
+          color: "light.main",
           h2: {
-            color: "light",
+            color: "light.main",
           },
           borderTop: "0.5ch solid",
-          borderTopColor: "primary",
+          borderTopColor: (theme) => theme.palette.primary.main,
           borderBottom: "0.5ch solid",
           borderBottomColor: "rgba(13,24,33,1)",
           paddingTop: "2rem",
@@ -454,18 +467,16 @@ const LandingPage = () => {
           // paddingRight: "max(3rem, calc((100vw - 120ch)/2))",
           paddingLeft: "calc((100vw - 120ch)/2)",
           paddingRight: "calc((100vw - 120ch)/2)",
-          ".muted-link": {
-            variant: "links.muted",
-          },
         }}
       >
         {/* <h2>Explore Public Data</h2> */}
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section"
         sx={{
-          color: "sgdarkblue",
+          color: "sgdarkblue.main",
           background:
             "linear-gradient(180deg, rgba(221,221,223,1) 0%, rgba(255,255,255,1) 72%)",
           paddingLeft: ["1rem", "1rem", "3rem"],
@@ -476,11 +487,11 @@ const LandingPage = () => {
         <h2>
           What is Splitgraph?
           <br />
-          <span sx={{ fontWeight: "200" }}>
+          <Box component="span" sx={{ fontWeight: "200" }}>
             Splitgraph is an integrated
             <br className="mobile-line-break" /> data catalog and database
             proxy.
-          </span>
+          </Box>
           <br />
           <br />
         </h2>
@@ -488,12 +499,12 @@ const LandingPage = () => {
         <Box sx={featurePanelStyle}>
           <Box className="feature">
             <IconConceptDataInPalmOfHand
-              color="primary"
+              color="primary.main"
               size={"6rem"}
               extraStyle={{ display: "inline-flex" }}
             />
             <h3>Discover Data</h3>
-            <p>
+            <p class="justified">
               The Splitgraph catalog indexes 40k+ data sources, including both
               live databases and versioned data snapshots called "data images."
               Discover data and explore it with features like an auto-generated
@@ -504,12 +515,12 @@ const LandingPage = () => {
 
           <Box className="feature">
             <IconFeatureLayeredQuerying
-              color="primary"
+              color="primary.main"
               size={"6rem"}
               extraStyle={{ display: "inline-flex" }}
             />
             <h3>Query Data</h3>
-            <p>
+            <p class="justified">
               Connect to the Data Delivery Network (DDN) to query the catalog
               like it's a Postgres database. The DDN is a distributed SQL
               caching proxy built on the PostgreSQL wire protocol. It can route
@@ -524,8 +535,8 @@ const LandingPage = () => {
               size={"6rem"}
               extraStyle={{ display: "inline-flex", color: "red" }}
             />
-            <h3>Build & Share Data</h3>
-            <p>
+            <h3>Build &amp; Share Data</h3>
+            <p class="justified">
               Build versioned datasets from your own data, package them and push
               them to the Splitgraph catalog for other people to discover and
               query. Store the data as column oriented, delta-compressed objects
@@ -537,18 +548,19 @@ const LandingPage = () => {
             </Link>
           </Box>
         </Box>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section"
         sx={{
-          color: "sgdarkblue",
+          color: "sgdarkblue.main",
           backgroundColor: "white",
           paddingLeft: ["1rem", "1rem", "3rem"],
           paddingRight: ["1rem", "1rem", "3rem"],
           paddingBottom: "4rem",
           a: {
-            color: "primary",
+            color: "primary.main",
           },
           ...communityLinksStyle,
         }}
@@ -577,37 +589,42 @@ const LandingPage = () => {
           </Link>
         </Box>
 
-        <h2 sx={{ fontWeight: 200 }}>
+        <Box component="h2" sx={{ fontWeight: 200 }}>
           Splitgraph.com is a hosted service built around Splitgraph Core.
           <br />
           It adds features like a public SQL proxy and data catalog.
-        </h2>
+        </Box>
 
         <Box>
           <Link href="/blog/data-delivery-network-launch">
             Read the DDN launch blog post &raquo;
           </Link>
         </Box>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section"
         sx={{
-          color: "sgdarkblue",
+          color: "sgdarkblue.main",
           backgroundColor: "white",
           paddingLeft: ["1rem", "1rem", "3rem"],
           paddingRight: ["1rem", "1rem", "3rem"],
           paddingBottom: "4rem",
           a: {
-            color: "primary",
+            color: "primary.main",
           },
         }}
       >
         <h2>Discover Data in the Catalog</h2>
-        <h2 sx={{ marginTop: "2rem !important", fontWeight: "200" }}>
+        <Box
+          component="h2"
+          sx={{ marginTop: "2rem !important", fontWeight: "200" }}
+        >
           We index 40k+ public datasets
-          <br className="mobile-line-break" /> & make them queryable with SQL.
-        </h2>
+          <br className="mobile-line-break" /> &amp; make them queryable with
+          SQL.
+        </Box>
 
         <Box>
           <iframe
@@ -647,12 +664,16 @@ const LandingPage = () => {
         <Link className="muted-link" href="/explore">
           Explore over 40,000 datasets &raquo;
         </Link>
-      </section>
+      </Box>
 
       {/* Placeholder section to make the Splitfiles start on the right (due to odd/even) */}
       <section className="lp-section"></section>
 
-      <section className="lp-section lp-cta" sx={ctaSectionStyle}>
+      <Box
+        component="section"
+        className="lp-section lp-cta"
+        sx={ctaSectionStyle}
+      >
         <Link className="button-link-secondary" href="/connect">
           Connect to DDN
         </Link>
@@ -660,12 +681,13 @@ const LandingPage = () => {
         <Link className="muted-link" href="/docs">
           Read the Docs &raquo;
         </Link>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section"
         sx={{
-          color: "primary",
+          color: (theme) => theme.palette.primary.main,
           // backgroundColor: "rgba(221,221,223,1)",
           backgroundColor: "white",
           textAlign: "center",
@@ -680,13 +702,17 @@ const LandingPage = () => {
       >
         <h2>Build Reproducible Data Snapshots</h2>
 
-        <h2 sx={{ marginTop: "2rem !important", fontWeight: "200" }}>
+        <Box
+          component="h2"
+          sx={{ marginTop: "2rem !important", fontWeight: "200" }}
+        >
           Combine data sources into reproducible data "images"
           <br /> using a CI-friendly build process.
-        </h2>
-      </section>
+        </Box>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-feature-section"
         sx={{
           ...featureSectionStyle,
@@ -744,7 +770,7 @@ const LandingPage = () => {
         <ul>
           <li>
             <Box className="feature-icon">
-              <IconFeatureSplitfiles color="primary" size={"3rem"} />
+              <IconFeatureSplitfiles color="primary.main" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Splitfiles</span>
@@ -763,7 +789,7 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureProvenance color="primary" size={"3rem"} />
+              <IconFeatureProvenance color="primary.main" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Provenance</span>
@@ -790,7 +816,7 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureCache color="primary" size={"3rem"} />
+              <IconFeatureCache color="primary.main" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Caching</span>
@@ -810,7 +836,7 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureVersioning color="primary" size={"3rem"} />
+              <IconFeatureVersioning color="primary.main" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Data Versioning</span>
@@ -828,18 +854,19 @@ const LandingPage = () => {
             </Box>
           </li>
         </ul>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section"
         sx={{
-          color: "sgdarkblue",
+          color: "sgdarkblue.main",
           backgroundColor: "white",
           paddingLeft: ["1rem", "1rem", "3rem"],
           paddingRight: ["1rem", "1rem", "3rem"],
           paddingBottom: "4rem",
           a: {
-            color: "primary",
+            color: "primary.main",
           },
           ".asciinema-embed-container": {
             width: "90vw",
@@ -861,18 +888,21 @@ const LandingPage = () => {
             justifyContent: "center",
           }}
         >
-          <Text sx={{ fontWeight: "800", marginRight: "1rem" }}>EXAMPLE</Text>
-          <Text>
+          <Typography sx={{ fontWeight: "800", marginRight: "1rem" }}>
+            EXAMPLE
+          </Typography>
+          <Typography>
             Import data from a CSV, then reference it in a Splitfile to build a
             derivative image.
-          </Text>
+          </Typography>
         </Box>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section"
         sx={{
-          color: "primary",
+          color: "primary.main",
           // backgroundColor: "rgba(221,221,223,1)",
           backgroundColor: "white",
           textAlign: "center",
@@ -887,14 +917,18 @@ const LandingPage = () => {
       >
         <h2>Push Data to Splitgraph</h2>
 
-        <h2 sx={{ marginTop: "2rem !important", fontWeight: "200" }}>
+        <Box
+          component="h2"
+          sx={{ marginTop: "2rem !important", fontWeight: "200" }}
+        >
           Push images to Splitgraph using an
           <br /> immutable and content-addressable{" "}
           <br className="mobile-line-break" /> storage format.
-        </h2>
-      </section>
+        </Box>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-feature-section"
         sx={{
           ...featureSectionStyle,
@@ -912,7 +946,7 @@ const LandingPage = () => {
         <ul>
           <li>
             <Box className="feature-icon">
-              <IconFeaturePeerToPeer color="primary" size={"3rem"} />
+              <IconFeaturePeerToPeer color="primary.main" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Peer-to-Peer</span>
@@ -932,7 +966,7 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureAutogeneratedAPI color="primary" size={"3rem"} />
+              <IconFeatureAutogeneratedAPI color="primary.main" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Auto-generated REST API</span>
@@ -953,7 +987,7 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureCloudStorage color="primary" size={"3rem"} />
+              <IconFeatureCloudStorage color="primary.main" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">
@@ -975,18 +1009,19 @@ const LandingPage = () => {
             </Box>
           </li>
         </ul>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section"
         sx={{
-          color: "sgdarkblue",
+          color: "sgdarkblue.main",
           backgroundColor: "rgba(221,221,223,1) !important",
           paddingLeft: ["1rem", "1rem", "3rem"],
           paddingRight: ["1rem", "1rem", "3rem"],
           paddingBottom: "4rem",
           a: {
-            color: "primary",
+            color: "primary.main",
           },
         }}
       >
@@ -1008,13 +1043,13 @@ const LandingPage = () => {
         >
           <Box
             sx={{
-              backgroundColor: "sgdarkblue",
+              backgroundColor: "sgdarkblue.main",
               color: "white",
               minWidth: ["90vw", "60ch", "min(80ch, 100%)"],
               maxWidth: ["90vw", "60ch", "min(80ch, 100%)"],
               marginTop: "2rem",
               marginBottom: "2rem",
-              boxShadow: "card",
+              boxShadow: "0 0 4px rgba(0, 0, 0, .125)", //formerly 'card' TODO MUI-ify more idiomatically
             }}
           >
             <HeroSampleQuery
@@ -1039,12 +1074,13 @@ const LandingPage = () => {
             />
           </Box>
         </Box>
-      </section>
+      </Box>
 
       {/* Placeholder to shift side of next list */}
       <section className="lp-section"></section>
 
-      <section
+      <Box
+        component="section"
         className="lp-feature-section"
         sx={{
           ...featureSectionStyle,
@@ -1053,7 +1089,7 @@ const LandingPage = () => {
         }}
       >
         <Box className="feature-section-header">
-          <h2>Store & Query Efficiently</h2>
+          <h2>Store &amp; Query Efficiently</h2>
           <Link href="/product/data-lifecycle/storage">
             Save on storage costs with a columnar format and delta compression.
           </Link>
@@ -1062,7 +1098,7 @@ const LandingPage = () => {
         <ul>
           <li>
             <Box className="feature-icon">
-              <IconFeatureDeltaCompression color="primary" size={"3rem"} />
+              <IconFeatureDeltaCompression color="primary.main" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Delta Compression</span>
@@ -1080,7 +1116,10 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureContentAddressable color="primary" size={"3rem"} />
+              <IconFeatureContentAddressable
+                color="primary.main"
+                size={"3rem"}
+              />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">
@@ -1103,7 +1142,7 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconFeatureLayeredQuerying color="primary" size={"3rem"} />
+              <IconFeatureLayeredQuerying color="primary.main" size={"3rem"} />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Layered querying</span>
@@ -1121,9 +1160,10 @@ const LandingPage = () => {
             </Box>
           </li>
         </ul>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section lp-cta"
         sx={{
           ...ctaSectionStyle,
@@ -1156,12 +1196,13 @@ const LandingPage = () => {
         <Link className="muted-link" href="/about/company/private-cloud-beta">
           Read About the Beta &raquo;
         </Link>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section"
         sx={{
-          color: "primary",
+          color: "primary.main",
           // backgroundColor: "rgba(221,221,223,1)",
           backgroundColor: "white",
           textAlign: "center",
@@ -1176,15 +1217,19 @@ const LandingPage = () => {
       >
         <h2>Run Splitgraph Locally</h2>
 
-        <h2 sx={{ marginTop: "2rem !important", fontWeight: "200" }}>
+        <Box
+          component="h2"
+          sx={{ marginTop: "2rem !important", fontWeight: "200" }}
+        >
           Run a local Splitgraph Engine <br className="mobile-line-break" />
           on top of Postgres
           <br />
           to mount or clone data into tables.
-        </h2>
-      </section>
+        </Box>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-feature-section"
         sx={{
           ...featureSectionStyle,
@@ -1210,9 +1255,12 @@ const LandingPage = () => {
           >
             <h2>Powered by Postgres</h2>
 
-            <h2 sx={{ marginTop: "2rem !important", fontWeight: "200" }}>
+            <Box
+              component="h2"
+              sx={{ marginTop: "2rem !important", fontWeight: "200" }}
+            >
               Plug into a growing ecosystem.
-            </h2>
+            </Box>
 
             <IconPostgresLogo
               size={"6em"}
@@ -1227,7 +1275,7 @@ const LandingPage = () => {
           <li>
             <Box className="feature-icon">
               <IconFeatureIntegrateOtherDatabases
-                color="primary"
+                color="primary.main"
                 size={"3rem"}
               />
             </Box>
@@ -1252,7 +1300,10 @@ const LandingPage = () => {
 
           <li>
             <Box className="feature-icon">
-              <IconConceptWorkflowGantChart color="primary" size={"3rem"} />
+              <IconConceptWorkflowGantChart
+                color="primary.main"
+                size={"3rem"}
+              />
             </Box>
             <Box className="feature-body">
               <span className="feature-heading">Keep Your Existing Tools</span>
@@ -1272,9 +1323,10 @@ const LandingPage = () => {
             </Box>
           </li>
         </ul>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        component="section"
         className="lp-section lp-cta"
         sx={{
           ...ctaSectionStyle,
@@ -1286,7 +1338,7 @@ const LandingPage = () => {
           ".community-link": {
             ...communityLinksStyle[".community-link"],
             backgroundColor: "white",
-            color: "primary",
+            color: "primary.main",
             ":hover": {
               textDecoration: "none !important",
               backgroundColor: "sglightblue",
@@ -1327,11 +1379,11 @@ const LandingPage = () => {
             Community Discord Chat
           </Link>
         </Box>
-      </section>
+      </Box>
 
       <Footer Link={Link} />
     </LandingPageLayout>
   );
 };
 
-export default withTheme(LandingPage);
+export default withMUITheme(LandingPage);

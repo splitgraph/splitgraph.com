@@ -1,8 +1,5 @@
-// @jsx jsx
-import { jsx } from "theme-ui";
 import { useMemo } from "react";
-
-import { Box } from "@splitgraph/design";
+import { Box } from "@material-ui/core";
 
 import useSidebar from "./useSidebar";
 
@@ -34,7 +31,7 @@ const getInlineFooterStyle = ({ depth, show, initialDepth, loading }) => ({
       left: 0,
       right: 0,
       height: "6rem",
-      backgroundColor: loading ? "background" : "primary",
+      backgroundColor: loading ? "background" : "primary.main",
       color: "white",
       borderBottomLeftRadius: "40px",
       borderBottomRightRadius: "40px",
@@ -69,7 +66,7 @@ const DopeWaterLoadingAnimation = ({ loading }) => {
       left: "0",
       width: "100%",
       height: "100%",
-      backgroundColor: "primary",
+      backgroundColor: "primary.main",
       WebkitAnimation: "animtop 5s forwards, animtop2 2s forwards",
       animation: "animtop 5s forwards, animtop2 2s forwards",
       borderBottomLeftRadius: "40px",
@@ -111,7 +108,8 @@ const DopeWaterLoadingAnimation = ({ loading }) => {
 
 const ResetButton = ({ reset, show }) => {
   return (
-    <span
+    <Box
+      component="span"
       sx={{
         textTransform: "uppercase",
         fontSize: "1rem",
@@ -123,7 +121,7 @@ const ResetButton = ({ reset, show }) => {
       onClick={reset}
     >
       Collapse
-    </span>
+    </Box>
   );
 };
 
@@ -225,8 +223,8 @@ const SidebarNode = ({
         anythingBeenClicked={anythingBeenClicked}
       />
       {children && (
-        <div className="ul-wrapper" sx={childListContainerStyle}>
-          <ul key={`${slug}`} sx={childListStyle}>
+        <Box className="ul-wrapper" sx={childListContainerStyle}>
+          <Box component="ul" key={`${slug}`} sx={childListStyle}>
             {children.map((child) => (
               <SidebarNode
                 key={`${child.slug}`}
@@ -243,8 +241,8 @@ const SidebarNode = ({
                 mutex={mutex}
               />
             ))}
-          </ul>
-        </div>
+          </Box>
+        </Box>
       )}
     </>
   );
@@ -271,7 +269,7 @@ const Sidebar = ({
   reset,
 }) => {
   return (
-    <>
+    <Box>
       {!minLabelDepth &&
         rootNode &&
         rootNode.metadata &&
@@ -300,7 +298,7 @@ const Sidebar = ({
         loading={loading}
         reset={reset}
       />
-    </>
+    </Box>
   );
 };
 
@@ -346,7 +344,6 @@ const SidebarRoot = ({
         ".li-selector": SidebarStyle.Item,
         "span,a": SidebarStyle.Label,
       }}
-      fontSize={2}
     >
       {children}
       <Sidebar

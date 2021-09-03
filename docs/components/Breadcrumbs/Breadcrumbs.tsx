@@ -1,9 +1,5 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, SystemStyleObject } from "theme-ui";
-import * as React from "react";
-
-import { Link } from "../Link";
+import { Box } from "@material-ui/core";
+import { MuiLink as Link } from "@splitgraph/tdesign";
 
 export interface IBreadcrumbsProps {
   crumbs: {
@@ -14,7 +10,7 @@ export interface IBreadcrumbsProps {
 
 const breadcrumbsListStyle = {
   listStyle: "none",
-  color: "heavy",
+  color: "heavy.main",
   padding: 0,
   li: {
     display: "inline",
@@ -25,20 +21,17 @@ const breadcrumbsListStyle = {
     paddingRight: "1ch",
     content: '"\\00BB"',
   },
-  a: {
-    variant: "links.primary",
-  },
-} as SystemStyleObject;
+};
 
 const Breadcrumbs = ({ crumbs }: IBreadcrumbsProps) => {
   return (
-    <ul sx={breadcrumbsListStyle}>
+    <Box component="ul" sx={breadcrumbsListStyle}>
       {crumbs.map(({ href, anchor }) => (
         <li key={anchor}>
           {href ? <Link href={href}>{anchor}</Link> : <span>{anchor}</span>}
         </li>
       ))}
-    </ul>
+    </Box>
   );
 };
 

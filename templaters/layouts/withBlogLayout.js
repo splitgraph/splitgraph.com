@@ -1,17 +1,14 @@
-// @jsx jsx
-import { jsx } from "theme-ui";
-import React from "react";
-
-import { mdxComponents } from "@splitgraph/design";
+import { mdxComponents } from "@splitgraph/tdesign";
 import {
   Link,
   BlogPost,
   Footer,
   InnerPageLayout,
   RSSMetaTag,
-} from "@splitgraph/docs/components";
-import withTheme from "@splitgraph/docs/hocs/withTheme";
+} from "../../docs/components";
+import { withMUITheme } from "@splitgraph/tdesign";
 
+// Unused import but might actually be necessary to trigger something in the build process?
 import blogPosts from "@splitgraph/docs/compile/compiledBlogPosts";
 
 const withBlogLayout = ({ MdxPage, item: { metadata } }) => {
@@ -32,7 +29,7 @@ const withBlogLayout = ({ MdxPage, item: { metadata } }) => {
               textDecoration: "underline",
               ":hover": {
                 borderBottom: "1px solid",
-                borderBottomColor: "primary",
+                borderBottomColor: "primary.main",
               },
             },
             img: {
@@ -54,7 +51,7 @@ const withBlogLayout = ({ MdxPage, item: { metadata } }) => {
 
   WithBlogLayout.displayName = `WithBlogLayout`;
 
-  return withTheme(WithBlogLayout);
+  return withMUITheme(WithBlogLayout);
 };
 
 export default withBlogLayout;

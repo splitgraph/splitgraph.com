@@ -1,8 +1,3 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx } from "theme-ui";
-import * as React from "react";
-
 export interface IFooterLinkProps {
   Link?: React.FunctionComponent<any>;
   href: string;

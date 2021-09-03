@@ -1,15 +1,12 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, SystemStyleObject } from "theme-ui";
 import * as React from "react";
 
 import { BaseLayout, Footer, MainContent } from "@splitgraph/tdesign";
 import { HeaderRight } from "../HeaderRight";
-import { Link } from "../Link";
+import { MuiLink as Link } from "@splitgraph/tdesign";
 
 export interface IInnerPageLayoutProps {
   children?: React.ReactNode;
-  extraStyle?: SystemStyleObject;
+  extraStyle?: object;
   charWidth?: number;
 }
 
@@ -20,6 +17,12 @@ const InnerPageLayout = ({
 }: IInnerPageLayoutProps) => {
   return (
     <BaseLayout
+      brandmarkURL={"/static/brandmark.svg"}
+      wordmarkURL={"/static/brandmark.svg"}
+      onHoverBrandmarkURL={"/static/brandmark_animated.svg"}
+      animateWordmarkOnHover={true}
+      logoText={"Splitgraph"}
+      brandName={"Splitgraph"}
       extraHeaderStyle={{
         borderWidth: "0 !important",
       }}
@@ -39,15 +42,15 @@ const InnerPageLayout = ({
           background:
             "linear-gradient(to bottom,rgba(13,24,33,1) 0%,rgba(54,102,141,1) 100%)",
           h1: {
-            color: "light",
-            fontSize: [5, 5, 6],
+            color: "light.main",
+            fontSize: ["40px", "40px", "48px"],
             marginBottom: "2rem",
           },
         },
         ".main-content": {
           maxWidth: "100vw",
           "a :not(footer a)": {
-            variant: "links.primary",
+            // variant: "links.primary",
           },
           ...(extraStyle.hasOwnProperty(".main-content")
             ? extraStyle[".main-content"]

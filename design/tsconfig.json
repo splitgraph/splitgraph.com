@@ -1,0 +1,6 @@
+{
+  "extends": "../tsconfig.json",
+  "exclude": ["node_modules"],
+  "include": ["**/*.js", "**/*.ts", "**/*.tsx"],
+  "references": [{ "path": "../tdesign" }, { "path": "../lib" }]
+}

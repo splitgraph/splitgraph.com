@@ -1,7 +1,4 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, Text } from "theme-ui";
-import * as React from "react";
+import { Box } from "@material-ui/core";
 import IframeResizer from "iframe-resizer-react";
 
 import { PreWithCopy } from "../PreWithCopy";
@@ -26,9 +23,9 @@ const HeroConnectionParams = ({
       className="hero-subsection hero-subsection--splitfile hero--connection-params"
       sx={{
         backgroundColor: "white",
-        color: "primary",
+        color: "primary.main",
         // maxWidth: "90vw",
-        boxShadow: "card",
+        boxShadow: "0 0 4px rgba(0, 0, 0, .125)",
         // minWidth: ["calc(100vw - 4rem)", "400px", "400px"],
         // minHeight: "600px",
         maxWidth: [
@@ -47,7 +44,7 @@ const HeroConnectionParams = ({
         sx={{
           width: "100%",
           h2: {
-            color: "heavy",
+            color: "heavy.main",
           },
         }}
       >
@@ -93,9 +90,11 @@ const HeroConnectionParams = ({
           />
         ) : (
           <Box>
-            <Text sx={{ color: "heavy", fontWeight: "bold", display: "block" }}>
+            <Box
+              sx={{ color: "heavy.main", fontWeight: "bold", display: "block" }}
+            >
               Username / Password
-            </Text>
+            </Box>
             <Box
               sx={{
                 display: "flex",
@@ -111,9 +110,9 @@ const HeroConnectionParams = ({
                 // padding: "1rem",
                 borderWidth: "1px",
                 borderStyle: "solid",
-                borderColor: "gray",
+                borderColor: "gray.main",
                 a: {
-                  variant: "links.primary",
+                  // variant: "links.primary", //TODO use MUI theme singleton
                   textDecoration: "underline",
                   marginBottom: "1rem",
                 },

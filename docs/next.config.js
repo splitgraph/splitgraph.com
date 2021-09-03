@@ -22,13 +22,25 @@ makePages();
 
 const { castManifest } = makeCasts();
 
-console.log("Casts:");
+// console.log("Casts:");
 
 for (let castKey of Object.keys(castManifest)) {
   console.log("    ", castKey);
 }
 
+const IGNORE_BUILD_ERRORS = process.env.IGNORE_BUILD_ERRORS === "true";
+
+if (IGNORE_BUILD_ERRORS) {
+  console.warn("Suppressing next.js typecheck...");
+}
+
 const nextConfig = {
+  typescript: {
+    ignoreBuildErrors: IGNORE_BUILD_ERRORS,
+  },
+  experimental: {
+    externalDir: true,
+  },
   env: {
     // This is a build time config variable, but in practice, since we should
     // only have one website deployed accessible to search engines, that's okay.
@@ -51,12 +63,17 @@ const nextConfig = {
       process.env.DOCSEARCH_PUBLIC_CLIENT_API_KEY,
     DOCSEARCH_INDEX_NAME: process.env.DOCSEARCH_INDEX_NAME || "splitgraph",
   },
-  resolve: {
-    alias: aliasConfig,
-  },
+  // resolve: {
+  //   alias: aliasConfig,
+  // },
   exportPathMap: async () => {
-    const jsonMap = await fs.readFile(EXPORT_PATH_MAP);
-    return JSON.parse(jsonMap);
+    try {
+      const jsonMap = await fs.readFile(EXPORT_PATH_MAP);
+      return JSON.parse(jsonMap);
+    } catch (_) {
+      console.warn("No exportPathMap found");
+      return {};
+    }
   },
 };
 
@@ -65,11 +82,11 @@ const _configs = {
   css: {},
   mdx: {
     options: {
-      mdPlugins: [
+      remarkPlugins: [
         [require("remark-disable-tokenizers"), { block: ["indentedCode"] }],
         require("remark-sectionize"),
       ],
-      hastPlugins: [
+      rehypePlugins: [
         splitgraphRehypePrism,
         [injectAsciicasts, { castManifest }],
         require("rehype-slug"),
@@ -88,19 +105,17 @@ const _configs = {
 };
 
 const _plugins = {
-  css: require("@zeit/next-css"),
   bundleAnalyzer: require("@next/bundle-analyzer"),
-  withIgnoreFs,
-  mdx: require("@zeit/next-mdx")(_configs.mdx), // note slightly different call format
-  transpileModules: require("next-transpile-modules"),
+  mdx: require("@next/mdx")(_configs.mdx), // note slightly different call format
 };
 
 const plugins = [
-  [_plugins.transpileModules, _configs.transpileModules],
   [_plugins.mdx],
-  [_plugins.withIgnoreFs, {}],
-  [_plugins.css, _configs.css],
-  [_plugins.bundleAnalyzer(_configs.bundleAnalyzer)],
+  // [_plugins.withIgnoreFs, {}],
+  // [_plugins.css, _configs.css],
+  // [_plugins.bundleAnalyzer(_configs.bundleAnalyzer)],
 ];
+
+// module.exports = nextConfig;
 
 module.exports = withPlugins(plugins, nextConfig);

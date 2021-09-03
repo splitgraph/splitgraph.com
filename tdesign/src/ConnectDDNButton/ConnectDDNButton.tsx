@@ -1,42 +1,33 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box } from "theme-ui";
-import * as React from "react";
+import { Button, Link } from "@material-ui/core";
+import ArrowRightAlt from "@material-ui/icons/ArrowRightAlt";
+import type { SxProps } from "@material-ui/system";
+import type { Theme } from "@material-ui/core/styles";
 
 export interface IConnectDDNButtonProps {
   connectParams?: string;
   children?: React.ReactNode;
   connectURL?: string;
+  sx?: SxProps<Theme>;
 }
 
 const ConnectDDNButton = ({
   connectURL = `/connect`,
   connectParams,
   children,
+  sx,
+  ...rest
 }: IConnectDDNButtonProps) => {
   return (
-    <Box
-      sx={{
-        a: {
-          display: "block",
-          variant: "buttons.secondary",
-          padding: "0.5rem",
-          textDecoration: "none",
-          ":hover": {
-            color: "sglightblue",
-            cursor: "pointer",
-          },
-        },
-      }}
+    <Button
+      component={Link}
+      variant="contained"
+      href={connectParams ? `${connectURL}?${connectParams}` : `${connectURL}`}
+      sx={sx}
+      endIcon={<ArrowRightAlt />}
+      {...(rest as any)}
     >
-      <a
-        href={
-          connectParams ? `${connectURL}?${connectParams}` : `${connectURL}`
-        }
-      >
-        {children || <>Connect to DDN</>}
-      </a>
-    </Box>
+      {children || <>Connect to DDN</>}
+    </Button>
   );
 };
 

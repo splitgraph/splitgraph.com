@@ -1,7 +1,5 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, Button } from "theme-ui";
 import * as React from "react";
+import { Box, Button } from "@material-ui/core";
 
 import { IconChevronRight, IconChevronLeft } from "@splitgraph/tdesign";
 
@@ -50,8 +48,8 @@ const HeroSampleSplitfile = ({ splitfiles }: IHeroSampleSplitfileProps) => {
       {snippet}
       <Box
         sx={{
-          backgroundColor: "heavy",
-          color: "light",
+          backgroundColor: "heavy.main",
+          color: "light.main",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
@@ -61,19 +59,21 @@ const HeroSampleSplitfile = ({ splitfiles }: IHeroSampleSplitfileProps) => {
         <Button
           sx={{
             backgroundColor: "transparent",
+            display: "flex",
           }}
           onClick={onClickPrev}
         >
-          <IconChevronLeft color={"light"} size={"1rem"} />
+          <IconChevronLeft color={"light.main"} size={"1rem"} />
         </Button>
         {description}
         <Button
           sx={{
             backgroundColor: "transparent",
+            display: "flex",
           }}
           onClick={onClickNext}
         >
-          <IconChevronRight color={"light"} size={"1rem"} />
+          <IconChevronRight color={"light.main"} size={"1rem"} />
         </Button>
       </Box>
     </Box>

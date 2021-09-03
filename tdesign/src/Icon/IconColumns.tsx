@@ -1,12 +1,8 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx } from 'theme-ui';
-import * as React from 'react';
+import { columnsIconURI } from "./cssSvgStrings";
+import BaseIcon, { IIconProps } from "./BaseIcon";
 
-import { columnsIconURI } from './cssSvgStrings';
-import BaseIcon, { IIconProps } from './BaseIcon';
-
-export default (props: IIconProps) => {
-  return <BaseIcon iconSlug={'columns'} svgURI={columnsIconURI} {...props} />;
+const IconColumns = (props: IIconProps) => {
+  return <BaseIcon iconSlug={"columns"} svgURI={columnsIconURI} {...props} />;
 };
 
+export default IconColumns;

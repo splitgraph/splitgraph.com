@@ -15,7 +15,7 @@ const useSidebarNode = ({
   minLabelDepth = 0,
   depth,
   isParent,
-  isNavigable
+  isNavigable,
 }) => {
   // const [isLocalCollapsed, setLocalCollapsed] = useState(depth > maxInitialStackDepth)
 
@@ -27,10 +27,10 @@ const useSidebarNode = ({
   const isLastClicked = mutex === nodeId && anythingBeenClicked;
 
   const isInActivePath =
-    isActiveNode || !!activeNodePath.find(node => node.nodeId === nodeId);
+    isActiveNode || !!activeNodePath.find((node) => node.nodeId === nodeId);
 
   const isInLastClickedPath = !!lastClickedPath.find(
-    node => node.nodeId === nodeId
+    (node) => node.nodeId === nodeId
   );
 
   // TODO: fixme
@@ -53,16 +53,16 @@ const useSidebarNode = ({
     hiddenHorizontally,
     hiddenVertically,
     depth,
-    minLabelDepth
+    minLabelDepth,
   });
 
   const childListStyle = getListStyle({
-    isInActivePath
+    isInActivePath,
   });
 
   // The "bottom leafs" (other than the active one)
   const isChildOfActiveParent =
-    parentNodeId && activeNodePath.find(n => n.nodeId === parentNodeId)
+    parentNodeId && activeNodePath.find((n) => n.nodeId === parentNodeId)
       ? true
       : false;
 
@@ -77,7 +77,7 @@ const useSidebarNode = ({
       depth: depth,
       setActive: isNavigable,
       loading: isNavigable,
-      nextDepth: isParent ? depth + 1 : depth
+      nextDepth: isParent ? depth + 1 : depth,
     });
   };
 
@@ -91,7 +91,7 @@ const useSidebarNode = ({
     childListStyle,
     anythingBeenClicked,
     isChildOfActiveParent,
-    isChildOfClickedParent
+    isChildOfClickedParent,
   };
 };
 

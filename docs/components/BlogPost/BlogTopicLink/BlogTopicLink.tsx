@@ -1,9 +1,6 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
-import * as React from "react";
+import { Box } from "@material-ui/core";
 
-import { Link } from "../../Link";
+import { MuiLink as Link } from "@splitgraph/tdesign";
 
 export interface IBlogTopicLinkProps {
   topic: string;
@@ -14,16 +11,14 @@ const BlogTopicLink = ({ topic }: IBlogTopicLinkProps) => {
     <Box
       sx={{
         border: "1px solid",
-        borderColor: "gray",
+        borderColor: "gray.main",
         padding: "5px",
         display: "inline",
         marginRight: "1em",
         marginBottom: "1em",
       }}
     >
-      <Link href="/blog/topic/[topic]" as={`/blog/topic/${topic}`}>
-        {topic}
-      </Link>
+      <Link href="/blog/topic/[topic]">{topic}</Link>
     </Box>
   );
 };

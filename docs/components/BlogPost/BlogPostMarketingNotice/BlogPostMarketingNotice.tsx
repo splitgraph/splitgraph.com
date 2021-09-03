@@ -1,9 +1,6 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box } from "theme-ui";
-import * as React from "react";
+import { Box } from "@material-ui/core";
 
-import { Link } from "../../Link";
+import { MuiLink as Link } from "@splitgraph/tdesign";
 import { MarketingNotice } from "../../MarketingNotice";
 import formatDate from "../formatDate";
 
@@ -33,7 +30,7 @@ const BlogPostMarketingNotice = ({}: IBlogPostMarketingNoticeProps) => {
           },
           ".muted": {
             fontWeight: "lighter",
-            color: "heavy",
+            color: "heavy.main",
           },
           ".padded": {
             paddingLeft: "1ch",

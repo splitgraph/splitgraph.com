@@ -1,5 +1,5 @@
-import React from "react";
-import { Box } from "@splitgraph/design";
+import { Children, cloneElement } from "react";
+import { Box } from "@material-ui/core";
 import { tocStyles } from "@splitgraph/tdesign";
 
 const TocStyle = {
@@ -7,6 +7,7 @@ const TocStyle = {
   "ol.toc-level": {
     ...tocStyles["ol.toc-level"],
     // fontSize: 1,
+    lineHeight: 1.15,
     padding: "0.75em !important",
     listStyleType: "none",
     li: {
@@ -29,10 +30,7 @@ const findMatchingElement = (children = [], matchFunc) => {
   for (let child of children) {
     let maybeMatch =
       !!child.props && child.props.children
-        ? findMatchingElement(
-            React.Children.toArray(child.props.children),
-            matchFunc
-          )
+        ? findMatchingElement(Children.toArray(child.props.children), matchFunc)
         : null;
 
     if (maybeMatch) {
@@ -44,15 +42,11 @@ const findMatchingElement = (children = [], matchFunc) => {
 };
 
 export const OnlyTOC = ({ children, ...rest }) => {
-  const originalToc = findMatchingElement(
-    React.Children.toArray(children),
-    (el) =>
-      el.props &&
-      (el.props.name === "nav" ||
-        (el.type === "nav" && el.props.className === "toc"))
-  );
+  const originalToc = findMatchingElement(Children.toArray(children), (el) => {
+    return el.props && el.props.className === "toc";
+  });
 
-  const extractedToc = originalToc ? React.cloneElement(originalToc) : null;
+  const extractedToc = originalToc ? cloneElement(originalToc) : null;
 
   return <Box sx={TocStyle}>{extractedToc}</Box>;
 };

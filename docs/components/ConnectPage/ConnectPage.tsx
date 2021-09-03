@@ -1,13 +1,9 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, StyleSystemObject } from "theme-ui";
-import * as React from "react";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
-import {
-  HeroConnectionParams,
-  HeroSampleQuery,
-  IHeroSampleQueryItem,
-} from "@splitgraph/docs/components";
+import { HeroConnectionParams } from "../HeroConnectionParams";
+import { HeroSampleQuery, IHeroSampleQueryItem } from "../HeroSampleQuery";
 
 export interface IConnectPageProps {
   isAuthenticated?: boolean;
@@ -27,7 +23,6 @@ const ConnectPage = ({
   sampleQueries,
   namespace,
   repository,
-  tableName,
   embed = false,
   whitelabeled = false,
   host,
@@ -56,7 +51,7 @@ const ConnectPage = ({
           },
           ".left-col": {
             flexGrow: "1",
-            backgroundColor: "primary",
+            backgroundColor: "primary.main",
             padding: 0,
             paddingBottom: "4rem",
             display: "flex",
@@ -85,7 +80,7 @@ const ConnectPage = ({
               paddingTop: "0",
               backgroundColor: "white",
               "h1, h2": {
-                color: "primary",
+                color: "primary.main",
               },
               // minHeight: "50%",
             },
@@ -94,7 +89,7 @@ const ConnectPage = ({
               // backgroundColor: "#ebebeb",
             },
           },
-        } as StyleSystemObject
+        } as SxProps<Theme>
       }
     >
       <Box className="left-col">
@@ -121,11 +116,10 @@ const ConnectPage = ({
                 // backgroundColor: "sglightblue",
                 paddingTop: "1rem",
                 // border: "1px solid",
-                // borderColor: "primary",
-                color: "heavy",
+                // borderColor: "primary.main",
+                color: "heavy.main",
                 width: "100%",
                 a: {
-                  variant: "links.primary",
                   // textDecoration: "underline",
                 },
                 ":before": {

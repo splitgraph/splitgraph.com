@@ -1,11 +1,7 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx } from "theme-ui";
 import * as React from "react";
 
-import { BaseLayout, MainContent } from "@splitgraph/tdesign";
+import { BaseLayout, MainContent, MuiLink as Link } from "@splitgraph/tdesign";
 import { BlogPostMarketingNotice } from "../BlogPost/BlogPostMarketingNotice";
-import { Link } from "../Link";
 
 export interface ILandingPageLayoutProps {
   children?: React.ReactNode;
@@ -48,7 +44,7 @@ const HeaderRight = ({
   </>
 );
 
-export default ({
+const LandingPageLayout = ({
   children,
   showHeader = true,
   showMarketingNotice = true,
@@ -72,7 +68,12 @@ export default ({
         extraHeaderStyle={{
           borderWidth: "0 !important",
         }}
-        logoText={brand || undefined}
+        brandmarkURL={"/static/brandmark.svg"}
+        wordmarkURL={"/static/brandmark.svg"}
+        onHoverBrandmarkURL={"/static/brandmark_animated.svg"}
+        animateWordmarkOnHover={true}
+        logoText={brand || "Splitgraph"}
+        brandName={"Splitgraph"}
         renderHeaderRight={() => (
           <HeaderRight
             includeDashboardHeaderLink={includeDashboardHeaderLink}
@@ -122,3 +123,5 @@ export default ({
     </>
   );
 };
+
+export default LandingPageLayout;

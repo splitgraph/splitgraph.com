@@ -1,23 +1,23 @@
-// @jsx jsx
-import { jsx } from "theme-ui";
-import React from "react";
 import { NextSeo } from "next-seo";
 import { Helmet } from "react-helmet";
+import { Box } from "@material-ui/core";
 
 import {
-  Box,
   Header,
   ContentHeader,
   ContentFooter,
   ContentBody,
   MainContent,
   Sidebar,
-  Heading,
   HolyGrail,
-  LogoImage,
-  InterPageNav,
-  mdxComponents,
 } from "@splitgraph/design";
+
+import {
+  InterPageNav,
+  Heading,
+  LogoImage,
+  mdxComponents,
+} from "@splitgraph/tdesign";
 
 import { BaseLayout } from "@splitgraph/design/Layout";
 import { Link, DocSearch } from "@splitgraph/docs/components";
@@ -123,7 +123,10 @@ const withHolyGrailLayout = ({
                 },
               }}
             >
-              <LogoImage logoURL="/static/splitgraph_logo.svg" />
+              <LogoImage
+                logoURL="/static/splitgraph_logo.svg"
+                sx={{ marginRight: "1ch", padding: 0.5 }}
+              />
               <a
                 href="/"
                 aria-label="homepage"

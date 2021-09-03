@@ -1,7 +1,4 @@
-// @jsx jsx
-// @ts-ignore
-import { Box, SystemStyleObject, jsx } from "theme-ui";
-import * as React from "react";
+import { Box } from "@material-ui/core";
 
 import FooterSection from "./FooterSection";
 import NewsletterSignup from "./NewsletterSignup";
@@ -18,27 +15,28 @@ import {
 
 export interface IFooterProps {
   Link?: React.FunctionComponent<any>;
-  extraStyle?: SystemStyleObject;
+  extraStyle?: object;
   footerVariant?: "dark";
 }
 
 const darkVariant = {
   ".footer-section-header": {
-    color: "muted",
+    color: "muted.main",
   },
   ul: {},
   a: {
-    variant: "links.muted",
+    color: "muted.main",
+    textDecoration: "none",
+    ":hover": {
+      textDecoration: "underline",
+    },
   },
-  backgroundColor: "primary",
+  backgroundColor: ({ palette }) => palette.footer.main,
   borderTop: "0.5ch solid",
-  borderTopColor: "lightaccent",
+  borderTopColor: "lightaccent.main",
 };
 
-const mixStyles = (
-  property: string,
-  ...styles: SystemStyleObject[]
-): SystemStyleObject => {
+const mixStyles = (property: string, ...styles: object[]) => {
   return styles.reduce(
     (mix, style) => ({
       ...mix,
@@ -93,7 +91,7 @@ const Footer = ({
         ".footer-copyright-row": {
           fontSize: "small",
           textTransform: "uppercase",
-          color: "muted",
+          color: "muted.main",
           // justifyContent: "center",
         },
         ".footer-section-header": {
@@ -105,6 +103,9 @@ const Footer = ({
           display: "flex",
           a: {
             variant: "links.unstyled",
+            ":hover": {
+              textDecoration: "none",
+            },
           },
           // marginBottom: ["2rem", "inherit", "inherit"],
           ...mixStyles(".community-logos", baseVariant, extraStyle),
@@ -179,11 +180,9 @@ const Footer = ({
               href="https://www.github.com/splitgraph/splitgraph"
               title="Splitgraph on GitHub"
               aria-label="Splitgraph on GitHub"
+              style={{ marginRight: "1rem" }}
             >
-              <IconLogoGitHub
-                size={"2rem"}
-                extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
-              />
+              <IconLogoGitHub color={"#fff"} size={"2rem"} />
             </a>
             <a
               href="https://www.linkedin.com/company/12620006/"
@@ -191,6 +190,7 @@ const Footer = ({
               aria-label="Splitgraph on LinkedIn"
             >
               <IconLogoLinkedIn
+                color={"#ffffff"}
                 size={"2rem"}
                 extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
               />
@@ -201,6 +201,7 @@ const Footer = ({
               aria-label="Splitgraph on Twitter (@splitgraph)"
             >
               <IconLogoTwitter
+                color={"white"}
                 size={"2rem"}
                 extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
               />
@@ -211,6 +212,7 @@ const Footer = ({
               aria-label="Splitgraph on Reddit (r/splitgraph)"
             >
               <IconLogoReddit
+                color={"white"}
                 size={"2rem"}
                 extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
               />
@@ -221,6 +223,7 @@ const Footer = ({
               aria-label="Splitgraph Blog RSS Feed"
             >
               <IconRss
+                color={"white"}
                 size={"2rem"}
                 extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
               />
@@ -262,7 +265,7 @@ const Footer = ({
             <span>Made with</span>
             <IconHeart
               size={"1rem"}
-              color="muted"
+              color="muted.main"
               extraStyle={{
                 display: "inline-flex",
                 marginRight: "1ch",

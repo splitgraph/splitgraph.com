@@ -1,7 +1,7 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
-import * as React from "react";
+import { useState, useMemo } from "react";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 export interface IHelpSectionItemWrapperProps {
   HelpSectionMarkdownComponent: any;
@@ -14,11 +14,12 @@ const HelpSectionItemWrapper = ({
   HelpSectionMarkdownComponent,
   defaultCollapsed = true,
 }: IHelpSectionItemWrapperProps) => {
-  const [collapsed, setCollapsed] = React.useState(defaultCollapsed);
+  const [collapsed, setCollapsed] = useState(defaultCollapsed);
 
-  const H1Component = React.useMemo(
+  const H1Component = useMemo(
     () => ({ children, ...rest }) => (
-      <h1
+      <Box
+        component="h1"
         className="header-control"
         onClick={(_) => setCollapsed(!collapsed)}
         sx={
@@ -26,9 +27,9 @@ const HelpSectionItemWrapper = ({
             width: "100%",
             display: "flex",
             justifyContent: "flex-start",
-            color: "heavy",
+            color: "heavy.main",
             borderBottom: "1px solid",
-            borderBottomColor: "heavy",
+            borderBottomColor: "heavy.main",
             textAlign: "left !important",
             fontWeight: 200,
             ":hover": {
@@ -39,12 +40,12 @@ const HelpSectionItemWrapper = ({
               paddingRight: "1ch",
               content: '"\\27F6"',
             },
-          } as SystemStyleObject
+          } as SxProps<Theme>
         }
         {...rest}
       >
         {children}
-      </h1>
+      </Box>
     ),
     [collapsed]
   );
@@ -59,7 +60,6 @@ const HelpSectionItemWrapper = ({
           display: collapsed ? "none" : "inherit",
         },
         a: {
-          variant: "links.primary",
           textDecoration: "underline",
         },
         img: {

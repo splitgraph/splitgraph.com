@@ -1,10 +1,15 @@
 import "@csstools/normalize.css";
 import "@splitgraph/design/css/base.css";
 
+// Note: Ideally we could import sphinxtheme as a module in only the sphinx
+//       pages, but that requires upating the Sphinx -> mdx transform files
+//       to make sure that every className is correctly prefixed (todo later)
+import "@splitgraph/design/css/sphinxtheme.css";
+
 import { DefaultSeo } from "next-seo";
 import App from "next/app";
 
-import { matomoInit } from "@splitgraph/design";
+import { matomoInit } from "@splitgraph/tdesign";
 
 const MATOMO_URL = process.env.MATOMO_RELATIVE_URL;
 const MATOMO_JS_FILE = process.env.MATOMO_JS_FILE;

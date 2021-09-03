@@ -9,7 +9,7 @@ const fileWildcard = `${mdxDir}/*.mdx`;
 
 const components = [];
 
-glob.sync(fileWildcard).forEach(function(file) {
+glob.sync(fileWildcard).forEach(function (file) {
   const ComponentName = path.basename(file).replace(".mdx", "");
 
   components.push({

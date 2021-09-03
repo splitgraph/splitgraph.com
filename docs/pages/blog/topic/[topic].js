@@ -1,17 +1,16 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
-
-import React from "react";
-
+import { Box } from "@material-ui/core";
 import { NextSeo } from "next-seo";
 
-import withTheme from "@splitgraph/docs/hocs/withTheme";
+import { withMUITheme } from "@splitgraph/tdesign";
 import { InnerPageLayout } from "@splitgraph/docs/components/InnerPageLayout";
 import { BlogPostItem, Breadcrumbs } from "@splitgraph/docs/components";
 import allBlogPosts from "@splitgraph/docs/compile/compiledBlogPosts";
 
-const BlogTopicPage = ({ topic, blogPosts }) => {
+if (!allBlogPosts) {
+  allBlogPosts = {};
+}
+
+const BlogTopicPage = ({ topic = null, blogPosts = [] }) => {
   return (
     <InnerPageLayout>
       <NextSeo title="Blog" />
@@ -24,7 +23,7 @@ const BlogTopicPage = ({ topic, blogPosts }) => {
           crumbs={[
             { href: "/blog", anchor: "Blog" },
             { href: null, anchor: "Topics" },
-            { href: null, anchor: topic },
+            ...(topic ? [{ href: null, anchor: topic }] : []),
           ]}
         />
       </section>
@@ -52,16 +51,22 @@ const getBlogPostsByTopic = ({ blogPosts, topic }) => {
 };
 
 export async function getStaticProps({ params: { topic } }) {
-  const blogPostsByTopic = getBlogPostsByTopic({
-    blogPosts: allBlogPosts.children,
-    topic,
-  });
-
-  return {
-    props: {
+  const blogPostsByTopic =
+    getBlogPostsByTopic({
+      blogPosts: allBlogPosts.children || [],
       topic,
-      blogPosts: blogPostsByTopic,
-    },
+    }) || [];
+
+  const props = {
+    topic: topic || null,
+    blogPosts: blogPostsByTopic || null,
+  };
+
+  // Don't blame me for this grossness. If blog post has children = undefined,
+  // then it will trigger error .blogPosts[0].children
+  // https://github.com/vercel/next.js/discussions/11209#discussioncomment-35915
+  return {
+    props: JSON.parse(JSON.stringify(props)),
   };
 }
 
@@ -74,4 +79,4 @@ export async function getStaticPaths() {
   };
 }
 
-export default withTheme(BlogTopicPage);
+export default withMUITheme(BlogTopicPage);

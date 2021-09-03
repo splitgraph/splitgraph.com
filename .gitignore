@@ -32,3 +32,10 @@ libmdx
 # (although setup.sh can still be useful to run locally)
 # !.yarn/releases/yarn-berry.js
 # !.yarn/plugins/*
+
+dist
+
+# During development it can be useful to serve a rootCA.pem 
+# from `docs/public/static` for easy download on a mobile device
+*.pem
+docs/out-storybook

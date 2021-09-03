@@ -1,12 +1,8 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx } from 'theme-ui';
-import * as React from 'react';
+import { userIconURI } from "./cssSvgStrings";
+import BaseIcon, { IIconProps } from "./BaseIcon";
 
-import { userIconURI } from './cssSvgStrings';
-import BaseIcon, { IIconProps } from './BaseIcon';
-
-export default (props: IIconProps) => {
-  return <BaseIcon iconSlug={'user'} svgURI={userIconURI} {...props} />;
+const IconUser = (props: IIconProps) => {
+  return <BaseIcon iconSlug={"user"} svgURI={userIconURI} {...props} />;
 };
 
+export default IconUser;

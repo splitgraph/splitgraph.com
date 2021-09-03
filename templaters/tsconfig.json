@@ -1,0 +1,22 @@
+{
+  "extends": "../tsconfig.json",
+  "include": [
+    "**/*.js",
+    "**/*.ts",
+    "**/*.tsx",
+    "../docs/compile/*.js",
+    "../docs/components/*.tsx",
+    "../docs/hocs/*.tsx",
+    "../docs/components/*.ts",
+    "../docs/hocs/*.ts",
+    "../docs/components/*.js",
+    "../docs/hocs/*.js",
+    "../docs/components/**/*.tsx",
+    "../docs/hocs/**/*.tsx",
+    "../docs/components/**/*.ts",
+    "../docs/hocs/**/*.ts",
+    "../docs/components/**/*.js",
+    "../docs/hocs/**/*.js"
+  ],
+  "references": [{ "path": "../tdesign" }, { "path": "../design" }]
+}

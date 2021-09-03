@@ -1,17 +1,14 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx } from 'theme-ui';
-import * as React from 'react';
+import { featureSplitfilesIconURI } from "./cssSvgStrings";
+import BaseIcon, { IIconProps } from "./BaseIcon";
 
-import { featureSplitfilesIconURI } from './cssSvgStrings';
-import BaseIcon, { IIconProps } from './BaseIcon';
-
-export default (props: IIconProps) => {
+const IconFeatureSplitfiles = (props: IIconProps) => {
   return (
     <BaseIcon
-      iconSlug={'featureSplitfiles'}
+      iconSlug={"featureSplitfiles"}
       svgURI={featureSplitfilesIconURI}
       {...props}
     />
   );
 };
+
+export default IconFeatureSplitfiles;

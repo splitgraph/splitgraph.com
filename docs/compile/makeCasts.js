@@ -22,11 +22,8 @@ const dirTree = require("directory-tree");
 
 const { md5sumSync } = require("@splitgraph/lib/util");
 
-const getCastMetadata = castSysPath => {
-  const headerLine = fs
-    .readFileSync(castSysPath)
-    .toString()
-    .split("\n")[0];
+const getCastMetadata = (castSysPath) => {
+  const headerLine = fs.readFileSync(castSysPath).toString().split("\n")[0];
 
   try {
     return JSON.parse(headerLine);
@@ -104,7 +101,7 @@ const getCastEmbedHtml = ({ castHttpPath, metadata }) => {
 const getCastManifest = () => {
   const castManifest = {};
 
-  dirTree(CONTENT_DIR, { extensions: /\.cast$/ }, item => {
+  dirTree(CONTENT_DIR, { extensions: /\.cast$/ }, (item) => {
     // This needs to be deterministic in order to work with nextjs export
     let versionHash = md5sumSync(item.path);
 
@@ -131,7 +128,7 @@ const getCastManifest = () => {
       embedSysPath,
       castSysPath,
       slug,
-      metadata
+      metadata,
     };
   });
 
@@ -141,7 +138,7 @@ const getCastManifest = () => {
 const createStaticEmbedPageForCast = ({
   embedSysPath,
   castHttpPath,
-  metadata
+  metadata,
 }) => {
   const html = getCastEmbedHtml({ castHttpPath, metadata });
   return fs.writeFileSync(embedSysPath, html);
@@ -157,7 +154,7 @@ const createStaticPagesForCast = ({
   embedHttpPath,
   castHttpPath,
   castSysPath,
-  metadata
+  metadata,
 }) => {
   console.log("    create embed:", embedHttpPath);
   createStaticEmbedPageForCast({ embedSysPath, castHttpPath, metadata });
@@ -209,5 +206,5 @@ const makeCasts = () => createStaticPages();
 
 module.exports = {
   getCastManifest,
-  makeCasts
+  makeCasts,
 };

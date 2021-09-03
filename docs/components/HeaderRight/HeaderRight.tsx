@@ -1,13 +1,8 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx } from "theme-ui";
-import * as React from "react";
-
-import { Link } from "../Link";
+import { MuiLink as Link } from "@splitgraph/tdesign";
 
 export interface IHeaderRightProps {}
 
-export default ({}: IHeaderRightProps) => {
+const HeaderRight = ({}: IHeaderRightProps) => {
   return (
     <>
       <Link href="/blog">Blog</Link>
@@ -16,8 +11,10 @@ export default ({}: IHeaderRightProps) => {
         Connect
       </Link>
       <Link className="button-link" href="/explore">
-        Data
+        Data2
       </Link>
     </>
   );
 };
+
+export default HeaderRight;

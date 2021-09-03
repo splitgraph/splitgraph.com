@@ -1,5 +1,12 @@
 // Our modules are managed by yarn workspaces
-const ourModules = ["@splitgraph"];
+const ourModules = [
+  "@splitgraph/design",
+  "@splitgraph/content",
+  "@splitgraph/content-scripts",
+  "@splitgraph/lib",
+  "@splitgraph/tdesign",
+  "@splitgraph/templaters",
+];
 
 // Enumerate every dependency with an "es" or "es6" module available
 // TODO: Make this programmatic (as in, with javascript, not shell)

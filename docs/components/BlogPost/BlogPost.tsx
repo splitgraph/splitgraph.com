@@ -1,8 +1,5 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx } from "theme-ui";
-
 import * as React from "react";
+import { Box } from "@material-ui/core";
 
 // import { Link } from "../Link"
 import { DividedBox } from "../Boxes/DividedBox";
@@ -55,7 +52,8 @@ const BlogPost = ({ children, meta }: IBlogPostProps) => {
           ]}
         />
       </section>
-      <section
+      <Box
+        component="section"
         sx={{
           display: "flex",
           flexWrap: "wrap",
@@ -64,11 +62,12 @@ const BlogPost = ({ children, meta }: IBlogPostProps) => {
         {meta.topics &&
           meta.topics.length > 0 &&
           meta.topics.map((topic) => <BlogTopicLink topic={topic} />)}
-      </section>
+      </Box>
       <section>
         <article className="main-content">{children}</article>
       </section>
-      <section
+      <Box
+        component="section"
         className="related-posts"
         aria-label="related posts"
         sx={{
@@ -80,7 +79,7 @@ const BlogPost = ({ children, meta }: IBlogPostProps) => {
             fontWeight: "normal",
             fontSize: 2,
             borderBottom: "1px solid",
-            borderBottomColor: "gray",
+            borderBottomColor: "gray.main",
           },
         }}
       >
@@ -92,9 +91,14 @@ const BlogPost = ({ children, meta }: IBlogPostProps) => {
             ))}
           </>
         )}
-      </section>
-      <section className="subscribe-opts" sx={{ marginBottom: "2rem" }}>
-        <a
+      </Box>
+      <Box
+        component="section"
+        className="subscribe-opts"
+        sx={{ marginBottom: "2rem" }}
+      >
+        <Box
+          component="a"
           href="/feed.xml"
           title="Splitgraph Blog RSS Feed"
           aria-label="Splitgraph Blog RSS Feed"
@@ -102,12 +106,12 @@ const BlogPost = ({ children, meta }: IBlogPostProps) => {
         >
           <IconRss
             size={"2rem"}
-            color={"primary"}
+            color={"primary.main"}
             extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
           />
           Subscribe to RSS
-        </a>
-      </section>
+        </Box>
+      </Box>
     </>
   );
 };

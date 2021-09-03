@@ -1,7 +1,4 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box } from "theme-ui";
-import * as React from "react";
+import { Box } from "@material-ui/core";
 
 import { MarketingNotice } from "../MarketingNotice";
 

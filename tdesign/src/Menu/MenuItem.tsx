@@ -1,11 +1,11 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, Text, SystemStyleObject } from "theme-ui";
-import * as React from "react";
 import { useContext, useEffect, useRef } from "react";
+import { Box, Typography } from "@material-ui/core";
+import type { SxProps } from "@material-ui/system";
+import type { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { useTheme } from "@material-ui/core/styles";
 
 import { IIconProps } from "../Icon/BaseIcon";
-import { Link } from "../Link";
+import { MuiLink as Link } from "../Link";
 import { LayoutContext } from "../Layout/TwoColumnLayout";
 
 export interface MenuItemProps {
@@ -19,19 +19,30 @@ export interface MenuItemProps {
   isActive?: boolean;
   scrollIntoViewIfNeeded?: boolean;
   isHeading?: boolean;
+  activeIconColor?: string | ((theme: Theme) => string);
+  defaultIconColor?: string | ((theme: Theme) => string);
 }
 
-export default ({
+const MenuItem = ({
   Icon,
   href,
-  as,
+  // as,
   text,
   iconSx = {},
   isActive = false,
   scrollIntoViewIfNeeded = true,
   isHeading = false,
+  activeIconColor,
+  defaultIconColor,
 }: MenuItemProps) => {
   const { expanded } = useContext(LayoutContext);
+  const theme = useTheme();
+
+  if (!defaultIconColor) {
+    defaultIconColor = theme.palette.getContrastText(
+      theme.palette.surfaces.background.main
+    );
+  }
 
   const itemRef = useRef<HTMLLIElement>(null);
   const scrolltoItem = () =>
@@ -53,7 +64,7 @@ export default ({
     }
   }, [isActive, expanded]);
 
-  const containerStyle = {
+  const containerStyle: SxProps<Theme> = {
     display: [
       expanded ? "flex" : "inline-flex",
       expanded ? "flex" : "inline-flex",
@@ -65,24 +76,34 @@ export default ({
       fontSize: "small",
       textTransform: "uppercase",
     },
+    "a:hover": {
+      textDecoration: "underline",
+    },
+    "a.menu-item-label--active": {
+      color: "link.main",
+    },
+    "a:not(.menu-item-label--active)": {
+      color: (theme) =>
+        theme.palette.getContrastText(theme.palette.surfaces.background.main),
+      textDecoration: "none",
+    },
     ":hover": {
       cursor: !href ? "initial" : "pointer",
     },
   };
 
-  const linkStyle = {
-    ":hover": {
-      textDecoration: "underline",
-    },
-  };
+  // const linkStyle: SxProps<Theme> = {
+  //   ":hover": {
+  //     textDecoration: "underline",
+  //   },
+  // };
 
   const textStyle = {};
 
-  const iconStyle = {
-    filter: "invert(1)",
+  const iconStyle: SxProps<Theme> = {
     marginRight: "0.5em",
     ...iconSx,
-  } as SystemStyleObject;
+  };
 
   const activeClassName = isActive ? "active" : "inactive";
   const headingClassName = isHeading ? "heading" : "text";
@@ -91,26 +112,31 @@ export default ({
   const innerContainerClassName = `menu-item-inner-container menu-item-inner-container--${activeClassName} menu-item-inner-container--${headingClassName}`;
   const linkClassName = `menu-item-label menu-item-link menu-item-label--${activeClassName} menu-item-label--${headingClassName}`;
   const textClassName = `menu-item-label menu-item-text menu-item-label--${activeClassName} menu-item-label--${headingClassName}`;
-
   return (
     <li className={listItemClassName} ref={itemRef}>
       <Box sx={containerStyle} className={innerContainerClassName}>
-        {Icon && <Icon extraStyle={iconStyle} />}{" "}
+        {Icon && (
+          <Icon
+            extraStyle={iconStyle}
+            color={isActive ? activeIconColor ?? "link.main" : defaultIconColor}
+          />
+        )}{" "}
         {href ? (
           <Link
-            extraStyle={linkStyle}
+            // extraStyle={linkStyle} // TODO consider if still needed?
             href={href}
-            as={as}
             className={linkClassName}
           >
             {text}
           </Link>
         ) : (
-          <Text className={textClassName} sx={textStyle}>
+          <Typography className={textClassName} sx={textStyle}>
             {text}
-          </Text>
+          </Typography>
         )}
       </Box>
     </li>
   );
 };
+
+export default MenuItem;

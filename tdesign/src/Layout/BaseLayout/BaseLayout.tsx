@@ -1,46 +1,74 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
 import * as React from "react";
+import { useEffect, useState } from "react";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import type { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 import { Header, HeaderLeft, HeaderCenter, HeaderRight } from "../Header";
-import { LogoImage } from "../LogoImage";
-import { LogoText } from "../LogoText";
+import { Logo } from "../Logo";
+import type { ILogoProps } from "../Logo";
 
-export interface BaseLayoutProps {
+import { UserThemeContext } from "../../themes/UserTheme";
+import { UserColorPicker } from "./UserColorPicker";
+
+export interface BaseLayoutProps extends Omit<ILogoProps, "linkTo"> {
   children?: React.ReactNode;
   renderHeaderRight?: () => React.ReactNode;
   renderHeaderCenter?: () => React.ReactNode;
-  extraHeaderStyle?: SystemStyleObject;
-  extraStyle?: SystemStyleObject;
+  extraHeaderStyle?: SxProps<Theme>;
+  extraStyle?: object;
   showHeader?: boolean;
-  logoText?: string;
+  logoLinkTo?: ILogoProps["linkTo"];
 }
 
-export default ({
+const BaseLayout = ({
   children,
   renderHeaderCenter,
   renderHeaderRight,
   extraHeaderStyle = {},
   extraStyle = {},
   showHeader = true,
-  logoText = "Splitgraph",
+  brandmarkURL,
+  onHoverBrandmarkURL,
+  animateWordmarkOnHover,
+  wordmarkURL,
+  logoText,
+  brandName,
+  logoLinkTo = "/",
 }: BaseLayoutProps) => {
-  const containerStyle = {
-    // maxWidth: '100vw',
-    minWidth: "-webkit-fit-content",
-    // width: '100vw',
-    ".logo-link": {
-      variant: "links.unstyled",
-    },
+  const containerStyle: SxProps<Theme> = {
+    // TODO: Deprecated variant syntax only works with legacyTheme
+    // ".logo-link": { variant: "links.unstyled", },
     ".button-link": {
-      variant: "links.button",
+      backgroundColor: "primary.main",
+      color: "muted.main",
+      px: "0.3rem",
+      py: "0.2rem",
+      fontWeight: "bold",
+      borderRadius: "0.5em",
+      transition: "background-color .5s",
+      ":hover": {
+        cursor: "pointer",
+        color: "white",
+        border: 0,
+        backgroundColor: "#437eab",
+        backgroundImage:
+          "linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,.7) 100%)",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "200% 100%",
+        transition: "background-size 1s, background-color 1s",
+      },
       display: "inline-table",
     },
-    ".button-link-secondary": {
-      variant: "links.buttonSecondary",
-      display: "inline-table",
-    },
+
+    // TODO: Deprecated variant syntax only works with legacyTheme
+    // ".logo-link": {
+    //   variant: "links.unstyled",
+    // },
+    // ".button-link-secondary": {
+    //   variant: "links.buttonSecondary",
+    //   display: "inline-table",
+    // },
     // weird hack needs two class names to refer to same element...
     ".logo-link-flex": {
       display: "flex",
@@ -49,33 +77,70 @@ export default ({
     ".header--container": {
       ...extraHeaderStyle,
     },
+    ".logo-text": {
+      fontSize: "22pt",
+      color: "initial",
+    },
+    ".logo-text:hover": {
+      color: "initial",
+    },
     ...extraStyle,
-  } as SystemStyleObject;
+  };
 
   const headerCenter = !!renderHeaderCenter ? renderHeaderCenter() : null;
   const headerRight = !!renderHeaderRight ? renderHeaderRight() : null;
+
+  // TEMPORARY: require user action to show the dark mode toggle
+  // From a JS console, run window.toggleShowDarkModeControl(true)
+  const [showDarkModeToggle, setShowDarkModeToggle] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    // @ts-ignore next
+    window.toggleShowDarkModeControl = (v) => setShowDarkModeToggle(v);
+  }, []);
 
   return (
     <Box sx={containerStyle}>
       {showHeader && (
         <Header>
           <HeaderLeft>
-            <a
-              className="logo-link logo-link-flex"
-              aria-label="home"
-              href={"/"}
-            >
-              <LogoImage
-                logoURL={"/static/splitgraph_logo_light_nocircle.svg"}
-              />
-              <LogoText text={logoText} />
-            </a>
+            <Logo
+              linkTo={logoLinkTo}
+              brandmarkURL={brandmarkURL}
+              onHoverBrandmarkURL={onHoverBrandmarkURL}
+              animateWordmarkOnHover={animateWordmarkOnHover}
+              wordmarkURL={wordmarkURL}
+              brandName={brandName}
+              logoText={logoText}
+            />
           </HeaderLeft>
           <HeaderCenter>{headerCenter}</HeaderCenter>
           <HeaderRight>{headerRight}</HeaderRight>
+          {showDarkModeToggle && (
+            <UserThemeContext.Consumer>
+              {({ userColors, setUserColors, toggleDarkMode }) => (
+                <div>
+                  <span onClick={toggleDarkMode}>
+                    {userColors.mode === "light" ? "🌙" : "🌞"}
+                    &nbsp;
+                  </span>
+                  <UserColorPicker
+                    userColors={userColors}
+                    setUserColors={setUserColors}
+                    toggleDarkMode={toggleDarkMode}
+                  />
+                </div>
+              )}
+            </UserThemeContext.Consumer>
+          )}
         </Header>
       )}
       {children}
     </Box>
   );
 };
+
+export default BaseLayout;

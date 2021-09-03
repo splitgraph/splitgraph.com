@@ -11,6 +11,8 @@ const { prepPages } = require("./compile/makePages");
 
 const { exportMap } = prepPages();
 
+// const exportMap = {};
+
 app.prepare().then(() => {
   const server = express();
 

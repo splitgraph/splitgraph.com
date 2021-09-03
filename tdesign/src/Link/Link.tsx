@@ -1,11 +1,10 @@
-// @jsx jsx
-import { jsx, SxStyleProp } from "theme-ui";
 import * as React from "react";
 import Link from "next/link";
+import { Box } from "@material-ui/core";
 
 export interface INextDynamicLinkProps {
   pathname: string;
-  query: { [key: string]: string };
+  query?: { [key: string]: string };
 }
 
 export interface LinkProps
@@ -25,7 +24,7 @@ export interface LinkProps
   rel?: "nofollow" | string;
 }
 
-export default React.forwardRef(
+const SplitgraphLink = React.forwardRef(
   (
     {
       href,
@@ -40,13 +39,15 @@ export default React.forwardRef(
     ref: any
   ) => (
     <Link href={href} as={as} passHref>
-      <a
-        sx={{ variant, ...sx, ...extraStyle } as SxStyleProp}
+      <Box
+        component="a"
+        sx={{ variant, ...sx, ...extraStyle }}
         ref={ref}
         {...rest}
       >
         {children}
-      </a>
+      </Box>
     </Link>
   )
 );
+export default SplitgraphLink;

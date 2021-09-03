@@ -1,7 +1,4 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, Text } from "theme-ui";
-import * as React from "react";
+import { Box, Typography } from "@material-ui/core";
 import IframeResizer from "iframe-resizer-react";
 
 import {
@@ -34,9 +31,9 @@ const HeroConnectionParams = ({
       className="hero-subsection hero-subsection--splitfile hero--connection-params"
       sx={{
         backgroundColor: "white",
-        color: "primary",
+        color: "primary.main",
         // maxWidth: "90vw",
-        boxShadow: "card",
+        boxShadow: "0 0 4px rgba(0, 0, 0, .125)", //formerly 'card' TODO MUI-ify more idiomatically
         // minWidth: ["calc(100vw - 4rem)", "400px", "400px"],
         // minHeight: "600px",
         maxWidth: [
@@ -55,7 +52,7 @@ const HeroConnectionParams = ({
         sx={{
           width: "100%",
           h2: {
-            color: "heavy",
+            color: "heavy.main",
           },
         }}
       >
@@ -101,9 +98,12 @@ const HeroConnectionParams = ({
           />
         ) : (
           <Box>
-            <Text sx={{ color: "heavy", fontWeight: "bold", display: "block" }}>
+            <Typography
+              color="common.black"
+              sx={{ fontWeight: "bold", display: "block" }}
+            >
               Username / Password
-            </Text>
+            </Typography>
             <Box
               sx={{
                 display: "flex",
@@ -119,9 +119,8 @@ const HeroConnectionParams = ({
                 // padding: "1rem",
                 borderWidth: "1px",
                 borderStyle: "solid",
-                borderColor: "gray",
+                borderColor: "gray.main",
                 a: {
-                  variant: "links.primary",
                   textDecoration: "underline",
                   marginBottom: "1rem",
                 },
@@ -135,7 +134,7 @@ const HeroConnectionParams = ({
                   redirectURL
                 )}`}
               >
-                Or, Sign Up with Email & Password
+                Or, Sign Up with Email &amp; Password
               </a>
             </Box>
           </Box>

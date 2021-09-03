@@ -1,15 +1,9 @@
-// @jsx jsx
-import { jsx } from "theme-ui";
-import * as React from "react";
-
-import { Flex, Text } from "rebass";
-import MutedLink from "../Link/MutedLink";
+import { Box, Typography } from "@material-ui/core";
+import MuiLink from "../Link/MuiLink";
 
 const ErrorHeading = () => {
   return (
-    <Text mr={2} fontWeight="bold">
-      Error:
-    </Text>
+    <Typography sx={{ marginRight: 2, fontWeight: "bold" }}>Error:</Typography>
   );
 };
 
@@ -27,7 +21,7 @@ interface ErrorResetLinkProps {
 }
 
 const ErrorResetLink = ({ text }: ErrorResetLinkProps) => (
-  <MutedLink href={"#"}>{text}</MutedLink>
+  <MuiLink href={"#"}>{text}</MuiLink>
 );
 
 export interface ErrorAlertProps {
@@ -36,7 +30,7 @@ export interface ErrorAlertProps {
   dismissLinkHref?: string;
 }
 
-export default ({
+const ErrorAlert = ({
   message,
   dismissLinkText,
   dismissLinkHref,
@@ -44,29 +38,30 @@ export default ({
   const trimmedMessage = message ? message.replace(/Error\:?\s*/, "") : "";
 
   return (
-    <Flex
-      flexDirection={"row"}
-      justifyContent={"space-between"}
-      p={2}
-      mb={4}
+    <Box
       sx={{
+        display: "flex",
+        marginBottom: 4,
+        justifyContent: "space-between",
+        flexDirection: "row",
         minWidth: "30vw",
-        backgroundColor: "white",
-        backgroundOpacity: 0.2,
+        backgroundColor: "errorBackground.main",
         border: "1px solid red",
-        padding: 8,
+        padding: "8px",
       }}
     >
-      <Flex width={7 / 10}>
+      <Box sx={{ display: "flex" }}>
         <ErrorHeading />
         <ErrorMessage message={trimmedMessage} />
-      </Flex>
+      </Box>
 
       {dismissLinkText && dismissLinkHref && (
-        <Flex width={3 / 10} justifyContent="flex-end">
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           <ErrorResetLink text={dismissLinkText} href={dismissLinkHref} />
-        </Flex>
+        </Box>
       )}
-    </Flex>
+    </Box>
   );
 };
+
+export default ErrorAlert;

@@ -1,7 +1,4 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Button } from "theme-ui";
-import * as React from "react";
+import { Button } from "@material-ui/core";
 
 import OAuthButton, { IOAuthButtonProps } from "./OAuthButton";
 
@@ -29,11 +26,11 @@ const button = (
   <Button
     variant="pill"
     sx={{
-      fontSize: 2,
+      fontSize: "16px",
       display: "flex",
       alignItems: "center",
       backgroundColor: "white",
-      color: "heavy",
+      color: "heavy.main",
     }}
   >
     <Octicon /> Login with GitHub

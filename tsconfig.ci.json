@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
+    "target": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "disableSourceOfProjectReferenceRedirect": false,
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "disableReferencedProjectLoad": false,
+    "incremental": true,
+    "baseUrl": ".",
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "listFiles": false,
+    "diagnostics": false,
+    "extendedDiagnostics": false,
+    "paths": {
+      "@splitgraph/*": ["*"]
+    }
+  },
+  "include": [
+    "content",
+    "content-scripts",
+    "design",
+    "docs",
+    "tdesign",
+    "templaters"
+  ],
+  "exclude": ["node_modules"]
+}

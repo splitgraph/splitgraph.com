@@ -1,29 +1,30 @@
-import { Box } from "../../index";
+import { Box } from "@material-ui/core";
 
-export default ({ children, gridArea = "header" }) => (
+const Header = ({ children, gridArea = "header" }) => (
   <Box
     sx={{
       gridArea,
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      paddingRight: "4px",
-      paddingLeft: "4px",
+      padding: "4px",
       a: {
-        variant: "links.muted",
+        color: "muted.main",
         // textDecoration: "underline",
         fontWeight: "bold",
         marginRight: "1ch",
       },
       ".button-link": {
         border: "1px solid",
-        borderColor: "light",
+        borderColor: "light.main",
         padding: "0.5ch",
         borderRadius: "0.5ch",
       },
+      backgroundColor: "primary.main",
     }}
-    backgroundColor="primary"
   >
     {children}
   </Box>
 );
+
+export default Header;

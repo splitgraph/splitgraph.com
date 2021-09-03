@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 import ConnectPageMarketingNotice from "./ConnectPageMarketingNotice";
 
@@ -9,7 +10,7 @@ import NewSocrataDatasets from "@splitgraph/content/marketing/sample-queries/New
 import QOZTractBigQuery from "@splitgraph/content/marketing/sample-queries/QOZTractBigQuery.mdx";
 import PostGISGeoData from "@splitgraph/content/marketing/sample-queries/PostGISGeoData.mdx";
 
-import { mdxComponents } from "@splitgraph/design";
+import { mdxComponents } from "@splitgraph/tdesign";
 
 import HelpSectionList from "./HelpSectionList";
 import useHasSessionCookie from "./useHasSessionCookie";
@@ -50,7 +51,7 @@ const useConnectPageData = ({ helpSectionComponents, onboardingState }) => {
         }
       : null;
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (redirect) {
       router.push(redirect);
     }

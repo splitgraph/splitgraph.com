@@ -1,7 +1,7 @@
-// @jsx jsx
-// @ts-ignore
-import { jsx, Box, SystemStyleObject } from "theme-ui";
 import * as React from "react";
+import { Box } from "@material-ui/core";
+import { SxProps } from "@material-ui/system";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 interface IRenderMidArgs {
   children?: React.ReactNode;
@@ -10,6 +10,7 @@ interface IRenderMidArgs {
 interface ChildProps {
   children?: React.ReactNode;
   className?: string;
+  sx?: SxProps<Theme>;
 }
 
 export interface IDividedBoxProps {
@@ -18,9 +19,9 @@ export interface IDividedBoxProps {
   renderMid?: (IRenderMidArgs) => React.ReactNode;
   background?: string;
   colors?: [string, string];
-  containerStyle?: SystemStyleObject;
-  midStyle?: SystemStyleObject;
-  topStyle?: SystemStyleObject;
+  containerStyle?: object;
+  midStyle?: object;
+  topStyle?: object;
   direction?: "vertical" | "horizontal";
   angle?: number;
   ContainerComponent?: React.FunctionComponent<ChildProps>;
@@ -68,14 +69,14 @@ const DividedBox = ({
     background,
     ...containerStyle,
     ".divided-top": {
-      color: "light",
+      color: "light.main",
       fontSize: [5, 5, 6],
       paddingLeft: ["1rem", "1rem", "4rem"],
       paddingRight: "4rem",
       marginBottom: "1rem",
       ...(containerStyle.hasOwnProperty(".divided-top")
         ? containerStyle[".divided-top"]
-        : ({} as SystemStyleObject)),
+        : ({} as object)),
       ...topStyle,
     },
     ".divided-mid": {
@@ -88,14 +89,13 @@ const DividedBox = ({
       paddingRight: "1rem",
       width: ["calc(100% - 1rem)", "calc(100% - 1rem)", "calc(100% - 4rem)"],
       borderRadius: 8,
-      border: "1px solid heavy",
       boxShadow: "0 0 1rem rgba(0, 0, 0, .25)",
       ...(containerStyle.hasOwnProperty(".divided-mid")
         ? containerStyle[".divided-mid"]
-        : ({} as SystemStyleObject)),
+        : ({} as object)),
       ...midStyle,
     },
-  } as SystemStyleObject;
+  };
 
   return (
     <ContainerComponent sx={containerStyle} className={containerClassName}>
