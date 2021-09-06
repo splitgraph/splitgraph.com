@@ -95,3 +95,5 @@ export {
   SQLCredentialsNicknameRow,
   AddNewUserRow,
 } from "./Rows";
+
+export { SubnavBar } from "./SubnavBar";

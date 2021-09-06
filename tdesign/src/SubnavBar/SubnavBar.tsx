@@ -22,7 +22,11 @@ const SubnavBar = ({
         display: "flex",
         alignItems: "center",
         borderBottom: ({ palette }) => `1px solid ${palette.grays.gray26.main}`,
-        ul: { pl: "0px" },
+        ul: {
+          paddingLeft: "0px",
+          marginBottom: "inherit",
+          marginTop: "inherit",
+        },
         ".unstyledLink": {
           color: "inherit",
           textDecoration: "inherit",

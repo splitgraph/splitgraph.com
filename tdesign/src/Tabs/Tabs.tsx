@@ -45,8 +45,6 @@ export const Tab = ({ sx, ...rest }: IStyledTabProps) => {
       sx={{
         textTransform: "none",
         fontWeight: (theme) => theme.typography.fontWeightRegular,
-        fontSize: (theme) => theme.typography.pxToRem(15),
-        marginRight: (theme) => theme.spacing(1),
         color: "rgba(3,3,3, 0.7)",
         "&.Mui-selected": {
           color: "black",
@@ -90,7 +88,7 @@ export const TabBody = ({ icon, label, value }: TabBodyProps) => (
 
 interface ITabsProps {
   currentTab: string;
-  handleChange: (_: React.SyntheticEvent, newValue: number) => void;
+  handleChange: (_: React.SyntheticEvent, newValue: string) => void;
   orientation: "horizontal" | "vertical";
   loading?: boolean;
   showDialog?: (show: boolean) => void; //for mobile
@@ -110,15 +108,15 @@ const Tabs = ({
       value={currentTab}
       onChange={handleChange}
       orientation={orientation}
-      aria-label="Search result type chooser"
+      aria-label="Tab chooser"
       variant="scrollable"
       sx={{
-        m: matches ? "1em" : "",
+        margin: matches ? "1em" : "",
         ".MuiTabs-indicator": {
           left: 0,
           background: (theme) => theme.palette.flambeeRed.light,
         },
-        mb: orientation !== "vertical" && "2rem",
+        marginBottom: orientation !== "vertical" && "2rem",
       }}
       {...(rest as any)}
     >
