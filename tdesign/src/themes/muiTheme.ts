@@ -363,6 +363,15 @@ export const muiTheme = ({
         gray28: { main: "#F9FAFB" },
         gray29: { main: "#FCFCFD" },
       },
+      editor: {
+        highlight: { main: "#bf55ec30" },
+        activeLine: { main: "#b6c9e3" },
+        comment: { main: "#6c7a89" },
+        keyword: { main: "#3455db" },
+        operator: { main: "#3455db" },
+        string: { main: "#008000" },
+        function: { main: "#e73c70" },
+      },
     },
   });
 
@@ -398,6 +407,15 @@ export const muiTheme = ({
         gray28: { main: "#0D0F0F" },
         gray29: { main: "#000202" },
         // Gray25-29: should be dynamic "add primary color at 8%"
+      },
+      editor: {
+        highlight: { main: "#bf55ec30" },
+        activeLine: { main: "#25415B" },
+        comment: { main: "#6c7a89" },
+        keyword: { main: "#00ffff" },
+        operator: { main: "#00ffff" },
+        string: { main: "#AE81FF" },
+        function: { main: "#e73c70" },
       },
     },
   });
@@ -446,6 +464,16 @@ declare module "@material-ui/core/styles/createPalette" {
     gray29: PaletteColor;
   }
 
+  interface EditorPalette {
+    highlight: PaletteColor;
+    activeLine: PaletteColor;
+    comment: PaletteColor;
+    keyword: PaletteColor;
+    operator: PaletteColor;
+    string: PaletteColor;
+    function: PaletteColor;
+  }
+
   interface Palette {
     surfaces?: SurfacePalette;
 
@@ -454,6 +482,8 @@ declare module "@material-ui/core/styles/createPalette" {
     footer?: PaletteColor;
 
     grays?: GrayPalette;
+
+    editor?: EditorPalette;
 
     textures?: {
       onLight?: TexturePalette;
@@ -506,6 +536,16 @@ declare module "@material-ui/core/styles/createPalette" {
     gray28: PaletteColorOptions;
     gray29: PaletteColorOptions;
   }
+
+  interface EditorPaletteOptions {
+    highlight: PaletteColorOptions;
+    activeLine: PaletteColorOptions;
+    comment: PaletteColorOptions;
+    keyword: PaletteColorOptions;
+    operator: PaletteColorOptions;
+    string: PaletteColorOptions;
+    function: PaletteColorOptions;
+  }
   interface PaletteOptions {
     surfaces?: SurfacePaletteOptions;
 
@@ -519,6 +559,8 @@ declare module "@material-ui/core/styles/createPalette" {
     footer?: PaletteColorOptions;
 
     grays?: GrayPaletteOptions;
+
+    editor?: EditorPaletteOptions;
 
     flambeeDarkGray?: PaletteColorOptions;
     flambeeLightGray?: PaletteColorOptions;
