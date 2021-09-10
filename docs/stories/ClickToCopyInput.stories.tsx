@@ -1,9 +1,9 @@
-import { ClickToCopyInput } from "@splitgraph/tdesign/src/Input";
+import { InputWithCopy } from "@splitgraph/tdesign/src/Input";
 import { FormControl } from "@material-ui/core";
 
 export default {
-  title: "Splitgraph/ClickToCopyInput",
-  component: ClickToCopyInput,
+  title: "Splitgraph/InputWithCopy",
+  component: InputWithCopy,
   argTypes: {
     color: { control: "color" },
   },
@@ -12,7 +12,7 @@ export default {
 const Template = (args) => (
   <form>
     <FormControl variant="outlined">
-      <ClickToCopyInput {...args} />
+      <InputWithCopy {...args} />
     </FormControl>
   </form>
 );

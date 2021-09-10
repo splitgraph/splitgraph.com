@@ -4,7 +4,7 @@ import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 import withMuiTheme from "@splitgraph/tdesign/src/themes/withMUITheme";
 import {
   PasswordInput,
-  ClickToCopyInput,
+  InputWithCopy,
   PasswordButtonInput,
   // ClickToCopySelect,
 } from "@splitgraph/tdesign/src/Input";
@@ -47,9 +47,9 @@ const ThemeDemo = () => {
         <PasswordInput error />
         <br />
         <Paper sx={{ p: "1rem" }}>
-          ClickToCopyInput
+          InputWithCopy (formerly ClickToCopyInput)
           <br />
-          <ClickToCopyInput />
+          <InputWithCopy />
           {/* <form onSubmit={handleSubmit(onSubmit)}> */}
           {/* <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined"> */}
           {/* <ClickToCopyInput {...register("example")} /> */}

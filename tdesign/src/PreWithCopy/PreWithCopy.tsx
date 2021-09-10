@@ -3,7 +3,7 @@ import { Box, Typography } from "@material-ui/core";
 import { SxProps } from "@material-ui/system";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
-import { IconClipboard } from "../Icon";
+import { IconCopy } from "../Icon";
 
 export interface IPreWithCopyProps {
   title?: string | React.ReactNode;
@@ -28,6 +28,8 @@ const PreWithCopy = ({
       width: "100%",
       overflowX: "hidden",
       margin: 0,
+      borderTopLeftRadius: "4px",
+      borderBottomLeftRadius: "4px",
       ...(extraStyle.hasOwnProperty(".pre") ? extraStyle[".pre"] : {}),
     },
     code: {
@@ -37,7 +39,6 @@ const PreWithCopy = ({
     },
     ".pre-title": {
       fontWeight: "bold",
-      color: "heavy.main",
       ...(extraStyle.hasOwnProperty(".pre-title")
         ? extraStyle[".pre-title"]
         : {}),
@@ -46,6 +47,7 @@ const PreWithCopy = ({
       display: "flex",
       justifyContent: "space-between",
       backgroundColor: ({ palette }) => palette.surfaces.sql.main,
+      borderRadius: "4px",
       ...(extraStyle.hasOwnProperty(".pre-row") ? extraStyle[".pre-row"] : {}),
     },
     ".copy-icon-container": {
@@ -85,7 +87,7 @@ const PreWithCopy = ({
   return (
     <Box sx={preContainerStyle}>
       {title && typeof title === "string" ? (
-        <Typography className="pre-title" color="common.black">
+        <Typography variant="small" className="pre-title">
           {title}
         </Typography>
       ) : title ? (
@@ -100,7 +102,7 @@ const PreWithCopy = ({
           onClick={handleClickCopy}
           title="Copy to clipboard"
         >
-          <IconClipboard color={"grays.light.gray23.main"} />
+          <IconCopy color="link.main" />
         </Box>
       </Box>
     </Box>
