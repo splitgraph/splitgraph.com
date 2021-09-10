@@ -2,11 +2,10 @@ import {
   Box,
   Tabs as MuiTabs,
   Tab as MuiTab,
+  TabProps,
   useMediaQuery,
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
-import { SxProps } from "@material-ui/system";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -33,12 +32,7 @@ export const TabPanel = (props: TabPanelProps) => {
   );
 };
 
-interface IStyledTabProps {
-  sx?: SxProps<Theme>;
-  label?: React.ReactNode;
-  value?: any;
-}
-export const Tab = ({ sx, ...rest }: IStyledTabProps) => {
+export const Tab = ({ sx, ...rest }: TabProps) => {
   return (
     <MuiTab
       disableRipple
