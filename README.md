@@ -2,8 +2,6 @@
 
 As of 7/8/21, these instructions should get you running locally. It's still a WIP.
 
-**NOTE: Make sure you check out `canary` of this repository! The default `master` branch is not up to date.**
-
 <details><summary>Installation and Setup
 </summary><p>
 
@@ -13,8 +11,7 @@ You can get started by copying this command and pasting it into your Terminal:
 
 ```bash
 git clone git@github.com:splitgraph/splitgraph.com.git \
-  && cd splitgraph.com \
-  && git checkout --track origin/canary
+  && cd splitgraph.com
 ```
 
 ## Installation
