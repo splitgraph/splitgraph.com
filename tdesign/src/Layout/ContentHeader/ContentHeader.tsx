@@ -11,6 +11,7 @@ export interface IContentHeaderProps {
 const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
   const headerContainerStyle: SxProps<Theme> = {
     marginBottom: "2rem",
+    marginRight: "10px",
     // color: (theme: Theme) =>
     //   theme.palette.getContrastText(
     //     theme.palette.surfaces.light.background.main
