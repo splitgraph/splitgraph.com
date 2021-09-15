@@ -295,3 +295,6 @@ export { IconArrowDown };
 
 import IconReset from "./IconReset";
 export { IconReset };
+
+import IconLogout from "./IconLogout";
+export { IconLogout };
