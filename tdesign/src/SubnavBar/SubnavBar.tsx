@@ -43,7 +43,7 @@ const SubnavBar = ({
             mr: "24px",
           },
         },
-        ".sectionLink.active": {
+        ".sectionLink:hover": {
           color: "flambeeRed.main",
         },
       }}

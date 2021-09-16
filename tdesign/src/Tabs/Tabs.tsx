@@ -3,6 +3,7 @@ import {
   Tabs as MuiTabs,
   Tab as MuiTab,
   TabProps,
+  TabsProps,
   useMediaQuery,
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
@@ -80,7 +81,7 @@ export const TabBody = ({ icon, label, value }: TabBodyProps) => (
   </Box>
 );
 
-interface ITabsProps {
+interface ITabsProps extends TabsProps {
   currentTab: string;
   handleChange: (_: React.SyntheticEvent, newValue: string) => void;
   orientation: "horizontal" | "vertical";
@@ -103,7 +104,7 @@ const Tabs = ({
       onChange={handleChange}
       orientation={orientation}
       aria-label="Tab chooser"
-      variant="scrollable"
+      // variant="scrollable"
       sx={{
         margin: matches ? "1em" : "",
         ".MuiTabs-indicator": {
