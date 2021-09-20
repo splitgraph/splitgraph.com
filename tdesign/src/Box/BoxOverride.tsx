@@ -17,8 +17,8 @@ export interface BoxOverrideProps extends BoxProps {
 }
 
 const paddedContentAreaStyle = {
-  paddingLeft: (theme) => ["2rem", "2rem", "2rem"],
-  paddingRight: (theme) => ["2rem", "2rem", "2rem"],
+  paddingLeft: "2rem",
+  paddingRight: "2rem",
 };
 const errorNoticeStyle = {
   display: "flex",
