@@ -4,9 +4,7 @@ import {
   Tab as MuiTab,
   TabProps,
   TabsProps,
-  useMediaQuery,
 } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -39,7 +37,7 @@ export const Tab = ({ sx, ...rest }: TabProps) => {
       disableRipple
       sx={{
         textTransform: "none",
-        fontWeight: (theme) => theme.typography.fontWeightRegular,
+        fontWeight: ({ typography }) => typography.fontWeightRegular,
         color: "rgba(3,3,3, 0.7)",
         "&.Mui-selected": {
           color: "black",
@@ -84,7 +82,7 @@ export const TabBody = ({ icon, label, value }: TabBodyProps) => (
 interface ITabsProps extends TabsProps {
   currentTab: string;
   handleChange: (_: React.SyntheticEvent, newValue: string) => void;
-  orientation: "horizontal" | "vertical";
+  isMobile?: boolean;
   loading?: boolean;
   showDialog?: (show: boolean) => void; //for mobile
   children?: React.ReactNode;
@@ -92,26 +90,22 @@ interface ITabsProps extends TabsProps {
 const Tabs = ({
   currentTab,
   handleChange,
-  orientation,
   children,
+  isMobile,
   ...rest
 }: ITabsProps) => {
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
   return (
     <MuiTabs
       value={currentTab}
       onChange={handleChange}
-      orientation={orientation}
+      orientation={isMobile ? "horizontal" : "vertical"}
       aria-label="Tab chooser"
-      // variant="scrollable"
       sx={{
-        margin: matches ? "1em" : "",
+        margin: isMobile ? "" : "1em",
         ".MuiTabs-indicator": {
           left: 0,
-          background: (theme) => theme.palette.flambeeRed.light,
+          background: ({ palette }) => palette.flambeeRed.light,
         },
-        marginBottom: orientation !== "vertical" && "2rem",
       }}
       {...(rest as any)}
     >

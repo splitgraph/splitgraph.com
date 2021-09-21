@@ -15,21 +15,27 @@ interface IDialogProps extends DialogProps {
   children: React.ReactNode;
 }
 
-const Dialog = ({ open, title, setShowDialog, children }: IDialogProps) => {
+const Dialog = ({
+  open,
+  title,
+  setShowDialog,
+  children,
+  ...rest
+}: IDialogProps) => {
   return (
     <MuiDialog
       open={open}
-      fullScreen
+      // fullScreen
       aria-labelledby={title}
       sx={{
         ".MuiDialogContent-root": { py: 0 },
       }}
+      {...(rest as any)}
     >
       <CloseableDialogTitle
         id={title}
         onClose={() => {
           setShowDialog(false);
-          console.log("closed MobileDialog");
         }}
       >
         {title}

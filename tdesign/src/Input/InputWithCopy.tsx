@@ -29,7 +29,7 @@ interface IInputWithCopy extends OutlinedInputProps {
   defaultValue?: string;
 }
 const InputWithCopy = forwardRef<HTMLInputElement, any>(
-  (props: IInputWithCopy, ref) => {
+  ({ sx, ...rest }: IInputWithCopy, ref) => {
     const innerRef = useRef<HTMLInputElement>(null);
     const combinedRef: MutableRefObject<HTMLInputElement> = useCombinedRefs(
       ref,
@@ -46,11 +46,7 @@ const InputWithCopy = forwardRef<HTMLInputElement, any>(
       }
 
       if (combinedRef && "current" in combinedRef && combinedRef.current) {
-        navigator.clipboard
-          .writeText(combinedRef.current?.value)
-          .then((result) => {
-            console.log(result);
-          });
+        navigator.clipboard.writeText(combinedRef.current?.value);
       }
     };
 
@@ -76,6 +72,7 @@ const InputWithCopy = forwardRef<HTMLInputElement, any>(
               borderColor: "#B62B35", //TODO should this be computed?
             },
           },
+          ...sx,
         }}
         inputRef={combinedRef}
         endAdornment={
@@ -83,14 +80,14 @@ const InputWithCopy = forwardRef<HTMLInputElement, any>(
             <IconButton
               onClick={handleClickCopy}
               onMouseDown={handleMouseDown}
-              aria-label="toggle password visibility"
+              aria-label="input with click to copy"
               edge="end"
             >
               <IconCopy color={"flambeeBlue.main"} />
             </IconButton>
           </InputAdornment>
         }
-        {...props}
+        {...rest}
       />
     );
   }

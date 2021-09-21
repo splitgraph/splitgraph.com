@@ -31,7 +31,7 @@ const darkVariant = {
       textDecoration: "underline",
     },
   },
-  backgroundColor: ({ palette }) => palette.footer.main,
+  backgroundColor: "footer.main",
   borderTop: "0.5ch solid",
   borderTopColor: "lightaccent.main",
 };

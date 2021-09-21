@@ -165,6 +165,7 @@ const ThemeDemo = () => {
           email={"user@example.com"}
           handleSetAsPrimary={() => console.log("handleSetAsPrimary()")}
           handleDelete={() => console.log("handleDelete()")}
+          primary={false}
         />
       </Grid>
       <br />
@@ -179,7 +180,8 @@ const ThemeDemo = () => {
         LinkedOAuthRow
         <LinkedOAuthRow
           name="Nicolas Panero"
-          email="nicolas.panero@example.com"
+          emails={["nicolas.panero@example.com"]}
+          idp_id="deadbeef"
         >
           <InvisibleButton>
             <GoogleLogoIcon />
@@ -214,6 +216,7 @@ const ThemeDemo = () => {
             email={"alice@example.com"}
             handleSetAsPrimary={() => {}}
             handleDelete={() => {}}
+            primary={true}
           />
           <UserRow
             name="Christian Really Long Name"
@@ -222,11 +225,13 @@ const ThemeDemo = () => {
             metadata={"Owner"}
             handleSetAsPrimary={() => {}}
             handleDelete={() => {}}
+            primary={false}
           />
           <SQLCredentialsRow />
           <LinkedOAuthRow
             name="Nicolas Panero"
-            email="nicolas.panero@example.com"
+            emails={["nicolas.panero@example.com"]}
+            idp_id="abc123"
           >
             <InvisibleButton>
               <GoogleLogoIcon />
@@ -243,7 +248,7 @@ const ThemeDemo = () => {
       </Grid>
       <Grid item>
         AddNewUserRow
-        <AddNewUserRow />
+        <AddNewUserRow errorMessage={""} />
       </Grid>
     </Paper>
   );

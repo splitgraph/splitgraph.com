@@ -94,6 +94,7 @@ export {
   AddOAuthLinkRow,
   SQLCredentialsNicknameRow,
   AddNewUserRow,
+  SQLNewCredentialsRow,
 } from "./Rows";
 
 export { SubnavBar } from "./SubnavBar";

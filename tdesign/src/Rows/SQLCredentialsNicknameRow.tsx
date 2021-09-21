@@ -7,13 +7,15 @@ interface ISQLCredentialsNicknameRowProps {
   handleDelete?: () => void;
   idNicknamePrefix?: string;
   idUsernamePrefix?: string;
+  deleteButton?: React.ReactNode;
 }
 
 const SQLCredentialsNicknameRow = ({
-  // name,
+  name,
   handleDelete,
   idNicknamePrefix,
   idUsernamePrefix,
+  deleteButton,
 }: ISQLCredentialsNicknameRowProps) => {
   return (
     <Box
@@ -48,10 +50,16 @@ const SQLCredentialsNicknameRow = ({
               <InputWithCopy
                 id={`${idUsernamePrefix + "-"}username-input`}
                 fullWidth
+                defaultValue={name}
+                sx={{}}
               />
-              <Button sx={{ ml: "1rem" }} onClick={handleDelete}>
-                <IconDelete />
-              </Button>
+              <Box sx={{ ml: "1rem" }}>
+                {deleteButton || (
+                  <Button onClick={handleDelete}>
+                    <IconDelete />
+                  </Button>
+                )}
+              </Box>
             </Box>
           </FormControl>
         </Grid>

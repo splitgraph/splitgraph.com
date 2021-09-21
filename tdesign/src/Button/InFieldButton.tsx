@@ -1,8 +1,6 @@
 import { Button, ButtonProps } from "@material-ui/core";
 import { SxProps } from "@material-ui/system";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
-// import { IconArrowRight } from "../Icon";
-import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 
 export interface IInFieldButtonProps extends ButtonProps {
   sx?: SxProps<Theme>;
@@ -10,6 +8,7 @@ export interface IInFieldButtonProps extends ButtonProps {
 const InFieldButton = ({
   children,
   disabled,
+  sx,
   ...rest
 }: IInFieldButtonProps) => (
   <Button
@@ -32,20 +31,13 @@ const InFieldButton = ({
         boxShadow: ({ palette }) =>
           `0px 0px 0px 1px ${palette.grays.gray20.main}`,
       },
+      paddingRight: "1rem",
+      ...sx,
     }}
     // endIcon={}
     {...(rest as any)}
   >
     {children}
-    <ArrowRightAltIcon
-      sx={{
-        ml: "10px",
-        color: (theme) =>
-          disabled
-            ? theme.palette.grays.gray22.main
-            : theme.palette.common.white,
-      }}
-    />
   </Button>
 );
 

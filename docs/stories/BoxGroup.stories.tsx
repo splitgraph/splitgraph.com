@@ -36,7 +36,11 @@ ExampleGroupOne.parameters = {
 export const ExampleGroupTwo = Template.bind({});
 ExampleGroupTwo.args = {
   children: [
-    <LinkedOAuthRow name="Nicolas Panero" email="nicolas.panero@example.com">
+    <LinkedOAuthRow
+      name="Nicolas Panero"
+      emails={["nicolas.panero@example.com"]}
+      idp_id="beefdead"
+    >
       <InvisibleButton>
         <GoogleLogoIcon />
         Unlink
@@ -61,6 +65,7 @@ ExampleGroupTwo.args = {
       email={"alice@example.com"}
       handleSetAsPrimary={() => {}}
       handleDelete={() => {}}
+      primary={false}
     />,
   ],
 };

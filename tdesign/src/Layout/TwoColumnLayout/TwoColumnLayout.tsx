@@ -47,6 +47,7 @@ const useResponsiveStyle = (): ILayoutContext => {
       backgroundColor: "white",
       maxWidth: ["100vw", "100vw", "75vw"],
       overflowX: "hidden",
+      // padding: "1rem",
     },
   };
 
