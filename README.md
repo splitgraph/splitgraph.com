@@ -19,7 +19,7 @@ git clone git@github.com:splitgraph/splitgraph.com.git \
 Assumptions:
 
 - Linux host, preferably running Ubuntu 18.04 (that's what CI uses)
-- Node 15.x or higher (15 is deprecated; 16 likely works; CI only tests with Node 15)
+- Node 15.x or higher (currently CI is on 16.x)
 - `yarn` installed ("yarn classic" is okay – it can upgrade to yarn berry)
 
 When in doubt, you can read read the CI scripts, you can check the CI scripts, since we know it's passing:
@@ -56,7 +56,7 @@ Troubleshooting:
 - `./setup.sh` exits with failure and hopefully prints some information
   - Try to do what it says
 - Make sure `node --version` is at least `15.x`
-  - Node `16.x` is also likely to work, but it is untested; CI only tests `15.x`
+  - Node `16.x` is also likely to work
   - Any version lower than `15.x` is unlikely to work
 - Directory permission errors
   - Make sure you own the current directory and any existing `node_modules` subdirectory
@@ -355,8 +355,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 ## After cloning, create an environment
 
 ```bash
-# example (note that v15 is not LTS)
- nvm install 15.12.0
+nvm install 16.10.0
 ```
 
 ## Install yarn
