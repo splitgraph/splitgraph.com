@@ -22,7 +22,7 @@ if ! which yarn ; then
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
     # Also, for some reason we nede to reinstall Node for this to work
-    curl -sL https://deb.nodesource.com/setup_15.x | bash -
+    curl -sL https://deb.nodesource.com/setup_16.x | bash -
     apt-get install -yy nodejs
     apt-get install --no-install-recommends yarn
     set +e
