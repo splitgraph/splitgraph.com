@@ -11,5 +11,5 @@
     { "path": "../templaters" }
   ],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.jsx", "**/*.js"],
-  "exclude": ["node_modules", "pages/_content", ".next"]
+  "exclude": ["node_modules", "pages/_content", ".next", "out", "out-storybook"]
 }
