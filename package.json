@@ -41,5 +41,5 @@
     "remark-sectionize": "1.1.1",
     "rss": "1.2.2"
   },
-  "packageManager": "yarn@2.4.1"
+  "packageManager": "yarn@2.4.2"
 }

@@ -12,7 +12,7 @@
 SPLITGRAPH_DIR=${1-"$(cd -P -- "$(dirname -- "$0")" && pwd -P)"}
 
 # If `yarn --version` is not exact match of `$TARGET_YARN_VERSION`, install yarn
-TARGET_YARN_VERSION="${TARGET_YARN_VERSION-"2.4.1"}"
+TARGET_YARN_VERSION="${TARGET_YARN_VERSION-"2.4.2"}"
 
 prep_env() {
     echo "Ensure certs..." \
