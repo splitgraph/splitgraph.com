@@ -20,6 +20,7 @@ const Dialog = ({
   title,
   setShowDialog,
   children,
+  sx,
   ...rest
 }: IDialogProps) => {
   return (
@@ -29,6 +30,7 @@ const Dialog = ({
       aria-labelledby={title}
       sx={{
         ".MuiDialogContent-root": { py: 0 },
+        ...sx,
       }}
       {...(rest as any)}
     >

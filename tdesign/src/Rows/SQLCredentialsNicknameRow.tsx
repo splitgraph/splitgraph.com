@@ -1,5 +1,5 @@
 import { Box, Grid, Typography, FormControl, Button } from "@material-ui/core";
-import { InputWithCopy, Input } from "../Input";
+import { InputWithCopy /*Input*/ } from "../Input";
 import { IconDelete } from "../Icon";
 
 interface ISQLCredentialsNicknameRowProps {
@@ -13,7 +13,7 @@ interface ISQLCredentialsNicknameRowProps {
 const SQLCredentialsNicknameRow = ({
   name,
   handleDelete,
-  idNicknamePrefix,
+  // idNicknamePrefix,
   idUsernamePrefix,
   deleteButton,
 }: ISQLCredentialsNicknameRowProps) => {
@@ -28,6 +28,7 @@ const SQLCredentialsNicknameRow = ({
       }}
     >
       <Grid container spacing={3}>
+        {/* Awaiting BE "nickname creds" support
         <Grid item md={6}>
           <Box sx={{ display: "flex", alignItems: "center", height: "100%" }}>
             <FormControl fullWidth>
@@ -40,8 +41,8 @@ const SQLCredentialsNicknameRow = ({
               ></Input>
             </FormControl>
           </Box>
-        </Grid>
-        <Grid item md={6} sx={{ display: "flex" }}>
+        </Grid> */}
+        <Grid item xs={12} sx={{ display: "flex" }}>
           <FormControl fullWidth variant="outlined">
             <label htmlFor={`${idUsernamePrefix + "-"}username-input`}>
               <Typography variant="small">Username</Typography>
