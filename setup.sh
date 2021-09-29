@@ -15,11 +15,36 @@ SPLITGRAPH_DIR=${1-"$(cd -P -- "$(dirname -- "$0")" && pwd -P)"}
 TARGET_YARN_VERSION="${TARGET_YARN_VERSION-"2.4.2"}"
 
 prep_env() {
-    echo "Ensure certs..." \
+    echo "Ensure yq..." \
+        && ensure_yq \
         && echo "Ensure yarn..." \
         && ensure_yarn \
         && return 0
     return 1
+}
+
+ensure_yq() {
+    if ! which yq && test -f node_modules/.bin/yq ; then
+        ln -s /src/js/node_modules/.bin/yq /usr/bin/yq
+    fi
+
+    if ! which yq || ! ( yq -V | grep -q 4.13.2 ) ; then
+        echo "Warning: yq is required but not installed"
+        YQ_VERSION="${YQ_VERSION-"v4.13.2"}"
+        echo "Attempting install: yq $YQ_VERSION"
+        set -x
+
+        # if we don't have (the right version of) yq, it's probably because we're
+        # iterating on this script. save it to node_modules so it's in a volume
+        # that persists across each container that shares the node_modules volume
+        mkdir -p /src/js/node_modules/.bin
+        curl -L "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64" \
+            -o /src/js/node_modules/.bin/yq \
+            && chmod +x /src/js/node_modules/.bin/yq \
+            && ln -s /src/js/node_modules/.bin/yq /usr/bin/yq
+        set +x
+        which yq || { echo "Failed to install required binary yq" ; exit 1 ; }
+    fi
 }
 
 ensure_yarn() {
@@ -141,12 +166,83 @@ ensure_yarn() {
 
     if ! dir_has_yarn_plugins "$SPLITGRAPH_DIR" ; then
         echo "Install yarn plugins into $SPLITGRAPH_DIR"
-
         install_plugins "$SPLITGRAPH_DIR"
     fi
+
+    if ! dir_has_local_plugins "$SPLITGRAPH_DIR" ; then
+        echo "Install local plugins into $SPLITGRAPH_DIR"
+        install_local_plugins "$SPLITGRAPH_DIR"
+    fi
+
     set +e
 
     return 0
+}
+
+# By convention, assume all `yarn-plugin-*.js` files represent our plugins
+# (naive assumption, but we only have yarn-plugin-pin-deps.js atm so it works)
+find_local_plugins() {
+    find . -type f -name 'yarn-plugin-*.js' ! -path '*node-modules*'
+}
+
+# we just want to set the yml item for the local plugin to a string with its file path
+# but `yarn plugin import` copies target to a new file and sets it as "spec"
+# so unfortunately instead of `yarn plugin import`, need to mangle the YML
+install_local_plugins() {
+    local prefixDir="$1"
+    shift
+
+    local yarnrcFile
+    yarnrcFile="$(get_yarnrc_file "$prefixDir")"
+
+    pushd "$prefixDir"
+    while read -r localPluginPath ; do
+        if yarnrc_has_local_plugin "$yarnrcFile" ; then
+            echo "[$yarnrcFile] skip install plugin, already imported: $localPluginPath"
+            continue
+        fi
+
+        echo "[$yarnrcFile] add local plugin: $localPluginPath"
+        yq -i eval '.plugins = .plugins + "'"$localPluginPath"'"' "$yarnrcFile"
+    done < <(find_local_plugins)
+    popd
+}
+
+# unfortunately cannot simply use `yarn plugin import` for local plugins,
+# because it copies the file to .yarn/plugins and sets original as "spec"
+dir_has_local_plugins() {
+    local prefixDir="$1"
+    shift
+
+    yarnrcFile="$(get_yarnrc_file "$prefixDir")"
+
+    pushd "$prefixDir"
+    while read -r localPluginPath ; do
+        if yarnrc_has_local_plugin "$yarnrcFile" "$localPluginPath" ; then
+            echo "[$yarnrcFile] check plugin, already imported: $localPluginPath"
+            continue
+        fi
+
+        popd
+        return 1
+    done < <(find_local_plugins)
+
+    popd
+    return 0
+}
+
+yarnrc_has_local_plugin() {
+    local yarnrcFile="$1"
+    shift
+
+    local localPluginPath="$1"
+    shift
+
+    if [[ "true" == "$(yq eval 'contains({"plugins": "'"$localPluginPath"'"})' "$yarnrcFile" )" ]] ; then
+        return 0
+    fi
+
+    return 1
 }
 
 install_plugins() {
@@ -201,21 +297,15 @@ install_plugins() {
         grep 'plugin-constraints' "$yarnrcFile" \
             && sed -i 's/plugin-constraints\.cjs/plugin-constraints\.js/' "$yarnrcFile"
 
-
         return 0
     }
 
     # todo: Is it actually possible to have a .yarnrc named either of these things? Maybe was
     # earlier code covering a corner case that no longer exists? But is harmless to check both.
-    if test -f "$prefixDir"/.yarnrc ; then
-        fix_yarnrc "$prefixDir"/.yarnrc
-    elif test -f "$prefixDir"/.yarnrc.yml ; then
-        fix_yarnrc "$prefixDir"/.yarnrc.yml
-    fi
+    fix_yarnrc "$(get_yarnrc_file "$prefixDir")"
 
     return 0
 }
-
 
 dir_has_yarn_release() {
     local prefixDir="$1"
@@ -261,28 +351,32 @@ dir_has_yarn_release() {
     return 1
 }
 
-
-dir_has_yarn_plugins() {
+get_yarnrc_file() {
     local prefixDir="$1"
     shift
-
+    local yarnrcFile
     if test -f "$prefixDir"/.yarnrc ; then
-        grep 'plugin-workspace-tools.js' "$prefixDir"/.yarnrc \
-            && grep 'plugin-interactive-tools.js' "$prefixDir"/.yarnrc \
-            && grep 'plugin-workspace-lockfile.js' "$prefixDir"/.yarnrc \
-            && grep 'plugin-constraints.js' "$prefixDir"/.yarnrc \
-            && return 0
+        yarnrcFile=""$prefixDir"/.yarnrc"
     elif test -f "$prefixDir"/.yarnrc.yml ; then
-        grep 'plugin-workspace-tools.js' "$prefixDir"/.yarnrc.yml \
-            && grep 'plugin-interactive-tools.js' "$prefixDir"/.yarnrc.yml \
-            && grep 'plugin-workspace-lockfile.js' "$prefixDir"/.yarnrc.yml \
-            && grep 'plugin-constraints.js' "$prefixDir"/.yarnrc.yml \
-            && return 0
+        yarnrcFile=""$prefixDir"/.yarnrc.yml"
+    else
+        echo "/dev/null"
+        echo "warning: yarnrc file not found" 2>&1
     fi
+    echo "$yarnrcFile"
+}
+
+dir_has_yarn_plugins() {
+    yarnrcFile="$(get_yarnrc_file "$1")"
+
+    grep -q 'plugin-workspace-tools.js' "$yarnrcFile" \
+        && grep -q 'plugin-interactive-tools.js' "$yarnrcFile" \
+        && grep -q 'plugin-workspace-lockfile.js' "$yarnrcFile" \
+        && grep -q 'plugin-constraints.js' "$yarnrcFile" \
+        && return 0
 
     return 1
 }
-
 
 # OPTIONAL:
 #   If $TARGET_YARN_VERSION is set, then `yarn --version` must be exact match
@@ -363,6 +457,7 @@ has_correct_config() {
     return 1
 }
 
+export DEBUG=1
 if test -n "$DEBUG" && test "$DEBUG" == "1" ; then
     prep_env || { echo "Fatal error." ; exit 1 ; }
 else
