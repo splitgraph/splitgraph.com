@@ -44,7 +44,7 @@ const button = (
       color: "heavy.main",
     }}
   >
-    <GoogleLogoIcon /> Login with Google
+    <GoogleLogoIcon /> Google
   </Button>
 );
 

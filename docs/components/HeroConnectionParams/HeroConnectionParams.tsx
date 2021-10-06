@@ -1,6 +1,6 @@
 import { Box, Typography } from "@material-ui/core";
 import IframeResizer from "iframe-resizer-react";
-
+import { MuiLink } from "@splitgraph/tdesign";
 import {
   PreWithCopy,
   GitHubOAuthButton,
@@ -98,12 +98,6 @@ const HeroConnectionParams = ({
           />
         ) : (
           <Box>
-            <Typography
-              color="common.black"
-              sx={{ fontWeight: "bold", display: "block" }}
-            >
-              Username / Password
-            </Typography>
             <Box
               sx={{
                 display: "flex",
@@ -120,22 +114,37 @@ const HeroConnectionParams = ({
                 borderWidth: "1px",
                 borderStyle: "solid",
                 borderColor: "gray.main",
+                borderRadius: "16px",
+                padding: "24px 16px",
                 a: {
                   textDecoration: "underline",
                   marginBottom: "1rem",
                 },
               }}
             >
+              <Typography variant="title2" color="text.primary">
+                Sign in with
+              </Typography>
               <GitHubOAuthButton redirectURL={redirectURL} />
               <GitLabOAuthButton redirectURL={redirectURL} />
               <GoogleOAuthButton redirectURL={redirectURL} />
-              <a
-                href={`/auth/sign_up?redirect=${encodeURIComponent(
-                  redirectURL
-                )}`}
-              >
-                Or, Sign Up with Email &amp; Password
-              </a>
+              <div>
+                <Typography color="text.primary" variant="body">
+                  or
+                </Typography>{" "}
+                <MuiLink
+                  href={`/auth/sign_up?redirect=${encodeURIComponent(
+                    redirectURL
+                  )}`}
+                  sx={{ color: "#36CBAE", border: "1px red solid" }}
+                >
+                  Sign Up
+                </MuiLink>{" "}
+                <Typography color="text.primary" variant="body">
+                  with email to
+                  <br /> create credentials
+                </Typography>
+              </div>
             </Box>
           </Box>
         )}

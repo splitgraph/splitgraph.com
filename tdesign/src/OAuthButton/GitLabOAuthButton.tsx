@@ -29,7 +29,7 @@ const button = (
       color: "heavy.main",
     }}
   >
-    <GitLabLogoIcon /> Login with GitLab
+    <GitLabLogoIcon /> GitLab
   </Button>
 );
 
