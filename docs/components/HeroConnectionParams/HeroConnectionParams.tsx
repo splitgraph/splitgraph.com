@@ -136,7 +136,11 @@ const HeroConnectionParams = ({
                   href={`/auth/sign_up?redirect=${encodeURIComponent(
                     redirectURL
                   )}`}
-                  sx={{ color: "#36CBAE", border: "1px red solid" }}
+                  sx={{
+                    color: "#36CBAE",
+                    fontWeight: "bold",
+                    "&.MuiLink-root": { textDecoration: "none" },
+                  }}
                 >
                   Sign Up
                 </MuiLink>{" "}
