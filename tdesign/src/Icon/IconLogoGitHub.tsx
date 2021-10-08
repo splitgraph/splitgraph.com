@@ -1,6 +1,6 @@
 const IconLogoGitHub = ({
   color = "#1B1F23",
-  size = "2rem",
+  size = "32px",
 }: {
   color?: string;
   size?: string;

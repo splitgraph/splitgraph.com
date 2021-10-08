@@ -182,7 +182,7 @@ const Footer = ({
               aria-label="Splitgraph on GitHub"
               style={{ marginRight: "1rem" }}
             >
-              <IconLogoGitHub color={"#fff"} size={"2rem"} />
+              <IconLogoGitHub color={"#fff"} size={"32px"} />
             </a>
             <a
               href="https://www.linkedin.com/company/12620006/"
