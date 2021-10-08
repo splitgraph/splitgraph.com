@@ -5,6 +5,7 @@ import AddOAuthLinkRow from "./AddOAuthLinkRow";
 import SQLCredentialsNicknameRow from "./SQLCredentialsNicknameRow";
 import AddNewUserRow from "./AddNewUserRow";
 import SQLNewCredentialsRow from "./SQLNewCredentialsRow";
+import SQLWarningIcon from "./SQLWarningIcon";
 
 export {
   UserRow,
@@ -14,4 +15,5 @@ export {
   AddOAuthLinkRow,
   AddNewUserRow,
   SQLNewCredentialsRow,
+  SQLWarningIcon,
 };
