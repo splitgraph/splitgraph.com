@@ -1,4 +1,5 @@
 import { Box, Typography } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
 
 interface Section {
   displayName: string;
@@ -16,13 +17,21 @@ const SubnavBar = ({
   visibleSection,
   ...rest
 }: ISubnavBarProps) => {
+  const theme = useTheme();
   return (
     <Box
       sx={{
         display: "flex",
         alignItems: "center",
-        borderBottom: ({ palette }) => `1px solid ${palette.grays.gray26.main}`,
-        ul: { pl: "0px" },
+        [theme.breakpoints.up("sm")]: {
+          borderBottom: `1px solid ${theme.palette.grays.gray26.main}`,
+        },
+        ul: {
+          display: { xs: "none", sm: "inline" },
+          paddingLeft: "0px",
+          marginBottom: "inherit",
+          marginTop: "inherit",
+        },
         ".unstyledLink": {
           color: "inherit",
           textDecoration: "inherit",
@@ -34,7 +43,7 @@ const SubnavBar = ({
             mr: "24px",
           },
         },
-        ".sectionLink.active": {
+        ".sectionLink:hover": {
           color: "flambeeRed.main",
         },
       }}
@@ -45,7 +54,7 @@ const SubnavBar = ({
       </Typography>
       <Box
         sx={{
-          display: "inline",
+          display: { xs: "none", sm: "inline" },
           height: "16px",
           mx: "16px",
           borderLeft: "1px solid black",

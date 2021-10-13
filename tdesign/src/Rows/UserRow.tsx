@@ -8,8 +8,12 @@ interface IUserRowProps {
   email: string;
   verified: string;
   metadata?: string;
-  handleSetAsPrimary: () => void;
-  handleDelete: () => void;
+  primary: boolean;
+  handleSetAsPrimary?: () => void;
+  handleDelete?: () => void;
+  deleteButton?: React.ReactNode;
+  setAsPrimaryButton?: React.ReactNode;
+  unverifiedAlertFooter?: React.ReactNode;
 }
 
 const UserRow = ({
@@ -17,8 +21,12 @@ const UserRow = ({
   verified,
   email,
   metadata,
+  primary,
   handleSetAsPrimary,
   handleDelete,
+  deleteButton,
+  setAsPrimaryButton,
+  unverifiedAlertFooter,
 }: IUserRowProps) => {
   return (
     <>
@@ -48,12 +56,25 @@ const UserRow = ({
           </Box>
         </div>
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <InvisibleButton sx={{ mr: "28px" }} onClick={handleSetAsPrimary}>
-            Set as Primary
-          </InvisibleButton>
-          <Button onClick={handleDelete} name="Delete">
-            <IconDelete />
-          </Button>
+          {primary ? (
+            <Typography variant="smallHighlightedSB">Primary</Typography>
+          ) : (
+            setAsPrimaryButton || (
+              <InvisibleButton sx={{ mr: "28px" }} onClick={handleSetAsPrimary}>
+                Set as Primary
+              </InvisibleButton>
+            )
+          )}
+
+          {deleteButton || (
+            <Button
+              onClick={handleDelete}
+              name="Delete"
+              sx={{ marginLeft: "1rem" }}
+            >
+              <IconDelete />
+            </Button>
+          )}
         </Box>
       </Box>
       <Box
@@ -95,6 +116,7 @@ const UserRow = ({
           </Box>
         </Box>
       </Box>
+      {verified?.toLowerCase() !== "verified" && unverifiedAlertFooter}
     </>
   );
 };

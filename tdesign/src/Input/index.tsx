@@ -1,6 +1,6 @@
 import PasswordInput from "./PasswordInput";
-import ClickToCopyInput from "./ClickToCopyInput";
+import InputWithCopy from "./InputWithCopy";
 import PasswordButtonInput from "./PasswordButtonInput";
 import Input from "./Input";
 
-export { Input, PasswordInput, ClickToCopyInput, PasswordButtonInput };
+export { Input, PasswordInput, InputWithCopy, PasswordButtonInput };

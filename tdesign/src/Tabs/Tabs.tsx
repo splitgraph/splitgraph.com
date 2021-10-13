@@ -2,11 +2,9 @@ import {
   Box,
   Tabs as MuiTabs,
   Tab as MuiTab,
-  useMediaQuery,
+  TabProps,
+  TabsProps,
 } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
-import { SxProps } from "@material-ui/system";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -33,20 +31,13 @@ export const TabPanel = (props: TabPanelProps) => {
   );
 };
 
-interface IStyledTabProps {
-  sx?: SxProps<Theme>;
-  label?: React.ReactNode;
-  value?: any;
-}
-export const Tab = ({ sx, ...rest }: IStyledTabProps) => {
+export const Tab = ({ sx, ...rest }: TabProps) => {
   return (
     <MuiTab
       disableRipple
       sx={{
         textTransform: "none",
-        fontWeight: (theme) => theme.typography.fontWeightRegular,
-        fontSize: (theme) => theme.typography.pxToRem(15),
-        marginRight: (theme) => theme.spacing(1),
+        fontWeight: ({ typography }) => typography.fontWeightRegular,
         color: "rgba(3,3,3, 0.7)",
         "&.Mui-selected": {
           color: "black",
@@ -88,10 +79,10 @@ export const TabBody = ({ icon, label, value }: TabBodyProps) => (
   </Box>
 );
 
-interface ITabsProps {
+interface ITabsProps extends TabsProps {
   currentTab: string;
-  handleChange: (_: React.SyntheticEvent, newValue: number) => void;
-  orientation: "horizontal" | "vertical";
+  handleChange: (_: React.SyntheticEvent, newValue: string) => void;
+  isMobile?: boolean;
   loading?: boolean;
   showDialog?: (show: boolean) => void; //for mobile
   children?: React.ReactNode;
@@ -99,26 +90,22 @@ interface ITabsProps {
 const Tabs = ({
   currentTab,
   handleChange,
-  orientation,
   children,
+  isMobile,
   ...rest
 }: ITabsProps) => {
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
   return (
     <MuiTabs
       value={currentTab}
       onChange={handleChange}
-      orientation={orientation}
-      aria-label="Search result type chooser"
-      variant="scrollable"
+      orientation={isMobile ? "horizontal" : "vertical"}
+      aria-label="Tab chooser"
       sx={{
-        m: matches ? "1em" : "",
+        margin: isMobile ? "" : "1em",
         ".MuiTabs-indicator": {
           left: 0,
-          background: (theme) => theme.palette.flambeeRed.light,
+          background: ({ palette }) => palette.flambeeRed.light,
         },
-        mb: orientation !== "vertical" && "2rem",
       }}
       {...(rest as any)}
     >

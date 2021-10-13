@@ -33,7 +33,7 @@ const button = (
       color: "heavy.main",
     }}
   >
-    <Octicon /> Login with GitHub
+    <Octicon /> GitHub
   </Button>
 );
 

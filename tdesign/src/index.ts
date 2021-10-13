@@ -94,4 +94,8 @@ export {
   AddOAuthLinkRow,
   SQLCredentialsNicknameRow,
   AddNewUserRow,
+  SQLNewCredentialsRow,
+  SQLWarningIcon,
 } from "./Rows";
+
+export { SubnavBar } from "./SubnavBar";

@@ -4,7 +4,7 @@ import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 import withMuiTheme from "@splitgraph/tdesign/src/themes/withMUITheme";
 import {
   PasswordInput,
-  ClickToCopyInput,
+  InputWithCopy,
   PasswordButtonInput,
   // ClickToCopySelect,
 } from "@splitgraph/tdesign/src/Input";
@@ -47,9 +47,9 @@ const ThemeDemo = () => {
         <PasswordInput error />
         <br />
         <Paper sx={{ p: "1rem" }}>
-          ClickToCopyInput
+          InputWithCopy (formerly ClickToCopyInput)
           <br />
-          <ClickToCopyInput />
+          <InputWithCopy />
           {/* <form onSubmit={handleSubmit(onSubmit)}> */}
           {/* <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined"> */}
           {/* <ClickToCopyInput {...register("example")} /> */}
@@ -165,6 +165,7 @@ const ThemeDemo = () => {
           email={"user@example.com"}
           handleSetAsPrimary={() => console.log("handleSetAsPrimary()")}
           handleDelete={() => console.log("handleDelete()")}
+          primary={false}
         />
       </Grid>
       <br />
@@ -179,7 +180,8 @@ const ThemeDemo = () => {
         LinkedOAuthRow
         <LinkedOAuthRow
           name="Nicolas Panero"
-          email="nicolas.panero@example.com"
+          emails={["nicolas.panero@example.com"]}
+          idp_id="deadbeef"
         >
           <InvisibleButton>
             <GoogleLogoIcon />
@@ -214,6 +216,7 @@ const ThemeDemo = () => {
             email={"alice@example.com"}
             handleSetAsPrimary={() => {}}
             handleDelete={() => {}}
+            primary={true}
           />
           <UserRow
             name="Christian Really Long Name"
@@ -222,11 +225,13 @@ const ThemeDemo = () => {
             metadata={"Owner"}
             handleSetAsPrimary={() => {}}
             handleDelete={() => {}}
+            primary={false}
           />
           <SQLCredentialsRow />
           <LinkedOAuthRow
             name="Nicolas Panero"
-            email="nicolas.panero@example.com"
+            emails={["nicolas.panero@example.com"]}
+            idp_id="abc123"
           >
             <InvisibleButton>
               <GoogleLogoIcon />
@@ -243,7 +248,7 @@ const ThemeDemo = () => {
       </Grid>
       <Grid item>
         AddNewUserRow
-        <AddNewUserRow />
+        <AddNewUserRow errorMessage={""} />
       </Grid>
     </Paper>
   );

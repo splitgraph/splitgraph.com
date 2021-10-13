@@ -1,7 +1,5 @@
 import { useContext, useEffect, useRef } from "react";
 import { Box, Typography } from "@material-ui/core";
-import type { SxProps } from "@material-ui/system";
-import type { Theme } from "@material-ui/core/styles/createMuiTheme";
 import { useTheme } from "@material-ui/core/styles";
 
 import { IIconProps } from "../Icon/BaseIcon";
@@ -19,8 +17,8 @@ export interface MenuItemProps {
   isActive?: boolean;
   scrollIntoViewIfNeeded?: boolean;
   isHeading?: boolean;
-  activeIconColor?: string | ((theme: Theme) => string);
-  defaultIconColor?: string | ((theme: Theme) => string);
+  activeIconColor?: string | ((theme) => string);
+  defaultIconColor?: string | ((theme) => string);
 }
 
 const MenuItem = ({
@@ -64,7 +62,7 @@ const MenuItem = ({
     }
   }, [isActive, expanded]);
 
-  const containerStyle: SxProps<Theme> = {
+  const containerStyle = {
     display: [
       expanded ? "flex" : "inline-flex",
       expanded ? "flex" : "inline-flex",
@@ -100,7 +98,7 @@ const MenuItem = ({
 
   const textStyle = {};
 
-  const iconStyle: SxProps<Theme> = {
+  const iconStyle = {
     marginRight: "0.5em",
     ...iconSx,
   };

@@ -26,7 +26,7 @@ const useResponsiveStyle = (): ILayoutContext => {
   const leftArea = "1 / 1 / 2 / 2";
   const rightArea = ["2 / 1 / 3 / 2", "2 / 1 / 3 / 2", "1 / 2 / 2 / 3"];
 
-  const style = {
+  const style: SxProps<Theme> = {
     display: "grid",
     // minHeight: '95vh',
     marginLeft: (theme) => theme.constants.leftMarginLogoAligned,
@@ -47,6 +47,7 @@ const useResponsiveStyle = (): ILayoutContext => {
       backgroundColor: "white",
       maxWidth: ["100vw", "100vw", "75vw"],
       overflowX: "hidden",
+      // padding: "1rem",
     },
   };
 
@@ -61,7 +62,7 @@ const TwoColumnLayout = ({ children }: TwoColumnLayoutProps) => {
   const { style, expanded, setExpanded } = useResponsiveStyle();
 
   return (
-    <Box className="two-col" sx={style as SxProps<Theme>}>
+    <Box className="two-col" sx={style}>
       <LayoutContext.Provider value={{ expanded, setExpanded }}>
         {children}
       </LayoutContext.Provider>

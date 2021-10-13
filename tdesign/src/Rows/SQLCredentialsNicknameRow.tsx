@@ -1,14 +1,21 @@
 import { Box, Grid, Typography, FormControl, Button } from "@material-ui/core";
-import { ClickToCopyInput, Input } from "../Input";
+import { InputWithCopy /*Input*/ } from "../Input";
 import { IconDelete } from "../Icon";
 
 interface ISQLCredentialsNicknameRowProps {
   name?: string;
   handleDelete?: () => void;
+  idNicknamePrefix?: string;
+  idUsernamePrefix?: string;
+  deleteButton?: React.ReactNode;
 }
 
 const SQLCredentialsNicknameRow = ({
+  name,
   handleDelete,
+  // idNicknamePrefix,
+  idUsernamePrefix,
+  deleteButton,
 }: ISQLCredentialsNicknameRowProps) => {
   return (
     <Box
@@ -21,26 +28,39 @@ const SQLCredentialsNicknameRow = ({
       }}
     >
       <Grid container spacing={3}>
+        {/* Awaiting BE "nickname creds" support
         <Grid item md={6}>
           <Box sx={{ display: "flex", alignItems: "center", height: "100%" }}>
             <FormControl fullWidth>
-              <label htmlFor="nickname-input">
+              <label htmlFor={`${idNicknamePrefix + "-"}nickname-input`}>
                 <Typography variant="small">Nickname</Typography>
               </label>
-              <Input id="nickname-input" fullWidth></Input>
+              <Input
+                id={`${idNicknamePrefix + "-"}nickname-input`}
+                fullWidth
+              ></Input>
             </FormControl>
           </Box>
-        </Grid>
-        <Grid item md={6} sx={{ display: "flex" }}>
+        </Grid> */}
+        <Grid item xs={12} sx={{ display: "flex" }}>
           <FormControl fullWidth variant="outlined">
-            <label htmlFor="username-input">
+            <label htmlFor={`${idUsernamePrefix + "-"}username-input`}>
               <Typography variant="small">Username</Typography>
             </label>
             <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}>
-              <ClickToCopyInput id="username-input" fullWidth />
-              <Button sx={{ ml: "1rem" }} onClick={handleDelete}>
-                <IconDelete />
-              </Button>
+              <InputWithCopy
+                id={`${idUsernamePrefix + "-"}username-input`}
+                fullWidth
+                defaultValue={name}
+                sx={{}}
+              />
+              <Box sx={{ ml: "1rem" }}>
+                {deleteButton || (
+                  <Button onClick={handleDelete}>
+                    <IconDelete />
+                  </Button>
+                )}
+              </Box>
             </Box>
           </FormControl>
         </Grid>
