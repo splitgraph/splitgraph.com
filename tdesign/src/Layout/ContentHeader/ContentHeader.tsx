@@ -19,7 +19,7 @@ const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
     ".content-header--banner": {
       // padding: "0.5em",
       marginBottom: { md: "2rem" },
-      display: { md: "flex" },
+      display: "flex",
       justifyContent: "space-between",
       alignContent: "center",
       alignItems: "flex-end",
