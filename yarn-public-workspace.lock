@@ -2672,6 +2672,7 @@ __metadata:
     "@emotion/styled": 11.1.5
     "@material-ui/core": 5.0.0-alpha.32
     "@material-ui/icons": 5.0.0-alpha.29
+    react-dropzone: 11.4.2
     theme-ui: 0.6.2
   peerDependencies:
     "@csstools/normalize.css": "*"
@@ -5416,6 +5417,13 @@ __metadata:
   bin:
     atob: bin/atob.js
   checksum: 597c0d1a740bb6522c98bea8fe362ae9420b4203af588d2bd470326d9abd4504264956b8355923d7019a21527ef5e6526a7b4455862ec5178ccd81e0ea289d5f
+  languageName: node
+  linkType: hard
+
+"attr-accept@npm:^2.2.1":
+  version: 2.2.2
+  resolution: "attr-accept@npm:2.2.2"
+  checksum: e9c5d3580f6cae9c5c25c5c9c8660d344dd8bed25e77df7515c046864fe1aa4bb245e743ad46f55b85443ff53c95e378b3203c3e83f2168a2557e94d0552d458
   languageName: node
   linkType: hard
 
@@ -8504,6 +8512,15 @@ __metadata:
   peerDependencies:
     webpack: ^4.0.0 || ^5.0.0
   checksum: 0f103418c072ec66c081a9908cd7824ee19905e18be16889cb050f5f373998afaf7ca4c2fd2df4cabf703a2cd526aefe59105930e3f8d266a5b35e6d5f5b3cf4
+  languageName: node
+  linkType: hard
+
+"file-selector@npm:^0.2.2":
+  version: 0.2.4
+  resolution: "file-selector@npm:0.2.4"
+  dependencies:
+    tslib: ^2.0.3
+  checksum: 45258fb1218ba9362e1fd0fdfd25e40b18fd2473adf8a45436245a78310dc76d2fdde95463afe1f4e9e8c0ef178837eb0e5335978c0db348bc1dec425e510429
   languageName: node
   linkType: hard
 
@@ -13914,6 +13931,19 @@ fsevents@^1.2.7:
     classnames: ^2.2.5
     prop-types: ^15.6.0
   checksum: 72f9e36019a76ea2e9ccf36e8d8c6d74e53d2ca52efcb102e8edb4bedf7c636a3fed4ffa17ea397df01603c6dd5c534190ab697f6e8378d04c4e546d04a6e612
+  languageName: node
+  linkType: hard
+
+"react-dropzone@npm:11.4.2":
+  version: 11.4.2
+  resolution: "react-dropzone@npm:11.4.2"
+  dependencies:
+    attr-accept: ^2.2.1
+    file-selector: ^0.2.2
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ">= 16.8"
+  checksum: 0c4cce746df597bf6e720bd8b108476d85b27bc8dbe8bb436064f246f90de5ac81f8cf1367d9efd77768f27363e6c19ce2a41595126db5c41a378b37a83d0dc2
   languageName: node
   linkType: hard
 
