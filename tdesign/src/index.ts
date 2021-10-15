@@ -99,3 +99,5 @@ export {
 } from "./Rows";
 
 export { SubnavBar } from "./SubnavBar";
+
+export { Upload } from "./Upload";
