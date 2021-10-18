@@ -30,7 +30,6 @@ const Header = ({ children }: HeaderProps) => {
       className="header--container"
       sx={
         {
-          boxShadow: "0px 4px 8px rgba(195, 195, 195, 0.2)",
           display: "grid",
           gridColumnGap: "0px",
           gridRowGap: "7px",
