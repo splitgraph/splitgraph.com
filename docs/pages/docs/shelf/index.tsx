@@ -37,9 +37,6 @@ const ThemeDemo = () => {
 
   return (
     <Paper sx={{ m: "1rem", p: "1rem" }}>
-      <Grid item xs={3}>
-        <Upload />
-      </Grid>
       <Grid item xs={5}>
         <FormControl variant="outlined">
           PasswordInput
