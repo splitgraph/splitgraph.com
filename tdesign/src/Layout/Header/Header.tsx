@@ -36,6 +36,10 @@ const Header = ({ children }: HeaderProps) => {
           gridTemplateColumns:
             "min-content repeat(1, minmax(25vw, 1fr)) min-content",
           gridAutoFlow: "column",
+          height: "56px",
+          [theme.breakpoints.down("sm")]: {
+            height: "108px",
+          },
           background: ({ palette }) => palette.navbar.main,
 
           // !! HACK
