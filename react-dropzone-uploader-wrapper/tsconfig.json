@@ -1,14 +1,24 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "esModuleInterop": true,
-    "jsx": "react",
-    "skipLibCheck": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": true,
-    "strict": true
-  },
   "extends": "../tsconfig.json",
+  "compilerOptions": {
+    // Requires importing `React` in TS files
+    // Matches the configuration of `react-dropzone-uploader`
+    // and does not treat `React` imports as unused in the types
+    // for `react-dropzone-uploader`.
+    "jsx": "react",
+    // Necessary to be able to import from ../../
+    "rootDir": "../../"
+  },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": [
+    "**/*.ts",
+    // `react-dropzone-uploader` hacks. See explanation in `index.ts`
+    // When `splitgraph.com` is a child workspace
+    // and there is a parent workspace
+    "../../node_modules/react-dropzone-uploader/dist/*.tsx",
+    "../../node_modules/react-dropzone-uploader/dist/*.ts",
+    // When `splitgraph.com` is used as a root workspace
+    "../node_modules/react-dropzone-uploader/dist/*.tsx",
+    "../node_modules/react-dropzone-uploader/dist/*.ts"
+  ]
 }
