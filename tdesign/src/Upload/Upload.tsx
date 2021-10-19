@@ -122,6 +122,12 @@ const Upload = ({
             browse to choose a file
           </LinkButton>
         </Typography>
+        <Typography
+          variant="smallHighlightedB"
+          sx={{ color: ({ palette }) => palette.grays.gray24.main }}
+        >
+          (Up to {filesize(maxSizeBytes)})
+        </Typography>
         <input
           id="upload"
           style={{ display: "none" }}

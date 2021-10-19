@@ -26,7 +26,6 @@ import {
   GitLabLogoIcon,
   SQLCredentialsNicknameRow,
   AddNewUserRow,
-  Upload,
 } from "@splitgraph/tdesign";
 import TabsDemo from "./tabs";
 // import { useForm } from "react-hook-form";
