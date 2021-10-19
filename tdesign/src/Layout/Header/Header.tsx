@@ -32,12 +32,12 @@ const Header = ({ children }: HeaderProps) => {
         {
           display: "grid",
           gridColumnGap: "0px",
-          gridRowGap: "7px",
           gridTemplateColumns:
             "min-content repeat(1, minmax(25vw, 1fr)) min-content",
           gridAutoFlow: "column",
           height: "56px",
           [theme.breakpoints.down("sm")]: {
+            gridTemplateRows: "repeat(2, 1fr)",
             height: "108px",
           },
           background: ({ palette }) => palette.navbar.main,
@@ -88,7 +88,7 @@ const Header = ({ children }: HeaderProps) => {
                 gridRow: "1",
                 gridColumnStart: "auto",
                 gridColumnEnd: "auto",
-                justifyContent: "flex-end",
+                justifyContent: "center",
               },
               ":focus-within": {
                 paddingLeft: "22.5px",
