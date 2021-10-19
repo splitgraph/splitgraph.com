@@ -30,10 +30,8 @@ const Header = ({ children }: HeaderProps) => {
       className="header--container"
       sx={
         {
-          boxShadow: "0px 4px 8px rgba(195, 195, 195, 0.2)",
           display: "grid",
           gridColumnGap: "0px",
-          gridRowGap: "7px",
           gridTemplateColumns:
             "min-content repeat(1, minmax(25vw, 1fr)) min-content",
           gridAutoFlow: "column",
@@ -75,28 +73,17 @@ const Header = ({ children }: HeaderProps) => {
           ".header--center": {
             display: "flex",
             alignItems: "center",
-            gridRow: "1",
             gridColumnStart: "auto",
             gridColumnEnd: "auto",
             justifyContent: "center",
-            [theme.breakpoints.down("md")]: {
-              ":not(:focus-within)": {
-                width: "100%",
-                gridRow: "1",
-                gridColumnStart: "auto",
-                gridColumnEnd: "auto",
-                justifyContent: "flex-end",
-              },
-              ":focus-within": {
-                paddingLeft: "22.5px",
-                paddingRight: "22.5px",
-                gridRow: "2",
-                gridColumnStart: "1",
-                gridColumnEnd: "none",
-                "*:focus": {
-                  width: "max-content",
-                },
-              },
+            paddingLeft: "22.5px",
+            paddingRight: "22.5px",
+            gridRow: "1",
+            [theme.breakpoints.down("sm")]: {
+              gridRow: "2",
+              width: "100%",
+              gridColumnStart: "1",
+              gridColumnEnd: "5",
             },
           },
           ".header--right": {
