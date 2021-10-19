@@ -78,28 +78,16 @@ const Header = ({ children }: HeaderProps) => {
           ".header--center": {
             display: "flex",
             alignItems: "center",
-            gridRow: "1",
             gridColumnStart: "auto",
             gridColumnEnd: "auto",
             justifyContent: "center",
-            [theme.breakpoints.down("md")]: {
-              ":not(:focus-within)": {
-                width: "100%",
-                gridRow: "1",
-                gridColumnStart: "auto",
-                gridColumnEnd: "auto",
-                justifyContent: "center",
-              },
-              ":focus-within": {
-                paddingLeft: "22.5px",
-                paddingRight: "22.5px",
-                gridRow: "2",
-                gridColumnStart: "1",
-                gridColumnEnd: "none",
-                "*:focus": {
-                  width: "max-content",
-                },
-              },
+            paddingLeft: "22.5px",
+            paddingRight: "22.5px",
+            [theme.breakpoints.down("sm")]: {
+              gridRow: "2",
+              width: "100%",
+              gridColumnStart: "1",
+              gridColumnEnd: "5",
             },
           },
           ".header--right": {
