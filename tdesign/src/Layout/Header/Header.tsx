@@ -35,11 +35,6 @@ const Header = ({ children }: HeaderProps) => {
           gridTemplateColumns:
             "min-content repeat(1, minmax(25vw, 1fr)) min-content",
           gridAutoFlow: "column",
-          height: "56px",
-          [theme.breakpoints.down("sm")]: {
-            gridTemplateRows: "repeat(2, 1fr)",
-            height: "108px",
-          },
           background: ({ palette }) => palette.navbar.main,
 
           // !! HACK
@@ -83,6 +78,7 @@ const Header = ({ children }: HeaderProps) => {
             justifyContent: "center",
             paddingLeft: "22.5px",
             paddingRight: "22.5px",
+            gridRow: "1",
             [theme.breakpoints.down("sm")]: {
               gridRow: "2",
               width: "100%",
