@@ -2674,6 +2674,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@splitgraph/react-dropzone-uploader-wrapper@workspace:*, @splitgraph/react-dropzone-uploader-wrapper@workspace:react-dropzone-uploader-wrapper":
+  version: 0.0.0-use.local
+  resolution: "@splitgraph/react-dropzone-uploader-wrapper@workspace:react-dropzone-uploader-wrapper"
+  dependencies:
+    react-dropzone-uploader: 2.11.0
+  languageName: unknown
+  linkType: soft
+
 "@splitgraph/tdesign@workspace:*, @splitgraph/tdesign@workspace:tdesign":
   version: 0.0.0-use.local
   resolution: "@splitgraph/tdesign@workspace:tdesign"
@@ -2682,7 +2690,7 @@ __metadata:
     "@emotion/styled": 11.1.5
     "@material-ui/core": 5.0.0-alpha.32
     "@material-ui/icons": 5.0.0-alpha.29
-    react-dropzone-uploader: 2.11.0
+    "@splitgraph/react-dropzone-uploader-wrapper": "workspace:*"
     theme-ui: 0.6.2
   peerDependencies:
     "@csstools/normalize.css": "*"

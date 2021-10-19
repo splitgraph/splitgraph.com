@@ -1,12 +1,13 @@
 import { useMemo, CSSProperties } from "react";
 // import "react-dropzone-uploader/dist/styles.css";
-import Dropzone, {
+import { Dropzone } from "@splitgraph/react-dropzone-uploader-wrapper";
+import {
   IFileWithMeta,
   IUploadParams,
   ILayoutProps,
   IInputProps,
   ISubmitButtonProps,
-} from "react-dropzone-uploader";
+} from "@splitgraph/react-dropzone-uploader-wrapper";
 import filesize from "filesize";
 import { Box, Typography, Grid, IconButton } from "@material-ui/core";
 import type { BoxProps } from "@material-ui/core";

@@ -21,7 +21,7 @@
     "@emotion/styled": "11.1.5",
     "@material-ui/core": "5.0.0-alpha.32",
     "@material-ui/icons": "5.0.0-alpha.29",
-    "react-dropzone-uploader": "2.11.0",
+    "@splitgraph/react-dropzone-uploader-wrapper": "workspace:*",
     "theme-ui": "0.6.2"
   }
 }

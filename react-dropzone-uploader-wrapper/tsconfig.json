@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "esModuleInterop": true,
+    "jsx": "react",
+    "skipLibCheck": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
+    "strict": true
+  },
+  "extends": "../tsconfig.json",
+  "exclude": ["node_modules"],
+  "include": ["**/*.ts", "**/*.tsx"],
+}

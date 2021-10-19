@@ -14,7 +14,8 @@
     "content",
     "content-scripts",
     "templaters",
-    "lib"
+    "lib",
+    "react-dropzone-uploader-wrapper"
   ],
   "resolutions": {
     "@storybook/react/webpack": "5.51.1"
