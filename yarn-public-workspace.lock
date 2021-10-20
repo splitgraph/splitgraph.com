@@ -7305,6 +7305,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"d3-format@npm:3.0.1":
+  version: 3.0.1
+  resolution: "d3-format@npm:3.0.1"
+  checksum: 151b97173359611dc3dfca595ff2bfae13f5811965ae2e843247d18324ea0228ff99d53957219b00788cfe49025b3d13f064fbbfd6d2d8bd32e383e93bc08b1d
+  languageName: node
+  linkType: hard
+
 "dashdash@npm:^1.12.0":
   version: 1.14.1
   resolution: "dashdash@npm:1.14.1"
@@ -15437,6 +15444,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "splitgraph.com@workspace:."
   dependencies:
+    d3-format: 3.0.1
     next-seo: 4.23.0
     prettier: 2.2.1
     react-helmet: 6.1.0

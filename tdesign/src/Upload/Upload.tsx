@@ -8,7 +8,7 @@ import {
   IInputProps,
   ISubmitButtonProps,
 } from "@splitgraph/react-dropzone-uploader-wrapper";
-import filesize from "filesize";
+import { format } from "d3-format";
 import { Box, Typography, Grid, IconButton } from "@material-ui/core";
 import type { BoxProps } from "@material-ui/core";
 import {
@@ -36,7 +36,7 @@ interface IUploadProps extends BoxProps {
 }
 
 const Upload = ({
-  maxSizeBytes = 102400,
+  maxSizeBytes = 102400000,
   maxFiles = 8,
   accept,
   getUploadParams,
@@ -122,12 +122,14 @@ const Upload = ({
             browse to choose a file
           </LinkButton>
         </Typography>
-        <Typography
-          variant="smallHighlightedB"
-          sx={{ color: ({ palette }) => palette.grays.gray24.main }}
-        >
-          (Up to {filesize(maxSizeBytes)})
-        </Typography>
+        {!!maxSizeBytes && (
+          <Typography
+            variant="smallHighlightedB"
+            sx={{ color: ({ palette }) => palette.grays.gray24.main }}
+          >
+            (Up to {format("~s")(maxSizeBytes)})
+          </Typography>
+        )}
         <input
           id="upload"
           style={{ display: "none" }}
@@ -227,7 +229,7 @@ const FileRow = ({ meta: { name, size, percent }, remove, restart }) => {
         {!!percent && <Typography variant="small">{percent}</Typography>}
         {percent === 1 && <CheckCircleOutline sx={{ color: "#43766C" }} />}
         <Typography variant="smallHighlightedSB">{name}</Typography>{" "}
-        <Typography variant="small">{filesize(size)}</Typography>
+        <Typography variant="small">{format("~s")(size)}</Typography>
       </div>
 
       <div>
