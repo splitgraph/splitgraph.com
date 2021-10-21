@@ -9,18 +9,23 @@ import {
   ISubmitButtonProps,
 } from "@splitgraph/react-dropzone-uploader-wrapper";
 import { format } from "d3-format";
-import { Box, Typography, Grid, IconButton } from "@material-ui/core";
+import {
+  Box,
+  Typography,
+  Grid,
+  IconButton,
+  LinearProgress,
+} from "@material-ui/core";
 import type { BoxProps } from "@material-ui/core";
 import {
   ArrowForward,
   CheckCircleOutline,
+  WarningAmber,
   Close,
   FileUpload,
 } from "@material-ui/icons";
 import { Button, LinkButton } from "../Button";
 import UploadCloudIcon from "./UploadCloudIcon";
-
-// import { upload } from "./uploadHelper";
 
 interface IUploadProps extends BoxProps {
   maxSizeBytes?: number;
@@ -33,6 +38,8 @@ interface IUploadProps extends BoxProps {
     successFiles: IFileWithMeta[],
     allFiles: IFileWithMeta[]
   ) => void;
+  message?: string;
+  small?: boolean;
 }
 
 const Upload = ({
@@ -41,10 +48,13 @@ const Upload = ({
   accept,
   getUploadParams,
   handleSubmit,
+  message,
+  small,
 }: IUploadProps) => {
-  // called every time a file's `status` changes
+  // RDU calls every time a file's `status` changes
+  // TODO: may help finalize serial uploading
   const handleChangeStatus = ({ meta, file }, status) => {
-    console.log("handleChangeStatus()", status, meta, file);
+    console.log(status, meta, file);
   };
 
   const Layout = ({
@@ -58,10 +68,7 @@ const Upload = ({
       <div {...dropzoneProps}>
         <Typography variant="title1">Upload</Typography>
         <br />
-        <Typography variant="body">
-          You can select multiple CSVs to upload. Each CSV will correspond to
-          its own table within the repository.
-        </Typography>
+        {!!message && <Typography variant="body">{message}</Typography>}
         <br />
         {files.length < maxFiles && input}
         <Box sx={{ marginBottom: "1rem" }}>{submitButton}</Box>
@@ -113,7 +120,7 @@ const Upload = ({
 
     return (
       <div style={style}>
-        <UploadCloudIcon active={active} />
+        {!small && <UploadCloudIcon active={active} />}
         <Typography variant="subtitle2">
           Drag and drop up to {maxFiles} files
           <br />
@@ -132,7 +139,10 @@ const Upload = ({
         )}
         <input
           id="upload"
-          style={{ display: "none" }}
+          style={{
+            position: "fixed",
+            top: "-50em",
+          }}
           type="file"
           accept={accept}
         />
@@ -141,22 +151,36 @@ const Upload = ({
   };
 
   const SubmitButton = ({ files, onSubmit }: ISubmitButtonProps) => {
+    const currentlyUploading = files.some(({ meta }) => {
+      return meta.status === "uploading";
+    });
+    const allSucceeded = files.every(({ meta }) => {
+      return meta.status === "done";
+    });
     return (
       <Button
+        type="submit"
         fullWidth
         endIcon={
           <ArrowForward
             sx={{ position: "absolute", right: "15px", top: "10px" }}
           />
         }
-        disabled={!files?.length}
+        disabled={!files?.length || currentlyUploading}
         sx={{ height: "40px" }}
         onClick={() => {
           onSubmit(files);
+          if (allSucceeded) {
+            files.forEach((f) => {
+              f.remove();
+            });
+          }
         }}
       >
         {!files?.length
           ? "Add files to continue"
+          : allSucceeded
+          ? "OK"
           : `Continue with ${files?.length} file${
               files?.length > 1 ? "s" : ""
             }`}
@@ -189,15 +213,8 @@ const Upload = ({
 export default Upload;
 
 const FilesUploadList = ({ files }: { files: IFileWithMeta[] }) => {
-  console.log("FilesUploadList files", files);
   return (
-    <Grid
-      container
-      spacing={2}
-      sx={{
-        ".fileRow": {},
-      }}
-    >
+    <Grid container spacing={2}>
       {files?.map((f) => (
         <Grid key={f.meta.name} item xs={12} md={6}>
           <FileRow {...f} />
@@ -207,39 +224,75 @@ const FilesUploadList = ({ files }: { files: IFileWithMeta[] }) => {
   );
 };
 
-const FileRow = ({ meta: { name, size, percent }, remove, restart }) => {
-  const success = percent === 1;
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "13px",
-        borderRadius: "4px",
-        width: "100%",
-        backgroundColor: () => {
-          if (success) return "green";
-          // if (error) return "red";
-          return undefined;
-        },
-      }}
-    >
-      <div>
-        {!!percent && <Typography variant="small">{percent}</Typography>}
-        {percent === 1 && <CheckCircleOutline sx={{ color: "#43766C" }} />}
-        <Typography variant="smallHighlightedSB">{name}</Typography>{" "}
-        <Typography variant="small">{format("~s")(size)}</Typography>
-      </div>
+const FileRow = ({
+  meta: { name, size, percent, status },
+  remove,
+  restart,
+}) => {
+  const getPercent = (percent, status) => {
+    if (percent < 100) {
+      return (
+        <Typography variant="small">{format(".0%")(percent / 100)}</Typography>
+      );
+    } else if (percent === 100 && status === "done") {
+      return <CheckCircleOutline sx={{ color: "#43766C" }} />;
+    } else {
+      return null;
+    }
+  };
 
-      <div>
-        <IconButton aria-label="remove file" onClick={restart}>
-          <FileUpload />
-        </IconButton>
-        <IconButton aria-label="remove file" onClick={remove}>
-          <Close />
-        </IconButton>
-      </div>
-    </Box>
+  return (
+    <div>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "13px",
+          borderRadius: "4px",
+          width: "100%",
+          backgroundColor: () => {
+            // if (success) return "green";
+            // if (error) return "red";
+            return undefined;
+          },
+        }}
+      >
+        {status === "error_upload" || status === "exception_upload" ? (
+          <WarningAmber
+            sx={{ color: ({ palette }) => palette.errorBackground.main }}
+          />
+        ) : (
+          getPercent(percent, status)
+        )}
+        <Typography variant="smallHighlightedSB">{name}</Typography>{" "}
+        <Typography variant="small">{format(".2s")(size)}</Typography>
+        <div>
+          {/* <IconButton aria-label="remove file" onClick={restart}>
+            <FileUpload />
+          </IconButton> */}
+          <IconButton aria-label="remove file" onClick={remove}>
+            <Close />
+          </IconButton>
+        </div>
+      </Box>
+      {status === "uploading" && (
+        <LinearProgress variant="determinate" value={percent} />
+      )}
+      {status === "exception_upload" ||
+        (status === "error_upload" && (
+          <>
+            <Typography
+              variant="smallHighlightedB"
+              sx={{ color: ({ palette }) => palette.errorBackground.main }}
+            >
+              Could not complete upload. Retry? &nbsp;
+            </Typography>
+            <IconButton aria-label="remove file" onClick={restart}>
+              <FileUpload />
+            </IconButton>
+          </>
+        ))}
+    </div>
   );
 };
