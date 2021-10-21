@@ -169,11 +169,12 @@ const Upload = ({
         disabled={!files?.length || currentlyUploading}
         sx={{ height: "40px" }}
         onClick={() => {
-          onSubmit(files);
           if (allSucceeded) {
             files.forEach((f) => {
               f.remove();
             });
+          } else {
+            onSubmit(files);
           }
         }}
       >
