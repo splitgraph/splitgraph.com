@@ -235,7 +235,9 @@ const FileRow = ({
         <Typography variant="small">{format(".0%")(percent / 100)}</Typography>
       );
     } else if (percent === 100 && status === "done") {
-      return <CheckCircleOutline sx={{ color: "#43766C" }} />;
+      return (
+        <CheckCircleOutline sx={{ color: "#43766C", marginRight: ".5rem" }} />
+      );
     } else {
       return null;
     }
@@ -248,26 +250,42 @@ const FileRow = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "13px",
+          paddingLeft: ".5rem",
           borderRadius: "4px",
           width: "100%",
-          backgroundColor: () => {
-            // if (success) return "green";
-            // if (error) return "red";
-            return undefined;
+          backgroundColor: ({ palette }) => {
+            if (status === "done") {
+              return palette.surfaces.success.main;
+            } else if (
+              status === "exception_upload" ||
+              status === "error_upload"
+            ) {
+              return palette.surfaces.error.main;
+            } else {
+              return undefined;
+            }
+          },
+          ".left": {
+            display: "flex",
+          },
+          ".right": {
+            display: "flex",
           },
         }}
       >
-        {status === "error_upload" || status === "exception_upload" ? (
-          <WarningAmber
-            sx={{ color: ({ palette }) => palette.errorBackground.main }}
-          />
-        ) : (
-          getPercent(percent, status)
-        )}
-        <Typography variant="smallHighlightedSB">{name}</Typography>{" "}
-        <Typography variant="small">{format(".2s")(size)}</Typography>
-        <div>
+        <div className={"left"}>
+          {status === "error_upload" || status === "exception_upload" ? (
+            <WarningAmber
+              sx={{ color: ({ palette }) => palette.errorBackground.main }}
+            />
+          ) : (
+            getPercent(percent, status)
+          )}
+          &nbsp;
+          <Typography variant="smallHighlightedSB">{name}</Typography>&nbsp;
+          <Typography variant="small">{format(".2s")(size)}</Typography>
+        </div>
+        <div className={"right"}>
           {/* <IconButton aria-label="remove file" onClick={restart}>
             <FileUpload />
           </IconButton> */}
@@ -279,20 +297,19 @@ const FileRow = ({
       {status === "uploading" && (
         <LinearProgress variant="determinate" value={percent} />
       )}
-      {status === "exception_upload" ||
-        (status === "error_upload" && (
-          <>
-            <Typography
-              variant="smallHighlightedB"
-              sx={{ color: ({ palette }) => palette.errorBackground.main }}
-            >
-              Could not complete upload. Retry? &nbsp;
-            </Typography>
-            <IconButton aria-label="remove file" onClick={restart}>
-              <FileUpload />
-            </IconButton>
-          </>
-        ))}
+      {(status === "exception_upload" || status === "error_upload") && (
+        <>
+          <Typography
+            variant="smallHighlightedB"
+            sx={{ color: ({ palette }) => palette.errorBackground.main }}
+          >
+            Could not complete upload. Retry? &nbsp;
+          </Typography>
+          <IconButton aria-label="remove file" onClick={restart}>
+            <FileUpload />
+          </IconButton>
+        </>
+      )}
     </div>
   );
 };
