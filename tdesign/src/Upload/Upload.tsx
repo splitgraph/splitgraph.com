@@ -9,6 +9,7 @@ import {
   ISubmitButtonProps,
 } from "@splitgraph/react-dropzone-uploader-wrapper";
 import { format } from "d3-format";
+import prettyBytes from "pretty-bytes";
 import {
   Box,
   Typography,
@@ -43,7 +44,7 @@ interface IUploadProps extends BoxProps {
 }
 
 const Upload = ({
-  maxSizeBytes = 102400000,
+  maxSizeBytes = 104_857_600,
   maxFiles = 8,
   accept,
   getUploadParams,
@@ -134,11 +135,12 @@ const Upload = ({
             variant="smallHighlightedB"
             sx={{ color: ({ palette }) => palette.grays.gray24.main }}
           >
-            (Up to {format("~s")(maxSizeBytes)})
+            (Up to {prettyBytes(maxSizeBytes)})
           </Typography>
         )}
         <input
           id="upload"
+          multiple
           style={{
             position: "fixed",
             top: "-50em",

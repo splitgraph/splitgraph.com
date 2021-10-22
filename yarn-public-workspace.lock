@@ -2691,6 +2691,7 @@ __metadata:
     "@material-ui/core": 5.0.0-alpha.32
     "@material-ui/icons": 5.0.0-alpha.29
     "@splitgraph/react-dropzone-uploader-wrapper": "workspace:*"
+    pretty-bytes: 5.6.0
     theme-ui: 0.6.2
   peerDependencies:
     "@csstools/normalize.css": "*"
@@ -13430,6 +13431,13 @@ fsevents@^1.2.7:
   bin:
     prettier: bin-prettier.js
   checksum: 4fd89a7f6a12b13456d359fba2b1dd0fc0a17cf33f8f15953ab9f43b21ea9b09b5a2861d63b558ca0577274ce606d390e70628cf93e26d19d6cb7f19c9eebc31
+  languageName: node
+  linkType: hard
+
+"pretty-bytes@npm:5.6.0":
+  version: 5.6.0
+  resolution: "pretty-bytes@npm:5.6.0"
+  checksum: 2a2db3daaee5c7271dbc68cc875118f4e2b6697e9e4e73b4ea5d5639f50cff2c1f1f7db4775119974eff86fdbd1fac2a5d9f16bc41d90626821a9f6a0e6e26cf
   languageName: node
   linkType: hard
 
