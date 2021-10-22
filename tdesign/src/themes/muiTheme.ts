@@ -390,7 +390,7 @@ export const muiTheme = ({
         main: userNavbarDark || "#201316",
       },
       footer: {
-        main: userFooterDark || "201316",
+        main: userFooterDark || "#201316",
       },
       grays: {
         gray20: { main: "#FCFCFD" },
