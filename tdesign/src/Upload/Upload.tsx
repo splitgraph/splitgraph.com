@@ -8,7 +8,6 @@ import {
   IInputProps,
   ISubmitButtonProps,
 } from "@splitgraph/react-dropzone-uploader-wrapper";
-import { format } from "d3-format";
 import prettyBytes from "pretty-bytes";
 import {
   Box,
@@ -235,7 +234,9 @@ const FileRow = ({
   const getPercent = (percent, status) => {
     if (percent < 100) {
       return (
-        <Typography variant="small">{format(".0%")(percent / 100)}</Typography>
+        <Typography variant="small">
+          {percent === 0 ? "0%" : `${percent?.toFixed(2)}%`}
+        </Typography>
       );
     } else if (percent === 100 && status === "done") {
       return (
@@ -286,7 +287,7 @@ const FileRow = ({
           )}
           &nbsp;
           <Typography variant="smallHighlightedSB">{name}</Typography>&nbsp;
-          <Typography variant="small">{format(".2s")(size)}</Typography>
+          <Typography variant="small">{prettyBytes(size)}</Typography>
         </div>
         <div className={"right"}>
           {/* <IconButton aria-label="remove file" onClick={restart}>
