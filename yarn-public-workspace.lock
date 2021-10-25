@@ -1446,6 +1446,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.1.2":
+  version: 7.15.4
+  resolution: "@babel/runtime@npm:7.15.4"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: 64b6c250fd02a664f40835b7bfc3ec0b473d251bf4881b06b689b60662bf2ae17adc6fa32fb0e0de308de5d4bc383738c6030ad93d823066fb9fd7c18f552b56
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.12.13, @babel/template@npm:^7.12.7, @babel/template@npm:^7.14.5":
   version: 7.14.5
   resolution: "@babel/template@npm:7.14.5"
@@ -2654,6 +2663,7 @@ __metadata:
     "@emotion/styled": "*"
     "@material-ui/core": "*"
     "@material-ui/icons": "*"
+    react-dropzone-uploader: "*"
     theme-ui: "*"
   languageName: unknown
   linkType: soft
@@ -2661,6 +2671,14 @@ __metadata:
 "@splitgraph/lib@workspace:*, @splitgraph/lib@workspace:lib":
   version: 0.0.0-use.local
   resolution: "@splitgraph/lib@workspace:lib"
+  languageName: unknown
+  linkType: soft
+
+"@splitgraph/react-dropzone-uploader-wrapper@workspace:*, @splitgraph/react-dropzone-uploader-wrapper@workspace:react-dropzone-uploader-wrapper":
+  version: 0.0.0-use.local
+  resolution: "@splitgraph/react-dropzone-uploader-wrapper@workspace:react-dropzone-uploader-wrapper"
+  dependencies:
+    react-dropzone-uploader: 2.11.0
   languageName: unknown
   linkType: soft
 
@@ -2672,6 +2690,9 @@ __metadata:
     "@emotion/styled": 11.1.5
     "@material-ui/core": 5.0.0-alpha.32
     "@material-ui/icons": 5.0.0-alpha.29
+    "@splitgraph/react-dropzone-uploader-wrapper": "workspace:*"
+    d3-format: 3.0.1
+    pretty-bytes: 5.6.0
     theme-ui: 0.6.2
   peerDependencies:
     "@csstools/normalize.css": "*"
@@ -7283,6 +7304,13 @@ __metadata:
   version: 1.0.1
   resolution: "cyclist@npm:1.0.1"
   checksum: 74bc0a48c37bed8a430f103d0a880902768b7e3bcc0f9e098c4bd9630438c6b053b88e33c127e41316bb2da8d642a937015961a6cd563641ad2a5798dfecadd9
+  languageName: node
+  linkType: hard
+
+"d3-format@npm:3.0.1":
+  version: 3.0.1
+  resolution: "d3-format@npm:3.0.1"
+  checksum: 151b97173359611dc3dfca595ff2bfae13f5811965ae2e843247d18324ea0228ff99d53957219b00788cfe49025b3d13f064fbbfd6d2d8bd32e383e93bc08b1d
   languageName: node
   linkType: hard
 
@@ -13407,6 +13435,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"pretty-bytes@npm:5.6.0":
+  version: 5.6.0
+  resolution: "pretty-bytes@npm:5.6.0"
+  checksum: 2a2db3daaee5c7271dbc68cc875118f4e2b6697e9e4e73b4ea5d5639f50cff2c1f1f7db4775119974eff86fdbd1fac2a5d9f16bc41d90626821a9f6a0e6e26cf
+  languageName: node
+  linkType: hard
+
 "pretty-error@npm:^2.1.1":
   version: 2.1.2
   resolution: "pretty-error@npm:2.1.2"
@@ -13914,6 +13949,19 @@ fsevents@^1.2.7:
     classnames: ^2.2.5
     prop-types: ^15.6.0
   checksum: 72f9e36019a76ea2e9ccf36e8d8c6d74e53d2ca52efcb102e8edb4bedf7c636a3fed4ffa17ea397df01603c6dd5c534190ab697f6e8378d04c4e546d04a6e612
+  languageName: node
+  linkType: hard
+
+"react-dropzone-uploader@npm:2.11.0":
+  version: 2.11.0
+  resolution: "react-dropzone-uploader@npm:2.11.0"
+  dependencies:
+    "@babel/runtime": ^7.1.2
+  peerDependencies:
+    prop-types: ">=15.5.10"
+    react: ">=16.2.0"
+    react-dom: ">=16.2.0"
+  checksum: e6355f03fc6a3b24277ce8460819b6f31e8a67c0b34d75de1cc204293d3afe59f754b401bc20da2906fab90eddc41f0db2d928e9926f39a1cf13f9394ffefee0
   languageName: node
   linkType: hard
 

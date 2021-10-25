@@ -4,5 +4,8 @@
     "jsxImportSource": "@emotion/react"
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.js", "**/*.ts", "**/*.tsx"]
+  "include": ["**/*.js", "**/*.ts", "**/*.tsx"],
+  "references": [
+    { "path": "../react-dropzone-uploader-wrapper" }
+  ]
 }
