@@ -44,7 +44,7 @@ interface IUploadProps extends BoxProps {
 }
 
 const Upload = ({
-  maxSizeBytes = 104_857_600,
+  maxSizeBytes = 100_000_000,
   maxFiles = 8,
   accept,
   getUploadParams,
@@ -126,9 +126,8 @@ const Upload = ({
         <Typography variant="subtitle2">
           Drag and drop up to {`${maxFiles} file${maxFiles > 1 ? "s" : ""}`}
           <br />
-          or{" "}
           <LinkButton onClick={() => document.getElementById("upload").click()}>
-            browse to choose a file
+            Browse to choose files
           </LinkButton>
         </Typography>
         {!!maxSizeBytes && (
