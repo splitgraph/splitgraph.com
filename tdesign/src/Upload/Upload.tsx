@@ -1,5 +1,4 @@
 import { useMemo, CSSProperties } from "react";
-// import "react-dropzone-uploader/dist/styles.css";
 import { Dropzone } from "@splitgraph/react-dropzone-uploader-wrapper";
 import {
   IFileWithMeta,
@@ -7,6 +6,7 @@ import {
   ILayoutProps,
   IInputProps,
   ISubmitButtonProps,
+  IDropzoneProps,
 } from "@splitgraph/react-dropzone-uploader-wrapper";
 import prettyBytes from "pretty-bytes";
 import {
@@ -40,6 +40,7 @@ interface IUploadProps extends BoxProps {
   ) => void;
   message?: string;
   small?: boolean;
+  handleChangeStatus?: IDropzoneProps["onChangeStatus"];
 }
 
 const Upload = ({
@@ -50,19 +51,13 @@ const Upload = ({
   handleSubmit,
   message,
   small,
+  handleChangeStatus,
 }: IUploadProps) => {
-  // RDU calls every time a file's `status` changes
-  // TODO: may help finalize serial uploading
-  const handleChangeStatus = ({ meta, file }, status) => {
-    console.log(status, meta, file);
-  };
-
   const Layout = ({
     input,
     submitButton,
     dropzoneProps,
     files,
-    extra: { maxFiles },
   }: ILayoutProps) => {
     return (
       <div {...dropzoneProps}>
@@ -70,7 +65,7 @@ const Upload = ({
         <br />
         {!!message && <Typography variant="body">{message}</Typography>}
         <br />
-        {files.length < maxFiles && input}
+        {input}
         <Box sx={{ marginBottom: "1rem" }}>{submitButton}</Box>
         {!!files?.length && (
           <section>
@@ -90,7 +85,14 @@ const Upload = ({
     );
   };
 
-  const Input = ({ accept, extra: { active, reject } }: IInputProps) => {
+  const Input = ({
+    getFilesFromEvent,
+    accept,
+    multiple,
+    disabled,
+    onFiles,
+    extra: { active, reject },
+  }: IInputProps) => {
     const style: CSSProperties = useMemo(
       () => ({
         display: "flex",
@@ -122,7 +124,7 @@ const Upload = ({
       <div style={style}>
         {!small && <UploadCloudIcon active={active} />}
         <Typography variant="subtitle2">
-          Drag and drop up to {maxFiles} files
+          Drag and drop up to {`${maxFiles} file${maxFiles > 1 ? "s" : ""}`}
           <br />
           or{" "}
           <LinkButton onClick={() => document.getElementById("upload").click()}>
@@ -139,13 +141,20 @@ const Upload = ({
         )}
         <input
           id="upload"
-          multiple
           style={{
             position: "fixed",
             top: "-50em",
           }}
           type="file"
           accept={accept}
+          multiple={multiple}
+          disabled={disabled}
+          onChange={async (e) => {
+            const target = e.target;
+            const chosenFiles = await getFilesFromEvent(e);
+            onFiles(chosenFiles);
+            target.value = null;
+          }}
         />
       </div>
     );
@@ -158,6 +167,9 @@ const Upload = ({
     const allSucceeded = files.every(({ meta }) => {
       return meta.status === "done";
     });
+    const fileSizeError = files.some(({ meta }) => {
+      return meta.status === "error_file_size";
+    });
     return (
       <Button
         type="submit"
@@ -167,7 +179,7 @@ const Upload = ({
             sx={{ position: "absolute", right: "15px", top: "10px" }}
           />
         }
-        disabled={!files?.length || currentlyUploading}
+        disabled={fileSizeError || !files?.length || currentlyUploading}
         sx={{ height: "40px" }}
         onClick={() => {
           if (allSucceeded) {
@@ -278,7 +290,9 @@ const FileRow = ({
         }}
       >
         <div className={"left"}>
-          {status === "error_upload" || status === "exception_upload" ? (
+          {status === "error_upload" ||
+          status === "exception_upload" ||
+          status === "error_file_size" ? (
             <WarningAmber
               sx={{ color: ({ palette }) => palette.errorBackground.main }}
             />
@@ -313,6 +327,14 @@ const FileRow = ({
             <FileUpload />
           </IconButton>
         </>
+      )}
+      {status === "error_file_size" && (
+        <Typography
+          variant="smallHighlightedB"
+          sx={{ color: ({ palette }) => palette.errorBackground.main }}
+        >
+          Please check filesize
+        </Typography>
       )}
     </div>
   );
