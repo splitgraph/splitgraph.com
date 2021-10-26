@@ -90,7 +90,8 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
 
   // Make sure to compare to router.asPath to match dynamic URL segments
   // e.g. when `router.pathname` is `/[namespace]`, `router.asPath` is `/miles`
-  const isActive = router.asPath === pathname;
+  // Only client can see #hash, so exclude it to avoid SSR hydration warnings
+  const isActive = router.asPath.split("#").shift() === pathname;
 
   const className = clsx(classNameProps, {
     [activeClassName]: isActive,
