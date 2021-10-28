@@ -29,6 +29,7 @@ export {
   HeaderRight,
   HeaderCenter,
   MainContent,
+  PaddedSingleCol,
 } from "./Layout/index";
 
 export { Menu, MenuItem, MenuItemHeading } from "./Menu";
