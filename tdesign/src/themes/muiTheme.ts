@@ -24,17 +24,67 @@ export const muiTheme = ({
   // Deep merge should perform better, at a hopefully small hit to readability
   // more info https://stackoverflow.com/questions/57630926/material-ui-theme-overrides-leveraging-theme-palette-colors
 
+  const baseGrid: React.CSSProperties = {
+    display: "grid",
+    gridColumnGap: "0px",
+    gridAutoFlow: "column",
+  };
+
+  // Known values that will not change
+  const magicNumbers = {
+    logo: {
+      padding: "22.5px",
+      margin: "37px",
+      width: "100px",
+    },
+    nav: {
+      rightMargin: "37px",
+      profile: {
+        paddingRight: "8px",
+        padding: "16px",
+        width: "40px",
+        fromRightOfPageToLeftOfMenu: "65px",
+      },
+      // Note: the width of the nav links is NOT known (it varies)
+      // Including it here to make that obvious.
+      links: {
+        width: "0px",
+      },
+    },
+  };
+
+  const constants = {
+    leftMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
+    rightMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
+
+    /** Align with left side of wordmark, right side of nav */
+    leftMarginLogoAligned: `max(2rem, calc((100vw - ${breakpointValues.desktop}px) / 2 + ${magicNumbers.logo.padding} + ${magicNumbers.logo.margin}))`,
+    rightMarginNavAligned: `max(2rem, calc((100vw - ${breakpointValues.desktop}px) / 2) + ${magicNumbers.nav.profile.paddingRight})`,
+
+    /** Align with right (inner) side of wordmark, left (inner) side of ProfileMenu */
+    leftMarginInsideLogo: `max(2rem, calc((100vw - ${breakpointValues.desktop}px) / 2 + ${magicNumbers.logo.padding} + ${magicNumbers.logo.margin}) + ${magicNumbers.logo.width})`,
+
+    /** Align with left (inner) side of ProfileMenu component (assumes logged in)
+     * Note: There is no constant including the nav links because their width is unknown
+     */
+    rightMarginInsideNavProfileMenu: `max(2rem, calc((100vw - ${breakpointValues.desktop}px) / 2) + ${magicNumbers.nav.profile.fromRightOfPageToLeftOfMenu})`,
+    brandGradient: `linear-gradient(90deg, rgb(249 69 105 / 100%) 0%, rgb(255 128 153 / 50%) 100%)`,
+  };
+
   const baseTheme = createMuiTheme({
     breakpoints: {
       values: breakpointValues,
     },
-    constants: {
-      leftMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
-      rightMargin: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
-      leftMarginLogoAligned: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2 + 22.5px + 40px))`,
-      rightMarginNavAligned: `max(0px, calc((100vw - ${breakpointValues.desktop}px) / 2))`,
-      brandGradient: `linear-gradient(90deg, rgb(249 69 105 / 100%) 0%, rgb(255 128 153 / 50%) 100%)`,
+    constants: constants,
+    grids: {
+      threeCol: {
+        ...baseGrid,
+        gridTemplateColumns:
+          "min-content repeat(1, minmax(25vw, 1fr)) min-content",
+        gridAutoFlow: "column",
+      },
     },
+    // min-content repeat(1, minmax(25vw, 1fr)) min-content
     palette: {
       primary: {
         main: userPrimaryColor || "#F94569",
@@ -587,8 +637,23 @@ declare module "@material-ui/core/styles/createPalette" {
 // Docs on module augmentation for customizing the theme
 // https://material-ui.com/guides/typescript/#customization-of-theme
 declare module "@material-ui/core/styles" {
+  type Constants = {
+    leftMargin: string;
+    rightMargin: string;
+    leftMarginLogoAligned: string;
+    rightMarginNavAligned: string;
+    leftMarginInsideLogo: string;
+    rightMarginInsideNavProfileMenu: string;
+    brandGradient: string;
+  };
+
+  type GridDefs = {
+    threeCol: React.CSSProperties;
+  };
+
   interface Theme {
-    constants?: { [key: string]: number | string };
+    constants: Constants;
+    grids: GridDefs;
     texturize: (
       base: React.CSSProperties,
       texture: React.CSSProperties
@@ -596,7 +661,8 @@ declare module "@material-ui/core/styles" {
   }
   // allow configuration using `createTheme`
   interface ThemeOptions {
-    constants?: { [key: string]: number | string };
+    constants: Constants;
+    grids: GridDefs;
     texturize: (
       base: React.CSSProperties,
       texture: React.CSSProperties
