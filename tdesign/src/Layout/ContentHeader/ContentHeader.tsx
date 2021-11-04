@@ -27,6 +27,8 @@ const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
         ? extraStyle[".content-header--banner"]
         : {}),
       h2: {
+        color: "flambeeDarkGray.light",
+        letterSpacing: "0.005em",
         display: "inline",
         margin: 0,
       },
