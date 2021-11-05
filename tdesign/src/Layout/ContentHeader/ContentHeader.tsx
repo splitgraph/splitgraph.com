@@ -32,6 +32,12 @@ const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
         display: "inline",
         margin: 0,
       },
+      h1: {
+        color: "flambeeDarkGray.dark",
+        letterSpacing: "0.005em",
+        display: "inline",
+        margin: 0,
+      },
     },
   };
 
