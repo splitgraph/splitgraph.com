@@ -29,6 +29,7 @@ const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
       h2: {
         color: "flambeeDarkGray.light",
         letterSpacing: "0.005em",
+        fontWeight: "600",
         display: "inline",
         margin: 0,
       },
