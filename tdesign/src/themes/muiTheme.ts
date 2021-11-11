@@ -69,6 +69,9 @@ export const muiTheme = ({
      */
     rightMarginInsideNavProfileMenu: `max(2rem, calc((100vw - ${breakpointValues.desktop}px) / 2) + ${magicNumbers.nav.profile.fromRightOfPageToLeftOfMenu})`,
     brandGradient: `linear-gradient(90deg, rgb(249 69 105 / 100%) 0%, rgb(255 128 153 / 50%) 100%)`,
+
+    paddedColumnLeftWidth: "max(22.5px, calc((100vw - 784px) / 2))",
+    paddedColumnRightWidth: "max(22.5px, calc((100vw - 784px) / 2))",
   };
 
   const baseTheme = createMuiTheme({
@@ -645,6 +648,8 @@ declare module "@material-ui/core/styles" {
     leftMarginInsideLogo: string;
     rightMarginInsideNavProfileMenu: string;
     brandGradient: string;
+    paddedColumnLeftWidth: string;
+    paddedColumnRightWidth: string;
   };
 
   type GridDefs = {

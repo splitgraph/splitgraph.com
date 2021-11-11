@@ -19,8 +19,6 @@ const PaddedSingleCol = ({
   children,
   className,
   innerClassName,
-  leftPadding,
-  rightPadding,
   extraStyle = {},
 }: IPaddedSingleColProps) => {
   const theme = useTheme();
@@ -31,10 +29,10 @@ const PaddedSingleCol = ({
   const outerContainerStyle: SxProps<Theme> = {
     ...theme.grids.threeCol,
     ".left-spacer": {
-      minWidth: leftPadding ?? theme.constants.leftMarginInsideLogo,
+      width: theme.constants.paddedColumnLeftWidth,
     },
     ".right-spacer": {
-      minWidth: rightPadding ?? theme.constants.rightMarginInsideNavProfileMenu,
+      width: theme.constants.paddedColumnRightWidth,
     },
     ...extraStyle,
   };
