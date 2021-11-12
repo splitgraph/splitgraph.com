@@ -30,11 +30,7 @@ const Header = ({ children }: HeaderProps) => {
       className="header--container"
       sx={
         {
-          display: "grid",
-          gridColumnGap: "0px",
-          gridTemplateColumns:
-            "min-content repeat(1, minmax(25vw, 1fr)) min-content",
-          gridAutoFlow: "column",
+          ...theme.grids.threeCol,
           background: ({ palette }) => palette.navbar.main,
 
           // !! HACK
