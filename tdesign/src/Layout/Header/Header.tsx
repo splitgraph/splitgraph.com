@@ -78,6 +78,7 @@ const Header = ({ children }: HeaderProps) => {
             [theme.breakpoints.down("sm")]: {
               gridRow: "2",
               width: "100%",
+              height: "56px",
               gridColumnStart: "1",
               gridColumnEnd: "5",
             },

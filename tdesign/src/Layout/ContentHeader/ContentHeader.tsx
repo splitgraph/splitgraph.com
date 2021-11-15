@@ -54,6 +54,7 @@ const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
       fontSize: "14px",
       lineHeight: "24px",
       fontWeight: "normal",
+      marginTop: "0.5rem",
       [theme.breakpoints.up("sm")]: { flex: "0 1 100%" },
     },
   };
