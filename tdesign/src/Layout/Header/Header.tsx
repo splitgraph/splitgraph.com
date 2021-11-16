@@ -140,9 +140,6 @@ const Header = ({ children }: HeaderProps) => {
                   width: "100%",
                   paddingLeft: "22.5px",
                   paddingRight: "22.5px",
-                  "> .search-input-container": {
-                    width: "100%",
-                  },
                 },
                 "~ div.header--right": {
                   gridRowStart: "3",
