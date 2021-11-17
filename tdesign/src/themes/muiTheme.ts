@@ -193,44 +193,53 @@ export const muiTheme = ({
         "-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;",
       // Default to sans-serif, b/c of all the text styles 2 are serif and the rest sans. List from systemfontstack.com -> sans-serif
       title1: {
+        //H1 Title - SF SB 24 pt
         fontWeight: 600,
         fontSize: "24px",
         lineHeight: 1.33,
       },
       title2: {
+        //H2 Title - SF SB 20 pt
         fontWeight: 600,
         fontSize: "1.25rem",
         lineHeight: 1,
       },
       subtitle1: {
+        //H3 Subtitle - SF SB 16 pt
         fontWeight: 600,
         fontSize: "14px",
         lineHeight: 1.375,
       },
       subtitle2: {
+        //H4 Subtitle - SF Reg 16 pt
         fontSize: "14px",
         lineHeight: 1.5,
       },
       body: {
+        //H5 Body - SF Reg 14 pt
         fontSize: "14px",
         lineHeight: 1.71,
       },
       bodyHighlighted: {
+        //H6 Body Highlighed - SF SB 14 pt
         fontWeight: 600,
         fontSize: "14px",
         lineHeight: 1.429,
       },
       small: {
+        //H7 Small Text - SF Reg 12 pt
         fontSize: "12px",
         color: "rgb(85, 86, 86)",
         lineHeight: 1.67,
       },
       smallHighlightedSB: {
+        //H8 Small T Highlighed - SF SB 12 pt
         fontSize: ".75rem",
         fontWeight: 600,
         lineHeight: 1.67,
       },
       smallHighlightedB: {
+        //H9 Small T. Hihglighted SF B 12 pt
         fontSize: ".75rem",
         fontWeight: 600,
         lineHeight: 1.67,

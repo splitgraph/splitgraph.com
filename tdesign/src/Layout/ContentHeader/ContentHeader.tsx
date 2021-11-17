@@ -30,33 +30,6 @@ const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
       flexDirection: "column",
       alignItems: "flex-start !important",
     },
-    ".repo-list-title": {
-      color: "flambeeDarkGray.dark",
-      fontWeight: "600",
-      fontSize: "20px",
-      lineHeight: "20px",
-      letterSpacing: "0.005em",
-      display: "inline",
-      margin: 0,
-      marginBottom: "1rem",
-      [theme.breakpoints.up("sm")]: { flex: "1 0 50%" },
-    },
-    ".repo-list-link": {
-      color: "flambeeRed.main",
-      [theme.breakpoints.down("sm")]: { order: 99 },
-      [theme.breakpoints.up("sm")]: {
-        flex: "1 0 50%",
-        textAlign: "end",
-      },
-    },
-    ".repo-list-subtitle": {
-      color: "flambeeDarkGray.light",
-      fontSize: "14px",
-      lineHeight: "24px",
-      fontWeight: "normal",
-      marginTop: "0.5rem",
-      [theme.breakpoints.up("sm")]: { flex: "0 1 100%" },
-    },
   };
 
   const headerContainerStyle: SxProps<Theme> = {
