@@ -395,7 +395,7 @@ export const muiTheme = ({
       mode: "light",
       surfaces: {
         background: { main: "#FFFFFF" },
-        sql: { main: "#E3EFFE" },
+        sql: { main: "#E3EFFE", dark: "#1F162C" },
         error: { main: "#F9EEEF" },
         success: { main: "#DBF9F3" },
         link: { main: "#2A81F6" },
@@ -407,7 +407,7 @@ export const muiTheme = ({
           `linear-gradient(0deg, rgba(42, 129, 246, 0.02), rgba(42, 129, 246, 0.02)),#FFFFFF`,
       },
       footer: {
-        main: userFooterLight || "#00224E",
+        main: userFooterLight || "#130822",
       },
       grays: {
         gray20: { main: "#000202" },
@@ -443,16 +443,16 @@ export const muiTheme = ({
       mode: "dark",
       surfaces: {
         background: { main: "#000202" },
-        sql: { main: "#27293B" },
+        sql: { main: "#1F1B27" },
         error: { main: "#370D10" },
         success: { main: "#103D34" },
         link: { main: "#2A81F6" },
       },
       navbar: {
-        main: userNavbarDark || "#201316",
+        main: userNavbarDark || "#1A1324",
       },
       footer: {
-        main: userFooterDark || "201316",
+        main: userFooterDark || "#1A1324",
       },
       grays: {
         gray20: { main: "#FCFCFD" },
