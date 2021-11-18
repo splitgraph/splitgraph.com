@@ -71,9 +71,6 @@ export const muiTheme = ({
 
     brandGradient: `linear-gradient(90deg, rgb(249 69 105 / 100%) 0%, rgb(255 128 153 / 50%) 100%)`,
     bannerGradient: `linear-gradient(185.2deg, #FDF2F4 24.37%, rgba(253, 242, 244, 0) 103.81%)`,
-
-    paddedColumnLeftWidth: "max(25px, calc((100vw - 784px) / 2))",
-    paddedColumnRightWidth: "max(25px, calc((100vw - 784px) / 2))",
   };
 
   const baseTheme = createMuiTheme({
@@ -660,8 +657,6 @@ declare module "@material-ui/core/styles" {
     rightMarginInsideNavProfileMenu: string;
     brandGradient: string;
     bannerGradient: string;
-    paddedColumnLeftWidth: string;
-    paddedColumnRightWidth: string;
   };
 
   type GridDefs = {

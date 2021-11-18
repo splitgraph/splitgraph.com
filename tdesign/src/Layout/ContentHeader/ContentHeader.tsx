@@ -35,9 +35,7 @@ const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
   const headerContainerStyle: SxProps<Theme> = {
     marginBottom: "2rem",
     ...extraStyle,
-    ".content-header--banner": {
-      ...contentHeaderBannerStyle,
-    },
+    ".content-header--banner": contentHeaderBannerStyle,
   };
 
   return (

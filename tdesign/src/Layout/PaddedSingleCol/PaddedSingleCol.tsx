@@ -29,10 +29,10 @@ const PaddedSingleCol = ({
   const outerContainerStyle: SxProps<Theme> = {
     ...theme.grids.threeCol,
     ".left-spacer": {
-      width: theme.constants.paddedColumnLeftWidth,
+      width: "max(25px, calc((100vw - 784px) / 2))",
     },
     ".right-spacer": {
-      width: theme.constants.paddedColumnRightWidth,
+      width: "max(25px, calc((100vw - 784px) / 2))",
     },
     ...extraStyle,
   };
