@@ -70,7 +70,7 @@ export const muiTheme = ({
     rightMarginInsideNavProfileMenu: `max(2rem, calc((100vw - ${breakpointValues.desktop}px) / 2) + ${magicNumbers.nav.profile.fromRightOfPageToLeftOfMenu})`,
 
     brandGradient: `linear-gradient(90deg, rgb(249 69 105 / 100%) 0%, rgb(255 128 153 / 50%) 100%)`,
-    bannerGradient: `linear-gradient(185.2deg, #FDF2F4 24.37%, rgba(253, 242, 244, 0) 103.81%)`,
+    pinkBackgroundGradient: `linear-gradient(185.2deg, #FDF2F4 24.37%, rgba(253, 242, 244, 0) 103.81%)`,
   };
 
   const baseTheme = createMuiTheme({
@@ -395,7 +395,7 @@ export const muiTheme = ({
       mode: "light",
       surfaces: {
         background: { main: "#FFFFFF" },
-        sql: { main: "#E3EFFE" },
+        sql: { main: "#E3EFFE", dark: "#1F162C" },
         error: { main: "#F9EEEF" },
         success: { main: "#DBF9F3" },
         link: { main: "#2A81F6" },
@@ -407,7 +407,7 @@ export const muiTheme = ({
           `linear-gradient(0deg, rgba(42, 129, 246, 0.02), rgba(42, 129, 246, 0.02)),#FFFFFF`,
       },
       footer: {
-        main: userFooterLight || "#00224E",
+        main: userFooterLight || "#130822",
       },
       grays: {
         gray20: { main: "#000202" },
@@ -443,16 +443,16 @@ export const muiTheme = ({
       mode: "dark",
       surfaces: {
         background: { main: "#000202" },
-        sql: { main: "#27293B" },
+        sql: { main: "#1F1B27" },
         error: { main: "#370D10" },
         success: { main: "#103D34" },
         link: { main: "#2A81F6" },
       },
       navbar: {
-        main: userNavbarDark || "#201316",
+        main: userNavbarDark || "#1A1324",
       },
       footer: {
-        main: userFooterDark || "201316",
+        main: userFooterDark || "#1A1324",
       },
       grays: {
         gray20: { main: "#FCFCFD" },
@@ -657,7 +657,7 @@ declare module "@material-ui/core/styles" {
     leftMarginInsideLogo: string;
     rightMarginInsideNavProfileMenu: string;
     brandGradient: string;
-    bannerGradient: string;
+    pinkBackgroundGradient: string;
   };
 
   type GridDefs = {

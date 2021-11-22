@@ -45,11 +45,11 @@ export const theme: SplitgraphTheme = {
   },
   navbar: {
     light: "#FBFCFF",
-    dark: "#201316",
+    dark: "#1A1324",
   },
   footer: {
-    light: "#00224E",
-    dark: "201316",
+    light: "#130822",
+    dark: "#1A1324",
   },
   // Surfaces ///////////////
   surfaces: {
@@ -62,7 +62,7 @@ export const theme: SplitgraphTheme = {
     },
     dark: {
       background: "#000202", // should "add primary color at 8%"
-      sql: "#27293B",
+      sql: "#1F1B27",
       error: "#370D10",
       success: "#103D34",
       link: "#2A81F6",
