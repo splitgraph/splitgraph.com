@@ -8,11 +8,6 @@ interface IPaddedSingleColProps {
   innerClassName?: string;
   children: React.ReactNode;
   extraStyle?: SxProps<Theme>;
-
-  /** Not literally padding-left. Will be set as minWidth of left spacer. */
-  leftPadding?: string | number;
-  /** Not literally padding-right. Will be set as minWidth of left spacer. */
-  rightPadding?: string | number;
 }
 
 const PaddedSingleCol = ({
@@ -25,7 +20,6 @@ const PaddedSingleCol = ({
 
   const outerClass = `padded-single-col-grid ${className ?? ""}`.trim();
   const innerClass = `center-padded-content ${innerClassName ?? ""}`.trim();
-
   const outerContainerStyle: SxProps<Theme> = {
     ...theme.grids.threeCol,
     ".left-spacer": {

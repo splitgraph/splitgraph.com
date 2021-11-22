@@ -189,6 +189,7 @@ export const muiTheme = ({
       fontFamily:
         "-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;",
       // Default to sans-serif, b/c of all the text styles 2 are serif and the rest sans. List from systemfontstack.com -> sans-serif
+      // Font names correspond to styles in component library: https://www.figma.com/file/jaOp7ncR6Zk90BeOQgrIB0/--Splitgraph-%2F-Component-and-Styles-Library
       title1: {
         //H1 Title - SF SB 24 pt
         fontWeight: 600,

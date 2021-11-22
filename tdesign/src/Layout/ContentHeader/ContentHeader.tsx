@@ -28,7 +28,7 @@ const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
     },
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
-      alignItems: "flex-start !important",
+      alignItems: "flex-start",
     },
   };
 
