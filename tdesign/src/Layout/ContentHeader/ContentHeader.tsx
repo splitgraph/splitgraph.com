@@ -12,30 +12,31 @@ export interface IContentHeaderProps {
 const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
   const theme = useTheme();
 
-  const contentHeaderBannerStyle: SxProps<Theme> = {
-    display: "flex",
-    flexWrap: "wrap",
-    marginBottom: "1rem",
-    justifyContent: "space-between",
-    alignContent: "flex-start",
-    alignItems: "flex-end",
-    h2: {
-      color: "flambeeDarkGray.light",
-      letterSpacing: "0.005em",
-      fontWeight: "600",
-      display: "inline",
-      margin: 0,
-    },
-    [theme.breakpoints.down("sm")]: {
-      flexDirection: "column",
-      alignItems: "flex-start",
-    },
-  };
-
   const headerContainerStyle: SxProps<Theme> = {
     marginBottom: "2rem",
     ...extraStyle,
-    ".content-header--banner": contentHeaderBannerStyle,
+    ".content-header--banner": {
+      display: "flex",
+      flexWrap: "wrap",
+      marginBottom: "1rem",
+      justifyContent: "space-between",
+      alignContent: "flex-start",
+      alignItems: "flex-end",
+      h2: {
+        color: "flambeeDarkGray.light",
+        letterSpacing: "0.005em",
+        fontWeight: "600",
+        display: "inline",
+        margin: 0,
+      },
+      ...(extraStyle.hasOwnProperty(".content-header--banner")
+        ? extraStyle[".content-header--banner"]
+        : {}),
+      [theme.breakpoints.down("sm")]: {
+        flexDirection: "column",
+        alignItems: "flex-start",
+      },
+    },
   };
 
   return (
