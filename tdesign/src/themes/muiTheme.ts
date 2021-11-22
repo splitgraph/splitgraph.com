@@ -68,7 +68,9 @@ export const muiTheme = ({
      * Note: There is no constant including the nav links because their width is unknown
      */
     rightMarginInsideNavProfileMenu: `max(2rem, calc((100vw - ${breakpointValues.desktop}px) / 2) + ${magicNumbers.nav.profile.fromRightOfPageToLeftOfMenu})`,
+
     brandGradient: `linear-gradient(90deg, rgb(249 69 105 / 100%) 0%, rgb(255 128 153 / 50%) 100%)`,
+    bannerGradient: `linear-gradient(185.2deg, #FDF2F4 24.37%, rgba(253, 242, 244, 0) 103.81%)`,
   };
 
   const baseTheme = createMuiTheme({
@@ -187,45 +189,55 @@ export const muiTheme = ({
       fontFamily:
         "-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;",
       // Default to sans-serif, b/c of all the text styles 2 are serif and the rest sans. List from systemfontstack.com -> sans-serif
+      // Font names correspond to styles in component library: https://www.figma.com/file/jaOp7ncR6Zk90BeOQgrIB0/--Splitgraph-%2F-Component-and-Styles-Library
       title1: {
+        //H1 Title - SF SB 24 pt
         fontWeight: 600,
         fontSize: "24px",
         lineHeight: 1.33,
       },
       title2: {
+        //H2 Title - SF SB 20 pt
         fontWeight: 600,
         fontSize: "1.25rem",
         lineHeight: 1,
       },
       subtitle1: {
+        //H3 Subtitle - SF SB 16 pt
         fontWeight: 600,
         fontSize: "14px",
         lineHeight: 1.375,
       },
       subtitle2: {
+        //H4 Subtitle - SF Reg 16 pt
         fontSize: "14px",
         lineHeight: 1.5,
       },
       body: {
+        //H5 Body - SF Reg 14 pt
         fontSize: "14px",
         lineHeight: 1.71,
       },
       bodyHighlighted: {
+        //H6 Body Highlighed - SF SB 14 pt
         fontWeight: 600,
         fontSize: "14px",
         lineHeight: 1.429,
       },
       small: {
+        //H7 Small Text - SF Reg 12 pt
         fontSize: "12px",
         color: "rgb(85, 86, 86)",
         lineHeight: 1.67,
       },
       smallHighlightedSB: {
+        //H8 Small T Highlighed - SF SB 12 pt
         fontSize: ".75rem",
         fontWeight: 600,
         lineHeight: 1.67,
       },
       smallHighlightedB: {
+        //H9 Small T. Hihglighted SF B 12 pt
         fontSize: ".75rem",
         fontWeight: 600,
         lineHeight: 1.67,
@@ -645,6 +657,7 @@ declare module "@material-ui/core/styles" {
     leftMarginInsideLogo: string;
     rightMarginInsideNavProfileMenu: string;
     brandGradient: string;
+    bannerGradient: string;
   };
 
   type GridDefs = {

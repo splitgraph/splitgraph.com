@@ -78,6 +78,7 @@ const Header = ({ children }: HeaderProps) => {
             [theme.breakpoints.down("sm")]: {
               gridRow: "2",
               width: "100%",
+              height: "56px",
               gridColumnStart: "1",
               gridColumnEnd: "5",
             },
@@ -133,14 +134,13 @@ const Header = ({ children }: HeaderProps) => {
               ":checked": {
                 ...iconCheckedStyle,
                 "~ div.header--center": {
-                  gridRow: "2",
-                  gridColumnStart: "1",
-                  gridColumnEnd: "none",
-                  width: "100%",
-                  paddingLeft: "22.5px",
-                  paddingRight: "22.5px",
-                  "> .search-input-container": {
+                  [theme.breakpoints.down("sm")]: {
+                    gridRow: "2",
+                    gridColumnStart: "1",
+                    gridColumnEnd: "none",
                     width: "100%",
+                    paddingLeft: "22.5px",
+                    paddingRight: "22.5px",
                   },
                 },
                 "~ div.header--right": {

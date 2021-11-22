@@ -8,33 +8,25 @@ interface IPaddedSingleColProps {
   innerClassName?: string;
   children: React.ReactNode;
   extraStyle?: SxProps<Theme>;
-
-  /** Not literally padding-left. Will be set as minWidth of left spacer. */
-  leftPadding?: string | number;
-  /** Not literally padding-right. Will be set as minWidth of left spacer. */
-  rightPadding?: string | number;
 }
 
 const PaddedSingleCol = ({
   children,
   className,
   innerClassName,
-  leftPadding,
-  rightPadding,
   extraStyle = {},
 }: IPaddedSingleColProps) => {
   const theme = useTheme();
 
   const outerClass = `padded-single-col-grid ${className ?? ""}`.trim();
   const innerClass = `center-padded-content ${innerClassName ?? ""}`.trim();
-
   const outerContainerStyle: SxProps<Theme> = {
     ...theme.grids.threeCol,
     ".left-spacer": {
-      minWidth: leftPadding ?? theme.constants.leftMarginInsideLogo,
+      width: "max(25px, calc((100vw - 784px) / 2))",
     },
     ".right-spacer": {
-      minWidth: rightPadding ?? theme.constants.rightMarginInsideNavProfileMenu,
+      width: "max(25px, calc((100vw - 784px) / 2))",
     },
     ...extraStyle,
   };
