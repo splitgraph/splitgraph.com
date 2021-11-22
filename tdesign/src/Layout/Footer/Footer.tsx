@@ -238,10 +238,7 @@ const Footer = ({
             <IconLogoDiscord
               size={"2rem"}
               color={"white"}
-              extraStyle={{
-                display: "inline-flex",
-                marginRight: "1rem",
-              }}
+              extraStyle={{ display: "inline-flex", marginRight: "1rem" }}
             />
             Join us on Discord
           </a>

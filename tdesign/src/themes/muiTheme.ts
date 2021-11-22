@@ -70,7 +70,7 @@ export const muiTheme = ({
     rightMarginInsideNavProfileMenu: `max(2rem, calc((100vw - ${breakpointValues.desktop}px) / 2) + ${magicNumbers.nav.profile.fromRightOfPageToLeftOfMenu})`,
 
     brandGradient: `linear-gradient(90deg, rgb(249 69 105 / 100%) 0%, rgb(255 128 153 / 50%) 100%)`,
-    bannerGradient: `linear-gradient(185.2deg, #FDF2F4 24.37%, rgba(253, 242, 244, 0) 103.81%)`,
+    pinkBackgroundGradient: `linear-gradient(185.2deg, #FDF2F4 24.37%, rgba(253, 242, 244, 0) 103.81%)`,
   };
 
   const baseTheme = createMuiTheme({
@@ -657,7 +657,7 @@ declare module "@material-ui/core/styles" {
     leftMarginInsideLogo: string;
     rightMarginInsideNavProfileMenu: string;
     brandGradient: string;
-    bannerGradient: string;
+    pinkBackgroundGradient: string;
   };
 
   type GridDefs = {
