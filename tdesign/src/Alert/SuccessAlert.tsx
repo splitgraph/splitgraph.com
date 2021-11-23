@@ -26,7 +26,7 @@ interface ISuccessResetLinkProps {
 }
 
 const SuccessResetLink = ({ text, href }: ISuccessResetLinkProps) => (
-  <MuiLink sx={{ color: "#fff" }} href={href || "#"}>
+  <MuiLink sx={{ color: "flambeeLightGray.light" }} href={href || "#"}>
     {text}
   </MuiLink>
 );
