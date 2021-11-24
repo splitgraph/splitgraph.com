@@ -58,7 +58,7 @@ const SuccessAlert = ({
     borderRadius: "4px",
     padding: "8px 8px 10px",
     color: "#43766C", //TODO consider 'on surface'
-    backgroundColor: (theme) => theme.palette.surfaces.success.main,
+    backgroundColor: (theme) => theme.palette.surfaces.success.light,
     ...(dismissLinkOwnRow
       ? {
           flexWrap: "wrap",

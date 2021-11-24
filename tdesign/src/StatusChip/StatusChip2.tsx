@@ -13,12 +13,18 @@ const StatusChip2 = ({ text }: IStatusChipProps) => {
           padding: "1px 8px 2px",
           background: (theme) => theme.palette.common.white,
           border: ({ palette }) =>
-            `1px solid ${isVerified ? "#36CBAE" : palette.grays.gray25.main}`, //TODO: this is called 'on success' but appears to be hardcoded
+            `1px solid ${
+              isVerified
+                ? palette.surfaces.success.main
+                : palette.grays.gray25.main
+            }`,
           borderRadius: "4px",
         },
         ".status-chip--text": {
-          color: (theme) =>
-            isVerified ? "#36CBAE" : theme.palette.grays.gray22.main,
+          color: ({ palette }) =>
+            isVerified
+              ? palette.surfaces.success.main
+              : palette.grays.gray22.main,
         },
       }}
     >

@@ -397,7 +397,7 @@ export const muiTheme = ({
         background: { main: "#FFFFFF" },
         sql: { main: "#E3EFFE", dark: "#1F162C" },
         error: { main: "#F9EEEF" },
-        success: { main: "#DBF9F3" },
+        success: { main: "#36CBAE", light: "#DBF9F3" },
         link: { main: "#2A81F6" },
       },
       navbar: {

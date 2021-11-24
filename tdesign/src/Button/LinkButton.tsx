@@ -7,7 +7,7 @@ const LinkButton = ({ sx, small, children, ...rest }: ILinkButtonProps) => {
   return (
     <Button
       sx={{
-        color: small ? "grays.gray22.main" : "#36CBAE", // TODO clarify if & where "On Surface" colors (confusingly named) should be computed
+        color: "surfaces.success.main",
         textDecoration: small ? "underline" : "inherit",
         ":hover": {
           background: "inherit",
