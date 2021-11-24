@@ -7,12 +7,12 @@ const LinkButton = ({ sx, small, children, ...rest }: ILinkButtonProps) => {
   return (
     <Button
       sx={{
-        color: small ? "#555656" : "#36CBAE", // TODO clarify if & where "On Surface" colors (confusingly named) should be computed
+        color: small ? "grays.gray22.main" : "#36CBAE", // TODO clarify if & where "On Surface" colors (confusingly named) should be computed
         textDecoration: small ? "underline" : "inherit",
         ":hover": {
           background: "inherit",
           textDecoration: "underline",
-          color: ({ palette }) => (small ? palette.grays.gray22 : "inherit"),
+          color: small ? "grays.gray22.main" : "inherit",
         },
         ":focus": {
           textDecoration: "underline",
