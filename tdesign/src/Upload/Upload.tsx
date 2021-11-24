@@ -270,7 +270,7 @@ const FileRow = ({
           width: "100%",
           backgroundColor: ({ palette }) => {
             if (status === "done") {
-              return palette.surfaces.success.light;
+              return palette.surfaces.success.main;
             } else if (
               status === "exception_upload" ||
               status === "error_upload"

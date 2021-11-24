@@ -7,7 +7,7 @@ const LinkButton = ({ sx, small, children, ...rest }: ILinkButtonProps) => {
   return (
     <Button
       sx={{
-        color: "surfaces.success.main",
+        color: "on.success1.main",
         textDecoration: small ? "underline" : "inherit",
         ":hover": {
           background: "inherit",

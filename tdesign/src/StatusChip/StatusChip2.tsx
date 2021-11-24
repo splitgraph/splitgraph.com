@@ -14,17 +14,13 @@ const StatusChip2 = ({ text }: IStatusChipProps) => {
           background: (theme) => theme.palette.common.white,
           border: ({ palette }) =>
             `1px solid ${
-              isVerified
-                ? palette.surfaces.success.main
-                : palette.grays.gray25.main
+              isVerified ? palette.on.success1.main : palette.grays.gray25.main
             }`,
           borderRadius: "4px",
         },
         ".status-chip--text": {
           color: ({ palette }) =>
-            isVerified
-              ? palette.surfaces.success.main
-              : palette.grays.gray22.main,
+            isVerified ? palette.on.success1.main : palette.grays.gray22.main,
         },
       }}
     >
