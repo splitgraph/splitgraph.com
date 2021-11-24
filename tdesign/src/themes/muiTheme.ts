@@ -397,7 +397,7 @@ export const muiTheme = ({
         background: { main: "#FFFFFF" },
         sql: { main: "#E3EFFE", dark: "#1F162C" },
         error: { main: "#F9EEEF" },
-        success: { main: "#36CBAE", light: "#DBF9F3" },
+        success: { main: "#DBF9F3" },
         link: { main: "#2A81F6" },
       },
       on: {
@@ -557,16 +557,14 @@ declare module "@material-ui/core/styles/createPalette" {
   }
 
   interface OnPalette {
-    on: {
-      primary: PaletteColor;
-      navbar: PaletteColor;
-      background1: PaletteColor;
-      background2: PaletteColor;
-      error1: PaletteColor;
-      error2: PaletteColor;
-      success1: PaletteColor;
-      success2: PaletteColor;
-    };
+    primary: PaletteColor;
+    navbar: PaletteColor;
+    background1: PaletteColor;
+    background2: PaletteColor;
+    error1: PaletteColor;
+    error2: PaletteColor;
+    success1: PaletteColor;
+    success2: PaletteColor;
   }
 
   interface Palette {
@@ -643,6 +641,17 @@ declare module "@material-ui/core/styles/createPalette" {
     string: PaletteColorOptions;
     function: PaletteColorOptions;
   }
+
+  interface OnPaletteOptions {
+    primary: PaletteColorOptions;
+    navbar: PaletteColorOptions;
+    background1: PaletteColorOptions;
+    background2: PaletteColorOptions;
+    error1: PaletteColorOptions;
+    error2: PaletteColorOptions;
+    success1: PaletteColorOptions;
+    success2: PaletteColorOptions;
+  }
   interface PaletteOptions {
     surfaces?: SurfacePaletteOptions;
 
@@ -658,6 +667,8 @@ declare module "@material-ui/core/styles/createPalette" {
     grays?: GrayPaletteOptions;
 
     editor?: EditorPaletteOptions;
+
+    on?: OnPaletteOptions;
 
     flambeeDarkGray?: PaletteColorOptions;
     flambeeLightGray?: PaletteColorOptions;
