@@ -57,7 +57,7 @@ const SuccessAlert = ({
     marginBottom: 4,
     borderRadius: "4px",
     padding: "8px 8px 10px",
-    color: "#43766C", //TODO consider 'on surface'
+    color: "on.success2.main",
     backgroundColor: (theme) => theme.palette.surfaces.success.main,
     ...(dismissLinkOwnRow
       ? {

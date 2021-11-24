@@ -251,7 +251,9 @@ const FileRow = ({
       );
     } else if (percent === 100 && status === "done") {
       return (
-        <CheckCircleOutline sx={{ color: "#43766C", marginRight: ".5rem" }} />
+        <CheckCircleOutline
+          sx={{ color: "on.success2.main", marginRight: ".5rem" }}
+        />
       );
     } else {
       return null;
