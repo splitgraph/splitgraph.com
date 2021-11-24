@@ -20,7 +20,7 @@ const Input = forwardRef<HTMLInputElement, OutlinedInputProps>((props, ref) => (
       "& .MuiOutlinedInput-root.Mui-error": {
         backgroundColor: ({ palette }) => palette.surfaces.error.main,
         "& fieldset": {
-          borderColor: "on.error1.main",
+          borderColor: "on.error.main",
         },
       },
     }}

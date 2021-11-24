@@ -69,7 +69,7 @@ const InputWithCopy = forwardRef<HTMLInputElement, any>(
           "& .MuiOutlinedInput-root.Mui-error": {
             backgroundColor: ({ palette }) => palette.surfaces.error.main,
             "& fieldset": {
-              borderColor: "on.error1.main",
+              borderColor: "on.error.main",
             },
           },
           ...sx,

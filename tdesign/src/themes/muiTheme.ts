@@ -403,11 +403,11 @@ export const muiTheme = ({
       on: {
         primary: { main: "#FFFFFF" },
         navbar: { main: "#000202" },
-        background1: { main: "#000202" },
+        background: { main: "#000202" },
         background2: { main: "#555656" },
-        error1: { main: "#B62B35" },
+        error: { main: "#B62B35" },
         error2: { main: "#5B171B" },
-        success1: { main: "#36CBAE" },
+        success: { main: "#36CBAE" },
         success2: { main: "#43766C" },
       },
       navbar: {
@@ -461,11 +461,11 @@ export const muiTheme = ({
       on: {
         primary: { main: "#FFFFFF" },
         navbar: { main: "#FFFFFF" },
-        background1: { main: "#E6E7EB" },
+        background: { main: "#E6E7EB" },
         background2: { main: "#A0A3A9" },
-        error1: { main: "#D38086" },
+        error: { main: "#D38086" },
         error2: { main: "#F9EEEF" },
-        success1: { main: "#36CBAE" },
+        success: { main: "#36CBAE" },
         success2: { main: "#DBF9F3" },
       },
       navbar: {
@@ -559,11 +559,11 @@ declare module "@material-ui/core/styles/createPalette" {
   interface OnPalette {
     primary: PaletteColor;
     navbar: PaletteColor;
-    background1: PaletteColor;
+    background: PaletteColor;
     background2: PaletteColor;
-    error1: PaletteColor;
+    error: PaletteColor;
     error2: PaletteColor;
-    success1: PaletteColor;
+    success: PaletteColor;
     success2: PaletteColor;
   }
 
@@ -645,11 +645,11 @@ declare module "@material-ui/core/styles/createPalette" {
   interface OnPaletteOptions {
     primary: PaletteColorOptions;
     navbar: PaletteColorOptions;
-    background1: PaletteColorOptions;
+    background: PaletteColorOptions;
     background2: PaletteColorOptions;
-    error1: PaletteColorOptions;
+    error: PaletteColorOptions;
     error2: PaletteColorOptions;
-    success1: PaletteColorOptions;
+    success: PaletteColorOptions;
     success2: PaletteColorOptions;
   }
   interface PaletteOptions {
