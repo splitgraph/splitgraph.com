@@ -400,6 +400,16 @@ export const muiTheme = ({
         success: { main: "#36CBAE", light: "#DBF9F3" },
         link: { main: "#2A81F6" },
       },
+      on: {
+        primary: { main: "#FFFFFF" },
+        navbar: { main: "#000202" },
+        background1: { main: "#000202" },
+        background2: { main: "#555656" },
+        error1: { main: "#B62B35" },
+        error2: { main: "#5B171B" },
+        success1: { main: "#36CBAE" },
+        success2: { main: "#43766C" },
+      },
       navbar: {
         /*main: "#FBFCFF",*/
         main:
@@ -447,6 +457,16 @@ export const muiTheme = ({
         error: { main: "#370D10" },
         success: { main: "#103D34" },
         link: { main: "#2A81F6" },
+      },
+      on: {
+        primary: { main: "#FFFFFF" },
+        navbar: { main: "#FFFFFF" },
+        background1: { main: "#E6E7EB" },
+        background2: { main: "#A0A3A9" },
+        error1: { main: "#D38086" },
+        error2: { main: "#F9EEEF" },
+        success1: { main: "#36CBAE" },
+        success2: { main: "#DBF9F3" },
       },
       navbar: {
         main: userNavbarDark || "#1A1324",
@@ -536,6 +556,19 @@ declare module "@material-ui/core/styles/createPalette" {
     function: PaletteColor;
   }
 
+  interface OnPalette {
+    on: {
+      primary: PaletteColor;
+      navbar: PaletteColor;
+      background1: PaletteColor;
+      background2: PaletteColor;
+      error1: PaletteColor;
+      error2: PaletteColor;
+      success1: PaletteColor;
+      success2: PaletteColor;
+    };
+  }
+
   interface Palette {
     surfaces?: SurfacePalette;
 
@@ -546,6 +579,8 @@ declare module "@material-ui/core/styles/createPalette" {
     grays?: GrayPalette;
 
     editor?: EditorPalette;
+
+    on?: OnPalette;
 
     textures?: {
       onLight?: TexturePalette;
