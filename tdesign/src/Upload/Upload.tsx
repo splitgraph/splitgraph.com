@@ -27,7 +27,7 @@ import {
 } from "@material-ui/icons";
 import { Button, LinkButton } from "../Button";
 import UploadCloudIcon from "./UploadCloudIcon";
-export type { MethodValue };
+export type { IUploadParams };
 interface IUploadProps extends BoxProps {
   maxSizeBytes?: number;
   maxFiles?: number;

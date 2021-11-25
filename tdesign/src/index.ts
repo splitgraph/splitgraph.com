@@ -102,4 +102,4 @@ export {
 export { SubnavBar } from "./SubnavBar";
 
 export { Upload } from "./Upload";
-export type { MethodValue } from "./Upload";
+export type { IUploadParams } from "./Upload";
