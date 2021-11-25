@@ -7,7 +7,6 @@ import type {
   IInputProps,
   ISubmitButtonProps,
   IDropzoneProps,
-  MethodValue, // it seems not great to import and re-export this
 } from "@splitgraph/react-dropzone-uploader-wrapper";
 import prettyBytes from "pretty-bytes";
 import {
