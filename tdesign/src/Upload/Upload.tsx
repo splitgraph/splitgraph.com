@@ -7,6 +7,7 @@ import type {
   IInputProps,
   ISubmitButtonProps,
   IDropzoneProps,
+  MethodValue, // it seems not great to import and re-export this
 } from "@splitgraph/react-dropzone-uploader-wrapper";
 import prettyBytes from "pretty-bytes";
 import {
@@ -26,7 +27,7 @@ import {
 } from "@material-ui/icons";
 import { Button, LinkButton } from "../Button";
 import UploadCloudIcon from "./UploadCloudIcon";
-
+export type { MethodValue };
 interface IUploadProps extends BoxProps {
   maxSizeBytes?: number;
   maxFiles?: number;
@@ -41,6 +42,7 @@ interface IUploadProps extends BoxProps {
   message?: string;
   small?: boolean;
   handleChangeStatus?: IDropzoneProps["onChangeStatus"];
+  onSubmitCallback?: () => void;
 }
 
 const Upload = ({
@@ -52,6 +54,7 @@ const Upload = ({
   message,
   small,
   handleChangeStatus,
+  onSubmitCallback,
 }: IUploadProps) => {
   const Layout = ({
     input,
@@ -185,6 +188,9 @@ const Upload = ({
             files.forEach((f) => {
               f.remove();
             });
+            if (typeof onSubmitCallback === "function") {
+              onSubmitCallback();
+            }
           } else {
             onSubmit(files);
           }
