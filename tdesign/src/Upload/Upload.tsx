@@ -41,7 +41,7 @@ interface IUploadProps extends BoxProps {
   message?: string;
   small?: boolean;
   handleChangeStatus?: IDropzoneProps["onChangeStatus"];
-  onSubmitCallback?: () => void;
+  onSubmitAfterFilesUploaded?: () => void;
 }
 
 const Upload = ({
@@ -53,7 +53,7 @@ const Upload = ({
   message,
   small,
   handleChangeStatus,
-  onSubmitCallback,
+  onSubmitAfterFilesUploaded,
 }: IUploadProps) => {
   const Layout = ({
     input,
@@ -187,8 +187,8 @@ const Upload = ({
             files.forEach((f) => {
               f.remove();
             });
-            if (typeof onSubmitCallback === "function") {
-              onSubmitCallback();
+            if (typeof onSubmitAfterFilesUploaded === "function") {
+              onSubmitAfterFilesUploaded();
             }
           } else {
             onSubmit(files);
