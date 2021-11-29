@@ -22,7 +22,7 @@ const NewsletterSignup = ({}: INewsletterSignupProps) => {
           paddingBottom: "0.5rem",
           ":hover": {
             cursor: "pointer",
-            borderColor: "sglightblue",
+            borderColor: "sgLightBlue",
           },
         },
       }}

@@ -70,7 +70,7 @@ export const muiTheme = ({
     rightMarginInsideNavProfileMenu: `max(2rem, calc((100vw - ${breakpointValues.desktop}px) / 2) + ${magicNumbers.nav.profile.fromRightOfPageToLeftOfMenu})`,
 
     brandGradient: `linear-gradient(90deg, rgb(249 69 105 / 100%) 0%, rgb(255 128 153 / 50%) 100%)`,
-    bannerGradient: `linear-gradient(185.2deg, #FDF2F4 24.37%, rgba(253, 242, 244, 0) 103.81%)`,
+    pinkBackgroundGradient: `linear-gradient(185.2deg, #FDF2F4 24.37%, rgba(253, 242, 244, 0) 103.81%)`,
   };
 
   const baseTheme = createMuiTheme({
@@ -144,17 +144,17 @@ export const muiTheme = ({
         light: "#FFFFFF",
         dark: "#C0C3CC",
       },
-      lightaccent: {
+      lightAccent: {
         main: "#96ccff",
       },
       gray: {
         main: "#dddddf",
       },
-      sglightblue: {
+      sgLightBlue: {
         main: "#d5f6fe",
         light: "rgba(213, 246, 255, .5)",
       },
-      sgdarkblue: {
+      sgDarkBlue: {
         main: "#36678d",
       },
       heavy: {
@@ -177,7 +177,7 @@ export const muiTheme = ({
       /*=== prismTheme ===*/
       prismTheme,
       code: {
-        backgroundColor: "sgdarkblue.main",
+        backgroundColor: "sgDarkBlue.main",
         fontFamily: "monospace",
         fontSize: "inherit",
         ".comment": {
@@ -320,7 +320,7 @@ export const muiTheme = ({
         fontSize: "0.8rem",
         padding: "10px",
         overflowX: "auto",
-        backgroundColor: "sgdarkblue.main",
+        backgroundColor: "sgDarkBlue.main",
         ".mdx-marker": {
           // backgroundColor: "rgba(255,255,255,0.1)",
           display: "block",
@@ -395,10 +395,20 @@ export const muiTheme = ({
       mode: "light",
       surfaces: {
         background: { main: "#FFFFFF" },
-        sql: { main: "#E3EFFE" },
+        sql: { main: "#E3EFFE", dark: "#1F162C" },
         error: { main: "#F9EEEF" },
         success: { main: "#DBF9F3" },
         link: { main: "#2A81F6" },
+      },
+      on: {
+        primary: { main: "#FFFFFF" },
+        navbar: { main: "#000202" },
+        background: { main: "#000202" },
+        background2: { main: "#555656" },
+        error: { main: "#B62B35" },
+        error2: { main: "#5B171B" },
+        success: { main: "#36CBAE" },
+        success2: { main: "#43766C" },
       },
       navbar: {
         /*main: "#FBFCFF",*/
@@ -407,7 +417,7 @@ export const muiTheme = ({
           `linear-gradient(0deg, rgba(42, 129, 246, 0.02), rgba(42, 129, 246, 0.02)),#FFFFFF`,
       },
       footer: {
-        main: userFooterLight || "#00224E",
+        main: userFooterLight || "#130822",
       },
       grays: {
         gray20: { main: "#000202" },
@@ -443,16 +453,26 @@ export const muiTheme = ({
       mode: "dark",
       surfaces: {
         background: { main: "#000202" },
-        sql: { main: "#27293B" },
+        sql: { main: "#1F1B27" },
         error: { main: "#370D10" },
         success: { main: "#103D34" },
         link: { main: "#2A81F6" },
       },
+      on: {
+        primary: { main: "#FFFFFF" },
+        navbar: { main: "#FFFFFF" },
+        background: { main: "#E6E7EB" },
+        background2: { main: "#A0A3A9" },
+        error: { main: "#D38086" },
+        error2: { main: "#F9EEEF" },
+        success: { main: "#36CBAE" },
+        success2: { main: "#DBF9F3" },
+      },
       navbar: {
-        main: userNavbarDark || "#201316",
+        main: userNavbarDark || "#1A1324",
       },
       footer: {
-        main: userFooterDark || "201316",
+        main: userFooterDark || "#1A1324",
       },
       grays: {
         gray20: { main: "#FCFCFD" },
@@ -536,6 +556,17 @@ declare module "@material-ui/core/styles/createPalette" {
     function: PaletteColor;
   }
 
+  interface OnPalette {
+    primary: PaletteColor;
+    navbar: PaletteColor;
+    background: PaletteColor;
+    background2: PaletteColor;
+    error: PaletteColor;
+    error2: PaletteColor;
+    success: PaletteColor;
+    success2: PaletteColor;
+  }
+
   interface Palette {
     surfaces?: SurfacePalette;
 
@@ -546,6 +577,8 @@ declare module "@material-ui/core/styles/createPalette" {
     grays?: GrayPalette;
 
     editor?: EditorPalette;
+
+    on?: OnPalette;
 
     textures?: {
       onLight?: TexturePalette;
@@ -559,10 +592,10 @@ declare module "@material-ui/core/styles/createPalette" {
     flambeeGreen?: PaletteColor;
     errorBackground?: PaletteColor;
     danger?: PaletteColor;
-    lightaccent?: PaletteColor;
+    lightAccent?: PaletteColor;
     gray?: PaletteColor;
-    sglightblue?: PaletteColor;
-    sgdarkblue?: PaletteColor;
+    sgLightBlue?: PaletteColor;
+    sgDarkBlue?: PaletteColor;
     heavy?: PaletteColor;
     muted?: PaletteColor;
     light?: PaletteColor;
@@ -608,6 +641,17 @@ declare module "@material-ui/core/styles/createPalette" {
     string: PaletteColorOptions;
     function: PaletteColorOptions;
   }
+
+  interface OnPaletteOptions {
+    primary: PaletteColorOptions;
+    navbar: PaletteColorOptions;
+    background: PaletteColorOptions;
+    background2: PaletteColorOptions;
+    error: PaletteColorOptions;
+    error2: PaletteColorOptions;
+    success: PaletteColorOptions;
+    success2: PaletteColorOptions;
+  }
   interface PaletteOptions {
     surfaces?: SurfacePaletteOptions;
 
@@ -624,6 +668,8 @@ declare module "@material-ui/core/styles/createPalette" {
 
     editor?: EditorPaletteOptions;
 
+    on?: OnPaletteOptions;
+
     flambeeDarkGray?: PaletteColorOptions;
     flambeeLightGray?: PaletteColorOptions;
     flambeeBlue?: PaletteColorOptions;
@@ -631,10 +677,10 @@ declare module "@material-ui/core/styles/createPalette" {
     flambeeGreen?: PaletteColorOptions;
     errorBackground?: PaletteColorOptions;
     danger?: PaletteColorOptions;
-    lightaccent?: PaletteColorOptions;
+    lightAccent?: PaletteColorOptions;
     gray?: PaletteColorOptions;
-    sglightblue?: PaletteColorOptions;
-    sgdarkblue?: PaletteColorOptions;
+    sgLightBlue?: PaletteColorOptions;
+    sgDarkBlue?: PaletteColorOptions;
     heavy?: PaletteColorOptions;
     muted?: PaletteColorOptions;
     light?: PaletteColorOptions;
@@ -657,7 +703,7 @@ declare module "@material-ui/core/styles" {
     leftMarginInsideLogo: string;
     rightMarginInsideNavProfileMenu: string;
     brandGradient: string;
-    bannerGradient: string;
+    pinkBackgroundGradient: string;
   };
 
   type GridDefs = {

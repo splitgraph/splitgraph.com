@@ -60,7 +60,7 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
           "& .MuiOutlinedInput-root.Mui-error": {
             backgroundColor: ({ palette }) => palette.surfaces.error.main,
             "& fieldset": {
-              borderColor: "#B62B35", //TODO is this computed?
+              borderColor: "on.error.main",
             },
           },
         }}

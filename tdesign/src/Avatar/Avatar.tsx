@@ -7,7 +7,7 @@ export interface IAvatarProps {
 const avatarContainerStyle = {
   borderRadius: "50%",
   backgroundColor: "text",
-  color: "sglightblue.main",
+  color: "sgLightBlue.main",
   minHeight: "4vh",
   minWidth: "4vh",
   display: "inline-flex",
@@ -15,7 +15,7 @@ const avatarContainerStyle = {
   justifyContent: "center",
   borderWidth: "1px",
   borderStyle: "solid",
-  borderColor: "sglightblue.main",
+  borderColor: "sgLightBlue.main",
   ".avatar-initials": {
     textTransform: "uppercase",
   },
