@@ -1,6 +1,6 @@
 const prismTheme = {
   color: "#e0ffff",
-  backgroundColor: "sgdarkblue.main",
+  backgroundColor: "sgDarkBlue.main",
   ".changed,.operator": { color: "#ffd700" },
   ".deleted": { color: "#ffa07a77" },
   ".inserted": { color: "#66cc99" },

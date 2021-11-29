@@ -33,7 +33,7 @@ const darkVariant = {
   },
   backgroundColor: "footer.main",
   borderTop: "0.5ch solid",
-  borderTopColor: "lightaccent.main",
+  borderTopColor: "lightAccent.main",
 };
 
 const mixStyles = (property: string, ...styles: object[]) => {
@@ -121,7 +121,7 @@ const Footer = ({
           marginBottom: ["2rem", "inherit", "inherit"],
           ...mixStyles(".discord-cta-link", baseVariant, extraStyle),
           ":hover": {
-            borderColor: "lightaccent",
+            borderColor: "lightAccent",
             textDecoration: "none",
             ...mixStyles(".discord-cta-link:hover", baseVariant, extraStyle),
           },

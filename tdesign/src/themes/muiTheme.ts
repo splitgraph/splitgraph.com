@@ -144,17 +144,17 @@ export const muiTheme = ({
         light: "#FFFFFF",
         dark: "#C0C3CC",
       },
-      lightaccent: {
+      lightAccent: {
         main: "#96ccff",
       },
       gray: {
         main: "#dddddf",
       },
-      sglightblue: {
+      sgLightBlue: {
         main: "#d5f6fe",
         light: "rgba(213, 246, 255, .5)",
       },
-      sgdarkblue: {
+      sgDarkBlue: {
         main: "#36678d",
       },
       heavy: {
@@ -177,7 +177,7 @@ export const muiTheme = ({
       /*=== prismTheme ===*/
       prismTheme,
       code: {
-        backgroundColor: "sgdarkblue.main",
+        backgroundColor: "sgDarkBlue.main",
         fontFamily: "monospace",
         fontSize: "inherit",
         ".comment": {
@@ -320,7 +320,7 @@ export const muiTheme = ({
         fontSize: "0.8rem",
         padding: "10px",
         overflowX: "auto",
-        backgroundColor: "sgdarkblue.main",
+        backgroundColor: "sgDarkBlue.main",
         ".mdx-marker": {
           // backgroundColor: "rgba(255,255,255,0.1)",
           display: "block",
@@ -592,10 +592,10 @@ declare module "@material-ui/core/styles/createPalette" {
     flambeeGreen?: PaletteColor;
     errorBackground?: PaletteColor;
     danger?: PaletteColor;
-    lightaccent?: PaletteColor;
+    lightAccent?: PaletteColor;
     gray?: PaletteColor;
-    sglightblue?: PaletteColor;
-    sgdarkblue?: PaletteColor;
+    sgLightBlue?: PaletteColor;
+    sgDarkBlue?: PaletteColor;
     heavy?: PaletteColor;
     muted?: PaletteColor;
     light?: PaletteColor;
@@ -677,10 +677,10 @@ declare module "@material-ui/core/styles/createPalette" {
     flambeeGreen?: PaletteColorOptions;
     errorBackground?: PaletteColorOptions;
     danger?: PaletteColorOptions;
-    lightaccent?: PaletteColorOptions;
+    lightAccent?: PaletteColorOptions;
     gray?: PaletteColorOptions;
-    sglightblue?: PaletteColorOptions;
-    sgdarkblue?: PaletteColorOptions;
+    sgLightBlue?: PaletteColorOptions;
+    sgDarkBlue?: PaletteColorOptions;
     heavy?: PaletteColorOptions;
     muted?: PaletteColorOptions;
     light?: PaletteColorOptions;
