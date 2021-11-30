@@ -34,7 +34,7 @@ const UserRow = ({
         sx={{
           display: ["none", "flex"],
           justifyContent: "space-between",
-          p: "1em",
+          padding: "1em",
           boxSizing: "border-box",
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.02);",
           borderRadius: "4px",
@@ -60,7 +60,10 @@ const UserRow = ({
             <Typography variant="smallHighlightedSB">Primary</Typography>
           ) : (
             setAsPrimaryButton || (
-              <InvisibleButton sx={{ mr: "28px" }} onClick={handleSetAsPrimary}>
+              <InvisibleButton
+                sx={{ marginRight: "28px" }}
+                onClick={handleSetAsPrimary}
+              >
                 Set as Primary
               </InvisibleButton>
             )
