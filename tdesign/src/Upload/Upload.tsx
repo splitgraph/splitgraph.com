@@ -26,7 +26,7 @@ import {
 } from "@material-ui/icons";
 import { Button, LinkButton } from "../Button";
 import UploadCloudIcon from "./UploadCloudIcon";
-
+export type { IUploadParams };
 interface IUploadProps extends BoxProps {
   maxSizeBytes?: number;
   maxFiles?: number;
@@ -41,6 +41,7 @@ interface IUploadProps extends BoxProps {
   message?: string;
   small?: boolean;
   handleChangeStatus?: IDropzoneProps["onChangeStatus"];
+  onSubmitAfterFilesUploaded?: () => void;
 }
 
 const Upload = ({
@@ -52,6 +53,7 @@ const Upload = ({
   message,
   small,
   handleChangeStatus,
+  onSubmitAfterFilesUploaded,
 }: IUploadProps) => {
   const Layout = ({
     input,
@@ -185,6 +187,9 @@ const Upload = ({
             files.forEach((f) => {
               f.remove();
             });
+            if (typeof onSubmitAfterFilesUploaded === "function") {
+              onSubmitAfterFilesUploaded();
+            }
           } else {
             onSubmit(files);
           }
