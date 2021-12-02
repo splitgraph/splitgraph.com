@@ -4,19 +4,10 @@
     "**/*.js",
     "**/*.ts",
     "**/*.tsx",
-    "../docs/compile/*.js",
-    "../docs/components/*.tsx",
-    "../docs/hocs/*.tsx",
-    "../docs/components/*.ts",
-    "../docs/hocs/*.ts",
-    "../docs/components/*.js",
-    "../docs/hocs/*.js",
-    "../docs/components/**/*.tsx",
-    "../docs/hocs/**/*.tsx",
-    "../docs/components/**/*.ts",
-    "../docs/hocs/**/*.ts",
-    "../docs/components/**/*.js",
-    "../docs/hocs/**/*.js"
+    // NOTE: wasteful and surprising to include those files in 2 TS projects, but cannot be avoided due
+    // to inter-dependencies between TS projects
+    "../docs/components/**/*",
+    "../docs/compile/**/*"
   ],
   "references": [{ "path": "../tdesign" }, { "path": "../design" }]
 }

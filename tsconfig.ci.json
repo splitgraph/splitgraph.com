@@ -32,13 +32,13 @@
       "@splitgraph/*": ["*"]
     }
   },
-  "include": [
-    "content",
-    "content-scripts",
-    "design",
-    "docs",
-    "tdesign",
-    "templaters"
+  "include": ["content", "content-scripts", "design"],
+  "references": [
+    { "path": "tdesign" },
+    { "path": "docs" },
+    { "path": "lib" },
+    { "path": "react-dropzone-uploader-wrapper" },
+    { "path": "templaters" }
   ],
   "exclude": ["node_modules"]
 }
