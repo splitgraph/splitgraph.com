@@ -4,6 +4,13 @@
     "rootDir": ".",
     "outDir": "dist"
   },
-  "exclude": ["node_modules"]
-  // "references": [{ "path": "tdesign" }, { "path": "docs" }]
+  "exclude": ["node_modules"],
+  "include": ["content", "content-scripts", "design"],
+  "references": [
+    { "path": "tdesign" },
+    { "path": "docs" },
+    { "path": "lib" },
+    { "path": "react-dropzone-uploader-wrapper" },
+    { "path": "templaters" }
+  ]
 }
