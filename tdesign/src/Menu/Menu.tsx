@@ -53,7 +53,7 @@ const Menu = ({ children, style = {} }: MenuProps) => {
         expanded ? "initial" : "surfaces.background.main",
         "initial",
       ],
-      padding: "1em",
+      padding: "1em 0.5em",
       borderRadius: [
         expanded ? "initial" : "1em",
         expanded ? "initial" : "1em",

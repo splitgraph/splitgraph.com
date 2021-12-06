@@ -90,14 +90,6 @@ const MenuItem = ({
     },
   };
 
-  // const linkStyle: SxProps<Theme> = {
-  //   ":hover": {
-  //     textDecoration: "underline",
-  //   },
-  // };
-
-  const textStyle = {};
-
   const iconStyle = {
     marginRight: "0.5em",
     ...iconSx,
@@ -121,16 +113,14 @@ const MenuItem = ({
         )}{" "}
         {href ? (
           <Link
-            // extraStyle={linkStyle} // TODO consider if still needed?
             href={href}
             className={linkClassName}
+            style={{ whiteSpace: "nowrap" }}
           >
             {text}
           </Link>
         ) : (
-          <Typography className={textClassName} sx={textStyle}>
-            {text}
-          </Typography>
+          <Typography className={textClassName}>{text}</Typography>
         )}
       </Box>
     </li>
