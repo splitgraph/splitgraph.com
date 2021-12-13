@@ -1,15 +1,15 @@
 import { pencilIconURI } from "./cssSvgStrings";
 import BaseIcon, { IIconProps } from "./BaseIcon";
 
-const IconPencilGray = (props: IIconProps) => {
+const IconPencilPink = (props: IIconProps) => {
   return (
     <BaseIcon
-      iconSlug={"pencilGray"}
+      iconSlug={"pencilPink"}
       svgURI={pencilIconURI}
-      color="#818285"
+      color="#F94569"
       {...props}
     />
   );
 };
 
-export default IconPencilGray;
+export default IconPencilPink;
