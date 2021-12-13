@@ -138,6 +138,9 @@ export { IconPencilBlue };
 import IconPencilGray from "./IconPencilGray";
 export { IconPencilGray };
 
+import IconPencilPink from "./IconPencilPink";
+export { IconPencilPink };
+
 import IconGear from "./IconGear";
 export { IconGear };
 
