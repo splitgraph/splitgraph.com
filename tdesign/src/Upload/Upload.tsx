@@ -251,7 +251,7 @@ const FileRow = ({
     if (percent < 100) {
       return (
         <Typography variant="small">
-          {percent === 0 ? "0%" : `${percent?.toFixed(2)}%`}
+          {percent === 0 ? "" : `${percent?.toFixed(2)}%`}
         </Typography>
       );
     } else if (percent === 100 && status === "done") {
