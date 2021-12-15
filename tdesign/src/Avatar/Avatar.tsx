@@ -1,34 +1,31 @@
-import { Box } from "@material-ui/core";
+import { Avatar as MUIAvatar } from "@material-ui/core";
+import type { SxProps } from "@material-ui/system";
+import type { Theme } from "@material-ui/core/styles/createMuiTheme";
+
 export interface IAvatarProps {
+  height?: number;
   avatarURL?: string;
   initials?: string;
+  sx?: SxProps<Theme>;
 }
 
-const avatarContainerStyle = {
-  borderRadius: "50%",
-  backgroundColor: "text",
-  color: "sgLightBlue.main",
-  minHeight: "4vh",
-  minWidth: "4vh",
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  borderWidth: "1px",
-  borderStyle: "solid",
-  borderColor: "sgLightBlue.main",
-  ".avatar-initials": {
-    textTransform: "uppercase",
-  },
+const defaultAvatarContainerStyle = {
+  marginLeft: "auto",
+  marginRight: "auto",
 };
 
-const Avatar = ({ avatarURL, initials }: IAvatarProps) => {
+const Avatar = ({ avatarURL, initials, sx, height }: IAvatarProps) => {
   return (
-    <Box sx={avatarContainerStyle}>
-      {!avatarURL && initials && (
-        <span className="avatar-initials">{initials}</span>
-      )}
-      {avatarURL && <img src={avatarURL} />}
-    </Box>
+    <MUIAvatar
+      sx={{
+        ...defaultAvatarContainerStyle,
+        height,
+        ...sx,
+      }}
+    >
+      {!avatarURL && initials}
+      {avatarURL && <img src={avatarURL} height={height} />}
+    </MUIAvatar>
   );
 };
 
