@@ -135,11 +135,8 @@ export { IconChevronRightPrimaryColor };
 import IconPencilBlue from "./IconPencilBlue";
 export { IconPencilBlue };
 
-import IconPencilGray from "./IconPencilGray";
-export { IconPencilGray };
-
-import IconPencilPink from "./IconPencilPink";
-export { IconPencilPink };
+import IconPencil from "./IconPencil";
+export { IconPencil };
 
 import IconGear from "./IconGear";
 export { IconGear };
