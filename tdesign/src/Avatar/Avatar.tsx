@@ -19,8 +19,8 @@ const Avatar = ({ avatarURL, initials, sx, height }: IAvatarProps) => {
     <MUIAvatar
       sx={{
         ...defaultAvatarContainerStyle,
-        ...sx,
         height,
+        ...sx,
       }}
     >
       {!avatarURL && initials}
