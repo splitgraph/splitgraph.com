@@ -5,14 +5,7 @@ import { useTheme } from "@material-ui/core/styles";
 
 const ThemeDemo = () => {
   const {
-    palette: {
-      mode,
-      divider,
-      getContrastText,
-      augmentColor,
-      textures,
-      ...rest
-    },
+    palette: { mode, divider, getContrastText, augmentColor, ...rest },
     palette,
   } = useTheme();
   console.log("palette", palette);
