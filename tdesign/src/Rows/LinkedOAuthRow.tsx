@@ -1,4 +1,4 @@
-import { Box, Typography, Avatar, Tooltip } from "@material-ui/core";
+import { Box, Typography, Avatar, Tooltip } from "@mui/material";
 
 interface ILinkedOAuthRowProps {
   name: string;

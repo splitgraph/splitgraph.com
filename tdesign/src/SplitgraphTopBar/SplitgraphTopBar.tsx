@@ -7,13 +7,13 @@ import {
   InputBase,
   Menu,
   MenuItem,
-} from "@material-ui/core";
+} from "@mui/material";
 import {
   Search as SearchIcon,
   AccountCircle,
   More as MoreIcon,
-} from "@material-ui/icons";
-import { useTheme, alpha } from "@material-ui/core/styles";
+} from "@mui/icons-material";
+import { useTheme, alpha } from "@mui/material/styles";
 import { LogoImage } from "../Layout";
 import Link, { NextLinkComposed } from "../Link/MuiLink";
 

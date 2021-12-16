@@ -1,7 +1,7 @@
-import { Box } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
-import { SxProps } from "@material-ui/system";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { Box } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import type { SxProps } from "@mui/system";
+import type { Theme } from "@mui/material/styles";
 
 interface IPaddedSingleColProps {
   className?: string;
@@ -20,7 +20,7 @@ const PaddedSingleCol = ({
 
   const outerClass = `padded-single-col-grid ${className ?? ""}`.trim();
   const innerClass = `center-padded-content ${innerClassName ?? ""}`.trim();
-  const outerContainerStyle: SxProps<Theme> = {
+  const outerContainerStyle = {
     ...theme.grids.threeCol,
     ".left-spacer": {
       width: "max(25px, calc((100vw - 784px) / 2))",
@@ -29,7 +29,7 @@ const PaddedSingleCol = ({
       width: "max(25px, calc((100vw - 784px) / 2))",
     },
     ...extraStyle,
-  };
+  } as SxProps<Theme>;
 
   return (
     <Box className={outerClass} sx={outerContainerStyle}>

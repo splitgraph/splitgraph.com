@@ -15,15 +15,15 @@ import {
   Grid,
   IconButton,
   LinearProgress,
-} from "@material-ui/core";
-import type { BoxProps } from "@material-ui/core";
+} from "@mui/material";
+import type { BoxProps } from "@mui/material";
 import {
   ArrowForward,
   CheckCircleOutline,
   WarningAmber,
   Close,
   FileUpload,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 import { Button, LinkButton } from "../Button";
 import UploadCloudIcon from "./UploadCloudIcon";
 export type { IUploadParams };

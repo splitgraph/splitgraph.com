@@ -1,4 +1,4 @@
-import { PaletteMode } from "@material-ui/core";
+import { PaletteMode } from "@mui/material";
 
 /**
  * Intended to be temporary; should map to some upstream thing/things

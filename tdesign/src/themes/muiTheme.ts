@@ -1,4 +1,4 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@mui/material/styles";
 import prismTheme from "./prismTheme";
 
 const breakpointValues = {
@@ -73,7 +73,7 @@ export const muiTheme = ({
     pinkBackgroundGradient: `linear-gradient(180deg, #FDF2F4 0%, #FDF3F5 100%)`,
   };
 
-  const baseTheme = createMuiTheme({
+  const baseTheme = createTheme({
     breakpoints: {
       values: breakpointValues,
     },
@@ -290,7 +290,7 @@ export const muiTheme = ({
   });
 
   // this pass depends on certain defaults returned by the first createMuiTheme
-  const dependentTheme = createMuiTheme(baseTheme, {
+  const dependentTheme = createTheme(baseTheme, {
     palette: {
       primary: {
         contrastText: baseTheme.palette.getContrastText(
@@ -390,7 +390,7 @@ export const muiTheme = ({
   });
 
   // add in colors that are unique to light theme
-  const lightTheme = createMuiTheme(dependentTheme, {
+  const lightTheme = createTheme(dependentTheme, {
     palette: {
       mode: "light",
       surfaces: {
@@ -448,7 +448,7 @@ export const muiTheme = ({
   });
 
   // finally add in colors that are unique to dark theme
-  const darkTheme = createMuiTheme(dependentTheme, {
+  const darkTheme = createTheme(dependentTheme, {
     palette: {
       mode: "dark",
       surfaces: {
@@ -505,13 +505,13 @@ export const muiTheme = ({
   return mode === "light" ? lightTheme : darkTheme;
 };
 
-declare module "@material-ui/core/Button" {
+declare module "@mui/material/Button" {
   interface ButtonPropsVariantOverrides {
     pill: true;
   }
 }
 
-declare module "@material-ui/core/styles/createBreakpoints" {
+declare module "@mui/material/styles" {
   // Basically: set a boolean, true for added breakpoints, false for removed
   // https://material-ui.com/customization/breakpoints/#custom-breakpoints
   interface BreakpointOverrides {
@@ -519,7 +519,7 @@ declare module "@material-ui/core/styles/createBreakpoints" {
   }
 }
 
-declare module "@material-ui/core/styles/createPalette" {
+declare module "@mui/material/styles/createPalette" {
   interface SurfacePalette {
     background: PaletteColor;
     sql: PaletteColor;
@@ -694,7 +694,7 @@ declare module "@material-ui/core/styles/createPalette" {
 }
 // Docs on module augmentation for customizing the theme
 // https://material-ui.com/guides/typescript/#customization-of-theme
-declare module "@material-ui/core/styles" {
+declare module "@mui/material/styles" {
   type Constants = {
     leftMargin: string;
     rightMargin: string;
@@ -750,7 +750,7 @@ declare module "@material-ui/core/styles" {
 }
 
 // Update the Typography's variant prop options
-declare module "@material-ui/core/Typography" {
+declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
     title1: true;
     title2: true;

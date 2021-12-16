@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Box } from "@material-ui/core";
-import { SxProps } from "@material-ui/system";
-import type { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { Box } from "@mui/material";
+import type { SxProps } from "@mui/system";
+import type { Theme } from "@mui/material/styles";
 
 import { Header, HeaderLeft, HeaderCenter, HeaderRight } from "../Header";
 import { Logo } from "../Logo";
@@ -15,7 +15,7 @@ export interface BaseLayoutProps extends Omit<ILogoProps, "linkTo"> {
   children?: React.ReactNode;
   renderHeaderRight?: () => React.ReactNode;
   renderHeaderCenter?: () => React.ReactNode;
-  extraHeaderStyle?: SxProps<Theme>;
+  extraHeaderStyle?: object;
   extraStyle?: object;
   showHeader?: boolean;
   logoLinkTo?: ILogoProps["linkTo"];

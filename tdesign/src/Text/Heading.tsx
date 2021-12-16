@@ -1,4 +1,4 @@
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 const Heading = ({ sx = {}, children, ...rest }) => {
   return (
     <Box

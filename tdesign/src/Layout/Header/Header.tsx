@@ -1,7 +1,7 @@
-import { Box } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
-import { SxProps } from "@material-ui/system";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { Box } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import type { SxProps } from "@mui/system";
+import type { Theme } from "@mui/material/styles";
 
 import { hamburgerIconURI, closeIconURI } from "../../Icon";
 

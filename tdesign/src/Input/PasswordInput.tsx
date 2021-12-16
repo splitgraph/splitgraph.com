@@ -5,7 +5,7 @@ import {
   OutlinedInputProps,
   InputAdornment,
   IconButton,
-} from "@material-ui/core";
+} from "@mui/material";
 import { IconPasswordHide, IconPasswordSee } from "../Icon";
 
 interface IPasswordInputProps extends OutlinedInputProps {

@@ -1,4 +1,4 @@
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 
 import OAuthButton, { IOAuthButtonProps } from "./OAuthButton";
 

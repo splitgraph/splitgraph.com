@@ -1,6 +1,6 @@
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 // import { makeDefaultTheme } from "./legacyTheme";
-import { useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@mui/material/styles";
 
 // const defaultTheme = makeDefaultTheme();
 

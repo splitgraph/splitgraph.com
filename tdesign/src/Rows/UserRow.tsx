@@ -1,4 +1,4 @@
-import { Box, Typography, Button } from "@material-ui/core";
+import { Box, Typography, Button } from "@mui/material";
 import { StatusChip2 } from "../StatusChip";
 import { InvisibleButton } from "../Button";
 import { IconDelete } from "../Icon";

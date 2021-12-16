@@ -4,7 +4,7 @@ import {
   OutlinedInputProps,
   InputAdornment,
   IconButton,
-} from "@material-ui/core";
+} from "@mui/material";
 import { IconCopy } from "../Icon";
 
 const useCombinedRefs = (...refs) => {

@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Box, Paper } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
-import { SxProps } from "@material-ui/system";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { Box, Paper } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import type { SxProps } from "@mui/system";
+import type { Theme } from "@mui/material/styles";
 
 export interface IContentHeaderProps {
   children?: React.ReactNode;

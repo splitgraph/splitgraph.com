@@ -1,6 +1,6 @@
-import { Button, ButtonProps, Typography } from "@material-ui/core";
-import { SxProps } from "@material-ui/system";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { Button, ButtonProps, Typography } from "@mui/material";
+import type { SxProps } from "@mui/system";
+import type { Theme } from "@mui/material/styles";
 // import { IconEmail } from "../Icon";
 
 interface IButtonProps extends ButtonProps {

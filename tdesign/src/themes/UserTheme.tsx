@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
-import { ThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 import initUserColors from "./upstream";
 import { muiTheme } from "./muiTheme";
 

@@ -5,8 +5,8 @@ import {
   DialogContent,
   Typography,
   IconButton,
-} from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface IDialogProps extends DialogProps {
   open: boolean;
@@ -60,7 +60,6 @@ const CloseableDialogTitle = (props: ICloseableDialogTitleProps) => {
 
   return (
     <DialogTitle
-      disableTypography
       sx={{
         m: 0,
         p: 2,

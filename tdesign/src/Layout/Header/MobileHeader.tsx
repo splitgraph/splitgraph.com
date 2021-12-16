@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Box, IconButton } from "@material-ui/core";
-import { Menu as MenuIcon } from "@material-ui/icons";
+import { Box, IconButton } from "@mui/material";
+import { Menu as MenuIcon } from "@mui/icons-material";
 import { LogoImage } from "../LogoImage";
 import { LogoText } from "../LogoText";
 

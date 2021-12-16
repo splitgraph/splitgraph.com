@@ -11,8 +11,8 @@ import {
   CardContent,
   Slide,
   SlideProps,
-} from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 export const UserColorPicker = ({
   userColors,

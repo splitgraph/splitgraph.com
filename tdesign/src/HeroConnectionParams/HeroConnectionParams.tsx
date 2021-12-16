@@ -1,4 +1,4 @@
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 import IframeResizer from "iframe-resizer-react";
 
 import { PreWithCopy } from "../PreWithCopy";

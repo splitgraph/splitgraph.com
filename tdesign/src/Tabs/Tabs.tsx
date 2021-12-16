@@ -4,7 +4,7 @@ import {
   Tab as MuiTab,
   TabProps,
   TabsProps,
-} from "@material-ui/core";
+} from "@mui/material";
 
 interface TabPanelProps {
   children?: React.ReactNode;
