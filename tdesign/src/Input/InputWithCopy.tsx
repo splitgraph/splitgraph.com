@@ -82,6 +82,7 @@ const InputWithCopy = forwardRef<HTMLInputElement, any>(
               onMouseDown={handleMouseDown}
               aria-label="input with click to copy"
               edge="end"
+              size="large"
             >
               <IconCopy color={"flambeeBlue.main"} />
             </IconButton>

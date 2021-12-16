@@ -79,7 +79,7 @@ const CloseableDialogTitle = (props: ICloseableDialogTitleProps) => {
             top: 8,
             color: (theme) => theme.palette.flambeeDarkGray.dark,
           }}
-        >
+          size="large">
           <CloseIcon />
         </IconButton>
       ) : null}

@@ -145,6 +145,7 @@ const SplitgraphTopBar = () => {
           aria-haspopup="true"
           color="inherit"
           disableRipple
+          size="large"
         >
           <AccountCircle />
         </IconButton>
@@ -210,6 +211,7 @@ const SplitgraphTopBar = () => {
               onClick={handleProfileMenuOpen}
               color="inherit"
               disableRipple
+              size="large"
             >
               <AccountCircle />
             </IconButton>
@@ -222,6 +224,7 @@ const SplitgraphTopBar = () => {
               onClick={handleMobileMenuOpen}
               color="inherit"
               disableRipple
+              size="large"
             >
               <MoreIcon />
             </IconButton>

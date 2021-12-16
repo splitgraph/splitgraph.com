@@ -1,5 +1,5 @@
 import { Button } from "@splitgraph/tdesign";
-import MailOutlineIcon from "@material-ui/icons/MailOutline";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
 
 export default {
   title: "Splitgraph/Button",

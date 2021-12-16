@@ -1,4 +1,4 @@
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography } from "@mui/material";
 import IframeResizer from "iframe-resizer-react";
 import { MuiLink } from "@splitgraph/tdesign";
 import {

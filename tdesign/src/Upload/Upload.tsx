@@ -307,7 +307,7 @@ const FileRow = ({
           {/* <IconButton aria-label="remove file" onClick={restart}>
             <FileUpload />
           </IconButton> */}
-          <IconButton aria-label="remove file" onClick={remove}>
+          <IconButton aria-label="remove file" onClick={remove} size="large">
             <Close />
           </IconButton>
         </div>
@@ -323,7 +323,7 @@ const FileRow = ({
           >
             Could not complete upload. Retry? &nbsp;
           </Typography>
-          <IconButton aria-label="remove file" onClick={restart}>
+          <IconButton aria-label="remove file" onClick={restart} size="large">
             <FileUpload />
           </IconButton>
         </>

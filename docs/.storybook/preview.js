@@ -1,5 +1,5 @@
-import { ThemeProvider as MUIThemeProvider } from "@material-ui/core";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider as MUIThemeProvider } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
 import { muiTheme } from "@splitgraph/tdesign/src/themes/muiTheme";
 
 export const parameters = {

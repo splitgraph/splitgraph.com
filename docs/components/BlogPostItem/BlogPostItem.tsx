@@ -1,4 +1,4 @@
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 import { MuiLink as Link } from "@splitgraph/tdesign";
 import formatDate from "../BlogPost/formatDate";
 

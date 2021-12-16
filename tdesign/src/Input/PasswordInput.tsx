@@ -36,6 +36,7 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
               onMouseDown={handleMouseDownPassword}
               aria-label="toggle password visibility"
               edge="end"
+              size="large"
             >
               {showPassword ? <IconPasswordSee /> : <IconPasswordHide />}
             </IconButton>

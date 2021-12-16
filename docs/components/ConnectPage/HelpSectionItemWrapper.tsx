@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
-import { Box } from "@material-ui/core";
-import { SxProps } from "@material-ui/system";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { Box } from "@mui/material";
+import type { SxProps } from "@mui/system";
+import type { Theme } from "@mui/material/styles";
 
 export interface IHelpSectionItemWrapperProps {
   HelpSectionMarkdownComponent: any;

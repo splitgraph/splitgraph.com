@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
-import { Paper, Box, Typography, Tooltip } from "@material-ui/core";
+import { Paper, Box, Typography, Tooltip } from "@mui/material";
 import withMuiTheme from "@splitgraph/tdesign/src/themes/withMUITheme";
-import { useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@mui/material/styles";
 
 const ThemeDemo = () => {
   const {

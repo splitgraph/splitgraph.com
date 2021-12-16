@@ -23,7 +23,7 @@ const MobileHeader = ({ logoText, renderHeaderCenter }: IMobileHeaderProps) => {
           <LogoImage logoURL={"/static/brandmark.svg"} />
           <LogoText text={logoText} />
         </a>
-        <IconButton onClick={() => {}}>
+        <IconButton onClick={() => {}} size="large">
           <MenuIcon />
         </IconButton>
       </Box>

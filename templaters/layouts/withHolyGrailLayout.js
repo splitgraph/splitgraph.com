@@ -1,6 +1,6 @@
 import { NextSeo } from "next-seo";
 import { Helmet } from "react-helmet";
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 
 import {
   Header,

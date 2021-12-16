@@ -57,6 +57,7 @@ const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
               aria-label="toggle password visibility"
               edge="end"
               sx={{ "&:hover": { background: "none" }, mr: "16px" }}
+              size="large"
             >
               {showPassword ? <IconPasswordSee /> : <IconPasswordHide />}
             </IconButton>

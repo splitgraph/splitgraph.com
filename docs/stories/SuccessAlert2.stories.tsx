@@ -1,4 +1,4 @@
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 import { SuccessAlert2 } from "@splitgraph/tdesign";
 
 export default {
