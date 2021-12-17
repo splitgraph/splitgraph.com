@@ -8,11 +8,9 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-import {
-  Search as SearchIcon,
-  AccountCircle,
-  More as MoreIcon,
-} from "@mui/icons-material";
+import SearchIcon from "@mui/icons-material/Search";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import MoreIcon from "@mui/icons-material/More";
 import { useTheme, alpha } from "@mui/material/styles";
 import { LogoImage } from "../Layout";
 import Link, { NextLinkComposed } from "../Link/MuiLink";

@@ -17,13 +17,11 @@ import {
   LinearProgress,
 } from "@mui/material";
 import type { BoxProps } from "@mui/material";
-import {
-  ArrowForward,
-  CheckCircleOutline,
-  WarningAmber,
-  Close,
-  FileUpload,
-} from "@mui/icons-material";
+import ArrowForward from "@mui/icons-material/ArrowForward";
+import CheckCircleOutline from "@mui/icons-material/CheckCircleOutline";
+import WarningAmber from "@mui/icons-material/WarningAmber";
+import Close from "@mui/icons-material/Close";
+import FileUpload from "@mui/icons-material/FileUpload";
 import { Button, LinkButton } from "../Button";
 import UploadCloudIcon from "./UploadCloudIcon";
 export type { IUploadParams };
