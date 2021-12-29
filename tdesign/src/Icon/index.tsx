@@ -298,3 +298,6 @@ export { IconReset };
 
 import IconLogout from "./IconLogout";
 export { IconLogout };
+
+import IconPrivate from "./IconPrivate";
+export { IconPrivate };
