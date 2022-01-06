@@ -70,8 +70,6 @@ const LandingPageLayout = ({
         }}
         brandmarkURL={"/static/brandmark.svg"}
         wordmarkURL={"/static/brandmark.svg"}
-        onHoverBrandmarkURL={"/static/brandmark_animated.svg"}
-        animateWordmarkOnHover={true}
         logoText={brand || "Splitgraph"}
         brandName={"Splitgraph"}
         renderHeaderRight={() => (
