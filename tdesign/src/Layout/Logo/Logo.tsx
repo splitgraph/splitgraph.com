@@ -4,12 +4,8 @@ import type { SxProps } from "@material-ui/system";
 import type { Theme } from "@material-ui/core/styles/createMuiTheme";
 import { useTheme } from "@material-ui/core/styles";
 
-import { keyframes } from "@material-ui/styled-engine";
-
 export interface ILogoProps {
   brandmarkURL: string | null;
-  onHoverBrandmarkURL: string | null;
-  animateWordmarkOnHover?: boolean;
   wordmarkURL: string | null;
   logoText: string | null;
   brandName: string | null;
@@ -28,13 +24,9 @@ export interface ILogoProps {
       };
 }
 
-// const onHoverBrandmarkURL = `/catalog-static/static/brandmark_animated.svg`;
-
 const Logo = ({
   brandmarkURL,
   wordmarkURL,
-  onHoverBrandmarkURL,
-  animateWordmarkOnHover = true,
   logoText,
   // todo
   // brandName,
@@ -43,20 +35,6 @@ const Logo = ({
   scale,
 }: ILogoProps) => {
   const theme = useTheme();
-
-  const shimmer = keyframes`
-      0% {
-        filter: none;
-      }
-
-      25% {
-        filter: blur(10px) drop-shadow(1px 1px 1px rgba(255, 255, 255, .5)) contrast(250%);
-      }
-
-      75% {
-          filter: none;
-      }
-  `;
 
   return (
     <Box
@@ -89,35 +67,16 @@ const Logo = ({
         },
         ":hover": {
           cursor: "pointer",
-          ".brandmark-animated": {
-            cursor: "pointer",
-          },
           ".brandmark": {
             cursor: "pointer",
-            display: animateWordmarkOnHover ? "none" : "inherit",
+            display: "inherit",
           },
           ".wordmark": {
-            ...(animateWordmarkOnHover
-              ? {
-                  animation: `${shimmer} 2s ease-in-out infinite alternate`,
-                  backgroundImage: `linear-gradient(90deg, rgb(249 69 105 / 100%) 0%, rgb(255 128 153 / 50%) 100%),url("${wordmarkURL}")`,
-                  WebkitMaskImage: `url("${wordmarkURL}")`,
-                  maskImage: `url("${wordmarkURL}")`,
-                  WebkitMaskRepeat: "no-repeat",
-                  maskRepeat: "no-repeat",
-                  backgroundRepeat: "no-repeat",
-                }
-              : {
-                  backgroundImage: `url("${wordmarkURL}")`,
-                  backgroundRepeat: "no-repeat",
-                }),
+            backgroundImage: `url("${wordmarkURL}")`,
+            backgroundRepeat: "no-repeat",
           },
         },
         ":not(:hover)": {
-          ".brandmark-animated": {
-            cursor: "pointer",
-            display: "none",
-          },
           ".brandmark": {
             cursor: "pointer",
             display: "flex",
@@ -153,9 +112,6 @@ const Logo = ({
       >
         <Box className="brandmark-container">
           <img className="brandmark" src={brandmarkURL} alt={logoText} />
-          {animateWordmarkOnHover && (
-            <img className="brandmark-animated" src={onHoverBrandmarkURL} />
-          )}
         </Box>
         <Box className="wordmark-container">
           <div className="wordmark">&nbsp;</div>

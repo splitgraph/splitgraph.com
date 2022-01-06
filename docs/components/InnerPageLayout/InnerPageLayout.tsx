@@ -19,8 +19,6 @@ const InnerPageLayout = ({
     <BaseLayout
       brandmarkURL={"/static/brandmark.svg"}
       wordmarkURL={"/static/brandmark.svg"}
-      onHoverBrandmarkURL={"/static/brandmark_animated.svg"}
-      animateWordmarkOnHover={true}
       logoText={"Splitgraph"}
       brandName={"Splitgraph"}
       extraHeaderStyle={{
