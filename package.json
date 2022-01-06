@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "prettier": "2.2.1",
-    "typescript": "4.2.4"
+    "typescript": "4.3.4"
   },
   "dependencies": {
     "next-seo": "4.23.0",
@@ -41,5 +41,5 @@
     "remark-sectionize": "1.1.1",
     "rss": "1.2.2"
   },
-  "packageManager": "yarn@2.4.1"
+  "packageManager": "yarn@2.4.2"
 }

@@ -1,4 +1,4 @@
-// import { getDisplayName } from "next/dist/next-server/lib/utils";
+// import { getDisplayName } from "next/dist/shared/lib/utils";
 
 // This is kinda hacky atm, and should be a more unified export from tcomponents
 // import { ThemeProvider as OurThemeProvider } from "theme-ui";
