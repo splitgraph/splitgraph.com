@@ -119,11 +119,10 @@ const Upload = ({
         {!small && <UploadCloudIcon active={active} />}
         <Typography variant="subtitle2">
           Drag and drop up to {`${maxFiles} file${maxFiles > 1 ? "s" : ""}`}
-          <br />
-          <LinkButton onClick={() => document.getElementById("upload").click()}>
-            Browse to choose files
-          </LinkButton>
         </Typography>
+        <LinkButton onClick={() => document.getElementById("upload").click()}>
+          Browse to choose files
+        </LinkButton>
         {!!maxSizeBytes && (
           <Typography
             variant="smallHighlightedB"
