@@ -81,8 +81,9 @@
   "peerDependencies": {
     "@emotion/react": "*",
     "@emotion/styled": "*",
-    "@material-ui/core": "*",
-    "@material-ui/icons": "*",
+    "@mui/icons-material": "*",
+    "@mui/material": "*",
+    "@mui/system": "*",
     "react-dropzone-uploader": "*",
     "theme-ui": "*"
   }
