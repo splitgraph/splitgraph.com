@@ -38,7 +38,6 @@ interface IUploadProps extends BoxProps {
     successFiles: IFileWithMeta[],
     allFiles: IFileWithMeta[]
   ) => void;
-  message?: string;
   small?: boolean;
   handleChangeStatus?: IDropzoneProps["onChangeStatus"];
   onSubmitAfterFilesUploaded?: () => void;
@@ -50,7 +49,6 @@ const Upload = ({
   accept,
   getUploadParams,
   handleSubmit,
-  message,
   small,
   handleChangeStatus,
   onSubmitAfterFilesUploaded,
@@ -63,10 +61,6 @@ const Upload = ({
   }: ILayoutProps) => {
     return (
       <div {...dropzoneProps}>
-        <Typography variant="title1">Upload</Typography>
-        <br />
-        {!!message && <Typography variant="body">{message}</Typography>}
-        <br />
         {input}
         <Box sx={{ marginBottom: "1rem" }}>{submitButton}</Box>
         {!!files?.length && (
