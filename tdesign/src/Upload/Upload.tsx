@@ -1,6 +1,6 @@
 import { useMemo, CSSProperties } from "react";
-import { Dropzone } from "@splitgraph/react-dropzone-uploader-wrapper";
-import type {
+import {
+  Dropzone,
   IFileWithMeta,
   IUploadParams,
   ILayoutProps,

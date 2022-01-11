@@ -1,10 +1,10 @@
 import "@csstools/normalize.css";
-import "@splitgraph/design/css/base.css";
+// import "@splitgraph/design/css/base.css";
 
 // Note: Ideally we could import sphinxtheme as a module in only the sphinx
 //       pages, but that requires upating the Sphinx -> mdx transform files
 //       to make sure that every className is correctly prefixed (todo later)
-import "@splitgraph/design/css/sphinxtheme.css";
+// import "@splitgraph/design/css/sphinxtheme.css";
 
 import { DefaultSeo } from "next-seo";
 import App from "next/app";
