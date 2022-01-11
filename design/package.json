@@ -12,11 +12,9 @@
     "@csstools/normalize.css": "*",
     "@mdx-js/react": "*",
     "@splitgraph/tdesign": "*",
-    "@theme-ui/prism": "*",
     "dayjs": "*",
     "next": "*",
     "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "theme-ui": "*"
+    "react-dom": "^16.13.0"
   }
 }
