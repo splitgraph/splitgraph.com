@@ -20,7 +20,7 @@ const PaddedSingleCol = ({
 
   const outerClass = `padded-single-col-grid ${className ?? ""}`.trim();
   const innerClass = `center-padded-content ${innerClassName ?? ""}`.trim();
-  const outerContainerStyle = {
+  const outerContainerStyle: SxProps<Theme> = {
     ...theme.grids.threeCol,
     ".left-spacer": {
       width: "max(25px, calc((100vw - 784px) / 2))",
@@ -29,7 +29,7 @@ const PaddedSingleCol = ({
       width: "max(25px, calc((100vw - 784px) / 2))",
     },
     ...extraStyle,
-  } as SxProps<Theme>;
+  };
 
   return (
     <Box className={outerClass} sx={outerContainerStyle}>

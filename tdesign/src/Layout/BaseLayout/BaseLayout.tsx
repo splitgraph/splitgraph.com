@@ -15,8 +15,9 @@ export interface BaseLayoutProps extends Omit<ILogoProps, "linkTo"> {
   children?: React.ReactNode;
   renderHeaderRight?: () => React.ReactNode;
   renderHeaderCenter?: () => React.ReactNode;
+  // for some reason setting this to SxProps<Theme> causes typing error
   extraHeaderStyle?: object;
-  extraStyle?: object;
+  extraStyle?: SxProps<Theme>;
   showHeader?: boolean;
   logoLinkTo?: ILogoProps["linkTo"];
 }
