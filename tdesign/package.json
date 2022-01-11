@@ -17,8 +17,8 @@
   "name": "@splitgraph/tdesign",
   "author": "Splitgraph Limited",
   "dependencies": {
-    "@emotion/react": "11.1.5",
-    "@emotion/styled": "11.1.5",
+    "@emotion/react": "11.7.1",
+    "@emotion/styled": "11.6.0",
     "@mui/icons-material": "5.2.5",
     "@mui/material": "5.2.8",
     "@mui/system": "5.2.8",

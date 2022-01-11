@@ -1560,6 +1560,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@emotion/babel-plugin@npm:^11.3.0":
+  version: 11.7.2
+  resolution: "@emotion/babel-plugin@npm:11.7.2"
+  dependencies:
+    "@babel/helper-module-imports": ^7.12.13
+    "@babel/plugin-syntax-jsx": ^7.12.13
+    "@babel/runtime": ^7.13.10
+    "@emotion/hash": ^0.8.0
+    "@emotion/memoize": ^0.7.5
+    "@emotion/serialize": ^1.0.2
+    babel-plugin-macros: ^2.6.1
+    convert-source-map: ^1.5.0
+    escape-string-regexp: ^4.0.0
+    find-root: ^1.1.0
+    source-map: ^0.5.7
+    stylis: 4.0.13
+  peerDependencies:
+    "@babel/core": ^7.0.0
+  checksum: 90843afbb695336b28c230cafd478ee6ad661dbfce3420f482607c44f71d1cf55e91abfdb8ee3366763809e19de263c63bf456e40db4b473f227ad7e7c04ea3c
+  languageName: node
+  linkType: hard
+
 "@emotion/babel-preset-css-prop@npm:11.2.0":
   version: 11.2.0
   resolution: "@emotion/babel-preset-css-prop@npm:11.2.0"
@@ -1665,7 +1687,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:11.1.5, @emotion/react@npm:^11.1.1":
+"@emotion/react@npm:11.7.1":
+  version: 11.7.1
+  resolution: "@emotion/react@npm:11.7.1"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@emotion/cache": ^11.7.1
+    "@emotion/serialize": ^1.0.2
+    "@emotion/sheet": ^1.1.0
+    "@emotion/utils": ^1.0.0
+    "@emotion/weak-memoize": ^0.2.5
+    hoist-non-react-statics: ^3.3.1
+  peerDependencies:
+    "@babel/core": ^7.0.0
+    react: ">=16.8.0"
+  peerDependenciesMeta:
+    "@babel/core":
+      optional: true
+    "@types/react":
+      optional: true
+  checksum: 6d28a6a1ce38895dc5a892ad3d3f5d7f8a64f7d2d52d2cf2c31dc6ec984aa6b04c93a64f6992793ad51cd62c175376c2a21f1c58623f7a5fd20277c3d1ea4607
+  languageName: node
+  linkType: hard
+
+"@emotion/react@npm:^11.1.1":
   version: 11.1.5
   resolution: "@emotion/react@npm:11.1.5"
   dependencies:
@@ -1743,7 +1788,42 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/styled@npm:11.1.5, @emotion/styled@npm:^11.0.0":
+"@emotion/styled@npm:11.6.0":
+  version: 11.6.0
+  resolution: "@emotion/styled@npm:11.6.0"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@emotion/babel-plugin": ^11.3.0
+    "@emotion/is-prop-valid": ^1.1.1
+    "@emotion/serialize": ^1.0.2
+    "@emotion/utils": ^1.0.0
+  peerDependencies:
+    "@babel/core": ^7.0.0
+    "@emotion/react": ^11.0.0-rc.0
+    react: ">=16.8.0"
+  peerDependenciesMeta:
+    "@babel/core":
+      optional: true
+    "@types/react":
+      optional: true
+  checksum: 9390e0a22725bad836eb24c452da51a8a894fcece942b061658bd8050d8e17de72a0820716024d432fba6a2589ffe5b1681b50ad6d07e6c8e1e3b60ac9a7279e
+  languageName: node
+  linkType: hard
+
+"@emotion/styled@npm:^10.0.27":
+  version: 10.0.27
+  resolution: "@emotion/styled@npm:10.0.27"
+  dependencies:
+    "@emotion/styled-base": ^10.0.27
+    babel-plugin-emotion: ^10.0.27
+  peerDependencies:
+    "@emotion/core": ^10.0.27
+    react: ">=16.3.0"
+  checksum: 5ae549cbe564482b9277f8f4f53b404270d9c4d826c5396ca62d7d8d07d4a69ba1826f262f506e326df6409b4dfff738d02c0c09f840b603d8cbfaf109634b3c
+  languageName: node
+  linkType: hard
+
+"@emotion/styled@npm:^11.0.0":
   version: 11.1.5
   resolution: "@emotion/styled@npm:11.1.5"
   dependencies:
@@ -1762,19 +1842,6 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 40c3ae4521c23ca2397d90a5d49f4329f70829a760220000d7ebd613fab8c2dc88dc78d38b4393cb5156f707ce9a6e418f0a574855418709742f11ce2fbef7b1
-  languageName: node
-  linkType: hard
-
-"@emotion/styled@npm:^10.0.27":
-  version: 10.0.27
-  resolution: "@emotion/styled@npm:10.0.27"
-  dependencies:
-    "@emotion/styled-base": ^10.0.27
-    babel-plugin-emotion: ^10.0.27
-  peerDependencies:
-    "@emotion/core": ^10.0.27
-    react: ">=16.3.0"
-  checksum: 5ae549cbe564482b9277f8f4f53b404270d9c4d826c5396ca62d7d8d07d4a69ba1826f262f506e326df6409b4dfff738d02c0c09f840b603d8cbfaf109634b3c
   languageName: node
   linkType: hard
 
@@ -2700,8 +2767,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@splitgraph/tdesign@workspace:tdesign"
   dependencies:
-    "@emotion/react": 11.1.5
-    "@emotion/styled": 11.1.5
+    "@emotion/react": 11.7.1
+    "@emotion/styled": 11.6.0
     "@mui/icons-material": 5.2.5
     "@mui/material": 5.2.8
     "@mui/system": 5.2.8
