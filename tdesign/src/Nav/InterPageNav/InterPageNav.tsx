@@ -1,6 +1,6 @@
-import { Box } from "@material-ui/core";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
-import { SxProps } from "@material-ui/system";
+import { Box } from "@mui/material";
+import type { Theme } from "@mui/material/styles";
+import type { SxProps } from "@mui/system";
 
 import {
   IconChevronLeftPrimaryColor,

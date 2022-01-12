@@ -1,7 +1,7 @@
-import { Button, Link } from "@material-ui/core";
-import ArrowRightAlt from "@material-ui/icons/ArrowRightAlt";
-import type { SxProps } from "@material-ui/system";
-import type { Theme } from "@material-ui/core/styles";
+import { Button, Link } from "@mui/material";
+import ArrowRightAlt from "@mui/icons-material/ArrowRightAlt";
+import type { SxProps } from "@mui/system";
+import type { Theme } from "@mui/material/styles";
 
 export interface IConnectDDNButtonProps {
   connectParams?: string;

@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Box, IconButton } from "@material-ui/core";
-import { Menu as MenuIcon } from "@material-ui/icons";
+import { Box, IconButton } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import { LogoImage } from "../LogoImage";
 import { LogoText } from "../LogoText";
 
@@ -23,7 +23,7 @@ const MobileHeader = ({ logoText, renderHeaderCenter }: IMobileHeaderProps) => {
           <LogoImage logoURL={"/static/brandmark.svg"} />
           <LogoText text={logoText} />
         </a>
-        <IconButton onClick={() => {}}>
+        <IconButton onClick={() => {}} size="large">
           <MenuIcon />
         </IconButton>
       </Box>

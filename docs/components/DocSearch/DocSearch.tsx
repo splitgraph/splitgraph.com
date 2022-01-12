@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 import { Helmet } from "react-helmet";
 
 import { searchIconURI } from "@splitgraph/tdesign";

@@ -1,4 +1,4 @@
-import { InputLabel as Label } from "@material-ui/core";
+import { InputLabel as Label } from "@mui/material";
 
 const LabelComponent = ({ sx = {}, children, ...rest }) => (
   <Label

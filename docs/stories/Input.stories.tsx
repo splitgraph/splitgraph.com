@@ -1,5 +1,5 @@
 import Input from "@splitgraph/tdesign/src/Input/Input";
-import { FormControl } from "@material-ui/core";
+import { FormControl } from "@mui/material";
 
 export default {
   title: "Splitgraph/Input",

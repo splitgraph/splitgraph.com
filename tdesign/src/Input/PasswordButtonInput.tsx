@@ -4,10 +4,10 @@ import {
   OutlinedInputProps,
   InputAdornment,
   IconButton,
-} from "@material-ui/core";
+} from "@mui/material";
 import { IconPasswordHide, IconPasswordSee } from "../Icon";
 import InFieldButton from "../Button/InFieldButton";
-import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
   (props, ref) => {
@@ -57,6 +57,7 @@ const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
               aria-label="toggle password visibility"
               edge="end"
               sx={{ "&:hover": { background: "none" }, mr: "16px" }}
+              size="large"
             >
               {showPassword ? <IconPasswordSee /> : <IconPasswordHide />}
             </IconButton>

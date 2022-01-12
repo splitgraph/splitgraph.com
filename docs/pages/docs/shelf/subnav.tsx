@@ -4,7 +4,7 @@
 // safe to ignore/delete as needed
 import * as React from "react";
 import { useRef } from "react";
-import { Paper } from "@material-ui/core";
+import { Paper } from "@mui/material";
 import withMuiTheme from "@splitgraph/tdesign/src/themes/withMUITheme";
 import { SubnavBar } from "@splitgraph/tdesign/src/SubnavBar";
 

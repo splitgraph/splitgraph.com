@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 
 // import { Link } from "../Link"
 import { DividedBox } from "../Boxes/DividedBox";

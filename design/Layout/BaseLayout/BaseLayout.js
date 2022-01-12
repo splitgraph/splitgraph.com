@@ -1,14 +1,10 @@
 // import defaultTheme from "../../themes/defaultTheme";
 
 // import defaultTheme from "@splitgraph/design/themes/defaultTheme";
-import { makeDefaultTheme } from "@splitgraph/tdesign";
-
-import { ThemeProvider } from "theme-ui";
-
-const defaultTheme = makeDefaultTheme();
+// import { makeDefaultTheme } from "@splitgraph/tdesign";
 
 const BaseLayout = ({ children }) => {
-  return <ThemeProvider theme={defaultTheme}>{children}</ThemeProvider>;
+  return <div>DEPRECATED</div>;
 };
 
 export default BaseLayout;

@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, FormControl } from "@material-ui/core";
+import { Box, Grid, Typography, FormControl } from "@mui/material";
 import { InFieldButton } from "../Button";
 import { PasswordInput } from "../Input";
 import SQLWarningIcon from "./SQLWarningIcon";

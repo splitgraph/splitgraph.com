@@ -7,13 +7,11 @@ import {
   InputBase,
   Menu,
   MenuItem,
-} from "@material-ui/core";
-import {
-  Search as SearchIcon,
-  AccountCircle,
-  More as MoreIcon,
-} from "@material-ui/icons";
-import { useTheme, alpha } from "@material-ui/core/styles";
+} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import MoreIcon from "@mui/icons-material/More";
+import { useTheme, alpha } from "@mui/material/styles";
 import { LogoImage } from "../Layout";
 import Link, { NextLinkComposed } from "../Link/MuiLink";
 
@@ -145,6 +143,7 @@ const SplitgraphTopBar = () => {
           aria-haspopup="true"
           color="inherit"
           disableRipple
+          size="large"
         >
           <AccountCircle />
         </IconButton>
@@ -210,6 +209,7 @@ const SplitgraphTopBar = () => {
               onClick={handleProfileMenuOpen}
               color="inherit"
               disableRipple
+              size="large"
             >
               <AccountCircle />
             </IconButton>
@@ -222,6 +222,7 @@ const SplitgraphTopBar = () => {
               onClick={handleMobileMenuOpen}
               color="inherit"
               disableRipple
+              size="large"
             >
               <MoreIcon />
             </IconButton>

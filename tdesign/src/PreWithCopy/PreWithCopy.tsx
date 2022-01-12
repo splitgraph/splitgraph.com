@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Box, Typography } from "@material-ui/core";
-import { SxProps } from "@material-ui/system";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { Box, Typography } from "@mui/material";
+import type { SxProps } from "@mui/system";
+import type { Theme } from "@mui/material/styles";
 
 import { IconCopy } from "../Icon";
 

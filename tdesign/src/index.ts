@@ -44,8 +44,6 @@ export {
   theme,
 } from "./themes/index";
 
-export { ThemeProvider } from "theme-ui";
-
 export * from "./Link";
 
 export * from "./Icon";

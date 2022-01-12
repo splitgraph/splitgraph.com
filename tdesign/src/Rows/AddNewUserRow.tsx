@@ -6,7 +6,7 @@ import {
   FormControl,
   FormHelperText,
   // OutlinedInputProps,
-} from "@material-ui/core";
+} from "@mui/material";
 import { theme as designTheme } from "../themes/design";
 import { IconEmail } from "../Icon";
 import { InFieldButton } from "../Button";

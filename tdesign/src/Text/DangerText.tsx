@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 
 const DangerText = ({ children, sx = {}, ...rest }) => (
   <Typography

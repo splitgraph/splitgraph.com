@@ -1,4 +1,4 @@
-import { Button, ButtonProps, Typography } from "@material-ui/core";
+import { Button, ButtonProps, Typography } from "@mui/material";
 
 interface ILinkButtonProps extends ButtonProps {
   small?: boolean;

@@ -2,7 +2,7 @@
 /** @jsxImportSource @emotion/react */
 //@ts-nocheck
 import { css } from "@emotion/react";
-import { Slider, Box, Typography, Button } from "@material-ui/core";
+import { Slider, Box, Typography, Button } from "@mui/material";
 
 const EmotionCSS = () => {
   return (

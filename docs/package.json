@@ -29,7 +29,6 @@
     "@splitgraph/lib": "workspace:*",
     "@splitgraph/tdesign": "workspace:*",
     "@splitgraph/templaters": "workspace:*",
-    "@theme-ui/prism": "0.6.2",
     "@zeit/next-mdx": "1.2.0",
     "babel-plugin-add-module-exports": "1.0.4",
     "babel-plugin-macros": "2.8.0",
@@ -81,9 +80,9 @@
   "peerDependencies": {
     "@emotion/react": "*",
     "@emotion/styled": "*",
-    "@material-ui/core": "*",
-    "@material-ui/icons": "*",
-    "react-dropzone-uploader": "*",
-    "theme-ui": "*"
+    "@mui/icons-material": "*",
+    "@mui/material": "*",
+    "@mui/system": "*",
+    "react-dropzone-uploader": "*"
   }
 }

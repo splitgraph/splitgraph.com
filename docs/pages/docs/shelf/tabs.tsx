@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress } from "@mui/material";
 import {
   Tabs,
   Tab,

@@ -5,7 +5,7 @@ import {
   OutlinedInputProps,
   InputAdornment,
   IconButton,
-} from "@material-ui/core";
+} from "@mui/material";
 import { IconPasswordHide, IconPasswordSee } from "../Icon";
 
 interface IPasswordInputProps extends OutlinedInputProps {
@@ -36,6 +36,7 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
               onMouseDown={handleMouseDownPassword}
               aria-label="toggle password visibility"
               edge="end"
+              size="large"
             >
               {showPassword ? <IconPasswordSee /> : <IconPasswordHide />}
             </IconButton>

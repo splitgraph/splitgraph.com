@@ -1,6 +1,6 @@
 import { useMemo, CSSProperties } from "react";
-import { Dropzone } from "@splitgraph/react-dropzone-uploader-wrapper";
-import type {
+import {
+  Dropzone,
   IFileWithMeta,
   IUploadParams,
   ILayoutProps,
@@ -15,15 +15,13 @@ import {
   Grid,
   IconButton,
   LinearProgress,
-} from "@material-ui/core";
-import type { BoxProps } from "@material-ui/core";
-import {
-  ArrowForward,
-  CheckCircleOutline,
-  WarningAmber,
-  Close,
-  FileUpload,
-} from "@material-ui/icons";
+} from "@mui/material";
+import type { BoxProps } from "@mui/material";
+import ArrowForward from "@mui/icons-material/ArrowForward";
+import CheckCircleOutline from "@mui/icons-material/CheckCircleOutline";
+import WarningAmber from "@mui/icons-material/WarningAmber";
+import Close from "@mui/icons-material/Close";
+import FileUpload from "@mui/icons-material/FileUpload";
 import { Button, LinkButton } from "../Button";
 import UploadCloudIcon from "./UploadCloudIcon";
 export type { IUploadParams };
@@ -307,7 +305,7 @@ const FileRow = ({
           {/* <IconButton aria-label="remove file" onClick={restart}>
             <FileUpload />
           </IconButton> */}
-          <IconButton aria-label="remove file" onClick={remove}>
+          <IconButton aria-label="remove file" onClick={remove} size="large">
             <Close />
           </IconButton>
         </div>
@@ -323,7 +321,7 @@ const FileRow = ({
           >
             Could not complete upload. Retry? &nbsp;
           </Typography>
-          <IconButton aria-label="remove file" onClick={restart}>
+          <IconButton aria-label="remove file" onClick={restart} size="large">
             <FileUpload />
           </IconButton>
         </>

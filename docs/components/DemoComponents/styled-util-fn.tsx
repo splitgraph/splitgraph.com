@@ -1,5 +1,5 @@
-import { Typography, Slider } from "@material-ui/core";
-import { experimentalStyled as styled } from "@material-ui/core/styles";
+import { Typography, Slider } from "@mui/material";
+import { experimentalStyled as styled } from "@mui/material/styles";
 
 const CustomizedSlider = styled(Slider)`
   color: #20b2aa;
@@ -12,7 +12,7 @@ const CustomizedSlider = styled(Slider)`
 export default function StyledComponents() {
   return (
     <div>
-      <Typography>styled from "@material-ui/core/styles"</Typography>
+      <Typography>styled from "@mui/material/styles"</Typography>
       <Slider defaultValue={30} />
       <CustomizedSlider defaultValue={30} />
       <p>

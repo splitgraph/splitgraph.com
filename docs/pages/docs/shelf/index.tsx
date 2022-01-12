@@ -1,6 +1,6 @@
-import { Grid, Paper, FormControl } from "@material-ui/core";
-import MailOutlineIcon from "@material-ui/icons/MailOutline";
-import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
+import { Grid, Paper, FormControl } from "@mui/material";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import withMuiTheme from "@splitgraph/tdesign/src/themes/withMUITheme";
 import {
   PasswordInput,

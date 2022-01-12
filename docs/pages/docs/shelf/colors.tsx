@@ -1,18 +1,11 @@
 import { forwardRef } from "react";
-import { Paper, Box, Typography, Tooltip } from "@material-ui/core";
+import { Paper, Box, Typography, Tooltip } from "@mui/material";
 import withMuiTheme from "@splitgraph/tdesign/src/themes/withMUITheme";
-import { useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@mui/material/styles";
 
 const ThemeDemo = () => {
   const {
-    palette: {
-      mode,
-      divider,
-      getContrastText,
-      augmentColor,
-      textures,
-      ...rest
-    },
+    palette: { mode, divider, getContrastText, augmentColor, ...rest },
     palette,
   } = useTheme();
   console.log("palette", palette);

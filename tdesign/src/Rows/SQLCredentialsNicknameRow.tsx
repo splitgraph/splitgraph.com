@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, FormControl, Button } from "@material-ui/core";
+import { Box, Grid, Typography, FormControl, Button } from "@mui/material";
 import { InputWithCopy /*Input*/ } from "../Input";
 import { IconDelete } from "../Icon";
 

@@ -1,4 +1,4 @@
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography } from "@mui/material";
 import IframeResizer from "iframe-resizer-react";
 import { MuiLink } from "@splitgraph/tdesign";
 import {
@@ -122,14 +122,14 @@ const HeroConnectionParams = ({
                 },
               }}
             >
-              <Typography variant="title2" color="text.primary">
+              <Typography variant="subtitle2" color="text.primary">
                 Sign in with
               </Typography>
               <GitHubOAuthButton redirectURL={redirectURL} />
               <GitLabOAuthButton redirectURL={redirectURL} />
               <GoogleOAuthButton redirectURL={redirectURL} />
               <div>
-                <Typography color="text.primary" variant="body">
+                <Typography color="text.primary" variant="body1">
                   or
                 </Typography>{" "}
                 <MuiLink
@@ -144,7 +144,7 @@ const HeroConnectionParams = ({
                 >
                   Sign Up
                 </MuiLink>{" "}
-                <Typography color="text.primary" variant="body">
+                <Typography color="text.primary" variant="body1">
                   with email to
                   <br /> create credentials
                 </Typography>

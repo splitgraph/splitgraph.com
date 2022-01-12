@@ -1,11 +1,10 @@
-import { SxProps } from "@material-ui/system";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import type { SxProps } from "@mui/system";
 import prismTheme from "./prismTheme";
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme, Theme } from "@mui/material/styles";
 
 // TODO: consider hoisting and/or removing the marketingTheme into the MUI theme
 // once that happens we can remove this
-const defaultTheme = createMuiTheme();
+const defaultTheme = createTheme();
 
 /*
 Pre-April 2021, different areas used different styles provided by different files

@@ -4,7 +4,7 @@ import {
   OutlinedInputProps,
   InputAdornment,
   IconButton,
-} from "@material-ui/core";
+} from "@mui/material";
 import { IconCopy } from "../Icon";
 
 const useCombinedRefs = (...refs) => {
@@ -82,6 +82,7 @@ const InputWithCopy = forwardRef<HTMLInputElement, any>(
               onMouseDown={handleMouseDown}
               aria-label="input with click to copy"
               edge="end"
+              size="large"
             >
               <IconCopy color={"flambeeBlue.main"} />
             </IconButton>

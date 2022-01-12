@@ -1,5 +1,3 @@
-export { Box, Flex, Image, Button, Text } from "theme-ui";
-
 export {
   BaseLayout,
   Header,

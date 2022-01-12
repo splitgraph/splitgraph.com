@@ -1,8 +1,8 @@
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 
-import type { SxProps } from "@material-ui/system";
-import type { Theme } from "@material-ui/core/styles/createMuiTheme";
-import { useTheme } from "@material-ui/core/styles";
+import type { SxProps } from "@mui/system";
+import type { Theme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 
 export interface ILogoProps {
   brandmarkURL: string | null;
