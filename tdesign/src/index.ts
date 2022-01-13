@@ -30,6 +30,7 @@ export {
   HeaderCenter,
   MainContent,
   PaddedSingleCol,
+  MarketingNotice,
 } from "./Layout/index";
 
 export { Menu, MenuItem, MenuItemHeading } from "./Menu";

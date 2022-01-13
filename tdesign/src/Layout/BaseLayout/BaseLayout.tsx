@@ -20,6 +20,7 @@ export interface BaseLayoutProps extends Omit<ILogoProps, "linkTo"> {
   extraStyle?: SxProps<Theme>;
   showHeader?: boolean;
   logoLinkTo?: ILogoProps["linkTo"];
+  marketingNotice?: React.ReactNode;
 }
 
 const BaseLayout = ({
@@ -34,6 +35,7 @@ const BaseLayout = ({
   logoText,
   brandName,
   logoLinkTo = "/",
+  marketingNotice = null,
 }: BaseLayoutProps) => {
   const containerStyle: SxProps<Theme> = {
     // TODO: Deprecated variant syntax only works with legacyTheme
@@ -103,6 +105,7 @@ const BaseLayout = ({
 
   return (
     <Box sx={containerStyle}>
+      {marketingNotice}
       {showHeader && (
         <Header>
           <HeaderLeft>

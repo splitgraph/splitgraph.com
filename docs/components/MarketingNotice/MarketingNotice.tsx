@@ -6,6 +6,11 @@ export interface IMarketingNoticeProps {
   children?: React.ReactNode;
 }
 
+/** @deprecated This is only used on some old marketing site pages
+ * (e.g. /connect).
+ *
+ * superceded by another file called MarketingNotice in tdesign
+ */
 const MarketingNotice = ({
   children,
   defaultShowBar = true,
