@@ -276,6 +276,12 @@ export const muiTheme = ({
           disableRipple: true,
         },
       },
+      MuiOutlinedInput: {
+        defaultProps: {
+          notched: false,
+          label: false,
+        },
+      },
     },
     texturize: (
       base: React.CSSProperties,
