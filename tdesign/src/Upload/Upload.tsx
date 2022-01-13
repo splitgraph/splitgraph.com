@@ -221,17 +221,15 @@ const Upload = ({
 };
 export default Upload;
 
-const FilesUploadList = ({ files }: { files: IFileWithMeta[] }) => {
-  return (
-    <Grid container spacing={2}>
-      {files?.map((f) => (
-        <Grid key={f.meta.name} item xs={12} md={6}>
-          <FileRow {...f} />
-        </Grid>
-      ))}
-    </Grid>
-  );
-};
+const FilesUploadList = ({ files }: { files: IFileWithMeta[] }) => (
+  <Grid container spacing={2}>
+    {files?.map((f) => (
+      <Grid key={f.meta.id} item xs={12} md={6}>
+        <FileRow {...f} />
+      </Grid>
+    ))}
+  </Grid>
+);
 
 const FileRow = ({
   meta: { name, size, percent, status },
