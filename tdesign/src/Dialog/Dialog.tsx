@@ -13,6 +13,7 @@ interface IDialogProps extends DialogProps {
   title?: string;
   setShowDialog: (T: boolean) => void;
   children: React.ReactNode;
+  showCloseIcon?: boolean;
 }
 
 const Dialog = ({
@@ -21,6 +22,7 @@ const Dialog = ({
   setShowDialog,
   children,
   sx,
+  showCloseIcon = true,
   ...rest
 }: IDialogProps) => {
   return (
@@ -34,14 +36,16 @@ const Dialog = ({
       }}
       {...(rest as any)}
     >
-      <CloseableDialogTitle
-        id={title}
-        onClose={() => {
-          setShowDialog(false);
-        }}
-      >
-        {title}
-      </CloseableDialogTitle>
+      {showCloseIcon && (
+        <CloseableDialogTitle
+          id={title}
+          onClose={() => {
+            setShowDialog(false);
+          }}
+        >
+          {title}
+        </CloseableDialogTitle>
+      )}
       <DialogContent sx={{ justifyContent: "flex-end" }}>
         {children}
       </DialogContent>
@@ -61,8 +65,8 @@ const CloseableDialogTitle = (props: ICloseableDialogTitleProps) => {
   return (
     <DialogTitle
       sx={{
-        m: 0,
-        p: 2,
+        margin: 0,
+        padding: 2,
       }}
       {...other}
     >
@@ -79,7 +83,8 @@ const CloseableDialogTitle = (props: ICloseableDialogTitleProps) => {
             top: 8,
             color: (theme) => theme.palette.flambeeDarkGray.dark,
           }}
-          size="large">
+          size="large"
+        >
           <CloseIcon />
         </IconButton>
       ) : null}
