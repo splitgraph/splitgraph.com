@@ -60,7 +60,9 @@ const Upload = ({
     return (
       <div {...dropzoneProps}>
         {input}
-        <Box sx={{ marginBottom: "1rem" }}>{submitButton}</Box>
+        <Box sx={{ marginBottom: "1rem", textAlign: "center" }}>
+          {submitButton}
+        </Box>
         {!!files?.length && (
           <section>
             <Typography variant="smallHighlightedSB" sx={{ fontSize: "14px" }}>
@@ -166,14 +168,13 @@ const Upload = ({
     return (
       <Button
         type="submit"
-        fullWidth
         endIcon={
           <ArrowForward
             sx={{ position: "absolute", right: "15px", top: "10px" }}
           />
         }
         disabled={fileSizeError || !files?.length || currentlyUploading}
-        sx={{ height: "40px" }}
+        sx={{ height: "40px", paddingRight: "50px", margin: "0 auto" }}
         onClick={() => {
           if (allSucceeded) {
             files.forEach((f) => {
