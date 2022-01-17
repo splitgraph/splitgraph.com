@@ -138,6 +138,9 @@ export { IconPencilBlue };
 import IconPencil from "./IconPencil";
 export { IconPencil };
 
+import IconPencilInline from "./IconPencilInline";
+export { IconPencilInline };
+
 import IconGear from "./IconGear";
 export { IconGear };
 
