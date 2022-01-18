@@ -56,30 +56,28 @@ const Upload = ({
     submitButton,
     dropzoneProps,
     files,
-  }: ILayoutProps) => {
-    return (
-      <div {...dropzoneProps}>
-        {input}
-        <Box sx={{ marginBottom: "1rem", textAlign: "center" }}>
-          {submitButton}
-        </Box>
-        {!!files?.length && (
-          <section>
-            <Typography variant="smallHighlightedSB" sx={{ fontSize: "14px" }}>
-              Files
-            </Typography>{" "}
-            <Typography
-              variant="smallHighlightedSB"
-              sx={{ color: ({ palette }) => palette.grays.gray20.main }}
-            >
-              ({files?.length})
-            </Typography>
-            <FilesUploadList files={files} />
-          </section>
-        )}
-      </div>
-    );
-  };
+  }: ILayoutProps) => (
+    <div {...dropzoneProps}>
+      {input}
+      <Box sx={{ marginBottom: "1rem", textAlign: "center" }}>
+        {submitButton}
+      </Box>
+      {!!files?.length && (
+        <section>
+          <Typography variant="smallHighlightedSB" sx={{ fontSize: "14px" }}>
+            Files
+          </Typography>{" "}
+          <Typography
+            variant="smallHighlightedSB"
+            sx={{ color: ({ palette }) => palette.grays.gray20.main }}
+          >
+            ({files?.length})
+          </Typography>
+          <FilesUploadList files={files} />
+        </section>
+      )}
+    </div>
+  );
 
   const Input = ({
     getFilesFromEvent,
@@ -184,7 +182,12 @@ const Upload = ({
               onSubmitAfterFilesUploaded();
             }
           } else {
-            onSubmit(files);
+            onSubmit(
+              files.filter(
+                // Resolves https://app.clickup.com/t/24n8v97
+                (file) => !["done", "aborted"].includes(file.meta.status)
+              )
+            );
           }
         }}
       >
