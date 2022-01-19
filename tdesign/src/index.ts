@@ -12,11 +12,16 @@ export {
   SubmitButton,
   LoadMoreButton,
   InFieldButton,
+  PrimaryButton,
   Button,
   InvisibleButton,
   LinkButton,
 } from "./Button/index";
-export type { IButtonProps, IInFieldButtonProps } from "./Button";
+export type {
+  IButtonProps,
+  IInFieldButtonProps,
+  IPrimaryButtonProps,
+} from "./Button";
 export {
   BaseLayout,
   ContentHeader,
