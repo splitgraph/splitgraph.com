@@ -1,0 +1,365 @@
+
+
+
+export const meta = {
+  title: "splitgraph.commandline package",
+  id: "splitgraph.commandline package"
+};
+
+<div className=" rst-content"><nav className="toc"><ol className="toc-level toc-level-1"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#module-contents">Module contents</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#submodules">Submodules</a><ol className="toc-level toc-level-2"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphcommandlinecloud-module">splitgraph.commandline.cloud module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphcommandlinecommon-module">splitgraph.commandline.common module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphcommandlineengine-module">splitgraph.commandline.engine module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphcommandlineexample-module">splitgraph.commandline.example module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphcommandlineimage_creation-module">splitgraph.commandline.image_creation module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphcommandlineimage_info-module">splitgraph.commandline.image_info module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphcommandlineingestion-module">splitgraph.commandline.ingestion module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphcommandlinemisc-module">splitgraph.commandline.misc module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphcommandlinemount-module">splitgraph.commandline.mount module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphcommandlinepush_pull-module">splitgraph.commandline.push_pull module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphcommandlinesplitfile-module">splitgraph.commandline.splitfile module</a></li></ol></li></ol></nav><div className="section" id="module-splitgraph.commandline">
+<span id="module-contents"></span><h2 id="module-contents">Module contents<a className="headerlink" href="#module-splitgraph.commandline" title="Permalink to this headline">¶</a></h2>
+<p>Splitgraph command line client</p>
+<p>Hooks into the API to allow management of Splitgraph repositories and images using <code className="docutils literal notranslate"><span className="pre">sgr</span></code>.</p>
+<dl className="py class">
+<dt id="splitgraph.commandline.ClickHandler">
+<em className="property"><span className="pre">class</span> </em><code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.</span></code><code className="sig-name descname"><span className="pre">ClickHandler</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">level</span></span><span className="o"><span className="pre">=</span></span><span className="default_value"><span className="pre">0</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.ClickHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">logging.Handler</span></code></p>
+<dl className="py method">
+<dt id="splitgraph.commandline.ClickHandler.emit">
+<code className="sig-name descname"><span className="pre">emit</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">record</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.ClickHandler.emit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do whatever it takes to actually log the specified logging record.</p>
+<p>This version is intended to be implemented by subclasses and so
+raises a NotImplementedError.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt id="splitgraph.commandline.WithExceptionHandler">
+<em className="property"><span className="pre">class</span> </em><code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.</span></code><code className="sig-name descname"><span className="pre">WithExceptionHandler</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">name</span></span><span className="o"><span className="pre">=</span></span><span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">commands</span></span><span className="o"><span className="pre">=</span></span><span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="o"><span className="pre">**</span></span><span className="n"><span className="pre">attrs</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.WithExceptionHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">click.core.Group</span></code></p>
+<dl className="py method">
+<dt id="splitgraph.commandline.WithExceptionHandler.get_command">
+<code className="sig-name descname"><span className="pre">get_command</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">ctx</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">cmd_name</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.WithExceptionHandler.get_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a context and a command name, this returns a
+<code className="xref py py-class docutils literal notranslate"><span className="pre">Command</span></code> object if it exists or returns <cite>None</cite>.</p>
+</dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.commandline.WithExceptionHandler.invoke">
+<code className="sig-name descname"><span className="pre">invoke</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">ctx</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.WithExceptionHandler.invoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a context, this invokes the attached callback (if it exists)
+in the right way.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.commandline.get_exception_name">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.</span></code><code className="sig-name descname"><span className="pre">get_exception_name</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">o</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.get_exception_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div><div className="section" id="splitgraph-commandline-package">
+
+<div className="section" id="submodules">
+<h2 id="submodules">Submodules<a className="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div className="section" id="module-splitgraph.commandline.cloud">
+<span id="splitgraph-commandline-cloud-module"></span><h2 id="splitgraphcommandlinecloud-module">splitgraph.commandline.cloud module<a className="headerlink" href="#module-splitgraph.commandline.cloud" title="Permalink to this headline">¶</a></h2>
+<p>Command line routines related to registering/setting up connections to the Splitgraph registry.</p>
+</div>
+<div className="section" id="module-splitgraph.commandline.common">
+<span id="splitgraph-commandline-common-module"></span><h2 id="splitgraphcommandlinecommon-module">splitgraph.commandline.common module<a className="headerlink" href="#module-splitgraph.commandline.common" title="Permalink to this headline">¶</a></h2>
+<p>Various common functions used by the command line interface.</p>
+<dl className="py class">
+<dt id="splitgraph.commandline.common.Color">
+<em className="property"><span className="pre">class</span> </em><code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.common.</span></code><code className="sig-name descname"><span className="pre">Color</span></code><a className="headerlink" href="#splitgraph.commandline.common.Color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">object</span></code></p>
+<p>An enumeration of console colors</p>
+<dl className="py attribute">
+<dt id="splitgraph.commandline.common.Color.BLUE">
+<code className="sig-name descname"><span className="pre">BLUE</span></code><em className="property"> <span className="pre">=</span> <span className="pre">'\x1b[94m'</span></em><a className="headerlink" href="#splitgraph.commandline.common.Color.BLUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt id="splitgraph.commandline.common.Color.BOLD">
+<code className="sig-name descname"><span className="pre">BOLD</span></code><em className="property"> <span className="pre">=</span> <span className="pre">'\x1b[1m'</span></em><a className="headerlink" href="#splitgraph.commandline.common.Color.BOLD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt id="splitgraph.commandline.common.Color.CYAN">
+<code className="sig-name descname"><span className="pre">CYAN</span></code><em className="property"> <span className="pre">=</span> <span className="pre">'\x1b[96m'</span></em><a className="headerlink" href="#splitgraph.commandline.common.Color.CYAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt id="splitgraph.commandline.common.Color.DARKCYAN">
+<code className="sig-name descname"><span className="pre">DARKCYAN</span></code><em className="property"> <span className="pre">=</span> <span className="pre">'\x1b[36m'</span></em><a className="headerlink" href="#splitgraph.commandline.common.Color.DARKCYAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt id="splitgraph.commandline.common.Color.END">
+<code className="sig-name descname"><span className="pre">END</span></code><em className="property"> <span className="pre">=</span> <span className="pre">'\x1b[0m'</span></em><a className="headerlink" href="#splitgraph.commandline.common.Color.END" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt id="splitgraph.commandline.common.Color.GREEN">
+<code className="sig-name descname"><span className="pre">GREEN</span></code><em className="property"> <span className="pre">=</span> <span className="pre">'\x1b[92m'</span></em><a className="headerlink" href="#splitgraph.commandline.common.Color.GREEN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt id="splitgraph.commandline.common.Color.PURPLE">
+<code className="sig-name descname"><span className="pre">PURPLE</span></code><em className="property"> <span className="pre">=</span> <span className="pre">'\x1b[95m'</span></em><a className="headerlink" href="#splitgraph.commandline.common.Color.PURPLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt id="splitgraph.commandline.common.Color.RED">
+<code className="sig-name descname"><span className="pre">RED</span></code><em className="property"> <span className="pre">=</span> <span className="pre">'\x1b[91m'</span></em><a className="headerlink" href="#splitgraph.commandline.common.Color.RED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt id="splitgraph.commandline.common.Color.UNDERLINE">
+<code className="sig-name descname"><span className="pre">UNDERLINE</span></code><em className="property"> <span className="pre">=</span> <span className="pre">'\x1b[4m'</span></em><a className="headerlink" href="#splitgraph.commandline.common.Color.UNDERLINE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt id="splitgraph.commandline.common.Color.YELLOW">
+<code className="sig-name descname"><span className="pre">YELLOW</span></code><em className="property"> <span className="pre">=</span> <span className="pre">'\x1b[93m'</span></em><a className="headerlink" href="#splitgraph.commandline.common.Color.YELLOW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt id="splitgraph.commandline.common.ImageType">
+<em className="property"><span className="pre">class</span> </em><code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.common.</span></code><code className="sig-name descname"><span className="pre">ImageType</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">default</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">'latest'</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository_exists</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">get_image</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.common.ImageType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">click.types.ParamType</span></code></p>
+<p>Parser that extracts the full image specification (repository and hash/tag).</p>
+<dl className="py method">
+<dt id="splitgraph.commandline.common.ImageType.convert">
+<code className="sig-name descname"><span className="pre">convert</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">value</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">param</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">click.core.Parameter</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">ctx</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">click.core.Context</span><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span> → <span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">Repository</span><span className="p"><span className="pre">,</span> </span><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Union</span><span className="p"><span className="pre">[</span></span><span className="pre">Image</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><a className="headerlink" href="#splitgraph.commandline.common.ImageType.convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Image specification must have the format [NAMESPACE/]REPOSITORY[:HASH_OR_TAG].</p>
+<p>The parser returns a tuple of (repository object, tag or hash).</p>
+</dd></dl>
+
+<dl className="py attribute">
+<dt id="splitgraph.commandline.common.ImageType.name">
+<code className="sig-name descname"><span className="pre">name</span></code><em className="property"> <span className="pre">=</span> <span className="pre">'Image'</span></em><a className="headerlink" href="#splitgraph.commandline.common.ImageType.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>the descriptive name of this type</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt id="splitgraph.commandline.common.JsonType">
+<em className="property"><span className="pre">class</span> </em><code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.common.</span></code><code className="sig-name descname"><span className="pre">JsonType</span></code><a className="headerlink" href="#splitgraph.commandline.common.JsonType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">click.types.ParamType</span></code></p>
+<p>Parser for Json – a wrapper around json.loads because without specifying
+the name Click shows the type for the option/arg as LOADS.</p>
+<p>Also supports passing JSON files (pass in @filename.json).</p>
+<dl className="py method">
+<dt id="splitgraph.commandline.common.JsonType.convert">
+<code className="sig-name descname"><span className="pre">convert</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">value</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">param</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">click.core.Parameter</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">ctx</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">click.core.Context</span><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.common.JsonType.convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the value.  This is not invoked for values that are
+<cite>None</cite> (the missing value).</p>
+</dd></dl>
+
+<dl className="py attribute">
+<dt id="splitgraph.commandline.common.JsonType.name">
+<code className="sig-name descname"><span className="pre">name</span></code><em className="property"> <span className="pre">=</span> <span className="pre">'Json'</span></em><a className="headerlink" href="#splitgraph.commandline.common.JsonType.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>the descriptive name of this type</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt id="splitgraph.commandline.common.RepositoryType">
+<em className="property"><span className="pre">class</span> </em><code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.common.</span></code><code className="sig-name descname"><span className="pre">RepositoryType</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">exists</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.common.RepositoryType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">click.types.ParamType</span></code></p>
+<dl className="py method">
+<dt id="splitgraph.commandline.common.RepositoryType.convert">
+<code className="sig-name descname"><span className="pre">convert</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">value</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">param</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">click.core.Parameter</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">ctx</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">click.core.Context</span><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span> → <span className="pre">Repository</span><a className="headerlink" href="#splitgraph.commandline.common.RepositoryType.convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the value.  This is not invoked for values that are
+<cite>None</cite> (the missing value).</p>
+</dd></dl>
+
+<dl className="py attribute">
+<dt id="splitgraph.commandline.common.RepositoryType.name">
+<code className="sig-name descname"><span className="pre">name</span></code><em className="property"> <span className="pre">=</span> <span className="pre">'Repository'</span></em><a className="headerlink" href="#splitgraph.commandline.common.RepositoryType.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>the descriptive name of this type</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt id="splitgraph.commandline.common.ResettableStream">
+<em className="property"><span className="pre">class</span> </em><code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.common.</span></code><code className="sig-name descname"><span className="pre">ResettableStream</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">stream</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.common.ResettableStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">io.RawIOBase</span></code></p>
+<p>Stream that supports reading from the underlying stream and resetting the position once.</p>
+<p>We can’t use fseek() in this case, since we might be reading from a pipe. So, we operate
+this stream in two modes. In the first mode, we mirror all reads into a separate buffer
+(consuming the input stream). After the user calls reset(), we first output data from the
+mirrored copy, then continue consuming the input stream (simulating seek(0).</p>
+<dl className="py method">
+<dt id="splitgraph.commandline.common.ResettableStream.readable">
+<code className="sig-name descname"><span className="pre">readable</span></code><span className="sig-paren">(</span><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.common.ResettableStream.readable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether object was opened for reading.</p>
+<p>If False, read() will raise OSError.</p>
+</dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.commandline.common.ResettableStream.readinto">
+<code className="sig-name descname"><span className="pre">readinto</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">b</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.common.ResettableStream.readinto" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.commandline.common.ResettableStream.reset">
+<code className="sig-name descname"><span className="pre">reset</span></code><span className="sig-paren">(</span><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.common.ResettableStream.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.commandline.common.emit_sql_results">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.common.</span></code><code className="sig-name descname"><span className="pre">emit_sql_results</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">results</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">use_json</span></span><span className="o"><span className="pre">=</span></span><span className="default_value"><span className="pre">False</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">show_all</span></span><span className="o"><span className="pre">=</span></span><span className="default_value"><span className="pre">False</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.common.emit_sql_results" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.commandline.common.load_json_param">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.common.</span></code><code className="sig-name descname"><span className="pre">load_json_param</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">value</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">param</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">click.core.Parameter</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">ctx</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">click.core.Context</span><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.common.load_json_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.commandline.common.remote_switch_option">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.common.</span></code><code className="sig-name descname"><span className="pre">remote_switch_option</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span><span className="n"><span className="pre">names</span></span></em>, <em className="sig-param"><span className="o"><span className="pre">**</span></span><span className="n"><span className="pre">kwargs</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.common.remote_switch_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds an option to switch global SG_ENGINE for this invocation of sgr.</p>
+<p>This is useful for e.g. tagging or viewing image information on a remote
+registry. This is not used in operations like commit/checkout (even though
+nothing is preventing SG_ENGINE switch from working on that if the remote engine
+supports this), the user should switch SG_ENGINE envvar themselves in that case.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>names</strong> – Names</p></li>
+<li><p><strong>kwargs</strong> – Passed to click.option</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.commandline.common.sql_results_to_str">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.common.</span></code><code className="sig-name descname"><span className="pre">sql_results_to_str</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">results</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">use_json</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em><span className="sig-paren">)</span> → <span className="pre">str</span><a className="headerlink" href="#splitgraph.commandline.common.sql_results_to_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div className="section" id="module-splitgraph.commandline.engine">
+<span id="splitgraph-commandline-engine-module"></span><h2 id="splitgraphcommandlineengine-module">splitgraph.commandline.engine module<a className="headerlink" href="#module-splitgraph.commandline.engine" title="Permalink to this headline">¶</a></h2>
+<dl className="py function">
+<dt id="splitgraph.commandline.engine.copy_to_container">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.engine.</span></code><code className="sig-name descname"><span className="pre">copy_to_container</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">container</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Container</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">source_path</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">target_path</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> → <span className="pre">None</span><a className="headerlink" href="#splitgraph.commandline.engine.copy_to_container" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy a file into a Docker container</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>container</strong> – Container object</p></li>
+<li><p><strong>source_path</strong> – Source file path</p></li>
+<li><p><strong>target_path</strong> – Target file path (in the container)</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.commandline.engine.get_docker_client">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.engine.</span></code><code className="sig-name descname"><span className="pre">get_docker_client</span></code><span className="sig-paren">(</span><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.engine.get_docker_client" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper around client.from_env() that also pings the daemon
+to make sure it can connect and if not, raises an error.</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.commandline.engine.inject_config_into_engines">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.engine.</span></code><code className="sig-name descname"><span className="pre">inject_config_into_engines</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">engine_prefix</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">config_path</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.engine.inject_config_into_engines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy the current config into all engines that are managed by <cite>sgr engine</cite>. This
+is so that the engine has the right credentials and settings for when we do
+layered querying (a Postgres client queries the engine directly and it
+has to download objects etc).</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>engine_prefix</strong> – Prefix for Docker containers that are considered to be engines</p></li>
+<li><p><strong>config_path</strong> – Path to the config file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.commandline.engine.list_engines">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.engine.</span></code><code className="sig-name descname"><span className="pre">list_engines</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">prefix</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">include_all</span></span><span className="o"><span className="pre">=</span></span><span className="default_value"><span className="pre">False</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">unavailable_ok</span></span><span className="o"><span className="pre">=</span></span><span className="default_value"><span className="pre">True</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.engine.list_engines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.commandline.engine.patch_and_save_config">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.engine.</span></code><code className="sig-name descname"><span className="pre">patch_and_save_config</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">config</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">patch</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.commandline.engine.patch_and_save_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div className="section" id="module-splitgraph.commandline.example">
+<span id="splitgraph-commandline-example-module"></span><h2 id="splitgraphcommandlineexample-module">splitgraph.commandline.example module<a className="headerlink" href="#module-splitgraph.commandline.example" title="Permalink to this headline">¶</a></h2>
+<p>Command line routines generating example data / Splitfiles</p>
+<dl className="py function">
+<dt id="splitgraph.commandline.example.alter_table">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.example.</span></code><code className="sig-name descname"><span className="pre">alter_table</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Repository</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">table_name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">rows_added</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">int</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">rows_deleted</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">int</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">rows_updated</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">int</span></span></em><span className="sig-paren">)</span> → <span className="pre">None</span><a className="headerlink" href="#splitgraph.commandline.example.alter_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alters the example table, adding/updating/deleting a certain number of rows.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>repository</strong> – Checked-out Repository object.</p></li>
+<li><p><strong>table_name</strong> – Name of the table</p></li>
+<li><p><strong>rows_added</strong> – Number of rows to add</p></li>
+<li><p><strong>rows_deleted</strong> – Number of rows to remove</p></li>
+<li><p><strong>rows_updated</strong> – Number of rows to update</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.commandline.example.generate_table">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.commandline.example.</span></code><code className="sig-name descname"><span className="pre">generate_table</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Repository</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">table_name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">size</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">int</span></span></em><span className="sig-paren">)</span> → <span className="pre">None</span><a className="headerlink" href="#splitgraph.commandline.example.generate_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a table with an integer primary key and a string value.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>repository</strong> – Checked-out Repository to create the table in.</p></li>
+<li><p><strong>table_name</strong> – Name of the table to generate</p></li>
+<li><p><strong>size</strong> – Number of rows in the table.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div className="section" id="module-splitgraph.commandline.image_creation">
+<span id="splitgraph-commandline-image-creation-module"></span><h2 id="splitgraphcommandlineimage_creation-module">splitgraph.commandline.image_creation module<a className="headerlink" href="#module-splitgraph.commandline.image_creation" title="Permalink to this headline">¶</a></h2>
+<p>sgr commands related to creating and checking out images</p>
+</div>
+<div className="section" id="module-splitgraph.commandline.image_info">
+<span id="splitgraph-commandline-image-info-module"></span><h2 id="splitgraphcommandlineimage_info-module">splitgraph.commandline.image_info module<a className="headerlink" href="#module-splitgraph.commandline.image_info" title="Permalink to this headline">¶</a></h2>
+<p>sgr commands related to getting information out of / about images</p>
+</div>
+<div className="section" id="module-splitgraph.commandline.ingestion">
+<span id="splitgraph-commandline-ingestion-module"></span><h2 id="splitgraphcommandlineingestion-module">splitgraph.commandline.ingestion module<a className="headerlink" href="#module-splitgraph.commandline.ingestion" title="Permalink to this headline">¶</a></h2>
+<p>Command line tools for ingesting/exporting Splitgraph images into other formats.</p>
+</div>
+<div className="section" id="module-splitgraph.commandline.misc">
+<span id="splitgraph-commandline-misc-module"></span><h2 id="splitgraphcommandlinemisc-module">splitgraph.commandline.misc module<a className="headerlink" href="#module-splitgraph.commandline.misc" title="Permalink to this headline">¶</a></h2>
+<p>Miscellaneous image management sgr commands.</p>
+</div>
+<div className="section" id="module-splitgraph.commandline.mount">
+<span id="splitgraph-commandline-mount-module"></span><h2 id="splitgraphcommandlinemount-module">splitgraph.commandline.mount module<a className="headerlink" href="#module-splitgraph.commandline.mount" title="Permalink to this headline">¶</a></h2>
+<p>sgr commands related to mounting databases via Postgres FDW</p>
+</div>
+<div className="section" id="module-splitgraph.commandline.push_pull">
+<span id="splitgraph-commandline-push-pull-module"></span><h2 id="splitgraphcommandlinepush_pull-module">splitgraph.commandline.push_pull module<a className="headerlink" href="#module-splitgraph.commandline.push_pull" title="Permalink to this headline">¶</a></h2>
+<p>sgr commands related to sharing and downloading images.</p>
+</div>
+<div className="section" id="module-splitgraph.commandline.splitfile">
+<span id="splitgraph-commandline-splitfile-module"></span><h2 id="splitgraphcommandlinesplitfile-module">splitgraph.commandline.splitfile module<a className="headerlink" href="#module-splitgraph.commandline.splitfile" title="Permalink to this headline">¶</a></h2>
+<p>sgr commands related to building and rebuilding Splitfiles.</p>
+</div>
+
+</div>
+</div>

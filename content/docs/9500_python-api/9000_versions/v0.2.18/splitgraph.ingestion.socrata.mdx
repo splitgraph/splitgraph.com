@@ -1,0 +1,182 @@
+
+
+
+export const meta = {
+  title: "splitgraph.ingestion.socrata package",
+  id: "splitgraph.ingestion.socrata package"
+};
+
+<div className=" rst-content"><nav className="toc"><ol className="toc-level toc-level-1"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#submodules">Submodules</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphingestionsocratafdw-module">splitgraph.ingestion.socrata.fdw module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphingestionsocratamount-module">splitgraph.ingestion.socrata.mount module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphingestionsocrataquerying-module">splitgraph.ingestion.socrata.querying module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#module-contents">Module contents</a></li></ol></nav><section id="splitgraph-ingestion-socrata-package">
+
+<section id="submodules">
+<h2 id="submodules">Submodules<a className="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-splitgraph.ingestion.socrata.fdw">
+<span id="splitgraph-ingestion-socrata-fdw-module"></span><h2 id="splitgraphingestionsocratafdw-module">splitgraph.ingestion.socrata.fdw module<a className="headerlink" href="#module-splitgraph.ingestion.socrata.fdw" title="Permalink to this headline"></a></h2>
+<p>Module imported by Multicorn on the Splitgraph engine server: a foreign data wrapper
+that communicates to Socrata datasets using sodapy.</p>
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.fdw.SocrataForeignDataWrapper">
+<em className="property"><span className="pre">class</span><span className="w"> </span></em><span className="sig-prename descclassname"><span className="pre">splitgraph.ingestion.socrata.fdw.</span></span><span className="sig-name descname"><span className="pre">SocrataForeignDataWrapper</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">fdw_options</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">fdw_columns</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.ingestion.socrata.fdw.SocrataForeignDataWrapper" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">object</span></code></p>
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.fdw.SocrataForeignDataWrapper.can_sort">
+<span className="sig-name descname"><span className="pre">can_sort</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">sortkeys</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.ingestion.socrata.fdw.SocrataForeignDataWrapper.can_sort" title="Permalink to this definition"></a></dt>
+<dd><dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><p><strong>sortkeys</strong> – List of SortKey</p>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>List of SortKey the FDW can sort on</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.fdw.SocrataForeignDataWrapper.execute">
+<span className="sig-name descname"><span className="pre">execute</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">quals</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">columns</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">sortkeys</span></span><span className="o"><span className="pre">=</span></span><span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.ingestion.socrata.fdw.SocrataForeignDataWrapper.execute" title="Permalink to this definition"></a></dt>
+<dd><p>Main Multicorn entry point.</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.fdw.SocrataForeignDataWrapper.explain">
+<span className="sig-name descname"><span className="pre">explain</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">quals</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">columns</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">sortkeys</span></span><span className="o"><span className="pre">=</span></span><span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">verbose</span></span><span className="o"><span className="pre">=</span></span><span className="default_value"><span className="pre">False</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.ingestion.socrata.fdw.SocrataForeignDataWrapper.explain" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.fdw.SocrataForeignDataWrapper.get_rel_size">
+<span className="sig-name descname"><span className="pre">get_rel_size</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">quals</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">columns</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.ingestion.socrata.fdw.SocrataForeignDataWrapper.get_rel_size" title="Permalink to this definition"></a></dt>
+<dd><p>Method called from the planner to estimate the resulting relation
+size for a scan.
+It will help the planner in deciding between different types of plans,
+according to their costs.
+Args:</p>
+<blockquote>
+<div><dl className="simple">
+<dt>quals (list): A list of Qual instances describing the filters</dt><dd><p>applied to this scan.</p>
+</dd>
+</dl>
+<p>columns (list): The list of columns that must be returned.</p>
+</div></blockquote>
+<dl className="simple">
+<dt>Returns:</dt><dd><p>A tuple of the form (expected_number_of_rows, avg_row_width (in bytes))</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py property">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.fdw.SocrataForeignDataWrapper.table_meta">
+<em className="property"><span className="pre">property</span><span className="w"> </span></em><span className="sig-name descname"><span className="pre">table_meta</span></span><a className="headerlink" href="#splitgraph.ingestion.socrata.fdw.SocrataForeignDataWrapper.table_meta" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.fdw.to_json">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.ingestion.socrata.fdw.</span></span><span className="sig-name descname"><span className="pre">to_json</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">row</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">columns</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">column_map</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.ingestion.socrata.fdw.to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-splitgraph.ingestion.socrata.mount">
+<span id="splitgraph-ingestion-socrata-mount-module"></span><h2 id="splitgraphingestionsocratamount-module">splitgraph.ingestion.socrata.mount module<a className="headerlink" href="#module-splitgraph.ingestion.socrata.mount" title="Permalink to this headline"></a></h2>
+<p>Splitgraph mount handler for Socrata datasets</p>
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.mount.SocrataDataSource">
+<em className="property"><span className="pre">class</span><span className="w"> </span></em><span className="sig-prename descclassname"><span className="pre">splitgraph.ingestion.socrata.mount.</span></span><span className="sig-name descname"><span className="pre">SocrataDataSource</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">engine</span></span><span className="p"><span className="pre">:</span></span><span className="w"> </span><span className="n"><span className="pre">PsycopgEngine</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credentials</span></span><span className="p"><span className="pre">:</span></span><span className="w"> </span><span className="n"><span className="pre">Credentials</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">params</span></span><span className="p"><span className="pre">:</span></span><span className="w"> </span><span className="n"><span className="pre">Params</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">tables</span></span><span className="p"><span className="pre">:</span></span><span className="w"> </span><span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Union</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="splitgraph.core/#splitgraph.core.types.TableColumn" title="splitgraph.core.types.TableColumn"><span className="pre">splitgraph.core.types.TableColumn</span></a><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">TableParams</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span><span className="w"> </span><span className="o"><span className="pre">=</span></span><span className="w"> </span><span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.ingestion.socrata.mount.SocrataDataSource" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a className="reference internal" href="splitgraph.hooks.data_source/#splitgraph.hooks.data_source.fdw.ForeignDataWrapperDataSource" title="splitgraph.hooks.data_source.fdw.ForeignDataWrapperDataSource"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.hooks.data_source.fdw.ForeignDataWrapperDataSource</span></code></a></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.mount.SocrataDataSource.credentials_schema">
+<span className="sig-name descname"><span className="pre">credentials_schema</span></span><em className="property"><span className="p"><span className="pre">:</span></span><span className="w"> </span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></em><em className="property"><span className="w"> </span><span className="p"><span className="pre">=</span></span><span className="w"> </span><span className="pre">&#38;lbrace;'properties':</span> <span className="pre">&#38;lbrace;'app_token':</span> <span className="pre">&#38;lbrace;'description':</span> <span className="pre">'Socrata</span> <span className="pre">app</span> <span className="pre">token',</span> <span className="pre">'type':</span> <span className="pre">'string'&#38;rbrace;&#38;rbrace;,</span> <span className="pre">'type':</span> <span className="pre">'object'&#38;rbrace;</span></em><a className="headerlink" href="#splitgraph.ingestion.socrata.mount.SocrataDataSource.credentials_schema" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.mount.SocrataDataSource.from_commandline">
+<em className="property"><span className="pre">classmethod</span><span className="w"> </span></em><span className="sig-name descname"><span className="pre">from_commandline</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">engine</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">commandline_kwargs</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><a className="reference internal" href="#splitgraph.ingestion.socrata.mount.SocrataDataSource" title="splitgraph.ingestion.socrata.mount.SocrataDataSource"><span className="pre">splitgraph.ingestion.socrata.mount.SocrataDataSource</span></a></span></span><a className="headerlink" href="#splitgraph.ingestion.socrata.mount.SocrataDataSource.from_commandline" title="Permalink to this definition"></a></dt>
+<dd><p>Instantiate an FDW data source from commandline arguments.</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.mount.SocrataDataSource.get_description">
+<em className="property"><span className="pre">classmethod</span><span className="w"> </span></em><span className="sig-name descname"><span className="pre">get_description</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">str</span></span></span><a className="headerlink" href="#splitgraph.ingestion.socrata.mount.SocrataDataSource.get_description" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.mount.SocrataDataSource.get_fdw_name">
+<span className="sig-name descname"><span className="pre">get_fdw_name</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.ingestion.socrata.mount.SocrataDataSource.get_fdw_name" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.mount.SocrataDataSource.get_name">
+<em className="property"><span className="pre">classmethod</span><span className="w"> </span></em><span className="sig-name descname"><span className="pre">get_name</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">str</span></span></span><a className="headerlink" href="#splitgraph.ingestion.socrata.mount.SocrataDataSource.get_name" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.mount.SocrataDataSource.get_raw_url">
+<span className="sig-name descname"><span className="pre">get_raw_url</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">tables</span></span><span className="p"><span className="pre">:</span></span><span className="w"> </span><span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Union</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="splitgraph.core/#splitgraph.core.types.TableColumn" title="splitgraph.core.types.TableColumn"><span className="pre">splitgraph.core.types.TableColumn</span></a><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">TableParams</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span><span className="w"> </span><span className="o"><span className="pre">=</span></span><span className="w"> </span><span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">expiry</span></span><span className="p"><span className="pre">:</span></span><span className="w"> </span><span className="n"><span className="pre">int</span></span><span className="w"> </span><span className="o"><span className="pre">=</span></span><span className="w"> </span><span className="default_value"><span className="pre">3600</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.ingestion.socrata.mount.SocrataDataSource.get_raw_url" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of public URLs for each table in this data source, e.g. to export the data
+as CSV. These may be temporary (e.g. pre-signed S3 URLs) but should be accessible without
+authentication.
+:param tables: A TableInfo object overriding the table params of the source
+:param expiry: The URL should be valid for at least this many seconds
+:return: Dict of table_name -> list of (mimetype, raw URL)</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.mount.SocrataDataSource.get_server_options">
+<span className="sig-name descname"><span className="pre">get_server_options</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.ingestion.socrata.mount.SocrataDataSource.get_server_options" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.mount.SocrataDataSource.params_schema">
+<span className="sig-name descname"><span className="pre">params_schema</span></span><em className="property"><span className="p"><span className="pre">:</span></span><span className="w"> </span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></em><em className="property"><span className="w"> </span><span className="p"><span className="pre">=</span></span><span className="w"> </span><span className="pre">&#38;lbrace;'properties':</span> <span className="pre">&#38;lbrace;'batch_size':</span> <span className="pre">&#38;lbrace;'default':</span> <span className="pre">1000,</span> <span className="pre">'description':</span> <span className="pre">'Amount</span> <span className="pre">of</span> <span className="pre">rows</span> <span className="pre">to</span> <span className="pre">fetch</span> <span className="pre">from</span> <span className="pre">Socrata</span> <span className="pre">per</span> <span className="pre">request</span> <span className="pre">(limit</span> <span className="pre">parameter)',</span> <span className="pre">'maximum':</span> <span className="pre">50000,</span> <span className="pre">'minimum':</span> <span className="pre">1,</span> <span className="pre">'type':</span> <span className="pre">'integer'&#38;rbrace;,</span> <span className="pre">'domain':</span> <span className="pre">&#38;lbrace;'description':</span> <span className="pre">'Socrata</span> <span className="pre">domain,</span> <span className="pre">for</span> <span className="pre">example,</span> <span className="pre">data.albanyny.gov',</span> <span className="pre">'type':</span> <span className="pre">'string'&#38;rbrace;&#38;rbrace;,</span> <span className="pre">'required':</span> <span className="pre">['domain'],</span> <span className="pre">'type':</span> <span className="pre">'object'&#38;rbrace;</span></em><a className="headerlink" href="#splitgraph.ingestion.socrata.mount.SocrataDataSource.params_schema" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.mount.SocrataDataSource.table_params_schema">
+<span className="sig-name descname"><span className="pre">table_params_schema</span></span><em className="property"><span className="p"><span className="pre">:</span></span><span className="w"> </span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></em><em className="property"><span className="w"> </span><span className="p"><span className="pre">=</span></span><span className="w"> </span><span className="pre">&#38;lbrace;'properties':</span> <span className="pre">&#38;lbrace;'socrata_id':</span> <span className="pre">&#38;lbrace;'description':</span> <span className="pre">'Socrata</span> <span className="pre">dataset</span> <span className="pre">ID,</span> <span className="pre">e.g.</span> <span className="pre">xzkq-xp2w',</span> <span className="pre">'type':</span> <span className="pre">'string'&#38;rbrace;&#38;rbrace;,</span> <span className="pre">'required':</span> <span className="pre">['socrata_id'],</span> <span className="pre">'type':</span> <span className="pre">'object'&#38;rbrace;</span></em><a className="headerlink" href="#splitgraph.ingestion.socrata.mount.SocrataDataSource.table_params_schema" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.mount.generate_socrata_mount_queries">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.ingestion.socrata.mount.</span></span><span className="sig-name descname"><span className="pre">generate_socrata_mount_queries</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">sought_ids</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">datasets</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">mountpoint</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">server_id</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">tables</span></span><span className="p"><span className="pre">:</span></span><span className="w"> </span><span className="n"><span className="pre">Union</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="splitgraph.core/#splitgraph.core.types.TableColumn" title="splitgraph.core.types.TableColumn"><span className="pre">splitgraph.core.types.TableColumn</span></a><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">TableParams</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.ingestion.socrata.mount.generate_socrata_mount_queries" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-splitgraph.ingestion.socrata.querying">
+<span id="splitgraph-ingestion-socrata-querying-module"></span><h2 id="splitgraphingestionsocrataquerying-module">splitgraph.ingestion.socrata.querying module<a className="headerlink" href="#module-splitgraph.ingestion.socrata.querying" title="Permalink to this headline"></a></h2>
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.querying.cols_to_socrata">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.ingestion.socrata.querying.</span></span><span className="sig-name descname"><span className="pre">cols_to_socrata</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">cols</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">column_map</span></span><span className="p"><span className="pre">:</span></span><span className="w"> </span><span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span><span className="w"> </span><span className="o"><span className="pre">=</span></span><span className="w"> </span><span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.ingestion.socrata.querying.cols_to_socrata" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.querying.estimate_socrata_rows_width">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.ingestion.socrata.querying.</span></span><span className="sig-name descname"><span className="pre">estimate_socrata_rows_width</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">columns</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">metadata</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">column_map</span></span><span className="o"><span className="pre">=</span></span><span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.ingestion.socrata.querying.estimate_socrata_rows_width" title="Permalink to this definition"></a></dt>
+<dd><p>Estimate number of rows required for a query and each row’s width
+from the table metadata.</p>
+</dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.querying.quals_to_socrata">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.ingestion.socrata.querying.</span></span><span className="sig-name descname"><span className="pre">quals_to_socrata</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">quals</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">column_map</span></span><span className="p"><span className="pre">:</span></span><span className="w"> </span><span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span><span className="w"> </span><span className="o"><span className="pre">=</span></span><span className="w"> </span><span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.ingestion.socrata.querying.quals_to_socrata" title="Permalink to this definition"></a></dt>
+<dd><p>Convert a list of Multicorn quals to a SoQL query</p>
+</dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.querying.socrata_to_sg_schema">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.ingestion.socrata.querying.</span></span><span className="sig-name descname"><span className="pre">socrata_to_sg_schema</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">metadata</span></span><span className="p"><span className="pre">:</span></span><span className="w"> </span><span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="splitgraph.core/#splitgraph.core.types.TableColumn" title="splitgraph.core.types.TableColumn"><span className="pre">splitgraph.core.types.TableColumn</span></a><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.ingestion.socrata.querying.socrata_to_sg_schema" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.ingestion.socrata.querying.sortkeys_to_socrata">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.ingestion.socrata.querying.</span></span><span className="sig-name descname"><span className="pre">sortkeys_to_socrata</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">sortkeys</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">column_map</span></span><span className="p"><span className="pre">:</span></span><span className="w"> </span><span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span></span><span className="w"> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span><span className="w"> </span><span className="o"><span className="pre">=</span></span><span className="w"> </span><span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.ingestion.socrata.querying.sortkeys_to_socrata" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-splitgraph.ingestion.socrata">
+<span id="module-contents"></span><h2 id="module-contents">Module contents<a className="headerlink" href="#module-splitgraph.ingestion.socrata" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+</div>

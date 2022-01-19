@@ -1,0 +1,120 @@
+
+
+
+export const meta = {
+  title: "splitgraph.core.sql package",
+  id: "splitgraph.core.sql package"
+};
+
+<div className=" rst-content"><nav className="toc"><ol className="toc-level toc-level-1"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#module-contents">Module contents</a></li></ol></nav><div className="section" id="module-splitgraph.core.sql">
+<span id="module-contents"></span><h2 id="module-contents">Module contents<a className="headerlink" href="#module-splitgraph.core.sql" title="Permalink to this headline">¶</a></h2>
+<p>Routines for managing SQL statements</p>
+<dl className="py function">
+<dt id="splitgraph.core.sql.insert">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.core.sql.</span></code><code className="sig-name descname"><span className="pre">insert</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">table</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">columns</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Sequence</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">'splitgraph_meta'</span></span></em><span className="sig-paren">)</span> → <span className="pre">psycopg2.sql.Composed</span><a className="headerlink" href="#splitgraph.core.sql.insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>A generic SQL SELECT constructor to simplify metadata access queries so that we don’t have to repeat the same
+identifiers everywhere.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>table</strong> – Table to select from.</p></li>
+<li><p><strong>columns</strong> – Columns to insert as a list of strings.</p></li>
+<li><p><strong>schema</strong> – Schema that contains the table</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>A psycopg2.sql.SQL object with the query (parameterized)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.core.sql.prepare_splitfile_sql">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.core.sql.</span></code><code className="sig-name descname"><span className="pre">prepare_splitfile_sql</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">sql</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">image_mapper</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Callable</span></span></em><span className="sig-paren">)</span> → <span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><a className="headerlink" href="#splitgraph.core.sql.prepare_splitfile_sql" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform an SQL query to prepare for it to be used in a Splitfile SQL command and validate it.
+The rules are:</p>
+<blockquote>
+<div><ul className="simple">
+<li><p>Only basic DDL (CREATE/ALTER/DROP table) and DML (SELECT/INSERT/UPDATE/DELETE) are permitted.</p></li>
+<li><p>All tables must be either non-schema qualified (the statement is run with <cite>search_path</cite></p></li>
+</ul>
+<p>set to the single schema that a Splitgraph image is checked out into) or have schemata of
+format namespace/repository:hash_or_tag. In the second case, the schema is rewritten to point
+at a temporary mount of the Splitgraph image.
+* Function invocations are forbidden.</p>
+</div></blockquote>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>sql</strong> – SQL query</p></li>
+<li><p><strong>image_mapper</strong> – Takes in an image and gives back the schema it should be rewritten to
+(for the purposes of execution) and the canonical form of the image.</p></li>
+<li><p><strong>schema</strong> – Schema to add to all non-qualified tables</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>Transformed form of the SQL with substituted schema shims for Splitfile execution
+and the canonical form (with e.g. tags resolved into at-the-time full image hashes)</p>
+</dd>
+<dt className="field-odd">Raises</dt>
+<dd className="field-odd"><p>UnsupportedSQLException if validation failed</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.core.sql.recover_original_schema_name">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.core.sql.</span></code><code className="sig-name descname"><span className="pre">recover_original_schema_name</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">sql</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schema_name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> → <span className="pre">str</span><a className="headerlink" href="#splitgraph.core.sql.recover_original_schema_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Postgres truncates identifiers to 63 characters at parse time and, as pglast
+uses bits of PG to parse queries, image names like noaa/climate:64_chars_of_hash
+get truncated which can cause ambiguities and issues in provenance. We can’t
+get pglast to give us back the full identifier, but we can try and figure out
+what it used to be and patch the AST to have it again.</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.core.sql.select">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.core.sql.</span></code><code className="sig-name descname"><span className="pre">select</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">table</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">columns</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">'*'</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">where</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">''</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">'splitgraph_meta'</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">table_args</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span> → <span className="pre">psycopg2.sql.Composed</span><a className="headerlink" href="#splitgraph.core.sql.select" title="Permalink to this definition">¶</a></dt>
+<dd><p>A generic SQL SELECT constructor to simplify metadata access queries so that we don’t have to repeat the same
+identifiers everywhere.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>table</strong> – Table to select from.</p></li>
+<li><p><strong>columns</strong> – Columns to select as a string. WARN: concatenated directly without any formatting.</p></li>
+<li><p><strong>where</strong> – If specified, added to the query with a “WHERE” keyword. WARN also concatenated directly.</p></li>
+<li><p><strong>schema</strong> – Defaults to SPLITGRAPH_META_SCHEMA.</p></li>
+<li><p><strong>table_args</strong> – If specified, appends to the FROM clause after the table specification,
+for example, SELECT * FROM “splitgraph_api”.”get_images” (%s, %s) …</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>A psycopg2.sql.SQL object with the query.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.core.sql.validate_import_sql">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.core.sql.</span></code><code className="sig-name descname"><span className="pre">validate_import_sql</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">sql</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> → <span className="pre">str</span><a className="headerlink" href="#splitgraph.core.sql.validate_import_sql" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check an SQL query to see if it can be safely used in an IMPORT statement
+(e.g. <cite>FROM noaa/climate:latest IMPORT &#38;lbrace;SELECT * FROM rainfall WHERE state = ‘AZ’&#38;rbrace; AS rainfall</cite>.
+In this case, only a single SELECT statement is supported.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><p><strong>sql</strong> – SQL query</p>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>Canonical (formatted) form of the SQL statement</p>
+</dd>
+<dt className="field-odd">Raises</dt>
+<dd className="field-odd"><p>UnsupportedSQLException if validation failed</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div><div className="section" id="splitgraph-core-sql-package">
+
+
+</div>
+</div>

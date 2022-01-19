@@ -1,0 +1,20 @@
+export const meta = {id: "cloud-load", title: "sgr cloud load", sidebarTitle: "cloud load", description: "Load a Splitgraph catalog from a YAML file."};
+
+```sgr cloud load [OPTIONS] [LIMIT_REPOSITORIES]...```
+
+Load a Splitgraph catalog from a YAML file.
+
+This will load a splitgraph.yml file and the `readmes` subdirectory produced by
+`sgr cloud dump` back into a remote Splitgraph catalog.
+
+By default, if a repository doesn't yet exist, it will be public. Pass `--initial-private` to
+this command to make it start off as private. This won't apply to existing repositories: use
+the Splitgraph GUI to manage repository access settings.
+
+### Options
+
+  * **`--remote TEXT`**: Name of the remote registry to use.
+  * **`--readme-dir TEXT`**: Path to the directory with the README files
+  * **`-p, --initial-private`**: If the repository doesn't exist, create it as private.
+  * **`-f, --repositories-file PATH`**: 
+  * **`--skip-external`**: Only set up the metadata, not the external data source settings

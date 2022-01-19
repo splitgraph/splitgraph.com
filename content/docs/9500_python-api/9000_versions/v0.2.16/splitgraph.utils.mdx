@@ -1,0 +1,51 @@
+
+
+
+export const meta = {
+  title: "splitgraph.utils package",
+  id: "splitgraph.utils package"
+};
+
+<div className=" rst-content"><nav className="toc"><ol className="toc-level toc-level-1"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#module-contents">Module contents</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#submodules">Submodules</a><ol className="toc-level toc-level-2"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphutilsdocker-module">splitgraph.utils.docker module</a></li></ol></li></ol></nav><div className="section" id="module-splitgraph.utils">
+<span id="module-contents"></span><h2 id="module-contents">Module contents<a className="headerlink" href="#module-splitgraph.utils" title="Permalink to this headline">¶</a></h2>
+</div><div className="section" id="splitgraph-utils-package">
+
+<div className="section" id="submodules">
+<h2 id="submodules">Submodules<a className="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div className="section" id="module-splitgraph.utils.docker">
+<span id="splitgraph-utils-docker-module"></span><h2 id="splitgraphutilsdocker-module">splitgraph.utils.docker module<a className="headerlink" href="#module-splitgraph.utils.docker" title="Permalink to this headline">¶</a></h2>
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.utils.docker.copy_dir_to_container">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.utils.docker.</span></span><span className="sig-name descname"><span className="pre">copy_dir_to_container</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">container</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Container</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">source_path</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">target_path</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">exclude_names</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.utils.docker.copy_dir_to_container" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.utils.docker.copy_to_container">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.utils.docker.</span></span><span className="sig-name descname"><span className="pre">copy_to_container</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">container</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Container</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">source_path</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">target_path</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">data</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">bytes</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.utils.docker.copy_to_container" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy a file into a Docker container</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>container</strong> – Container object</p></li>
+<li><p><strong>source_path</strong> – Source file path</p></li>
+<li><p><strong>target_path</strong> – Target file path (in the container)</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.utils.docker.get_docker_client">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.utils.docker.</span></span><span className="sig-name descname"><span className="pre">get_docker_client</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.utils.docker.get_docker_client" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper around client.from_env() that also pings the daemon
+to make sure it can connect and if not, raises an error.</p>
+</dd></dl>
+
+</div>
+
+</div>
+</div>

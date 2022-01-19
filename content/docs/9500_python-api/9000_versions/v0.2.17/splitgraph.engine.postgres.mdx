@@ -1,0 +1,456 @@
+
+
+
+export const meta = {
+  title: "splitgraph.engine.postgres package",
+  id: "splitgraph.engine.postgres package"
+};
+
+<div className=" rst-content"><nav className="toc"><ol className="toc-level toc-level-1"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#submodules">Submodules</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphenginepostgresengine-module">splitgraph.engine.postgres.engine module</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#module-contents">Module contents</a></li></ol></nav><section id="splitgraph-engine-postgres-package">
+
+<section id="submodules">
+<h2 id="submodules">Submodules<a className="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-splitgraph.engine.postgres.engine">
+<span id="splitgraph-engine-postgres-engine-module"></span><h2 id="splitgraphenginepostgresengine-module">splitgraph.engine.postgres.engine module<a className="headerlink" href="#module-splitgraph.engine.postgres.engine" title="Permalink to this headline"></a></h2>
+<p>Default Splitgraph engine: uses PostgreSQL to store metadata and actual objects and an audit stored procedure
+to track changes, as well as the Postgres FDW interface to upload/download objects to/from other Postgres engines.</p>
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.AuditTriggerChangeEngine">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.engine.postgres.engine.</span></span><span className="sig-name descname"><span className="pre">AuditTriggerChangeEngine</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">conn_params</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">pool</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">psycopg2.pool.AbstractConnectionPool</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">autocommit</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">registry</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">in_fdw</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">check_version</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">True</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.postgres.engine.AuditTriggerChangeEngine" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a className="reference internal" href="#splitgraph.engine.postgres.engine.PsycopgEngine" title="splitgraph.engine.postgres.engine.PsycopgEngine"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.engine.postgres.engine.PsycopgEngine</span></code></a>, <a className="reference internal" href="splitgraph.engine/#splitgraph.engine.ChangeEngine" title="splitgraph.engine.ChangeEngine"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.engine.ChangeEngine</span></code></a></p>
+<p>Change tracking based on an audit trigger stored procedure</p>
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.AuditTriggerChangeEngine.discard_pending_changes">
+<span className="sig-name descname"><span className="pre">discard_pending_changes</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">table</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.AuditTriggerChangeEngine.discard_pending_changes" title="Permalink to this definition"></a></dt>
+<dd><p>Discard recorded pending changes for a tracked schema / table</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.AuditTriggerChangeEngine.get_changed_tables">
+<span className="sig-name descname"><span className="pre">get_changed_tables</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.AuditTriggerChangeEngine.get_changed_tables" title="Permalink to this definition"></a></dt>
+<dd><p>Get list of tables that have changed content</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.AuditTriggerChangeEngine.get_pending_changes">
+<span className="sig-name descname"><span className="pre">get_pending_changes</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">table</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">aggregate</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">Union</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">int</span><span className="p"><span className="pre">,</span> </span><span className="pre">int</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span> </span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="p"><span className="pre">...</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span> </span><span className="pre">bool</span><span className="p"><span className="pre">,</span> </span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span> </span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.AuditTriggerChangeEngine.get_pending_changes" title="Permalink to this definition"></a></dt>
+<dd><p>Return pending changes for a given tracked table</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>schema</strong> – Schema the table belongs to</p></li>
+<li><p><strong>table</strong> – Table to return changes for</p></li>
+<li><p><strong>aggregate</strong> – Whether to aggregate changes or return them completely</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>If aggregate is True: List of tuples of (change_type, number of rows).
+If aggregate is False: List of (primary_key, change_type, change_data)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.AuditTriggerChangeEngine.get_tracked_tables">
+<span className="sig-name descname"><span className="pre">get_tracked_tables</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.AuditTriggerChangeEngine.get_tracked_tables" title="Permalink to this definition"></a></dt>
+<dd><p>Return a list of tables that the audit trigger is working on.</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.AuditTriggerChangeEngine.has_pending_changes">
+<span className="sig-name descname"><span className="pre">has_pending_changes</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">bool</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.AuditTriggerChangeEngine.has_pending_changes" title="Permalink to this definition"></a></dt>
+<dd><p>Return True if the tracked schema has pending changes and False if it doesn’t.</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.AuditTriggerChangeEngine.track_tables">
+<span className="sig-name descname"><span className="pre">track_tables</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">tables</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.AuditTriggerChangeEngine.track_tables" title="Permalink to this definition"></a></dt>
+<dd><p>Install the audit trigger on the required tables</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.AuditTriggerChangeEngine.untrack_tables">
+<span className="sig-name descname"><span className="pre">untrack_tables</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">tables</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.AuditTriggerChangeEngine.untrack_tables" title="Permalink to this definition"></a></dt>
+<dd><p>Remove triggers from tables and delete their pending changes</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PostgresEngine">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.engine.postgres.engine.</span></span><span className="sig-name descname"><span className="pre">PostgresEngine</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">conn_params</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">pool</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">psycopg2.pool.AbstractConnectionPool</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">autocommit</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">registry</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">in_fdw</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">check_version</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">True</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a className="reference internal" href="#splitgraph.engine.postgres.engine.AuditTriggerChangeEngine" title="splitgraph.engine.postgres.engine.AuditTriggerChangeEngine"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.engine.postgres.engine.AuditTriggerChangeEngine</span></code></a>, <a className="reference internal" href="splitgraph.engine/#splitgraph.engine.ObjectEngine" title="splitgraph.engine.ObjectEngine"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.engine.ObjectEngine</span></code></a></p>
+<p>An implementation of the Postgres engine for Splitgraph</p>
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PostgresEngine.apply_fragments">
+<span className="sig-name descname"><span className="pre">apply_fragments</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">objects</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">target_schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">target_table</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">extra_quals</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">psycopg2.sql.Composed</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">extra_qual_args</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">Any</span><span className="p"><span className="pre">,</span> </span><span className="p"><span className="pre">...</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schema_spec</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="splitgraph.core/#splitgraph.core.types.TableColumn" title="splitgraph.core.types.TableColumn"><span className="pre">splitgraph.core.types.TableColumn</span></a><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">progress_every</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">int</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.apply_fragments" title="Permalink to this definition"></a></dt>
+<dd><p>Apply multiple fragments to a target table as a single-query batch operation.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>objects</strong> – List of tuples <cite>(object_schema, object_table)</cite> that the objects are stored in.</p></li>
+<li><p><strong>target_schema</strong> – Schema to apply the fragment to</p></li>
+<li><p><strong>target_table</strong> – Table to apply the fragment to</p></li>
+<li><p><strong>extra_quals</strong> – Optional, extra SQL (Composable) clauses to filter new rows in the fragment on
+(e.g. SQL(“a = %s”))</p></li>
+<li><p><strong>extra_qual_args</strong> – Optional, a tuple of arguments to use with <cite>extra_quals</cite></p></li>
+<li><p><strong>schema_spec</strong> – Optional, list of (ordinal, column_name, column_type, is_pk).
+If not specified, uses the schema of target_table.</p></li>
+<li><p><strong>progress_every</strong> – If set, will report the materialization progress via
+tqdm every <cite>progress_every</cite> objects.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PostgresEngine.delete_objects">
+<span className="sig-name descname"><span className="pre">delete_objects</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">object_ids</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.delete_objects" title="Permalink to this definition"></a></dt>
+<dd><p>Delete one or more objects from the engine.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><p><strong>object_ids</strong> – IDs of objects to delete</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PostgresEngine.download_objects">
+<span className="sig-name descname"><span className="pre">download_objects</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">objects</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">remote_engine</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><a className="reference internal" href="#splitgraph.engine.postgres.engine.PostgresEngine" title="splitgraph.engine.postgres.engine.PostgresEngine"><span className="pre">splitgraph.engine.postgres.engine.PostgresEngine</span></a></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.download_objects" title="Permalink to this definition"></a></dt>
+<dd><p>Download objects from the remote engine to the local cache</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>objects</strong> – List of object IDs to download</p></li>
+<li><p><strong>remote_engine</strong> – A remote ObjectEngine to download the objects from.</p></li>
+</ul>
+</dd>
+</dl>
+<p>:return List of object IDs that were downloaded.</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PostgresEngine.dump_object">
+<span className="sig-name descname"><span className="pre">dump_object</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">object_id</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">stream</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">_io.TextIOWrapper</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.dump_object" title="Permalink to this definition"></a></dt>
+<dd><p>Dump an object into a series of SQL statements</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>object_id</strong> – Object ID</p></li>
+<li><p><strong>stream</strong> – Text stream to dump the object into</p></li>
+<li><p><strong>schema</strong> – Schema the object lives in</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PostgresEngine.dump_object_creation">
+<span className="sig-name descname"><span className="pre">dump_object_creation</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">object_id</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">table</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schema_spec</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="splitgraph.core/#splitgraph.core.types.TableColumn" title="splitgraph.core.types.TableColumn"><span className="pre">splitgraph.core.types.TableColumn</span></a><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">if_not_exists</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">bytes</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.dump_object_creation" title="Permalink to this definition"></a></dt>
+<dd><p>Generate the SQL that remounts a foreign table pointing to a Splitgraph object.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>object_id</strong> – Name of the object</p></li>
+<li><p><strong>schema</strong> – Schema to create the table in</p></li>
+<li><p><strong>table</strong> – Name of the table to mount</p></li>
+<li><p><strong>schema_spec</strong> – Schema of the table</p></li>
+<li><p><strong>if_not_exists</strong> – Add IF NOT EXISTS to the DDL</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>SQL in bytes format.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PostgresEngine.get_change_key">
+<span className="sig-name descname"><span className="pre">get_change_key</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">table</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.get_change_key" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the key used to identify a row in a change (list of column name, column type).
+If the tracked table has a PK, we use that; if it doesn’t, the whole row is used.</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PostgresEngine.get_object_schema">
+<span className="sig-name descname"><span className="pre">get_object_schema</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">object_id</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="splitgraph.core/#splitgraph.core.types.TableColumn" title="splitgraph.core.types.TableColumn"><span className="pre">splitgraph.core.types.TableColumn</span></a><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.get_object_schema" title="Permalink to this definition"></a></dt>
+<dd><p>Get the schema of a given object, returned as a list of
+(ordinal, column_name, column_type, is_pk).</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><p><strong>object_id</strong> – ID of the object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PostgresEngine.get_object_size">
+<span className="sig-name descname"><span className="pre">get_object_size</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">object_id</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">int</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.get_object_size" title="Permalink to this definition"></a></dt>
+<dd><p>Return the on-disk footprint of this object, in bytes
+:param object_id: ID of the object</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PostgresEngine.mount_object">
+<span className="sig-name descname"><span className="pre">mount_object</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">object_id</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">table</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">None</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">'splitgraph_meta'</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schema_spec</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="splitgraph.core/#splitgraph.core.types.TableColumn" title="splitgraph.core.types.TableColumn"><span className="pre">splitgraph.core.types.TableColumn</span></a><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.mount_object" title="Permalink to this definition"></a></dt>
+<dd><p>Mount an object from local storage as a foreign table.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>object_id</strong> – ID of the object</p></li>
+<li><p><strong>table</strong> – Table to mount the object into</p></li>
+<li><p><strong>schema</strong> – Schema to mount the object into</p></li>
+<li><p><strong>schema_spec</strong> – Schema of the object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PostgresEngine.rename_object">
+<span className="sig-name descname"><span className="pre">rename_object</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">old_object_id</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">new_object_id</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.rename_object" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PostgresEngine.store_fragment">
+<span className="sig-name descname"><span className="pre">store_fragment</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">inserted</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Any</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">deleted</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Any</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">table</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">source_schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">source_table</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">source_schema_spec</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="splitgraph.core/#splitgraph.core.types.TableColumn" title="splitgraph.core.types.TableColumn"><span className="pre">splitgraph.core.types.TableColumn</span></a><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.store_fragment" title="Permalink to this definition"></a></dt>
+<dd><p>Store a fragment of a changed table in another table</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>inserted</strong> – List of PKs that have been updated/inserted</p></li>
+<li><p><strong>deleted</strong> – List of PKs that have been deleted</p></li>
+<li><p><strong>schema</strong> – Schema to store the change in</p></li>
+<li><p><strong>table</strong> – Table to store the change in</p></li>
+<li><p><strong>source_schema</strong> – Schema the source table is located in</p></li>
+<li><p><strong>source_table</strong> – Name of the source table</p></li>
+<li><p><strong>source_schema_spec</strong> – Schema of the source table (optional)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PostgresEngine.store_object">
+<span className="sig-name descname"><span className="pre">store_object</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">object_id</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">source_query</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Union</span><span className="p"><span className="pre">[</span></span><span className="pre">bytes</span><span className="p"><span className="pre">,</span> </span><span className="pre">psycopg2.sql.Composed</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">psycopg2.sql.SQL</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schema_spec</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="splitgraph.core/#splitgraph.core.types.TableColumn" title="splitgraph.core.types.TableColumn"><span className="pre">splitgraph.core.types.TableColumn</span></a><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">source_query_args</span></span><span className="o"><span className="pre">=</span></span><span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">overwrite</span></span><span className="o"><span className="pre">=</span></span><span className="default_value"><span className="pre">False</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.store_object" title="Permalink to this definition"></a></dt>
+<dd><p>Stores a Splitgraph object using a source query in the actual format
+implemented by this engine.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>object_id</strong> – Name of the object</p></li>
+<li><p><strong>source_query</strong> – SELECT query that produces data required by the object</p></li>
+<li><p><strong>schema_spec</strong> – Schema of the source table</p></li>
+<li><p><strong>source_query_args</strong> – Arguments to mogrify into the source query.</p></li>
+<li><p><strong>overwrite</strong> – If True, will overwrite the object if it already exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PostgresEngine.sync_object_mounts">
+<span className="sig-name descname"><span className="pre">sync_object_mounts</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.sync_object_mounts" title="Permalink to this definition"></a></dt>
+<dd><p>Scan through local object storage and synchronize it with the foreign tables in
+splitgraph_meta (unmounting non-existing objects and mounting existing ones).</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PostgresEngine.unmount_objects">
+<span className="sig-name descname"><span className="pre">unmount_objects</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">object_ids</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.unmount_objects" title="Permalink to this definition"></a></dt>
+<dd><p>Unmount objects from splitgraph_meta (this doesn’t delete the physical files.</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PostgresEngine.upload_objects">
+<span className="sig-name descname"><span className="pre">upload_objects</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">objects</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">remote_engine</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><a className="reference internal" href="#splitgraph.engine.postgres.engine.PostgresEngine" title="splitgraph.engine.postgres.engine.PostgresEngine"><span className="pre">splitgraph.engine.postgres.engine.PostgresEngine</span></a></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PostgresEngine.upload_objects" title="Permalink to this definition"></a></dt>
+<dd><p>Upload objects from the local cache to the remote engine</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>objects</strong> – List of object IDs to upload</p></li>
+<li><p><strong>remote_engine</strong> – A remote ObjectEngine to upload the objects to.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.engine.postgres.engine.</span></span><span className="sig-name descname"><span className="pre">PsycopgEngine</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">conn_params</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">pool</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">psycopg2.pool.AbstractConnectionPool</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">autocommit</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">registry</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">in_fdw</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">check_version</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">True</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a className="reference internal" href="splitgraph.engine/#splitgraph.engine.SQLEngine" title="splitgraph.engine.SQLEngine"><code className="xref py py-class docutils literal notranslate"><span className="pre">splitgraph.engine.SQLEngine</span></code></a></p>
+<p>Postgres SQL engine backed by a Psycopg connection.</p>
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.close">
+<span className="sig-name descname"><span className="pre">close</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.close" title="Permalink to this definition"></a></dt>
+<dd><p>Commit and close the engine’s backing connection</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.close_others">
+<span className="sig-name descname"><span className="pre">close_others</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.close_others" title="Permalink to this definition"></a></dt>
+<dd><p>Close and release all other connections to the connection pool.</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.commit">
+<span className="sig-name descname"><span className="pre">commit</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.commit" title="Permalink to this definition"></a></dt>
+<dd><p>Commit the engine’s backing connection</p>
+</dd></dl>
+
+<dl className="py property">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.connection">
+<em className="property"><span className="pre">property</span> </em><span className="sig-name descname"><span className="pre">connection</span></span><em className="property"><span className="pre">:</span> <span className="pre">Connection</span></em><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.connection" title="Permalink to this definition"></a></dt>
+<dd><p>Engine-internal Psycopg connection.</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.copy_cursor">
+<span className="sig-name descname"><span className="pre">copy_cursor</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.copy_cursor" title="Permalink to this definition"></a></dt>
+<dd><p>Return a cursor that can be used for copy_expert operations</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.delete_database">
+<span className="sig-name descname"><span className="pre">delete_database</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">database</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.delete_database" title="Permalink to this definition"></a></dt>
+<dd><p>Helper function to drop a database using the admin connection</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><p><strong>database</strong> – Database name to drop</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.dump_table_sql">
+<span className="sig-name descname"><span className="pre">dump_table_sql</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">table_name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">stream</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">_io.TextIOWrapper</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">columns</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">'*'</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">where</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">''</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">where_args</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Union</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span> </span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">target_schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">target_table</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.dump_table_sql" title="Permalink to this definition"></a></dt>
+<dd><p>Dump the table contents in the SQL format
+:param schema: Schema the table is located in
+:param table_name: Name of the table
+:param stream: A file-like object to write the result into.
+:param columns: SQL column spec. Default ‘*’.
+:param where: Optional, an SQL WHERE clause
+:param where_args: Arguments for the optional WHERE clause.
+:param target_schema: Schema to create the table in (default same as <cite>schema</cite>)
+:param target_table: Name of the table to insert data into (default same as <cite>table_name</cite>)</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.get_primary_keys">
+<span className="sig-name descname"><span className="pre">get_primary_keys</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">table</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.get_primary_keys" title="Permalink to this definition"></a></dt>
+<dd><p>Inspects the Postgres information_schema to get the primary keys for a given table.</p>
+</dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.in_fdw">
+<span className="sig-name descname"><span className="pre">in_fdw</span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.in_fdw" title="Permalink to this definition"></a></dt>
+<dd><p>List of notices issued by the server during the previous execution of run_sql.</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.initialize">
+<span className="sig-name descname"><span className="pre">initialize</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">skip_object_handling</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">skip_create_database</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.initialize" title="Permalink to this definition"></a></dt>
+<dd><p>Create the Splitgraph Postgres database and install the audit trigger</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>skip_object_handling</strong> – If True, skips installation of
+audit triggers and other object management routines for engines
+that don’t need change tracking or checkouts.</p></li>
+<li><p><strong>skip_create_database</strong> – Don’t create the Splitgraph database</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.lock_table">
+<span className="sig-name descname"><span className="pre">lock_table</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">table</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.lock_table" title="Permalink to this definition"></a></dt>
+<dd><p>Acquire an exclusive lock on a given table, released when the transaction commits / rolls back.</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.rollback">
+<span className="sig-name descname"><span className="pre">rollback</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.rollback" title="Permalink to this definition"></a></dt>
+<dd><p>Rollback the engine’s backing connection</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.run_api_call">
+<span className="sig-name descname"><span className="pre">run_api_call</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">call</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="o"><span className="pre">*</span></span><span className="n"><span className="pre">args</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">'splitgraph_api'</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">Any</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.run_api_call" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.run_api_call_batch">
+<span className="sig-name descname"><span className="pre">run_api_call_batch</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">call</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">argslist</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">'splitgraph_api'</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.run_api_call_batch" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.run_chunked_sql">
+<span className="sig-name descname"><span className="pre">run_chunked_sql</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">statement</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Union</span><span className="p"><span className="pre">[</span></span><span className="pre">bytes</span><span className="p"><span className="pre">,</span> </span><span className="pre">psycopg2.sql.Composed</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">psycopg2.sql.SQL</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">arguments</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Sequence</span><span className="p"><span className="pre">[</span></span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">return_shape</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="splitgraph.engine/#splitgraph.engine.ResultShape" title="splitgraph.engine.ResultShape"><span className="pre">splitgraph.engine.ResultShape</span></a><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">ResultShape.MANY_MANY</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">chunk_size</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">int</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">1000</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">chunk_position</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">int</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">-</span> <span className="pre">1</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">Any</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.run_chunked_sql" title="Permalink to this definition"></a></dt>
+<dd><p>Because the Splitgraph API has a request size limitation, certain
+SQL calls with variadic arguments are going to be too long to fit that. This function
+runs an SQL query against a set of broken up arguments and returns the combined result.</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.run_sql">
+<span className="sig-name descname"><span className="pre">run_sql</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">statement</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Union</span><span className="p"><span className="pre">[</span></span><span className="pre">bytes</span><span className="p"><span className="pre">,</span> </span><span className="pre">psycopg2.sql.Composed</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">psycopg2.sql.SQL</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">arguments</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Sequence</span><span className="p"><span className="pre">[</span></span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">return_shape</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="splitgraph.engine/#splitgraph.engine.ResultShape" title="splitgraph.engine.ResultShape"><span className="pre">splitgraph.engine.ResultShape</span></a><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">ResultShape.MANY_MANY</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">named</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">False</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">Any</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.run_sql" title="Permalink to this definition"></a></dt>
+<dd><p>Run an arbitrary SQL statement with some arguments, return an iterator of results.
+If the statement doesn’t return any results, return None. If named=True, return named
+tuples when possible.</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.run_sql_batch">
+<span className="sig-name descname"><span className="pre">run_sql_batch</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">statement</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Union</span><span className="p"><span className="pre">[</span></span><span className="pre">psycopg2.sql.Composed</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">arguments</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Any</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">max_size</span></span><span className="o"><span className="pre">=</span></span><span className="default_value"><span className="pre">261000</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">None</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.run_sql_batch" title="Permalink to this definition"></a></dt>
+<dd><p>Run a parameterized SQL statement against multiple sets of arguments.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>statement</strong> – Statement to run</p></li>
+<li><p><strong>arguments</strong> – Query arguments</p></li>
+<li><p><strong>schema</strong> – Schema to run the statement in</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py property">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.PsycopgEngine.splitgraph_version">
+<em className="property"><span className="pre">property</span> </em><span className="sig-name descname"><span className="pre">splitgraph_version</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.engine.postgres.engine.PsycopgEngine.splitgraph_version" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the version of the Splitgraph library installed on the engine
+and by association the version of the engine itself.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.add_ud_flag_column">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.engine.postgres.engine.</span></span><span className="sig-name descname"><span className="pre">add_ud_flag_column</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">table_schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="splitgraph.core/#splitgraph.core.types.TableColumn" title="splitgraph.core.types.TableColumn"><span className="pre">splitgraph.core.types.TableColumn</span></a><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="splitgraph.core/#splitgraph.core.types.TableColumn" title="splitgraph.core.types.TableColumn"><span className="pre">splitgraph.core.types.TableColumn</span></a><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.add_ud_flag_column" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.chunk">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.engine.postgres.engine.</span></span><span className="sig-name descname"><span className="pre">chunk</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">sequence</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Sequence</span><span className="p"><span className="pre">[</span></span><span className="pre">splitgraph.engine.postgres.engine.T</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">chunk_size</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">int</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">1000</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">Iterator</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">splitgraph.engine.postgres.engine.T</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.chunk" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.get_change_key">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.engine.postgres.engine.</span></span><span className="sig-name descname"><span className="pre">get_change_key</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">schema_spec</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="splitgraph.core/#splitgraph.core.types.TableColumn" title="splitgraph.core.types.TableColumn"><span className="pre">splitgraph.core.types.TableColumn</span></a><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.get_change_key" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.engine.postgres.engine.get_conn_str">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.engine.postgres.engine.</span></span><span className="sig-name descname"><span className="pre">get_conn_str</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">conn_params</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">str</span></span></span><a className="headerlink" href="#splitgraph.engine.postgres.engine.get_conn_str" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-splitgraph.engine.postgres">
+<span id="module-contents"></span><h2 id="module-contents">Module contents<a className="headerlink" href="#module-splitgraph.engine.postgres" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+</div>

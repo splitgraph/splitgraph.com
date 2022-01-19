@@ -1,0 +1,15 @@
+export const meta = {id: "cloud-dump", title: "sgr cloud dump", sidebarTitle: "cloud dump", description: "Dump a Splitgraph catalog to a YAML file."};
+
+```sgr cloud dump [OPTIONS] [LIMIT_REPOSITORIES]...```
+
+Dump a Splitgraph catalog to a YAML file.
+
+This creates a repositories.yml file in the target directory as well as a subdirectory `readmes`
+with all the repository readmes. This file can be used to recreate all catalog metadata
+and all external data source settings for a repository using `sgr cloud load`.
+
+### Options
+
+  * **`--remote TEXT`**: Name of the remote registry to use.
+  * **`--readme-dir TEXT`**: Directory to dump the data into
+  * **`-f, --repositories-file FILENAME`**: 
