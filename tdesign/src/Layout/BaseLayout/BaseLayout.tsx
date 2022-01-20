@@ -35,7 +35,7 @@ const BaseLayout = ({
   logoText,
   brandName,
   logoLinkTo = "/",
-  marketingNotice = null,
+  marketingNotice,
 }: BaseLayoutProps) => {
   const containerStyle: SxProps<Theme> = {
     // TODO: Deprecated variant syntax only works with legacyTheme
