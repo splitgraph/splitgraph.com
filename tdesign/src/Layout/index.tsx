@@ -27,3 +27,5 @@ export { Logo } from "./Logo";
 export type { ILogoProps } from "./Logo";
 
 export { PaddedSingleCol } from "./PaddedSingleCol";
+
+export * from "./MarketingNotice";
