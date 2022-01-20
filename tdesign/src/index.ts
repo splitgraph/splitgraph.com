@@ -31,6 +31,7 @@ export {
   MainContent,
   PaddedSingleCol,
   MarketingNotice,
+  CTAButton,
 } from "./Layout/index";
 
 export { Menu, MenuItem, MenuItemHeading } from "./Menu";

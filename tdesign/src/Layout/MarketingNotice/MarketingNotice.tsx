@@ -3,12 +3,8 @@ import { styled } from "@mui/material/styles";
 import type { muiTheme } from "@splitgraph/tdesign/src/themes/muiTheme";
 import { Button } from "@mui/material";
 
-interface CallToActionOpts {
-  href: string;
-}
-
 interface MarketingNoticeProps {
-  cta?: React.PropsWithChildren<CallToActionOpts>;
+  cta?: React.ReactNode;
 }
 
 const MarketingNoticeContainer = styled("div")(
@@ -34,7 +30,7 @@ const RightAlignedCTAContainer = styled("div")({
   alignSelf: "flex-end",
 });
 
-const CTAButton = styled(Button)(
+export const CTAButton = styled(Button)(
   ({ theme }: { theme: ReturnType<typeof muiTheme> }) => ({
     borderWidth: "1px",
     borderStyle: "solid",
@@ -57,9 +53,7 @@ export const MarketingNotice = ({
   return (
     <MarketingNoticeContainer>
       <CenteredChildrenContainer>{children}</CenteredChildrenContainer>
-      <RightAlignedCTAContainer>
-        <CTAButton {...cta} />
-      </RightAlignedCTAContainer>
+      {!!cta && <RightAlignedCTAContainer>{cta}</RightAlignedCTAContainer>}
     </MarketingNoticeContainer>
   );
 };
