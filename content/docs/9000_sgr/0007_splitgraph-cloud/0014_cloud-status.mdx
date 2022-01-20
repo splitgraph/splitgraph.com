@@ -1,0 +1,14 @@
+export const meta = {id: "cloud-status", title: "sgr cloud status", sidebarTitle: "cloud status", description: "Get job statuses for given repositories."};
+
+```sgr cloud status [OPTIONS] [REPOSITORIES]...```
+
+Get job statuses for given repositories.
+
+If this command is passed a list of repositories, it will get the latest job
+statuses just for those repositories. Otherwise, it will use an existing splitgraph.yml
+file and get job statuses for all repositories in this file.
+
+### Options
+
+  * **`--remote TEXT`**: Name of the remote registry to use.
+  * **`-f, --repositories-file PATH`**: 

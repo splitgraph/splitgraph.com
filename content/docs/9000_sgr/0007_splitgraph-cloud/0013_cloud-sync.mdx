@@ -1,0 +1,25 @@
+export const meta = {id: "cloud-sync", title: "sgr cloud sync", sidebarTitle: "cloud sync", description: "Trigger an ingestion job for a repository."};
+
+```sgr cloud sync [OPTIONS] REPOSITORY```
+
+Trigger an ingestion job for a repository.
+
+This starts off a load job for an existing/new repository, optionally using a
+splitgraph.yml file and waiting for the job to complete before exiting.
+
+If the splitgraph.yml file is specified, it will use the settings for that repository
+from there to override the existing parameters for a repository or to create a new repository.
+Otherwise, it will use the existing parameters.
+
+By default, if a repository doesn't yet exist, it will be public. Pass `--initial-private` to
+this command to make it start off as private. This won't apply to existing repositories: use
+the Splitgraph GUI to manage repository access settings.
+
+### Options
+
+  * **`--remote TEXT`**: Name of the remote registry to use.
+  * **`-r, --full-refresh`**: Trigger a full reload instead of an incremental load
+  * **`-w, --wait`**: Attach to the job and wait for it to finish
+  * **`-p, --initial-private`**: If the repository doesn't exist, create it as private.
+  * **`-u, --use-file`**: Use a YAML file with repository settings
+  * **`-f, --repositories-file PATH`**: 

@@ -1,0 +1,244 @@
+
+
+
+export const meta = {
+  title: "splitgraph.cloud package",
+  id: "splitgraph.cloud package"
+};
+
+<div className=" rst-content"><nav className="toc"><ol className="toc-level toc-level-1"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#module-contents">Module contents</a></li></ol></nav><div className="section" id="module-splitgraph.cloud">
+<span id="module-contents"></span><h2 id="module-contents">Module contents<a className="headerlink" href="#module-splitgraph.cloud" title="Permalink to this headline">¶</a></h2>
+<p>Public API for interacting with the Splitgraph registry</p>
+<dl className="py function">
+<dt id="splitgraph.cloud.AuthAPIClient">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.cloud.</span></code><code className="sig-name descname"><span className="pre">AuthAPIClient</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span><span className="n"><span className="pre">args</span></span></em>, <em className="sig-param"><span className="o"><span className="pre">**</span></span><span className="n"><span className="pre">kwargs</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.AuthAPIClient" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py class">
+<dt id="splitgraph.cloud.GQLAPIClient">
+<em className="property"><span className="pre">class</span> </em><code className="sig-prename descclassname"><span className="pre">splitgraph.cloud.</span></code><code className="sig-name descname"><span className="pre">GQLAPIClient</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">remote</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">object</span></code></p>
+<p>Wrapper class for select Splitgraph Registry GQL operations that can be
+called from the CLI</p>
+<dl className="py method">
+<dt id="splitgraph.cloud.GQLAPIClient.find_repository">
+<code className="sig-name descname"><span className="pre">find_repository</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">query</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">limit</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">int</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">10</span></span></em><span className="sig-paren">)</span> → <span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">int</span><span className="p"><span className="pre">,</span> </span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.find_repository" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.cloud.GQLAPIClient.get_external_metadata">
+<code className="sig-name descname"><span className="pre">get_external_metadata</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> → <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">splitgraph.cloud.models.ExternalResponse</span><span className="p"><span className="pre">]</span></span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.get_external_metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.cloud.GQLAPIClient.get_metadata">
+<code className="sig-name descname"><span className="pre">get_metadata</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> → <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">splitgraph.cloud.models.MetadataResponse</span><span className="p"><span className="pre">]</span></span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.get_metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.cloud.GQLAPIClient.load_all_repositories">
+<code className="sig-name descname"><span className="pre">load_all_repositories</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">limit_to</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span> → <span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">splitgraph.cloud.models.Repository</span><span className="p"><span className="pre">]</span></span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.load_all_repositories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.cloud.GQLAPIClient.upsert_description">
+<code className="sig-name descname"><span className="pre">upsert_description</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">description</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.upsert_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.cloud.GQLAPIClient.upsert_metadata">
+<code className="sig-name descname"><span className="pre">upsert_metadata</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">metadata</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">splitgraph.cloud.models.Metadata</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.upsert_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update metadata for a single repository.</p>
+</dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.cloud.GQLAPIClient.upsert_readme">
+<code className="sig-name descname"><span className="pre">upsert_readme</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">readme</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.upsert_readme" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.cloud.GQLAPIClient.upsert_topics">
+<code className="sig-name descname"><span className="pre">upsert_topics</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">topics</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.upsert_topics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt id="splitgraph.cloud.RESTAPIClient">
+<em className="property"><span className="pre">class</span> </em><code className="sig-prename descclassname"><span className="pre">splitgraph.cloud.</span></code><code className="sig-name descname"><span className="pre">RESTAPIClient</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">remote</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">object</span></code></p>
+<p>Client for various Splitgraph Registry REST APIs: auth token generation, external repo setup…</p>
+<dl className="py method">
+<dt id="splitgraph.cloud.RESTAPIClient.access_token">
+<em className="property"><span className="pre">property</span> </em><code className="sig-name descname"><span className="pre">access_token</span></code><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.access_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will return an up-to-date access token by either getting it from
+the configuration file or contacting the auth service for a new one.
+Will write the new access token into the configuration file.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Returns</dt>
+<dd className="field-odd"><p>Access token.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.cloud.RESTAPIClient.create_machine_credentials">
+<code className="sig-name descname"><span className="pre">create_machine_credentials</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">access_token</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">password</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> → <span className="pre">requests.models.Response</span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.create_machine_credentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a key and secret that can be used to log into the Splitgraph registry
+via a normal Postgres connection. The secret must be stored in the user’s local
+configuration file (it’s not stored on Splitgraph servers).</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>access_token</strong> – Access token</p></li>
+<li><p><strong>password</strong> – Password</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>Tuple of (key, secret).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.cloud.RESTAPIClient.ensure_external_credential">
+<code className="sig-name descname"><span className="pre">ensure_external_credential</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">credential_data</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credential_name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">plugin_name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> → <span className="pre">str</span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.ensure_external_credential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store a credential for accessing an external data source
+in Splitgraph Cloud and return its ID</p>
+</dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.cloud.RESTAPIClient.get_access_token">
+<code className="sig-name descname"><span className="pre">get_access_token</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">refresh_token</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> → <span className="pre">requests.models.Response</span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.get_access_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a new access token from a refresh token.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><p><strong>refresh_token</strong> – Refresh token</p>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>New access token.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.cloud.RESTAPIClient.get_access_token_from_api">
+<code className="sig-name descname"><span className="pre">get_access_token_from_api</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">api_key</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">api_secret</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> → <span className="pre">requests.models.Response</span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.get_access_token_from_api" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a new access token from API keys</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>api_key</strong> – API key</p></li>
+<li><p><strong>api_secret</strong> – API secret</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>New access token.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.cloud.RESTAPIClient.get_latest_version">
+<code className="sig-name descname"><span className="pre">get_latest_version</span></code><span className="sig-paren">(</span><span className="sig-paren">)</span> → <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.get_latest_version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.cloud.RESTAPIClient.get_refresh_token">
+<code className="sig-name descname"><span className="pre">get_refresh_token</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">username</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">password</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> → <span className="pre">requests.models.Response</span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.get_refresh_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a long-lived refresh token and a short-lived access token from the API.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>username</strong> – Username</p></li>
+<li><p><strong>password</strong> – Password</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>Tuple of (access_token, refresh_token).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.cloud.RESTAPIClient.list_external_credentials">
+<code className="sig-name descname"><span className="pre">list_external_credentials</span></code><span className="sig-paren">(</span><span className="sig-paren">)</span> → <span className="pre">splitgraph.cloud.models.ListExternalCredentialsResponse</span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.list_external_credentials" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.cloud.RESTAPIClient.register">
+<code className="sig-name descname"><span className="pre">register</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">username</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">password</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">email</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">accept_tos</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span></em><span className="sig-paren">)</span> → <span className="pre">requests.models.Response</span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register a new Splitgraph user.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>username</strong> – Username</p></li>
+<li><p><strong>password</strong> – Password</p></li>
+<li><p><strong>email</strong> – Email</p></li>
+<li><p><strong>accept_tos</strong> – Accept the Terms of Service if they exist</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.cloud.RESTAPIClient.tos">
+<code className="sig-name descname"><span className="pre">tos</span></code><span className="sig-paren">(</span><span className="sig-paren">)</span> → <span className="pre">requests.models.Response</span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.tos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a Terms of Service message from the registry (if accepting ToS is required)
+:return: Link to the Terms of Service or None</p>
+</dd></dl>
+
+<dl className="py method">
+<dt id="splitgraph.cloud.RESTAPIClient.upsert_external">
+<code className="sig-name descname"><span className="pre">upsert_external</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">external</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">splitgraph.cloud.models.External</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credentials_map</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.upsert_external" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.cloud.expect_result">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.cloud.</span></code><code className="sig-name descname"><span className="pre">expect_result</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">result</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">ignore_status_codes</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">int</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span> → <span className="pre">Callable</span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">[</span></span><span className="pre">Callable</span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">…</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span> </span><span className="pre">requests.models.Response</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span> </span><span className="pre">Callable</span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">…</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span> </span><span className="pre">Union</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><a className="headerlink" href="#splitgraph.cloud.expect_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>A decorator that can be wrapped around a function returning a requests.Response with a JSON body.
+If the request has failed, it will extract the “error” from the JSON response and raise an AuthAPIError.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>result</strong> – Items to extract. Will raise an AuthAPIError if not all items were fetched.</p></li>
+<li><p><strong>ignore_status_codes</strong> – If one of these status codes is returned (e.g. 404),
+it gets ignored and a None is returned instead.</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>Tuple of items enumerated in the <cite>result</cite> list. If there’s only one item, it will
+return just that item.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.cloud.get_headers">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.cloud.</span></code><code className="sig-name descname"><span className="pre">get_headers</span></code><span className="sig-paren">(</span><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.get_headers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.cloud.get_remote_param">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.cloud.</span></code><code className="sig-name descname"><span className="pre">get_remote_param</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">remote</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">key</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> → <span className="pre">str</span><a className="headerlink" href="#splitgraph.cloud.get_remote_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.cloud.get_token_claim">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.cloud.</span></code><code className="sig-name descname"><span className="pre">get_token_claim</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">jwt</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">claim</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.get_token_claim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract a claim from a JWT token without validating it.</p>
+</dd></dl>
+
+<dl className="py function">
+<dt id="splitgraph.cloud.handle_gql_errors">
+<code className="sig-prename descclassname"><span className="pre">splitgraph.cloud.</span></code><code className="sig-name descname"><span className="pre">handle_gql_errors</span></code><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">func</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Callable</span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">…</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span> </span><span className="pre">requests.models.Response</span><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span> → <span className="pre">Callable</span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">…</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span> </span><span className="pre">requests.models.Response</span><span className="p"><span className="pre">]</span></span><a className="headerlink" href="#splitgraph.cloud.handle_gql_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>A decorator that handles responses from the GQL API, transforming errors into exceptions.</p>
+</dd></dl>
+
+</div><div className="section" id="splitgraph-cloud-package">
+
+
+</div>
+</div>

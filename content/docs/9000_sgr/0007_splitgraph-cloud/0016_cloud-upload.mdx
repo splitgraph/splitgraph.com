@@ -1,0 +1,13 @@
+export const meta = {id: "cloud-upload", title: "sgr cloud upload", sidebarTitle: "cloud upload", description: "Upload files to Splitgraph."};
+
+```sgr cloud upload [OPTIONS] REPOSITORY [FILES]...```
+
+Upload files to Splitgraph.
+
+This uses the upload API to add data like CSV files to a remote Splitgraph instance,
+trigger a load and wait for the data to load into a repository.
+
+### Options
+
+  * **`--remote TEXT`**: Name of the remote registry to use.
+  * **`--file-format [csv]`**: 
