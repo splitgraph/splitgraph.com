@@ -1,0 +1,34 @@
+export const meta = {id: "sql", title: "sgr sql", sidebarTitle: "sql", description: "Run an SQL statement against the Splitgraph engine."};
+
+```sgr sql [OPTIONS] SQL```
+
+Run an SQL statement against the Splitgraph engine.
+
+There are no restrictions on the contents of the statement: this is the same as running it
+from any other PostgreSQL client.
+
+If ``--schema`` is specified, the statement is run with the ``search_path`` set to that schema. This means
+that these statements are equivalent:
+
+
+```
+sgr sql "SELECT * FROM "noaa/climate".table"
+sgr sql -s noaa/climate "SELECT * FROM table"
+```
+
+If `--image` is specified, this will run the statement against that image using layered querying.
+Only read-only statements are supported. For example:
+
+
+```
+sgr sql -i noaa/climate:latest "SELECT * FROM table"
+```
+
+### Options
+
+  * **`-r, --remote []`**: Perform operation on a different remote engine
+  * **`-s, --schema TEXT`**: Run SQL against this schema.
+  * **`-i, --image IMAGE`**: Run SQL against this image.
+  * **`-a, --show-all`**: Return all results of the query.
+  * **`-j, --json`**: Return results as JSON
+  * **`-n, --no-transaction`**: Don't wrap the SQL in a transaction.

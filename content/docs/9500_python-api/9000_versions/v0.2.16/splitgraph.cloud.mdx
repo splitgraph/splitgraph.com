@@ -1,0 +1,875 @@
+
+
+
+export const meta = {
+  title: "splitgraph.cloud package",
+  id: "splitgraph.cloud package"
+};
+
+<div className=" rst-content"><nav className="toc"><ol className="toc-level toc-level-1"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#module-contents">Module contents</a></li><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#submodules">Submodules</a><ol className="toc-level toc-level-2"><li className="toc-item toc-item-h2"><a className="toc-link toc-link-h2" href="#splitgraphcloudmodels-module">splitgraph.cloud.models module</a></li></ol></li></ol></nav><div className="section" id="module-splitgraph.cloud">
+<span id="module-contents"></span><h2 id="module-contents">Module contents<a className="headerlink" href="#module-splitgraph.cloud" title="Permalink to this headline">¶</a></h2>
+<p>Public API for interacting with the Splitgraph registry</p>
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.cloud.AuthAPIClient">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.</span></span><span className="sig-name descname"><span className="pre">AuthAPIClient</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span><span className="n"><span className="pre">args</span></span></em>, <em className="sig-param"><span className="o"><span className="pre">**</span></span><span className="n"><span className="pre">kwargs</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.AuthAPIClient" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.GQLAPIClient">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.</span></span><span className="sig-name descname"><span className="pre">GQLAPIClient</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">remote</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">endpoint</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">access_token</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">object</span></code></p>
+<p>Wrapper class for select Splitgraph Registry GQL operations that can be
+called from the CLI</p>
+<dl className="py property">
+<dt className="sig sig-object py" id="splitgraph.cloud.GQLAPIClient.access_token">
+<em className="property"><span className="pre">property</span> </em><span className="sig-name descname"><span className="pre">access_token</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional[str]</span></em><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.access_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.GQLAPIClient.bulk_upsert_metadata">
+<span className="sig-name descname"><span className="pre">bulk_upsert_metadata</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">namespace_list</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository_list</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">metadata_list</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.Metadata" title="splitgraph.cloud.models.Metadata"><span className="pre">splitgraph.cloud.models.Metadata</span></a><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.bulk_upsert_metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.GQLAPIClient.find_repository">
+<span className="sig-name descname"><span className="pre">find_repository</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">query</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">limit</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">int</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">10</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">int</span><span className="p"><span className="pre">,</span> </span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.find_repository" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.GQLAPIClient.get_external_metadata">
+<span className="sig-name descname"><span className="pre">get_external_metadata</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.ExternalResponse" title="splitgraph.cloud.models.ExternalResponse"><span className="pre">splitgraph.cloud.models.ExternalResponse</span></a><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.get_external_metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.GQLAPIClient.get_metadata">
+<span className="sig-name descname"><span className="pre">get_metadata</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.MetadataResponse" title="splitgraph.cloud.models.MetadataResponse"><span className="pre">splitgraph.cloud.models.MetadataResponse</span></a><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.get_metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.GQLAPIClient.load_all_repositories">
+<span className="sig-name descname"><span className="pre">load_all_repositories</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">limit_to</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.Repository" title="splitgraph.cloud.models.Repository"><span className="pre">splitgraph.cloud.models.Repository</span></a><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.load_all_repositories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.GQLAPIClient.upsert_description">
+<span className="sig-name descname"><span className="pre">upsert_description</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">description</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.upsert_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.GQLAPIClient.upsert_metadata">
+<span className="sig-name descname"><span className="pre">upsert_metadata</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">metadata</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><a className="reference internal" href="#splitgraph.cloud.models.Metadata" title="splitgraph.cloud.models.Metadata"><span className="pre">splitgraph.cloud.models.Metadata</span></a></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.upsert_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update metadata for a single repository.</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.GQLAPIClient.upsert_readme">
+<span className="sig-name descname"><span className="pre">upsert_readme</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">readme</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.upsert_readme" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.GQLAPIClient.upsert_topics">
+<span className="sig-name descname"><span className="pre">upsert_topics</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">topics</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.GQLAPIClient.upsert_topics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.RESTAPIClient">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.</span></span><span className="sig-name descname"><span className="pre">RESTAPIClient</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">remote</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">object</span></code></p>
+<p>Client for various Splitgraph Registry REST APIs: auth token generation, external repo setup…</p>
+<dl className="py property">
+<dt className="sig sig-object py" id="splitgraph.cloud.RESTAPIClient.access_token">
+<em className="property"><span className="pre">property</span> </em><span className="sig-name descname"><span className="pre">access_token</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.access_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will return an up-to-date access token by either getting it from
+the configuration file or contacting the auth service for a new one.
+Will write the new access token into the configuration file.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Returns</dt>
+<dd className="field-odd"><p>Access token.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.RESTAPIClient.bulk_upsert_external">
+<span className="sig-name descname"><span className="pre">bulk_upsert_external</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">repositories</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.AddExternalRepositoryRequest" title="splitgraph.cloud.models.AddExternalRepositoryRequest"><span className="pre">splitgraph.cloud.models.AddExternalRepositoryRequest</span></a><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.bulk_upsert_external" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.RESTAPIClient.create_machine_credentials">
+<span className="sig-name descname"><span className="pre">create_machine_credentials</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">access_token</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">password</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">requests.models.Response</span></span></span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.create_machine_credentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a key and secret that can be used to log into the Splitgraph registry
+via a normal Postgres connection. The secret must be stored in the user’s local
+configuration file (it’s not stored on Splitgraph servers).</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>access_token</strong> – Access token</p></li>
+<li><p><strong>password</strong> – Password</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>Tuple of (key, secret).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.RESTAPIClient.ensure_external_credential">
+<span className="sig-name descname"><span className="pre">ensure_external_credential</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">credential_data</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credential_name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">plugin_name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">str</span></span></span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.ensure_external_credential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store a credential for accessing an external data source
+in Splitgraph Cloud and return its ID</p>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.RESTAPIClient.get_access_token">
+<span className="sig-name descname"><span className="pre">get_access_token</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">refresh_token</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">requests.models.Response</span></span></span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.get_access_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a new access token from a refresh token.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><p><strong>refresh_token</strong> – Refresh token</p>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>New access token.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.RESTAPIClient.get_access_token_from_api">
+<span className="sig-name descname"><span className="pre">get_access_token_from_api</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">api_key</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">api_secret</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">requests.models.Response</span></span></span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.get_access_token_from_api" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a new access token from API keys</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>api_key</strong> – API key</p></li>
+<li><p><strong>api_secret</strong> – API secret</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>New access token.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.RESTAPIClient.get_latest_version">
+<span className="sig-name descname"><span className="pre">get_latest_version</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.get_latest_version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.RESTAPIClient.get_refresh_token">
+<span className="sig-name descname"><span className="pre">get_refresh_token</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">username</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">password</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">requests.models.Response</span></span></span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.get_refresh_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a long-lived refresh token and a short-lived access token from the API.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>username</strong> – Username</p></li>
+<li><p><strong>password</strong> – Password</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>Tuple of (access_token, refresh_token).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.RESTAPIClient.list_external_credentials">
+<span className="sig-name descname"><span className="pre">list_external_credentials</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><a className="reference internal" href="#splitgraph.cloud.models.ListExternalCredentialsResponse" title="splitgraph.cloud.models.ListExternalCredentialsResponse"><span className="pre">splitgraph.cloud.models.ListExternalCredentialsResponse</span></a></span></span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.list_external_credentials" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.RESTAPIClient.register">
+<span className="sig-name descname"><span className="pre">register</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">username</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">password</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">email</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">accept_tos</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">requests.models.Response</span></span></span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register a new Splitgraph user.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>username</strong> – Username</p></li>
+<li><p><strong>password</strong> – Password</p></li>
+<li><p><strong>email</strong> – Email</p></li>
+<li><p><strong>accept_tos</strong> – Accept the Terms of Service if they exist</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.RESTAPIClient.tos">
+<span className="sig-name descname"><span className="pre">tos</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">requests.models.Response</span></span></span><a className="headerlink" href="#splitgraph.cloud.RESTAPIClient.tos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a Terms of Service message from the registry (if accepting ToS is required)
+:return: Link to the Terms of Service or None</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.cloud.expect_result">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.</span></span><span className="sig-name descname"><span className="pre">expect_result</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">result</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">ignore_status_codes</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">int</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">Callable</span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">[</span></span><span className="pre">Callable</span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">...</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span> </span><span className="pre">requests.models.Response</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span> </span><span className="pre">Callable</span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">...</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span> </span><span className="pre">Union</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Tuple</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.cloud.expect_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>A decorator that can be wrapped around a function returning a requests.Response with a JSON body.
+If the request has failed, it will extract the “error” from the JSON response and raise an AuthAPIError.</p>
+<dl className="field-list simple">
+<dt className="field-odd">Parameters</dt>
+<dd className="field-odd"><ul className="simple">
+<li><p><strong>result</strong> – Items to extract. Will raise an AuthAPIError if not all items were fetched.</p></li>
+<li><p><strong>ignore_status_codes</strong> – If one of these status codes is returned (e.g. 404),
+it gets ignored and a None is returned instead.</p></li>
+</ul>
+</dd>
+<dt className="field-even">Returns</dt>
+<dd className="field-even"><p>Tuple of items enumerated in the <cite>result</cite> list. If there’s only one item, it will
+return just that item.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.cloud.get_headers">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.</span></span><span className="sig-name descname"><span className="pre">get_headers</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.get_headers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.cloud.get_remote_param">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.</span></span><span className="sig-name descname"><span className="pre">get_remote_param</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">remote</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">key</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">str</span></span></span><a className="headerlink" href="#splitgraph.cloud.get_remote_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.cloud.get_token_claim">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.</span></span><span className="sig-name descname"><span className="pre">get_token_claim</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">jwt</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">claim</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.get_token_claim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract a claim from a JWT token without validating it.</p>
+</dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.cloud.handle_gql_errors">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.</span></span><span className="sig-name descname"><span className="pre">handle_gql_errors</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">func</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Callable</span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">...</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span> </span><span className="pre">requests.models.Response</span><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">Callable</span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">[</span></span><span className="p"><span className="pre">...</span></span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">,</span> </span><span className="pre">requests.models.Response</span><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.cloud.handle_gql_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>A decorator that handles responses from the GQL API, transforming errors into exceptions.</p>
+</dd></dl>
+
+</div><div className="section" id="splitgraph-cloud-package">
+
+<div className="section" id="submodules">
+<h2 id="submodules">Submodules<a className="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div className="section" id="module-splitgraph.cloud.models">
+<span id="splitgraph-cloud-models-module"></span><h2 id="splitgraphcloudmodels-module">splitgraph.cloud.models module<a className="headerlink" href="#module-splitgraph.cloud.models" title="Permalink to this headline">¶</a></h2>
+<p>Definitions for the repositories.yml format that’s used to batch-populate a Splitgraph catalog
+with repositories and their metadata.</p>
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.AddExternalCredentialRequest">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">AddExternalCredentialRequest</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credential_name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credential_data</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">plugin_name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.AddExternalCredentialRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.AddExternalCredentialRequest.credential_data">
+<span className="sig-name descname"><span className="pre">credential_data</span></span><em className="property"><span className="pre">:</span> <span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.AddExternalCredentialRequest.credential_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.AddExternalCredentialRequest.credential_name">
+<span className="sig-name descname"><span className="pre">credential_name</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.AddExternalCredentialRequest.credential_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.AddExternalCredentialRequest.plugin_name">
+<span className="sig-name descname"><span className="pre">plugin_name</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.AddExternalCredentialRequest.plugin_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.AddExternalRepositoriesRequest">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">AddExternalRepositoriesRequest</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repositories</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.AddExternalRepositoryRequest" title="splitgraph.cloud.models.AddExternalRepositoryRequest"><span className="pre">splitgraph.cloud.models.AddExternalRepositoryRequest</span></a><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.AddExternalRepositoriesRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.AddExternalRepositoriesRequest.repositories">
+<span className="sig-name descname"><span className="pre">repositories</span></span><em className="property"><span className="pre">:</span> <span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.AddExternalRepositoryRequest" title="splitgraph.cloud.models.AddExternalRepositoryRequest"><span className="pre">splitgraph.cloud.models.AddExternalRepositoryRequest</span></a><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.AddExternalRepositoriesRequest.repositories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.AddExternalRepositoryRequest">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">AddExternalRepositoryRequest</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">plugin_name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">params</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Params</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">is_live</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">tables</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><a className="reference internal" href="#splitgraph.cloud.models.ExternalTableRequest" title="splitgraph.cloud.models.ExternalTableRequest"><span className="pre">splitgraph.cloud.models.ExternalTableRequest</span></a><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credential_id</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schedule</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><a className="reference internal" href="#splitgraph.cloud.models.IngestionSchedule" title="splitgraph.cloud.models.IngestionSchedule"><span className="pre">splitgraph.cloud.models.IngestionSchedule</span></a></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.AddExternalRepositoryRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.AddExternalRepositoryRequest.credential_id">
+<span className="sig-name descname"><span className="pre">credential_id</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.AddExternalRepositoryRequest.credential_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.AddExternalRepositoryRequest.from_external">
+<em className="property"><span className="pre">classmethod</span> </em><span className="sig-name descname"><span className="pre">from_external</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">external</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><a className="reference internal" href="#splitgraph.cloud.models.External" title="splitgraph.cloud.models.External"><span className="pre">splitgraph.cloud.models.External</span></a></span></em>, <em className="sig-param"><span className="n"><span className="pre">credential_map</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.AddExternalRepositoryRequest.from_external" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.AddExternalRepositoryRequest.is_live">
+<span className="sig-name descname"><span className="pre">is_live</span></span><em className="property"><span className="pre">:</span> <span className="pre">bool</span></em><a className="headerlink" href="#splitgraph.cloud.models.AddExternalRepositoryRequest.is_live" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.AddExternalRepositoryRequest.namespace">
+<span className="sig-name descname"><span className="pre">namespace</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.AddExternalRepositoryRequest.namespace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.AddExternalRepositoryRequest.params">
+<span className="sig-name descname"><span className="pre">params</span></span><em className="property"><span className="pre">:</span> <span className="pre">Params</span></em><a className="headerlink" href="#splitgraph.cloud.models.AddExternalRepositoryRequest.params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.AddExternalRepositoryRequest.plugin_name">
+<span className="sig-name descname"><span className="pre">plugin_name</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.AddExternalRepositoryRequest.plugin_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.AddExternalRepositoryRequest.repository">
+<span className="sig-name descname"><span className="pre">repository</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.AddExternalRepositoryRequest.repository" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.AddExternalRepositoryRequest.schedule">
+<span className="sig-name descname"><span className="pre">schedule</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.IngestionSchedule" title="splitgraph.cloud.models.IngestionSchedule"><span className="pre">splitgraph.cloud.models.IngestionSchedule</span></a><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.AddExternalRepositoryRequest.schedule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.AddExternalRepositoryRequest.tables">
+<span className="sig-name descname"><span className="pre">tables</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><a className="reference internal" href="#splitgraph.cloud.models.ExternalTableRequest" title="splitgraph.cloud.models.ExternalTableRequest"><span className="pre">splitgraph.cloud.models.ExternalTableRequest</span></a><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.AddExternalRepositoryRequest.tables" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Credential">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">Credential</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">plugin</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">data</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.Credential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Credential.data">
+<span className="sig-name descname"><span className="pre">data</span></span><em className="property"><span className="pre">:</span> <span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.Credential.data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Credential.plugin">
+<span className="sig-name descname"><span className="pre">plugin</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.Credential.plugin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.External">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">External</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credential_id</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credential</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">plugin</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">params</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">tables</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><a className="reference internal" href="#splitgraph.cloud.models.Table" title="splitgraph.cloud.models.Table"><span className="pre">splitgraph.cloud.models.Table</span></a><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">is_live</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">True</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schedule</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><a className="reference internal" href="#splitgraph.cloud.models.IngestionSchedule" title="splitgraph.cloud.models.IngestionSchedule"><span className="pre">splitgraph.cloud.models.IngestionSchedule</span></a></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.External" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.External.credential">
+<span className="sig-name descname"><span className="pre">credential</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.External.credential" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.External.credential_id">
+<span className="sig-name descname"><span className="pre">credential_id</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.External.credential_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.External.is_live">
+<span className="sig-name descname"><span className="pre">is_live</span></span><em className="property"><span className="pre">:</span> <span className="pre">bool</span></em><a className="headerlink" href="#splitgraph.cloud.models.External.is_live" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.External.params">
+<span className="sig-name descname"><span className="pre">params</span></span><em className="property"><span className="pre">:</span> <span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.External.params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.External.plugin">
+<span className="sig-name descname"><span className="pre">plugin</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.External.plugin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.External.schedule">
+<span className="sig-name descname"><span className="pre">schedule</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.IngestionSchedule" title="splitgraph.cloud.models.IngestionSchedule"><span className="pre">splitgraph.cloud.models.IngestionSchedule</span></a><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.External.schedule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.External.tables">
+<span className="sig-name descname"><span className="pre">tables</span></span><em className="property"><span className="pre">:</span> <span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><a className="reference internal" href="#splitgraph.cloud.models.Table" title="splitgraph.cloud.models.Table"><span className="pre">splitgraph.cloud.models.Table</span></a><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.External.tables" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">ExternalResponse</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credentialId</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">dataSource</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">params</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">tableParams</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">externalImageByNamespaceAndRepository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><a className="reference internal" href="#splitgraph.cloud.models.ExternalResponse.ExternalImageResponse" title="splitgraph.cloud.models.ExternalResponse.ExternalImageResponse"><span className="pre">splitgraph.cloud.models.ExternalResponse.ExternalImageResponse</span></a></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.ExternalImageResponse">
+<em className="property"><span className="pre">class</span> </em><span className="sig-name descname"><span className="pre">ExternalImageResponse</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">imageByNamespaceAndRepositoryAndImageHash</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><a className="reference internal" href="#splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse" title="splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse"><span className="pre">splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse</span></a></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.ExternalImageResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse">
+<em className="property"><span className="pre">class</span> </em><span className="sig-name descname"><span className="pre">ImageResponse</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">tablesByNamespaceAndRepositoryAndImageHash</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><a className="reference internal" href="#splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse" title="splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse"><span className="pre">splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse</span></a></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse">
+<em className="property"><span className="pre">class</span> </em><span className="sig-name descname"><span className="pre">TablesResponse</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">nodes</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse.Node" title="splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse.Node"><span className="pre">splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse.Node</span></a><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse.Node">
+<em className="property"><span className="pre">class</span> </em><span className="sig-name descname"><span className="pre">Node</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">tableName</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">tableSchema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="splitgraph.core/#splitgraph.core.types.TableColumn" title="splitgraph.core.types.TableColumn"><span className="pre">splitgraph.core.types.TableColumn</span></a><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse.Node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse.Node.tableName">
+<span className="sig-name descname"><span className="pre">tableName</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse.Node.tableName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse.Node.tableSchema">
+<span className="sig-name descname"><span className="pre">tableSchema</span></span><em className="property"><span className="pre">:</span> <span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="splitgraph.core/#splitgraph.core.types.TableColumn" title="splitgraph.core.types.TableColumn"><span className="pre">splitgraph.core.types.TableColumn</span></a><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse.Node.tableSchema" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse.nodes">
+<span className="sig-name descname"><span className="pre">nodes</span></span><em className="property"><span className="pre">:</span> <span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse.Node" title="splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse.Node"><span className="pre">splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse.Node</span></a><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse.nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.tablesByNamespaceAndRepositoryAndImageHash">
+<span className="sig-name descname"><span className="pre">tablesByNamespaceAndRepositoryAndImageHash</span></span><em className="property"><span className="pre">:</span> <a className="reference internal" href="#splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse" title="splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse"><span className="pre">splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.TablesResponse</span></a></em><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse.tablesByNamespaceAndRepositoryAndImageHash" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.imageByNamespaceAndRepositoryAndImageHash">
+<span className="sig-name descname"><span className="pre">imageByNamespaceAndRepositoryAndImageHash</span></span><em className="property"><span className="pre">:</span> <a className="reference internal" href="#splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse" title="splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse"><span className="pre">splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.ImageResponse</span></a></em><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.ExternalImageResponse.imageByNamespaceAndRepositoryAndImageHash" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.credentialId">
+<span className="sig-name descname"><span className="pre">credentialId</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.credentialId" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.dataSource">
+<span className="sig-name descname"><span className="pre">dataSource</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.dataSource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.externalImageByNamespaceAndRepository">
+<span className="sig-name descname"><span className="pre">externalImageByNamespaceAndRepository</span></span><em className="property"><span className="pre">:</span> <a className="reference internal" href="#splitgraph.cloud.models.ExternalResponse.ExternalImageResponse" title="splitgraph.cloud.models.ExternalResponse.ExternalImageResponse"><span className="pre">splitgraph.cloud.models.ExternalResponse.ExternalImageResponse</span></a></em><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.externalImageByNamespaceAndRepository" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.from_response">
+<em className="property"><span className="pre">classmethod</span> </em><span className="sig-name descname"><span className="pre">from_response</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">response</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.ExternalResponse" title="splitgraph.cloud.models.ExternalResponse"><span className="pre">splitgraph.cloud.models.ExternalResponse</span></a><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.from_response" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.namespace">
+<span className="sig-name descname"><span className="pre">namespace</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.namespace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.params">
+<span className="sig-name descname"><span className="pre">params</span></span><em className="property"><span className="pre">:</span> <span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.repository">
+<span className="sig-name descname"><span className="pre">repository</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.repository" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.tableParams">
+<span className="sig-name descname"><span className="pre">tableParams</span></span><em className="property"><span className="pre">:</span> <span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.tableParams" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalResponse.to_external">
+<span className="sig-name descname"><span className="pre">to_external</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><a className="reference internal" href="#splitgraph.cloud.models.External" title="splitgraph.cloud.models.External"><span className="pre">splitgraph.cloud.models.External</span></a></span></span><a className="headerlink" href="#splitgraph.cloud.models.ExternalResponse.to_external" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalTableRequest">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">ExternalTableRequest</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">options</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">&#38;lbrace;&#38;rbrace;</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.ExternalTableRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalTableRequest.options">
+<span className="sig-name descname"><span className="pre">options</span></span><em className="property"><span className="pre">:</span> <span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.ExternalTableRequest.options" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ExternalTableRequest.schema_">
+<span className="sig-name descname"><span className="pre">schema_</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.ExternalTableRequest.schema_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.IngestionSchedule">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">IngestionSchedule</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schedule</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">enabled</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">True</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.IngestionSchedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.IngestionSchedule.schedule">
+<span className="sig-name descname"><span className="pre">schedule</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.IngestionSchedule.schedule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ListExternalCredentialsResponse">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">ListExternalCredentialsResponse</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credentials</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.ListExternalCredentialsResponse.ExternalCredential" title="splitgraph.cloud.models.ListExternalCredentialsResponse.ExternalCredential"><span className="pre">splitgraph.cloud.models.ListExternalCredentialsResponse.ExternalCredential</span></a><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.ListExternalCredentialsResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ListExternalCredentialsResponse.ExternalCredential">
+<em className="property"><span className="pre">class</span> </em><span className="sig-name descname"><span className="pre">ExternalCredential</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">plugin_name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credential_name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credential_id</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.ListExternalCredentialsResponse.ExternalCredential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ListExternalCredentialsResponse.ExternalCredential.credential_id">
+<span className="sig-name descname"><span className="pre">credential_id</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.ListExternalCredentialsResponse.ExternalCredential.credential_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ListExternalCredentialsResponse.ExternalCredential.credential_name">
+<span className="sig-name descname"><span className="pre">credential_name</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.ListExternalCredentialsResponse.ExternalCredential.credential_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ListExternalCredentialsResponse.ExternalCredential.plugin_name">
+<span className="sig-name descname"><span className="pre">plugin_name</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.ListExternalCredentialsResponse.ExternalCredential.plugin_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.ListExternalCredentialsResponse.credentials">
+<span className="sig-name descname"><span className="pre">credentials</span></span><em className="property"><span className="pre">:</span> <span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.ListExternalCredentialsResponse.ExternalCredential" title="splitgraph.cloud.models.ListExternalCredentialsResponse.ExternalCredential"><span className="pre">splitgraph.cloud.models.ListExternalCredentialsResponse.ExternalCredential</span></a><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.ListExternalCredentialsResponse.credentials" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Metadata">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">Metadata</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">readme</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Union</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><a className="reference internal" href="#splitgraph.cloud.models.Metadata.Readme" title="splitgraph.cloud.models.Metadata.Readme"><span className="pre">splitgraph.cloud.models.Metadata.Readme</span></a><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">description</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">topics</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">sources</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.Source" title="splitgraph.cloud.models.Source"><span className="pre">splitgraph.cloud.models.Source</span></a><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">license</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">extra_metadata</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.Metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Metadata.Readme">
+<em className="property"><span className="pre">class</span> </em><span className="sig-name descname"><span className="pre">Readme</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">file</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">text</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.Metadata.Readme" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Metadata.Readme.file">
+<span className="sig-name descname"><span className="pre">file</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.Metadata.Readme.file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Metadata.Readme.text">
+<span className="sig-name descname"><span className="pre">text</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.Metadata.Readme.text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Metadata.description">
+<span className="sig-name descname"><span className="pre">description</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.Metadata.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Metadata.extra_metadata">
+<span className="sig-name descname"><span className="pre">extra_metadata</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.Metadata.extra_metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Metadata.license">
+<span className="sig-name descname"><span className="pre">license</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.Metadata.license" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Metadata.readme">
+<span className="sig-name descname"><span className="pre">readme</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Union</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><a className="reference internal" href="#splitgraph.cloud.models.Metadata.Readme" title="splitgraph.cloud.models.Metadata.Readme"><span className="pre">splitgraph.cloud.models.Metadata.Readme</span></a><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.Metadata.readme" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Metadata.sources">
+<span className="sig-name descname"><span className="pre">sources</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.Source" title="splitgraph.cloud.models.Source"><span className="pre">splitgraph.cloud.models.Source</span></a><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.Metadata.sources" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Metadata.topics">
+<span className="sig-name descname"><span className="pre">topics</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.Metadata.topics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">MetadataResponse</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repoTopicsByNamespaceAndRepository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><a className="reference internal" href="#splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse" title="splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse"><span className="pre">splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse</span></a></span></em>, <em className="sig-param"><span className="n"><span className="pre">repoProfileByNamespaceAndRepository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><a className="reference internal" href="#splitgraph.cloud.models.MetadataResponse.RepoProfileResponse" title="splitgraph.cloud.models.MetadataResponse.RepoProfileResponse"><span className="pre">splitgraph.cloud.models.MetadataResponse.RepoProfileResponse</span></a></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.RepoProfileResponse">
+<em className="property"><span className="pre">class</span> </em><span className="sig-name descname"><span className="pre">RepoProfileResponse</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">readme</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">description</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">topics</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">sources</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.Source" title="splitgraph.cloud.models.Source"><span className="pre">splitgraph.cloud.models.Source</span></a><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">license</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">metadata</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><a className="reference internal" href="#splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.MetadataResponse" title="splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.MetadataResponse"><span className="pre">splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.MetadataResponse</span></a></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.RepoProfileResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.MetadataResponse">
+<em className="property"><span className="pre">class</span> </em><span className="sig-name descname"><span className="pre">MetadataResponse</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">created_at</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">updated_at</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">upstream_metadata</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.MetadataResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.MetadataResponse.created_at">
+<span className="sig-name descname"><span className="pre">created_at</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.MetadataResponse.created_at" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.MetadataResponse.updated_at">
+<span className="sig-name descname"><span className="pre">updated_at</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.MetadataResponse.updated_at" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.MetadataResponse.upstream_metadata">
+<span className="sig-name descname"><span className="pre">upstream_metadata</span></span><em className="property"><span className="pre">:</span> <span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.MetadataResponse.upstream_metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.description">
+<span className="sig-name descname"><span className="pre">description</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.license">
+<span className="sig-name descname"><span className="pre">license</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.license" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.metadata">
+<span className="sig-name descname"><span className="pre">metadata</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.MetadataResponse" title="splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.MetadataResponse"><span className="pre">splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.MetadataResponse</span></a><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.readme">
+<span className="sig-name descname"><span className="pre">readme</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.readme" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.sources">
+<span className="sig-name descname"><span className="pre">sources</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.Source" title="splitgraph.cloud.models.Source"><span className="pre">splitgraph.cloud.models.Source</span></a><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.sources" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.topics">
+<span className="sig-name descname"><span className="pre">topics</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">List</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.RepoProfileResponse.topics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse">
+<em className="property"><span className="pre">class</span> </em><span className="sig-name descname"><span className="pre">RepoTopicsResponse</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">nodes</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse.RepositoryTopics" title="splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse.RepositoryTopics"><span className="pre">splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse.RepositoryTopics</span></a><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse.RepositoryTopics">
+<em className="property"><span className="pre">class</span> </em><span className="sig-name descname"><span className="pre">RepositoryTopics</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">topic</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse.RepositoryTopics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse.RepositoryTopics.topic">
+<span className="sig-name descname"><span className="pre">topic</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse.RepositoryTopics.topic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse.nodes">
+<span className="sig-name descname"><span className="pre">nodes</span></span><em className="property"><span className="pre">:</span> <span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse.RepositoryTopics" title="splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse.RepositoryTopics"><span className="pre">splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse.RepositoryTopics</span></a><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse.nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.from_response">
+<em className="property"><span className="pre">classmethod</span> </em><span className="sig-name descname"><span className="pre">from_response</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">response</span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.MetadataResponse" title="splitgraph.cloud.models.MetadataResponse"><span className="pre">splitgraph.cloud.models.MetadataResponse</span></a><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.from_response" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.namespace">
+<span className="sig-name descname"><span className="pre">namespace</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.namespace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.repoProfileByNamespaceAndRepository">
+<span className="sig-name descname"><span className="pre">repoProfileByNamespaceAndRepository</span></span><em className="property"><span className="pre">:</span> <a className="reference internal" href="#splitgraph.cloud.models.MetadataResponse.RepoProfileResponse" title="splitgraph.cloud.models.MetadataResponse.RepoProfileResponse"><span className="pre">splitgraph.cloud.models.MetadataResponse.RepoProfileResponse</span></a></em><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.repoProfileByNamespaceAndRepository" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.repoTopicsByNamespaceAndRepository">
+<span className="sig-name descname"><span className="pre">repoTopicsByNamespaceAndRepository</span></span><em className="property"><span className="pre">:</span> <a className="reference internal" href="#splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse" title="splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse"><span className="pre">splitgraph.cloud.models.MetadataResponse.RepoTopicsResponse</span></a></em><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.repoTopicsByNamespaceAndRepository" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.repository">
+<span className="sig-name descname"><span className="pre">repository</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.repository" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py method">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.MetadataResponse.to_metadata">
+<span className="sig-name descname"><span className="pre">to_metadata</span></span><span className="sig-paren">(</span><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><a className="reference internal" href="#splitgraph.cloud.models.Metadata" title="splitgraph.cloud.models.Metadata"><span className="pre">splitgraph.cloud.models.Metadata</span></a></span></span><a className="headerlink" href="#splitgraph.cloud.models.MetadataResponse.to_metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.RepositoriesYAML">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">RepositoriesYAML</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repositories</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.Repository" title="splitgraph.cloud.models.Repository"><span className="pre">splitgraph.cloud.models.Repository</span></a><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credentials</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><a className="reference internal" href="#splitgraph.cloud.models.Credential" title="splitgraph.cloud.models.Credential"><span className="pre">splitgraph.cloud.models.Credential</span></a><span className="p"><span className="pre">]</span></span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.RepositoriesYAML" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.RepositoriesYAML.credentials">
+<span className="sig-name descname"><span className="pre">credentials</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><a className="reference internal" href="#splitgraph.cloud.models.Credential" title="splitgraph.cloud.models.Credential"><span className="pre">splitgraph.cloud.models.Credential</span></a><span className="p"><span className="pre">]</span></span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.RepositoriesYAML.credentials" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.RepositoriesYAML.repositories">
+<span className="sig-name descname"><span className="pre">repositories</span></span><em className="property"><span className="pre">:</span> <span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.Repository" title="splitgraph.cloud.models.Repository"><span className="pre">splitgraph.cloud.models.Repository</span></a><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.RepositoriesYAML.repositories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Repository">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">Repository</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">namespace</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">repository</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">metadata</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><a className="reference internal" href="#splitgraph.cloud.models.Metadata" title="splitgraph.cloud.models.Metadata"><span className="pre">splitgraph.cloud.models.Metadata</span></a></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">external</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><a className="reference internal" href="#splitgraph.cloud.models.External" title="splitgraph.cloud.models.External"><span className="pre">splitgraph.cloud.models.External</span></a></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.Repository" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Repository.external">
+<span className="sig-name descname"><span className="pre">external</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.External" title="splitgraph.cloud.models.External"><span className="pre">splitgraph.cloud.models.External</span></a><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.Repository.external" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Repository.metadata">
+<span className="sig-name descname"><span className="pre">metadata</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.Metadata" title="splitgraph.cloud.models.Metadata"><span className="pre">splitgraph.cloud.models.Metadata</span></a><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.Repository.metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Repository.namespace">
+<span className="sig-name descname"><span className="pre">namespace</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.Repository.namespace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Repository.repository">
+<span className="sig-name descname"><span className="pre">repository</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.Repository.repository" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Source">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">Source</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">anchor</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">href</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">isCreator</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">isSameAs</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">bool</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.Source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Source.anchor">
+<span className="sig-name descname"><span className="pre">anchor</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.Source.anchor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Source.href">
+<span className="sig-name descname"><span className="pre">href</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.Source.href" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Source.isCreator">
+<span className="sig-name descname"><span className="pre">isCreator</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">bool</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.Source.isCreator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Source.isSameAs">
+<span className="sig-name descname"><span className="pre">isSameAs</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">bool</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.Source.isSameAs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Table">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">Table</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">options</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">schema</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.Table.Column" title="splitgraph.cloud.models.Table.Column"><span className="pre">splitgraph.cloud.models.Table.Column</span></a><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.Table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Table.Column">
+<em className="property"><span className="pre">class</span> </em><span className="sig-name descname"><span className="pre">Column</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">type</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">comment</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span> <span className="o"><span className="pre">=</span></span> <span className="default_value"><span className="pre">None</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.Table.Column" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Table.Column.comment">
+<span className="sig-name descname"><span className="pre">comment</span></span><em className="property"><span className="pre">:</span> <span className="pre">Optional</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.Table.Column.comment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Table.Column.name">
+<span className="sig-name descname"><span className="pre">name</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.Table.Column.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Table.Column.pg_type">
+<span className="sig-name descname"><span className="pre">pg_type</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.Table.Column.pg_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Table.options">
+<span className="sig-name descname"><span className="pre">options</span></span><em className="property"><span className="pre">:</span> <span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.Table.options" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.Table.schema_">
+<span className="sig-name descname"><span className="pre">schema_</span></span><em className="property"><span className="pre">:</span> <span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.Table.Column" title="splitgraph.cloud.models.Table.Column"><span className="pre">splitgraph.cloud.models.Table.Column</span></a><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.Table.schema_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.UpdateExternalCredentialRequest">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">UpdateExternalCredentialRequest</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credential_id</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credential_name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credential_data</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">plugin_name</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.UpdateExternalCredentialRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.UpdateExternalCredentialRequest.credential_data">
+<span className="sig-name descname"><span className="pre">credential_data</span></span><em className="property"><span className="pre">:</span> <span className="pre">Dict</span><span className="p"><span className="pre">[</span></span><span className="pre">str</span><span className="p"><span className="pre">,</span> </span><span className="pre">Any</span><span className="p"><span className="pre">]</span></span></em><a className="headerlink" href="#splitgraph.cloud.models.UpdateExternalCredentialRequest.credential_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.UpdateExternalCredentialRequest.credential_id">
+<span className="sig-name descname"><span className="pre">credential_id</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.UpdateExternalCredentialRequest.credential_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.UpdateExternalCredentialRequest.credential_name">
+<span className="sig-name descname"><span className="pre">credential_name</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.UpdateExternalCredentialRequest.credential_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.UpdateExternalCredentialRequest.plugin_name">
+<span className="sig-name descname"><span className="pre">plugin_name</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.UpdateExternalCredentialRequest.plugin_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py class">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.UpdateExternalCredentialResponse">
+<em className="property"><span className="pre">class</span> </em><span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">UpdateExternalCredentialResponse</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="o"><span className="pre">*</span></span></em>, <em className="sig-param"><span className="n"><span className="pre">credential_id</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">str</span></span></em><span className="sig-paren">)</span><a className="headerlink" href="#splitgraph.cloud.models.UpdateExternalCredentialResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code className="xref py py-class docutils literal notranslate"><span className="pre">pydantic.main.BaseModel</span></code></p>
+<dl className="py attribute">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.UpdateExternalCredentialResponse.credential_id">
+<span className="sig-name descname"><span className="pre">credential_id</span></span><em className="property"><span className="pre">:</span> <span className="pre">str</span></em><a className="headerlink" href="#splitgraph.cloud.models.UpdateExternalCredentialResponse.credential_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl className="py function">
+<dt className="sig sig-object py" id="splitgraph.cloud.models.make_repositories">
+<span className="sig-prename descclassname"><span className="pre">splitgraph.cloud.models.</span></span><span className="sig-name descname"><span className="pre">make_repositories</span></span><span className="sig-paren">(</span><em className="sig-param"><span className="n"><span className="pre">metadata_responses</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.MetadataResponse" title="splitgraph.cloud.models.MetadataResponse"><span className="pre">splitgraph.cloud.models.MetadataResponse</span></a><span className="p"><span className="pre">]</span></span></span></em>, <em className="sig-param"><span className="n"><span className="pre">external_responses</span></span><span className="p"><span className="pre">:</span></span> <span className="n"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.ExternalResponse" title="splitgraph.cloud.models.ExternalResponse"><span className="pre">splitgraph.cloud.models.ExternalResponse</span></a><span className="p"><span className="pre">]</span></span></span></em><span className="sig-paren">)</span> <span className="sig-return"><span className="sig-return-icon">→</span> <span className="sig-return-typehint"><span className="pre">List</span><span className="p"><span className="pre">[</span></span><a className="reference internal" href="#splitgraph.cloud.models.Repository" title="splitgraph.cloud.models.Repository"><span className="pre">splitgraph.cloud.models.Repository</span></a><span className="p"><span className="pre">]</span></span></span></span><a className="headerlink" href="#splitgraph.cloud.models.make_repositories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+</div>
+</div>

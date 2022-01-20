@@ -1,0 +1,20 @@
+export const meta = {id: "cloud-sql", title: "sgr cloud sql", sidebarTitle: "cloud sql", description: "Run SQL on or connect to the Splitgraph Data Delivery Network."};
+
+```sgr cloud sql [OPTIONS] [QUERY]```
+
+Run SQL on or connect to the Splitgraph Data Delivery Network.
+
+If a query isn't passed, this will return a libpq-compatible connection string to
+the registry's SQL endpoint. It can be used to connect to the endpoint with other SQL clients:
+
+```
+pgcli $(sgr cloud sql)
+```
+
+If a query is passed, this will run an SQL query against the SQL endpoint.
+
+### Options
+
+  * **`--remote TEXT`**: Name of the remote registry to use.
+  * **`-a, --show-all`**: Return all results of the query.
+  * **`-j, --json`**: Return results as JSON

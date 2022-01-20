@@ -1,0 +1,21 @@
+export const meta = {id: "dependents", title: "sgr dependents", sidebarTitle: "dependents", description: "List images that were created from an image."};
+
+```sgr dependents [OPTIONS] IMAGE_SPEC```
+
+List images that were created from an image.
+
+This is the inverse of the sgr provenance command. It will list all images that were
+created using a Splitfile that imported data from this image.
+
+By default, this will look at images on the local engine. The engine can be overridden
+with --source-on and --dependents-on. For example:
+
+    sgr dependents --source-on data.splitgraph.com --dependents-on LOCAL noaa/climate:latest
+
+will show all images on the local engine that derived data from `noaa/climate:latest`
+on the Splitgraph registry.
+
+### Options
+
+  * **`-O, --source-on TEXT`**: Override the engine to look the source up on
+  * **`-o, --dependents-on TEXT`**: Override the engine to list dependents from

@@ -1,0 +1,15 @@
+export const meta = {id: "cloud-login-api", title: "sgr cloud login-api", sidebarTitle: "cloud login-api", description: "Log into a Splitgraph registry using existing API keys."};
+
+```sgr cloud login-api [OPTIONS] ```
+
+Log into a Splitgraph registry using existing API keys.
+
+This will inject the API keys for the registry into the configuration file
+and generate a new access token.
+
+### Options
+
+  * **`--api-key TEXT`**: 
+  * **`--api-secret TEXT`**: 
+  * **`--remote TEXT`**: Name of the remote registry to log into.
+  * **`-s, --skip-inject`**: Don't try to copy the config into all engines

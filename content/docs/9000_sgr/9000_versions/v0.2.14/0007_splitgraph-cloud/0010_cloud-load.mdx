@@ -1,0 +1,67 @@
+export const meta = {id: "cloud-load", title: "sgr cloud load", sidebarTitle: "cloud load", description: "Load a Splitgraph catalog from a YAML file."};
+
+```sgr cloud load [OPTIONS] [LIMIT_REPOSITORIES]...```
+
+Load a Splitgraph catalog from a YAML file.
+
+This will load a repositories.yml file and the `readmes` subdirectory produced by
+`sgr cloud dump` back into a remote Splitgraph catalog.
+
+The format is an extension of the format accepted by `sgr cloud metadata` to include multiple
+repositories. README files are read from the `readmes` subdirectory.
+
+
+```
+credentials:      # Optional credentials to access remote data sources
+  my_bucket:
+    plugin: csv
+    data:
+      s3_access_key: ...
+      s3_secret_key: ...
+repositories:
+- namespace: my_username
+  repository: repository
+  metadata:
+    readme: dataset-readme.md
+    description: Dataset description (160 characters max).
+    topics:
+      - topic_1
+      - topic_2
+    sources:
+      - anchor: Source
+        href: https://www.splitgraph.com
+        isCreator: true
+        isSameAs: false
+      - anchor: Source 2
+        href: https://www.splitgraph.com
+        isCreator: false
+        isSameAs: true
+    license: Public Domain
+    extra_metadata:
+      key_1:
+        key_1_1: value_1_1
+        key_1_2: value_1_2
+      key_2:
+        key_2_1: value_2_1
+        key_2_2: value_2_2
+  external:
+    credential: my_bucket
+    plugin: csv
+    params:
+      s3_bucket: my_bucket
+    tables:
+      table_1:
+        schema:
+        - name: column_1
+          type: text
+        - name: column_2
+          type: integer
+        options:
+          s3_object: some/s3_key.csv
+```
+
+### Options
+
+  * **`--remote TEXT`**: Name of the remote registry to use.
+  * **`--readme-dir TEXT`**: Path to the directory with the README files
+  * **`-f, --repositories-file FILENAME`**: 

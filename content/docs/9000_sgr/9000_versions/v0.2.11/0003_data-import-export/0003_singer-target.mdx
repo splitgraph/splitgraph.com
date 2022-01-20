@@ -1,0 +1,23 @@
+export const meta = {id: "singer-target", title: "sgr singer target", sidebarTitle: "singer target", description: "Singer target that loads data into Splitgraph images."};
+
+```sgr singer target [OPTIONS] IMAGE```
+
+Singer target that loads data into Splitgraph images.
+
+This will read data from the stdin from a Singer-compatible tap and load it into
+a Splitgraph image, merging data if the image already exists.
+
+Image must be of the format `[NAMESPACE/]REPOSITORY[:HASH_OR_TAG]` where `HASH_OR_TAG`
+is a tag of an existing image to base the image on. If the repository doesn't exist,
+it will be created.
+
+As this target consumes data from stdin, it will flush the records into a Splitgraph image. By
+default, it will only keep the image if the whole stream has been successfully consumed. To
+make this target completely follow the Singer spec (if it emits state, the records have been
+flushed), pass --failure=keep-both or --failure=delete-old. To delete the old image on success,
+pass --delete-old.
+
+### Options
+
+  * **`-d, --delete-old`**: Delete the old image at the end of ingestion
+  * **`-f, --failure [keep-both|delete-old|delete-new]`**: What to do in case of a failure.
