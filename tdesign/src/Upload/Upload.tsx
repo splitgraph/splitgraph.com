@@ -118,10 +118,10 @@ const Upload = ({
       <div style={style}>
         {!small && <UploadCloudIcon active={active} />}
         <Typography variant="subtitle2">
-          Drag and drop up to {`${maxFiles} file${maxFiles > 1 ? "s" : ""}`}
+          Drag and drop
           <br />
           <LinkButton onClick={() => document.getElementById("upload").click()}>
-            Browse to choose files
+            Browse to choose CSV files
           </LinkButton>
         </Typography>
         {!!maxSizeBytes && (
@@ -129,7 +129,8 @@ const Upload = ({
             variant="smallHighlightedB"
             sx={{ color: ({ palette }) => palette.grays.gray24.main }}
           >
-            (Up to {prettyBytes(maxSizeBytes)})
+            Max {`${maxFiles} file${maxFiles > 1 ? "s" : ""}`},{" "}
+            {prettyBytes(maxSizeBytes)} each
           </Typography>
         )}
         <input
@@ -188,12 +189,10 @@ const Upload = ({
         }}
       >
         {!files?.length
-          ? "Add files to continue"
+          ? "Upload Files and Configure Sharing"
           : allSucceeded
-          ? "OK"
-          : `Continue with ${files?.length} file${
-              files?.length > 1 ? "s" : ""
-            }`}
+          ? "Continue to Configure Sharing"
+          : `Upload ${files?.length} File${files?.length > 1 ? "s" : ""}`}
       </Button>
     );
   };
