@@ -266,7 +266,6 @@ const FileRow = ({
           justifyContent: "space-between",
           paddingLeft: ".5rem",
           borderRadius: "4px",
-          width: "100%",
           backgroundColor: ({ palette }) => {
             if (status === "done") {
               return palette.surfaces.success.main;
