@@ -60,7 +60,9 @@ const Upload = ({
     return (
       <div {...dropzoneProps}>
         {input}
-        <Box sx={{ marginBottom: "1rem" }}>{submitButton}</Box>
+        <Box sx={{ marginBottom: "1rem", textAlign: "center" }}>
+          {submitButton}
+        </Box>
         {!!files?.length && (
           <section>
             <Typography variant="smallHighlightedSB" sx={{ fontSize: "14px" }}>
@@ -117,13 +119,10 @@ const Upload = ({
     return (
       <div style={style}>
         {!small && <UploadCloudIcon active={active} />}
-        <Typography variant="subtitle2">
-          Drag and drop
-          <br />
-          <LinkButton onClick={() => document.getElementById("upload").click()}>
-            Browse to choose CSV files
-          </LinkButton>
-        </Typography>
+        <Typography variant="subtitle2">Drag and drop</Typography>
+        <LinkButton onClick={() => document.getElementById("upload").click()}>
+          Browse to choose CSV files
+        </LinkButton>
         {!!maxSizeBytes && (
           <Typography
             variant="smallHighlightedB"
@@ -167,14 +166,14 @@ const Upload = ({
     return (
       <Button
         type="submit"
-        fullWidth
         endIcon={
           <ArrowForward
             sx={{ position: "absolute", right: "15px", top: "10px" }}
           />
         }
         disabled={fileSizeError || !files?.length || currentlyUploading}
-        sx={{ height: "40px" }}
+        fullWidth
+        sx={{ height: "40px", paddingRight: "50px", margin: "0 auto" }}
         onClick={() => {
           if (allSucceeded) {
             files.forEach((f) => {
@@ -184,7 +183,12 @@ const Upload = ({
               onSubmitAfterFilesUploaded();
             }
           } else {
-            onSubmit(files);
+            onSubmit(
+              files.filter(
+                // Resolves https://app.clickup.com/t/24n8v97
+                (file) => !["done", "aborted"].includes(file.meta.status)
+              )
+            );
           }
         }}
       >
@@ -221,17 +225,15 @@ const Upload = ({
 };
 export default Upload;
 
-const FilesUploadList = ({ files }: { files: IFileWithMeta[] }) => {
-  return (
-    <Grid container spacing={2}>
-      {files?.map((f) => (
-        <Grid key={f.meta.name} item xs={12} md={6}>
-          <FileRow {...f} />
-        </Grid>
-      ))}
-    </Grid>
-  );
-};
+const FilesUploadList = ({ files }: { files: IFileWithMeta[] }) => (
+  <Grid container spacing={2}>
+    {files?.map((f) => (
+      <Grid key={f.meta.id} item xs={12} md={6}>
+        <FileRow {...f} />
+      </Grid>
+    ))}
+  </Grid>
+);
 
 const FileRow = ({
   meta: { name, size, percent, status },
@@ -265,7 +267,6 @@ const FileRow = ({
           justifyContent: "space-between",
           paddingLeft: ".5rem",
           borderRadius: "4px",
-          width: "100%",
           backgroundColor: ({ palette }) => {
             if (status === "done") {
               return palette.surfaces.success.main;
