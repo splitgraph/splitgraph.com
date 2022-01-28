@@ -31,7 +31,10 @@ const Dialog = ({
       // fullScreen
       aria-labelledby={title}
       sx={{
-        ".MuiDialogContent-root": { py: 0 },
+        ".MuiDialogContent-root": {
+          paddingTop: 0,
+          paddingBottom: 0,
+        },
         ...sx,
       }}
       {...(rest as any)}
