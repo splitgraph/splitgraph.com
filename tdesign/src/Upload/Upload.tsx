@@ -56,28 +56,30 @@ const Upload = ({
     submitButton,
     dropzoneProps,
     files,
-  }: ILayoutProps) => (
-    <div {...dropzoneProps}>
-      {input}
-      <Box sx={{ marginBottom: "1rem", textAlign: "center" }}>
-        {submitButton}
-      </Box>
-      {!!files?.length && (
-        <section>
-          <Typography variant="smallHighlightedSB" sx={{ fontSize: "14px" }}>
-            Files
-          </Typography>{" "}
-          <Typography
-            variant="smallHighlightedSB"
-            sx={{ color: ({ palette }) => palette.grays.gray20.main }}
-          >
-            ({files?.length})
-          </Typography>
-          <FilesUploadList files={files} />
-        </section>
-      )}
-    </div>
-  );
+  }: ILayoutProps) => {
+    return (
+      <div {...dropzoneProps}>
+        {input}
+        <Box sx={{ marginBottom: "1rem", textAlign: "center" }}>
+          {submitButton}
+        </Box>
+        {!!files?.length && (
+          <section>
+            <Typography variant="smallHighlightedSB" sx={{ fontSize: "14px" }}>
+              Files
+            </Typography>{" "}
+            <Typography
+              variant="smallHighlightedSB"
+              sx={{ color: ({ palette }) => palette.grays.gray20.main }}
+            >
+              ({files?.length})
+            </Typography>
+            <FilesUploadList files={files} />
+          </section>
+        )}
+      </div>
+    );
+  };
 
   const Input = ({
     getFilesFromEvent,
@@ -117,11 +119,9 @@ const Upload = ({
     return (
       <div style={style}>
         {!small && <UploadCloudIcon active={active} />}
-        <Typography variant="subtitle2">
-          Drag and drop up to {`${maxFiles} file${maxFiles > 1 ? "s" : ""}`}
-        </Typography>
+        <Typography variant="subtitle2">Drag and drop</Typography>
         <LinkButton onClick={() => document.getElementById("upload").click()}>
-          Browse to choose files
+          Browse to choose CSV files
         </LinkButton>
         {!!maxSizeBytes && (
           <Typography
@@ -172,6 +172,7 @@ const Upload = ({
           />
         }
         disabled={fileSizeError || !files?.length || currentlyUploading}
+        fullWidth
         sx={{ height: "40px", paddingRight: "50px", margin: "0 auto" }}
         onClick={() => {
           if (allSucceeded) {
