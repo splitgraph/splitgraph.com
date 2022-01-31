@@ -93,7 +93,7 @@ const containerStyle: SxProps<Theme> = {
   position: "relative",
 };
 
-const PopoutBox = ({
+export const PopoutBox = ({
   children,
   renderButton,
   popoutContainerStyle = {},
@@ -185,5 +185,3 @@ const PopoutBox = ({
     </Box>
   );
 };
-
-export default PopoutBox;
