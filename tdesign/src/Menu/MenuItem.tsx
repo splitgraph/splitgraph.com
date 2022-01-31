@@ -60,7 +60,7 @@ const MenuItem = ({
     if (isActive && scrollIntoViewIfNeeded) {
       scrolltoItem();
     }
-  }, [isActive, expanded]);
+  }, [isActive, expanded, scrollIntoViewIfNeeded]);
 
   const containerStyle = {
     display: [
