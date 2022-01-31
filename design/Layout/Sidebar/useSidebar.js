@@ -95,7 +95,7 @@ const useLastClickedPath = ({ contentTree, lastClickedNodeId, idKey }) => {
             }),
           ]
         : [],
-    [lastClickedNodeId, idKey]
+    [lastClickedNodeId, idKey, contentTree]
   );
 };
 
@@ -108,7 +108,7 @@ const useActivePath = ({ contentTree, activeNodeId, idKey }) => {
             ...findParentsOfNode({ nodeId: activeNodeId, contentTree, idKey }),
           ]
         : [],
-    [activeNodeId, idKey]
+    [activeNodeId, idKey, contentTree]
   );
 };
 
