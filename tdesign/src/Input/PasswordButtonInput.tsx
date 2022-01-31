@@ -79,3 +79,4 @@ const PasswordButtonInput = forwardRef<HTMLInputElement, OutlinedInputProps>(
   }
 );
 export default PasswordButtonInput;
+PasswordButtonInput.displayName = "PasswordButtonInput";

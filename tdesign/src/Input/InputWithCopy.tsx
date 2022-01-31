@@ -94,3 +94,4 @@ const InputWithCopy = forwardRef<HTMLInputElement, any>(
   }
 );
 export default InputWithCopy;
+InputWithCopy.displayName = "InputWithCopy";
