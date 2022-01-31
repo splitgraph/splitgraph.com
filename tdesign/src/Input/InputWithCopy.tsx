@@ -28,7 +28,7 @@ const useCombinedRefs = (...refs) => {
 interface IInputWithCopy extends OutlinedInputProps {
   defaultValue?: string;
 }
-const InputWithCopy = forwardRef<HTMLInputElement, any>(
+export const InputWithCopy = forwardRef<HTMLInputElement, any>(
   ({ sx, ...rest }: IInputWithCopy, ref) => {
     const innerRef = useRef<HTMLInputElement>(null);
     const combinedRef: MutableRefObject<HTMLInputElement> = useCombinedRefs(
@@ -93,5 +93,4 @@ const InputWithCopy = forwardRef<HTMLInputElement, any>(
     );
   }
 );
-export default InputWithCopy;
 InputWithCopy.displayName = "InputWithCopy";

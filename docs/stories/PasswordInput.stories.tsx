@@ -1,4 +1,4 @@
-import PasswordInput from "@splitgraph/tdesign/src/Input/PasswordInput";
+import { PasswordInput } from "@splitgraph/tdesign/src/Input/PasswordInput";
 import { FormControl } from "@mui/material";
 
 export default {

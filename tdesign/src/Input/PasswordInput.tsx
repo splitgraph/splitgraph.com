@@ -12,7 +12,7 @@ interface IPasswordInputProps extends OutlinedInputProps {
   extraEndAdornment?: React.ReactNode;
 }
 
-const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
+export const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
   (props, ref) => {
     const [showPassword, setShowPassword] = useState(false);
     const { extraEndAdornment, ...rest } = props;
@@ -71,4 +71,3 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
   }
 );
 PasswordInput.displayName = "PasswordInput";
-export default PasswordInput;
