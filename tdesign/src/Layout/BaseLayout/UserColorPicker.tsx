@@ -1,4 +1,4 @@
-import { useState, forwardRef } from "react";
+import { useState, forwardRef, ComponentProps } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -46,6 +46,7 @@ export const UserColorPicker = ({
 const Transition = forwardRef<unknown, SlideProps>((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
 ));
+Transition.displayName = "Transition";
 
 const ColorDialog = ({
   onClose,
@@ -194,4 +195,6 @@ const ColorDialog = ({
   );
 };
 
-const Card = (props) => <MuiCard sx={{ minWidth: 150 }} {...props} />;
+const Card = (props: ComponentProps<typeof MuiCard>) => (
+  <MuiCard sx={{ minWidth: 150 }} {...props} />
+);
