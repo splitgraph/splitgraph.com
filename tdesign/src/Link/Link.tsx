@@ -50,5 +50,5 @@ const SplitgraphLink = React.forwardRef(
     </Link>
   )
 );
-export default SplitgraphLink;
 SplitgraphLink.displayName = "Link";
+export { SplitgraphLink as Link };
