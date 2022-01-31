@@ -1,33 +1,19 @@
 import { Box } from "@mui/material";
-// import { makeDefaultTheme } from "./legacyTheme";
 import { useTheme } from "@mui/material/styles";
-
-// const defaultTheme = makeDefaultTheme();
+import { PropsWithChildren } from "react";
 
 export const mdxComponents = {
-  pre: ({ children, ...rest }) => {
+  pre: function Pre(props: PropsWithChildren<{}>) {
     const theme = useTheme();
-    return (
-      <Box component="pre" sx={theme.palette.pre} {...rest}>
-        {children}
-      </Box>
-    );
+    return <Box component="pre" sx={theme.palette.pre} {...props} />;
   },
-  code: ({ children, ...rest }) => {
+  code: function Code(props: PropsWithChildren<{}>) {
     const theme = useTheme();
-    return (
-      <Box component="code" sx={theme.palette.code} {...rest}>
-        {children}
-      </Box>
-    );
+    return <Box component="code" sx={theme.palette.code} {...props} />;
   },
-  inlineCode: ({ children, ...rest }) => {
+  inlineCode: function InlineCode(props: PropsWithChildren<{}>) {
     const theme = useTheme();
-    return (
-      <Box component="code" sx={theme.palette.inlineCode} {...rest}>
-        {children}
-      </Box>
-    );
+    return <Box component="code" sx={theme.palette.inlineCode} {...props} />;
   },
 };
 export default mdxComponents;
