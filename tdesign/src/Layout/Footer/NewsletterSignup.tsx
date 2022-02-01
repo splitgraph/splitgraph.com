@@ -48,6 +48,7 @@ const NewsletterSignup = ({}: INewsletterSignupProps) => {
             background: "none",
             overflowY: "hidden",
           }}
+          title="Newsletter sign up form"
         />
       )}
     </Box>
