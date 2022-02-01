@@ -23,6 +23,12 @@ export interface BaseLayoutProps extends Omit<ILogoProps, "linkTo"> {
   marketingNotice?: React.ReactNode;
 }
 
+declare global {
+  interface Window {
+    toggleShowDarkModeControl: (value: boolean) => void;
+  }
+}
+
 const BaseLayout = ({
   children,
   renderHeaderCenter,
@@ -99,7 +105,6 @@ const BaseLayout = ({
     if (typeof window === "undefined") {
       return;
     }
-    // @ts-ignore next
     window.toggleShowDarkModeControl = (v) => setShowDarkModeToggle(v);
   }, []);
 
