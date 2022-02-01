@@ -194,53 +194,56 @@ export const muiTheme = ({
         //H1 Title - SF SB 24 pt
         fontWeight: 600,
         fontSize: "24px",
-        lineHeight: 1.33,
+        lineHeight: "32px",
       },
       title2: {
         //H2 Title - SF SB 20 pt
         fontWeight: 600,
-        fontSize: "1.25rem",
-        lineHeight: 1,
+        fontSize: "20px",
+        lineHeight: "20px",
       },
       subtitle1: {
         //H3 Subtitle - SF SB 16 pt
         fontWeight: 600,
-        fontSize: "14px",
-        lineHeight: 1.375,
+        fontSize: "16px",
+        lineHeight: "24px",
       },
       subtitle2: {
         //H4 Subtitle - SF Reg 16 pt
+        fontWeight: "normal",
         fontSize: "14px",
-        lineHeight: 1.5,
+        lineHeight: "24px",
       },
       body: {
         //H5 Body - SF Reg 14 pt
+        fontWeight: "normal",
         fontSize: "14px",
-        lineHeight: 1.71,
+        lineHeight: "24px",
       },
       bodyHighlighted: {
         //H6 Body Highlighed - SF SB 14 pt
         fontWeight: 600,
         fontSize: "14px",
-        lineHeight: 1.429,
+        lineHeight: "24px",
       },
       small: {
         //H7 Small Text - SF Reg 12 pt
+        fontWeight: "normal",
         fontSize: "12px",
-        color: "rgb(85, 86, 86)",
-        lineHeight: 1.67,
+        color: "#555656",
+        lineHeight: "20px",
       },
       smallHighlightedSB: {
         //H8 Small T Highlighed - SF SB 12 pt
-        fontSize: ".75rem",
+        fontSize: "12px",
         fontWeight: 600,
-        lineHeight: 1.67,
+        lineHeight: "20px",
       },
       smallHighlightedB: {
         //H9 Small T. Hihglighted SF B 12 pt
-        fontSize: ".75rem",
-        fontWeight: 600,
-        lineHeight: 1.67,
+        fontSize: "12px",
+        fontWeight: "bold",
+        lineHeight: "20px",
       },
     },
     components: {
