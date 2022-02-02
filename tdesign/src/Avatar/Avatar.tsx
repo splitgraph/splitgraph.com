@@ -24,7 +24,7 @@ const Avatar = ({ avatarURL, initials, sx, height }: IAvatarProps) => {
       }}
     >
       {!avatarURL && initials}
-      {avatarURL && <img src={avatarURL} height={height} />}
+      {avatarURL && <img src={avatarURL} height={height} alt="Avatar" />}
     </MUIAvatar>
   );
 };

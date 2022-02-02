@@ -21,6 +21,8 @@ const useClickToCopy = (
     const timeoutId = setTimeout(() => setStatus("inactive"), timeout);
 
     return () => clearTimeout(timeoutId);
+    // NOTE: we deliberately do not want to reset the timeout when `timeout` changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
 
   return [status, copy];

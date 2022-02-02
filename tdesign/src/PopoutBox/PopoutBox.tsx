@@ -93,7 +93,7 @@ const containerStyle: SxProps<Theme> = {
   position: "relative",
 };
 
-const PopoutBox = ({
+export const PopoutBox = ({
   children,
   renderButton,
   popoutContainerStyle = {},
@@ -121,30 +121,36 @@ const PopoutBox = ({
   };
 
   // When user clicks outside of container, close the popout
-  const handleDocumentClick = (e: any) => {
-    if (containerRef.current && containerRef.current.contains(e.target)) {
-      return;
-    }
+  const handleDocumentClick = React.useCallback(
+    (e: any) => {
+      if (containerRef.current && containerRef.current.contains(e.target)) {
+        return;
+      }
 
-    if (isOpen) {
-      setIsOpen(false);
-    }
-  };
+      if (isOpen) {
+        setIsOpen(false);
+      }
+    },
+    [isOpen]
+  );
 
-  const handleEscapeKey = (e: any) => {
-    if (!containerRef.current) {
-      return;
-    }
+  const handleEscapeKey = React.useCallback(
+    (e: any) => {
+      if (!containerRef.current) {
+        return;
+      }
 
-    // ESC key
-    if (e.keyCode !== 27) {
-      return;
-    }
+      // ESC key
+      if (e.keyCode !== 27) {
+        return;
+      }
 
-    if (isOpen) {
-      setIsOpen(false);
-    }
-  };
+      if (isOpen) {
+        setIsOpen(false);
+      }
+    },
+    [isOpen]
+  );
 
   React.useEffect(() => {
     if (typeof window === "undefined") {
@@ -162,7 +168,7 @@ const PopoutBox = ({
       document.removeEventListener("keydown", handleEscapeKey);
       document.removeEventListener("mousedown", handleDocumentClick);
     };
-  }, [isOpen, handleDocumentClick]);
+  }, [isOpen, handleDocumentClick, handleEscapeKey]);
 
   const mainButton = renderButton({
     isOpen,
@@ -179,5 +185,3 @@ const PopoutBox = ({
     </Box>
   );
 };
-
-export default PopoutBox;

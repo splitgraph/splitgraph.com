@@ -36,7 +36,7 @@ const SplitgraphLink = React.forwardRef(
       children,
       ...rest
     }: LinkProps,
-    ref: any
+    ref
   ) => (
     <Link href={href} as={as} passHref>
       <Box
@@ -50,4 +50,5 @@ const SplitgraphLink = React.forwardRef(
     </Link>
   )
 );
-export default SplitgraphLink;
+SplitgraphLink.displayName = "Link";
+export { SplitgraphLink as Link };

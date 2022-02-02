@@ -446,7 +446,13 @@ const useScrollToActiveNode = ({
     hideScrollbars(scrollContainer);
     scrollTarget.scrollIntoView({ block: "nearest", inline: "nearest" });
     revealScrollbars(scrollContainer);
-  }, [nodeId, isInActivePath, containerEl]);
+  }, [
+    nodeId,
+    isInActivePath,
+    containerEl,
+    isInLastClickedPath,
+    anythingBeenClicked,
+  ]);
 };
 
 const useScrollToActiveNodeOnClient =

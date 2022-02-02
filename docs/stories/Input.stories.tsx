@@ -1,4 +1,4 @@
-import Input from "@splitgraph/tdesign/src/Input/Input";
+import { Input } from "@splitgraph/tdesign/src/Input/Input";
 import { FormControl } from "@mui/material";
 
 export default {
