@@ -15,8 +15,6 @@ import { useTheme, alpha } from "@mui/material/styles";
 import { LogoImage } from "../Layout";
 import Link, { NextLinkComposed } from "../Link/MuiLink";
 
-export interface ISplitgraphTopBarProps {}
-
 const SGRSearch = ({ children }: { children: React.ReactNode }) => {
   const theme = useTheme();
 
