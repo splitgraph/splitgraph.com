@@ -14,7 +14,7 @@ export function matomoInit({
   url = `${origin}${url}`;
 
   if (navigator.sendBeacon) {
-    var origSendBeacon = navigator.sendBeacon;
+    const origSendBeacon = navigator.sendBeacon;
     navigator.sendBeacon = function () {
       const cleanSearchParams = (origSearch) => {
         // We need to remove the leading `?` from the original search params,
@@ -23,7 +23,7 @@ export function matomoInit({
       };
 
       if (typeof arguments[0] === "string") {
-        var _url = new URL(arguments[0]);
+        const _url = new URL(args[0]);
         _url.search = `${cleanSearchParams(_url.search)}`;
         arguments[0] = _url.toString();
       }
