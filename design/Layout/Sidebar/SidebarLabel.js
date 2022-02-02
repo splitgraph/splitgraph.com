@@ -73,7 +73,6 @@ const getHardcodedDepthStyles = (maxHardCodedDepth = 10) => {
     let marginLeft = depth > 1 ? depth / 2 : 0;
 
     depthStyles.Vertical[`.${ClassNames.Depth(depth)}`] = {
-      paddingLeft: `${paddingLeft}rem`,
       marginLeft: `${marginLeft}rem`,
       paddingRight: depth >= 1 ? "1rem" : `${depth}rem`,
 
@@ -303,7 +302,6 @@ const styles = {
         // unfortunately need to set again or will use other :hover
         borderLeftColor: "primary.main",
         borderLeftStyle: "solid",
-        borderLeftWidth: "4px",
         borderLeftWidth: "4px",
         borderTopStyle: "solid",
         borderBottomStyle: "solid",

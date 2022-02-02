@@ -68,7 +68,6 @@ const VerticalStyle = {
   Container: {
     display: "flex",
     width: "100%",
-    backgroundColor: "background",
     alignItems: "center",
     justifyContent: "left",
     flexDirection: "column",

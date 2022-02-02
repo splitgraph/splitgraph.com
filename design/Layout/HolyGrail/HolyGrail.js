@@ -12,7 +12,6 @@ const HolyGrail = ({ children }) => (
   <Box
     sx={{
       display: "grid",
-      gridGap: 4,
       gridTemplateAreas: `
         "${GridArea.Header} ${GridArea.Header}  ${GridArea.Header}"
         "${GridArea.Nav}    ${GridArea.Content} ${GridArea.Content}"
