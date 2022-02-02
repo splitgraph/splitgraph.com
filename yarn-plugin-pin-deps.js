@@ -534,7 +534,7 @@ module.exports = {
           `$0 pin-deps`,
         ],
         [
-          `Perform a "dry run" – do not apply any changes to files, but otherwise
+          `Perform a "dry run" – do not apply any changes to files, but otherwise
           run command as normally.`,
           `$0 pin-deps --dry`,
         ],
