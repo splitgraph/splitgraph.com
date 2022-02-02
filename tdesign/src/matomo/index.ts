@@ -31,7 +31,6 @@ export function matomoInit({
       return origSendBeacon.apply(this, args);
     };
   }
-  // @ts-ignore next
   window._paq = window._paq || [];
   if (!url) {
     console.warn("Matomo disabled, please provide matomo url");
@@ -141,7 +140,8 @@ export function matomoPush(args) {
   window._paq.push(args);
 }
 
-interface MWindow extends Window {
-  _paq: any;
+declare global {
+  interface Window {
+    _paq: unknown[];
+  }
 }
-declare let window: MWindow;
