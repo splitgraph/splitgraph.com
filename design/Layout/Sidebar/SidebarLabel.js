@@ -454,7 +454,11 @@ const useScrollToActiveNode = ({
 };
 
 const useScrollToActiveNodeOnClient =
-  typeof window === "undefined" ? () => {} : useScrollToActiveNode;
+  typeof window === "undefined"
+    ? () => {
+        // no-op
+      }
+    : useScrollToActiveNode;
 
 const SidebarLabel = ({
   node,
