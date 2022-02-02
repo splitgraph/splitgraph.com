@@ -4,13 +4,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { LogoImage } from "../LogoImage";
 import { LogoText } from "../LogoText";
 
-// TODO: This file is deprecated
 interface IMobileHeaderProps {
   logoText: string;
   searchInput?: React.ReactElement;
   renderHeaderCenter?: () => React.ReactNode;
 }
 
+/** @deprecated */
 const MobileHeader = ({ logoText, renderHeaderCenter }: IMobileHeaderProps) => {
   const headerCenter = renderHeaderCenter?.();
 
