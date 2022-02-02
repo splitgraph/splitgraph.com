@@ -316,7 +316,6 @@ module.exports = {
           workspaceCwd,
           pinnableInWorkspace,
           reportablePinsInWorkspace,
-          isDevDependency = false,
         } = opts;
 
         const { scope, name, range } = dependency;
