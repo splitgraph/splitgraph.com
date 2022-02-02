@@ -15,20 +15,20 @@ export function matomoInit({
 
   if (navigator.sendBeacon) {
     const origSendBeacon = navigator.sendBeacon;
-    navigator.sendBeacon = function () {
+    navigator.sendBeacon = function (...args) {
       const cleanSearchParams = (origSearch) => {
         // We need to remove the leading `?` from the original search params,
         // since lua will insert it at the other end, and a double ?? makes Big Sad
         return `?q=${btoa(origSearch.substring(1))}`;
       };
 
-      if (typeof arguments[0] === "string") {
+      if (typeof args[0] === "string") {
         const _url = new URL(args[0]);
         _url.search = `${cleanSearchParams(_url.search)}`;
-        arguments[0] = _url.toString();
+        args[0] = _url.toString();
       }
 
-      return origSendBeacon.apply(this, arguments);
+      return origSendBeacon.apply(this, args);
     };
   }
   // @ts-ignore next
