@@ -94,8 +94,8 @@ const BaseLayout = ({
     ...extraStyle,
   };
 
-  const headerCenter = !!renderHeaderCenter ? renderHeaderCenter() : null;
-  const headerRight = !!renderHeaderRight ? renderHeaderRight() : null;
+  const headerCenter = renderHeaderCenter?.();
+  const headerRight = renderHeaderRight?.();
 
   // TEMPORARY: require user action to show the dark mode toggle
   // From a JS console, run window.toggleShowDarkModeControl(true)

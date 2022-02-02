@@ -12,7 +12,7 @@ interface IMobileHeaderProps {
 }
 
 const MobileHeader = ({ logoText, renderHeaderCenter }: IMobileHeaderProps) => {
-  const headerCenter = !!renderHeaderCenter ? renderHeaderCenter() : null;
+  const headerCenter = renderHeaderCenter?.();
 
   return (
     <Box sx={{ p: "12px" }}>
