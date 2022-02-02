@@ -4,7 +4,7 @@ import { Button, ButtonProps } from "@mui/material";
 export interface SubmitButtonProps extends ButtonProps {
   disabled?: boolean;
   hasErrors?: boolean;
-  sx?: {};
+  sx?: Record<string, unknown>;
   variant?: "text" | "outlined" | "contained" | "pill";
   children?: React.ReactNode;
 }
