@@ -31,7 +31,7 @@ const InFieldButton = ({
         boxShadow: ({ palette }) =>
           `0px 0px 0px 1px ${palette.grays.gray20.main}`,
       },
-      paddingRight: "1rem",
+      paddingRight: "0.5rem",
       ...sx,
     }}
     // endIcon={}
