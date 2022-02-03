@@ -279,6 +279,11 @@ export const muiTheme = ({
           disableRipple: true,
         },
       },
+      MuiButtonGroup: {
+        defaultProps: {
+          disableRipple: true,
+        },
+      },
       MuiOutlinedInput: {
         defaultProps: {
           notched: false,
