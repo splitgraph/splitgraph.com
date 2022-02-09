@@ -9,7 +9,10 @@ import UserTheme from "./UserTheme";
 // If multiple instances of Emotion + caching becomes a problem again, see:
 // https://github.com/emotion-js/emotion/issues/2210#issuecomment-758577800
 
-const withMUITheme = <Props extends {}, IP extends {}>(
+const withMUITheme = <
+  Props extends Record<string, any>,
+  IP extends Record<string, any>
+>(
   Page: NextPage<Props, IP>
 ) => {
   const WithMUITheme: NextPage<Props, IP> = (props) => {

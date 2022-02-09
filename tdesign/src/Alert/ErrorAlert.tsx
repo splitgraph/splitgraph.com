@@ -35,7 +35,7 @@ const ErrorAlert = ({
   dismissLinkText,
   dismissLinkHref,
 }: ErrorAlertProps) => {
-  const trimmedMessage = message ? message.replace(/Error\:?\s*/, "") : "";
+  const trimmedMessage = message ? message.replace(/Error:?\s*/, "") : "";
 
   return (
     <Box

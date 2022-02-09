@@ -1,8 +1,6 @@
 import MenuItem, { MenuItemProps } from "./MenuItem";
 
-export interface IMenuItemHeadingProps extends MenuItemProps {}
-
-const MenuItemHeading = (props: IMenuItemHeadingProps) => {
+const MenuItemHeading = (props: MenuItemProps) => {
   return <MenuItem isHeading={true} {...props} />;
 };
 

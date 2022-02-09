@@ -17,7 +17,7 @@ const stripParagraphCharacters = require("./rehype-plugins/stripParagraphCharact
 
 // TODO: Figure out what's going on here
 const preprocessHtml = (html) => {
-  return html.replace(/\sclass=\"/gm, ' className="');
+  return html.replace(/\sclass="/gm, ' className="');
 
   // .replace(/“/gm, '"')
   // .replace(/”/gm, '"')
@@ -27,7 +27,7 @@ const preprocessHtml = (html) => {
 };
 
 const postprocessHtml = (html) => {
-  return html.replace(/\sclass=\"/gm, ' className="');
+  return html.replace(/\sclass="/gm, ' className="');
 };
 
 const htmlToMdx = (html) => {

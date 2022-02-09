@@ -73,7 +73,6 @@ const getHardcodedDepthStyles = (maxHardCodedDepth = 10) => {
     let marginLeft = depth > 1 ? depth / 2 : 0;
 
     depthStyles.Vertical[`.${ClassNames.Depth(depth)}`] = {
-      paddingLeft: `${paddingLeft}rem`,
       marginLeft: `${marginLeft}rem`,
       paddingRight: depth >= 1 ? "1rem" : `${depth}rem`,
 
@@ -304,7 +303,6 @@ const styles = {
         borderLeftColor: "primary.main",
         borderLeftStyle: "solid",
         borderLeftWidth: "4px",
-        borderLeftWidth: "4px",
         borderTopStyle: "solid",
         borderBottomStyle: "solid",
         borderTopColor: "lightgray",
@@ -456,7 +454,11 @@ const useScrollToActiveNode = ({
 };
 
 const useScrollToActiveNodeOnClient =
-  typeof window === "undefined" ? () => {} : useScrollToActiveNode;
+  typeof window === "undefined"
+    ? () => {
+        // no-op
+      }
+    : useScrollToActiveNode;
 
 const SidebarLabel = ({
   node,

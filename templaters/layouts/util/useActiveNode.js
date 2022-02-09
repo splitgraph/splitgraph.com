@@ -5,7 +5,7 @@ const useActiveNode = ({ router, contentTree }) => {
   // next client thinks we're in the _content directory (technically we are),
   // even though we rewrote the URL. TODO: Factor out Link/router handling
   const currentURL = useMemo(
-    () => router.pathname.replace(/^\/\_content/gm, ""),
+    () => router.pathname.replace(/^\/_content/gm, ""),
     [router]
   );
 

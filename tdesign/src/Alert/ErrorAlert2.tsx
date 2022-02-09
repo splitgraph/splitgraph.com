@@ -42,7 +42,7 @@ const ErrorAlert = ({
   children,
   sx,
 }: IErrorAlertProps) => {
-  const trimmedMessage = message ? message.replace(/Error\:?\s*/, "") : "";
+  const trimmedMessage = message ? message.replace(/Error:?\s*/, "") : "";
 
   return (
     <Box

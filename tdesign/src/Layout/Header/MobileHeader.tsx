@@ -4,15 +4,15 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { LogoImage } from "../LogoImage";
 import { LogoText } from "../LogoText";
 
-// TODO: This file is deprecated
 interface IMobileHeaderProps {
   logoText: string;
   searchInput?: React.ReactElement;
   renderHeaderCenter?: () => React.ReactNode;
 }
 
+/** @deprecated */
 const MobileHeader = ({ logoText, renderHeaderCenter }: IMobileHeaderProps) => {
-  const headerCenter = !!renderHeaderCenter ? renderHeaderCenter() : null;
+  const headerCenter = renderHeaderCenter?.();
 
   return (
     <Box sx={{ p: "12px" }}>
@@ -23,7 +23,12 @@ const MobileHeader = ({ logoText, renderHeaderCenter }: IMobileHeaderProps) => {
           <LogoImage logoURL={"/static/brandmark.svg"} />
           <LogoText text={logoText} />
         </a>
-        <IconButton onClick={() => {}} size="large">
+        <IconButton
+          onClick={() => {
+            // no-op
+          }}
+          size="large"
+        >
           <MenuIcon />
         </IconButton>
       </Box>

@@ -13,7 +13,7 @@ const FooterLink = ({ Link, href, children }: IFooterLinkProps) => {
     href: string;
   }) => <a href={href}>{children}</a>;
 
-  return !!Link ? (
+  return Link ? (
     <Link href={href}>{children}</Link>
   ) : (
     <HTMLLink href={href}>{children}</HTMLLink>

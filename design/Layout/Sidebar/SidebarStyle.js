@@ -12,8 +12,6 @@ const BaseStyle = {
     padding: 0,
   },
   Item: {
-    // whiteSpace: "nowrap",
-    // padding: 100,
     color: "primary.main",
   },
   Label: {},
@@ -21,12 +19,8 @@ const BaseStyle = {
 
 const HorizontalStyle = {
   Container: {
-    // marginTop: "-2rem",
-    // overflowY: "scroll",
     backgroundColor: "background",
-    // WebkitOverflowScrolling: "touch",
     padding: 0,
-    // maxHeight: 75,
   },
   ListContainer: {
     flexWrap: "wrap",
@@ -40,11 +34,6 @@ const HorizontalStyle = {
     flexBasis: "100%",
     padding: 0,
 
-    // backgroundColor: "green",
-    // paddingBottom: "1rem",
-    // overflowY: "hidden",
-    // height: "4rem",
-    // backgroundColor: "green",
     borderTopWidth: "0px",
     borderTopStyle: "dotted",
     borderTopColor: "legacySecondary.main",
@@ -61,12 +50,9 @@ const HorizontalStyle = {
     alignItems: "center",
     paddingLeft: 2,
     paddingRight: 4,
-    // scrollMarginInlineEnd: "200px",
     scrollSnapType: "x mandatory",
     scrollPaddingRight: "200px",
     scrollPaddingLeft: "200px",
-    // lineHeight:
-    // paddingBottom: "2rem"
   },
   Item: {
     display: "flex",
@@ -82,7 +68,6 @@ const VerticalStyle = {
   Container: {
     display: "flex",
     width: "100%",
-    backgroundColor: "background",
     alignItems: "center",
     justifyContent: "left",
     flexDirection: "column",
@@ -94,8 +79,6 @@ const VerticalStyle = {
     MsOverflowStyle: "-ms-autohiding-scrollbar",
     scrollbarWidth: "thin",
     paddingBottom: "8rem",
-    // scrollSnapType: "y mandatory",
-    // scrollPaddingRight: "200px",
     scrollPaddingBottom: "200px",
 
     backgroundColor: "#efefef",
@@ -104,16 +87,10 @@ const VerticalStyle = {
     direction: "rtl",
     // Required to work in safari
     display: "-webkit-box",
-    // borderLeftWidth: 10,
-    // borderLeftStyle: "solid",
-    // paddingLeft: 2,
     flexBasis: "100%",
-    // display: "flex",
-    // flexDirection: "column",
     backgroundColor: "#efefef",
   },
   List: {
-    // flexBasis: "100%",
     minWidth: "100%",
     display: "flex",
     flexDirection: "column",

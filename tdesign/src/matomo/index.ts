@@ -14,24 +14,23 @@ export function matomoInit({
   url = `${origin}${url}`;
 
   if (navigator.sendBeacon) {
-    var origSendBeacon = navigator.sendBeacon;
-    navigator.sendBeacon = function () {
+    const origSendBeacon = navigator.sendBeacon;
+    navigator.sendBeacon = function (...args) {
       const cleanSearchParams = (origSearch) => {
         // We need to remove the leading `?` from the original search params,
         // since lua will insert it at the other end, and a double ?? makes Big Sad
         return `?q=${btoa(origSearch.substring(1))}`;
       };
 
-      if (typeof arguments[0] === "string") {
-        var _url = new URL(arguments[0]);
+      if (typeof args[0] === "string") {
+        const _url = new URL(args[0]);
         _url.search = `${cleanSearchParams(_url.search)}`;
-        arguments[0] = _url.toString();
+        args[0] = _url.toString();
       }
 
-      return origSendBeacon.apply(this, arguments);
+      return origSendBeacon.apply(this, args);
     };
   }
-  // @ts-ignore next
   window._paq = window._paq || [];
   if (!url) {
     console.warn("Matomo disabled, please provide matomo url");
@@ -141,7 +140,8 @@ export function matomoPush(args) {
   window._paq.push(args);
 }
 
-interface MWindow extends Window {
-  _paq: any;
+declare global {
+  interface Window {
+    _paq: unknown[];
+  }
 }
-declare let window: MWindow;

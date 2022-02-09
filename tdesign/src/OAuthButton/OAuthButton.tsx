@@ -6,8 +6,10 @@ export interface IGenericOAuthButtonProps {
   redirectURL?: string;
 }
 
-export interface IOAuthButtonProps
-  extends Omit<IGenericOAuthButtonProps, "button" | "identityProvider"> {}
+export type IOAuthButtonProps = Omit<
+  IGenericOAuthButtonProps,
+  "button" | "identityProvider"
+>;
 
 const FORM_ACTION = "/api/forms/submit/auth/oauth/init";
 

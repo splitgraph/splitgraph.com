@@ -1,9 +1,7 @@
 import * as React from "react";
 import { Box } from "@mui/material";
 
-export interface INewsletterSignupProps {}
-
-const NewsletterSignup = ({}: INewsletterSignupProps) => {
+const NewsletterSignup = () => {
   const [expanded, setExpanded] = React.useState(false);
 
   return (

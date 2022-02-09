@@ -16,7 +16,9 @@ const PreWithCopy = ({
   children,
   title,
   extraStyle = {},
-  onCopy = () => {},
+  onCopy = () => {
+    // no-op
+  },
 }: IPreWithCopyProps) => {
   const preContainerStyle: SxProps<Theme> = {
     display: "flex",
