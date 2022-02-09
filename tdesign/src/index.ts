@@ -16,6 +16,7 @@ export {
   Button,
   InvisibleButton,
   LinkButton,
+  SplitButton,
 } from "./Button/index";
 export type {
   IButtonProps,
