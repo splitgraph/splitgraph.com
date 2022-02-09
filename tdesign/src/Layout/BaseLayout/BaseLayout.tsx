@@ -23,6 +23,12 @@ export interface BaseLayoutProps extends Omit<ILogoProps, "linkTo"> {
   marketingNotice?: React.ReactNode;
 }
 
+declare global {
+  interface Window {
+    toggleShowDarkModeControl: (value: boolean) => void;
+  }
+}
+
 const BaseLayout = ({
   children,
   renderHeaderCenter,
@@ -99,7 +105,6 @@ const BaseLayout = ({
     if (typeof window === "undefined") {
       return;
     }
-    // @ts-ignore next
     window.toggleShowDarkModeControl = (v) => setShowDarkModeToggle(v);
   }, []);
 
@@ -123,6 +128,8 @@ const BaseLayout = ({
             <UserThemeContext.Consumer>
               {({ userColors, setUserColors, toggleDarkMode }) => (
                 <div>
+                  {/* TODO: fix me */}
+                  {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */}
                   <span onClick={toggleDarkMode}>
                     {userColors.mode === "light" ? "🌙" : "🌞"}
                     &nbsp;

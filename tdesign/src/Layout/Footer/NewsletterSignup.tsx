@@ -27,6 +27,8 @@ const NewsletterSignup = ({}: INewsletterSignupProps) => {
         },
       }}
     >
+      {/* TODO: fix me */}
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */}
       <h3
         className="footer-section-header cta-newsletter-signup"
         onClick={(_) => setExpanded(!expanded)}
@@ -46,6 +48,7 @@ const NewsletterSignup = ({}: INewsletterSignupProps) => {
             background: "none",
             overflowY: "hidden",
           }}
+          title="Newsletter sign up form"
         />
       )}
     </Box>

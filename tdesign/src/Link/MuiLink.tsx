@@ -47,6 +47,8 @@ export const NextLinkComposed = forwardRef<
       passHref={passHref}
       locale={locale}
     >
+      {/* SAFETY: `children` are spread in `other` */}
+      {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
       <a ref={ref} {...(other as any)} />
     </NextLink>
   );
@@ -104,6 +106,8 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
   if (isExternal) {
     if (noLinkStyle) {
       return (
+        // SAFETY: `children` are spread in `other`
+        // eslint-disable-next-line jsx-a11y/anchor-has-content
         <a
           className={className}
           href={href as string}
