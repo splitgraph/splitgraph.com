@@ -772,11 +772,14 @@ const copyLatestDocsFromArchive = async ({
 
   const newVersionExists = await fs.pathExists(newVersionDir);
 
+  // This used to throw an error instead of a warning. It will happen when a
+  // resource root did not have any updates in the latest version (e.g., the
+  // `casts` directory stopped existing after `v3.0.0`).
   if (!newVersionExists) {
-    throw new Error(
-      "failed to copy latest because version does not exist:",
-      newVersion
+    console.warn(
+      `WARNING: cannot copy ${newVersion} at ${newVersionDir} (does not exist) to ${latestDir}`
     );
+    return;
   }
 
   await fs.copy(newVersionDir, latestDir);
