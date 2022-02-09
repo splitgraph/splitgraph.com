@@ -1,10 +1,11 @@
 import * as React from "react";
-import { Button, ButtonProps } from "@mui/material";
+import { Button, ButtonProps, SxProps } from "@mui/material";
+import type { Theme } from "@mui/material/styles";
 
 export interface SubmitButtonProps extends ButtonProps {
   disabled?: boolean;
   hasErrors?: boolean;
-  sx?: Record<string, unknown>;
+  sx?: SxProps<Theme>;
   variant?: "text" | "outlined" | "contained" | "pill";
   children?: React.ReactNode;
 }
