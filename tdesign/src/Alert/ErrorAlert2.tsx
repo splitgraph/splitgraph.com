@@ -23,8 +23,8 @@ interface ErrorResetLinkProps {
   href?: string;
 }
 
-const ErrorResetLink = ({ text }: ErrorResetLinkProps) => (
-  <MuiLink href={"#"}>{text}</MuiLink>
+const ErrorResetLink = ({ text, href }: ErrorResetLinkProps) => (
+  <MuiLink href={href ?? "#"}>{text}</MuiLink>
 );
 
 export interface IErrorAlertProps {
