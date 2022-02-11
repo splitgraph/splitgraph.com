@@ -8,7 +8,7 @@ const useHasSessionCookie = () => {
       return;
     }
 
-    setHasSessionCookie(document.cookie.includes("sgr.session.id"));
+    setHasSessionCookie(document.cookie.includes("sgr.session.id.v2"));
   }, []);
 
   return {

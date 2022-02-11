@@ -57,13 +57,13 @@ export function matomoInit({
   if (
     document &&
     document.cookie &&
-    document.cookie.includes("sgr.token.access")
+    document.cookie.includes("sgr.token.access.v2")
   ) {
     try {
       const userId = JSON.parse(
         atob(
           document.cookie
-            .split("; sgr.token.access=")
+            .split("; sgr.token.access.v2=")
             .pop()
             .split(";")
             .shift()
