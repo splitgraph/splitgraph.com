@@ -1,5 +1,5 @@
 import { Typography, Slider } from "@mui/material";
-import { experimentalStyled as styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 
 const CustomizedSlider = styled(Slider)`
   color: #20b2aa;
@@ -17,9 +17,7 @@ export default function StyledComponents() {
       <CustomizedSlider defaultValue={30} />
       <p>
         MUI wraps{" "}
-        <a href="https://next.material-ui.com/guides/interoperability/#styled-components">
-          Emotion's styled()
-        </a>
+        <a href="https://mui.com/system/styled/">Emotion's styled()</a>
       </p>
     </div>
   );
