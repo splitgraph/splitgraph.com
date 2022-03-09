@@ -43,14 +43,7 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>(
           name={name}
           {...(rest as any)}
         />
-        <Box
-          marginTop={2}
-          sx={{
-            ".danger-text,.warning-text,.success-text": {
-              maxWidth: "fit-content",
-            },
-          }}
-        >
+        <Box marginTop={2}>
           {validating ? (
             <MutedText>&#9850; {validatingText} ...</MutedText>
           ) : error ? (
