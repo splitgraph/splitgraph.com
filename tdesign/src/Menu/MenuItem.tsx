@@ -68,6 +68,7 @@ const MenuItem = ({
       expanded ? "flex" : "inline-flex",
       "flex",
     ],
+    alignItems: "center",
     justifyContent: "space-between",
     ".menu-item-label--heading": {
       color: "muted",
