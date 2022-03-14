@@ -1,17 +1,14 @@
 import { useState, useCallback, useEffect } from "react";
 
 type CopyStatus = "inactive" | "copied" | "error";
-const useClickToCopy = (
-  text: string,
-  timeout = 2000
-): [CopyStatus, () => void] => {
+export const useClickToCopy = (timeout = 2000) => {
   const [status, setStatus] = useState<CopyStatus>("inactive");
-  const copy = useCallback(() => {
+  const copy = useCallback((text: string) => {
     navigator.clipboard.writeText(text).then(
       () => setStatus("copied"),
       () => setStatus("error")
     );
-  }, [text]);
+  }, []);
 
   useEffect(() => {
     if (status === "inactive") {
@@ -25,6 +22,5 @@ const useClickToCopy = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
 
-  return [status, copy];
+  return [status, copy] as const;
 };
-export default useClickToCopy;
