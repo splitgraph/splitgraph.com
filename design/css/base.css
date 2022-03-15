@@ -29,7 +29,7 @@ body {
 }
 
 .ace_scrollbar::-webkit-scrollbar-track {
-  background: #36668d !important;
+  background: transparent !important;
   border-radius: 10px;
 }
 
@@ -62,7 +62,7 @@ body {
 
 /* pre scrollbar should be color of pre */
 pre::-webkit-scrollbar-track {
-  background: #36668d;
+  background: transparent;
 }
 
 /* generic hoverable scrollbar class */
