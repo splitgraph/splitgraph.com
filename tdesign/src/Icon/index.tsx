@@ -307,3 +307,18 @@ export { IconLogout };
 
 import IconPrivate from "./IconPrivate";
 export { IconPrivate };
+
+import IconJobHistory from "./IconJobHistory";
+export { IconJobHistory };
+
+import IconCalendar from "./IconCalendar";
+export { IconCalendar };
+
+import IconClock from "./IconClock";
+export { IconClock };
+
+import IconScheduled from "./IconScheduled";
+export { IconScheduled };
+
+import IconDocument from "./IconDocument";
+export { IconDocument };
