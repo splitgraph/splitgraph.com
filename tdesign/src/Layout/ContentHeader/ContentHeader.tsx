@@ -21,7 +21,7 @@ const ContentHeader = ({ children, extraStyle = {} }: IContentHeaderProps) => {
       marginBottom: "1rem",
       justifyContent: "space-between",
       alignContent: "flex-start",
-      alignItems: "flex-end",
+      alignItems: "center",
       h2: {
         color: "flambeeDarkGray.light",
         letterSpacing: "0.005em",
