@@ -6,6 +6,8 @@ export { BaseIcon, makeIconStyle };
 import IconAccount from "./IconAccount";
 export { IconAccount };
 
+export { IconArrowCircleRight } from "./IconArrowCircleRight";
+
 import IconAll from "./IconAll";
 export { IconAll };
 
