@@ -11,7 +11,7 @@ export interface IInputProps extends InputProps {
   validatingText?: string | null;
 }
 
-const Input = forwardRef<HTMLInputElement, IInputProps>(
+export const Input = forwardRef<HTMLInputElement, IInputProps>(
   (
     {
       sx = {},
@@ -43,14 +43,7 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
           name={name}
           {...(rest as any)}
         />
-        <Box
-          mt={2}
-          sx={{
-            ".danger-text,.warning-text,.success-text": {
-              maxWidth: "fit-content",
-            },
-          }}
-        >
+        <Box marginTop={2}>
           {validating ? (
             <MutedText>&#9850; {validatingText} ...</MutedText>
           ) : error ? (
@@ -77,5 +70,3 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
   }
 );
 Input.displayName = "Input";
-
-export default Input;

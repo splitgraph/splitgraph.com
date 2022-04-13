@@ -4,6 +4,7 @@ const DangerText = ({ children, sx = {}, ...rest }) => (
   <Typography
     sx={{
       color: "danger.main",
+      textAlign: "center",
       ...sx,
     }}
     {...rest}
