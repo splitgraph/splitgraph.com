@@ -18,10 +18,10 @@ export const Input = forwardRef<HTMLInputElement, OutlinedInputProps>(
           "& fieldset": {
             borderColor: ({ palette }) => palette.grays.gray26.main,
           },
-          "&:hover fieldset": {
-            borderColor: "flambeeBlue.light",
-            boxShadow: "0px 4px 8px rgba(115, 176, 255, 0.15)",
-          },
+        },
+        "&:hover .MuiOutlinedInput-notchedOutline": {
+          borderColor: "flambeeBlue.light",
+          boxShadow: "0px 4px 8px rgba(115, 176, 255, 0.15)",
         },
         "&.Mui-focused": {
           caretColor: "#2A81F6",
