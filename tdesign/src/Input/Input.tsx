@@ -6,6 +6,14 @@ export const Input = forwardRef<HTMLInputElement, OutlinedInputProps>(
     <OutlinedInput
       inputRef={ref}
       sx={{
+        ".MuiOutlinedInput-input": {
+          fontWeight: 400,
+          fontSize: "16px",
+          lineHeight: "24px",
+          padding: "8px",
+          paddingLeft: "16px",
+          fontColor: "on.backgroun.main",
+        },
         "& .MuiOutlinedInput-root": {
           "& fieldset": {
             borderColor: ({ palette }) => palette.grays.gray26.main,
@@ -18,9 +26,9 @@ export const Input = forwardRef<HTMLInputElement, OutlinedInputProps>(
             borderColor: "flambeeBlue.light",
           },
         },
-        "& .MuiOutlinedInput-root.Mui-error": {
+        "&.Mui-error": {
           backgroundColor: ({ palette }) => palette.surfaces.error.main,
-          "& fieldset": {
+          ".MuiOutlinedInput-notchedOutline": {
             borderColor: "on.error.main",
           },
         },
