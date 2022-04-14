@@ -12,7 +12,7 @@ export const Input = forwardRef<HTMLInputElement, OutlinedInputProps>(
           lineHeight: "24px",
           padding: "8px",
           paddingLeft: "16px",
-          fontColor: "on.backgroun.main",
+          color: "on.background.main",
         },
         "& .MuiOutlinedInput-root": {
           "& fieldset": {
@@ -22,7 +22,10 @@ export const Input = forwardRef<HTMLInputElement, OutlinedInputProps>(
             borderColor: "flambeeBlue.light",
             boxShadow: "0px 4px 8px rgba(115, 176, 255, 0.15)",
           },
-          "&.Mui-focused fieldset": {
+        },
+        "&.Mui-focused": {
+          caretColor: "#2A81F6",
+          ".MuiOutlinedInput-notchedOutline": {
             borderColor: "flambeeBlue.light",
           },
         },
