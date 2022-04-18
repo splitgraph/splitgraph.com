@@ -7,6 +7,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { IconPasswordHide, IconPasswordSee } from "../Icon";
+import { styles } from "./styles";
 
 interface IPasswordInputProps extends OutlinedInputProps {
   extraEndAdornment?: React.ReactNode;
@@ -53,32 +54,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
             )}
           </InputAdornment>
         }
-        sx={{
-          "&.MuiOutlinedInput-root": {
-            paddingRight: "20px",
-          },
-          "& .MuiOutlinedInput-root": {
-            "& fieldset": {
-              borderColor: ({ palette }) => palette.grays.gray26.main,
-            },
-            "&:hover fieldset": {
-              borderColor: "flambeeBlue.light",
-              boxShadow: "0px 4px 8px rgba(115, 176, 255, 0.15)",
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: "flambeeBlue.light",
-            },
-          },
-          "& .MuiOutlinedInput-root.Mui-error": {
-            backgroundColor: ({ palette }) => palette.surfaces.error.main,
-            "& fieldset": {
-              borderColor: "on.error.main",
-            },
-          },
-          "::-ms-reveal": {
-            display: "none",
-          },
-        }}
+        sx={styles}
         {...rest}
       />
     );
