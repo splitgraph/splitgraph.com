@@ -27,6 +27,7 @@ export const Input = forwardRef<HTMLInputElement, OutlinedInputProps>(
           caretColor: "#2A81F6",
           ".MuiOutlinedInput-notchedOutline": {
             borderColor: "flambeeBlue.light",
+            borderWidth: "1px",
           },
         },
         "&.Mui-error": {
