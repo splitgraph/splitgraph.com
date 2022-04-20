@@ -81,7 +81,7 @@ export const TabBody = ({ icon, label, value }: TabBodyProps) => (
 
 interface ITabsProps extends TabsProps {
   currentTab: string;
-  handleChange: (_: React.SyntheticEvent, newValue: string) => void;
+  handleChange: (_: React.SyntheticEvent, newValue: any) => void;
   isMobile?: boolean;
   loading?: boolean;
   showDialog?: (show: boolean) => void; //for mobile
