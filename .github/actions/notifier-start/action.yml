@@ -14,7 +14,12 @@ runs:
       run: |
         echo "BRANCH_NAME="${GITHUB_REF#refs/heads/}"" >> $GITHUB_ENV
         echo "SHORT_COMMIT="${GITHUB_SHA:0:8}"" >> $GITHUB_ENV
-        echo "COMMIT_MSG_TRUNCATED="${COMMIT_MSG:0:50}"" >> $GITHUB_ENV
+        unescaped_commit_msg_truncated="${COMMIT_MSG:0:50}"
+        # NOTE: escape backticks in the commit message
+        # Prevents errors when a backtick is used in the first 50 characters of
+        # the commit message
+        # See https://github.com/splitgraph/splitgraph.com/runs/6191036770?check_suite_focus=true
+        echo "COMMIT_MSG_TRUNCATED="${unescaped_commit_msg_truncated//\`/\\\`}"" >> $GITHUB_ENV
         echo "START_TIME="$(printf '%(%s)T\n' -1)"" >> $GITHUB_ENV
     - name: Setup Notification Preamble
       id: setup_notification_preamble
