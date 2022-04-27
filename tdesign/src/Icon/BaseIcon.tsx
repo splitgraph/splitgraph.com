@@ -35,11 +35,13 @@ export const makeIconStyle = ({
 }: IMakeIconStyleArgs) => {
   const svgDataURI = `url("${svgURI}")`;
 
-  const maskStyle = {
+  const maskStyle: SxProps<Theme> = {
     WebkitMaskImage: svgDataURI,
     maskImage: svgDataURI,
     WebkitMaskRepeat: "no-repeat",
     maskRepeat: "no-repeat",
+    WebKitMaskSize: "contain",
+    maskSize: "contain",
   };
 
   const style: SxProps<Theme> = {
