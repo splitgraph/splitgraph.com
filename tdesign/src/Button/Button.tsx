@@ -39,7 +39,8 @@ const Button = ({
         boxShadow: "0px 4px 8px rgba(249, 69, 105, 0.2)",
       },
       "&:focus": {
-        boxShadow: ({ palette }) => `0px 0px 0px 1px ${palette.grays.gray20}`,
+        boxShadow: ({ palette }) =>
+          `0px 0px 0px 1px ${palette.grays.gray20.main}`,
         // July 2021: webkit doesn't support rounded outlines, so boxShadow is next best thing
       },
       minWidth: large ? "360px" : null,
