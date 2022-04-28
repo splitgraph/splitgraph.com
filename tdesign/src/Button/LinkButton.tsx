@@ -7,7 +7,8 @@ const LinkButton = ({ sx, small, children, ...rest }: ILinkButtonProps) => {
   return (
     <Button
       sx={{
-        color: "on.success.main",
+        color: ({ palette }) => palette.on.success.main,
+        textDecorationColor: ({ palette }) => palette.on.success.main,
         textDecoration: small ? "underline" : "inherit",
         ":hover": {
           background: "inherit",
@@ -17,12 +18,18 @@ const LinkButton = ({ sx, small, children, ...rest }: ILinkButtonProps) => {
         ":focus": {
           textDecoration: "underline",
           textDecorationColor: "black",
+          outline: "1px solid grey",
         },
         ...sx,
       }}
       {...(rest as any)}
     >
-      <Typography variant={small ? "small" : "bodyHighlighted"}>
+      <Typography
+        sx={{
+          color: ({ palette }) => palette.on.success.main,
+        }}
+        variant={small ? "small" : "bodyHighlighted"}
+      >
         {children}
       </Typography>
     </Button>
