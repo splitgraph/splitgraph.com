@@ -15,6 +15,7 @@ const AddOAuthLinkRow = ({ children }: IAddOAuthLinkRowProps) => {
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.02);",
         borderRadius: "4px",
         border: ({ palette }) => `1px dashed ${palette.grays.gray26.main};`,
+        gap: "10px 20px",
       }}
     >
       <Typography variant="bodyHighlighted" sx={{ ml: "1rem", mr: "29px" }}>
