@@ -37,6 +37,12 @@ export const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
               aria-label="toggle password visibility"
               edge="end"
               size="large"
+              sx={{
+                "&:focus": {
+                  boxShadow: ({ palette }) =>
+                    `0px 0px 0px 1px ${palette.grays.gray20.main}`,
+                },
+              }}
             >
               {showPassword ? <IconPasswordSee /> : <IconPasswordHide />}
             </IconButton>
@@ -46,6 +52,9 @@ export const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
           </InputAdornment>
         }
         sx={{
+          "&.MuiOutlinedInput-root": {
+            paddingRight: "20px",
+          },
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
               borderColor: ({ palette }) => palette.grays.gray26.main,
