@@ -29,7 +29,7 @@ const InvisibleButton = ({
       outline: ({ palette }) => `1px solid ${palette.grays.gray25.main}`,
       "&:hover": {
         boxShadow: ({ palette }) =>
-          `0px 0px 0px 1px ${palette.grays.gray25.main}`,
+          `0px 0px 0px 2px ${palette.grays.gray25.main}`,
         background: "transparent",
       },
       "&:focus": {
