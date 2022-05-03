@@ -1,27 +1,23 @@
-// import { forwardRef } from "react";
 import {
-  Box,
   Grid,
   Typography,
   FormControl,
   FormHelperText,
-  // OutlinedInputProps,
+  Box,
 } from "@mui/material";
-import { theme as designTheme } from "../themes/design";
 import { IconEmail } from "../Icon";
 import { InFieldButton } from "../Button";
 import { Input } from "../Input";
 
-// const AddNewUserRow = forwardRef<HTMLInputElement, OutlinedInputProps>((props, ref) => {
-const AddNewUserRow = ({ errorMessage, ...rest }) => {
+export const AddNewUserRow = ({ errorMessage, ...rest }) => {
   return (
     <Box
       sx={{
-        p: "1em",
+        padding: "1em",
         boxSizing: "border-box",
-        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.02);",
+        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.02)",
         borderRadius: "4px",
-        border: `1px dashed ${designTheme.grays.light.gray26};`,
+        border: (theme) => `1px solid ${theme.palette.grays?.gray26.main}`,
       }}
     >
       <Grid container spacing={3}>
@@ -50,5 +46,3 @@ const AddNewUserRow = ({ errorMessage, ...rest }) => {
     </Box>
   );
 };
-
-export default AddNewUserRow;
