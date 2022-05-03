@@ -31,8 +31,8 @@ export const AddNewUserRow = ({ errorMessage, ...rest }) => {
               id="add-new-email-input"
               fullWidth
               endAdornment={
-                <InFieldButton sx={{ paddingRight: "1rem" }}>
-                  <IconEmail sx={{ mx: ".5rem" }} />
+                <InFieldButton>
+                  <IconEmail />
                   Add
                 </InFieldButton>
               }
