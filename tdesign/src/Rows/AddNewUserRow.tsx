@@ -5,8 +5,6 @@ import {
   FormHelperText,
   Box,
 } from "@mui/material";
-import { IconEmail } from "../Icon";
-import { InFieldButton } from "../Button";
 import { Input } from "../Input";
 
 export const AddNewUserRow = ({ errorMessage, ...rest }) => {
@@ -27,17 +25,7 @@ export const AddNewUserRow = ({ errorMessage, ...rest }) => {
             <label htmlFor="add-new-email-input">
               <Typography variant="small">Add new email</Typography>
             </label>
-            <Input
-              id="add-new-email-input"
-              fullWidth
-              endAdornment={
-                <InFieldButton>
-                  <IconEmail />
-                  Add
-                </InFieldButton>
-              }
-              {...rest}
-            />
+            <Input id="add-new-email-input" fullWidth {...rest} />
             <FormHelperText>{errorMessage}</FormHelperText>
           </FormControl>
         </Grid>
