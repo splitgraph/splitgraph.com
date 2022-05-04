@@ -26,10 +26,11 @@ const InvisibleButton = ({
       "&.Mui-disabled": {
         backgroundColor: ({ palette }) => palette.grays.gray26.main,
       },
-      outline: ({ palette }) => `1px solid ${palette.grays.gray25.main}`,
+      boxShadow: ({ palette }) =>
+        `0px 0px 0px 2px ${palette.grays.gray25.main}`,
       "&:hover": {
         boxShadow: ({ palette }) =>
-          `0px 0px 0px 2px ${palette.grays.gray25.main}`,
+          `0px 0px 0px 2px ${palette.grays.gray23.main}`,
         background: "transparent",
       },
       "&:focus": {

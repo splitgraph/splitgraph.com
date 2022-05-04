@@ -10,12 +10,13 @@ import { IconPasswordHide, IconPasswordSee } from "../Icon";
 
 interface IPasswordInputProps extends OutlinedInputProps {
   extraEndAdornment?: React.ReactNode;
+  tabbable?: boolean;
 }
 
 export const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
   (props, ref) => {
     const [showPassword, setShowPassword] = useState(false);
-    const { extraEndAdornment, ...rest } = props;
+    const { extraEndAdornment, tabbable, ...rest } = props;
     const handleClickShowPassword = () => {
       setShowPassword(!showPassword);
     };
@@ -43,6 +44,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
                     `0px 0px 0px 1px ${palette.grays.gray20.main}`,
                 },
               }}
+              tabIndex={tabbable ? 0 : -1}
             >
               {showPassword ? <IconPasswordSee /> : <IconPasswordHide />}
             </IconButton>
@@ -72,6 +74,9 @@ export const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
             "& fieldset": {
               borderColor: "on.error.main",
             },
+          },
+          "::-ms-reveal": {
+            display: "none",
           },
         }}
         {...rest}
