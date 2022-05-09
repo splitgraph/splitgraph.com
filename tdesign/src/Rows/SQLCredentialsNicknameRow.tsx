@@ -1,11 +1,21 @@
-import { Box, Grid, Typography, FormControl, Button } from "@mui/material";
-import { InputWithCopy /*Input*/ } from "../Input";
-import { IconDelete } from "../Icon";
+import {
+  Box,
+  Grid,
+  Typography,
+  FormControl,
+  Button,
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
+} from "@mui/material";
+import { useState } from "react";
+import { IconCheck, IconDelete } from "../Icon";
+import { PreWithCopy } from "../PreWithCopy";
 
 interface ISQLCredentialsNicknameRowProps {
   name?: string;
+  nickname?: string;
   handleDelete?: () => void;
-  idNicknamePrefix?: string;
   idUsernamePrefix?: string;
   deleteButton?: React.ReactNode;
 }
@@ -13,10 +23,11 @@ interface ISQLCredentialsNicknameRowProps {
 const SQLCredentialsNicknameRow = ({
   name,
   handleDelete,
-  // idNicknamePrefix,
   idUsernamePrefix,
   deleteButton,
+  nickname,
 }: ISQLCredentialsNicknameRowProps) => {
+  const [nicknameInputValue, setNicknameInputValue] = useState(nickname);
   return (
     <Box
       sx={{
@@ -27,44 +38,80 @@ const SQLCredentialsNicknameRow = ({
         border: ({ palette }) => `1px solid ${palette.grays.gray26.main};`,
       }}
     >
-      <Grid container spacing={3}>
-        {/* Awaiting BE "nickname creds" support
-        <Grid item md={6}>
-          <Box sx={{ display: "flex", alignItems: "center", height: "100%" }}>
-            <FormControl fullWidth>
-              <label htmlFor={`${idNicknamePrefix + "-"}nickname-input`}>
-                <Typography variant="small">Nickname</Typography>
-              </label>
-              <Input
-                id={`${idNicknamePrefix + "-"}nickname-input`}
-                fullWidth
-              ></Input>
-            </FormControl>
-          </Box>
-        </Grid> */}
-        <Grid item xs={12} sx={{ display: "flex" }}>
-          <FormControl fullWidth variant="outlined">
-            <label htmlFor={`${idUsernamePrefix + "-"}username-input`}>
-              <Typography variant="small">Username</Typography>
+      <FormControl fullWidth variant="outlined">
+        <Grid container spacing={3}>
+          {/* Left-hand column with nickname */}
+          <Grid item xs={12} md={6} className="value-area">
+            <label htmlFor={`${idUsernamePrefix + "-"}nickname-input`}>
+              <Typography variant="small">Nickname</Typography>
             </label>
             <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}>
-              <InputWithCopy
-                id={`${idUsernamePrefix + "-"}username-input`}
+              <OutlinedInput
+                id={`${idUsernamePrefix + "-"}nickname-input`}
                 fullWidth
-                defaultValue={name}
+                defaultValue={nickname}
                 sx={{}}
+                onChange={(change) => {
+                  setNicknameInputValue(change.target.value);
+                }}
+                endAdornment={
+                  nicknameInputValue === (nickname ?? "") ? null : (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={(...args) =>
+                          console.log("save  nickname", ...args)
+                        }
+                        aria-label="Save credential nickname"
+                        edge="end"
+                        size="large"
+                      >
+                        <IconCheck color={"flambeeGreen.light"} />
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }
               />
-              <Box sx={{ ml: "1rem" }}>
-                {deleteButton || (
-                  <Button onClick={handleDelete}>
-                    <IconDelete />
-                  </Button>
-                )}
-              </Box>
             </Box>
-          </FormControl>
+          </Grid>
+
+          {/* Right-hand column with username and delete button */}
+          <Grid
+            item
+            xs={12}
+            md={5}
+            className="value-area"
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              // alignItems: "center",
+            }}
+          >
+            <PreWithCopy
+              title={"Username"}
+              extraStyle={{ marginBottom: "1rem" }}
+            >
+              {name}
+            </PreWithCopy>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={1}
+            className="value-area"
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              // alignItems: "center",
+            }}
+          >
+            {deleteButton || (
+              <Button onClick={handleDelete}>
+                <IconDelete />
+              </Button>
+            )}
+          </Grid>
         </Grid>
-      </Grid>
+      </FormControl>
     </Box>
   );
 };
