@@ -4,7 +4,7 @@ import {
   Typography,
   FormControl,
   FormHelperText,
-  Box,
+  styled,
 } from "@mui/material";
 import { Input } from "../Input";
 
@@ -13,15 +13,7 @@ export const AddNewUserRow = ({
   ...rest
 }: ComponentProps<typeof Input> & { errorMessage: string }) => {
   return (
-    <Box
-      sx={{
-        padding: "1em",
-        boxSizing: "border-box",
-        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.02)",
-        borderRadius: "4px",
-        border: (theme) => `1px solid ${theme.palette.grays?.gray26.main}`,
-      }}
-    >
+    <NewUserRowContainer>
       <Grid container spacing={3}>
         <Grid item md={1} />
         <Grid item md={10}>
@@ -35,6 +27,14 @@ export const AddNewUserRow = ({
         </Grid>
         <Grid item md={1} />
       </Grid>
-    </Box>
+    </NewUserRowContainer>
   );
 };
+
+const NewUserRowContainer = styled("div")(({ theme }) => ({
+  padding: "1em",
+  boxSizing: "border-box",
+  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.02)",
+  borderRadius: "4px",
+  border: `1px solid ${theme.palette.grays?.gray26.main}`,
+}));
