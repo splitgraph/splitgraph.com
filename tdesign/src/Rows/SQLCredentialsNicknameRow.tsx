@@ -6,10 +6,8 @@ import {
   Button,
   OutlinedInput,
   InputAdornment,
-  IconButton,
 } from "@mui/material";
-import { useState } from "react";
-import { IconCheck, IconDelete } from "../Icon";
+import { IconDelete } from "../Icon";
 import { PreWithCopy } from "../PreWithCopy";
 
 interface ISQLCredentialsNicknameRowProps {
@@ -18,6 +16,9 @@ interface ISQLCredentialsNicknameRowProps {
   handleDelete?: () => void;
   idUsernamePrefix?: string;
   deleteButton?: React.ReactNode;
+  saveNicknameButton?: React.ReactNode;
+  setNewNickname: (nickname: string) => void;
+  newNickname: string;
 }
 
 const SQLCredentialsNicknameRow = ({
@@ -26,8 +27,10 @@ const SQLCredentialsNicknameRow = ({
   idUsernamePrefix,
   deleteButton,
   nickname,
+  saveNicknameButton,
+  newNickname,
+  setNewNickname,
 }: ISQLCredentialsNicknameRowProps) => {
-  const [nicknameInputValue, setNicknameInputValue] = useState(nickname);
   return (
     <Box
       sx={{
@@ -52,23 +55,14 @@ const SQLCredentialsNicknameRow = ({
                 defaultValue={nickname}
                 sx={{}}
                 onChange={(change) => {
-                  setNicknameInputValue(change.target.value);
+                  setNewNickname(change.target.value);
                 }}
                 endAdornment={
-                  nicknameInputValue === (nickname ?? "") ? null : (
+                  saveNicknameButton && newNickname !== (nickname ?? "") ? (
                     <InputAdornment position="end">
-                      <IconButton
-                        onClick={(...args) =>
-                          console.log("save  nickname", ...args)
-                        }
-                        aria-label="Save credential nickname"
-                        edge="end"
-                        size="large"
-                      >
-                        <IconCheck color={"flambeeGreen.light"} />
-                      </IconButton>
+                      {saveNicknameButton}
                     </InputAdornment>
-                  )
+                  ) : null
                 }
               />
             </Box>
