@@ -1,3 +1,4 @@
+import { ComponentProps } from "react";
 import {
   Grid,
   Typography,
@@ -7,7 +8,10 @@ import {
 } from "@mui/material";
 import { Input } from "../Input";
 
-export const AddNewUserRow = ({ errorMessage, ...rest }) => {
+export const AddNewUserRow = ({
+  errorMessage,
+  ...rest
+}: ComponentProps<typeof Input> & { errorMessage: string }) => {
   return (
     <Box
       sx={{

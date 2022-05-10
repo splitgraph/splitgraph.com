@@ -33,8 +33,8 @@ export const styles = {
       borderColor: "on.error.main",
     },
   },
-  ".MuiButtonBase-root": { marginRight: buttonMarginRight },
 
-  //Limit button hieght when within the input field
+  ".MuiButtonBase-root": { marginRight: buttonMarginRight },
+  // Limit button height when within the input field
   ".MuiButton-root": { maxHeight: `calc(100% - (2 * ${buttonMarginRight}))` },
 };
