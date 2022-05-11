@@ -17,8 +17,7 @@ interface ISQLCredentialsNicknameRowProps {
   idUsernamePrefix?: string;
   deleteButton?: React.ReactNode;
   saveNicknameButton?: React.ReactNode;
-  setNewNickname: (nickname: string) => void;
-  newNickname: string;
+  setNewNickname?: (nickname: string) => void;
 }
 
 const SQLCredentialsNicknameRow = ({
@@ -28,7 +27,6 @@ const SQLCredentialsNicknameRow = ({
   deleteButton,
   nickname,
   saveNicknameButton,
-  newNickname,
   setNewNickname,
 }: ISQLCredentialsNicknameRowProps) => {
   return (
@@ -54,11 +52,12 @@ const SQLCredentialsNicknameRow = ({
                 fullWidth
                 defaultValue={nickname}
                 sx={{}}
+                disabled={setNewNickname === undefined}
                 onChange={(change) => {
                   setNewNickname(change.target.value);
                 }}
                 endAdornment={
-                  saveNicknameButton && newNickname !== (nickname ?? "") ? (
+                  saveNicknameButton ? (
                     <InputAdornment position="end">
                       {saveNicknameButton}
                     </InputAdornment>
