@@ -3,7 +3,7 @@ import SQLCredentialsRow from "./SQLCredentialsRow";
 import LinkedOAuthRow from "./LinkedOAuthRow";
 import AddOAuthLinkRow from "./AddOAuthLinkRow";
 import SQLCredentialsNicknameRow from "./SQLCredentialsNicknameRow";
-import AddNewUserRow from "./AddNewUserRow";
+export { AddNewUserRow } from "./AddNewUserRow";
 import SQLNewCredentialsRow from "./SQLNewCredentialsRow";
 import SQLWarningIcon from "./SQLWarningIcon";
 
@@ -13,7 +13,6 @@ export {
   SQLCredentialsNicknameRow,
   LinkedOAuthRow,
   AddOAuthLinkRow,
-  AddNewUserRow,
   SQLNewCredentialsRow,
   SQLWarningIcon,
 };

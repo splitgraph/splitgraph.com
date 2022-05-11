@@ -107,6 +107,8 @@ export { IconStarFilled };
 import IconStarOutline from "./IconStarOutline";
 export { IconStarOutline };
 
+export { IconBlankCircle } from "./IconBlankCircle";
+
 import IconCopy from "./IconCopy";
 export { IconCopy };
 

@@ -1,4 +1,8 @@
+const buttonMarginRight = "4px";
+
 export const styles = {
+  paddingRight: 0,
+  height: "40px",
   ".MuiOutlinedInput-input": {
     fontWeight: 400,
     fontSize: "16px",
@@ -29,4 +33,8 @@ export const styles = {
       borderColor: "on.error.main",
     },
   },
+
+  ".MuiButtonBase-root": { marginRight: buttonMarginRight },
+  // Limit button height when within the input field
+  ".MuiButton-root": { maxHeight: `calc(100% - (2 * ${buttonMarginRight}))` },
 };
