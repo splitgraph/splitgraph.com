@@ -7,6 +7,7 @@ import {
   OutlinedInput,
   InputAdornment,
 } from "@mui/material";
+import React from "react";
 import { IconDelete } from "../Icon";
 import { PreWithCopy } from "../PreWithCopy";
 
@@ -55,6 +56,11 @@ const SQLCredentialsNicknameRow = ({
                 disabled={setNewNickname === undefined}
                 onChange={(change) => {
                   setNewNickname(change.target.value);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && saveNicknameButton) {
+                    (saveNicknameButton as any)?.props?.onClick();
+                  }
                 }}
                 endAdornment={
                   saveNicknameButton ? (
