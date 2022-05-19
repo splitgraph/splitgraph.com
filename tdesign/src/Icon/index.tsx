@@ -11,6 +11,8 @@ export { IconArrowCircleRight } from "./IconArrowCircleRight";
 import IconAll from "./IconAll";
 export { IconAll };
 
+export { IconAdd } from "./IconAdd";
+
 import IconAPI from "./IconAPI";
 export { IconAPI };
 
