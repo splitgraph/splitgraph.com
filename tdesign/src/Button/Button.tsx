@@ -26,6 +26,7 @@ const Button = ({
       borderRadius: "32px",
       px: "1rem",
       // pl: icon ? "3.5rem" : "2rem",
+
       background: ({ palette }) =>
         disabled
           ? palette.grays.gray26.main
@@ -38,12 +39,7 @@ const Button = ({
         background: "linear-gradient(270.8deg, #F94569 4.38%, #FF8099 93.29%)",
         boxShadow: "0px 4px 8px rgba(249, 69, 105, 0.2)",
       },
-      "&:focus": {
-        boxShadow: ({ palette }) =>
-          `0px 0px 0px 1px ${palette.grays.gray20.main}`,
-        // July 2021: webkit doesn't support rounded outlines, so boxShadow is next best thing
-      },
-      // minWidth: large ? "360px" : null,
+
       minHeight: large ? "40px" : null,
       ...sx,
     }}

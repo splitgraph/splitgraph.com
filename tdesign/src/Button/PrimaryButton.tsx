@@ -30,13 +30,8 @@ const PrimaryButton = ({
       "&.Mui-disabled": {
         backgroundColor: ({ palette }) => palette.grays.gray26.main,
       },
-      "&:focus": {
-        boxShadow: ({ palette }) =>
-          `0px 0px 0px 1px ${palette.grays.gray20.main}`,
-      },
       ...sx,
     }}
-    // endIcon={}
     {...(rest as any)}
   >
     {children}
