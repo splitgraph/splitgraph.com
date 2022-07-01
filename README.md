@@ -1,3 +1,9 @@
+# Deprecation notice
+
+This repository is deprecated and will not be used in the future.
+
+The contents of this repository were moved into the parent monorepo (which is kept private).
+
 # Quick Start
 
 As of 7/8/21, these instructions should get you running locally. It's still a WIP.
