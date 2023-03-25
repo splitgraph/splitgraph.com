@@ -4,6 +4,11 @@ This repository is deprecated and will not be used in the future.
 
 The contents of this repository were moved into the parent monorepo (which is kept private).
 
+If you have noticed a documentation issue or would like to submit an improvement, please create an issue in the relevant repository:
+
+- https://github.com/splitgraph/sgr for any [Splitgraph documentation](https://www.splitgraph.com/docs) issues
+- https://github.com/splitgraph/seafowl for any [Seafowl documentation](https://seafowl.io/) issues
+
 # Quick Start
 
 As of 7/8/21, these instructions should get you running locally. It's still a WIP.
